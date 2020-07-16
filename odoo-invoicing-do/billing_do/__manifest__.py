@@ -18,6 +18,8 @@
         'views/billing_do_account_journal.xml',
         'views/billing_do_account_move.xml',
         'views/billing_do_ir_sequence.xml',
+        'views/billing_do_res_partner.xml',
+        'views/billing_do_res_company.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
