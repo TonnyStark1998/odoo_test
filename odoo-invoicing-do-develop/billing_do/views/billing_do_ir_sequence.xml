@@ -1,0 +1,12 @@
+<odoo>
+    <record model="ir.ui.view" id="billing_do_view_sequence_form">
+        <field name="name">billing.do.ir.sequence.form</field>
+        <field name="model">ir.sequence</field>
+        <field name="inherit_id" ref="base.sequence_view" />
+        <field name="arch" type="xml">
+            <field name="active" position="after">
+                <field name="is_refund_sequence" />
+            </field>
+        </field>
+    </record>
+</odoo>
