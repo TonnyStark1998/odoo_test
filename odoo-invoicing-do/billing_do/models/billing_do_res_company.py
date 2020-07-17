@@ -24,7 +24,7 @@ class BillingDoResCompany(models.Model):
                 return { 
                     'warning':{
                             'title': "Dígito verificador erróneo",
-                            'message': "El RNC (%s) digitado es una cédula, verifique el valor digitado ya que es inválida." % self.vat
+                            'message': "El RNC (%s) digitado es inválido." % self.vat
                         }
                 }
             try:
