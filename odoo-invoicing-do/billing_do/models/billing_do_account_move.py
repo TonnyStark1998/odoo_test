@@ -2,6 +2,7 @@
 import re
 import requests
 from odoo import models, fields, api, exceptions
+from . import billing_do_utils as doutils
 
 class BillingDoAccountMove(models.Model):
     _inherit = "account.move"
@@ -53,7 +54,7 @@ class BillingDoAccountMove(models.Model):
             number_next = sequence._get_current_sequence(sequence_date=sequence_date).number_next_actual
             self.ncf_sequence_next_number = str(prefix) + str('%%0%sd' % sequence.padding % number_next)
 
-    @api.onchange('ncf')
+    @api.onchange('ncf', 'partner_id')
     def _onchange_ncf(self):
         if self.type == 'in_invoice':
             try:
@@ -61,11 +62,10 @@ class BillingDoAccountMove(models.Model):
             except exceptions.ValidationError as ve:
                 return {
                     'warning': {
-                        'title': "Campo invalido",
+                        'title': "Campo NCF inválido",
                         'message': "{0}".format(ve.name),
                     }
                 }
-
 
     # Account Move - Compute Field's Functions
     @api.depends('ncf_sequence_next_number', 'journal_id')
@@ -94,6 +94,8 @@ class BillingDoAccountMove(models.Model):
     # Account Move - Helper Functions
     def _validate_ncf(self, ncf):
         if ncf:
+            if not self.partner_id:
+                raise exceptions.ValidationError("Seleccione primero el proveedor y luego digite el NCF.")
             regex = r"(^(E)?(?=)(31|32|33|34|41|43|44|45)[0-9]{10}|^(B)(?:(01|02|03|04|11|12|13|14|15|16|17)[0-9]{8}))"
             match_ncf = re.match(regex, ncf.upper())
             if not match_ncf:
@@ -101,4 +103,13 @@ class BillingDoAccountMove(models.Model):
             else:
                 if int(len(ncf)) != int(match_ncf.end()):
                     raise exceptions.ValidationError("El NCF (%s) posee dígitos extras. Verifique." % ncf.upper())
-                # response = requests.get("https://localhost:44359/webapi/Contribuyentes/00117045369")
+            ncf_response = doutils.BillingDoUtils.dgii_validate_ncf(self.partner_id.vat, ncf, self.env.company.vat)
+            if ncf_response.status_code == 400:
+                raise exceptions.ValidationError("Los datos suministrados para la consulta no son válidos. NCF:{0}|RNC:{1}".format(ncf, self.partner_id.vat))
+            elif ncf_response.status_code == 500:
+                raise exceptions.ValidationError("Ocurrió un error desconocido al conectar con el servicio de consulta.")
+            elif ncf_response.status_code == 404:
+                raise exceptions.ValidationError("El NCF {0} y el RNC {1} no arrojaron ningún resultado. Favor verificar el NCF digitado.".format(ncf, self.partner_id.vat))
+            elif ncf_response.status_code == 200:
+                if not bool(ncf_response.json()['isValid']):
+                    raise exceptions.ValidationError("El NCF {0} digitado no es válido. Verifique el valor digitado y el proveedor (RNC: {1}) seleccionado.".format(ncf, self.partner_id.vat))

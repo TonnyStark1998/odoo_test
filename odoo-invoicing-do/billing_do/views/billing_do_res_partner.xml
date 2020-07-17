@@ -1,0 +1,22 @@
+<odoo>
+    <record model="ir.ui.view" id="billing_do_view_partner_form">
+        <field name="name">billing.do.res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <field name="type" position="before">
+                <field name="vat" position="move" />
+            </field>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="billing_do_view_partner_short_form">
+        <field name="name">billing.do.res.partner.short.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_short_form" />
+        <field name="arch" type="xml">
+            <field name="type" position="before">
+                <field name="vat" position="move" />
+            </field>
+        </field>
+    </record>
+</odoo>
