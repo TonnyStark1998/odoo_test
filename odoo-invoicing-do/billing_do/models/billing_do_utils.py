@@ -16,7 +16,12 @@ class BillingDoUtils:
     def dgii_validate_ncf(vat, ncf, vatBuyer):
         if not BillingDoUtils.__token:
             BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi()
-        return requests.post("{0}/taxreceiptnumber/{1}/{2}/{3}".format(BillingDoUtils.__api_dgii_base_url, vat, ncf, vatBuyer), headers=BillingDoUtils.__get_request_headers(), data={})
+        request = requests.post("{0}/taxreceiptnumber/{1}/{2}/{3}".format(BillingDoUtils.__api_dgii_base_url, vat, ncf, vatBuyer), headers=BillingDoUtils.__get_request_headers(), data={})
+        if token_request.status_code == 201:
+            BillingDoUtils.__token = ""
+            BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi()
+            request = requests.post("{0}/taxreceiptnumber/{1}/{2}/{3}".format(BillingDoUtils.__api_dgii_base_url, vat, ncf, vatBuyer), headers=BillingDoUtils.__get_request_headers(), data={})
+        return 
 
     @staticmethod
     def __get_access_token_for_webapi():
@@ -35,9 +40,7 @@ class BillingDoUtils:
             match_vat = re.match(regex, vat)
             if not match_vat:
                 return 3
-            if len(vat) == 11:
-                return BillingDoUtils.__validate_do_id(vat)
-            return 1
+            return BillingDoUtils.__validate_do_id(vat)
 
     @staticmethod
     def __get_token_api_data():
@@ -54,17 +57,38 @@ class BillingDoUtils:
             "Authorization":"Bearer {0}" .format(BillingDoUtils.__token),
             "Cache-Control":"max-age=3600"
         }
+
     @staticmethod
     def __validate_do_id(vat):
-        validator_number = "1212121212"
-        sum = 0
-        for i in range(0,10):
-            temp_number = int(vat[i]) * int(validator_number[i])
-            if temp_number > 9:
-                temp_number = (temp_number - 10) + 1
-            sum += temp_number
-        temp_number = sum % 10
-        temp_number = (10 - temp_number) % 10
-        if int(temp_number) == int(vat[10]):
+        is_vat_valid = True
+        if len(vat) == 11:
+            base_number = "1212121212"
+            sum = 0
+            for i in range(0,10):
+                temp_number = int(vat[i]) * int(base_number[i])
+                if temp_number > 9:
+                    temp_number = (temp_number - 10) + 1
+                sum += temp_number
+            temp_number = sum % 10
+            temp_number = (10 - temp_number) % 10
+            if int(temp_number) != int(vat[10]):
+                is_vat_valid = False
+        elif len(vat) == 9:
+            base_number = "79865432"
+            sum = 0
+            for i in range(0,8):
+                sum += int(vat[i]) * int(base_number[i])
+            temp_number = sum - (int(sum / 11) * 11)
+            if temp_number == 0:
+                temp_number = 2
+            elif temp_number == 1:
+                temp_number = 1
+            else:
+                temp_number = 11 - temp_number
+            if int(temp_number) != int(vat[8]):
+                is_vat_valid = False
+        else:
+            is_vat_valid = False
+        if is_vat_valid:
             return 1
         return 2
