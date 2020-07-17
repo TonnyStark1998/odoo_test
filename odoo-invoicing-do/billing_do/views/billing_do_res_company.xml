@@ -1,0 +1,12 @@
+<odoo>
+    <record model="ir.ui.view" id="billing_do_view_company_form">
+        <field name="name">billing.do.res.company.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="before">
+                <field name="vat" position="move" />
+            </field>
+        </field>
+    </record>
+</odoo>

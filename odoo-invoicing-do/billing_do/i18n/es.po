@@ -180,3 +180,16 @@ msgstr "El NCF (%s) posee dígitos extras. Verifique."
 #: model:ir.model.constraint,message:billing_do.constraint_account_move_ncf_sequence_next_number
 msgid "El NCF de las facturas no puede repetirse."
 msgstr "El NCF no puede repetirse."
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:base.field_res_company__vat
+#: model:ir.model.fields,field_description:base.field_res_partner__vat
+#: model:ir.model.fields,field_description:base.field_res_users__vat
+msgid "Tax ID"
+msgstr "RNC"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:base.view_partner_form
+#: model_terms:ir.ui.view,arch_db:base.view_partner_short_form
+msgid "e.g. BE0477472701"
+msgstr "Ejemplos: 130000000, 00100000000, 430000000..."
