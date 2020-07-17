@@ -18,14 +18,14 @@ class BillingDoResPartner(models.Model):
                 return { 
                     'warning':{
                             'title': "Valor digitado inválido",
-                            'message': "El RNC (%s) es inválido. Verifique el valor digitado." % self.vat
+                            'message': "El RNC (%s) digitado es inválido. Posee un formato incorrecto. Verifique el valor digitado." % self.vat
                         }
                 }
             elif _validate_vat_result == 2:
                 return { 
                     'warning':{
                             'title': "Dígito verificador erróneo",
-                            'message': "El RNC (%s) digitado es una cédula, verifique el valor digitado ya que es inválida." % self.vat
+                            'message': "El RNC (%s) digitado es inválido. El dígito verificador no coincide. Verifique el valor digitado." % self.vat
                         }
                 }
             try:

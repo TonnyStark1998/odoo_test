@@ -54,7 +54,7 @@ class BillingDoAccountMove(models.Model):
             number_next = sequence._get_current_sequence(sequence_date=sequence_date).number_next_actual
             self.ncf_sequence_next_number = str(prefix) + str('%%0%sd' % sequence.padding % number_next)
 
-    @api.onchange('ncf')
+    @api.onchange('ncf', 'partner_id')
     def _onchange_ncf(self):
         if self.type == 'in_invoice':
             try:

@@ -17,11 +17,11 @@ class BillingDoUtils:
         if not BillingDoUtils.__token:
             BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi()
         request = requests.post("{0}/taxreceiptnumber/{1}/{2}/{3}".format(BillingDoUtils.__api_dgii_base_url, vat, ncf, vatBuyer), headers=BillingDoUtils.__get_request_headers(), data={})
-        if token_request.status_code == 201:
+        if request.status_code == 201:
             BillingDoUtils.__token = ""
             BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi()
             request = requests.post("{0}/taxreceiptnumber/{1}/{2}/{3}".format(BillingDoUtils.__api_dgii_base_url, vat, ncf, vatBuyer), headers=BillingDoUtils.__get_request_headers(), data={})
-        return 
+        return request
 
     @staticmethod
     def __get_access_token_for_webapi():
