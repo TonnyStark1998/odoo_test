@@ -10,7 +10,13 @@ class BillingDoUtils:
     def dgii_get_vat_info(vat):
         if not BillingDoUtils.__token:
             BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi()
-        return requests.get("{0}/taxcontributor/{1}".format(BillingDoUtils.__api_dgii_base_url, vat), headers={"Authorization":"Bearer {0}" .format(BillingDoUtils.__token)})
+        return requests.get("{0}/taxcontributor/{1}".format(BillingDoUtils.__api_dgii_base_url, vat), headers=BillingDoUtils.__get_request_headers())
+
+    @staticmethod
+    def dgii_validate_ncf(vat, ncf, vatBuyer):
+        if not BillingDoUtils.__token:
+            BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi()
+        return requests.post("{0}/taxreceiptnumber/{1}/{2}/{3}".format(BillingDoUtils.__api_dgii_base_url, vat, ncf, vatBuyer), headers=BillingDoUtils.__get_request_headers(), data={})
 
     @staticmethod
     def __get_access_token_for_webapi():
@@ -42,6 +48,12 @@ class BillingDoUtils:
             'scope':'https://koalacreativesoftware.com/.default'
         }
 
+    @staticmethod
+    def __get_request_headers():
+        return {
+            "Authorization":"Bearer {0}" .format(BillingDoUtils.__token),
+            "Cache-Control":"max-age=3600"
+        }
     @staticmethod
     def __validate_do_id(vat):
         validator_number = "1212121212"
