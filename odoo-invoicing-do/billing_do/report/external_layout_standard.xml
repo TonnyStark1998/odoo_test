@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="billing_do_report_external_layout_standard" inherit_id="web.external_layout_standard" name="billing.do.account.external.layout.standard.report">
+        <xpath expr="//div[@t-attf-class]" position="replace" />
+    </template>
+</odoo>

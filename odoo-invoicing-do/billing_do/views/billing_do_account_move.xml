@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record model="ir.ui.view" id="billing_do_view_move_form">
         <field name="name">billing.do.account.move.form</field>
@@ -30,6 +31,7 @@
             </xpath>
         </field>
     </record>
+
     <record model="ir.ui.view" id="billing_do_view_move_reversal_form">
         <field name="name">billing.do.account.move.reversal.form</field>
         <field name="model">account.move.reversal</field>
