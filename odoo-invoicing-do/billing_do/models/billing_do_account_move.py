@@ -40,6 +40,7 @@ class BillingDoAccountMove(models.Model):
 
     ncf = fields.Char(string="NCF", readonly=False, copy=False, store=True, tracking=True, states={'posted': [('readonly', True)]})
     ncf_sequence_next_number = fields.Char(readonly=True, copy=False, store=False, tracking=False, compute='_compute_set_name_next_sequence')
+    ncf_date_to = fields.Date(string="NCF valid to:", readonly=True, copy=False, store=True, tracking=True)
 
     # Account Move - OnChange Fields Functions
     @api.onchange('journal_id')
@@ -51,7 +52,9 @@ class BillingDoAccountMove(models.Model):
             else:
                 sequence = self.journal_id.sequence_id
             prefix, suffix = sequence._get_prefix_suffix(date=sequence_date, date_range=sequence_date)
-            number_next = sequence._get_current_sequence(sequence_date=sequence_date).number_next_actual
+            sequence_date_new = sequence._get_current_sequence(sequence_date=sequence_date)
+            number_next = sequence_date_new.number_next_actual
+            self.ncf_date_to = sequence_date_new.date_to
             self.ncf_sequence_next_number = str(prefix) + str('%%0%sd' % sequence.padding % number_next)
 
     @api.onchange('ncf', 'partner_id')
@@ -78,7 +81,9 @@ class BillingDoAccountMove(models.Model):
                 else:
                     sequence = move.journal_id.sequence_id
                 prefix, suffix = sequence._get_prefix_suffix(date=sequence_date, date_range=sequence_date)
-                number_next = sequence._get_current_sequence(sequence_date=sequence_date).number_next_actual
+                sequence_date_new = sequence._get_current_sequence(sequence_date=sequence_date)
+                number_next = sequence_date_new.number_next_actual
+                move.ncf_date_to = sequence_date_new.date_to
                 move.ncf_sequence_next_number = str(prefix) + str('%%0%sd' % sequence.padding % number_next)
 
     # Account Move - Contraints Field's Functions

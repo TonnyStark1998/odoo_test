@@ -19,7 +19,9 @@
         'views/billing_do_account_move.xml',
         'views/billing_do_ir_sequence.xml',
         'views/billing_do_res_partner.xml',
-        'views/billing_do_res_company.xml'
+        'views/billing_do_res_company.xml',
+        'report/report_invoice.xml',
+        'report/external_layout_standard.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
