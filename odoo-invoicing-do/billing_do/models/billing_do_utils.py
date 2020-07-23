@@ -10,7 +10,12 @@ class BillingDoUtils:
     def dgii_get_vat_info(vat):
         if not BillingDoUtils.__token:
             BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi()
-        return requests.get("{0}/taxcontributor/{1}".format(BillingDoUtils.__api_dgii_base_url, vat), headers=BillingDoUtils.__get_request_headers())
+        request = requests.get("{0}/taxcontributor/{1}".format(BillingDoUtils.__api_dgii_base_url, vat), headers=BillingDoUtils.__get_request_headers())
+        if request.status_code == 201:
+            BillingDoUtils.__token = ""
+            BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi()
+            request = requests.get("{0}/taxcontributor/{1}".format(BillingDoUtils.__api_dgii_base_url, vat), headers=BillingDoUtils.__get_request_headers())
+        return request
 
     @staticmethod
     def dgii_validate_ncf(vat, ncf, vatBuyer):

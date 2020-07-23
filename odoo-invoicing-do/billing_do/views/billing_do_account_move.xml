@@ -5,9 +5,10 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
-            <xpath expr="//h1[hasclass('mt0')]" position="before">
+            <xpath expr="//h1[hasclass('mt0')]" position="replace">
                 <h2 class="mt0" style="color:#474747;">
-                    <field name="ncf_sequence_next_number" readonly="True" attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('name', '!=', '/')]}" />
+                    <field name="name" readonly="True" attrs="{'invisible':[('name', '=', '/')]}"/>
+                    <field name="ncf_sequence_next_number" readonly="True" attrs="{'invisible':['|', ('type', '=', 'in_invoice'), ('state','!=','draft')]}" />
                 </h2>
             </xpath>
             <xpath expr="//field[@name='ref']" position="before">

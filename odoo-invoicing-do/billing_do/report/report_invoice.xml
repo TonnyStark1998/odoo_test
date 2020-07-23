@@ -6,55 +6,86 @@
         <xpath expr="//address" position="replace" />
         <xpath expr="//div[hasclass('mt16')]" position="replace" />
         <xpath expr="//div[hasclass('page')]" position="before">
-            <hr style="height: 3px;color: #aaa;background-color: #aaa;border: 0;" />
-            <div class="row" style="margin:9% 0 9% 0;">
-                <div class="col">
-                    <h5 class="m-0">
-                        <strong><span t-field="o.company_id.name" /></strong>
-                    </h5>
-                    <p class="m-0">
-                        RNC: <span t-field="o.company_id.vat" />
-                    </p>
-                    <p class="m-0">
-                        Fecha: <span t-esc="o.invoice_date.strftime('%d/%m/%Y')" />
-                    </p>
-                </div>
-                <div class="col" t-if="'B01' in o.name.upper() or 'B01' in o.ncf_sequence_next_number.upper()">
-                    <h2 class="m-0">
-                        <strong>Factura de crédito fiscal</strong>
-                    </h2>
-                    <p class="m-0">
-                        NCF: 
-                        <span t-if="o.name != '/'" t-field="o.name" />
-                        <span t-if="o.name == '/'" t-field="o.ncf_sequence_next_number" />
-                    </p>
-                    <p class="m-0">
-                        Válido hasta: 31/12/2021
-                    </p>
-                </div>
-                <div class="col" t-if="'B02' in o.name.upper() or 'B02' in o.ncf_sequence_next_number.upper()">
-                    <h2 class="m-0">
-                        <strong>Factura de consumo</strong>
-                    </h2>
-                    <p class="m-0">
-                        NCF: 
-                        <span t-if="o.name != '/'" t-field="o.name" />
-                        <span t-if="o.name == '/'" t-field="o.ncf_sequence_next_number" />
-                    </p>
-                </div>
-            </div>
-            <hr style="height: 1px;color: #aaa;background-color: #aaa;border: 0;" t-if="'B01' in o.name.upper() or 'B01' in o.ncf_sequence_next_number.upper()" />
-            <div class="row" style="margin:1% 0 2.5% 0;" t-if="'B01' in o.name.upper() or 'B01' in o.ncf_sequence_next_number.upper()">
-                <div class="col">
-                    <h6 class="m-0">
-                        <strong>
-                            RNC cliente: 
-                            <span t-if="o.partner_id" t-field="o.partner_id.vat" />
-                            <span t-if="not o.partner_id">N/D</span>
-                            <br />
-                            <span t-field="o.partner_id.name" />
-                        </strong>
-                    </h6>
+            <div class="page">
+                <table class="table table-sm o_main_table" name="invoice_info_table" style="margin:2% 0 9% 0;">
+                    <tbody>
+                        <tr>
+                            <td style="border:0;">
+                                <h5 class="m-0">
+                                    <strong><span t-field="o.company_id.name" /></strong>
+                                </h5>
+                                <p class="m-0">
+                                    RNC: <span t-field="o.company_id.vat" />
+                                </p>
+                                <p class="m-0">
+                                    Fecha: <span t-esc="o.invoice_date.strftime('%d/%m/%Y')" />
+                                </p>
+                            </td>
+                            <td style="border:0;">
+                                <div t-if="o.journal_id.sequence_id.code == 'B01' and o.type in ['out_invoice']">
+                                    <h2 class="m-0">
+                                        <strong>Factura de crédito fiscal</strong>
+                                    </h2>
+                                    <p class="m-0">
+                                        NCF: 
+                                        <span t-if="o.name != '/'" t-field="o.name" />
+                                        <span t-if="o.name == '/'" t-field="o.ncf_sequence_next_number" />
+                                    </p>
+                                    <p class="m-0">
+                                        Válido hasta: 
+                                        <span t-if="o.ncf_date_to" t-esc="o.ncf_date_to.strftime('%d/%m/%Y')"></span>
+                                        <span t-if="not o.ncf_date_to">31/12/2020</span>
+                                    </p>
+                                </div>
+                                <div t-if="o.journal_id.sequence_id.code == 'B02'  and o.type in ['out_invoice']">
+                                    <h2 class="m-0">
+                                        <strong>Factura de consumo</strong>
+                                    </h2>
+                                    <p class="m-0">
+                                        NCF: 
+                                        <span t-if="o.name != '/'" t-field="o.name" />
+                                        <span t-if="o.name == '/'" t-field="o.ncf_sequence_next_number" />
+                                    </p>
+                                </div>
+                                <div t-if="o.type in ['out_refund', 'in_refund'] and o.journal_id.refund_sequence_id.code == 'B04'">
+                                    <h2 class="m-0" t-if="o.type in ['out_refund']">
+                                        <strong>Nota de crédito</strong>
+                                    </h2>
+                                    <h2 class="m-0" t-if="o.type in ['in_refund']">
+                                        <strong>Nota de débito</strong>
+                                    </h2>
+                                    <p class="m-0">
+                                        NCF: 
+                                        <span t-if="o.name != '/'" t-field="o.name" />
+                                        <span t-if="o.name == '/'" t-field="o.ncf_sequence_next_number" />
+                                    </p>
+                                    <p class="m-0 text-danger">
+                                        NCF modificado: 
+                                        <span t-if="o.reversed_entry_id" t-field="o.reversed_entry_id.name" />
+                                    </p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr style="height: 3px;color: #aaa;background-color: #aaa;border: 0;" />
+                <div class="row" style="margin:1% 0 5% 0;">
+                    <div class="col">
+                        <h6 class="m-0">
+                            <strong>
+                                <p class="m-0" t-if="o.journal_id.sequence_id.code == 'B01'">
+                                    <span>RNC:</span>
+                                    <span t-if="o.partner_id" t-field="o.partner_id.vat" />
+                                    <span t-if="not o.partner_id">N/D</span>
+                                </p>
+                                <p class="m-0">
+                                    <span t-if="o.journal_id.sequence_id.code == 'B02'">Cliente:</span>
+                                    <span t-if="o.journal_id.sequence_id.code == 'B01'">Razón Social:</span>
+                                    <span t-field="o.partner_id.name" />
+                                </p>
+                            </strong>
+                        </h6>
+                    </div>
                 </div>
             </div>
         </xpath>
