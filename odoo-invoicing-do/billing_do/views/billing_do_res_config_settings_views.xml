@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="billing_do_res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">billing.do.res.config.settings.view.form.inherit.account</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="40"/>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-string='Invoicing']" position="inside">
+                <h2>Billing DO - Module Settings</h2>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-12 col-lg-6 o_setting_box" title="These are settings for the Billing Do module.">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Services URL</span>
+                            <span class="fa fa-lg fa-globe-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                            <div class="text-muted">
+                                These are the URL used to query the services of validations.
+                            </div>
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label string="Token URL" for="token_url" class="col-lg-3 o_light_label"/>
+                                    <field name="token_url" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                                <div class="row">
+                                    <label string="API Services Base URL" for="api_services_base_url" class="col-lg-3 o_light_label"/>
+                                    <field name="api_services_base_url" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                                <div class="row">
+                                    <label string="Tax Contributors Endpoint" for="api_services_tax_contributors_endpoint" class="col-lg-3 o_light_label"/>
+                                    <field name="api_services_tax_contributors_endpoint" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                                <div class="row">
+                                    <label string="Tax Receipts Endpoint" for="api_services_tax_receipts_endpoint" class="col-lg-3 o_light_label"/>
+                                    <field name="api_services_tax_receipts_endpoint" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
