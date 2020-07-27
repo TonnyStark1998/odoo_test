@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="billing_do_report_external_layout_standard" inherit_id="web.external_layout_standard" name="billing.do.account.external.layout.standard.report">
+        <xpath expr="//div[@t-attf-class]" position="replace">
+            <div class="row">
+                <div class="col-3 mb4">
+                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 100px;" alt="Logo"/>
+                </div>
+                <div class="col-9 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>
