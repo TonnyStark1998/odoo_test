@@ -28,23 +28,24 @@ class BillingDoResCompany(models.Model):
                         }
                 }
             try:
-                vat_response = doutils.BillingDoUtils.dgii_get_vat_info(self.vat)
-                if(vat_response.status_code == 200):
-                    self.name = vat_response.json()['razonSocial']
-                elif(vat_response.status_code == 404):
-                    return{
-                        'warning':{
-                            'title': "Consulta fallida",
-                            'message': "El RNC '%s' no se encuentra en la base de datos de la DGII." % self.vat
+                vat_response = doutils.BillingDoUtils.dgii_get_vat_info(self, self.vat)
+                if vat_response:
+                    if(vat_response.status_code == 200):
+                        self.name = vat_response.json()['razonSocial']
+                    elif(vat_response.status_code == 404):
+                        return{
+                            'warning':{
+                                'title': "Consulta fallida",
+                                'message': "El RNC '%s' no se encuentra en la base de datos de la DGII." % self.vat
+                            }
                         }
-                    }
-                else:
-                    return{
-                        'warning':{
-                            'title': "Error de conexión con servicio",
-                            'message': "Ocurrió un error inesperado al consulta el servicio."
+                    else:
+                        return{
+                            'warning':{
+                                'title': "Error de conexión con servicio",
+                                'message': "Ocurrió un error inesperado al consulta el servicio."
+                            }
                         }
-                    }
             except exceptions.ValidationError as ve:
                 return {
                     'warning': {
