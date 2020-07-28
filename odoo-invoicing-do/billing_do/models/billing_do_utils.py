@@ -48,7 +48,7 @@ class BillingDoUtils:
         if __token_url_temp:
             BillingDoUtils.__token_url = __token_url_temp
         if not BillingDoUtils.__token:
-            token_request = requests.post(BillingDoUtils.__token_url, data=BillingDoUtils.__get_token_api_data())
+            token_request = requests.post(BillingDoUtils.__token_url, data=BillingDoUtils.__get_token_api_data(model))
             if(token_request.status_code == 200):
                 BillingDoUtils.__token = token_request.json()['access_token']
             elif(token_request.status_code == 500 or token_request.status_code == 404 or token_request.status_code == 400):
