@@ -22,6 +22,7 @@
         'views/billing_do_res_company.xml',
         'report/report_invoice.xml',
         'report/external_layout_standard.xml',
+        'views/billing_do_res_config_settings_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

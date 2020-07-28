@@ -7,31 +7,48 @@ class BillingDoUtils:
     __token = ""
     
     @staticmethod
-    def dgii_get_vat_info(vat):
-        if not BillingDoUtils.__token:
-            BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi()
-        request = requests.get("{0}/taxcontributor/{1}".format(BillingDoUtils.__api_dgii_base_url, vat), headers=BillingDoUtils.__get_request_headers())
-        if request.status_code == 201:
-            BillingDoUtils.__token = ""
-            BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi()
-            request = requests.get("{0}/taxcontributor/{1}".format(BillingDoUtils.__api_dgii_base_url, vat), headers=BillingDoUtils.__get_request_headers())
-        return request
+    def dgii_get_vat_info(model, vat):
+        __api_services_tax_contributors_switch_temp = model.env['ir.config_parameter'].sudo().get_param("billing_do.api_services_tax_contributors_switch")
+        if __api_services_tax_contributors_switch_temp:
+            __api_dgii_base_url_temp = model.env['ir.config_parameter'].sudo().get_param("billing_do.api_services_base_url")
+            __api_services_tax_contributors_endpoint_temp = model.env['ir.config_parameter'].sudo().get_param("billing_do.api_services_tax_contributors_endpoint")
+            if __api_dgii_base_url_temp:
+                BillingDoUtils.__api_dgii_base_url = __api_dgii_base_url_temp
+            if not BillingDoUtils.__token:
+                BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi(model)
+            request = requests.get("{0}/{2}/{1}".format(BillingDoUtils.__api_dgii_base_url, vat, __api_services_tax_contributors_endpoint_temp), headers=BillingDoUtils.__get_request_headers())
+            if request.status_code == 201:
+                BillingDoUtils.__token = ""
+                BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi(model)
+                request = requests.get("{0}/{2}/{1}".format(BillingDoUtils.__api_dgii_base_url, vat, __api_services_tax_contributors_endpoint_temp), headers=BillingDoUtils.__get_request_headers())
+            return request
+        return None
 
     @staticmethod
-    def dgii_validate_ncf(vat, ncf, vatBuyer):
-        if not BillingDoUtils.__token:
-            BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi()
-        request = requests.post("{0}/taxreceiptnumber/{1}/{2}/{3}".format(BillingDoUtils.__api_dgii_base_url, vat, ncf, vatBuyer), headers=BillingDoUtils.__get_request_headers(), data={})
-        if request.status_code == 201:
-            BillingDoUtils.__token = ""
-            BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi()
-            request = requests.post("{0}/taxreceiptnumber/{1}/{2}/{3}".format(BillingDoUtils.__api_dgii_base_url, vat, ncf, vatBuyer), headers=BillingDoUtils.__get_request_headers(), data={})
-        return request
+    def dgii_validate_ncf(model, vat, ncf, vatBuyer):
+        __api_services_tax_receipts_switch_temp = model.env['ir.config_parameter'].sudo().get_param("billing_do.api_services_tax_receipts_switch")
+        if __api_services_tax_receipts_switch_temp:
+            __api_dgii_base_url_temp = model.env['ir.config_parameter'].sudo().get_param("billing_do.api_services_base_url")
+            __api_services_tax_receipts_endpoint_temp = model.env['ir.config_parameter'].sudo().get_param("billing_do.api_services_tax_receipts_endpoint")
+            if __api_dgii_base_url_temp:
+                BillingDoUtils.__api_dgii_base_url = __api_dgii_base_url_temp
+            if not BillingDoUtils.__token:
+                BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi(model)
+            request = requests.post("{0}/{4}/{1}/{2}/{3}".format(BillingDoUtils.__api_dgii_base_url, vat, ncf, vatBuyer, __api_services_tax_receipts_endpoint_temp), headers=BillingDoUtils.__get_request_headers(), data={})
+            if request.status_code == 201:
+                BillingDoUtils.__token = ""
+                BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi(model)
+                request = requests.post("{0}/{4}/{1}/{2}/{3}".format(BillingDoUtils.__api_dgii_base_url, vat, ncf, vatBuyer, __api_services_tax_receipts_endpoint_temp), headers=BillingDoUtils.__get_request_headers(), data={})
+            return request
+        return None
 
     @staticmethod
-    def __get_access_token_for_webapi():
+    def __get_access_token_for_webapi(model):
+        __token_url_temp = model.env['ir.config_parameter'].sudo().get_param("billing_do.token_url")
+        if __token_url_temp:
+            BillingDoUtils.__token_url = __token_url_temp
         if not BillingDoUtils.__token:
-            token_request = requests.post(BillingDoUtils.__token_url, data=BillingDoUtils.__get_token_api_data())
+            token_request = requests.post(BillingDoUtils.__token_url, data=BillingDoUtils.__get_token_api_data(model))
             if(token_request.status_code == 200):
                 BillingDoUtils.__token = token_request.json()['access_token']
             elif(token_request.status_code == 500 or token_request.status_code == 404 or token_request.status_code == 400):
@@ -48,11 +65,13 @@ class BillingDoUtils:
             return BillingDoUtils.__validate_do_id(vat)
 
     @staticmethod
-    def __get_token_api_data():
+    def __get_token_api_data(model):
+        __token_client_id_temp = model.env['ir.config_parameter'].sudo().get_param("billing_do.token_client_id")
+        __token_client_secret_temp = model.env['ir.config_parameter'].sudo().get_param("billing_do.token_client_secret")
         return {
             'grant_type':'client_credentials', 
-            'client_id':'2bc79f1d-78c8-414f-8c52-e6ad016f0e29', 
-            'client_secret':'3wx_~.K1xH2rc.u~Uy02J1Tw6Kirdyg6zl', 
+            'client_id':__token_client_id_temp, 
+            'client_secret':__token_client_secret_temp, 
             'scope':'https://koalacreativesoftware.com/.default'
         }
 
