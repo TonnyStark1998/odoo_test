@@ -5,7 +5,13 @@ import requests, re
 class BillingDoResPartner(models.Model):
     _inherit = "res.partner"
 
-    # Res Partner - Modified Fields
+    # Res Company - New Fields
+    tax_contributor_type = fields.Selection(selection=[
+            ('1', 'Persona jurídica'),
+            ('2', 'Persona física')
+        ], required=True, store=True, readonly=False, copy=False, tracking=True)
+
+    # Res Company - Modified Fields
     vat = fields.Char(required=True, store=True, tracking=True)
 
     # Res Partner - OnChange Fields Functions

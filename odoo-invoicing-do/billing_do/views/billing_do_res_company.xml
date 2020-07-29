@@ -7,6 +7,9 @@
             <field name="partner_id" position="before">
                 <field name="vat" position="move" />
             </field>
+            <field name="vat" position="after">
+                <field name="tax_contributor_type" />
+            </field>
         </field>
     </record>
 </odoo>
