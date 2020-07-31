@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
-import requests
+import logging as log
 from odoo import models, fields, api, exceptions
 from . import billing_do_utils as doutils
 
@@ -61,7 +61,7 @@ class BillingDoAccountMove(models.Model):
     def _onchange_ncf(self):
         if self.type == 'in_invoice':
             try:
-                self._validate_ncf(self.ncf)
+                return self._validate_ncf(self.ncf)
             except exceptions.ValidationError as ve:
                 return {
                     'warning': {
@@ -92,8 +92,8 @@ class BillingDoAccountMove(models.Model):
         for move in self:
             if move.type == 'in_invoice':
                 try:
-                    self._validate_ncf(move.ncf)
-                except exceptions.ValidationError:
+                    return self._validate_ncf(move.ncf)
+                except exceptions.ValidationError as ve:
                     raise
 
     # Account Move - Helper Functions
@@ -104,18 +104,27 @@ class BillingDoAccountMove(models.Model):
             regex = r"(^(E)?(?=)(31|32|33|34|41|43|44|45)[0-9]{10}|^(B)(?:(01|02|03|04|11|12|13|14|15|16|17)[0-9]{8}))"
             match_ncf = re.match(regex, ncf.upper())
             if not match_ncf:
-                raise exceptions.ValidationError("El NCF (%s) es inválido." % ncf.upper())
+                raise exceptions.ValidationError("El NCF ({0}) es inválido.".format(ncf.upper()))
             else:
                 if int(len(ncf)) != int(match_ncf.end()):
                     raise exceptions.ValidationError("El NCF (%s) posee dígitos extras. Verifique." % ncf.upper())
             ncf_response = doutils.BillingDoUtils.dgii_validate_ncf(self, self.partner_id.vat, ncf, self.env.company.vat)
-            if ncf_response:
-                if ncf_response.status_code == 400:
-                    raise exceptions.ValidationError("Los datos suministrados para la consulta no son válidos. NCF:{0}|RNC:{1}".format(ncf, self.partner_id.vat))
-                elif ncf_response.status_code == 500:
+            log.info("[KCS] NCF Response: {0}".format(ncf_response))
+            log.info("[KCS] NCF Response (Status Code): {0}".format(ncf_response.status_code))
+            if not ncf_response is None:
+                if ncf_response.status_code == 500:
                     raise exceptions.ValidationError("Ocurrió un error desconocido al conectar con el servicio de consulta.")
                 elif ncf_response.status_code == 404:
                     raise exceptions.ValidationError("El NCF {0} y el RNC {1} no arrojaron ningún resultado. Favor verificar el NCF digitado.".format(ncf, self.partner_id.vat))
+                elif ncf_response.status_code == 400:
+                    raise exceptions.ValidationError("Los datos suministrados para la consulta no son válidos. NCF:{0}|RNC:{1}".format(ncf, self.partner_id.vat))
                 elif ncf_response.status_code == 200:
                     if not bool(ncf_response.json()['isValid']):
                         raise exceptions.ValidationError("El NCF {0} digitado no es válido. Verifique el valor digitado y el proveedor (RNC: {1}) seleccionado.".format(ncf, self.partner_id.vat))
+                    else:
+                        return {
+                            'warning': {
+                                'title': "NCF es válido.",
+                                'message': "El NCF '{0}' y el RNC '{1}' son válidos.".format(ncf, self.partner_id.vat)
+                            }
+                        }
