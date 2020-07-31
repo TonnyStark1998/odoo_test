@@ -27,7 +27,7 @@ class BillingDoUtils:
             log.info("[KCS][1] Request: {0}".format(request))
             log.info("[KCS][1] Request (Status Code): {0}".format(request.status_code))
             log.info("[KCS][1] Request (JSON): {0}".format(request.json()))
-            if request.status_code == 201:
+            if request.status_code == 401:
                 log.info("[KCS][2] Token (Before Request): {0}".format(BillingDoUtils.__token))
                 BillingDoUtils.__token = ""
                 log.info("[KCS][2] Token (Before Request): {0}".format(BillingDoUtils.__token))
@@ -52,7 +52,7 @@ class BillingDoUtils:
             if not BillingDoUtils.__token:
                 BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi(model)
             request = requests.post("{0}/{4}/{1}/{2}/{3}".format(BillingDoUtils.__api_dgii_base_url, vat, ncf, vatBuyer, __api_services_tax_receipts_endpoint_temp), headers=BillingDoUtils.__get_request_headers(), data={})
-            if request.status_code == 201:
+            if request.status_code == 401:
                 BillingDoUtils.__token = ""
                 BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi(model)
                 request = requests.post("{0}/{4}/{1}/{2}/{3}".format(BillingDoUtils.__api_dgii_base_url, vat, ncf, vatBuyer, __api_services_tax_receipts_endpoint_temp), headers=BillingDoUtils.__get_request_headers(), data={})

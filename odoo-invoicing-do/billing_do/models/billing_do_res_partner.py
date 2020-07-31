@@ -34,19 +34,18 @@ class BillingDoResPartner(models.Model):
                 vat_response = doutils.BillingDoUtils.dgii_get_vat_info(self, self.vat)
                 log.info("[KCS] VAT Response: {0}".format(vat_response))
                 log.info("[KCS] VAT Response (Status Code): {0}".format(vat_response.status_code))
-                log.info("[KCS] VAT Response (JSON): {0}".format(vat_response.json()))
                 if vat_response:
                     if(vat_response.status_code == 200):
                         self.name = vat_response.json()['razonSocial']
                     elif(vat_response.status_code == 404):
-                        return{
+                        return {
                             'warning':{
                                 'title': "Consulta fallida",
-                                'message': "El RNC '%s' no se encuentra en la base de datos de la DGII." % self.vat
+                                'message': "El RNC '{0}' no se encuentra en la base de datos de la DGII.".format(self.vat)
                             }
                         }
                     else:
-                        return{
+                        return {
                             'warning':{
                                 'title': "Error de conexión con servicio",
                                 'message': "Ocurrió un error inesperado al consulta el servicio."
