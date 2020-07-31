@@ -37,6 +37,12 @@ class BillingDoResPartner(models.Model):
                 if not vat_response is None:
                     if(vat_response.status_code == 200):
                         self.name = vat_response.json()['razonSocial']
+                        return {
+                            'info': {
+                                'title': "Hola",
+                                "message": "Pasaba por aquí..."
+                            }
+                        }
                     elif(vat_response.status_code == 404):
                         return {
                             'warning':{
@@ -51,13 +57,6 @@ class BillingDoResPartner(models.Model):
                                 'message': "Ocurrió un error inesperado al consulta el servicio."
                             }
                         }
-                else:
-                    return {
-                        'warning': {
-                            'title': 'Hola',
-                            'message': 'Pasaba por aquí..'
-                        }
-                    }
             except exceptions.ValidationError as ve:
                 return {
                     'warning': {
