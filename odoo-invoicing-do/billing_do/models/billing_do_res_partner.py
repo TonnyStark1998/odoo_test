@@ -51,6 +51,13 @@ class BillingDoResPartner(models.Model):
                                 'message': "Ocurrió un error inesperado al consulta el servicio."
                             }
                         }
+                else:
+                    return {
+                        'warning': {
+                            'title': 'Hola',
+                            'message': 'Pasaba por aquí..'
+                        }
+                    }
             except exceptions.ValidationError as ve:
                 return {
                     'warning': {
