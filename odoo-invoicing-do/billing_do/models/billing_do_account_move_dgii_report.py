@@ -53,8 +53,9 @@ class BillingDoAccountMoveDgiiReport(models.Model):
                 for invoice_line_id in move.invoice_line_ids:
                     #logging.warning("{0}".format(invoice_line_id.))
                     if invoice_line_id.product_id.type in ['consu', 'product']:
-                        consumable_amount += invoice_line_id.amount_currency
+                        consumable_amount += invoice_line_id.price_subtotal
                     elif invoice_line_id.product_id.type in ['service']:
-                        service_amount += invoice_line_id.amount_currency
-                move.report_service_amount = service_amount
+                        service_amount += invoice_line_id.price_subtotal
+                currency = self.env['res.currency']
+                move.report_service_amount = currency._convert(service_amount, move.currency_id, move.company_id, move.invoice_date, True)
                 move.report_consumable_amount = consumable_amount
