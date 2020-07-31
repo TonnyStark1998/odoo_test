@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
+import logging as log
 from odoo import models, fields, api, exceptions
 from . import billing_do_utils as doutils
 
