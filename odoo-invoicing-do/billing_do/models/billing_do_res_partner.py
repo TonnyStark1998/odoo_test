@@ -1,6 +1,5 @@
 from odoo import models, fields, api, exceptions
 from . import billing_do_utils as doutils
-import requests, re
 import logging as log
 
 class BillingDoResPartner(models.Model):
@@ -20,14 +19,14 @@ class BillingDoResPartner(models.Model):
                 return { 
                     'warning':{
                             'title': "Valor digitado inválido",
-                            'message': "El RNC (%s) digitado es inválido. Posee un formato incorrecto. Verifique el valor digitado." % self.vat
+                            'message': "El RNC ({0}) digitado es inválido. Posee un formato incorrecto. Verifique el valor digitado.".format(self.vat)
                         }
                 }
             elif _validate_vat_result == 2:
                 return { 
                     'warning':{
                             'title': "Dígito verificador erróneo",
-                            'message': "El RNC (%s) digitado es inválido. El dígito verificador no coincide. Verifique el valor digitado." % self.vat
+                            'message': "El RNC ({0}) digitado es inválido. El dígito verificador no coincide. Verifique el valor digitado.".format(self.vat)
                         }
                 }
             try:
@@ -36,11 +35,12 @@ class BillingDoResPartner(models.Model):
                 log.info("[KCS] VAT Response (Status Code): {0}".format(vat_response.status_code))
                 if not vat_response is None:
                     if(vat_response.status_code == 200):
-                        self.name = vat_response.json()['razonSocial']
+                        vat_name = vat_response.json()['razonSocial']
+                        self.name = vat_name
                         return {
-                            'info': {
-                                'title': "Hola",
-                                "message": "Pasaba por aquí..."
+                            'warning': {
+                                'title': "RNC '{0}' encontrado.".format(self.vat),
+                                "message": "Pertenece a '{0}' según los registros de la DGII.".format(vat_name)
                             }
                         }
                     elif(vat_response.status_code == 404):
