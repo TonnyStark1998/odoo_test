@@ -1,5 +1,6 @@
 
 import requests, re
+import logging as log
 
 class BillingDoUtils:
     __token_url = "https://login.microsoftonline.com/4e9b7883-1526-4764-abf5-619326b5f34a/oauth2/v2.0/token"
@@ -9,36 +10,56 @@ class BillingDoUtils:
     @staticmethod
     def dgii_get_vat_info(model, vat):
         __api_services_tax_contributors_switch_temp = model.env['ir.config_parameter'].sudo().get_param("billing_do.api_services_tax_contributors_switch")
+        log.info("[KCS] Service Tax Contributors Switch: {0}".format(__api_services_tax_contributors_switch_temp))
         if __api_services_tax_contributors_switch_temp:
             __api_dgii_base_url_temp = model.env['ir.config_parameter'].sudo().get_param("billing_do.api_services_base_url")
+            log.info("[KCS] DGII Api Base URL: {0}".format(__api_dgii_base_url_temp))
             __api_services_tax_contributors_endpoint_temp = model.env['ir.config_parameter'].sudo().get_param("billing_do.api_services_tax_contributors_endpoint")
+            log.info("[KCS] Service Tax Contributors Endpoint: {0}".format(__api_services_tax_contributors_endpoint_temp))
             if __api_dgii_base_url_temp:
                 BillingDoUtils.__api_dgii_base_url = __api_dgii_base_url_temp
             if not BillingDoUtils.__token:
                 BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi(model)
-            request = requests.get("{0}/{2}/{1}".format(BillingDoUtils.__api_dgii_base_url, vat, __api_services_tax_contributors_endpoint_temp), headers=BillingDoUtils.__get_request_headers())
-            if request.status_code == 201:
+            log.info("[KCS] Payload: ['vat': '{0}']".format(vat))
+            log.info("[KCS] Token used: {0}".format(BillingDoUtils.__token))
+            request = requests.get("{0}/{1}/{2}".format(BillingDoUtils.__api_dgii_base_url, __api_services_tax_contributors_endpoint_temp, vat), headers=BillingDoUtils.__get_request_headers())
+            log.info("[KCS] Request: {0}".format(request))
+            log.info("[KCS] Request (Status Code): {0}".format(request.status_code))
+            if request.status_code == 401:
                 BillingDoUtils.__token = ""
                 BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi(model)
-                request = requests.get("{0}/{2}/{1}".format(BillingDoUtils.__api_dgii_base_url, vat, __api_services_tax_contributors_endpoint_temp), headers=BillingDoUtils.__get_request_headers())
+                log.info("[KCS] Token new: {0}".format(BillingDoUtils.__token))
+                request = requests.get("{0}/{1}/{2}".format(BillingDoUtils.__api_dgii_base_url, __api_services_tax_contributors_endpoint_temp, vat), headers=BillingDoUtils.__get_request_headers())
+                log.info("[KCS] Request: {0}".format(request))
+                log.info("[KCS] Request (Status Code): {0}".format(request.status_code))
             return request
         return None
 
     @staticmethod
     def dgii_validate_ncf(model, vat, ncf, vatBuyer):
         __api_services_tax_receipts_switch_temp = model.env['ir.config_parameter'].sudo().get_param("billing_do.api_services_tax_receipts_switch")
+        log.info("[KCS] Service Tax Receipts Switch: {0}".format(__api_services_tax_receipts_switch_temp))
         if __api_services_tax_receipts_switch_temp:
             __api_dgii_base_url_temp = model.env['ir.config_parameter'].sudo().get_param("billing_do.api_services_base_url")
+            log.info("[KCS] DGII Api Base URL: {0}".format(__api_dgii_base_url_temp))
             __api_services_tax_receipts_endpoint_temp = model.env['ir.config_parameter'].sudo().get_param("billing_do.api_services_tax_receipts_endpoint")
+            log.info("[KCS] Service Tax Receipts Endpoint: {0}".format(__api_services_tax_receipts_endpoint_temp))
             if __api_dgii_base_url_temp:
                 BillingDoUtils.__api_dgii_base_url = __api_dgii_base_url_temp
             if not BillingDoUtils.__token:
                 BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi(model)
+            log.info("[KCS] Payload: ['vat': '{0}', 'ncf': '{1}', 'vat_buyer': '{2}']".format(vat, ncf, vatBuyer))
+            log.info("[KCS] Token used: {0}".format(BillingDoUtils.__token))
             request = requests.post("{0}/{4}/{1}/{2}/{3}".format(BillingDoUtils.__api_dgii_base_url, vat, ncf, vatBuyer, __api_services_tax_receipts_endpoint_temp), headers=BillingDoUtils.__get_request_headers(), data={})
-            if request.status_code == 201:
+            log.info("[KCS] Request: {0}".format(request))
+            log.info("[KCS] Request (Status Code): {0}".format(request.status_code))
+            if request.status_code == 401:
                 BillingDoUtils.__token = ""
                 BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi(model)
+                log.info("[KCS] Token new: {0}".format(BillingDoUtils.__token))
                 request = requests.post("{0}/{4}/{1}/{2}/{3}".format(BillingDoUtils.__api_dgii_base_url, vat, ncf, vatBuyer, __api_services_tax_receipts_endpoint_temp), headers=BillingDoUtils.__get_request_headers(), data={})
+                log.info("[KCS] Request: {0}".format(request))
+                log.info("[KCS] Request (Status Code): {0}".format(request.status_code))
             return request
         return None
 

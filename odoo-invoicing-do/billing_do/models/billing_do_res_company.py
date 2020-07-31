@@ -19,30 +19,40 @@ class BillingDoResCompany(models.Model):
         self.name = ''
         if self.vat:
             _validate_vat_result = doutils.BillingDoUtils.validate_vat(self.vat)
+            log.info("[KCS] Validate VAT Result: {0}".format(_validate_vat_result))
             if _validate_vat_result == 3:
                 return { 
                     'warning':{
                             'title': "Valor digitado inválido",
-                            'message': "El RNC (%s) digitado es inválido. Posee un formato incorrecto. Verifique el valor digitado." % self.vat
+                            'message': "El RNC ({0}) digitado es inválido. Posee un formato incorrecto. Verifique el valor digitado.".format(self.vat)
                         }
                 }
             elif _validate_vat_result == 2:
                 return { 
                     'warning':{
                             'title': "Dígito verificador erróneo",
-                            'message': "El RNC (%s) digitado es inválido. El dígito verificador no coincide. Verifique el valor digitado." % self.vat
+                            'message': "El RNC ({0}) digitado es inválido. El dígito verificador no coincide. Verifique el valor digitado.".format(self.vat)
                         }
                 }
             try:
                 vat_response = doutils.BillingDoUtils.dgii_get_vat_info(self, self.vat)
-                if vat_response:
+                log.info("[KCS] VAT Response: {0}".format(vat_response))
+                log.info("[KCS] VAT Response (Status Code): {0}".format(vat_response.status_code))
+                if not vat_response is None:
                     if(vat_response.status_code == 200):
-                        self.name = vat_response.json()['razonSocial']
+                        vat_name = vat_response.json()['razonSocial']
+                        self.name = vat_name
+                        return {
+                            'warning': {
+                                'title': "RNC '{0}' encontrado.".format(self.vat),
+                                "message": "Pertenece a '{0}' según los registros de la DGII.".format(vat_name)
+                            }
+                        }
                     elif(vat_response.status_code == 404):
                         return{
                             'warning':{
                                 'title': "Consulta fallida",
-                                'message': "El RNC '%s' no se encuentra en la base de datos de la DGII." % self.vat
+                                'message': "El RNC '{0}' no se encuentra en la base de datos de la DGII.".format(self.vat)
                             }
                         }
                     else:
