@@ -1,6 +1,7 @@
 from odoo import models, fields, api, exceptions
 from . import billing_do_utils as doutils
 import requests, re
+import logging as log
 
 class BillingDoResPartner(models.Model):
     _inherit = "res.partner"
@@ -14,6 +15,7 @@ class BillingDoResPartner(models.Model):
         self.name = ''
         if self.vat:
             _validate_vat_result = doutils.BillingDoUtils.validate_vat(self.vat)
+            log.info("[KCS] Validate VAT Result: {0}".format(_validate_vat_result))
             if _validate_vat_result == 3:
                 return { 
                     'warning':{
@@ -30,6 +32,9 @@ class BillingDoResPartner(models.Model):
                 }
             try:
                 vat_response = doutils.BillingDoUtils.dgii_get_vat_info(self, self.vat)
+                log.info("[KCS] VAT Response: {0}".format(vat_response))
+                log.info("[KCS] VAT Response (Status Code): {0}".format(vat_response.status_code))
+                log.info("[KCS] VAT Response (JSON): {0}".format(vat_response.json()))
                 if vat_response:
                     if(vat_response.status_code == 200):
                         self.name = vat_response.json()['razonSocial']
