@@ -12,6 +12,9 @@
             <field name="type" position="before">
                 <field name="vat" position="move" />
             </field>
+            <field name="vat" position="after">
+                <field name="tax_contributor_type" />
+            </field>
         </field>
     </record>
     <record model="ir.ui.view" id="billing_do_view_partner_short_form">
@@ -42,6 +45,9 @@
             </field>
             <field name="type" position="before">
                 <field name="vat" position="move" />
+            </field>
+            <field name="vat" position="after">
+                <field name="tax_contributor_type" />
             </field>
         </field>
     </record>

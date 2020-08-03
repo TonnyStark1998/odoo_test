@@ -4,6 +4,12 @@ from . import billing_do_utils as doutils
 class BillingDoResCompany(models.Model):
     _inherit = "res.company"
 
+    # Res Partner - New Fields
+    tax_contributor_type = fields.Selection(selection=[
+            ('1', 'Persona jurídica'),
+            ('2', 'Persona física')
+        ], required=True, store=True, readonly=False, copy=False, tracking=True)
+
     # Res Partner - Modified Fields
     vat = fields.Char(required=True, store=True, tracking=True)
 
