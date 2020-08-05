@@ -115,12 +115,12 @@ class BillingDoAccountMove(models.Model):
                 if ncf_response.status_code == 500:
                     raise exceptions.ValidationError("Ocurrió un error desconocido al conectar con el servicio de consulta.")
                 elif ncf_response.status_code == 404:
-                    raise exceptions.ValidationError("El NCF {0} y el RNC {1} no arrojaron ningún resultado. Favor verificar el NCF digitado.".format(ncf, self.partner_id.vat))
+                    raise exceptions.ValidationError("El número de comprobante fiscal {0} digitado no está vigente o no corresponde a este RNC {1}.".format(ncf, self.partner_id.vat))
                 elif ncf_response.status_code == 400:
                     raise exceptions.ValidationError("Los datos suministrados para la consulta no son válidos. NCF:{0}|RNC:{1}".format(ncf, self.partner_id.vat))
                 elif ncf_response.status_code == 200:
                     if not bool(ncf_response.json()['isValid']):
-                        raise exceptions.ValidationError("El NCF {0} digitado no es válido. Verifique el valor digitado y el proveedor (RNC: {1}) seleccionado.".format(ncf, self.partner_id.vat))
+                        raise exceptions.ValidationError("El número de comprobante fiscal {0} digitado no está vigente o no corresponde a este RNC {1}.".format(ncf, self.partner_id.vat))
                     else:
                         return {
                             'warning': {
