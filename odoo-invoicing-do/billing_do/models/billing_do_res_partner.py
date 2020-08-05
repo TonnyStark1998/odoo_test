@@ -8,6 +8,12 @@ class BillingDoResPartner(models.Model):
     # Res Partner - Modified Fields
     vat = fields.Char(required=True, store=True, tracking=True)
 
+    # Temporary field
+    tax_contributor_type = fields.Selection(selection=[
+        ('1','Persona Jurídica'),
+        ('2', 'Persona Física')
+    ], store=False, required=False)
+
     # Res Partner - OnChange Fields Functions
     @api.onchange('vat')
     def _onchange_vat_billing_do(self):
