@@ -19,9 +19,9 @@
                 </h2>
             </xpath>
             <xpath expr="//field[@name='ref']" position="before">
-                <field name="income_type" attrs="{'invisible': [('type', '!=', 'out_invoice')]}" />
+                <field name="income_type" attrs="{'invisible': [('type', '!=', 'out_invoice')], 'readonly': [('state','!=','draft')]}" />
                 <field name="ncf" attrs="{'invisible': [('type', '!=', 'in_invoice')], 'required': [('type', '=', 'in_invoice')]}" />
-                <field name="expense_type" attrs="{'invisible': [('type', '!=', 'in_invoice')]}" />
+                <field name="expense_type" attrs="{'invisible': [('type', '!=', 'in_invoice')], 'readonly': [('state','!=','draft')]}" />
             </xpath>
             <field name="journal_id" position="attributes">
                 <attribute name="attrs">
