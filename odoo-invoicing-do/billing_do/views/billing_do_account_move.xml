@@ -10,18 +10,18 @@
             <xpath expr="//field[@name='invoice_sequence_number_next_prefix' and position()=1]" position="replace" />
             <xpath expr="//field[@name='invoice_sequence_number_next' and position()=1]" position="replace" />
             <xpath expr="//h1[hasclass('mt0')]" position="replace">
-                <span class="o_form_label" attrs="{'invisible': ['|', ('type', '=', 'entry'), '|', ('name', '=', '/'), ('type','=','in_invoice')]}">
+                <span class="o_form_label" attrs="{'invisible': ['|', ('type', 'in', ['entry', 'in_invoice', 'in_refund']), ('name', '=', '/')]}">
                     <field name="type" readonly="1" nolabel="1"/>
                 </span>
                 <h2 class="mt0" style="color:#474747;">
-                    <field name="name" readonly="True" attrs="{'invisible':['|', ('name', '=', '/'), ('type','=','in_invoice')]}"/>
-                    <field name="ncf_sequence_next_number" readonly="True" attrs="{'invisible':['|', ('type', '=', 'in_invoice'), '|', ('state','!=','draft'), ('name','!=','/')]}" />
+                    <field name="name" readonly="True" attrs="{'invisible':['|', ('name', '=', '/'), ('type','in',['in_invoice', 'in_refund'])]}"/>
+                    <field name="ncf_sequence_next_number" readonly="True" attrs="{'invisible':['|', ('type', 'in', ['in_invoice', 'in_refund']), '|', ('state','!=','draft'), ('name','!=','/')]}" />
                 </h2>
             </xpath>
             <xpath expr="//field[@name='ref']" position="before">
                 <field name="income_type" attrs="{'invisible': [('type', '!=', 'out_invoice')], 'readonly': [('state','!=','draft')]}" />
-                <field name="ncf" attrs="{'invisible': [('type', '!=', 'in_invoice')], 'required': [('type', '=', 'in_invoice')]}" />
-                <field name="expense_type" attrs="{'invisible': [('type', '!=', 'in_invoice')], 'readonly': [('state','!=','draft')]}" />
+                <field name="ncf" attrs="{'invisible': [('type', 'not in', ['in_invoice', 'in_refund'])], 'required': [('type', 'in', ['in_invoice', 'in_refund'])]}" />
+                <field name="expense_type" attrs="{'invisible': [('type', 'not in', ['in_invoice', 'in_refund'])], 'readonly': [('state','!=','draft')]}" />
             </xpath>
             <field name="journal_id" position="attributes">
                 <attribute name="attrs">
@@ -31,6 +31,21 @@
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="journal_id" position="move" />
             </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="billing_do_view_invoice_tree">
+        <field name="name">billing.do.account.move.tree</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree" />
+        <field name="arch" type="xml">
+            <field name="name" position="before">
+                <field name="ncf" invisible="context.get('default_type') not in ('in_invoice', 'in_refund','in_receipt')" />
+            </field>
+            <field name="name" position="attributes">
+                <attribute name="invisible">
+                    context.get('default_type') not in ('out_invoice', 'out_refund','out_receipt')
+                </attribute>
+            </field>
         </field>
     </record>
     <record model="ir.ui.view" id="billing_do_view_move_reversal_form">

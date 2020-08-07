@@ -59,7 +59,7 @@ class BillingDoAccountMove(models.Model):
 
     @api.onchange('ncf', 'partner_id')
     def _onchange_ncf(self):
-        if self.type == 'in_invoice':
+        if self.type in ['in_invoice', 'in_refund']:
             try:
                 return self._validate_ncf(self.ncf)
             except exceptions.ValidationError as ve:
@@ -90,7 +90,7 @@ class BillingDoAccountMove(models.Model):
     @api.constrains('ncf', 'type')
     def _check_ncf(self):
         for move in self:
-            if move.type == 'in_invoice':
+            if move.type in ['in_invoice', 'in_refund']:
                 try:
                     return self._validate_ncf(move.ncf)
                 except exceptions.ValidationError as ve:
