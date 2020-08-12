@@ -67,8 +67,8 @@
                 <field name="report_vat" />
                 <field name="report_vat_type" />
                 <field name="expense_type" string="Expense Type" />
-                <field name="ncf" string="Tax Receipt Number" />
-                <field name="report_reversed_move" string="Tax Receipt Reversed Number" />
+                <field name="report_move" />
+                <field name="report_move_reversed" string="Tax Receipt Reversed Number" />
                 <field name="report_bill_date_month" string="Invoice Date Month" />
                 <field name="report_bill_date_day" string="Invoice Date Day" />
                 <field name="report_bill_payment_date_month" string="Payment Date Month" />
@@ -77,7 +77,6 @@
                 <field name="report_bill_consumable_amount" />
                 <field name="report_bill_total_amount" />
                 <field name="report_bill_tax_amount" string="ITBIS Tax" />
-                <field name="report_bill_itbis_billed_amount" />
                 <field name="report_bill_itbis_held_amount" />
                 <field name="report_bill_itbis_proportional_amount" />
                 <field name="report_bill_itbis_expense_amount" />
@@ -96,12 +95,12 @@
         <field name="name">billing.do.account.dgii.607.tree</field>
         <field name="model">account.move</field>
         <field name="arch" type="xml">
-            <tree default_order="invoice_date desc" create="false" import="false">
+            <tree default_order="report_invoice_date desc" create="false" import="false">
                 <field name="state" invisible="1" />
                 <field name="report_vat" />
                 <field name="report_vat_type" />
-                <field name="name" />
-                <field name="report_reversed_move" string="Tax Receipt Reversed Number" />
+                <field name="report_move" />
+                <field name="report_move_reversed" string="Tax Receipt Reversed Number" />
                 <field name="income_type" />
                 <field name="report_invoice_date" string="Invoice Date" />
                 <field name="report_invoice_held_date" string="Invoice Held Date" />
@@ -129,20 +128,14 @@
         <field name="res_model">account.move</field>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="billing_do_view_dgii_606_tree" />
-        <field name="domain">['&amp;', ('type','in',['in_invoice']), ('state','in',['posted'])]</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Create the first course</p>
-        </field>
+        <field name="domain">['&amp;', ('type','in',['in_invoice', 'in_refund']), '&amp;', ('state','in',['posted']), ('report_move','!=','')]</field>
     </record>
     <record model="ir.actions.act_window" id="dgii_reports_format_607">
         <field name="name">Formato de envío de datos 607 (Ventas)</field>
         <field name="res_model">account.move</field>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="billing_do_view_dgii_607_tree" />
-        <field name="domain">['&amp;', ('type','in',['out_invoice']), ('state', 'in', ['posted'])]</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Create the first course</p>
-        </field>
+        <field name="domain">['&amp;', ('type','in',['out_invoice','out_refund']), ('state', 'in', ['posted'])]</field>
     </record>
     <menuitem id="main_menu_dgii_reports" name="DGII Reports" parent="account_accountant.menu_accounting" sequence="30" />
     <menuitem id="menu_dgii_reports_606" name="Formato de compras (606)" parent="main_menu_dgii_reports" action="dgii_reports_format_606" sequence="1" />

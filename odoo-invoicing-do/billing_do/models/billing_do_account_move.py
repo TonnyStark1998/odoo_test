@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
+import datetime as date
 import logging as log
 from odoo import models, fields, api, exceptions
 from . import billing_do_utils as doutils
@@ -128,3 +129,19 @@ class BillingDoAccountMove(models.Model):
                                 'message': "El NCF '{0}' y el RNC '{1}' son válidos.".format(ncf, self.partner_id.vat)
                             }
                         }
+    
+    def get_last_payment_date(self):
+        self.ensure_one()
+        foreign_currency = self.currency_id if self.currency_id != self.company_id.currency_id else False
+
+        pay_term_line_ids = self.line_ids.filtered(lambda line: line.account_id.user_type_id.type in ('receivable', 'payable'))
+        partials = pay_term_line_ids.mapped('matched_debit_ids') + pay_term_line_ids.mapped('matched_credit_ids')
+
+        _last_payment_date = False
+        for partial in partials:
+            counterpart_lines = partial.debit_move_id + partial.credit_move_id
+            counterpart_line = counterpart_lines.filtered(lambda line: line not in self.line_ids)
+            _last_payment_date = counterpart_line.date
+
+        log.info("[DEBUG] Last Payment Date: {0}".format(_last_payment_date))
+        return _last_payment_date
