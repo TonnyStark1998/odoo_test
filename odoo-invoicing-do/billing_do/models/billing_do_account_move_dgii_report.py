@@ -19,10 +19,10 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_bill_payment_date_day = fields.Char(string='Payment Date Day', compute='_compute_report_bill_payment_date', store=False)
     report_bill_service_amount = fields.Monetary(string='Service Amount', default=0.0, currency_field='company_currency_id', compute='_compute_service_consumable_amount')
     report_bill_consumable_amount = fields.Monetary(string='Consumable Amount', default=0.0, currency_field='company_currency_id', compute='_compute_service_consumable_amount')
-    report_bill_total_amount = fields.Monetary(string='Total Amount', default=0.0, compute='_compute_report_total_amount', store=False)
+    report_bill_total_amount = fields.Monetary(string='Total Amount', default=0.0, related='amount_total', store=False)
     report_bill_tax_amount = fields.Monetary(string='Tax Amount', currency_field='company_currency_id', compute='_compute_report_bill_tax_amount', default=0.0)
     # Fields for DGII report 606 (NOT IN USE RIGHT NOW!)
-    report_bill_itbis_held_amount = fields.Monetary(string='ITBIS Held Amount', store=False)
+    report_bill_itbis_held_amount = fields.Monetary(string='ITBIS Held Amount', compute='_compute_report_bill_itbis_held_amount', store=False)
     report_bill_itbis_proportional_amount = fields.Monetary(string='ITBIS Proportional Amount', store=False)
     report_bill_itbis_expense_amount = fields.Monetary(string='ITBIS Expense Amount', store=False)
     report_bill_itbis_ahead_amount = fields.Monetary(string='ITBIS Ahead Amount', store=False)
@@ -141,7 +141,21 @@ class BillingDoAccountMoveDgiiReport(models.Model):
                 move.report_move = move.ncf
                 move.report_move_reversed = ''
     
-    @api.depends('amount_total')
-    def _compute_report_total_amount(self):
+    @api.depends('line_ids')
+    def _compute_report_bill_itbis_held_amount(self):
+        bill_itbis_held_amount = invoice_itbis_held = bill_isr_held = invoice_isr_held = 0
         for move in self:
-            move.report_bill_total_amount = move.amount_total
+            for line in move.line_ids:
+                log.info("[KCS] [DEBUG] Account Withholding Type: {0}".format(line.account_id.withholding_tax_type))
+                if line.account_id.withholding_tax_type in ["RET-ITBIS-606"]:
+                    bill_itbis_held_amount = line.credit + line.debit
+                elif line.account_id.withholding_tax_type in ["RET-ITBIS-607"]:
+                    invoice_itbis_held = line.credit + line.debit
+                elif line.account_id.withholding_tax_type in ["RET-ISR-606"]:
+                    bill_isr_held = line.credit + line.debit
+                elif line.account_id.withholding_tax_type in ["RET-ISR-607"]:
+                    invoice_isr_held = line.credit + line.debit
+            move.report_bill_itbis_held_amount = bill_itbis_held_amount
+            move.report_invoice_itbis_held_by_thirdparty_amount = invoice_itbis_held
+            move.report_bill_isr_held_amount = bill_isr_held
+            move.report_invoice_isr_held_by_thirdparty_amount = invoice_isr_held
