@@ -10,7 +10,6 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_vat_type = fields.Char(compute='_compute_report_vat_type', string='Tax Contributor Type', store=False)
     report_move = fields.Char(string='Tax Receipt Number', compute='_compute_move', store=False)
     report_move_reversed = fields.Char(string='Tax Receipt Reversed', compute='_compute_move', store=False)
-    report_legaltip_amount = fields.Monetary(string='Legal Tip Amount', store=False)
     report_isc_amount = fields.Monetary(string='ISC Amount', store=False)
 
     # Fields for DGII report 606
@@ -31,8 +30,8 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_bill_isr_type = fields.Char(string='ISR Type', store=False)
     report_bill_isr_held_amount = fields.Monetary(string='ISR Held Amount', store=False)
     report_bill_isr_purchases_amount = fields.Monetary(string='ISR Purchases Amount', store=False)
-    report_bill_other_taxes_amount = fields.Monetary(string='Other Taxes Amount', store=False)
-    report_bill_legaltip_amount = fields.Monetary(string='Legal Tip Amount', store=False)
+    report_bill_other_taxes_amount = fields.Monetary(string='Bill Other Taxes Amount', store=False)
+    report_bill_legaltip_amount = fields.Monetary(string='Bill Legal Tip Amount', store=False)
 
     # Fields for DGII report 607
     report_invoice_date = fields.Char(string='Invoice Date Month', compute='_compute_report_invoice_date')
@@ -42,8 +41,8 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_invoice_itbis_perceived_amount = fields.Monetary(string='ITBIS Perceived Amount', default=0.0)
     report_invoice_isr_held_by_thirdparty_amount = fields.Monetary(string='ISR Held By ThirdParty Amount', default=0.0)
     report_invoice_isr_perceived_amount = fields.Monetary(string='ISR Perceived Amount', default=0.0)
-    report_invoice_other_taxes_amount = fields.Monetary(string='Other Taxes Amount', default=0.0)
-    report_invoice_legaltip_amount = fields.Monetary(string='Legal Tip Amount', store=False)
+    report_invoice_other_taxes_amount = fields.Monetary(string='Invoice Other Taxes Amount', default=0.0)
+    report_invoice_legaltip_amount = fields.Monetary(string='Invoice Legal Tip Amount', store=False)
     report_invoice_cash_amount = fields.Monetary(string='Cash Amount', store=False)
     report_invoice_bank_amount = fields.Monetary(string='Bank Amount', store=False)
     report_invoice_credit_debit_card_amount = fields.Monetary(string='Credit/Debit Card Amount', store=False)
