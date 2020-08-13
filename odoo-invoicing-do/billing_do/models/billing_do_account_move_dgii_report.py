@@ -108,7 +108,6 @@ class BillingDoAccountMoveDgiiReport(models.Model):
                     # The base should be added ONCE
                     done_taxes.add(tax_key_add_base)
             for key, value in res.items():
-                log.info("[KCS] [DEBUG] Key: {0} | Value: {1}".format(key, value))
                 if key == "ITBIS":
                     move.report_bill_tax_amount = value["amount"]
                 elif key == "ISC":
@@ -123,7 +122,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     @api.depends('report_bill_payment_date_month','report_bill_payment_date_month')
     def _compute_report_bill_payment_date(self):
         for move in self:
-            if not move.amount_residual > 0:
+            if not move.amount_residual > 0 and move.report_bill_itbis_held_amount > 0:
                 _last_payment_date = move.get_last_payment_date()
                 move.report_bill_payment_date_month = '' if not _last_payment_date else _last_payment_date.strftime('%Y%m')
                 move.report_bill_payment_date_day = '' if not _last_payment_date else _last_payment_date.strftime('%d')
@@ -143,10 +142,9 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     
     @api.depends('line_ids')
     def _compute_report_bill_itbis_held_amount(self):
-        bill_itbis_held_amount = invoice_itbis_held = bill_isr_held = invoice_isr_held = 0
         for move in self:
+            bill_itbis_held_amount = invoice_itbis_held = bill_isr_held = invoice_isr_held = 0
             for line in move.line_ids:
-                log.info("[KCS] [DEBUG] Account Withholding Type: {0}".format(line.account_id.withholding_tax_type))
                 if line.account_id.withholding_tax_type in ["RET-ITBIS-606"]:
                     bill_itbis_held_amount = line.credit + line.debit
                 elif line.account_id.withholding_tax_type in ["RET-ITBIS-607"]:
