@@ -141,7 +141,6 @@ class BillingDoAccountMove(models.Model):
         for partial in partials:
             counterpart_lines = partial.debit_move_id + partial.credit_move_id
             counterpart_line = counterpart_lines.filtered(lambda line: line not in self.line_ids)
-            log.info("[DEBUG] Move ID: {2} | ID:{0} | Payment Date: {1} | Last Payment Date: {3}".format(counterpart_line.id, counterpart_line.date, self.id, _last_payment_date))
             if counterpart_line.date > _last_payment_date:
                 _last_payment_date = counterpart_line.date
 

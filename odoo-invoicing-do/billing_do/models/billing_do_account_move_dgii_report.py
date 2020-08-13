@@ -20,7 +20,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_bill_payment_date_day = fields.Char(string='Payment Date Day', compute='_compute_report_bill_payment_date', store=False)
     report_bill_service_amount = fields.Monetary(string='Service Amount', default=0.0, currency_field='company_currency_id', compute='_compute_service_consumable_amount')
     report_bill_consumable_amount = fields.Monetary(string='Consumable Amount', default=0.0, currency_field='company_currency_id', compute='_compute_service_consumable_amount')
-    report_bill_total_amount = fields.Monetary(string='Total Amount', default=0.0, store=False)
+    report_bill_total_amount = fields.Monetary(string='Total Amount', default=0.0, compute='_compute_report_total_amount', store=False)
     report_bill_tax_amount = fields.Monetary(string='Tax Amount', currency_field='company_currency_id', compute='_compute_report_bill_tax_amount', default=0.0)
     # Fields for DGII report 606 (NOT IN USE RIGHT NOW!)
     report_bill_itbis_held_amount = fields.Monetary(string='ITBIS Held Amount', store=False)
@@ -109,6 +109,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
                     # The base should be added ONCE
                     done_taxes.add(tax_key_add_base)
             for key, value in res.items():
+                log.info("[KCS] [DEBUG] Key: {0} | Value: {1}".format(key, value))
                 if key == "ITBIS":
                     move.report_bill_tax_amount = value["amount"]
                 elif key == "ISC":
@@ -140,3 +141,8 @@ class BillingDoAccountMoveDgiiReport(models.Model):
             else:
                 move.report_move = move.ncf
                 move.report_move_reversed = ''
+    
+    @api.depends('amount_total')
+    def _compute_report_total_amount(self):
+        for move in self:
+            move.report_bill_total_amount = move.amount_total
