@@ -142,8 +142,20 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     
     @api.depends('line_ids')
     def _compute_report_bill_itbis_held_amount(self):
+        payments = self.env['account.payment'].search(args=[])
         for move in self:
             bill_itbis_held_amount = invoice_itbis_held = bill_isr_held = invoice_isr_held = 0
+            move_payments = payments.filtered(lambda payment: move in payment.invoice_ids)
+            for move_payment in move_payments:
+                for line in move_payment.move_line_ids:
+                    if line.account_id.withholding_tax_type in ["RET-ITBIS-606"]:
+                        bill_itbis_held_amount = line.credit + line.debit
+                    elif line.account_id.withholding_tax_type in ["RET-ITBIS-607"]:
+                        invoice_itbis_held = line.credit + line.debit
+                    elif line.account_id.withholding_tax_type in ["RET-ISR-606"]:
+                        bill_isr_held = line.credit + line.debit
+                    elif line.account_id.withholding_tax_type in ["RET-ISR-607"]:
+                        invoice_isr_held = line.credit + line.debit
             for line in move.line_ids:
                 if line.account_id.withholding_tax_type in ["RET-ITBIS-606"]:
                     bill_itbis_held_amount = line.credit + line.debit
