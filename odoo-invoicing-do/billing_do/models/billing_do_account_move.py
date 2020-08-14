@@ -132,9 +132,7 @@ class BillingDoAccountMove(models.Model):
     
     def get_last_payment_date(self):
         self.ensure_one()
-        foreign_currency = self.currency_id if self.currency_id != self.company_id.currency_id else False
-
-        pay_term_line_ids = self.line_ids.sorted(key=lambda line: line.date, reverse=True).filtered(lambda line: line.account_id.user_type_id.type in ('receivable', 'payable'))
+        pay_term_line_ids = self.line_ids.filtered(lambda line: line.account_id.user_type_id.type in ('receivable', 'payable'))
         partials = pay_term_line_ids.mapped('matched_debit_ids') + pay_term_line_ids.mapped('matched_credit_ids')
 
         _last_payment_date = date.date.min
