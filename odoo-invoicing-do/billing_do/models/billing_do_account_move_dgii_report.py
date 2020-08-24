@@ -19,7 +19,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_bill_payment_date_day = fields.Char(string='Payment Date Day', compute='_compute_report_bill_payment_date', store=False)
     report_bill_service_amount = fields.Monetary(string='Service Amount', default=0.0, currency_field='company_currency_id', compute='_compute_service_consumable_amount')
     report_bill_consumable_amount = fields.Monetary(string='Consumable Amount', default=0.0, currency_field='company_currency_id', compute='_compute_service_consumable_amount')
-    report_bill_total_amount = fields.Monetary(string='Total Amount', default=0.0, related='amount_total', store=False)
+    report_bill_total_amount = fields.Monetary(string='Total Amount', default=0.0, compute='_compute_service_consumable_amount')
     report_bill_tax_amount = fields.Monetary(string='Tax Amount', currency_field='company_currency_id', compute='_compute_report_bill_tax_amount', default=0.0)
     # Fields for DGII report 606 (NOT IN USE RIGHT NOW!)
     report_bill_itbis_held_amount = fields.Monetary(string='ITBIS Held Amount', compute='_compute_report_bill_itbis_held_amount', store=False)
@@ -85,6 +85,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
                         service_amount += unit_price
                 move.report_bill_service_amount = service_amount
                 move.report_bill_consumable_amount = consumable_amount
+                move.report_bill_total_amount = move.report_bill_service_amount + move.report_bill_consumable_amount
 
     @api.depends('line_ids')
     def _compute_report_bill_tax_amount(self):
@@ -142,10 +143,12 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     
     @api.depends('line_ids')
     def _compute_report_bill_itbis_held_amount(self):
-        payments = self.env['account.payment'].search(args=[])
+        all_payments = self.env['account.payment'].search(args=[])
         for move in self:
             bill_itbis_held_amount = invoice_itbis_held = bill_isr_held = invoice_isr_held = 0
-            move_payments = payments.filtered(lambda payment: move in payment.invoice_ids)
+            reconciled_vals = move._get_reconciled_info_JSON_values()
+            move_payments_ids = [payment['account_payment_id'] for payment in reconciled_vals]
+            move_payments = all_payments.filtered(lambda payment: payment.id in move_payments_ids)
             for move_payment in move_payments:
                 for line in move_payment.move_line_ids:
                     if line.account_id.withholding_tax_type in ["RET-ITBIS-606"]:
