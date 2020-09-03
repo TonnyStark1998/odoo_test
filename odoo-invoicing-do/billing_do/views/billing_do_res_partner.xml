@@ -10,7 +10,13 @@
                 </attribute>
             </field>
             <field name="type" position="before">
+                <field name="tax_contributor_type" />
                 <field name="vat" position="move" />
+            </field>
+            <field name="vat" position="attributes">
+                <attribute name="attrs">
+                    {'required': [('tax_contributor_type', 'not in', ['3'])]}
+                </attribute>
             </field>
         </field>
     </record>
@@ -25,7 +31,13 @@
                 </attribute>
             </field>
             <field name="type" position="before">
+                <field name="tax_contributor_type" />
                 <field name="vat" position="move" />
+            </field>
+            <field name="vat" position="attributes">
+                <attribute name="attrs">
+                    {'required': [('tax_contributor_type', 'not in', ['3'])]}
+                </attribute>
             </field>
         </field>
     </record>
