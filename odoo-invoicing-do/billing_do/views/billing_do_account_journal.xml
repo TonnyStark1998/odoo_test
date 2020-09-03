@@ -10,6 +10,9 @@
             <xpath expr="//field[@name='refund_sequence_number_next']" position="replace">
                 <field name="refund_sequence_number_next" attrs="{'invisible': 1}" />
             </xpath>
+            <field name="type" position="after">
+                <field name="is_tax_valuable" attrs="{'invisible': [('type', 'not in', ['purchase'])], 'required': [('type', 'in', ['purchase'])]}" />
+            </field>
         </field>
     </record>
 </odoo>

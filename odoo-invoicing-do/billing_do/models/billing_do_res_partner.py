@@ -10,7 +10,7 @@ class BillingDoResPartner(models.Model):
             ('1', 'Persona jurídica'),
             ('2', 'Persona física'),
             ('3', 'Otro')
-        ], required=True, store=True, readonly=False, copy=False, tracking=True)
+        ], string='Tax Contributor Type', required=True, store=True, readonly=False, copy=False, tracking=True)
 
     # Res Partner - Modified Fields
     vat = fields.Char(store=True, tracking=True)
