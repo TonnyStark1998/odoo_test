@@ -12,14 +12,14 @@ class BillingDoResCompany(models.Model):
             ('3', 'Otro')
         ], required=True, store=True, readonly=False, copy=False, tracking=True)
 
-    # Res Partner - Modified Fields
+    # Res Company - Modified Fields
     vat = fields.Char(store=True, tracking=True)
 
-    # Res Partner - OnChange Fields Functions
+    # Res Company - OnChange Fields Functions
     @api.onchange('vat')
     def _onchange_vat_billing_do(self):
         self.name = ''
-        if self.vat:
+        if self.vat and self.tax_contributor_type and not self.tax_contributor_type in ['3']:
             _validate_vat_result = doutils.BillingDoUtils.validate_vat(self.vat)
             log.info("[KCS] Validate VAT Result: {0}".format(_validate_vat_result))
             if _validate_vat_result == 3:
@@ -71,3 +71,8 @@ class BillingDoResCompany(models.Model):
                         'message': "No se pudo consultar con la DGII la información requerida.",
                     }
                 }
+
+    @api.onchange('tax_contributor_type')
+    def _onchange_tax_contributor_type(self):
+        if self.tax_contributor_type and self.tax_contributor_type in ['3']:
+            self.name = ''

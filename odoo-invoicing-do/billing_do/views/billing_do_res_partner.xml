@@ -5,8 +5,8 @@
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
             <field name="name" position="attributes">
-                <attribute name="readonly">
-                    True
+                <attribute name="attrs">
+                    {'readonly': [('tax_contributor_type', 'not in', ['3'])]}
                 </attribute>
             </field>
             <field name="type" position="before">
@@ -50,6 +50,9 @@
             <field name="name" position="attributes">
                 <attribute name="readonly">
                     False
+                </attribute>
+                <attribute name="attrs">
+                    {'readonly': False}
                 </attribute>
             </field>
             <field name="type" position="before">
