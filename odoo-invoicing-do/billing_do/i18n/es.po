@@ -207,3 +207,10 @@ msgstr "Tipo de contribuyente"
 #: model:ir.model.fields,field_description:billing_do.field_account_move__is_tax_valuable
 msgid "Is tax valuable?"
 msgstr "¿Posee valor fiscal?"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_bank_statement_import_journal_creation__use_sequence
+#: model:ir.model.fields,field_description:billing_do.field_account_journal__use_sequence
+#: model:ir.model.fields,field_description:billing_do.field_account_move__use_sequence
+msgid "Use sequence?"
+msgstr "Usar secuencia?"
