@@ -13,6 +13,9 @@
             <field name="type" position="after">
                 <field name="is_tax_valuable" attrs="{'invisible': [('type', 'not in', ['purchase'])], 'required': [('type', 'in', ['purchase'])]}" />
             </field>
+            <field name="company_id" position="after">
+                <field name="use_sequence" attrs="{'invisible': [('type', 'not in', ['purchase'])], 'required': [('type', 'in', ['purchase'])]}" />
+            </field>
         </field>
     </record>
 </odoo>
