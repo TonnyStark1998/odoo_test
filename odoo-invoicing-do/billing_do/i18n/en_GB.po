@@ -181,3 +181,24 @@ msgstr "RNC"
 #: model_terms:ir.ui.view,arch_db:base.view_partner_short_form
 msgid "e.g. BE0477472701"
 msgstr "Some examples: 130000000, 00100000000, 430000000..."
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_company__tax_contributor_type
+#: model:ir.model.fields,field_description:billing_do.field_res_partner__tax_contributor_type
+#: model:ir.model.fields,field_description:billing_do.field_res_users__tax_contributor_type
+msgid "Tax Contributor Type"
+msgstr "Tax Contributor Type"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_bank_statement_import_journal_creation__is_tax_valuable
+#: model:ir.model.fields,field_description:billing_do.field_account_journal__is_tax_valuable
+#: model:ir.model.fields,field_description:billing_do.field_account_move__is_tax_valuable
+msgid "Is tax valuable?"
+msgstr "Is tax valuable?"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_bank_statement_import_journal_creation__use_sequence
+#: model:ir.model.fields,field_description:billing_do.field_account_journal__use_sequence
+#: model:ir.model.fields,field_description:billing_do.field_account_move__use_sequence
+msgid "Use sequence?"
+msgstr "Use sequence?"

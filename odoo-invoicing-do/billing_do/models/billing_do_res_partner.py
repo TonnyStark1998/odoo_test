@@ -5,26 +5,21 @@ import logging as log
 class BillingDoResPartner(models.Model):
     _inherit = "res.partner"
 
-    # Res Company - New Fields
+    # Res Partner - New Fields
     tax_contributor_type = fields.Selection(selection=[
             ('1', 'Persona jurídica'),
-            ('2', 'Persona física')
-        ], required=True, store=True, readonly=False, copy=False, tracking=True)
+            ('2', 'Persona física'),
+            ('3', 'Otro')
+        ], string='Tax Contributor Type', required=True, store=True, readonly=False, copy=False, tracking=True)
 
-    # Res Company - Modified Fields
-    vat = fields.Char(required=True, store=True, tracking=True)
-
-    # Temporary field
-    tax_contributor_type = fields.Selection(selection=[
-        ('1','Persona Jurídica'),
-        ('2', 'Persona Física')
-    ], store=False, required=False)
+    # Res Partner - Modified Fields
+    vat = fields.Char(store=True, tracking=True)
 
     # Res Partner - OnChange Fields Functions
-    @api.onchange('vat')
+    @api.onchange('vat', 'tax_contributor_type')
     def _onchange_vat_billing_do(self):
         self.name = ''
-        if self.vat:
+        if self.vat and self.tax_contributor_type and not self.tax_contributor_type in ['3']:
             _validate_vat_result = doutils.BillingDoUtils.validate_vat(self.vat)
             log.info("[KCS] Validate VAT Result: {0}".format(_validate_vat_result))
             if _validate_vat_result == 3:
@@ -76,3 +71,8 @@ class BillingDoResPartner(models.Model):
                         'message': "No se pudo consultar con la DGII la información requerida.",
                     }
                 }
+
+    @api.onchange('tax_contributor_type')
+    def _onchange_tax_contributor_type(self):
+        if self.tax_contributor_type and self.tax_contributor_type in ['3']:
+            self.name = ''
