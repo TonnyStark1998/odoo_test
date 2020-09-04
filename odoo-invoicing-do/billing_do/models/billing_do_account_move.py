@@ -43,6 +43,10 @@ class BillingDoAccountMove(models.Model):
     ncf_sequence_next_number = fields.Char(readonly=True, copy=False, store=False, tracking=False, compute='_compute_set_name_next_sequence')
     ncf_date_to = fields.Date(string="NCF valid to:", readonly=True, copy=False, store=True, tracking=True)
 
+    # Account Move - Related Fields
+    is_tax_valuable = fields.Boolean(related='journal_id.is_tax_valuable', store=False, Tracking=False)
+    use_sequence = fields.Boolean(related='journal_id.use_sequence', store=False, Tracking=False)
+
     # Account Move - OnChange Fields Functions
     @api.onchange('journal_id')
     def _onchange_journal_id_billing_do(self):
@@ -60,7 +64,7 @@ class BillingDoAccountMove(models.Model):
 
     @api.onchange('ncf', 'partner_id')
     def _onchange_ncf(self):
-        if self.type in ['in_invoice', 'in_refund']:
+        if self.type in ['in_invoice', 'in_refund'] and self.is_tax_valuable:
             try:
                 return self._validate_ncf(self.ncf)
             except exceptions.ValidationError as ve:
@@ -88,10 +92,10 @@ class BillingDoAccountMove(models.Model):
                 move.ncf_sequence_next_number = str(prefix) + str('%%0%sd' % sequence.padding % number_next)
 
     # Account Move - Contraints Field's Functions
-    @api.constrains('ncf', 'type')
+    @api.constrains('ncf', 'type', 'journal_id')
     def _check_ncf(self):
         for move in self:
-            if move.type in ['in_invoice', 'in_refund']:
+            if in ['in_invoice', 'in_refund'] and self.is_tax_valuable:
                 try:
                     return self._validate_ncf(move.ncf)
                 except exceptions.ValidationError as ve:

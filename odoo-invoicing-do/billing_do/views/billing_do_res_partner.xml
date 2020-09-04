@@ -5,15 +5,18 @@
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
             <field name="name" position="attributes">
-                <attribute name="readonly">
-                    True
+                <attribute name="attrs">
+                    {'readonly': [('tax_contributor_type', 'not in', ['3'])]}
                 </attribute>
             </field>
             <field name="type" position="before">
+                <field name="tax_contributor_type" />
                 <field name="vat" position="move" />
             </field>
-            <field name="vat" position="after">
-                <field name="tax_contributor_type" />
+            <field name="vat" position="attributes">
+                <attribute name="attrs">
+                    {'required': [('tax_contributor_type', 'not in', ['3'])]}
+                </attribute>
             </field>
         </field>
     </record>
@@ -28,7 +31,13 @@
                 </attribute>
             </field>
             <field name="type" position="before">
+                <field name="tax_contributor_type" readonly="1" />
                 <field name="vat" position="move" />
+            </field>
+            <field name="vat" position="attributes">
+                <attribute name="attrs">
+                    {'required': [('tax_contributor_type', 'not in', ['3'])]}
+                </attribute>
             </field>
         </field>
     </record>
@@ -41,6 +50,9 @@
             <field name="name" position="attributes">
                 <attribute name="readonly">
                     False
+                </attribute>
+                <attribute name="attrs">
+                    {'readonly': False}
                 </attribute>
             </field>
             <field name="type" position="before">
