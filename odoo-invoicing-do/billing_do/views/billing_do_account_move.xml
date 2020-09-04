@@ -14,13 +14,15 @@
                     <field name="type" readonly="1" nolabel="1"/>
                 </span>
                 <h2 class="mt0" style="color:#474747;">
-                    <field name="name" readonly="True" attrs="{'invisible':['|', ('name', '=', '/'), ('type','=','in_invoice')]}"/>
-                    <field name="ncf_sequence_next_number" readonly="True" attrs="{'invisible':['|', ('type', '=', 'in_invoice'), '|', ('state','!=','draft'), ('name','!=','/')]}" />
+                    <field name="use_sequence" attrs="{'invisible': 1}" />
+                    <field name="name" readonly="True" attrs="{'invisible': ['|', ('name', '=', '/'), '&amp;', ('type','=','in_invoice'), ('use_sequence', '=', False)]}" />
+                    <field name="ncf_sequence_next_number" readonly="True" attrs="{'invisible': ['|', ('state','!=','draft'), '|', ('name','!=','/'), '&amp;', ('type', '=', 'in_invoice'), ('use_sequence', '=', False)]}" />
                 </h2>
             </xpath>
             <xpath expr="//field[@name='ref']" position="before">
+                <field name="is_tax_valuable" attrs="{'invisible': 1}" />
                 <field name="income_type" attrs="{'invisible': [('type', '!=', 'out_invoice')]}" />
-                <field name="ncf" attrs="{'invisible': [('type', '!=', 'in_invoice')], 'required': [('type', '=', 'in_invoice')]}" />
+                <field name="ncf" attrs="{'invisible': ['|', ('type', '!=', 'in_invoice'), '|', ('is_tax_valuable', '=', False), ('use_sequence', '=', True)], 'required': ['&amp;', ('type', '=', 'in_invoice'), ('is_tax_valuable', '=', True)]}" />
                 <field name="expense_type" attrs="{'invisible': [('type', '!=', 'in_invoice')]}" />
             </xpath>
             <field name="journal_id" position="attributes">

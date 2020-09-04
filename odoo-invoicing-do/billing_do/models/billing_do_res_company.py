@@ -5,8 +5,15 @@ import logging as log
 class BillingDoResCompany(models.Model):
     _inherit = "res.company"
 
+    # Res Company - New Fields
+    tax_contributor_type = fields.Selection(selection=[
+            ('1', 'Persona jurídica'),
+            ('2', 'Persona física'),
+            ('3', 'Otro')
+        ], required=True, store=True, readonly=False, copy=False, tracking=True)
+
     # Res Partner - Modified Fields
-    vat = fields.Char(required=True, store=True, tracking=True)
+    vat = fields.Char(store=True, tracking=True)
 
     # Res Partner - OnChange Fields Functions
     @api.onchange('vat')
