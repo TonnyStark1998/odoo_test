@@ -95,7 +95,7 @@ class BillingDoAccountMove(models.Model):
     @api.constrains('ncf', 'type', 'journal_id')
     def _check_ncf(self):
         for move in self:
-            if in ['in_invoice', 'in_refund'] and self.is_tax_valuable:
+            if move.type in ['in_invoice', 'in_refund'] and self.is_tax_valuable:
                 try:
                     return self._validate_ncf(move.ncf)
                 except exceptions.ValidationError as ve:
