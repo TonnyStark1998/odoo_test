@@ -16,7 +16,7 @@ class BillingDoResCompany(models.Model):
     vat = fields.Char(store=True, tracking=True)
 
     # Res Company - OnChange Fields Functions
-    @api.onchange('vat')
+    @api.onchange('vat', 'tax_contributor_type')
     def _onchange_vat_billing_do(self):
         self.name = ''
         if self.vat and self.tax_contributor_type and not self.tax_contributor_type in ['3']:
@@ -51,14 +51,14 @@ class BillingDoResCompany(models.Model):
                             }
                         }
                     elif(vat_response.status_code == 404):
-                        return{
+                        return {
                             'warning':{
                                 'title': "Consulta fallida",
                                 'message': "El RNC '{0}' no se encuentra en la base de datos de la DGII.".format(self.vat)
                             }
                         }
                     else:
-                        return{
+                        return {
                             'warning':{
                                 'title': "Error de conexión con servicio",
                                 'message': "Ocurrió un error inesperado al consulta el servicio."
