@@ -1,0 +1,66 @@
+<odoo>
+    <record model="ir.ui.view" id="billing_do_view_partner_form">
+        <field name="name">billing.do.res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <field name="name" position="attributes">
+                <attribute name="attrs">
+                    {'readonly': [('tax_contributor_type', 'not in', ['3'])]}
+                </attribute>
+            </field>
+            <field name="type" position="before">
+                <field name="tax_contributor_type" />
+                <field name="vat" position="move" />
+            </field>
+            <field name="vat" position="attributes">
+                <attribute name="attrs">
+                    {'required': [('tax_contributor_type', 'not in', ['3'])]}
+                </attribute>
+            </field>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="billing_do_view_partner_short_form">
+        <field name="name">billing.do.res.partner.short.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_short_form" />
+        <field name="arch" type="xml">
+            <field name="name" position="attributes">
+                <attribute name="groups">
+                    base.user_admin
+                </attribute>
+            </field>
+            <field name="type" position="before">
+                <field name="tax_contributor_type" readonly="1" />
+                <field name="vat" position="move" />
+            </field>
+            <field name="vat" position="attributes">
+                <attribute name="attrs">
+                    {'required': [('tax_contributor_type', 'not in', ['3'])]}
+                </attribute>
+            </field>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="billing_do_view_partner_name_field_form">
+        <field name="name">billing.do.res.partner.name.field.form</field>
+        <field name="model">res.partner</field>
+        <field name="groups_id" eval="[(6,0,[ref('base.user_admin')])]" />
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <field name="name" position="attributes">
+                <attribute name="readonly">
+                    False
+                </attribute>
+                <attribute name="attrs">
+                    {'readonly': False}
+                </attribute>
+            </field>
+            <field name="type" position="before">
+                <field name="vat" position="move" />
+            </field>
+            <field name="vat" position="after">
+                <field name="tax_contributor_type" />
+            </field>
+        </field>
+    </record>
+</odoo>
