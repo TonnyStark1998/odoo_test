@@ -11,6 +11,7 @@ class BillingDoResCompany(models.Model):
             ('2', 'Persona física'),
             ('3', 'Otro')
         ], required=True, store=True, readonly=False, copy=False, tracking=True)
+    report_custom_color = fields.Char(string='', copy=False, store=True)
 
     # Res Company - Modified Fields
     vat = fields.Char(store=True, tracking=True)
