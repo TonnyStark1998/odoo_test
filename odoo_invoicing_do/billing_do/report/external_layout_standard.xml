@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="billing_do_report_external_layout_standard" inherit_id="web.external_layout_standard" name="billing.do.account.external.layout.standard.report">
-        <xpath expr="//div[@t-attf-class]" position="replace">
-            <div class="row">
-                <div class="col-3 mb4">
-                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 100px;" alt="Logo"/>
-                </div>
-                <div class="col-9 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto"/>
+        <xpath expr="//t[@t-call='web.address_layout']" position="replace" />
+        <xpath expr="//div[contains(@t-attf-class, 'header')]" position="replace">
+            <div t-attf-class="header o_company_#{company.id}_layout">
+              <div class="row">
+                  <div class="col-6 pull-left">
+                      <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 100px;" alt="Logo" />
+                  </div>
+                  <div t-attf-class="col-6 pull-right">
+                      <h3>
+                        <strong t-attf-style="color: #{company.report_custom_color};font-size:1.4em;">Factura</strong>
+                      </h3>
+                      <div t-if="company.phone" t-attf-style="font-size:0.85em;">
+                          <i class="fa fa-phone" aria-hidden="true"></i>
+                          <span t-field="company.phone" />
+                      </div>
+                      <div t-if="company.vat" t-attf-style="font-size:0.85em;">
+                          <i class="fa fa-building-o" aria-hidden="true"></i>
+                          RNC:
+                          <span t-field="company.vat" />
+                      </div>
+                  </div>
+                  <div class="col-12 clearfix">
+                    <div t-attf-style="border-bottom: 2px solid #{company.report_custom_color};margin-bottom:1%;"></div>
+                  </div>
+              </div>
             </div>
         </xpath>
     </template>

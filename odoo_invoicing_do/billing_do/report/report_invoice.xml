@@ -1,45 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="billing_do_report_invoice_document" inherit_id="account.report_invoice_document" name="billing.do.account.invoice.document.report">
-        <xpath expr="//div[hasclass('page')]/h2" position="replace"/>
-        <xpath expr="//div[hasclass('page')]/div[hasclass('row')]" position="replace">
-            <div class="row">
-                <div name="information_company" class="col-xs-5 pull-left">
-                    <h4 class="m-0">
+        <xpath expr="//div[hasclass('page')]/h2" position="replace">
+            <div class="row" t-attf-style="margin-top:2%;margin-bottom:3%;">
+                <div name="information_company" class="col-6 pull-left">
+                    <div t-attf-class="m-0" t-attf-style="font-size:1.1em;">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <strong t-if="o.journal_id.code == 'B02'">CLIENTE</strong>
+                        <strong t-if="o.journal_id.code == 'B01'">RAZÓN SOCIAL</strong>
+                        <br />
                         <strong><span t-field="o.company_id.name" /></strong>
-                    </h4>
-                    <p>
-                        <span t-field="o.company_id.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}' />
+                    </div>
+                    <div t-attf-class="m-0" t-attf-style="font-size:0.9em;">
+                    <p class="m-0">
+                        RNC: <span t-field="o.company_id.vat" />
                     </p>
                     <p class="m-0">
-                        <strong><span string="RNC" /></strong><span t-field="o.company_id.vat" />
+                        Fecha: <span t-esc="o.invoice_date.strftime('%d/%m/%Y')" />
                     </p>
-                    <p class="m-0">
-                        <strong><span string="Fecha" /></strong><span t-esc="o.invoice_date.strftime('%d/%m/%Y')" />
-                    </p>
+                    <span t-field="o.company_id.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}' />
+                    </div>
                 </div>
-                <div name="information_ncf" class="col-xs-5 pull-right" t-esc="'style=""border:2px solid #' + o.company_id.report_custom_color + ";"">
-                    <h3 class="m-0">
+                <div name="information_ncf" class="col-6 pull-right">
+                    <div class="m-0" t-attf-style="font-size:1.6em;">
                         <strong>
-                            <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">
-                                <span string="Factura de" /> <span t-field="o.sale_fiscal_type"/>
-                            </span>
-                            <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Factura Borrador</span>
+                        <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Factura Borrador</span>
                             <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Factura Cancelada</span>
+                            <span t-if="o.type == 'out_invoice' and o.journal_id.code == 'B01'">Factura de crédito fiscal</span>
+                            <span t-if="o.type == 'out_invoice' and o.journal_id.code == 'B02'">Factura de consumo</span>
                             <span t-if="o.type == 'out_refund'">Nota de Crédito</span>
                             <span t-if="o.type == 'in_refund'">NC de Proveedor</span>
                             <span t-if="o.type == 'in_invoice'">Factura de Proveedor</span>
                             <br/>
                         </strong>
-                    </h3>
+                    </div>
                     <p class="m-0">
-                        <span t-if="o.name != '/'" string="NCF " />: 
+                        NCF: 
                         <span t-if="o.name != '/'" t-field="o.name" />
                         <span t-if="o.name == '/'" t-field="o.ncf_sequence_next_number" />
                     </p>
                     <span t-if="o.type == 'out_refund' and (o.origin != False)">
                         <p class="m-0 text-danger">
-                            <span t-if="o.reversed_entry_id" string="NCF modificado" />: 
+                            NCF modificado: 
                             <span t-if="o.reversed_entry_id" t-field="o.reversed_entry_id.name" />
                         </p>
                     </span>
@@ -52,32 +54,10 @@
                 <div class="clearfix mb12"/>
             </div>
         </xpath>
-        <xpath expr="//div[hasclass('page')]" position="before">
-            <div class="page">
-                <hr style="height: 3px;color: #aaa;background-color: #aaa;border: 0;" />
-                <div class="row" style="margin:1% 0 5% 0;">
-                    <div class="col">
-                        <h6 class="m-0">
-                            <strong>
-                                <p class="m-0" t-if="o.journal_id.sequence_id.code == 'B01'">
-                                    <span>RNC:</span>
-                                    <span t-if="o.partner_id" t-field="o.partner_id.vat" />
-                                    <span t-if="not o.partner_id">N/D</span>
-                                </p>
-                                <p class="m-0">
-                                    <span t-if="o.journal_id.sequence_id.code == 'B02'">Cliente:</span>
-                                    <span t-if="o.journal_id.sequence_id.code == 'B01'">Razón Social:</span>
-                                    <span t-field="o.partner_id.name" />
-                                </p>
-                            </strong>
-                        </h6>
-                    </div>
-                </div>
-            </div>
-        </xpath>
+        <xpath expr="//div[hasclass('page')]/div[@id='informations']" position="replace" />
         <xpath expr="//table[@name='invoice_line_table']" position="replace">
             <table class="table table-sm o_main_table" name="invoice_line_table">
-                <thead>
+                <thead t-attf-style="background-color:#{o.company_id.report_custom_color}">
                     <th name="th_quantity">
                         <strong>
                             <span>Cantidad</span>
