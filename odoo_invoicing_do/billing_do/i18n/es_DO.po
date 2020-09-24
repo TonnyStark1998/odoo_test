@@ -214,3 +214,8 @@ msgstr "¿Posee valor fiscal?"
 #: model:ir.model.fields,field_description:billing_do.field_account_move__use_sequence
 msgid "Use sequence?"
 msgstr "Usar secuencia?"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:account.report_invoice_document_with_payments
+msgid "Amount Due"
+msgstr "Monto Adeudado"
