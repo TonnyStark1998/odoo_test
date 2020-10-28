@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
+import datetime as date
 import logging as log
 from odoo import models, fields, api, exceptions
 from . import billing_do_utils as doutils
@@ -63,7 +64,7 @@ class BillingDoAccountMove(models.Model):
 
     @api.onchange('ncf', 'partner_id')
     def _onchange_ncf(self):
-        if self.type == 'in_invoice' and self.is_tax_valuable:
+        if self.type in ['in_invoice', 'in_refund'] and self.is_tax_valuable:
             try:
                 return self._validate_ncf(self.ncf)
             except exceptions.ValidationError as ve:
@@ -94,7 +95,7 @@ class BillingDoAccountMove(models.Model):
     @api.constrains('ncf', 'type', 'journal_id')
     def _check_ncf(self):
         for move in self:
-            if move.type == 'in_invoice' and self.is_tax_valuable:
+            if move.type in ['in_invoice', 'in_refund'] and self.is_tax_valuable:
                 try:
                     return self._validate_ncf(move.ncf)
                 except exceptions.ValidationError as ve:
@@ -132,3 +133,17 @@ class BillingDoAccountMove(models.Model):
                                 'message': "El NCF '{0}' y el RNC '{1}' son válidos.".format(ncf, self.partner_id.vat)
                             }
                         }
+    
+    def get_last_payment_date(self):
+        self.ensure_one()
+        pay_term_line_ids = self.line_ids.filtered(lambda line: line.account_id.user_type_id.type in ('receivable', 'payable'))
+        partials = pay_term_line_ids.mapped('matched_debit_ids') + pay_term_line_ids.mapped('matched_credit_ids')
+
+        _last_payment_date = date.date.min
+        for partial in partials:
+            counterpart_lines = partial.debit_move_id + partial.credit_move_id
+            counterpart_line = counterpart_lines.filtered(lambda line: line not in self.line_ids)
+            if counterpart_line.date > _last_payment_date:
+                _last_payment_date = counterpart_line.date
+
+        return _last_payment_date

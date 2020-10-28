@@ -23,6 +23,8 @@
         'report/report_invoice.xml',
         'report/external_layout_standard.xml',
         'views/billing_do_res_config_settings_views.xml',
+        'views/billing_do_account_tax.xml',
+        'views/billing_do_account_account.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
