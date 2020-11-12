@@ -13,8 +13,8 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_isc_amount = fields.Monetary(string='ISC Amount', store=False)
 
     # Fields for DGII report 606
-    report_bill_date_month = fields.Char(string='Bill Date Month', compute='_compute_report_invoice_date')
-    report_bill_date_day = fields.Char(string='Bill Date Day', compute='_compute_report_invoice_date')
+    report_bill_date_month = fields.Char(string='Bill Date Month', compute='_compute_report_invoice_date', store=True)
+    report_bill_date_day = fields.Char(string='Bill Date Day', compute='_compute_report_invoice_date', store=True)
     report_bill_payment_date_month = fields.Char(string='Payment Date Month', compute='_compute_report_bill_payment_date', store=False)
     report_bill_payment_date_day = fields.Char(string='Payment Date Day', compute='_compute_report_bill_payment_date', store=False)
     report_bill_service_amount = fields.Monetary(string='Service Amount', default=0.0, currency_field='company_currency_id', compute='_compute_service_consumable_amount')
@@ -34,7 +34,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_bill_legaltip_amount = fields.Monetary(string='Bill Legal Tip Amount', store=False)
 
     # Fields for DGII report 607
-    report_invoice_date = fields.Char(string='Invoice Date Month', compute='_compute_report_invoice_date')
+    report_invoice_date = fields.Char(string='Invoice Date Month', compute='_compute_report_invoice_date', store=True)
     # Fields for DGII report 607 (NOT IN USE RIGHT NOW!)
     report_invoice_held_date = fields.Char(string='Invoice Held Date', default='')
     report_invoice_itbis_held_by_thirdparty_amount = fields.Monetary(string='ITBIS Held By ThirdParty Amount', default=0.0)
