@@ -6,21 +6,21 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     _inherit = "account.move"
 
     # Common fields between DGII reports
-    report_vat = fields.Char(related='partner_id.vat', string='Tax Contributor ID', store=False)
-    report_vat_type = fields.Char(compute='_compute_report_vat_type', string='Tax Contributor Type', store=False)
-    report_move = fields.Char(string='Tax Receipt Number', compute='_compute_move', store=False)
-    report_move_reversed = fields.Char(string='Tax Receipt Reversed', compute='_compute_move', store=False)
-    report_isc_amount = fields.Monetary(string='ISC Amount', store=False)
+    report_vat = fields.Char(related='partner_id.vat', string='Tax Contributor ID', store=True)
+    report_vat_type = fields.Char(compute='_compute_report_vat_type', string='Tax Contributor Type', store=True)
+    report_move = fields.Char(string='Tax Receipt Number', compute='_compute_move', store=True)
+    report_move_reversed = fields.Char(string='Tax Receipt Reversed', compute='_compute_move', store=True)
+    report_isc_amount = fields.Monetary(string='ISC Amount', store=True)
 
     # Fields for DGII report 606
     report_bill_date_month = fields.Char(string='Bill Date Month', compute='_compute_report_invoice_date', store=True)
     report_bill_date_day = fields.Char(string='Bill Date Day', compute='_compute_report_invoice_date', store=True)
-    report_bill_payment_date_month = fields.Char(string='Payment Date Month', compute='_compute_report_bill_payment_date', store=False)
-    report_bill_payment_date_day = fields.Char(string='Payment Date Day', compute='_compute_report_bill_payment_date', store=False)
-    report_bill_service_amount = fields.Monetary(string='Service Amount', default=0.0, currency_field='company_currency_id', compute='_compute_service_consumable_amount', store=False)
-    report_bill_consumable_amount = fields.Monetary(string='Consumable Amount', default=0.0, currency_field='company_currency_id', compute='_compute_service_consumable_amount')
-    report_bill_total_amount = fields.Monetary(string='Total Amount', default=0.0, compute='_compute_service_consumable_amount')
-    report_bill_tax_amount = fields.Monetary(string='Tax Amount', currency_field='company_currency_id', compute='_compute_report_bill_tax_amount', default=0.0)
+    report_bill_payment_date_month = fields.Char(string='Payment Date Month', compute='_compute_report_bill_payment_date', store=True)
+    report_bill_payment_date_day = fields.Char(string='Payment Date Day', compute='_compute_report_bill_payment_date', store=True)
+    report_bill_service_amount = fields.Monetary(string='Service Amount', default=0.0, currency_field='company_currency_id', compute='_compute_service_consumable_amount', store=True)
+    report_bill_consumable_amount = fields.Monetary(string='Consumable Amount', default=0.0, currency_field='company_currency_id', compute='_compute_service_consumable_amount', store=True)
+    report_bill_total_amount = fields.Monetary(string='Total Amount', default=0.0, compute='_compute_service_consumable_amount', store=True)
+    report_bill_tax_amount = fields.Monetary(string='Tax Amount', currency_field='company_currency_id', compute='_compute_report_bill_tax_amount', default=0.0, store=True)
     # Fields for DGII report 606 (NOT IN USE RIGHT NOW!)
     report_bill_itbis_held_amount = fields.Monetary(string='ITBIS Held Amount', compute='_compute_report_bill_itbis_held_amount', store=False)
     report_bill_itbis_proportional_amount = fields.Monetary(string='ITBIS Proportional Amount', store=False)
@@ -36,12 +36,12 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     # Fields for DGII report 607
     report_invoice_date = fields.Char(string='Invoice Date Month', compute='_compute_report_invoice_date', store=True)
     # Fields for DGII report 607 (NOT IN USE RIGHT NOW!)
-    report_invoice_held_date = fields.Char(string='Invoice Held Date', default='')
-    report_invoice_itbis_held_by_thirdparty_amount = fields.Monetary(string='ITBIS Held By ThirdParty Amount', default=0.0)
-    report_invoice_itbis_perceived_amount = fields.Monetary(string='ITBIS Perceived Amount', default=0.0)
-    report_invoice_isr_held_by_thirdparty_amount = fields.Monetary(string='ISR Held By ThirdParty Amount', default=0.0)
-    report_invoice_isr_perceived_amount = fields.Monetary(string='ISR Perceived Amount', default=0.0)
-    report_invoice_other_taxes_amount = fields.Monetary(string='Invoice Other Taxes Amount', default=0.0)
+    report_invoice_held_date = fields.Char(string='Invoice Held Date', default='', store=True)
+    report_invoice_itbis_held_by_thirdparty_amount = fields.Monetary(string='ITBIS Held By ThirdParty Amount', default=0.0, store=True)
+    report_invoice_itbis_perceived_amount = fields.Monetary(string='ITBIS Perceived Amount', default=0.0, store=True)
+    report_invoice_isr_held_by_thirdparty_amount = fields.Monetary(string='ISR Held By ThirdParty Amount', default=0.0, store=True)
+    report_invoice_isr_perceived_amount = fields.Monetary(string='ISR Perceived Amount', default=0.0, store=True)
+    report_invoice_other_taxes_amount = fields.Monetary(string='Invoice Other Taxes Amount', default=0.0, store=True)
     report_invoice_legaltip_amount = fields.Monetary(string='Invoice Legal Tip Amount', store=False)
     report_invoice_cash_amount = fields.Monetary(string='Cash Amount', store=False)
     report_invoice_bank_amount = fields.Monetary(string='Bank Amount', store=False)
@@ -56,9 +56,9 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     def _compute_report_invoice_date(self):
         for move in self:
             if move.date and move.type not in ['entry']:
-                move.report_bill_date_month = move.invoice_date.strftime('%Y%m')
-                move.report_bill_date_day = move.invoice_date.strftime('%d')
-                move.report_invoice_date = move.invoice_date.strftime('%Y%m%d')
+                move.report_bill_date_month = move.date.strftime('%Y%m')
+                move.report_bill_date_day = move.date.strftime('%d')
+                move.report_invoice_date = move.date.strftime('%Y%m%d')
 
     @api.depends('partner_id.tax_contributor_type')
     def _compute_report_vat_type(self):
