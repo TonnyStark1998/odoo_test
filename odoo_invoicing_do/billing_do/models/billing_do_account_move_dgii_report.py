@@ -52,10 +52,10 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_invoice_other_sale_way_amount = fields.Monetary(string='Other Sale Way Amount', store=False)
 
     # Account Move DGII Reports - Compute Field's Functions
-    @api.depends('invoice_date')
+    @api.depends('date')
     def _compute_report_invoice_date(self):
         for move in self:
-            if move.invoice_date:
+            if move.date and move.type not in ['entry']:
                 move.report_bill_date_month = move.invoice_date.strftime('%Y%m')
                 move.report_bill_date_day = move.invoice_date.strftime('%d')
                 move.report_invoice_date = move.invoice_date.strftime('%Y%m%d')
