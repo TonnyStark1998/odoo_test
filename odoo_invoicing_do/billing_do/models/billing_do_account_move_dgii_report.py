@@ -17,7 +17,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_bill_date_day = fields.Char(string='Bill Date Day', compute='_compute_report_invoice_date', store=True)
     report_bill_payment_date_month = fields.Char(string='Payment Date Month', compute='_compute_report_bill_payment_date', store=False)
     report_bill_payment_date_day = fields.Char(string='Payment Date Day', compute='_compute_report_bill_payment_date', store=False)
-    report_bill_service_amount = fields.Monetary(string='Service Amount', default=0.0, currency_field='company_currency_id', compute='_compute_service_consumable_amount')
+    report_bill_service_amount = fields.Monetary(string='Service Amount', default=0.0, currency_field='company_currency_id', compute='_compute_service_consumable_amount', store=False)
     report_bill_consumable_amount = fields.Monetary(string='Consumable Amount', default=0.0, currency_field='company_currency_id', compute='_compute_service_consumable_amount')
     report_bill_total_amount = fields.Monetary(string='Total Amount', default=0.0, compute='_compute_service_consumable_amount')
     report_bill_tax_amount = fields.Monetary(string='Tax Amount', currency_field='company_currency_id', compute='_compute_report_bill_tax_amount', default=0.0)
