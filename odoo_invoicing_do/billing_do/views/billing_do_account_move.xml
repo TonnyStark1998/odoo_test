@@ -63,7 +63,7 @@
             </xpath>
         </field>
     </record>
-    <record model="ir.ui.view" id="billing_do_view_dgii_606_tree">
+    <!--<record model="ir.ui.view" id="billing_do_view_dgii_606_tree">
         <field name="name">billing.do.account.dgii.606.tree</field>
         <field name="model">account.move</field>
         <field name="arch" type="xml">
@@ -142,7 +142,7 @@
         <field name="view_id" ref="billing_do_view_dgii_607_tree" />
         <field name="domain">['&amp;', ('type','in',['out_invoice','out_refund']), ('state', 'in', ['posted'])]</field>
     </record>
-    <!--<menuitem id="main_menu_dgii_reports" name="DGII Reports" parent="account_accountant.menu_accounting" sequence="30" />
+    <menuitem id="main_menu_dgii_reports" name="DGII Reports" parent="account_accountant.menu_accounting" sequence="30" />
     <menuitem id="menu_dgii_reports_606" name="Formato de compras (606)" parent="main_menu_dgii_reports" action="dgii_reports_format_606" sequence="1" />
     <menuitem id="menu_dgii_reports_607" name="Formato de ventas (607)" parent="main_menu_dgii_reports" action="dgii_reports_format_607" sequence="2" />-->
 </odoo>
