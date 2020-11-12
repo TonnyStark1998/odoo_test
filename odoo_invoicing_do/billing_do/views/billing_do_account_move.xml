@@ -33,6 +33,9 @@
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="journal_id" position="move" />
             </xpath>
+            <xpath expr="//field[@name='company_id']" position="before">
+                <field name="invoice_user_id" position="move"/>
+            </xpath>
         </field>
     </record>
     <record model="ir.ui.view" id="billing_do_view_invoice_tree">
