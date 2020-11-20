@@ -11,8 +11,7 @@
       <div class="header">
         <div class="row mt32 mb32">
           <div class="col-6">
-            <img t-if="o.company_id.logo" t-attf-src="'data:image/png;base64,%s' % to_text(o.company_id.logo)"
-                 style="max-height: 50px;"/>
+            <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" t-attf-style="max-height: 50px;"/>
           </div>
           <div class="col-6 text-right" style="font:12px lucida-console,sans-serif !important;">
             <span t-field="o.company_id.name"/>

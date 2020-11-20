@@ -11,7 +11,7 @@
       <div class="header">
         <div class="row mt32 mb32">
           <div class="col-6">
-            <img t-attf-src="image_data_uri(doc.company_id.logo)" />
+            <img t-att-src="image_data_uri(doc.company_id.logo)" t-attf-style="max-height: 50px;" />
           </div>
           <div class="col-6 text-right">
             <strong>
