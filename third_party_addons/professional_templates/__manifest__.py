@@ -48,6 +48,7 @@
         "stock",
         "sale_stock",
         "delivery",
+        "billing_do",
     ],
     "external_dependencies": {"python": ["num2words", "PyPDF2"]},
     # always loaded
