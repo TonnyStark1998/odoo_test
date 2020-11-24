@@ -11,8 +11,7 @@ class BillingDoResCompany(models.Model):
             ('2', 'Persona física'),
             ('3', 'Otro')
         ], required=True, store=True, readonly=False, copy=False, tracking=True)
-    report_custom_background_color = fields.Char(string='Report Custom Background Color', copy=False, store=True)
-    report_custom_text_color = fields.Char(string='Report Custom Text Color', copy=False, store=True)
+    googleplus = fields.Char(string='Google Plus ID', copy=True, store=True, default='')
 
     # Res Company - Modified Fields
     vat = fields.Char(store=True, tracking=True)
