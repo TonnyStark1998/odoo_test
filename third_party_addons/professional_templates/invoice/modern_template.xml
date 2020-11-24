@@ -40,9 +40,10 @@
       <!--end of Header-->
       <!-- START OF PAGE -->
       <div class="article page clearfix" t-attf-data-oe-model="account.move" t-attf-data-oe-id="{{o.id}}" t-attf-style="margin-top:4px; padding-top:5px; padding-left:0px; padding-right:0px; color:{{o.style.text_color}} !important;">
+      <!--  Start of INVOICE HEADER    -->
         <div class="col-12 float-left" style="padding-left:0px; padding-right:0px; padding-bottom:2px;">
           <!--start of wrapper -->
-          <div class="col-6 pull-left" style="font-size:12px !important;padding-left:0px;">
+          <div class="col-6 pull-left" t-attf-style="font-size:{{int(o.style.body_font)}}px !important;padding-left:0px;">
             <div t-attf-style="background-color:{{o.style.cust_color}}; padding-top:2px; padding-bottom:2px; color:{{o.style.theme_txt_color}};">
               <span style="font-size:16px;">
                 <span class="fa fa-user fa-lg"/>
@@ -103,10 +104,10 @@
             </t>
             <h5 t-attf-style="color:{{o.style.name_color}}">
               <strong>
-                <span t-if="o.type == 'out_invoice' and journal_code.upper() == 'B01' and (o.state == 'posted' or o.invoice_payment_state == 'paid')">
+                <span t-if="o.type == 'out_invoice' and journal_code.upper() == 'B02' and (o.state == 'posted' or o.invoice_payment_state == 'paid')">
                   CONSUMIDOR FINAL
                 </span>
-                <span t-if="o.type == 'out_invoice' and journal_code.upper() == 'B02' and (o.state == 'posted' or o.invoice_payment_state == 'paid')">
+                <span t-if="o.type == 'out_invoice' and journal_code.upper() == 'B01' and (o.state == 'posted' or o.invoice_payment_state == 'paid')">
                   CRÉDITO FISCAL
                 </span>
                 <span t-if="o.type == 'out_invoice' and journal_code.upper() == 'B15' and (o.state == 'posted' or o.invoice_payment_state == 'paid')">
@@ -145,10 +146,9 @@
             </div>
           </div>
         </div>
-        <!--end of wrapper2-->
+        <!--    End of INVOICE HEADER   -->
+        <!--    Start of INVOICE LINES  -->
         <div class="col-12 mt8 mb9" t-attf-style="padding-left:0px; padding-right:0px;font-size:12px !important;">
-          <!--start of DATA-->
-          <!-- <t t-set="display_taxes" t-value="any([y.invoice_line_tax_ids for y in o.invoice_line_ids])"/> -->
           <table class="table table-condensed" t-attf-style="color:{{o.style.text_color}};">
             <thead t-attf-style="background-color:{{o.style.name_color}}; page-break-inside: avoid; color:{{o.style.theme_txt_color}};">
               <tr t-attf-style="page-break-inside: avoid !important; border-bottom: 1px solid {{o.style.text_color}} !important;">
@@ -202,10 +202,10 @@
               </t>
             </tbody>
           </table>
-
         </div>
-        <!--End of DATA-->
-        <div class="col-12" t-attf-style="padding-left:0px; padding-right:0px;font-size:12px !important;">
+        <!--    End of INVOICE LINES    -->
+        <!--    Start of TOTALS -->
+        <div class="col-12 clearfix" t-attf-style="padding-left:0px; padding-right:0px;font-size:12px !important;">
           <div class="col-5 pull-right" style="padding-left:0px; padding-right:0px; page-break-inside: avoid !important;">
             <table class="table table-sm" t-attf-style="color:{{o.style.text_color}};">
               <tbody>
@@ -237,24 +237,23 @@
             </table>
           </div>
         </div>
-
-        <!--PAYMENT INFO-->
+        <!--    Start of PAYMENTS   -->
         <t t-set="payments" t-value="json.loads(o.invoice_payments_widget)"/>
-        <div t-if="payments" class="col-12" style="padding-left:0px; padding-right:0px;">
+        <div t-if="payments" class="col-12" t-attf-style="padding-left:0px; padding-right:0px;font-size:{{int(o.style.body_font)}}px">
           <p>
-            <strong>Payment Information:</strong>
+            <strong>Pago(s):</strong>
           </p>
           <div class="col-7 pull-left" style="padding-left:0px; padding-right:0px; page-break-inside: avoid !important;">
             <table class="table table-condensed" t-attf-style="color:{{o.style.text_color}};">
 
-              <thead t-attf-style="background-color:{{o.style.theme_color}}; page-break-inside: avoid; color:{{o.style.theme_txt_color}};">
+              <thead t-attf-style="background-color:{{o.style.name_color}}; page-break-inside: avoid; color:{{o.style.theme_txt_color}};">
                 <tr t-attf-style="page-break-inside: avoid !important; border-bottom: 1px solid {{o.style.text_color}} !important;">
                   <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">No.</th>
-                  <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">Date</th>
-                  <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">Method</th>
+                  <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">Fecha</th>
+                  <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">Método</th>
                   <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">Ref.</th>
                   <th class="text-right" t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
-                    Amount
+                    Monto
                   </th>
                 </tr>
               </thead>
@@ -283,8 +282,7 @@
             </table>
           </div>
         </div>
-        <!--END PAYMENT INFO -->
-
+        <!--    End of PAYMENTS     -->
         <div t-if="o.invoice_origin" class="col-12" style="margin-top:10px; padding-left:0px; padding-right:0px; page-break-inside: avoid ! important;">
           <p>
             <strong>Origen:</strong>
@@ -295,7 +293,7 @@
             <span t-field="o.fiscal_position_id.note"/>
           </p>
           <p t-if="o.narration">
-            <strong>Note:</strong>
+            <strong>Nota(s):</strong>
             <span t-field="o.narration"/>
           </p>
           <br/>
@@ -304,7 +302,7 @@
       </div>
       <!--End of PAGE-->
       <!-- Start of FOOTER -->
-      <div t-if="o.style.footer" class="footer" t-attf-style="font-size:{{style.footer_font}}px !important;font-family:{{style.font_family}} !important;">
+      <div t-if="o.style.footer" class="footer" t-attf-style="font-size:{{style.footer_font}}px !important;font-family:{{style.font_family}} !important;color:{{style.text_color}};border-top: 1px solid {{style.text_color}};padding-top:5px;padding-left:0px; padding-right:0px;">
         <t t-call="professional_templates.company_footer"/>
       </div>
       <!--End of FOOTER-->
