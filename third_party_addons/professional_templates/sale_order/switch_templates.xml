@@ -19,6 +19,8 @@
 										<t t-if="style.template_so.key == 'professional_templates.SO_11_document'" t-call="professional_templates.SO_11_document" t-lang="doc.partner_id.lang"/>
 										<t t-if="style.template_so.key == 'professional_templates.SO_13_document'" t-call="professional_templates.SO_13_document" t-lang="doc.partner_id.lang"/>
 										<t t-if="style.template_so.key == 'professional_templates.SO_14_document'" t-call="professional_templates.SO_14_document" t-lang="doc.partner_id.lang"/>
+                                        <!--add custom report template-->
+										<t t-if="style.template_so.key == 'professional_templates.SO_15_document'" t-call="professional_templates.SO_15_document" t-lang="doc.partner_id.lang"/>
 										<t t-if="not style" t-call="sale.report_saleorder_document" t-lang="doc.partner_id.lang"/>
 								</t>
 						</t>
@@ -42,6 +44,7 @@
 										<t t-if="style.template_so.key == 'professional_templates.SO_11_document'" t-call="professional_templates.SO_11_document" t-lang="doc.partner_id.lang"/>
 										<t t-if="style.template_so.key == 'professional_templates.SO_13_document'" t-call="professional_templates.SO_13_document" t-lang="doc.partner_id.lang"/>
 										<t t-if="style.template_so.key == 'professional_templates.SO_14_document'" t-call="professional_templates.SO_14_document" t-lang="doc.partner_id.lang"/>
+										<t t-if="style.template_so.key == 'professional_templates.SO_15_document'" t-call="professional_templates.SO_15_document" t-lang="doc.partner_id.lang"/>
 										<t t-if="not style" t-call="sale.report_saleorder_document" t-lang="doc.partner_id.lang"/>
 								</t>
 						</t>
