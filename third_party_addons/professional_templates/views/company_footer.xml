@@ -56,12 +56,12 @@
                         </ul>
                     </div> -->
                     <!--Footer Logo (optional) -->
-                    <div t-if="o.style.show_footer_logo" t-attf-class="col-4 pull-right text-right"> 
+                    <div t-if="style.show_footer_logo" t-attf-class="col-4 pull-right text-right">
                         <ul style="padding: 0px;">
                             <div>
-                                <img t-if="o.style.footer_logo" t-att-src="image_data_uri(o.style.footer_logo)" alt="Footer Logo" style="max-width:80px;"/>
-                                <img t-if="not o.style.footer_logo and o.style.logo" t-att-src="image_data_uri(o.style.logo)" alt="Footer Logo" style="max-width:80px;"/>
-                                <img t-if="not o.style.footer_logo and not o.style.logo and company.logo" t-att-src="image_data_uri(company.logo)" alt="Footer Logo" style="max-width:80px;"/>
+                                <img t-if="style.footer_logo" t-att-src="image_data_uri(style.footer_logo)" alt="Footer Logo" style="max-width:80px;"/>
+                                <img t-if="not style.footer_logo and style.logo" t-att-src="image_data_uri(style.logo)" alt="Footer Logo" style="max-width:80px;"/>
+                                <img t-if="not style.footer_logo and not style.logo and company.logo" t-att-src="image_data_uri(company.logo)" alt="Footer Logo" style="max-width:80px;"/>
                             </div>
                         </ul>
                     </div>

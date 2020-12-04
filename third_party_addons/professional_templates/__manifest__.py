@@ -105,6 +105,8 @@
         "sale_order/modern_template.xml",
         "sale_order/100miles_template.xml",
         "sale_order/ascend_template.xml",
+        "sale_order/custom_so_template.xml",
+        "sale_order/custom_order_lines_template.xml",
         "purchase_order/purchase_lines.xml",
         "purchase_order/purchase_lines_ascend.xml",
         "purchase_order/switch_templates.xml",

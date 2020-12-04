@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="SO_15_document" name="Custom Company Template">
+            <!-- multi company configurations -->
+            <t t-if="doc and 'company_id' in doc">
+                <t t-set="company" t-value="doc.company_id"></t>
+            </t>
+            <t t-if="not doc or not 'company_id' in doc">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+
+            <!-- company header -->
+
+            <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+                <div class="row">
+                    <div class="col-3 mb4">
+                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;"
+                             alt="Logo"/>
+                    </div>
+                </div>
+            </div>
+            <!--start of page data-->
+
+            <div class="article page"
+                 t-attf-style="color:{{style.text_color}} !important;font-size:{{int(style.body_font)}}px !important;font-family:{{style.font_family}} !important;">
+                <t t-set="div_class" t-value="'col-4'"/>
+
+                <div class="row">
+                    <div class="col-4">
+                        <center t-attf-style="color:white;font-size:{{int(style.body_font)+7}}px; font-weight:bold;background-color:{{style.theme_color}};">
+                            Cliente &amp; Dirección de envío
+                        </center>
+
+                        <div style="margin-left:20px;">
+                            <div t-if="doc.partner_id"
+                                 t-attf-style="color:{{style.cust_color}};font-size:{{int(style.body_font)+8}}px;font-weight:500;">
+                                <span t-field="doc.partner_id"/>
+                            </div>
+                            <address t-field="doc.partner_id" style="margin-bottom:0px;"
+                                     t-options='{"widget": "contact", "fields":["address","phone","email","website"],"no_marker": false}'/>
+                            <span t-if="doc.partner_id.vat">RNC:
+                                <span t-field="doc.partner_id.vat"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-1"/>
+                    <div class="col-7"
+                         t-attf-style="border:2px solid {{style.theme_color}};color:{{style.text_color}} !important;font-size:{{int(style.header_font)}}px !important;font-family:{{style.font_family}} !important;">
+                        <div/>
+
+                        <div t-attf-style="margin-top:10px;font-size:{{int(style.body_font)+7}}px; font-weight:bold;">
+                            Pedido #
+                            <span t-field="doc.name"/>
+                        </div>
+
+                        <div class="row"
+                             t-attf-style="margin-top:10px;margin-left:10px;font-size:{{int(style.body_font)+6}}px; font-weight:bold;">
+                            <div class="col-6">Fecha pedido:</div>
+                            <div class="col-6">Vendedor:</div>
+                        </div>
+
+                        <div class="row"
+                             t-attf-style="margin-left:10px;font-size:{{int(style.body_font)+6}}px;">
+                            <div class="col-6">
+                                <span t-field="doc.date_order" t-options='{"widget": "date"}'/>
+                            </div>
+                            <div class="col-6">
+
+                            </div>
+                        </div>
+
+                        <div class="row"
+                             t-attf-style="margin-top:10px;margin-left:10px;font-size:{{int(style.body_font)+6}}px; font-weight:bold;">
+                            <div class="col-6">Currency:</div>
+                            <div class="col-6"></div>
+                        </div>
+
+                        <div class="row"
+                             t-attf-style="margin-left:10px;font-size:{{int(style.body_font)+6}}px;">
+                            <div class="col-6">
+                                <span t-field="doc.currency_id"/>
+                            </div>
+                            <div class="col-6">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- DATA-->
+                <br/>
+                <br/>
+                <t t-call="professional_templates.custom_order_lines"/>
+                <!--/DATA-->
+            </div>
+
+
+            <!-- company footer -->
+
+            <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+                <div class="text-center" style="border-top: 1px solid black;">
+                    <ul class="list-inline mb4">
+                        <li t-if="company.phone" class="list-inline-item d-inline">
+                            <span class="o_force_ltr" t-field="company.partner_id"
+                                  t-options='{"widget": "contact", "fields": ["phone"], "no_marker": false}'/>
+
+                        </li>
+                        <li t-if="company.email" class="list-inline-item d-inline">
+                            <span class="o_force_ltr" t-field="company.partner_id"
+                                  t-options='{"widget": "contact", "fields": ["email"], "no_marker": false}'/>
+                        </li>
+                        <li t-if="company.website" class="list-inline-item d-inline">
+                            <span class="o_force_ltr" t-field="company.partner_id"
+                                  t-options='{"widget": "contact", "fields": ["website"], "no_marker": false}'/>
+                        </li>
+                    </ul>
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Página:
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+
+        </template>
+    </data>
+</odoo>
