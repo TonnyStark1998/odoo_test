@@ -39,7 +39,9 @@
                             </div>
                             <address t-field="doc.partner_id" style="margin-bottom:0px;"
                                      t-options='{"widget": "contact", "fields":["address","phone","email","website"],"no_marker": false}'/>
-                            <span t-if="doc.partner_id.vat">RNC:
+                            <span t-if="doc.partner_id.vat">
+                                <span class="fa fa-building fa-lg"/>
+                                RNC:
                                 <span t-field="doc.partner_id.vat"/>
                             </span>
                         </div>
