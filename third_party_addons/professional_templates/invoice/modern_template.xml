@@ -1,311 +1,377 @@
 <?xml version="1.0"?>
 <odoo>
-  <data>
-    <template name="Modern Template" id="INVOICE_1_document">
-      <!-- Multicompany -->
-      <t t-if="o and 'company_id' in o">
-        <t t-set="company" t-value="o.company_id"/>
-      </t>
-      <t t-if="not o or not 'company_id' in o">
-        <t t-set="company" t-value="res_company"/>
-      </t>
-      <div t-attf-style="padding-bottom:0px; padding-left:0px; padding-right:0px; color:{{o.style.text_color}} !important;font-size:{{int(o.style.header_font)}}px !important;font-family:{{o.style.font_family}} !important;" class="header col-12">
-        <t t-if="style.header">
-          <div class="col-7 float-left" style="padding-left:0px;">
-            <img t-if="o.style.logo" t-att-src="image_data_uri(o.style.logo)" style="max-height: 90px;" alt="Company Logo"/>
-            <img t-if="not o.style.logo and company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 90px;" alt="Company Logo"/>
-          </div>
-          <div t-if="company.twitter or company.facebook or company.youtube" t-attf-style="background-color:{{o.style.theme_color}};width:auto;padding-left:15px; color:{{o.style.theme_txt_color}}; padding-right:15px; padding-top:4px; padding-bottom:2px;" class="float-left">
-            <span t-if="company.twitter" style="padding-left:0px;" class="fa fa-twitter-square "/>&#160;<span t-field="company.twitter"/>
-            <span t-if="company.facebook" style="padding-left:13px;" class="fa fa-facebook-square "/>&#160;<span t-field="company.facebook"/>
-            <span t-if="company.youtube" style="padding-left:13px;" class="fa fa-youtube-square "/>&#160;<span t-field="company.youtube" />
-          </div>
-          <div class="col-5 mb8 float-right" style="font-size:12px !important; padding-bottom:2px;padding-right:0px;">
-            <h1 t-attf-style="color:{{o.style.name_color}}">FACTURA </h1>
-            <div t-if="company.email">
-              <span class="fa fa-envelope-square fa-lg"/> 
-              <span t-field="company.email"/>
-            </div>
-            <div t-if="company.website">
-              <span class="fa fa-globe fa-lg"/> 
-              <span t-field="company.website"/>
-            </div>
-            <div t-if="company.vat">
-              <span class="fa fa-building fa-lg"/>
-              RNC: <span t-field="company.vat"/>
-            </div>
-          </div>
-        </t>
-      </div>
-      <!--end of Header-->
-      <!-- START OF PAGE -->
-      <div class="article page clearfix" t-attf-data-oe-model="account.move" t-attf-data-oe-id="{{o.id}}" t-attf-style="margin-top:4px; padding-top:5px; padding-left:0px; padding-right:0px; color:{{o.style.text_color}} !important;">
-      <!--  Start of INVOICE HEADER    -->
-        <div class="col-12 float-left" style="padding-left:0px; padding-right:0px; padding-bottom:2px;">
-          <!--start of wrapper -->
-          <div class="col-6 pull-left" t-attf-style="font-size:{{int(o.style.body_font)}}px !important;padding-left:0px;">
-            <div t-attf-style="background-color:{{o.style.cust_color}}; padding-top:2px; padding-bottom:2px; color:{{o.style.theme_txt_color}};">
-              <span style="font-size:16px;">
-                <span class="fa fa-user fa-lg"/>
-                 Cliente
-              </span>
-            </div>
-            <h5 t-if="o.partner_id" t-attf-style="color:{{o.style.cust_color}}; margin-top:2px; margin-bottom:5px; margin-left:0px;">
-              <span t-if="o.partner_id.title" t-field="o.partner_id.title"/>
-              <span t-field="o.partner_id"/>
-            </h5>
-            <div t-if="o.partner_id.vat">
-              <span class="fa fa-building fa-lg"/>
-              RNC:
-              <span t-field="o.partner_id.vat"/>
-            </div>
-            <div>
-              <span t-if="o.partner_id.street" class="fa fa-map-marker fa-lg"/>
-              <span t-if="o.partner_id.street" t-field="o.partner_id.street"/>
-              <span t-if="o.partner_id.street and o.partner_id.street2 ">,</span>
-              <span t-if="o.partner_id.street2" t-field="o.partner_id.street2"/>
-              <span t-if="o.partner_id.zip and o.partner_id.street or o.partner_id.street2 ">,</span>
-              <span t-if="o.partner_id.zip ">
-                ZIP:
-                <span t-field="o.partner_id.zip"/>
-              </span>
-              <span t-if="o.partner_id.zip and o.partner_id.city">,</span>
-              <span t-if="o.partner_id.city or o.partner_id.country_id" t-field="o.partner_id.city"/>
-              <span t-if="o.partner_id.country_id and o.partner_id.city ">,</span>
-              <span t-field="o.partner_id.country_id"/>
-            </div>
-            <div t-if="o.partner_id.phone or o.partner_id.mobile">
-              <span class="fa fa-phone-square fa-lg"/>
-              <span t-field="o.partner_id.phone"/>
-              <span t-if="o.partner_id.mobile and o.partner_id.phone ">,</span>
-              <span t-field="o.partner_id.mobile"/>
-            </div>
-            <div t-if="o.partner_id.email">
-              <span class="fa fa-envelope-square fa-lg"/>
-              <span t-field="o.partner_id.email"/>
-            </div>
-            <div t-if="o.partner_id.website">
-              <span class="fa fa-globe fa-lg"/>
-              <span t-field="o.partner_id.website"/>
-            </div>
-          </div>
-          <div class="col-6 mb4 pull-right" t-attf-style="border:2px solid {{o.style.name_color}}; color:#222;">
-            <t t-if="o.journal_id.sequence_id">
-              <t t-set="journal_code" t-value="o.journal_id.sequence_id.code" />
+    <data>
+        <template name="Modern Template" id="INVOICE_1_document">
+            <!-- Multicompany -->
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"/>
             </t>
-            <t t-if="not o.journal_id.sequence_id">
-              <t t-set="journal_code" t-value="B01" />
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"/>
             </t>
-            <t t-if="o.journal_id.sequence_id.use_date_range">
-              <t t-set="ncf_date_due" t-value="o.journal_id.sequence_id.date_range_ids[0].date_to" />
-            </t>
-            <t t-if="not o.journal_id.sequence_id.use_date_range">
-              <t t-set="ncf_date_due" t-value="'31/12/%s' % datetime.date.today().strftime('%Y')" />
-            </t>
-            <h5 t-attf-style="color:{{o.style.name_color}}">
-              <strong>
-                <span t-if="o.type == 'out_invoice' and journal_code.upper() == 'B02' and (o.state == 'posted' or o.invoice_payment_state == 'paid')">
-                  CONSUMIDOR FINAL
-                </span>
-                <span t-if="o.type == 'out_invoice' and journal_code.upper() == 'B01' and (o.state == 'posted' or o.invoice_payment_state == 'paid')">
-                  CRÉDITO FISCAL
-                </span>
-                <span t-if="o.type == 'out_invoice' and journal_code.upper() == 'B15' and (o.state == 'posted' or o.invoice_payment_state == 'paid')">
-                  FACTURA GUBERNAMENTAL
-                </span>
-                <span t-if="o.type == 'out_invoice' and journal_code.upper() == 'B14' and (o.state == 'posted' or o.invoice_payment_state == 'paid')">
-                  REGIMENES ESPECIALES
-                </span>
-                <span t-if="o.type == 'out_invoice' and journal_code.upper() == 'B12' and (o.state == 'posted' or o.invoice_payment_state == 'paid')">
-                  ÚNICO INGRESO
-                </span>
-                <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
-                <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Factura Borrador</span>
-                <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Factura Cancelada</span>
-                <span t-if="o.type == 'out_refund'">Nota de crédito</span>
-                <span t-if="o.type == 'in_refund'">Nota de crédito proveedor</span>
-                <span t-if="o.type == 'in_invoice'">Factura de compra</span>
-              </strong>
-            </h5>
-            <p>
-              <strong>
-                <span t-field="o.name" t-attf-style="color:{{o.style.name_color}}"/>
-              </strong>
-            </p>
-            <div t-if="o.invoice_date">
-              Fecha:
-              <span t-field="o.invoice_date"/>
-            </div>
-            <div t-if="ncf_date_due">
-              Vencimiento secuencia:
-              <span t-esc="ncf_date_due.strftime('%d/%m/%Y')"/>
-            </div>
-            <div>
-              Términos de pago:
-              <span t-field="o.invoice_payment_term_id"/>
-            </div>
-          </div>
-        </div>
-        <!--    End of INVOICE HEADER   -->
-        <!--    Start of INVOICE LINES  -->
-        <div class="col-12 mt8 mb9" t-attf-style="padding-left:0px; padding-right:0px;font-size:12px !important;">
-          <table class="table table-condensed" t-attf-style="color:{{o.style.text_color}};">
-            <thead t-attf-style="background-color:{{o.style.name_color}}; page-break-inside: avoid; color:{{o.style.theme_txt_color}};">
-              <tr t-attf-style="page-break-inside: avoid !important; border-bottom: 1px solid {{o.style.text_color}} !important;">
-                <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">No.</th>
-                <th class="text-right" t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
-                  Quantity
-                </th>
-                <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
-                  Description
-                </th>
-                <th class="text-right" t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
-                  Unit Price
-                </th>
-                <th class="text-right" t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;" groups="sale.group_discount_per_so_line">
-                  Discount(%)
-                </th>
-                <th class="text-right" t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
-                  Taxes
-                </th>
-                <th class="text-right" t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
-                  Amount
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <t t-foreach="o.invoice_line_ids" t-as="l">
-                <tr t-attf-style="background-color:{{o.style.odd if l_parity in 'odd' else o.style.even}}; page-break-inside: avoid !important;">
-                  <td>
-                    <span t-esc="l_index + 1"/>
-                  </td>
-                  <td class="text-right">
-                    <span t-field="l.quantity"/>
-                    <span t-field="l.uom_id" groups="product.group_uom"/>
-                  </td>
-                  <td>
-                    <span t-field="l.name"/>
-                  </td>
-                  <td class="text-right">
-                    <span t-field="l.price_unit"/>
-                  </td>
-                  <td class="text-right" groups="sale.group_discount_per_so_line">
-                    <span t-field="l.discount"/>
-                  </td>
-                  <td class="text-right">
-                    <span t-esc="', '.join(map(lambda x: (x.name), l.tax_ids))"/>
-                  </td>
-                  <td class="text-right">
-                    <span t-field="l.price_subtotal"/>
-                  </td>
-                </tr>
-              </t>
-            </tbody>
-          </table>
-        </div>
-        <!--    End of INVOICE LINES    -->
-        <!--    Start of TOTALS -->
-        <div class="col-12 clearfix" t-attf-style="padding-left:0px; padding-right:0px;font-size:12px !important;">
-          <div class="col-5 pull-right" style="padding-left:0px; padding-right:0px; page-break-inside: avoid !important;">
-            <table class="table table-sm" t-attf-style="color:{{o.style.text_color}};">
-              <tbody>
-                <tr t-attf-style="border-top: 1px solid {{o.style.text_color}};">
-                  <td t-attf-style="border-top: 1px solid {{o.style.text_color}} !important;">
-                    <strong>Subtotal</strong>
-                  </td>
-                  <td class="text-right" t-attf-style="border-top: 1px solid {{o.style.text_color}} !important;">
-                    <span t-field="o.amount_untaxed"/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>ITBIS</td>
-                  <td class="text-right">
-                    <span t-field="o.amount_tax"/>
-                  </td>
-                </tr>
-                <tr t-attf-style="border-bottom: 1px solid {{o.style.text_color}};">
-                  <td t-attf-style="border-top: 1px solid {{o.style.text_color}} !important;">
-                    <strong>Total</strong>
-                  </td>
-                  <td class="text-right" t-attf-style="border-top: 1px solid {{o.style.text_color}} !important;">
-                    <strong>
-                      <span style="font-weight:bold; text-decoration:underline;" t-field="o.amount_total"/>
-                    </strong>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <!--    Start of PAYMENTS   -->
-        <t t-set="payments" t-value="json.loads(o.invoice_payments_widget)"/>
-        <div t-if="payments" class="col-12" t-attf-style="padding-left:0px; padding-right:0px;font-size:{{int(o.style.body_font)}}px">
-          <p>
-            <strong>Pago(s):</strong>
-          </p>
-          <div class="col-7 pull-left" style="padding-left:0px; padding-right:0px; page-break-inside: avoid !important;">
-            <table class="table table-condensed" t-attf-style="color:{{o.style.text_color}};">
-
-              <thead t-attf-style="background-color:{{o.style.name_color}}; page-break-inside: avoid; color:{{o.style.theme_txt_color}};">
-                <tr t-attf-style="page-break-inside: avoid !important; border-bottom: 1px solid {{o.style.text_color}} !important;">
-                  <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">No.</th>
-                  <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">Fecha</th>
-                  <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">Método</th>
-                  <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">Ref.</th>
-                  <th class="text-right" t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
-                    Monto
-                  </th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <t t-foreach="payments['content']" t-as="p">
-                  <tr t-attf-style="background-color:{{o.style.odd if p_parity in 'odd' else o.style.even}}; page-break-inside: avoid !important;">
-                    <td>
-                      <span t-esc="p_index + 1"/>
-                    </td>
-                    <td>
-                      <span t-esc="p['date']"/>
-                    </td>
-                    <td>
-                      <span t-esc="p['journal_name']"/>
-                    </td>
-                    <td>
-                      <span t-esc="p['ref']"/>
-                    </td>
-                    <td class="text-right">
-                      <span t-esc="'{:,.2f} {}'.format(p['amount'], p['currency']) if p['position'] == 'after'     else '{} {:,.2f}'.format(p['currency'], p['amount'])"/>
-                    </td>
-                  </tr>
+            <div t-attf-style="padding-bottom:0px; padding-left:0px; padding-right:0px; color:{{o.style.text_color}} !important;font-size:{{int(o.style.header_font)}}px !important;font-family:{{o.style.font_family}} !important;"
+                 class="header col-12">
+                <t t-if="style.header">
+                    <div class="col-7 float-left" style="padding-left:0px;">
+                        <img t-if="o.style.logo" t-att-src="image_data_uri(o.style.logo)" style="max-height: 90px;"
+                             alt="Company Logo"/>
+                        <img t-if="not o.style.logo and company.logo" t-att-src="image_data_uri(company.logo)"
+                             style="max-height: 90px;" alt="Company Logo"/>
+                    </div>
+                    <div t-if="company.twitter or company.facebook or company.youtube"
+                         t-attf-style="background-color:{{o.style.theme_color}};width:auto;padding-left:15px; color:{{o.style.theme_txt_color}}; padding-right:15px; padding-top:4px; padding-bottom:2px;"
+                         class="float-left">
+                        <span t-if="company.twitter" style="padding-left:0px;" class="fa fa-twitter-square "/>&#160;<span
+                            t-field="company.twitter"/>
+                        <span t-if="company.facebook" style="padding-left:13px;" class="fa fa-facebook-square "/>&#160;<span
+                            t-field="company.facebook"/>
+                        <span t-if="company.youtube" style="padding-left:13px;" class="fa fa-youtube-square "/>&#160;<span
+                            t-field="company.youtube"/>
+                    </div>
+                    <div class="col-5 mb8 float-right"
+                         style="font-size:12px !important; padding-bottom:2px;padding-right:0px;">
+                        <h1 t-attf-style="color:{{o.style.name_color}}">FACTURA</h1>
+                        <div t-if="company.email">
+                            <span class="fa fa-envelope-square fa-lg"/> 
+                            <span t-field="company.email"/>
+                        </div>
+                        <div t-if="company.website">
+                            <span class="fa fa-globe fa-lg"/> 
+                            <span t-field="company.website"/>
+                        </div>
+                        <div t-if="company.vat">
+                            <span class="fa fa-building fa-lg"/>
+                            RNC:
+                            <span t-field="company.vat"/>
+                        </div>
+                    </div>
                 </t>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <!--    End of PAYMENTS     -->
-        <div t-if="o.invoice_origin" class="col-12" style="margin-top:10px; padding-left:0px; padding-right:0px; page-break-inside: avoid ! important;">
-          <p>
-            <strong>Origen:</strong>
-            <span t-field="o.invoice_origin"/>
-          </p>
-          <p t-if="o.fiscal_position_id.note">
-            <strong>Fiscal Position Remark:</strong>
-            <span t-field="o.fiscal_position_id.note"/>
-          </p>
-          <p t-if="o.narration">
-            <strong>Nota(s):</strong>
-            <span t-field="o.narration"/>
-          </p>
-          <br/>
-          <br/>
-        </div>
-      </div>
-      <!--End of PAGE-->
-      <!-- Start of FOOTER -->
-      <div t-if="o.style.footer" class="footer" t-attf-style="font-size:{{style.footer_font}}px !important;font-family:{{style.font_family}} !important;color:{{style.text_color}};border-top: 1px solid {{style.text_color}};padding-top:5px;padding-left:0px; padding-right:0px;">
-        <t t-call="professional_templates.company_footer"/>
-      </div>
-      <!--End of FOOTER-->
-    </template>
-  </data>
+            </div>
+            <!--end of Header-->
+            <!-- START OF PAGE -->
+            <div class="article page clearfix" t-attf-data-oe-model="account.move" t-attf-data-oe-id="{{o.id}}"
+                 t-attf-style="margin-top:4px; padding-top:5px; padding-left:0px; padding-right:0px; color:{{o.style.text_color}} !important;">
+                <!--  Start of INVOICE HEADER    -->
+                <div class="col-12 float-left" style="padding-left:0px; padding-right:0px; padding-bottom:2px;">
+                    <!--start of wrapper -->
+                    <div class="col-6 pull-left"
+                         t-attf-style="font-size:{{int(o.style.body_font)}}px !important;padding-left:0px;">
+                        <div t-attf-style="background-color:{{o.style.cust_color}}; padding-top:2px; padding-bottom:2px; color:{{o.style.theme_txt_color}};">
+                            <span style="font-size:16px;">
+                                <span class="fa fa-user fa-lg"/>
+                                Cliente
+                            </span>
+                        </div>
+                        <h5 t-if="o.partner_id"
+                            t-attf-style="color:{{o.style.cust_color}}; margin-top:2px; margin-bottom:5px; margin-left:0px;">
+                            <span t-if="o.partner_id.title" t-field="o.partner_id.title"/>
+                            <span t-field="o.partner_id"/>
+                        </h5>
+                        <div t-if="o.partner_id.vat">
+                            <span class="fa fa-building fa-lg"/>
+                            RNC:
+                            <span t-field="o.partner_id.vat"/>
+                        </div>
+                        <div>
+                            <span t-if="o.partner_id.street" class="fa fa-map-marker fa-lg"/>
+                            <span t-if="o.partner_id.street" t-field="o.partner_id.street"/>
+                            <span t-if="o.partner_id.street and o.partner_id.street2 ">,</span>
+                            <span t-if="o.partner_id.street2" t-field="o.partner_id.street2"/>
+                            <span t-if="o.partner_id.zip and o.partner_id.street or o.partner_id.street2 ">,</span>
+                            <span t-if="o.partner_id.zip ">
+                                ZIP:
+                                <span t-field="o.partner_id.zip"/>
+                            </span>
+                            <span t-if="o.partner_id.zip and o.partner_id.city">,</span>
+                            <span t-if="o.partner_id.city or o.partner_id.country_id" t-field="o.partner_id.city"/>
+                            <span t-if="o.partner_id.country_id and o.partner_id.city ">,</span>
+                            <span t-field="o.partner_id.country_id"/>
+                        </div>
+                        <div t-if="o.partner_id.phone or o.partner_id.mobile">
+                            <span class="fa fa-phone-square fa-lg"/>
+                            <span t-field="o.partner_id.phone"/>
+                            <span t-if="o.partner_id.mobile and o.partner_id.phone ">,</span>
+                            <span t-field="o.partner_id.mobile"/>
+                        </div>
+                        <div t-if="o.partner_id.email">
+                            <span class="fa fa-envelope-square fa-lg"/>
+                            <span t-field="o.partner_id.email"/>
+                        </div>
+                        <div t-if="o.partner_id.website">
+                            <span class="fa fa-globe fa-lg"/>
+                            <span t-field="o.partner_id.website"/>
+                        </div>
+                    </div>
+                    <div class="col-6 mb4 pull-right"
+                         t-attf-style="border:2px solid {{o.style.name_color}}; color:#222;">
+                        <t t-if="o.journal_id.sequence_id">
+                            <t t-set="journal_code" t-value="o.journal_id.sequence_id.code"/>
+                        </t>
+                        <t t-if="not o.journal_id.sequence_id">
+                            <t t-set="journal_code" t-value="B01"/>
+                        </t>
+                        <t t-if="o.journal_id.sequence_id.use_date_range">
+                            <t t-set="ncf_date_due" t-value="o.journal_id.sequence_id.date_range_ids[0].date_to"/>
+                        </t>
+                        <t t-if="not o.journal_id.sequence_id.use_date_range">
+                            <t t-set="ncf_date_due" t-value="'31/12/%s' % datetime.date.today().strftime('%Y')"/>
+                        </t>
+                        <h5 t-attf-style="color:{{o.style.name_color}}">
+                            <strong>
+                                <span t-if="o.type == 'out_invoice' and journal_code.upper() == 'B02' and (o.state == 'posted' or o.invoice_payment_state == 'paid')">
+                                    CONSUMIDOR FINAL
+                                </span>
+                                <span t-if="o.type == 'out_invoice' and journal_code.upper() == 'B01' and (o.state == 'posted' or o.invoice_payment_state == 'paid')">
+                                    CRÉDITO FISCAL
+                                </span>
+                                <span t-if="o.type == 'out_invoice' and journal_code.upper() == 'B15' and (o.state == 'posted' or o.invoice_payment_state == 'paid')">
+                                    FACTURA GUBERNAMENTAL
+                                </span>
+                                <span t-if="o.type == 'out_invoice' and journal_code.upper() == 'B14' and (o.state == 'posted' or o.invoice_payment_state == 'paid')">
+                                    REGIMENES ESPECIALES
+                                </span>
+                                <span t-if="o.type == 'out_invoice' and journal_code.upper() == 'B12' and (o.state == 'posted' or o.invoice_payment_state == 'paid')">
+                                    ÚNICO INGRESO
+                                </span>
+                                <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
+                                <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Factura Borrador</span>
+                                <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Factura Cancelada</span>
+                                <span t-if="o.type == 'out_refund'">Nota de crédito</span>
+                                <span t-if="o.type == 'in_refund'">Nota de crédito proveedor</span>
+                                <span t-if="o.type == 'in_invoice'">Factura de compra</span>
+                            </strong>
+                        </h5>
+                        <p>
+                            <strong>
+                                <span t-field="o.name" t-attf-style="color:{{o.style.name_color}}"/>
+                            </strong>
+                        </p>
+                        <div t-if="o.invoice_date">
+                            Fecha:
+                            <span t-field="o.invoice_date"/>
+                        </div>
+                        <div t-if="ncf_date_due">
+                            Vencimiento secuencia:
+                            <span t-esc="ncf_date_due.strftime('%d/%m/%Y')"/>
+                        </div>
+                        <div>
+                            Términos de pago:
+                            <span t-field="o.invoice_payment_term_id"/>
+                        </div>
+                    </div>
+                </div>
+                <!--    End of INVOICE HEADER   -->
+                <!--    Start of INVOICE LINES  -->
+                <div class="col-12 mt8 mb9"
+                     t-attf-style="padding-left:0px; padding-right:0px;font-size:12px !important;">
+                    <table class="table table-condensed" t-attf-style="color:{{o.style.text_color}};">
+                        <thead t-attf-style="background-color:{{o.style.name_color}}; page-break-inside: avoid; color:{{o.style.theme_txt_color}};">
+                            <tr t-attf-style="page-break-inside: avoid !important; border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">No.</th>
+                                <th class="text-right"
+                                    t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                    Quantity
+                                </th>
+                                <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                    Description
+                                </th>
+                                <th class="text-right"
+                                    t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                    Unit Price
+                                </th>
+                                <th class="text-right"
+                                    t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;"
+                                    groups="sale.group_discount_per_so_line">
+                                    Discount(%)
+                                </th>
+                                <th class="text-right"
+                                    t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                    Taxes
+                                </th>
+                                <th class="text-right"
+                                    t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                    Amount
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.invoice_line_ids" t-as="l">
+                                <tr t-attf-style="background-color:{{o.style.odd if l_parity in 'odd' else o.style.even}}; page-break-inside: avoid !important;">
+                                    <td>
+                                        <span t-esc="l_index + 1"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-field="l.quantity"/>
+                                        <span t-field="l.uom_id" groups="product.group_uom"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="l.name"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-field="l.price_unit"/>
+                                    </td>
+                                    <td class="text-right" groups="sale.group_discount_per_so_line">
+                                        <span t-field="l.discount"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="', '.join(map(lambda x: (x.name), l.tax_ids))"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-field="l.price_subtotal"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+                <!--    End of INVOICE LINES    -->
+                <!--    Start of TOTALS -->
+                <div class="col-12 clearfix"
+                     t-attf-style="padding-left:0px; padding-right:0px;font-size:12px !important;">
+                    <div class="col-5 pull-right"
+                         style="padding-left:0px; padding-right:0px; page-break-inside: avoid !important;">
+                        <table class="table table-sm" t-attf-style="color:{{o.style.text_color}};">
+                            <tbody>
+                                <tr t-attf-style="border-top: 1px solid {{o.style.text_color}};">
+                                    <td t-attf-style="border-top: 1px solid {{o.style.text_color}} !important;">
+                                        <strong>Subtotal</strong>
+                                    </td>
+                                    <td class="text-right"
+                                        t-attf-style="border-top: 1px solid {{o.style.text_color}} !important;">
+                                        <span t-field="o.amount_untaxed"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>ITBIS</td>
+                                    <td class="text-right">
+                                        <span t-field="o.amount_tax"/>
+                                    </td>
+                                </tr>
+                                <tr t-attf-style="border-bottom: 1px solid {{o.style.text_color}};">
+                                    <td t-attf-style="border-top: 1px solid {{o.style.text_color}} !important;">
+                                        <strong>Total</strong>
+                                    </td>
+                                    <td class="text-right"
+                                        t-attf-style="border-top: 1px solid {{o.style.text_color}} !important;">
+                                        <strong>
+                                            <span style="font-weight:bold; text-decoration:underline;"
+                                                  t-field="o.amount_total"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--    Start of PAYMENTS   -->
+                <t t-set="payments" t-value="json.loads(o.invoice_payments_widget)"/>
+                <div t-if="payments" class="col-12"
+                     t-attf-style="padding-left:0px; padding-right:0px;font-size:{{int(o.style.body_font)}}px">
+                    <p>
+                        <strong>Pago(s):</strong>
+                    </p>
+                    <div class="col-7 pull-left"
+                         style="padding-left:0px; padding-right:0px; page-break-inside: avoid !important;">
+                        <table class="table table-condensed" t-attf-style="color:{{o.style.text_color}};">
+
+                            <thead t-attf-style="background-color:{{o.style.name_color}}; page-break-inside: avoid; color:{{o.style.theme_txt_color}};">
+                                <tr t-attf-style="page-break-inside: avoid !important; border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                    <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">No.
+                                    </th>
+                                    <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                        Fecha
+                                    </th>
+                                    <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                        Método
+                                    </th>
+                                    <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                        Ref.
+                                    </th>
+                                    <th class="text-right"
+                                        t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                        Monto
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <t t-foreach="payments['content']" t-as="p">
+                                    <tr t-attf-style="background-color:{{o.style.odd if p_parity in 'odd' else o.style.even}}; page-break-inside: avoid !important;">
+                                        <td>
+                                            <span t-esc="p_index + 1"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="p['date']"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="p['journal_name']"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="p['ref']"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-esc="'{:,.2f} {}'.format(p['amount'], p['currency']) if p['position'] == 'after'     else '{} {:,.2f}'.format(p['currency'], p['amount'])"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--    End of PAYMENTS     -->
+                <div t-if="o.invoice_origin" class="col-12"
+                     style="margin-top:10px; padding-left:0px; padding-right:0px; page-break-inside: avoid ! important;">
+                    <p>
+                        <strong>Origen:</strong>
+                        <span t-field="o.invoice_origin"/>
+                    </p>
+                    <p t-if="o.fiscal_position_id.note">
+                        <strong>Fiscal Position Remark:</strong>
+                        <span t-field="o.fiscal_position_id.note"/>
+                    </p>
+                    <p t-if="o.narration">
+                        <strong>Nota(s):</strong>
+                        <span t-field="o.narration"/>
+                    </p>
+                    <br/>
+                    <br/>
+                </div>
+            </div>
+            <!--End of PAGE-->
+            <!-- Start of FOOTER -->
+            <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+                <div class="text-center" style="border-top: 1px solid black;">
+                    <ul class="list-inline mb4">
+                        <li t-if="company.partner_id" class="list-inline-item d-inline">
+                            <span class="fa fa-map-marker fa-fw"/>
+                            <span class="o_force_ltr" t-field="company.partner_id.contact_address_complete"/>
+
+                        </li>
+                    </ul>
+                    <ul class="list-inline mb4">
+                        <li t-if="company.phone" class="list-inline-item d-inline">
+                            <span class="o_force_ltr" t-field="company.partner_id"
+                                  t-options='{"widget": "contact", "fields": ["phone"], "no_marker": false}'/>
+
+                        </li>
+                        <li t-if="company.email" class="list-inline-item d-inline">
+                            <span class="o_force_ltr" t-field="company.partner_id"
+                                  t-options='{"widget": "contact", "fields": ["email"], "no_marker": false}'/>
+                        </li>
+                        <li t-if="company.website" class="list-inline-item d-inline">
+                            <span class="o_force_ltr" t-field="company.partner_id"
+                                  t-options='{"widget": "contact", "fields": ["website"], "no_marker": false}'/>
+                        </li>
+                    </ul>
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Página:
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+            <!--End of FOOTER-->
+        </template>
+    </data>
 </odoo>

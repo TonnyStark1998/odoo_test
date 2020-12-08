@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="SO_15_document" name="Custom Company Template">
+        <template id="SO_15_document" name="Personal Template">
             <!-- multi company configurations -->
             <t t-if="doc and 'company_id' in doc">
                 <t t-set="company" t-value="doc.company_id"></t>
@@ -39,7 +39,9 @@
                             </div>
                             <address t-field="doc.partner_id" style="margin-bottom:0px;"
                                      t-options='{"widget": "contact", "fields":["address","phone","email","website"],"no_marker": false}'/>
-                            <span t-if="doc.partner_id.vat">RNC:
+                            <span t-if="doc.partner_id.vat">
+                                <span class="fa fa-building fa-lg"/>
+                                RNC:
                                 <span t-field="doc.partner_id.vat"/>
                             </span>
                         </div>
