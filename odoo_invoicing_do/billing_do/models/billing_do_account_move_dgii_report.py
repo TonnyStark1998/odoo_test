@@ -52,52 +52,52 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_invoice_other_sale_way_amount = fields.Monetary(string='Other Sale Way Amount')
 
     # Account Move DGII Reports - Compute Field's Functions
-    # @api.depends('date')
-    # def _compute_report_invoice_date(self):
-    #     for move in self:
-    #         move.report_bill_date_month = ''
-    #         move.report_bill_date_day = ''
-    #         move.report_invoice_date = ''
+    @api.depends('date')
+    def _compute_report_invoice_date(self):
+        for move in self:
+            move.report_bill_date_month = ''
+            move.report_bill_date_day = ''
+            move.report_invoice_date = ''
 
-    # @api.depends('partner_id.tax_contributor_type')
-    # def _compute_report_vat_type(self):
-    #     for move in self:
-    #         if move.partner_id.tax_contributor_type in ['1']:
-    #             move.report_vat_type = '1'
-    #         else:
-    #             move.report_vat_type = '2'
+    @api.depends('partner_id.tax_contributor_type')
+    def _compute_report_vat_type(self):
+        for move in self:
+            if move.partner_id.tax_contributor_type in ['1']:
+                move.report_vat_type = '1'
+            else:
+                move.report_vat_type = '2'
     
-    # @api.depends('invoice_line_ids')
-    # def _compute_service_consumable_amount(self):
-    #     for move in self:
-    #         move.report_bill_service_amount = 0.0
-    #         move.report_bill_consumable_amount = 0.0
-    #         move.report_bill_total_amount = 0.0
+    @api.depends('invoice_line_ids')
+    def _compute_service_consumable_amount(self):
+        for move in self:
+            move.report_bill_service_amount = 0.0
+            move.report_bill_consumable_amount = 0.0
+            move.report_bill_total_amount = 0.0
 
-    # @api.depends('line_ids')
-    # def _compute_report_bill_tax_amount(self):
-    #     for move in self:
-    #         move.report_isc_amount = 0.0
-    #         move.report_bill_other_taxes_amount = 0.0
-    #         move.report_bill_legaltip_amount = 0.0
-    #         move.report_bill_tax_amount = 0.0
+    @api.depends('line_ids')
+    def _compute_report_bill_tax_amount(self):
+        for move in self:
+            move.report_isc_amount = 0.0
+            move.report_bill_other_taxes_amount = 0.0
+            move.report_bill_legaltip_amount = 0.0
+            move.report_bill_tax_amount = 0.0
 
-    # @api.depends('report_bill_payment_date_month','report_bill_payment_date_month')
-    # def _compute_report_bill_payment_date(self):
-    #     for move in self:
-    #         move.report_bill_payment_date_month = ''
-    #         move.report_bill_payment_date_day = ''
+    @api.depends('report_bill_payment_date_month','report_bill_payment_date_month')
+    def _compute_report_bill_payment_date(self):
+        for move in self:
+            move.report_bill_payment_date_month = ''
+            move.report_bill_payment_date_day = ''
     
-    # @api.depends('name', 'reversal_move_id')
-    # def _compute_move(self):
-    #     for move in self:
-    #         move.report_move = ''
-    #         move.report_move_reversed = ''
+    @api.depends('name', 'reversal_move_id')
+    def _compute_move(self):
+        for move in self:
+            move.report_move = ''
+            move.report_move_reversed = ''
     
-    # @api.depends('line_ids')
-    # def _compute_report_bill_itbis_held_amount(self):
-    #     for move in self:
-    #         move.report_bill_itbis_held_amount = 0.0
-    #         move.report_invoice_itbis_held_by_thirdparty_amount = 0.0
-    #         move.report_bill_isr_held_amount = 0.0
-    #         move.report_invoice_isr_held_by_thirdparty_amount = 0.0
+    @api.depends('line_ids')
+    def _compute_report_bill_itbis_held_amount(self):
+        for move in self:
+            move.report_bill_itbis_held_amount = 0.0
+            move.report_invoice_itbis_held_by_thirdparty_amount = 0.0
+            move.report_bill_isr_held_amount = 0.0
+            move.report_invoice_isr_held_by_thirdparty_amount = 0.0
