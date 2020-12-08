@@ -71,17 +71,17 @@
                 <field name="state" invisible="1" />
                 <field name="report_vat" />
                 <field name="report_vat_type" />
-                <field name="expense_type" string="Expense Type" />
+                <field name="expense_type" />
                 <field name="report_move" />
-                <field name="report_move_reversed" string="Tax Receipt Reversed Number" />
-                <field name="report_bill_date_month" string="Invoice Date Month" />
-                <field name="report_bill_date_day" string="Invoice Date Day" />
-                <field name="report_bill_payment_date_month" string="Payment Date Month" />
-                <field name="report_bill_payment_date_day" string="Payment Date Day" />
+                <field name="report_move_reversed" />
+                <field name="report_bill_date_month" />
+                <field name="report_bill_date_day" />
+                <field name="report_bill_payment_date_month" />
+                <field name="report_bill_payment_date_day" />
                 <field name="report_bill_service_amount" />
                 <field name="report_bill_consumable_amount" />
                 <field name="report_bill_total_amount" />
-                <field name="report_bill_tax_amount" string="ITBIS Tax" />
+                <field name="report_bill_tax_amount" />
                 <field name="report_bill_itbis_held_amount" />
                 <field name="report_bill_itbis_proportional_amount" />
                 <field name="report_bill_itbis_expense_amount" />
@@ -105,12 +105,12 @@
                 <field name="report_vat" />
                 <field name="report_vat_type" />
                 <field name="report_move" />
-                <field name="report_move_reversed" string="Tax Receipt Reversed Number" />
+                <field name="report_move_reversed" />
                 <field name="income_type" />
-                <field name="report_invoice_date" string="Invoice Date" />
-                <field name="report_invoice_held_date" string="Invoice Held Date" />
-                <field name="amount_untaxed_signed" string="Invoice Amount" />
-                <field name="amount_tax_signed" string="Invoice Tax Amount" />
+                <field name="report_invoice_date" />
+                <field name="report_invoice_held_date" />
+                <field name="amount_untaxed_signed" />
+                <field name="amount_tax_signed" />
                 <field name="report_invoice_itbis_held_by_thirdparty_amount" />
                 <field name="report_invoice_itbis_perceived_amount" />
                 <field name="report_invoice_isr_held_by_thirdparty_amount" />
