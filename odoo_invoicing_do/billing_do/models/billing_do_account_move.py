@@ -23,7 +23,14 @@ class BillingDoAccountMove(models.Model):
             ('04', '04 - Ingresos por Arrendamientos'),
             ('05', '05 - Ingresos por Venta de Activo Depreciable'),
             ('06', '06 - Otros Ingresos')
-        ], required=True, store=True, readonly=False, copy=False, tracking=True, default='01')
+        ], 
+                                    required=True, 
+                                    store=True, 
+                                    readonly=False, 
+                                    copy=False, 
+                                    tracking=True, 
+                                    default='01',
+                                    string='Income Type')
 
     expense_type = fields.Selection(selection=[
             ('01', '01 - Gastos de personal'),
@@ -37,7 +44,14 @@ class BillingDoAccountMove(models.Model):
             ('09', '09 - Compras y gastos que formarán parte del costo de venta'),
             ('10', '10 - Adquisiciones de activos'),
             ('11', '11 - Gastos de seguro'),
-        ], required=True, store=True, readonly=False, copy=True, tracking=True, default='02')
+        ], 
+                                    required=True, 
+                                    store=True, 
+                                    readonly=False, 
+                                    copy=True, 
+                                    tracking=True, 
+                                    default='02',
+                                    string='Expense Type')
 
     ncf = fields.Char(string="NCF", readonly=False, copy=False, store=True, tracking=True, states={'posted': [('readonly', True)]})
     ncf_sequence_next_number = fields.Char(readonly=True, copy=False, store=False, tracking=False, compute='_compute_set_name_next_sequence')

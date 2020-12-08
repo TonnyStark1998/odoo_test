@@ -219,3 +219,122 @@ msgstr "Usar secuencia?"
 #: model_terms:ir.ui.view,arch_db:account.report_invoice_document_with_payments
 msgid "Amount Due"
 msgstr "Monto Adeudado"
+
+##################################
+#   DGII 606/607 Models Fields   #
+##################################
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_vat
+msgid "Tax Contributor ID"
+msgstr "RNC"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_vat_type
+msgid "Tax Contributor Type"
+msgstr "Tipo Id"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_move
+msgid "Tax Receipt Number"
+msgstr "NCF"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_move_reversed
+msgid "Tax Receipt Reversed"
+msgstr "NCF ó Documento Modificado"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_isc_amount
+msgid "ISC Amount"
+msgstr "Impuesto Selectivo al Consumo"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_bill_date_month
+msgid "Bill Date Month"
+msgstr "Fecha Comprobante (Mes)"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_bill_date_day
+msgid "Bill Date Day"
+msgstr "Fecha Comprobante (Día)"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_bill_payment_date_month
+msgid "Payment Date Month"
+msgstr "Fecha Pago (Mes)"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_bill_payment_date_day
+msgid "Payment Date Day"
+msgstr "Fecha Pago (Día)"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_bill_service_amount
+msgid "Service Amount"
+msgstr "Monto Facturado en Servicios"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_bill_consumable_amount
+msgid "Consumable Amount"
+msgstr "Monto Facturado en Bienes"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_bill_total_amount
+msgid "Total Amount"
+msgstr "Total Monto Facturado"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_bill_tax_amount
+msgid "Tax Amount"
+msgstr "ITBIS Facturado"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_bill_itbis_held_amount
+msgid "ITBIS Held Amount"
+msgstr "ITBIS Retenido"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_bill_itbis_proportional_amount
+msgid "ITBIS Proportional Amount"
+msgstr "ITBIS Sujeto a Proporcionalidad (Art. 349)"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_bill_itbis_expense_amount
+msgid "ITBIS Expense Amount"
+msgstr "ITBIS llevado al Costo"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_bill_itbis_ahead_amount
+msgid "ITBIS Ahead Amount"
+msgstr "ITBIS por Adelantar"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_bill_itbis_purchases_amount
+msgid "ITBIS Purchases Amount"
+msgstr "ITBIS percibido en compras"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_bill_isr_type
+msgid "ISR Type"
+msgstr "Tipo de retención en ISR"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_bill_isr_held_amount
+msgid "ISR Held Amount"
+msgstr "Monto Retención Renta"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_bill_isr_purchases_amount
+msgid "ISR Held Amount"
+msgstr "ISR percibido en compras"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_bill_other_taxes_amount
+msgid "Bill Other Taxes Amount"
+msgstr "Otros Impuestos/Tasas"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_bill_legaltip_amount
+msgid "Bill Legal Tip Amount"
+msgstr "Monto Propina Legal"
