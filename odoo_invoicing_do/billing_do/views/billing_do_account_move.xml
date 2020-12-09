@@ -5,7 +5,7 @@
         <field name="model">account.move</field>
         <field name="arch" type="xml">
             <search>
-                <field name="invoice_date" string="Date" filter_domain="[('invoice_date','>=', self)]" />
+                <field name="report_invoice_date_month" string="Report Date" filter_domain="[('report_invoice_date_month', '=', self)]" />
             </search>
         </field>
     </record>
@@ -76,7 +76,7 @@
         <field name="name">billing.do.account.dgii.606.tree</field>
         <field name="model">account.move</field>
         <field name="arch" type="xml">
-            <tree default_order="invoice_date desc" create="false" import="false">
+            <tree default_order="report_bill_date_month desc" create="false" import="false">
                 <field name="state" invisible="1" />
                 <field name="report_vat" />
                 <field name="report_vat_type" />

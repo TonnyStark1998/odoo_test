@@ -58,8 +58,10 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_bill_legaltip_amount = fields.Monetary(string='Bill Legal Tip Amount')
 
     # Fields for DGII report 607
-    report_invoice_date = fields.Char(string='Invoice Date Month',
+    report_invoice_date = fields.Date(string='Invoice Date',
                                         compute='_compute_report_invoice_date')
+    report_invoice_date_month = fields.Char(string='Invoice Date Month',
+                                                compute='_compute_report_invoice_date')
     # Fields for DGII report 607 (NOT IN USE RIGHT NOW!)
     report_invoice_held_date = fields.Char(string='Invoice Held Date')
     report_invoice_itbis_held_by_thirdparty_amount = fields.Monetary(string='ITBIS Held By ThirdParty Amount', 
@@ -98,10 +100,11 @@ class BillingDoAccountMoveDgiiReport(models.Model):
             if move.report_bill_date:
                 bill_date_month = move.report_bill_date.strftime('%Y%m')
                 bill_date_day = move.report_bill_date.strftime('%d')
-                invoice_date = move.report_bill_date.strftime('%Y%m%d')
+                invoice_date = move.report_bill_date
             move.report_bill_date_month = bill_date_month
             move.report_bill_date_day = bill_date_day
             move.report_invoice_date = invoice_date
+            move.report_invoice_date_month = invoice_date.strftime('%Y%m')
 
     @api.depends('partner_id.tax_contributor_type')
     def _compute_report_vat_type(self):
