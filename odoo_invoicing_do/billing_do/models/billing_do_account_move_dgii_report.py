@@ -76,10 +76,16 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     @api.depends('date')
     def _compute_report_invoice_date(self):
         for move in self:
+            bill_date_month = ''
+            bill_date_day = ''
+            invoice_date = ''
             if move.date and move.type not in ['entry']:
-                move.report_bill_date_month = move.date.strftime('%Y%m')
-                move.report_bill_date_day = move.date.strftime('%d')
-                move.report_invoice_date = move.date.strftime('%Y%m%d')
+                bill_date_month = move.date.strftime('%Y%m')
+                bill_date_day = move.date.strftime('%d')
+                invoice_date = move.date.strftime('%Y%m%d')
+            move.report_bill_date_month = bill_date_month
+            move.report_bill_date_day = bill_date_day
+            move.report_invoice_date = invoice_date
 
     @api.depends('partner_id.tax_contributor_type')
     def _compute_report_vat_type(self):
