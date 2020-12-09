@@ -41,13 +41,16 @@ class BillingDoAccountMoveDgiiReport(models.Model):
                                                 compute='_compute_report_bill_tax_amount')
     # Fields for DGII report 606 (NOT IN USE RIGHT NOW!)
     report_bill_itbis_held_amount = fields.Monetary(string='ITBIS Held Amount',
-                                                        compute='_compute_report_bill_itbis_held_amount')
+                                                        compute='_compute_report_itbis_held_amount',
+                                                        default=0.0)
     report_bill_itbis_proportional_amount = fields.Monetary(string='ITBIS Proportional Amount')
     report_bill_itbis_expense_amount = fields.Monetary(string='ITBIS Expense Amount')
     report_bill_itbis_ahead_amount = fields.Monetary(string='ITBIS Ahead Amount')
     report_bill_itbis_purchases_amount = fields.Monetary(string='ITBIS Purchases Amount')
     report_bill_isr_type = fields.Char(string='ISR Type')
-    report_bill_isr_held_amount = fields.Monetary(string='ISR Held Amount')
+    report_bill_isr_held_amount = fields.Monetary(string='ISR Held Amount',
+                                                        compute='_compute_report_itbis_held_amount',
+                                                        default=0.0)
     report_bill_isr_purchases_amount = fields.Monetary(string='ISR Purchases Amount')
     report_bill_other_taxes_amount = fields.Monetary(string='Bill Other Taxes Amount')
     report_bill_legaltip_amount = fields.Monetary(string='Bill Legal Tip Amount')
@@ -58,9 +61,12 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     # Fields for DGII report 607 (NOT IN USE RIGHT NOW!)
     report_invoice_held_date = fields.Char(string='Invoice Held Date')
     report_invoice_itbis_held_by_thirdparty_amount = fields.Monetary(string='ITBIS Held By ThirdParty Amount', 
-                                                                        default=0.0)
+                                                                        default=0.0,
+                                                                        compute='_compute_report_itbis_held_amount')
     report_invoice_itbis_perceived_amount = fields.Monetary(string='ITBIS Perceived Amount')
-    report_invoice_isr_held_by_thirdparty_amount = fields.Monetary(string='ISR Held By ThirdParty Amount')
+    report_invoice_isr_held_by_thirdparty_amount = fields.Monetary(string='ISR Held By ThirdParty Amount',
+                                                                    default=0.0,
+                                                                    compute='_compute_report_itbis_held_amount')
     report_invoice_isr_perceived_amount = fields.Monetary(string='ISR Perceived Amount')
     report_invoice_other_taxes_amount = fields.Monetary(string='Invoice Other Taxes Amount')
     report_invoice_legaltip_amount = fields.Monetary(string='Invoice Legal Tip Amount')
@@ -98,10 +104,10 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     @api.depends('invoice_line_ids')
     def _compute_service_consumable_amount(self):
         for move in self:
+            service_amount = 0
+            consumable_amount = 0
+            itbis_tax_amount = 0
             if move.invoice_line_ids:
-                service_amount = 0
-                consumable_amount = 0
-                itbis_tax_amount = 0
                 for invoice_line_id in move.invoice_line_ids:
                     unit_price = invoice_line_id.price_subtotal
                     if invoice_line_id.currency_id:
@@ -110,9 +116,9 @@ class BillingDoAccountMoveDgiiReport(models.Model):
                         consumable_amount += unit_price
                     elif invoice_line_id.product_id.type in ['service']:
                         service_amount += unit_price
-                move.report_bill_service_amount = service_amount
-                move.report_bill_consumable_amount = consumable_amount
-                move.report_bill_total_amount = move.report_bill_service_amount + move.report_bill_consumable_amount
+            move.report_bill_service_amount = service_amount
+            move.report_bill_consumable_amount = consumable_amount
+            move.report_bill_total_amount = service_amount + consumable_amount
 
     @api.depends('line_ids')
     def _compute_report_bill_tax_amount(self):
@@ -169,7 +175,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
                 move.report_move_reversed = ''
     
     @api.depends('line_ids')
-    def _compute_report_bill_itbis_held_amount(self):
+    def _compute_report_itbis_held_amount(self):
         all_payments = self.env['account.payment'].search(args=[])
         for move in self:
             bill_itbis_held_amount = invoice_itbis_held = bill_isr_held = invoice_isr_held = 0

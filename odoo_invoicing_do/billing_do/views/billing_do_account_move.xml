@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record model="ir.ui.view" id="billing_do_view_dgii_607_search">
+        <field name="name">billing.do.account.dgii.607.search</field>
+        <field name="model">account.move</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="invoice_date" string="Date" filter_domain="[('invoice_date','>=', self)]" />
+            </search>
+        </field>
+    </record>
     <record model="ir.ui.view" id="billing_do_view_move_form">
         <field name="name">billing.do.account.move.form</field>
         <field name="model">account.move</field>
@@ -133,6 +142,7 @@
         <field name="res_model">account.move</field>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="billing_do_view_dgii_606_tree" />
+        <field name="search_view_id" ref="billing_do_view_dgii_607_search"/>
         <field name="domain">['&amp;', ('type','in',['in_invoice', 'in_refund']), '&amp;', ('state','in',['posted']), ('report_move','!=','')]</field>
     </record>
     <record model="ir.actions.act_window" id="dgii_reports_format_607">
@@ -140,6 +150,7 @@
         <field name="res_model">account.move</field>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="billing_do_view_dgii_607_tree" />
+        <field name="search_view_id" ref="billing_do_view_dgii_607_search"/>
         <field name="domain">['&amp;', ('type','in',['out_invoice','out_refund']), ('state', 'in', ['posted'])]</field>
     </record>
     <menuitem id="main_menu_dgii_reports" name="DGII Reports" parent="account_accountant.menu_accounting" sequence="30" />
