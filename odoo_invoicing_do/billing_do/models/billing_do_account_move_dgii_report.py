@@ -16,7 +16,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_isc_amount = fields.Monetary(string='ISC Amount')
 
     # Fields for DGII report 606
-    report_bill_date = fields.Date(string='',
+    report_bill_date = fields.Date(string='Bill Date',
                                     compute='_compute_report_bill_date')
     report_bill_date_month = fields.Char(string='Bill Date Month',
                                             compute='_compute_report_invoice_date')
