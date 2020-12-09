@@ -221,7 +221,7 @@ msgid "Amount Due"
 msgstr "Monto Adeudado"
 
 ##################################
-#   DGII 606/607 Models Fields   #
+#   DGII 606 Models Fields   #
 ##################################
 
 #. module: billing_do
@@ -338,3 +338,82 @@ msgstr "Otros Impuestos/Tasas"
 #: model:ir.model.fields,field_description:billing_do.field_account_move__report_bill_legaltip_amount
 msgid "Bill Legal Tip Amount"
 msgstr "Monto Propina Legal"
+
+##################################
+#   DGII 607 Models Fields   #
+##################################
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_date
+msgid "Invoice Date Month"
+msgstr "Fecha Comprobante"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_held_date
+msgid "Invoice Held Date"
+msgstr "Fecha de Retención"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_itbis_held_by_thirdparty_amount
+msgid "ITBIS Held By ThirdParty Amount"
+msgstr "ITBIS Retenido por Terceros"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_itbis_perceived_amount
+msgid "ITBIS Perceived Amount"
+msgstr "ITBIS Percibido"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_isr_held_by_thirdparty_amount
+msgid "ISR Held By ThirdParty Amount"
+msgstr "Retención Renta Por Terceros"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_isr_perceived_amount
+msgid "ISR Perceived Amount"
+msgstr "ISR Percibido"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_other_taxes_amount
+msgid "Invoice Other Taxes Amount"
+msgstr "Otros Impuestos/Tasas"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_legaltip_amount
+msgid "Invoice Legal Tip Amount"
+msgstr "Monto Propina Legal"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_cash_amount
+msgid "Cash Amount"
+msgstr "Efectivo"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_cash_amount
+msgid "Bank Amount"
+msgstr "Cheque/Transferencia/Depósito"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_credit_debit_card_amount
+msgid "Credit/Debit Card Amount"
+msgstr "Tarjeta Débito/Crédito"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_credit_sale_amount
+msgid "Credit Sale Amount"
+msgstr "Venta a Crédito"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_gift_amount
+msgid "Gift Certificates Amount"
+msgstr "Bonos o Certificados de Regalo"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_permute_amount
+msgid "Permute Amount"
+msgstr "Permuta"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_other_sale_way_amount
+msgid "Other Sale Way Amount"
+msgstr "Otras Formas de Ventas"
