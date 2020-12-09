@@ -389,7 +389,7 @@ msgid "Cash Amount"
 msgstr "Efectivo"
 
 #. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_cash_amount
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_bank_amount
 msgid "Bank Amount"
 msgstr "Cheque/Transferencia/Depósito"
 
