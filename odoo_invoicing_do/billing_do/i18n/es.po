@@ -339,13 +339,18 @@ msgstr "Otros Impuestos/Tasas"
 msgid "Bill Legal Tip Amount"
 msgstr "Monto Propina Legal"
 
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_dgii_607_search
+msgid "Report Date"
+msgstr "Fecha para reporte"
+
 ##################################
 #   DGII 607 Models Fields   #
 ##################################
 
 #. module: billing_do
 #: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_date
-msgid "Invoice Date Month"
+msgid "Invoice Date"
 msgstr "Fecha Comprobante"
 
 #. module: billing_do
@@ -389,7 +394,7 @@ msgid "Cash Amount"
 msgstr "Efectivo"
 
 #. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_cash_amount
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_bank_amount
 msgid "Bank Amount"
 msgstr "Cheque/Transferencia/Depósito"
 
