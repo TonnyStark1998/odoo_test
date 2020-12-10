@@ -19,9 +19,6 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_isc_amount = fields.Monetary(string='ISC Amount')
 
     # Fields for DGII report 606
-    report_bill_date = fields.Date(string='Bill Date',
-                                    compute='_compute_report_bill_date',
-                                    store=True)
     report_bill_date_month = fields.Char(string='Bill Date Month',
                                             compute='_compute_report_invoice_date',
                                             store=True)
@@ -102,27 +99,21 @@ class BillingDoAccountMoveDgiiReport(models.Model):
 
     # Account Move DGII Reports - Compute Field's Functions
     @api.depends('date')
-    def _compute_report_bill_date(self):
-        for move in self:
-            bill_date = ''
-            if move.date and move.type not in ['entry']:
-                bill_date = move.date
-            move.report_bill_date = bill_date
-            
-    @api.depends('report_bill_date')
     def _compute_report_invoice_date(self):
         for move in self:
             bill_date_month = ''
             bill_date_day = ''
             invoice_date = ''
-            if move.report_bill_date:
-                bill_date_month = move.report_bill_date.strftime('%Y%m')
-                bill_date_day = move.report_bill_date.strftime('%d')
-                invoice_date = move.report_bill_date
+            invoice_date_month = ''
+            if move.date and move.type not in ['entry']:
+                bill_date_month = move.date.strftime('%Y%m')
+                bill_date_day = move.date.strftime('%d')
+                invoice_date = move.date
+                invoice_date_month = move.date.strftime('%Y%m')
             move.report_bill_date_month = bill_date_month
             move.report_bill_date_day = bill_date_day
             move.report_invoice_date = invoice_date
-            move.report_invoice_date_month = invoice_date.strftime('%Y%m')
+            move.report_invoice_date_month = invoice_date_month
 
     @api.depends('partner_id.tax_contributor_type')
     def _compute_report_vat_type(self):
