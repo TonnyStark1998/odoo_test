@@ -225,6 +225,12 @@ msgstr "Monto Adeudado"
 ##################################
 
 #. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_dgii_607_tree
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_dgii_606_tree
+msgid "NCF"
+msgstr "NCF"
+
+#. module: billing_do
 #: model:ir.model.fields,field_description:billing_do.field_account_move__report_vat
 msgid "Tax Contributor ID"
 msgstr "RNC"
@@ -341,6 +347,7 @@ msgstr "Monto Propina Legal"
 
 #. module: billing_do
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_dgii_607_search
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_dgii_606_search
 msgid "Report Date"
 msgstr "Fecha para reporte"
 
@@ -349,8 +356,8 @@ msgstr "Fecha para reporte"
 ##################################
 
 #. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_date
-msgid "Invoice Date"
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_date_month
+msgid "Invoice Date Month"
 msgstr "Fecha Comprobante"
 
 #. module: billing_do

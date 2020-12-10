@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record model="ir.ui.view" id="billing_do_view_dgii_606_search">
+        <field name="name">billing.do.account.dgii.606.search</field>
+        <field name="model">account.move</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="report_bill_payment_date_month" string="Report Date" filter_domain="['|', ('report_bill_date_month', '=', self), ('report_bill_payment_date_month', '=', self)]" />
+            </search>
+        </field>
+    </record>
     <record model="ir.ui.view" id="billing_do_view_dgii_607_search">
         <field name="name">billing.do.account.dgii.607.search</field>
         <field name="model">account.move</field>
         <field name="arch" type="xml">
             <search>
-                <field name="report_invoice_date_month" string="Report Date" filter_domain="[('report_invoice_date_month', '=', self)]" />
+                <field name="report_invoice_date_month" string="Report Date" filter_domain="['|', ('report_invoice_date_month', 'like', self), ('report_invoice_held_date', 'like', self)]" />
             </search>
         </field>
     </record>
@@ -120,14 +129,14 @@
         <field name="name">billing.do.account.dgii.607.tree</field>
         <field name="model">account.move</field>
         <field name="arch" type="xml">
-            <tree default_order="report_invoice_date desc" create="false" import="false">
+            <tree default_order="report_invoice_date_month desc" create="false" import="false">
                 <field name="state" invisible="1" />
                 <field name="report_vat" />
                 <field name="report_vat_type" />
                 <field name="report_move" />
                 <field name="report_move_reversed" />
                 <field name="income_type" />
-                <field name="report_invoice_date" />
+                <field name="report_invoice_date_month" />
                 <field name="report_invoice_held_date" />
                 <field name="amount_untaxed_signed" />
                 <field name="amount_tax_signed" />
@@ -153,7 +162,7 @@
         <field name="res_model">account.move</field>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="billing_do_view_dgii_606_tree" />
-        <field name="search_view_id" ref="billing_do_view_dgii_607_search"/>
+        <field name="search_view_id" ref="billing_do_view_dgii_606_search"/>
         <field name="domain">['&amp;', ('type','in',['in_invoice', 'in_refund']), '&amp;', ('state','in',['posted']), ('report_move','!=','')]</field>
     </record>
     <record model="ir.actions.act_window" id="dgii_reports_format_607">
