@@ -81,7 +81,7 @@
                 <field name="report_vat" />
                 <field name="report_vat_type" />
                 <field name="expense_type" />
-                <field name="name" />
+                <field name="report_move" />
                 <field name="report_move_reversed" />
                 <field name="report_bill_date_month" />
                 <field name="report_bill_date_day" />
@@ -109,14 +109,14 @@
         <field name="name">billing.do.account.dgii.607.tree</field>
         <field name="model">account.move</field>
         <field name="arch" type="xml">
-            <tree default_order="report_invoice_date desc" create="false" import="false">
+            <tree default_order="report_invoice_date_month desc" create="false" import="false">
                 <field name="state" invisible="1" />
                 <field name="report_vat" />
                 <field name="report_vat_type" />
-                <field name="name" />
+                <field name="report_move" />
                 <field name="report_move_reversed" />
                 <field name="income_type" />
-                <field name="report_invoice_date" />
+                <field name="report_invoice_date_month" />
                 <field name="report_invoice_held_date" />
                 <field name="amount_untaxed_signed" />
                 <field name="amount_tax_signed" />
