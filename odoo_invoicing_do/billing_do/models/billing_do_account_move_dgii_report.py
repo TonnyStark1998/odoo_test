@@ -20,11 +20,13 @@ class BillingDoAccountMoveDgiiReport(models.Model):
 
     # Fields for DGII report 606
     report_bill_date_month = fields.Char(string='Bill Date Month',
-                                            compute='_compute_report_invoice_date')
+                                            compute='_compute_report_invoice_date',
+                                            store=True)
     report_bill_date_day = fields.Char(string='Bill Date Day',
                                         compute='_compute_report_invoice_date')
     report_bill_payment_date_month = fields.Char(string='Payment Date Month',
-                                                    compute='_compute_report_bill_payment_date')
+                                                    compute='_compute_report_bill_payment_date',
+                                                    store=True)
     report_bill_payment_date_day = fields.Char(string='Payment Date Day',
                                                 compute='_compute_report_bill_payment_date')
     report_bill_service_amount = fields.Monetary(string='Service Amount', 
@@ -60,10 +62,12 @@ class BillingDoAccountMoveDgiiReport(models.Model):
 
     # Fields for DGII report 607
     report_invoice_date_month = fields.Char(string='Invoice Date Month',
-                                                compute='_compute_report_invoice_date')
+                                                compute='_compute_report_invoice_date',
+                                                store=True)
     # Fields for DGII report 607 (NOT IN USE RIGHT NOW!)
     report_invoice_held_date = fields.Char(string='Invoice Held Date',
-                                            compute='_compute_report_invoice_held_date')
+                                            compute='_compute_report_invoice_held_date',
+                                            store=True)
     report_invoice_itbis_held_by_thirdparty_amount = fields.Monetary(string='ITBIS Held By ThirdParty Amount', 
                                                                         default=0.0,
                                                                         compute='_compute_report_itbis_held_amount')

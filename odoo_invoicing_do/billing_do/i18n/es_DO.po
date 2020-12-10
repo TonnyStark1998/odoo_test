@@ -347,6 +347,7 @@ msgstr "Monto Propina Legal"
 
 #. module: billing_do
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_dgii_607_search
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_dgii_606_search
 msgid "Report Date"
 msgstr "Fecha para reporte"
 
