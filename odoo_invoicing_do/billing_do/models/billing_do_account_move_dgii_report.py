@@ -6,15 +6,14 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     _inherit = "account.move"
 
     # Common fields between DGII reports
-    report_vat = fields.Char(related='partner_id.vat', string='Tax Contributor ID')
+    report_vat = fields.Char(related='partner_id.vat', 
+                                string='Tax Contributor ID')
     report_vat_type = fields.Char(string='Tax Contributor Type',
                                     compute='_compute_report_vat_type',
                                     store=True)
-    report_move = fields.Char(string='Tax Receipt Number',
-                                compute='_compute_move',
-                                store=True)
     report_move_reversed = fields.Char(string='Tax Receipt Reversed',
-                                        compute='_compute_move',
+                                        related='reversal_move_id',
+                                        # compute='_compute_move',
                                         store=True)
     report_isc_amount = fields.Monetary(string='ISC Amount')
 
@@ -185,17 +184,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
             else:
                 move.report_bill_payment_date_month = ''
                 move.report_bill_payment_date_day = ''
-    
-    @api.depends('name', 'reversal_move_id')
-    def _compute_move(self):
-        for move in self:
-            if move.reversal_move_id:
-                move.report_move = move.reversal_move_id.name
-                move.report_move_reversed = move.ncf
-            else:
-                move.report_move = move.ncf
-                move.report_move_reversed = ''
-    
+
     @api.depends('line_ids')
     def _compute_report_itbis_held_amount(self):
         all_payments = self.env['account.payment'].search(args=[])

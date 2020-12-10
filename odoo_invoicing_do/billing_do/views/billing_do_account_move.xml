@@ -81,7 +81,7 @@
                 <field name="report_vat" />
                 <field name="report_vat_type" />
                 <field name="expense_type" />
-                <field name="report_move" />
+                <field name="name" />
                 <field name="report_move_reversed" />
                 <field name="report_bill_date_month" />
                 <field name="report_bill_date_day" />
@@ -113,7 +113,7 @@
                 <field name="state" invisible="1" />
                 <field name="report_vat" />
                 <field name="report_vat_type" />
-                <field name="report_move" />
+                <field name="name" />
                 <field name="report_move_reversed" />
                 <field name="income_type" />
                 <field name="report_invoice_date" />
