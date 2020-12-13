@@ -351,6 +351,16 @@ msgstr "Monto Propina Legal"
 msgid "Report Date"
 msgstr "Fecha para reporte"
 
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__report_bill_payment_type
+msgid "Payment Type"
+msgstr "Forma de Pago"
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__account_journal__type__credit_debit_card
+msgid "Credit/Debit Card"
+msgstr "Tarjeta de Crédito/Débito"
+
 ##################################
 #   DGII 607 Models Fields   #
 ##################################

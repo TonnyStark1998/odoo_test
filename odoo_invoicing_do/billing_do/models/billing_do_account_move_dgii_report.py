@@ -1,4 +1,5 @@
 import logging as log
+import datetime as datetime
 from odoo import models, fields, api, exceptions
 from . import billing_do_utils as doutils
 
@@ -25,10 +26,10 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_bill_date_day = fields.Char(string='Bill Date Day',
                                         compute='_compute_report_invoice_date')
     report_bill_payment_date_month = fields.Char(string='Payment Date Month',
-                                                    compute='_compute_report_bill_payment_date',
+                                                    compute='_compute_report_itbis_held_amount',
                                                     store=True)
     report_bill_payment_date_day = fields.Char(string='Payment Date Day',
-                                                compute='_compute_report_bill_payment_date')
+                                                compute='_compute_report_itbis_held_amount')
     report_bill_service_amount = fields.Monetary(string='Service Amount', 
                                                     default=0.0, 
                                                     currency_field='company_currency_id',
@@ -59,6 +60,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_bill_isr_purchases_amount = fields.Monetary(string='ISR Purchases Amount')
     report_bill_other_taxes_amount = fields.Monetary(string='Bill Other Taxes Amount')
     report_bill_legaltip_amount = fields.Monetary(string='Bill Legal Tip Amount')
+    report_bill_payment_type = fields.Char(string='Payment Type')
 
     # Fields for DGII report 607
     report_invoice_date_month = fields.Char(string='Invoice Date Month',
@@ -66,7 +68,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
                                                 store=True)
     # Fields for DGII report 607 (NOT IN USE RIGHT NOW!)
     report_invoice_held_date = fields.Char(string='Invoice Held Date',
-                                            compute='_compute_report_invoice_held_date',
+                                            compute='_compute_report_itbis_held_amount',
                                             store=True)
     report_invoice_itbis_held_by_thirdparty_amount = fields.Monetary(string='ITBIS Held By ThirdParty Amount', 
                                                                         default=0.0,
@@ -84,7 +86,14 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_invoice_credit_sale_amount = fields.Monetary(string='Credit Sale Amount')
     report_invoice_gift_amount = fields.Monetary(string='Gift Certificates Amount')
     report_invoice_permute_amount = fields.Monetary(string='Permute Amount')
-    report_invoice_other_sale_way_amount = fields.Monetary(string='Other Sale Way Amount')
+    report_invoice_other_sale_way_amount = fields.Monetary(selection=['01', '01 - EFECTIVO',
+                                                                        '02', '02 - CHEQUES/TRANSFERENCIAS/DEPÓSITO',
+                                                                        '03', '03 - TARJETA CRÉDITO/DÉBITO',
+                                                                        '04', '04 - COMPRA A CREDITO',
+                                                                        '05', '05 -  PERMUTA',
+                                                                        '06', '06 - NOTA DE CREDITO',
+                                                                        '07', '07 - MIXTO'],
+                                                            string='Other Sale Way Amount')
 
     # Account Move DGII Reports - Compute Field's Functions
     @api.depends('name')
@@ -179,34 +188,24 @@ class BillingDoAccountMoveDgiiReport(models.Model):
             if not move.report_bill_tax_amount:
                 move.report_bill_tax_amount = 0.0
 
-    @api.depends('amount_residual', 'report_bill_itbis_held_amount')
-    def _compute_report_bill_payment_date(self):
-        for move in self:
-            if not move.amount_residual > 0 and move.report_bill_itbis_held_amount > 0:
-                _last_payment_date = move.get_last_payment_date()
-                move.report_bill_payment_date_month = '' if not _last_payment_date else _last_payment_date.strftime('%Y%m')
-                move.report_bill_payment_date_day = '' if not _last_payment_date else _last_payment_date.strftime('%d')
-            else:
-                move.report_bill_payment_date_month = ''
-                move.report_bill_payment_date_day = ''
-    
-    @api.depends('invoice_payment_state')
-    def _compute_report_invoice_held_date(self):
-        for move in self:
-            _last_payment_date = ''
-            if move.invoice_payment_state in ['paid'] and (move.report_invoice_isr_held_by_thirdparty_amount > 0 or move.report_invoice_itbis_held_by_thirdparty_amount > 0):
-                _last_payment_date = move.get_last_payment_date()
-            move.report_invoice_held_date = _last_payment_date if not _last_payment_date else _last_payment_date.strftime('%Y%m%d')
-
-    @api.depends('line_ids')
+    @api.depends('line_ids', 'invoice_payment_state')
     def _compute_report_itbis_held_amount(self):
         all_payments = self.env['account.payment'].search(args=[])
         for move in self:
+            _last_payment_date = False
+            _payment_type = False
             bill_itbis_held_amount = invoice_itbis_held = bill_isr_held = invoice_isr_held = 0
             reconciled_vals = move._get_reconciled_info_JSON_values()
             move_payments_ids = [payment['account_payment_id'] for payment in reconciled_vals]
             move_payments = all_payments.filtered(lambda payment: payment.id in move_payments_ids)
+
             for move_payment in move_payments:
+                if not _last_payment_date or move_payment.date > _last_payment_date:
+                    _last_payment_date = move_payment.date
+
+                if not _payment_type:
+                    _payment_type = move._get_payment_type(move_payment)
+
                 for line in move_payment.move_line_ids:
                     if line.account_id.withholding_tax_type in ["RET-ITBIS-606"]:
                         bill_itbis_held_amount = line.credit + line.debit
@@ -216,6 +215,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
                         bill_isr_held = line.credit + line.debit
                     elif line.account_id.withholding_tax_type in ["RET-ISR-607"]:
                         invoice_isr_held = line.credit + line.debit
+
             for line in move.line_ids:
                 if line.account_id.withholding_tax_type in ["RET-ITBIS-606"]:
                     bill_itbis_held_amount = line.credit + line.debit
@@ -225,7 +225,42 @@ class BillingDoAccountMoveDgiiReport(models.Model):
                     bill_isr_held = line.credit + line.debit
                 elif line.account_id.withholding_tax_type in ["RET-ISR-607"]:
                     invoice_isr_held = line.credit + line.debit
+
+            if move.invoice_payment_state in ['paid'] and _last_payment_date \
+                    and _last_payment_date.month <= move.date.month \
+                    and _last_payment_date.year <= move.date.year:
+
+                if invoice_isr_held > 0 or invoice_itbis_held > 0:
+                    move.report_invoice_held_date = \
+                        _last_payment_date if not _last_payment_date else _last_payment_date.strftime('%Y%m%d')
+
+                if bill_isr_held or bill_itbis_held_amount > 0:
+                    move.report_bill_payment_date_month = \
+                        _last_payment_date if not _last_payment_date else _last_payment_date.strftime('%Y%m')
+                    move.report_bill_payment_date_day = \
+                        _last_payment_date if not _last_payment_date else _last_payment_date.strftime('%d')
+
+            else:
+                move.report_invoice_held_date = ''
+                move.report_bill_payment_date_month = ''
+                move.report_bill_payment_date_day = ''
+
             move.report_bill_itbis_held_amount = bill_itbis_held_amount
-            move.report_invoice_itbis_held_by_thirdparty_amount = invoice_itbis_held
             move.report_bill_isr_held_amount = bill_isr_held
-            move.report_invoice_isr_held_by_thirdparty_amount = invoice_isr_held
+            
+            if _last_payment_date and _last_payment_date.month <= move.date.month and _last_payment_date.year <= move.date.year:
+                move.report_invoice_itbis_held_by_thirdparty_amount = invoice_itbis_held
+                move.report_invoice_isr_held_by_thirdparty_amount = invoice_isr_held
+
+                if not _payment_type:
+                    move.report_invoice_other_sale_way_amount = '04'
+                else:
+                    move.report_invoice_other_sale_way_amount = _payment_type
+    
+    def _get_payment_type(self, payment):
+        if payment.journal_id.type in ['cash']:
+            return '01'
+        elif payment.journal_id.type in ['bank']:
+            return '02'
+        elif payment.journal_id.type in ['credit_debit_card']:
+            return '03'
