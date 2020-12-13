@@ -209,7 +209,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     def _compute_report_held_values(self):
         all_payments = self.env['account.payment'].search(args=[])
         for move in self:
-            _last_payment_date = False
+            _last_payment_date = datetime.date.min
             _payment_type = False
 
             cash_amount = 0.0
@@ -221,12 +221,12 @@ class BillingDoAccountMoveDgiiReport(models.Model):
             reconciled_vals = move._get_reconciled_info_JSON_values()
             move_payments_ids = [payment['account_payment_id'] for payment in reconciled_vals]
             move_payments = all_payments.filtered(lambda payment: payment.id in move_payments_ids)
-            
-            if not _last_payment_date:
-                _last_payment_date = move._get_last_payment_date()
 
             payment_amount = 0.0
             for move_payment in move_payments:
+                if move_payment.payment_date > _last_payment_date:
+                    _last_payment_date = move_payment.payment_date
+
                 _payment_type = move._get_payment_type(move_payment)
                 payment_amount += move_payment.amount
 
@@ -259,7 +259,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
                 elif line.account_id.withholding_tax_type in ["RET-ISR-607"]:
                     invoice_isr_held = line.credit + line.debit
 
-            if move.invoice_payment_state in ['paid'] and _last_payment_date \
+            if move.invoice_payment_state in ['paid'] and _last_payment_date != datetime.date.min \
                     and _last_payment_date.month <= move.date.month \
                     and _last_payment_date.year <= move.date.year:
 
