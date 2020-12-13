@@ -122,6 +122,7 @@
                 <field name="report_isc_amount" />
                 <field name="report_bill_other_taxes_amount" />
                 <field name="report_bill_legaltip_amount" />
+                <field name="report_bill_payment_type" />
             </tree>
         </field>
     </record>
