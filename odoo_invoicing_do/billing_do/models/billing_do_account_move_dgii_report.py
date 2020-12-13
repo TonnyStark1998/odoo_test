@@ -300,6 +300,8 @@ class BillingDoAccountMoveDgiiReport(models.Model):
                 else:
                     move.report_bill_payment_type = _payment_type
             else:
+                move.report_invoice_itbis_held_by_thirdparty_amount = ''
+                move.report_invoice_isr_held_by_thirdparty_amount = ''
                 move.report_bill_payment_type = ''
     
     def _get_payment_type(self, payment):
