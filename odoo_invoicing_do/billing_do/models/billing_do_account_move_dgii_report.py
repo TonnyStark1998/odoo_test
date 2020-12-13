@@ -299,6 +299,8 @@ class BillingDoAccountMoveDgiiReport(models.Model):
                     move.report_bill_payment_type = '04'
                 else:
                     move.report_bill_payment_type = _payment_type
+            else:
+                move.report_bill_payment_type = ''
     
     def _get_payment_type(self, payment):
         if payment.journal_id.type in ['cash']:
