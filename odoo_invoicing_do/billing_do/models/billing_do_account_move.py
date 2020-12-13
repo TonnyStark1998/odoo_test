@@ -148,7 +148,7 @@ class BillingDoAccountMove(models.Model):
                             }
                         }
     
-    def get_last_payment_date(self):
+    def _get_last_payment_date(self):
         self.ensure_one()
         pay_term_line_ids = self.line_ids.filtered(lambda line: line.account_id.user_type_id.type in ('receivable', 'payable'))
         partials = pay_term_line_ids.mapped('matched_debit_ids') + pay_term_line_ids.mapped('matched_credit_ids')
