@@ -271,6 +271,9 @@ class BillingDoAccountMoveDgiiReport(models.Model):
             move.report_bill_itbis_held_amount = ''
             move.report_bill_isr_held_amount = ''
 
+            move.report_invoice_itbis_held_by_thirdparty_amount = ''
+            move.report_invoice_isr_held_by_thirdparty_amount = ''
+
             if move.invoice_payment_state in ['paid']:
                 move.report_bill_payment_type = _payment_type
                 if _last_payment_date != datetime.date.min:
