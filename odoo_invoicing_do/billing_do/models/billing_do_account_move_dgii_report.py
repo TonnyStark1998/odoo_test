@@ -259,38 +259,40 @@ class BillingDoAccountMoveDgiiReport(models.Model):
                 elif line.account_id.withholding_tax_type in ["RET-ISR-607"]:
                     invoice_isr_held = line.credit + line.debit
 
-            if move.invoice_payment_state in ['paid'] and _last_payment_date != datetime.date.min \
-                    and _last_payment_date.month <= move.date.month \
-                    and _last_payment_date.year <= move.date.year:
+            move.report_invoice_held_date = ''
+            move.report_bill_payment_date_month = ''
+            move.report_bill_payment_date_day = ''
 
+            if _last_payment_date != datetime.date.min:
                 if invoice_isr_held > 0 or invoice_itbis_held > 0:
                     move.report_invoice_held_date = \
                         _last_payment_date if not _last_payment_date else _last_payment_date.strftime('%Y%m%d')
-                else:
-                    move.report_invoice_held_date = ''
 
-                if bill_isr_held or bill_itbis_held_amount > 0:
+                if bill_isr_held > 0 or bill_itbis_held_amount > 0:
                     move.report_bill_payment_date_month = \
                         _last_payment_date if not _last_payment_date else _last_payment_date.strftime('%Y%m')
                     move.report_bill_payment_date_day = \
                         _last_payment_date if not _last_payment_date else _last_payment_date.strftime('%d')
-                else:
-                    move.report_bill_payment_date_month = ''
-                    move.report_bill_payment_date_day = ''
+            
+            move.report_bill_itbis_held_amount = ''
+            move.report_bill_isr_held_amount = ''
 
-            else:
-                move.report_invoice_held_date = ''
-                move.report_bill_payment_date_month = ''
-                move.report_bill_payment_date_day = ''
+            if move.invoice_payment_state in ['paid'] and _last_payment_date != datetime.date.min \
+                    and _last_payment_date.month <= move.date.month \
+                    and _last_payment_date.year <= move.date.year:
 
-            move.report_bill_itbis_held_amount = bill_itbis_held_amount
-            move.report_bill_isr_held_amount = bill_isr_held
+                move.report_bill_itbis_held_amount = bill_itbis_held_amount
+                move.report_bill_isr_held_amount = bill_isr_held                
 
             move.report_invoice_cash_amount = cash_amount
             move.report_invoice_bank_amount = bank_amount
             move.report_invoice_credit_debit_card_amount = credit_debit_card_amount
             move.report_invoice_credit_sale_amount = credit_sale_amount
             
+            move.report_invoice_itbis_held_by_thirdparty_amount = ''
+            move.report_invoice_isr_held_by_thirdparty_amount = ''
+            move.report_bill_payment_type = ''
+
             if _last_payment_date and _last_payment_date.month <= move.date.month and _last_payment_date.year <= move.date.year:
                 move.report_invoice_itbis_held_by_thirdparty_amount = invoice_itbis_held
                 move.report_invoice_isr_held_by_thirdparty_amount = invoice_isr_held
@@ -299,11 +301,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
                     move.report_bill_payment_type = '04'
                 else:
                     move.report_bill_payment_type = _payment_type
-            else:
-                move.report_invoice_itbis_held_by_thirdparty_amount = ''
-                move.report_invoice_isr_held_by_thirdparty_amount = ''
-                move.report_bill_payment_type = ''
-    
+
     def _get_payment_type(self, payment):
         if payment.journal_id.type in ['cash']:
             return '01'
