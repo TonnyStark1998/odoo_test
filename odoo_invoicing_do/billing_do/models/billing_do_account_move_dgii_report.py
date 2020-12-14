@@ -60,13 +60,14 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_bill_isr_purchases_amount = fields.Monetary(string='ISR Purchases Amount')
     report_bill_other_taxes_amount = fields.Monetary(string='Bill Other Taxes Amount')
     report_bill_legaltip_amount = fields.Monetary(string='Bill Legal Tip Amount')
-    report_bill_payment_type = fields.Char(selection=['01', '01 - EFECTIVO',
-                                                        '02', '02 - CHEQUES/TRANSFERENCIAS/DEPÓSITO',
-                                                        '03', '03 - TARJETA CRÉDITO/DÉBITO',
-                                                        '04', '04 - COMPRA A CREDITO',
-                                                        '05', '05 -  PERMUTA',
-                                                        '06', '06 - NOTA DE CREDITO',
-                                                        '07', '07 - MIXTO'],
+    report_bill_payment_type = fields.Selection(selection=[('01', '01 - EFECTIVO'),
+                                                        ('02', '02 - CHEQUES/TRANSFERENCIAS/DEPÓSITO'),
+                                                        ('03', '03 - TARJETA CRÉDITO/DÉBITO'),
+                                                        ('04', '04 - COMPRA A CREDITO'),
+                                                        ('05', '05 -  PERMUTA'),
+                                                        ('06', '06 - NOTA DE CREDITO'),
+                                                        ('07', '07 - MIXTO'),
+                                                    ],
                                             string='Payment Type',
                                             compute='_compute_report_held_values')
 
