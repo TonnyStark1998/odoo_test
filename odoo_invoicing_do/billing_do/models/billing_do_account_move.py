@@ -23,21 +23,35 @@ class BillingDoAccountMove(models.Model):
             ('04', '04 - Ingresos por Arrendamientos'),
             ('05', '05 - Ingresos por Venta de Activo Depreciable'),
             ('06', '06 - Otros Ingresos')
-        ], required=True, store=True, readonly=False, copy=False, tracking=True, default='01')
+        ], 
+                                    required=True, 
+                                    store=True, 
+                                    readonly=False, 
+                                    copy=False, 
+                                    tracking=True, 
+                                    default='01',
+                                    string='Income Type')
 
     expense_type = fields.Selection(selection=[
-            ('01', '01 - Gastos de personal'),
-            ('02', '02 - Gastos por trabajos, suministros y servicios'),
-            ('03', '03 - Arrendamientos'),
-            ('04', '04 - Gastos de activo fijo'),
-            ('05', '05 - Gastos de representación'),
-            ('06', '06 - Otras deducciones admitidas'),
-            ('07', '07 - Gastos financieros'),
-            ('08', '08 - Gastos extraordinarios'),
-            ('09', '09 - Compras y gastos que formarán parte del costo de venta'),
-            ('10', '10 - Adquisiciones de activos'),
-            ('11', '11 - Gastos de seguro'),
-        ], required=True, store=True, readonly=False, copy=True, tracking=True, default='02')
+            ('01', '01 -GASTOS DE PERSONAL'),
+            ('02', '02-GASTOS POR TRABAJOS, SUMINISTROS Y SERVICIOS'),
+            ('03', '03-ARRENDAMIENTOS'),
+            ('04', '04-GASTOS DE ACTIVOS FIJO'),
+            ('05', '05 -GASTOS DE REPRESENTACIÓN'),
+            ('06', '06 -OTRAS DEDUCCIONES ADMITIDAS'),
+            ('07', '07 -GASTOS FINANCIEROS'),
+            ('08', '08 -GASTOS EXTRAORDINARIOS'),
+            ('09', '09 -COMPRAS Y GASTOS QUE FORMARAN PARTE DEL COSTO DE VENTA'),
+            ('10', '10 -ADQUISICIONES DE ACTIVOS'),
+            ('11', '11- GASTOS DE SEGUROS'),
+        ], 
+                                    required=True, 
+                                    store=True, 
+                                    readonly=False, 
+                                    copy=True, 
+                                    tracking=True, 
+                                    default='02',
+                                    string='Expense Type')
 
     ncf = fields.Char(string="NCF", readonly=False, copy=False, store=True, tracking=True, states={'posted': [('readonly', True)]})
     ncf_sequence_next_number = fields.Char(readonly=True, copy=False, store=False, tracking=False, compute='_compute_set_name_next_sequence')
@@ -134,7 +148,7 @@ class BillingDoAccountMove(models.Model):
                             }
                         }
     
-    def get_last_payment_date(self):
+    def _get_last_payment_date(self):
         self.ensure_one()
         pay_term_line_ids = self.line_ids.filtered(lambda line: line.account_id.user_type_id.type in ('receivable', 'payable'))
         partials = pay_term_line_ids.mapped('matched_debit_ids') + pay_term_line_ids.mapped('matched_credit_ids')
