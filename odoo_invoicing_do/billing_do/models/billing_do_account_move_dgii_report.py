@@ -209,7 +209,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     def _compute_report_held_values(self):
         all_payments = self.env['account.payment'].search(args=[])
         for move in self:
-            _last_payment_date = datetime.date.min
+            _last_payment_date = move._get_last_payment_date()
             _payment_type = False
 
             cash_amount = 0.0
@@ -224,9 +224,6 @@ class BillingDoAccountMoveDgiiReport(models.Model):
 
             payment_amount = 0.0
             for move_payment in move_payments:
-                if move_payment.payment_date > _last_payment_date:
-                    _last_payment_date = move_payment.payment_date
-
                 _payment_type = move._get_payment_type(move_payment)
                 payment_amount += move_payment.amount
 
