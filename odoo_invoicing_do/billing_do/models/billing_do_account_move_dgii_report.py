@@ -211,7 +211,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
         all_payments = self.env['account.payment'].search(args=[])
         for move in self:
             _last_payment_date = move._get_last_payment_date()
-            _payment_type = False
+            _payment_type = '04'
 
             cash_amount = 0.0
             bank_amount = 0.0
@@ -245,7 +245,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
             elif _payment_type in ['03']:
                 credit_debit_card_amount = payment_amount
             elif _payment_type in ['04']:
-                credit_sale_amount = payment_amount
+                credit_sale_amount = move.amount_total
 
             for line in move.line_ids:
                 if line.account_id.withholding_tax_type in ["RET-ITBIS-606"]:
