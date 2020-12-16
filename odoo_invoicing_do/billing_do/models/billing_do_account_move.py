@@ -53,8 +53,19 @@ class BillingDoAccountMove(models.Model):
                                     default='02',
                                     string='Expense Type')
 
-    ncf = fields.Char(string="NCF", readonly=False, copy=False, store=True, tracking=True, states={'posted': [('readonly', True)]})
-    ncf_sequence_next_number = fields.Char(readonly=True, copy=False, store=False, tracking=False, compute='_compute_set_name_next_sequence')
+    ncf = fields.Char(string="NCF",
+                        readonly=False,
+                        copy=False, 
+                        store=True, 
+                        tracking=True, 
+                        states={'posted': [('readonly', True)]}
+                    )
+    ncf_sequence_next_number = fields.Char(readonly=True, 
+                                            copy=False, 
+                                            store=False, 
+                                            tracking=False, 
+                                            compute='_compute_set_name_next_sequence'
+                                        )
     ncf_date_to = fields.Date(string="NCF valid to:", readonly=True, copy=False, store=True, tracking=True)
 
     # Account Move - Related Fields
@@ -65,6 +76,9 @@ class BillingDoAccountMove(models.Model):
     @api.onchange('journal_id')
     def _onchange_journal_id_billing_do(self):
         if self.journal_id:
+            self.ncf_date_to = ''
+            self.ncf_sequence_next_number = ''
+
             sequence_date = self.date or self.invoice_date
             if self.type in ('out_refund', 'in_refund'):
                 sequence = self.journal_id.refund_sequence_id
@@ -73,7 +87,10 @@ class BillingDoAccountMove(models.Model):
             prefix, suffix = sequence._get_prefix_suffix(date=sequence_date, date_range=sequence_date)
             sequence_date_new = sequence._get_current_sequence(sequence_date=sequence_date)
             number_next = sequence_date_new.number_next_actual
-            self.ncf_date_to = sequence_date_new.date_to
+
+            if sequence_date_new.date_to:
+                self.ncf_date_to = sequence_date_new.date_to
+            
             self.ncf_sequence_next_number = str(prefix) + str('%%0%sd' % sequence.padding % number_next)
 
     @api.onchange('ncf', 'partner_id')
