@@ -350,19 +350,20 @@
                     </ul>
                     <ul class="list-inline mb4">
                         <li t-if="company.phone" class="list-inline-item d-inline">
-                            <span class="o_force_ltr" t-field="company.partner_id"
-                                  t-options='{"widget": "contact", "fields": ["phone"], "no_marker": false}'/>
+                            <span class="fa fa-phone"/>
+                            <span class="o_force_ltr" t-field="company.phone"/>
 
                         </li>
                         <li t-if="company.email" class="list-inline-item d-inline">
-                            <span class="o_force_ltr" t-field="company.partner_id"
-                                  t-options='{"widget": "contact", "fields": ["email"], "no_marker": false}'/>
+                            <span class="fa fa-envelope"/>
+                            <span class="o_force_ltr" t-field="company.email"/>
                         </li>
                         <li t-if="company.website" class="list-inline-item d-inline">
-                            <span class="o_force_ltr" t-field="company.partner_id"
-                                  t-options='{"widget": "contact", "fields": ["website"], "no_marker": false}'/>
+                            <span class="fa fa-globe"/>
+                            <span class="o_force_ltr" t-field="company.website"/>
                         </li>
                     </ul>
+
                     <div t-if="report_type == 'pdf'" class="text-muted">
                         Página:
                         <span class="page"/>
