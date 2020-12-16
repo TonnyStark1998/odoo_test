@@ -17,13 +17,13 @@ class BillingDoAccountMove(models.Model):
 
     # Account Move - New Fields
     income_type = fields.Selection(selection=[
-            ('01', '01 - Ingresos por Operaciones (No Financieros)'),
-            ('02', '02 - Ingresos Financieros'),
-            ('03', '03 - Ingresos Extraordinarios'),
-            ('04', '04 - Ingresos por Arrendamientos'),
-            ('05', '05 - Ingresos por Venta de Activo Depreciable'),
-            ('06', '06 - Otros Ingresos')
-        ], 
+                                                ('01', '01 - Ingresos por Operaciones (No Financieros)'),
+                                                ('02', '02 - Ingresos Financieros'),
+                                                ('03', '03 - Ingresos Extraordinarios'),
+                                                ('04', '04 - Ingresos por Arrendamientos'),
+                                                ('05', '05 - Ingresos por Venta de Activo Depreciable'),
+                                                ('06', '06 - Otros Ingresos')
+                                            ], 
                                     required=True, 
                                     store=True, 
                                     readonly=False, 
@@ -33,18 +33,18 @@ class BillingDoAccountMove(models.Model):
                                     string='Income Type')
 
     expense_type = fields.Selection(selection=[
-            ('01', '01 -GASTOS DE PERSONAL'),
-            ('02', '02-GASTOS POR TRABAJOS, SUMINISTROS Y SERVICIOS'),
-            ('03', '03-ARRENDAMIENTOS'),
-            ('04', '04-GASTOS DE ACTIVOS FIJO'),
-            ('05', '05 -GASTOS DE REPRESENTACIÓN'),
-            ('06', '06 -OTRAS DEDUCCIONES ADMITIDAS'),
-            ('07', '07 -GASTOS FINANCIEROS'),
-            ('08', '08 -GASTOS EXTRAORDINARIOS'),
-            ('09', '09 -COMPRAS Y GASTOS QUE FORMARAN PARTE DEL COSTO DE VENTA'),
-            ('10', '10 -ADQUISICIONES DE ACTIVOS'),
-            ('11', '11- GASTOS DE SEGUROS'),
-        ], 
+                                                ('01', '01 -GASTOS DE PERSONAL'),
+                                                ('02', '02-GASTOS POR TRABAJOS, SUMINISTROS Y SERVICIOS'),
+                                                ('03', '03-ARRENDAMIENTOS'),
+                                                ('04', '04-GASTOS DE ACTIVOS FIJO'),
+                                                ('05', '05 -GASTOS DE REPRESENTACIÓN'),
+                                                ('06', '06 -OTRAS DEDUCCIONES ADMITIDAS'),
+                                                ('07', '07 -GASTOS FINANCIEROS'),
+                                                ('08', '08 -GASTOS EXTRAORDINARIOS'),
+                                                ('09', '09 -COMPRAS Y GASTOS QUE FORMARAN PARTE DEL COSTO DE VENTA'),
+                                                ('10', '10 -ADQUISICIONES DE ACTIVOS'),
+                                                ('11', '11- GASTOS DE SEGUROS'),
+                                            ], 
                                     required=True, 
                                     store=True, 
                                     readonly=False, 
@@ -53,18 +53,43 @@ class BillingDoAccountMove(models.Model):
                                     default='02',
                                     string='Expense Type')
 
-    ncf = fields.Char(string="NCF", readonly=False, copy=False, store=True, tracking=True, states={'posted': [('readonly', True)]})
-    ncf_sequence_next_number = fields.Char(readonly=True, copy=False, store=False, tracking=False, compute='_compute_set_name_next_sequence')
-    ncf_date_to = fields.Date(string="NCF valid to:", readonly=True, copy=False, store=True, tracking=True)
+    ncf = fields.Char(string="NCF",
+                        readonly=False,
+                        copy=False, 
+                        store=True, 
+                        tracking=True, 
+                        states={'posted': [('readonly', True)]}
+                    )
+    ncf_sequence_next_number = fields.Char(readonly=True, 
+                                            copy=False, 
+                                            store=False, 
+                                            tracking=False, 
+                                            compute='_compute_set_name_next_sequence'
+                                        )
+    ncf_date_to = fields.Date(string="NCF valid to:", 
+                                readonly=True, 
+                                copy=False, 
+                                store=True, 
+                                tracking=True
+                            )
 
     # Account Move - Related Fields
-    is_tax_valuable = fields.Boolean(related='journal_id.is_tax_valuable', store=False, Tracking=False)
-    use_sequence = fields.Boolean(related='journal_id.use_sequence', store=False, Tracking=False)
+    is_tax_valuable = fields.Boolean(related='journal_id.is_tax_valuable', 
+                                        store=False, 
+                                        Tracking=False
+                                    )
+    use_sequence = fields.Boolean(related='journal_id.use_sequence', 
+                                    store=False, 
+                                    Tracking=False
+                                )
 
     # Account Move - OnChange Fields Functions
     @api.onchange('journal_id')
     def _onchange_journal_id_billing_do(self):
         if self.journal_id:
+            self.ncf_date_to = ''
+            self.ncf_sequence_next_number = ''
+
             sequence_date = self.date or self.invoice_date
             if self.type in ('out_refund', 'in_refund'):
                 sequence = self.journal_id.refund_sequence_id
@@ -73,12 +98,20 @@ class BillingDoAccountMove(models.Model):
             prefix, suffix = sequence._get_prefix_suffix(date=sequence_date, date_range=sequence_date)
             sequence_date_new = sequence._get_current_sequence(sequence_date=sequence_date)
             number_next = sequence_date_new.number_next_actual
-            self.ncf_date_to = sequence_date_new.date_to
+
+            if sequence_date_new.date_to:
+                self.ncf_date_to = sequence_date_new.date_to
+            
             self.ncf_sequence_next_number = str(prefix) + str('%%0%sd' % sequence.padding % number_next)
+
+            if self.type in ['in_invoice', 'in_refund'] and self.journal_id.sequence_id.code in ['B11', 'B13']:
+                self.ncf = self.ncf_sequence_next_number
+            else:
+                self.ncf = ''
 
     @api.onchange('ncf', 'partner_id')
     def _onchange_ncf(self):
-        if self.type in ['in_invoice', 'in_refund'] and self.is_tax_valuable:
+        if self.type in ['in_invoice', 'in_refund'] and self.is_tax_valuable and self.journal_id.sequence_id.code not in ['B11', 'B13']:
             try:
                 return self._validate_ncf(self.ncf)
             except exceptions.ValidationError as ve:
@@ -105,11 +138,16 @@ class BillingDoAccountMove(models.Model):
                 move.ncf_date_to = sequence_date_new.date_to
                 move.ncf_sequence_next_number = str(prefix) + str('%%0%sd' % sequence.padding % number_next)
 
+                if move.type in ['in_invoice', 'in_refund'] and move.journal_id.sequence_id.code in ['B11', 'B13']:
+                    move.ncf = move.ncf_sequence_next_number
+                else:
+                    move.ncf = ''
+
     # Account Move - Contraints Field's Functions
     @api.constrains('ncf', 'type', 'journal_id')
     def _check_ncf(self):
         for move in self:
-            if move.type in ['in_invoice', 'in_refund'] and self.is_tax_valuable:
+            if move.type in ['in_invoice', 'in_refund'] and self.is_tax_valuable and self.journal_id.sequence_id.code not in ['B11', 'B13']:
                 try:
                     return self._validate_ncf(move.ncf)
                 except exceptions.ValidationError as ve:
