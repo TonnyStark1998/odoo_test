@@ -8,7 +8,9 @@ class BillingDoAccountMoveDgiiReport(models.Model):
 
     # Common fields between DGII reports
     report_vat = fields.Char(related='partner_id.vat', 
-                                string='Tax Contributor ID')
+                                string='Tax Contributor ID',
+                                store=True
+                            )
     report_vat_type = fields.Char(string='Tax Contributor Type',
                                     compute='_compute_report_vat_type',
                                     store=True

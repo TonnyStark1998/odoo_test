@@ -66,11 +66,21 @@ class BillingDoAccountMove(models.Model):
                                             tracking=False, 
                                             compute='_compute_set_name_next_sequence'
                                         )
-    ncf_date_to = fields.Date(string="NCF valid to:", readonly=True, copy=False, store=True, tracking=True)
+    ncf_date_to = fields.Date(string="NCF valid to:", 
+                                readonly=True, 
+                                copy=False, 
+                                store=True, 
+                                tracking=True
+                            )
 
     # Account Move - Related Fields
-    is_tax_valuable = fields.Boolean(related='journal_id.is_tax_valuable', store=False, Tracking=False)
-    use_sequence = fields.Boolean(related='journal_id.use_sequence', store=False, Tracking=False)
+    is_tax_valuable = fields.Boolean(related='journal_id.is_tax_valuable', 
+                                        store=False, 
+                                        Tracking=False)
+    use_sequence = fields.Boolean(related='journal_id.use_sequence', 
+                                    store=False, 
+                                    Tracking=False
+                                )
 
     # Account Move - OnChange Fields Functions
     @api.onchange('journal_id')
