@@ -104,8 +104,10 @@ class BillingDoAccountMove(models.Model):
             
             self.ncf_sequence_next_number = str(prefix) + str('%%0%sd' % sequence.padding % number_next)
 
-            if self.type in ['in_invoice'] and self.journal_id.sequence_id.code in ['B11', 'B13']:
+            if self.type in ['in_invoice', 'in_refund'] and self.journal_id.sequence_id.code in ['B11', 'B13']:
                 self.ncf = self.ncf_sequence_next_number
+            else:
+                self.ncf = ''
 
     @api.onchange('ncf', 'partner_id')
     def _onchange_ncf(self):
@@ -135,6 +137,11 @@ class BillingDoAccountMove(models.Model):
                 number_next = sequence_date_new.number_next_actual
                 move.ncf_date_to = sequence_date_new.date_to
                 move.ncf_sequence_next_number = str(prefix) + str('%%0%sd' % sequence.padding % number_next)
+
+                if move.type in ['in_invoice', 'in_refund'] and move.journal_id.sequence_id.code in ['B11', 'B13']:
+                    move.ncf = move.ncf_sequence_next_number
+                else:
+                    move.ncf = ''
 
     # Account Move - Contraints Field's Functions
     @api.constrains('ncf', 'type', 'journal_id')
