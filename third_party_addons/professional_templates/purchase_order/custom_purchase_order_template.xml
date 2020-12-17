@@ -149,12 +149,16 @@
                         </div>
 
 
-
                         <div class="col-2"/>
                     </div>
                 </div>
+                <!-- start of order data-->
+                <br/>
+                <t t-call="professional_templates.custom_purchase_order_lines"/>
+                <!-- end of order data-->
             </div>
             <!-- end of page -->
+
             <!--start of footer-->
             <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
                 <div class="text-center" style="border-top: 1px solid black;">

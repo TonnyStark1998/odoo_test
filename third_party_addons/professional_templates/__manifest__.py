@@ -122,6 +122,7 @@
         "purchase_order/cubic_template.xml",
         "purchase_order/clean_template.xml",
         "purchase_order/ascend_template.xml",
+        "purchase_order/custom_purchase_order_lines_template.xml",
         "purchase_order/custom_purchase_order_template.xml",
         "rfq/rfq_lines.xml",
         "rfq/rfq_lines_ascend.xml",
