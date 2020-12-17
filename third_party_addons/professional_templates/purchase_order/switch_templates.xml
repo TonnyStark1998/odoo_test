@@ -18,6 +18,7 @@
             <t t-if="style.template_po.key == 'professional_templates.PO_10_document'" t-call="professional_templates.PO_10_document" t-lang="o.partner_id.lang"/>
             <t t-if="style.template_po.key == 'professional_templates.PO_11_document'" t-call="professional_templates.PO_11_document" t-lang="o.partner_id.lang"/>
             <t t-if="style.template_po.key == 'professional_templates.PO_12_document'" t-call="professional_templates.PO_12_document" t-lang="o.partner_id.lang"/>
+            <t t-if="style.template_po.key == 'professional_templates.PO_13_document'" t-call="professional_templates.PO_13_document" t-lang="o.partner_id.lang"/>
             <t t-if="not style" t-call="purchase.report_purchaseorder_document" t-lang="o.partner_id.lang"/>
          </t>
     </t>
