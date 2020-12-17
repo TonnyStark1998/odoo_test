@@ -140,6 +140,7 @@
         "rfq/cubic_template.xml",
         "rfq/clean_template.xml",
         "rfq/ascend_template.xml",
+        "rfq/custom_rfq_template.xml",
         "delivery_note/switch_templates.xml",
         "delivery_note/delivery_lines.xml",
         "delivery_note/delivery_lines_ascend.xml",
