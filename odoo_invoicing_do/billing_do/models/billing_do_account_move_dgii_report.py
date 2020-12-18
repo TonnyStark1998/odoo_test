@@ -247,84 +247,67 @@ class BillingDoAccountMoveDgiiReport(models.Model):
 
     @api.depends('line_ids', 'invoice_payment_state')
     def _compute_report_held_values(self):
-        all_payments = self.env['account.payment'].search(args=[])
         for move in self:
-            _last_payment_date = move._get_last_payment_date()
-            _payment_type = '04'
-
-            cash_amount = 0.0
-            bank_amount = 0.0
-            credit_debit_card_amount = 0.0
-            credit_sale_amount = 0.0
+            _payment_type = False
 
             bill_itbis_held_amount = invoice_itbis_held = bill_isr_held = invoice_isr_held = 0
+            
             reconciled_vals = move._get_reconciled_info_JSON_values()
-            move_payments_ids = [payment['account_payment_id'] for payment in reconciled_vals]
-            move_payments = all_payments.filtered(lambda payment: payment.id in move_payments_ids)
+            move_ids = [move_line['move_id'] for move_line in reconciled_vals]
 
-            payment_amount = 0.0
-            for move_payment in move_payments:
-                _payment_type = move._get_payment_type(move_payment)
-                payment_amount += move_payment.amount
+            move_lines = self.env['account.move.line'].search(args=[('move_id', 'in', move_ids)]) + move.line_ids
+            for move_line in move_lines:
+                if not _payment_type:
+                    _payment_type = move._get_payment_type(move_line.journal_id)
 
-                for line in move_payment.move_line_ids:
-                    if line.account_id.withholding_tax_type in ["RET-ITBIS-606"]:
-                        bill_itbis_held_amount = line.credit + line.debit
-                    elif line.account_id.withholding_tax_type in ["RET-ITBIS-607"]:
-                        invoice_itbis_held = line.credit + line.debit
-                    elif line.account_id.withholding_tax_type in ["RET-ISR-606"]:
-                        bill_isr_held = line.credit + line.debit
-                    elif line.account_id.withholding_tax_type in ["RET-ISR-607"]:
-                        invoice_isr_held = line.credit + line.debit
+                if move_line.account_id.withholding_tax_type in ["RET-ITBIS-606"]:
+                    bill_itbis_held_amount += move_line.credit + move_line.debit
+                elif move_line.account_id.withholding_tax_type in ["RET-ITBIS-607"]:
+                    invoice_itbis_held += move_line.credit + move_line.debit
+                elif move_line.account_id.withholding_tax_type in ["RET-ISR-606"]:
+                    bill_isr_held += move_line.credit + move_line.debit
+                elif move_line.account_id.withholding_tax_type in ["RET-ISR-607"]:
+                    invoice_isr_held += move_line.credit + move_line.debit
 
-            if _payment_type in ['01']:
-                cash_amount = payment_amount
-            elif _payment_type in ['02']:
-                bank_amount = payment_amount
-            elif _payment_type in ['03']:
-                credit_debit_card_amount = payment_amount
-            elif _payment_type in ['04']:
-                credit_sale_amount = move.amount_total
-
-            for line in move.line_ids:
-                if line.account_id.withholding_tax_type in ["RET-ITBIS-606"]:
-                    bill_itbis_held_amount = line.credit + line.debit
-                elif line.account_id.withholding_tax_type in ["RET-ITBIS-607"]:
-                    invoice_itbis_held = line.credit + line.debit
-                elif line.account_id.withholding_tax_type in ["RET-ISR-606"]:
-                    bill_isr_held = line.credit + line.debit
-                elif line.account_id.withholding_tax_type in ["RET-ISR-607"]:
-                    invoice_isr_held = line.credit + line.debit
-
-            move.report_invoice_cash_amount = cash_amount
-            move.report_invoice_bank_amount = bank_amount
-            move.report_invoice_credit_debit_card_amount = credit_debit_card_amount
-            move.report_invoice_credit_sale_amount = credit_sale_amount
-
+            move.report_invoice_cash_amount = ''
+            move.report_invoice_bank_amount = ''
+            move.report_invoice_credit_debit_card_amount = ''
+            move.report_invoice_credit_sale_amount = ''
             move.report_bill_payment_type = '04'
+
+            payment_amount = sum([payment['amount'] for payment in reconciled_vals], 0)
+            if move.invoice_payment_state in ['paid']:
+                move.report_bill_payment_type = _payment_type
+                if _payment_type in ['01']:
+                    move.report_invoice_cash_amount = payment_amount
+                elif _payment_type in ['02']:
+                    move.report_invoice_bank_amount = payment_amount
+                elif _payment_type in ['03']:
+                    move.report_invoice_credit_debit_card_amount = payment_amount
+            else:
+                move.report_invoice_credit_sale_amount = move.amount_total
 
             move.report_invoice_held_date = ''
             move.report_bill_payment_date_month = ''
             move.report_bill_payment_date_day = ''
-
             move.report_bill_itbis_held_amount = ''
             move.report_bill_isr_held_amount = ''
-
             move.report_invoice_itbis_held_by_thirdparty_amount = ''
             move.report_invoice_isr_held_by_thirdparty_amount = ''
 
+            _last_payment_date = datetime.date.min
+            for payment in reconciled_vals:
+                if payment['date'] > _last_payment_date:
+                    _last_payment_date = payment['date']
+
             if move.invoice_payment_state in ['paid']:
-                move.report_bill_payment_type = _payment_type
                 if _last_payment_date != datetime.date.min:
                     if invoice_isr_held > 0 or invoice_itbis_held > 0:
-                        move.report_invoice_held_date = \
-                            _last_payment_date if not _last_payment_date else _last_payment_date.strftime('%Y%m%d')
+                        move.report_invoice_held_date = _last_payment_date.strftime('%Y%m%d')
 
                     if bill_isr_held > 0 or bill_itbis_held_amount > 0:
-                        move.report_bill_payment_date_month = \
-                            _last_payment_date if not _last_payment_date else _last_payment_date.strftime('%Y%m')
-                        move.report_bill_payment_date_day = \
-                            _last_payment_date if not _last_payment_date else _last_payment_date.strftime('%d')
+                        move.report_bill_payment_date_month = _last_payment_date.strftime('%Y%m')
+                        move.report_bill_payment_date_day = _last_payment_date.strftime('%d')
 
                 move.report_bill_itbis_held_amount = bill_itbis_held_amount
                 move.report_bill_isr_held_amount = bill_isr_held
@@ -332,10 +315,12 @@ class BillingDoAccountMoveDgiiReport(models.Model):
                 move.report_invoice_itbis_held_by_thirdparty_amount = invoice_itbis_held
                 move.report_invoice_isr_held_by_thirdparty_amount = invoice_isr_held
 
-    def _get_payment_type(self, payment):
-        if payment.journal_id.type in ['cash']:
+    def _get_payment_type(self, journal):
+        if journal.type in ['cash']:
             return '01'
-        elif payment.journal_id.type in ['bank']:
+        elif journal.type in ['bank']:
             return '02'
-        elif payment.journal_id.type in ['credit_debit_card']:
+        elif journal.type in ['credit_debit_card']:
             return '03'
+        else:
+            return False
