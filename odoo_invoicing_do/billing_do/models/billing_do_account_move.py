@@ -87,20 +87,18 @@ class BillingDoAccountMove(models.Model):
     @api.onchange('journal_id')
     def _onchange_journal_id_billing_do(self):
         if self.journal_id:
-            self.ncf_date_to = ''
-            self.ncf_sequence_next_number = ''
-
             sequence_date = self.date or self.invoice_date
             if self.type in ('out_refund', 'in_refund'):
                 sequence = self.journal_id.refund_sequence_id
             else:
                 sequence = self.journal_id.sequence_id
-            prefix, suffix = sequence._get_prefix_suffix(date=sequence_date, date_range=sequence_date)
-            sequence_date_new = sequence._get_current_sequence(sequence_date=sequence_date)
-            number_next = sequence_date_new.number_next_actual
 
+            prefix, suffix = sequence._get_prefix_suffix(date=sequence_date, date_range=sequence_date)
+
+            sequence_date_new = sequence._get_current_sequence(sequence_date=sequence_date)
             self.ncf_date_to = sequence_date_new.date_to
             
+            number_next = sequence_date_new.number_next_actual
             self.ncf_sequence_next_number = str(prefix) + str('%%0%sd' % sequence.padding % number_next)
 
             if self.type in ['in_invoice', 'in_refund'] and self.journal_id.sequence_id.code in ['B11', 'B13']:
@@ -122,7 +120,7 @@ class BillingDoAccountMove(models.Model):
                 }
 
     # Account Move - Compute Field's Functions
-    @api.depends('ncf_sequence_next_number', 'journal_id')
+    @api.depends('journal_id')
     def _compute_set_name_next_sequence(self):
         for move in self:
             if move.journal_id:
@@ -131,13 +129,13 @@ class BillingDoAccountMove(models.Model):
                     sequence = move.journal_id.refund_sequence_id
                 else:
                     sequence = move.journal_id.sequence_id
+                
                 prefix, suffix = sequence._get_prefix_suffix(date=sequence_date, date_range=sequence_date)
 
                 sequence_date_new = sequence._get_current_sequence(sequence_date=sequence_date)
-                number_next = sequence_date_new.number_next_actual
-                if sequence.sequence_date_new:
-                    move.ncf_date_to = sequence_date_new.date_to
+                move.ncf_date_to = sequence_date_new.date_to
 
+                number_next = sequence_date_new.number_next_actual
                 move.ncf_sequence_next_number = str(prefix) + str('%%0%sd' % sequence.padding % number_next)
 
                 if move.type in ['in_invoice', 'in_refund'] and move.journal_id.sequence_id.code in ['B11', 'B13']:
