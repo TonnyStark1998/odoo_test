@@ -99,8 +99,7 @@ class BillingDoAccountMove(models.Model):
             sequence_date_new = sequence._get_current_sequence(sequence_date=sequence_date)
             number_next = sequence_date_new.number_next_actual
 
-            if sequence_date_new.date_to:
-                self.ncf_date_to = sequence_date_new.date_to
+            self.ncf_date_to = sequence_date_new.date_to
             
             self.ncf_sequence_next_number = str(prefix) + str('%%0%sd' % sequence.padding % number_next)
 
@@ -133,9 +132,12 @@ class BillingDoAccountMove(models.Model):
                 else:
                     sequence = move.journal_id.sequence_id
                 prefix, suffix = sequence._get_prefix_suffix(date=sequence_date, date_range=sequence_date)
+
                 sequence_date_new = sequence._get_current_sequence(sequence_date=sequence_date)
                 number_next = sequence_date_new.number_next_actual
-                move.ncf_date_to = sequence_date_new.date_to
+                if sequence.sequence_date_new:
+                    move.ncf_date_to = sequence_date_new.date_to
+
                 move.ncf_sequence_next_number = str(prefix) + str('%%0%sd' % sequence.padding % number_next)
 
                 if move.type in ['in_invoice', 'in_refund'] and move.journal_id.sequence_id.code in ['B11', 'B13']:
@@ -185,17 +187,3 @@ class BillingDoAccountMove(models.Model):
                                 'message': "El NCF '{0}' y el RNC '{1}' son válidos.".format(ncf, self.partner_id.vat)
                             }
                         }
-    
-    def _get_last_payment_date(self):
-        self.ensure_one()
-        pay_term_line_ids = self.line_ids.filtered(lambda line: line.account_id.user_type_id.type in ('receivable', 'payable'))
-        partials = pay_term_line_ids.mapped('matched_debit_ids') + pay_term_line_ids.mapped('matched_credit_ids')
-
-        _last_payment_date = date.date.min
-        for partial in partials:
-            counterpart_lines = partial.debit_move_id + partial.credit_move_id
-            counterpart_line = counterpart_lines.filtered(lambda line: line not in self.line_ids)
-            if counterpart_line.date > _last_payment_date:
-                _last_payment_date = counterpart_line.date
-
-        return _last_payment_date

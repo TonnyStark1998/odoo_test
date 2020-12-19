@@ -33,8 +33,8 @@
                 </span>
                 <h2 class="mt0" style="color:#474747;">
                     <field name="use_sequence" attrs="{'invisible': 1}" />
-                    <field name="name" readonly="True" attrs="{'invisible': ['|', ('name', '=', '/'), '&amp;', ('type','=','in_invoice'), ('use_sequence', '=', False)]}" />
-                    <field name="ncf_sequence_next_number" readonly="True" attrs="{'invisible': ['|', ('state','!=','draft'), '|', ('name','!=','/'), '&amp;', ('type', '=', 'in_invoice'), ('use_sequence', '=', False)]}" />
+                    <field name="name" readonly="True" attrs="{'invisible': ['|', ('name', '=', '/'), '&amp;', ('type','in', ['in_invoice', 'in_refund']), ('use_sequence', '=', False)]}" />
+                    <field name="ncf_sequence_next_number" readonly="True" attrs="{'invisible': ['|', ('state','!=','draft'), '|', ('name','!=','/'), '&amp;', ('type', 'in', ['in_invoice', 'in_refund']), ('use_sequence', '=', False)]}" />
                 </h2>
             </xpath>
             <xpath expr="//field[@name='ref']" position="before">
