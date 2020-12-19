@@ -37,24 +37,6 @@
                     <field name="ncf_sequence_next_number" readonly="True" attrs="{'invisible': ['|', ('state','!=','draft'), '|', ('name','!=','/'), '&amp;', ('type', 'in', ['in_invoice', 'in_refund']), ('use_sequence', '=', False)]}" />
                 </h2>
             </xpath>
-
-            <!-- <xpath expr="//h1[hasclass('mt0')]" position="attributes">
-                <attribute name="style">
-                    color:#474747;
-                </attribute>
-            </xpath>
-            <xpath expr="//field[@name='name']" position="before">
-                <field name="use_sequence" attrs="{'invisible': 1}" />
-            </xpath>
-            <xpath expr="//field[@name='name']" position="after">
-                <field name="ncf_sequence_next_number" readonly="True" attrs="{'invisible': ['|', ('state','!=','draft'), '|', ('name','!=','/'), '&amp;', ('type', 'in', ['in_invoice', 'in_refund']), ('use_sequence', '=', False)]}" />
-            </xpath>
-            <xpath expr="//field[@name='name']" position="attributes">
-                <attribute name="attrs">
-                    {'invisible': ['|', ('name', '=', '/'), '&amp;', ('type','=','in_invoice'), ('use_sequence', '=', False)]}
-                </attribute>
-            </xpath> -->
-
             <xpath expr="//field[@name='ref']" position="before">
                 <field name="is_tax_valuable" attrs="{'invisible': 1}" />
                 <field name="income_type" attrs="{'invisible': [('type', '!=', 'out_invoice')], 'readonly': [('state', '!=', 'draft')]}" />
