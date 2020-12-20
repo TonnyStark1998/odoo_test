@@ -97,7 +97,8 @@ class BillingDoAccountMoveDgiiReport(models.Model):
                                             )
     # Fields for DGII report 607 (NOT IN USE RIGHT NOW!)
     report_invoice_held_date = fields.Char(string='Invoice Held Date',
-                                            compute='_compute_report_held_values'
+                                            compute='_compute_report_held_values',
+                                            store=True
                                         )
     report_invoice_itbis_held_by_thirdparty_amount = fields.Monetary(string='ITBIS Held By ThirdParty Amount', 
                                                                         default=0.0,
