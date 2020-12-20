@@ -153,7 +153,7 @@
         <field name="view_mode">tree</field>
         <field name="view_id" ref="billing_do_view_dgii_606_tree" />
         <field name="search_view_id" ref="billing_do_view_dgii_606_search"/>
-        <field name="domain">['&amp;', ('type','in',['in_invoice', 'in_refund']), '&amp;', ('state','in',['posted']), ('report_move','!=','')]</field>
+        <field name="domain">['&amp;', ('type','in',['in_invoice', 'in_refund']), ('state','in',['posted'])]</field>
     </record>
     <record model="ir.actions.act_window" id="dgii_reports_format_607">
         <field name="name">Formato de envío de datos 607 (Ventas)</field>

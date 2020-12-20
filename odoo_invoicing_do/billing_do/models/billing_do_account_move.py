@@ -103,8 +103,6 @@ class BillingDoAccountMove(models.Model):
 
             if self.type in ['in_invoice', 'in_refund'] and self.journal_id.sequence_id.code in ['B11', 'B13']:
                 self.ncf = self.ncf_sequence_next_number
-            else:
-                self.ncf = ''
 
     @api.onchange('ncf', 'partner_id')
     def _onchange_ncf(self):
@@ -140,8 +138,6 @@ class BillingDoAccountMove(models.Model):
 
                 if move.type in ['in_invoice', 'in_refund'] and move.journal_id.sequence_id.code in ['B11', 'B13']:
                     move.ncf = move.ncf_sequence_next_number
-                else:
-                    move.ncf = ''
 
     # Account Move - Contraints Field's Functions
     @api.constrains('ncf', 'type', 'journal_id')
@@ -158,16 +154,26 @@ class BillingDoAccountMove(models.Model):
         if ncf:
             if not self.partner_id:
                 raise exceptions.ValidationError("Seleccione primero el proveedor y luego digite el NCF.")
+            
+            regex = r"(^(E)?(?=)(41|43)[0-9]{10}|^(B)(?:(11|13)[0-9]{8}))"
+            match_ncf = re.match(regex, ncf.upper())
+
+            if match_ncf:
+                raise exceptions.ValidationError("Los comprobantes de tipo B11 y B13 ({0}) requieren el uso de un diario en específico.".format(ncf.upper()))
+
             regex = r"(^(E)?(?=)(31|32|33|34|41|43|44|45)[0-9]{10}|^(B)(?:(01|02|03|04|11|12|13|14|15|16|17)[0-9]{8}))"
             match_ncf = re.match(regex, ncf.upper())
+            
             if not match_ncf:
                 raise exceptions.ValidationError("El NCF ({0}) es inválido.".format(ncf.upper()))
             else:
                 if int(len(ncf)) != int(match_ncf.end()):
                     raise exceptions.ValidationError("El NCF (%s) posee dígitos extras. Verifique." % ncf.upper())
+            
             ncf_response = doutils.BillingDoUtils.dgii_validate_ncf(self, self.partner_id.vat, ncf, self.env.company.vat)
             log.info("[KCS] NCF Response: {0}".format(ncf_response))
             log.info("[KCS] NCF Response (Status Code): {0}".format(ncf_response.status_code))
+            
             if not ncf_response is None:
                 if ncf_response.status_code == 500:
                     raise exceptions.ValidationError("Ocurrió un error desconocido al conectar con el servicio de consulta.")
