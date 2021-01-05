@@ -182,7 +182,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
                         unit_price = invoice_line_id.currency_id._convert(unit_price, 
                                                                             self.env.company.currency_id, 
                                                                             self.env.company, 
-                                                                            move.invoice_date, 
+                                                                            move.invoice_date or fields.Date.today(), 
                                                                             True
                                                                         )
                     if invoice_line_id.product_id.type in ['consu', 'product']:
