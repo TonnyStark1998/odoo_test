@@ -27,20 +27,20 @@
             <xpath expr="//span[hasclass('o_form_label') and @attrs]" position="replace" />
             <xpath expr="//field[@name='invoice_sequence_number_next_prefix' and position()=1]" position="replace" />
             <xpath expr="//field[@name='invoice_sequence_number_next' and position()=1]" position="replace" />
-            <xpath expr="//h1[hasclass('mt0')]" position="replace">
+            <xpath expr="//h1[hasclass('mt0')]" position="before">
                 <span class="o_form_label" attrs="{'invisible': ['|', ('type', 'in', ['entry', 'in_invoice', 'in_refund']), ('name', '=', '/')]}">
                     <field name="type" readonly="1" nolabel="1"/>
                 </span>
                 <h2 class="mt0" style="color:#474747;">
                     <field name="use_sequence" attrs="{'invisible': 1}" />
-                    <field name="name" readonly="True" attrs="{'invisible': ['|', ('name', '=', '/'), '&amp;', ('type','=','in_invoice'), ('use_sequence', '=', False)]}" />
-                    <field name="ncf_sequence_next_number" readonly="True" attrs="{'invisible': ['|', ('state','!=','draft'), '|', ('name','!=','/'), '&amp;', ('type', '=', 'in_invoice'), ('use_sequence', '=', False)]}" />
+                    <field name="name" readonly="True" attrs="{'invisible': ['|', ('name', '=', '/'), '&amp;', ('type','in', ['in_invoice', 'in_refund']), ('use_sequence', '=', False)]}" />
+                    <field name="ncf_sequence_next_number" readonly="True" attrs="{'invisible': ['|', ('state','!=','draft'), '|', ('name','!=','/'), '&amp;', ('type', 'in', ['in_invoice', 'in_refund']), ('use_sequence', '=', False)]}" />
                 </h2>
             </xpath>
             <xpath expr="//field[@name='ref']" position="before">
                 <field name="is_tax_valuable" attrs="{'invisible': 1}" />
                 <field name="income_type" attrs="{'invisible': [('type', '!=', 'out_invoice')], 'readonly': [('state', '!=', 'draft')]}" />
-                <field name="ncf" attrs="{'invisible': ['|', ('type', '!=', 'in_invoice'), '|', ('is_tax_valuable', '=', False), ('use_sequence', '=', True)], 'required': ['&amp;', ('type', '=', 'in_invoice'), ('is_tax_valuable', '=', True)]}" />
+                <field name="ncf" attrs="{'invisible': ['|', ('type', 'not in', ['in_invoice', 'in_refund']), '|', ('is_tax_valuable', '=', False), ('use_sequence', '=', True)], 'required': ['&amp;', ('type', 'in', ['in_invoice', 'in_refund']), '&amp;', ('is_tax_valuable', '=', True), ('use_sequence', '=', False)]}" />
                 <field name="expense_type" attrs="{'invisible': [('type', '!=', 'in_invoice')], 'readonly': [('state', '!=', 'draft')]}" />
             </xpath>
             <field name="journal_id" position="attributes">
@@ -96,21 +96,21 @@
                 <field name="report_bill_date_day" />
                 <field name="report_bill_payment_date_month" />
                 <field name="report_bill_payment_date_day" />
-                <field name="report_bill_service_amount" />
-                <field name="report_bill_consumable_amount" />
-                <field name="report_bill_total_amount" />
-                <field name="report_bill_tax_amount" />
-                <field name="report_bill_itbis_held_amount" />
-                <field name="report_bill_itbis_proportional_amount" />
-                <field name="report_bill_itbis_expense_amount" />
-                <field name="report_bill_itbis_ahead_amount" />
-                <field name="report_bill_itbis_purchases_amount" />
+                <field name="report_bill_service_amount" sum="Bill Service Amount" />
+                <field name="report_bill_consumable_amount" sum="Bill Consumable Amount" />
+                <field name="report_bill_total_amount" sum="Total Amount" />
+                <field name="report_bill_tax_amount" sum="Tax Amount" />
+                <field name="report_bill_itbis_held_amount" sum="ITBIS Held Amount" />
+                <field name="report_bill_itbis_proportional_amount" sum="ITBIS Proportional Amount" />
+                <field name="report_bill_itbis_expense_amount" sum="ITBIS Expense Amount" />
+                <field name="report_bill_itbis_ahead_amount" sum="ITBIS Ahead Amount" />
+                <field name="report_bill_itbis_purchases_amount" sum="ITBIS Purchase Amount" />
                 <field name="report_bill_isr_type" />
-                <field name="report_bill_isr_held_amount" />
-                <field name="report_bill_isr_purchases_amount" />
-                <field name="report_isc_amount" />
-                <field name="report_bill_other_taxes_amount" />
-                <field name="report_bill_legaltip_amount" />
+                <field name="report_bill_isr_held_amount" sum="ISR Held Amount" />
+                <field name="report_bill_isr_purchases_amount" sum="ISR Purchase Amount" />
+                <field name="report_isc_amount" sum="ISC Amount" />
+                <field name="report_bill_other_taxes_amount" sum="Other Taxes Amount" />
+                <field name="report_bill_legaltip_amount" sum="Legal Tip Amount" />
                 <field name="report_bill_payment_type" />
             </tree>
         </field>
@@ -128,22 +128,22 @@
                 <field name="income_type" />
                 <field name="report_invoice_date_month" />
                 <field name="report_invoice_held_date" />
-                <field name="amount_untaxed_signed" />
-                <field name="amount_tax_signed" />
-                <field name="report_invoice_itbis_held_by_thirdparty_amount" />
-                <field name="report_invoice_itbis_perceived_amount" />
-                <field name="report_invoice_isr_held_by_thirdparty_amount" />
-                <field name="report_invoice_isr_perceived_amount" />
-                <field name="report_isc_amount" />
-                <field name="report_invoice_other_taxes_amount" />
-                <field name="report_invoice_legaltip_amount" />
-                <field name="report_invoice_cash_amount" />
-                <field name="report_invoice_bank_amount" />
-                <field name="report_invoice_credit_debit_card_amount" />
-                <field name="report_invoice_credit_sale_amount" />
-                <field name="report_invoice_gift_amount" />
-                <field name="report_invoice_permute_amount" />
-                <field name="report_invoice_other_sale_way_amount" />
+                <field name="amount_untaxed_signed" sum="Untaxed Amount" />
+                <field name="amount_tax_signed" sum="Tax Amount" />
+                <field name="report_invoice_itbis_held_by_thirdparty_amount" sum="ITBIS Held Amount" />
+                <field name="report_invoice_itbis_perceived_amount" sum="ITBIS Perceived Amount" />
+                <field name="report_invoice_isr_held_by_thirdparty_amount" sum="ISR Held Amount" />
+                <field name="report_invoice_isr_perceived_amount" sum="ISR Perceived Amount" />
+                <field name="report_isc_amount" sum="ISC Amount" />
+                <field name="report_invoice_other_taxes_amount" sum="Other Taxes Amount" />
+                <field name="report_invoice_legaltip_amount" sum="Legaltip Amount" />
+                <field name="report_invoice_cash_amount" sum="Cash Amount" />
+                <field name="report_invoice_bank_amount" sum="Bank Amount" />
+                <field name="report_invoice_credit_debit_card_amount" sum="Credit/Debit Card Amount" />
+                <field name="report_invoice_credit_sale_amount" sum="Credit Sale Amount" />
+                <field name="report_invoice_gift_amount" sum="Gift Amount" />
+                <field name="report_invoice_permute_amount" sum="Permute Amount" />
+                <field name="report_invoice_other_sale_way_amount" sum="Other Sale Amount" />
             </tree>
         </field>
     </record>
@@ -153,7 +153,7 @@
         <field name="view_mode">tree</field>
         <field name="view_id" ref="billing_do_view_dgii_606_tree" />
         <field name="search_view_id" ref="billing_do_view_dgii_606_search"/>
-        <field name="domain">['&amp;', ('type','in',['in_invoice', 'in_refund']), '&amp;', ('state','in',['posted']), ('report_move','!=','')]</field>
+        <field name="domain">['&amp;', ('type','in',['in_invoice', 'in_refund']), ('state','in',['posted'])]</field>
     </record>
     <record model="ir.actions.act_window" id="dgii_reports_format_607">
         <field name="name">Formato de envío de datos 607 (Ventas)</field>

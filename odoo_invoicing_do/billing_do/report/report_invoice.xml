@@ -196,6 +196,7 @@
           </attribute>
         </xpath>
     </template>
+
     <template id="billing_do_report_invoice_document_payments" inherit_id="account.report_invoice_document_with_payments" name="billing.do.account.invoice.document.payments.report">
         <xpath expr="//t[@t-if='len(payments_vals) > 0']" position="replace">
           <tr class="border-black">
