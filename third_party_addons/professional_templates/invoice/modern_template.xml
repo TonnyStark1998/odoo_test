@@ -170,27 +170,27 @@
                                 <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">No.</th>
                                 <th class="text-right"
                                     t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
-                                    Quantity
+                                    Cantidad
                                 </th>
                                 <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
-                                    Description
+                                    Descripción
                                 </th>
                                 <th class="text-right"
                                     t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
-                                    Unit Price
+                                    Precio Unitario
                                 </th>
                                 <th class="text-right"
                                     t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;"
                                     groups="sale.group_discount_per_so_line">
-                                    Discount(%)
+                                    Desc.(%)
                                 </th>
                                 <th class="text-right"
                                     t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
-                                    Taxes
+                                    Impuestos
                                 </th>
                                 <th class="text-right"
                                     t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
-                                    Amount
+                                    Monto
                                 </th>
                             </tr>
                         </thead>
