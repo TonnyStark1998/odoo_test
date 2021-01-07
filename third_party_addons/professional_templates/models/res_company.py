@@ -47,7 +47,8 @@ class ReportDefaultSettings(models.Model):
         'Default Style',
         help=
         "If no other report style is specified during the printing of document,\
-                    this default style will be used")
+                    this default style will be used"
+    )
 
     pdf_watermark = fields.Binary(
         'Watermark PDF',

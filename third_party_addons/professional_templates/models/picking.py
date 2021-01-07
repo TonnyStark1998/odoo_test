@@ -40,11 +40,13 @@ class PK(models.Model):
     _inherit = ["stock.picking"]
 
     pk_style = fields.Many2one(
-        'report.template.settings',
-        'Picking Style',
+        related='company_id.df_style',
+        string='Picking Style',
         help="Select Style to use when printing the picking slip",
-        default=lambda self: self.partner_id.style or self.env.user.company_id.
-        df_style)
+        default=lambda self: self.partner_id.style 
+                                or self.env.user.company_id.df_style,
+        readonly=True
+    )
 
     @api.model
     def create(self, vals):
