@@ -35,7 +35,7 @@
                     <field name="use_sequence" attrs="{'invisible': 1}" />
                     <strong>
                         <field name="name" readonly="True" attrs="{'invisible': ['|', ('name', '=', '/'), '|', ('type','not in', ['out_invoice', 'out_refund']), ('use_sequence', '=', True)]}" />
-                        <field name="ncf" readonly="True" attrs="{'invisible': [('type', 'not in', ['in_invoice', 'in_refund'])]}" />
+                        <field name="ncf" readonly="True" attrs="{'invisible': ['|', ('state', '=', 'draft'), ('type', 'not in', ['in_invoice', 'in_refund'])]}" />
                     </strong>
                     <field name="ncf_sequence_next_number" readonly="True" attrs="{'invisible': ['|', ('state','!=','draft'), '|', ('name','!=','/'), '&amp;', ('type', 'in', ['in_invoice', 'in_refund']), ('use_sequence', '=', False)]}" />
                 </h2>
