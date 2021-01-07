@@ -171,10 +171,10 @@ class BillingDoAccountMove(models.Model):
                     raise exceptions.ValidationError("El NCF (%s) posee dígitos extras. Verifique." % ncf.upper())
             
             ncf_response = doutils.BillingDoUtils.dgii_validate_ncf(self, self.partner_id.vat, ncf, self.env.company.vat)
-            log.info("[KCS] NCF Response: {0}".format(ncf_response))
-            log.info("[KCS] NCF Response (Status Code): {0}".format(ncf_response.status_code))
             
             if not ncf_response is None:
+                log.info("[KCS] NCF Response: {0}".format(ncf_response))
+                log.info("[KCS] NCF Response (Status Code): {0}".format(ncf_response.status_code))
                 if ncf_response.status_code == 500:
                     raise exceptions.ValidationError("Ocurrió un error desconocido al conectar con el servicio de consulta.")
                 elif ncf_response.status_code == 404:
