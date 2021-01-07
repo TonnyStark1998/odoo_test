@@ -38,9 +38,11 @@ class BillingDoResPartner(models.Model):
                 }
             try:
                 vat_response = doutils.BillingDoUtils.dgii_get_vat_info(self, self.vat)
-                log.info("[KCS] VAT Response: {0}".format(vat_response))
-                log.info("[KCS] VAT Response (Status Code): {0}".format(vat_response.status_code))
+
                 if not vat_response is None:
+                    log.info("[KCS] VAT Response: {0}".format(vat_response))
+                    log.info("[KCS] VAT Response (Status Code): {0}".format(vat_response.status_code))
+                    
                     if(vat_response.status_code == 200):
                         vat_name = vat_response.json()['razonSocial']
                         self.name = vat_name
