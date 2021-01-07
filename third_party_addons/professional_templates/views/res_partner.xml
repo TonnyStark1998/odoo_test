@@ -7,9 +7,9 @@
                 <xpath expr="//page[@name = 'internal_notes']" position="inside">
                     <field name="delivery_instructions" placeholder="Delivery Instructions..."/>
                 </xpath>
-                <xpath expr="//page[@name='sales_purchases']//field[@name = 'ref']" position="before">
+                <!-- <xpath expr="//page[@name='sales_purchases']//field[@name = 'ref']" position="before">
                     <field name="style"/>
-                </xpath>
+                </xpath> -->
             </field>
         </record>
     </data>

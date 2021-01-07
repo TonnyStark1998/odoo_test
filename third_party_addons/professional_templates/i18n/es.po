@@ -4136,7 +4136,7 @@ msgstr ""
 #: code:addons/professional_templates/models/invoice.py:0
 #, python-format
 msgid "DISABLED"
-msgstr ""
+msgstr "DESHABILITADO"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_10_document
@@ -4163,7 +4163,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:professional_templates.field_res_company__df_style
 #: model:ir.model.fields,field_description:professional_templates.field_res_config_settings__df_style
 msgid "Default Style"
-msgstr ""
+msgstr "Estilo"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.delivery_lines_ascend
