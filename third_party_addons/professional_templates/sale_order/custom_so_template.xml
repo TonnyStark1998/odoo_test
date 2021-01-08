@@ -9,32 +9,49 @@
             <t t-if="not doc or not 'company_id' in doc">
                 <t t-set="company" t-value="res_company"></t>
             </t>
-
             <!-- company header -->
-
-            <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
-                <div class="row">
-                    <div class="col-5 mb4">
+            <t t-if="style.header">
+                <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+                    <div class="col-7 pull-left" style="padding-left:0;">
                         <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
-                             style="max-height: 60px;max-width: 300px;width:250px;"/>
+                                style="max-height: 90px;"/>
+                    </div>
+                    <div class="col-5 mb8 float-right"
+                            style="font-size:12px !important; padding-bottom:2px; padding-right:0px;">
+                        <div t-if="company.email">
+                            <span class="fa fa-envelope-square fa-lg"/> 
+                            <span t-field="company.email"/>
+                        </div>
+                        <div t-if="company.website">
+                            <span class="fa fa-globe fa-lg"/> 
+                            <span t-field="company.website"/>
+                        </div>
+                        <div t-if="company.vat">
+                            <span class="fa fa-building fa-lg"/>
+                            RNC:
+                            <span t-field="company.vat"/>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </t>
             <!--start of page data-->
-
-            <div class="article page"
-                 t-attf-style="color:{{style.text_color}} !important;font-size:{{int(style.body_font)}}px !important;font-family:{{style.font_family}} !important;">
-                <t t-set="div_class" t-value="'col-4'"/>
-
-                <div class="row">
-                    <div class="col-5">
-                        <center t-attf-style="color:white;font-size:{{int(style.body_font)+7}}px; font-weight:bold;background-color:{{style.theme_color}};">
+            <div class="article page clearfix"
+                 t-attf-style="color:{{style.text_color}} !important;
+                                font-size:{{int(style.body_font)}}px !important;
+                                font-family:{{style.font_family}} !important;">
+                <div class="col-12 pull-left" style="padding-left:0px;
+                                                        padding-right:0px;
+                                                        padding-bottom:2px;">
+                    <div class="col-6 pull-left">
+                        <center t-attf-style="color:white;
+                                                font-size:{{int(style.body_font)+7}}px;
+                                                font-weight:bold;
+                                                background-color:{{style.theme_color}};">
                             Cliente &amp; Dirección de envío
                         </center>
-
-                        <div style="margin-left:20px;">
+                        <div>
                             <div t-if="doc.partner_id"
-                                 t-attf-style="color:{{style.cust_color}};font-size:{{int(style.body_font)+8}}px;font-weight:500;">
+                                 t-attf-style="font-size:{{int(style.body_font)+8}}px;font-weight:500;">
                                 <span t-field="doc.partner_id"/>
                             </div>
                             <address t-field="doc.partner_id" style="margin-bottom:0px;"
@@ -46,13 +63,11 @@
                             </span>
                         </div>
                     </div>
-                    <div class="col-7"
-                         t-attf-style="margin-top:30px;border:2px solid {{style.theme_color}};color:{{style.text_color}} !important;font-size:{{int(style.header_font)}}px !important;font-family:{{style.font_family}} !important;">
-                        <div/>
-
+                    <div class="col-6 mb4 pull-right"
+                         t-attf-style="border:2px solid {{style.theme_color}};color:{{style.text_color}} !important;font-size:{{int(style.header_font)}}px !important;font-family:{{style.font_family}} !important;">
                         <div class="row">
                             <div class="col-10"
-                                 t-attf-style="margin-top:20px;font-size:{{int(style.body_font)+10}}px; font-weight:bold;">
+                                 t-attf-style="margin-top:7px; margin-bottom: 7px; font-size:{{int(style.body_font)+10}}px; font-weight:bold;">
                                 Pedido #
                                 <span t-field="doc.name"/>
                             </div>
@@ -64,26 +79,22 @@
                             <div class="col-2"/>
                             <div class="col-5">Vendedor:</div>
                         </div>
-
                         <div class="row"
                              t-attf-style="margin-left:10px;font-size:{{int(style.body_font)+5}}px;">
                             <div class="col-5">
                                 <span t-field="doc.date_order" t-options='{"widget": "date"}'/>
                             </div>
                             <div class="col-2"/>
-
                             <div class="col-5">
                                 <span t-field="doc.user_id"/>
                             </div>
                         </div>
-
                         <div class="row"
                              t-attf-style="margin-top:10px;margin-left:10px;font-size:{{int(style.body_font)+5}}px; font-weight:bold;">
-                            <div class="col-5">Currency:</div>
+                            <div class="col-5">Moneda:</div>
                             <div class="col-2"/>
                             <div class="col-5"/>
                         </div>
-
                         <div class="row"
                              t-attf-style="margin-left:10px;font-size:{{int(style.body_font)+5}}px;">
                             <div class="col-5">
@@ -92,19 +103,16 @@
                             <div class="col-2"/>
                             <div class="col-5"/>
                         </div>
-
                     </div>
                 </div>
                 <!-- DATA-->
-                <br/>
-                <br/>
-                <t t-call="professional_templates.custom_order_lines"/>
+                <div class="col-12 pull-left clearfix"
+                     t-attf-style="margin:15px 0 0 0 !important; padding:15px 0 0 0; font-size:12px !important;">
+                    <t t-call="professional_templates.custom_order_lines"/>
+                </div>
                 <!--/DATA-->
             </div>
-
-
             <!-- company footer -->
-
             <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
                 <div class="text-center" style="border-top: 1px solid black;">
                     <ul class="list-inline mb4">
