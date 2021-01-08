@@ -2,7 +2,6 @@
 <odoo>
     <data>
         <template id="custom_order_lines" name="Personal Sale Order Data">
-
             <!-- Is there a discount on at least one line? -->
             <t t-set="display_discount" t-value="any([l.discount for l in doc.order_line])"/>
             <!-- Is there tax on at least one line? -->
@@ -10,10 +9,15 @@
             <!-- To take care of columns when no discount -->
             <t t-set="col_span" t-value="7 if display_discount else 6"/>
             <!-- common th styles -->
-            <t t-set="th_style" t-value="'border-bottom: 1px solid #ddd !important;white-space:nowrap;'"/>
+            <t t-set="th_style" t-value="'border-bottom: 1px solid #ddd !important;white-space:nowrap;font-weight:bold;'"/>
             <table class="table table-sm" t-attf-style="color:{{style.text_color}};">
-                <thead t-attf-style="background-color:{{style.theme_color if not style.transparent else 'transparent'}} !important; page-break-inside: avoid; color:{{style.theme_txt_color if not style.transparent else style.text_color}};">
-                    <tr t-attf-style="page-break-inside: avoid !important; border-bottom: 1px solid {{style.text_color}} !important;font-size:{{int(style.body_font)+2}}px;">
+                <thead t-attf-style="background-color:{{style.theme_color if not style.transparent else 'transparent'}} !important;
+                                        page-break-inside: avoid;
+                                        color:{{style.theme_txt_color if not style.transparent else style.text_color}};">
+                    <tr t-attf-style="page-break-inside: avoid !important;
+                                        border-bottom: 1px solid {{style.text_color}} !important;
+                                        font-size:{{int(style.body_font)+2}}px;
+                                        border-top:0;">
                         <th t-attf-style="{{th_style}}">
                             #
                         </th>
@@ -36,7 +40,6 @@
                             <t groups="account.group_show_line_subtotals_tax_excluded">Precio</t>
                             <t groups="account.group_show_line_subtotals_tax_included">Precio</t>
                         </th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -57,8 +60,9 @@
                                     <span t-field="l.name"/>
                                 </td>
                                 <td class="text-right">
-                                    <span t-field="l.product_uom_qty"/>
-                                    <span t-field="l.product_uom" groups="product.group_uom"/>
+                                    <span t-esc="int(l.product_uom_qty)" />
+                                    <br />
+                                    <span t-field="l.product_uom" />
                                 </td>
                                 <td class="text-right">
                                     <span t-field="l.price_unit"
