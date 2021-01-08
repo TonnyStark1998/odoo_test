@@ -20,6 +20,7 @@
                     <t t-if="style.template_inv.key =='professional_templates.INVOICE_11_document'" t-call="professional_templates.INVOICE_11_document" t-lang="o.partner_id.lang"/>
                     <t t-if="style.template_inv.key =='professional_templates.INVOICE_13_document'" t-call="professional_templates.INVOICE_13_document" t-lang="o.partner_id.lang"/>
                     <t t-if="style.template_inv.key =='professional_templates.INVOICE_14_document'" t-call="professional_templates.INVOICE_14_document" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='professional_templates.INVOICE_15_document'" t-call="professional_templates.INVOICE_15_document" t-lang="o.partner_id.lang"/>
                     <t t-if="not style" t-call="account.report_invoice_document_with_payments" t-lang="o.partner_id.lang"/>
                 </t>
             </t>

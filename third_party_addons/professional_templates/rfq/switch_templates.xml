@@ -18,6 +18,7 @@
 	<t t-if="style.template_rfq.key =='professional_templates.RFQ_10_document'" t-call="professional_templates.RFQ_10_document" t-lang="o.partner_id.lang"/>
 	<t t-if="style.template_rfq.key =='professional_templates.RFQ_11_document'" t-call="professional_templates.RFQ_11_document" t-lang="o.partner_id.lang"/>
 	<t t-if="style.template_rfq.key =='professional_templates.RFQ_12_document'" t-call="professional_templates.RFQ_12_document" t-lang="o.partner_id.lang"/>
+	<t t-if="style.template_rfq.key =='professional_templates.RFQ_13_document'" t-call="professional_templates.RFQ_13_document" t-lang="o.partner_id.lang"/>
 	<t t-if="not style" t-call="purchase.report_purchasequotation_document" t-lang="o.partner_id.lang"/>
      </t>
     </t>

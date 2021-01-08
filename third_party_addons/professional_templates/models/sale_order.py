@@ -48,11 +48,14 @@ class SO(models.Model):
                 self.env.ref('professional_templates.df_style_for_all_reports').id
 
     style = fields.Many2one(
-        'report.template.settings',
-        'Quote/Order Style',
+        string='Quote/Order Style',
+        related='company_id.df_style',
         help="Select Style to use when printing the Sales Order or Quote",
-        default=lambda self: self.partner_id.style or self.env.user.company_id.
-        df_style)
+        default=lambda self: self.partner_id.style 
+                                or self.env.user.company_id.df_style,
+        readonly=True
+    )
+
     project_title = fields.Char(
         'Title',
         help=

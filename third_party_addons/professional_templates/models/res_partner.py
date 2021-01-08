@@ -40,7 +40,9 @@ class ResPartner(models.Model):
 
     delivery_instructions = fields.Text("Delivery Instructions")
     style = fields.Many2one(
-        'report.template.settings',
-        'Reports Style',
+        related='company_id.df_style',
+        string='Reports Style',
         help="Select a style to use when printing reports for this customer",
-        default=lambda self: self.env.user.company_id.df_style)
+        default=lambda self: self.env.user.company_id.df_style,
+        readonly=True
+    )

@@ -14,9 +14,9 @@
 
             <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
                 <div class="row">
-                    <div class="col-3 mb4">
-                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;"
-                             alt="Logo"/>
+                    <div class="col-5 mb4">
+                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
+                             style="max-height: 60px;max-width: 300px;width:250px;"/>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                 <t t-set="div_class" t-value="'col-4'"/>
 
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-5">
                         <center t-attf-style="color:white;font-size:{{int(style.body_font)+7}}px; font-weight:bold;background-color:{{style.theme_color}};">
                             Cliente &amp; Dirección de envío
                         </center>
@@ -46,46 +46,51 @@
                             </span>
                         </div>
                     </div>
-                    <div class="col-1"/>
                     <div class="col-7"
-                         t-attf-style="border:2px solid {{style.theme_color}};color:{{style.text_color}} !important;font-size:{{int(style.header_font)}}px !important;font-family:{{style.font_family}} !important;">
+                         t-attf-style="margin-top:30px;border:2px solid {{style.theme_color}};color:{{style.text_color}} !important;font-size:{{int(style.header_font)}}px !important;font-family:{{style.font_family}} !important;">
                         <div/>
 
-                        <div t-attf-style="margin-top:10px;font-size:{{int(style.body_font)+7}}px; font-weight:bold;">
-                            Pedido #
-                            <span t-field="doc.name"/>
+                        <div class="row">
+                            <div class="col-10"
+                                 t-attf-style="margin-top:20px;font-size:{{int(style.body_font)+10}}px; font-weight:bold;">
+                                Pedido #
+                                <span t-field="doc.name"/>
+                            </div>
+                            <div class="col-2"/>
+                        </div>
+                        <div class="row"
+                             t-attf-style="margin-top:10px;margin-left:10px;font-size:{{int(style.body_font)+5}}px; font-weight:bold;">
+                            <div class="col-5">Fecha pedido:</div>
+                            <div class="col-2"/>
+                            <div class="col-5">Vendedor:</div>
                         </div>
 
                         <div class="row"
-                             t-attf-style="margin-top:10px;margin-left:10px;font-size:{{int(style.body_font)+6}}px; font-weight:bold;">
-                            <div class="col-6">Fecha pedido:</div>
-                            <div class="col-6">Vendedor:</div>
-                        </div>
-
-                        <div class="row"
-                             t-attf-style="margin-left:10px;font-size:{{int(style.body_font)+6}}px;">
-                            <div class="col-6">
+                             t-attf-style="margin-left:10px;font-size:{{int(style.body_font)+5}}px;">
+                            <div class="col-5">
                                 <span t-field="doc.date_order" t-options='{"widget": "date"}'/>
                             </div>
-                            <div class="col-6">
+                            <div class="col-2"/>
 
+                            <div class="col-5">
+                                <span t-field="doc.user_id"/>
                             </div>
                         </div>
 
                         <div class="row"
-                             t-attf-style="margin-top:10px;margin-left:10px;font-size:{{int(style.body_font)+6}}px; font-weight:bold;">
-                            <div class="col-6">Currency:</div>
-                            <div class="col-6"></div>
+                             t-attf-style="margin-top:10px;margin-left:10px;font-size:{{int(style.body_font)+5}}px; font-weight:bold;">
+                            <div class="col-5">Currency:</div>
+                            <div class="col-2"/>
+                            <div class="col-5"/>
                         </div>
 
                         <div class="row"
-                             t-attf-style="margin-left:10px;font-size:{{int(style.body_font)+6}}px;">
-                            <div class="col-6">
+                             t-attf-style="margin-left:10px;font-size:{{int(style.body_font)+5}}px;">
+                            <div class="col-5">
                                 <span t-field="doc.currency_id"/>
                             </div>
-                            <div class="col-6">
-
-                            </div>
+                            <div class="col-2"/>
+                            <div class="col-5"/>
                         </div>
 
                     </div>
@@ -104,17 +109,17 @@
                 <div class="text-center" style="border-top: 1px solid black;">
                     <ul class="list-inline mb4">
                         <li t-if="company.phone" class="list-inline-item d-inline">
-                            <span class="o_force_ltr" t-field="company.partner_id"
-                                  t-options='{"widget": "contact", "fields": ["phone"], "no_marker": false}'/>
+                            <span class="fa fa-phone"/>
+                            <span class="o_force_ltr" t-field="company.phone"/>
 
                         </li>
                         <li t-if="company.email" class="list-inline-item d-inline">
-                            <span class="o_force_ltr" t-field="company.partner_id"
-                                  t-options='{"widget": "contact", "fields": ["email"], "no_marker": false}'/>
+                            <span class="fa fa-envelope"/>
+                            <span class="o_force_ltr" t-field="company.email"/>
                         </li>
                         <li t-if="company.website" class="list-inline-item d-inline">
-                            <span class="o_force_ltr" t-field="company.partner_id"
-                                  t-options='{"widget": "contact", "fields": ["website"], "no_marker": false}'/>
+                            <span class="fa fa-globe"/>
+                            <span class="o_force_ltr" t-field="company.website"/>
                         </li>
                     </ul>
                     <div t-if="report_type == 'pdf'" class="text-muted">

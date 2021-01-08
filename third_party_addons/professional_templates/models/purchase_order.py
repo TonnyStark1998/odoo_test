@@ -44,11 +44,15 @@ class PO(models.Model):
         self.rfq_style = self.partner_id.style or self.env.user.company_id.df_style or self.env.ref(
             'professional_templates.df_style_for_all_reports').id
 
-    po_style = fields.Many2one('report.template.settings',
-                               'PO Style',
-                               help="Select Style to use when printing the PO",
-                               default=lambda self: self.partner_id.style or
-                               self.env.user.company_id.df_style)
+    po_style = fields.Many2one(
+                                string='PO Style',
+                                related='company_id.df_style',
+                                help="Select Style to use when printing the PO",
+                                default=lambda self: self.partner_id.style 
+                                                        or self.env.user.company_id.df_style,
+                                readonly=True
+    )
+
     amount_words = fields.Char(
         'Amount in Words:',
         help=

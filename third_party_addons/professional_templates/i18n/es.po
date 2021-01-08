@@ -4136,7 +4136,7 @@ msgstr ""
 #: code:addons/professional_templates/models/invoice.py:0
 #, python-format
 msgid "DISABLED"
-msgstr ""
+msgstr "DESHABILITADO"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_10_document
@@ -4163,7 +4163,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:professional_templates.field_res_company__df_style
 #: model:ir.model.fields,field_description:professional_templates.field_res_config_settings__df_style
 msgid "Default Style"
-msgstr ""
+msgstr "Estilo"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.delivery_lines_ascend
@@ -4458,7 +4458,7 @@ msgstr ""
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_account_move__style
 msgid "Invoice Style"
-msgstr ""
+msgstr "Estilo"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__template_inv
@@ -4658,7 +4658,7 @@ msgstr ""
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_purchase_order__po_style
 msgid "PO Style"
-msgstr ""
+msgstr "Estilo"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_10_document
@@ -4685,7 +4685,7 @@ msgstr ""
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_stock_picking__pk_style
 msgid "Picking Style"
-msgstr ""
+msgstr "Estilo"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.invoice_lines
@@ -4836,7 +4836,7 @@ msgstr ""
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_sale_order__style
 msgid "Quote/Order Style"
-msgstr ""
+msgstr "Estilo"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_4_document
@@ -4880,7 +4880,7 @@ msgstr ""
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_purchase_order__rfq_style
 msgid "RFQ Style"
-msgstr ""
+msgstr "Estilo"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__template_rfq
@@ -4912,35 +4912,35 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_9_document
 msgid "Refund"
-msgstr ""
+msgstr "Reembolso"
 
 #. module: professional_templates
 #: model:ir.model,name:professional_templates.model_ir_actions_report
 msgid "Report Action"
-msgstr ""
+msgstr "Acción de reporte"
 
 #. module: professional_templates
 #: model:ir.model,name:professional_templates.model_report_template_settings
 msgid "Report Style Settings"
-msgstr ""
+msgstr "Configuraciones de Estilos de Reportes"
 
 #. module: professional_templates
 #: model:ir.ui.menu,name:professional_templates.reports_styles_menuitem
 #: model_terms:ir.ui.view,arch_db:professional_templates.view_report_style_form
 #: model_terms:ir.ui.view,arch_db:professional_templates.view_report_style_tree
 msgid "Report Styles"
-msgstr ""
+msgstr "Estilos de reportes profesionales"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_res_partner__style
 #: model:ir.model.fields,field_description:professional_templates.field_res_users__style
 msgid "Reports Style"
-msgstr ""
+msgstr "Estilo"
 
 #. module: professional_templates
 #: model:ir.actions.act_window,name:professional_templates.reports_styles_action
 msgid "Reports Styles"
-msgstr ""
+msgstr "Estilos"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_1_document

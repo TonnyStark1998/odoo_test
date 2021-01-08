@@ -107,6 +107,7 @@ class TemplateSettings(models.Model):
     name = fields.Char('Name of Style',
                        required=True,
                        help="Give a unique name for this report style")
+                       
     template_inv = fields.Many2one(
         'ir.ui.view',
         'Invoice Template',
@@ -114,6 +115,7 @@ class TemplateSettings(models.Model):
         domain=
         "[('type', '=', 'qweb'), ('key', 'like', 'professional_templates.INVOICE\_%\_document' )]",
         required=False)
+
     template_so = fields.Many2one(
         'ir.ui.view',
         'Order/Quote Template',

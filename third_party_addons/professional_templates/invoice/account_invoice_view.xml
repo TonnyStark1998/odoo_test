@@ -13,7 +13,7 @@
                     </h2>
                 </xpath>
                 <xpath expr="//field[@name='invoice_date']" position="after">
-                    <field name="style"/>
+                    <field name="style" />
                 </xpath>
                 <xpath expr="//field[@name='narration']" position="before">
                     <group>
