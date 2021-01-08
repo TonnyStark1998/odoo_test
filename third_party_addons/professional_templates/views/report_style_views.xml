@@ -68,11 +68,11 @@
                                 <field name="header_font"/>
                                 <field name="body_font"/>
                                 <field name="footer_font"/>
-                                <field name="template_so"/>
                                 <field name="template_inv"/>
+                                <field name="template_so"/>
+                                <field name="template_po"/>
                                 <field name="template_pk"/>
                                 <field name="template_dn"/>
-                                <field name="template_po"/>
                                 <field name="template_rfq"/>
                                 <field name="aiw_report"/>
                                 <field name="show_img"/>
