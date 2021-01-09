@@ -68,13 +68,13 @@
                                 <field name="header_font"/>
                                 <field name="body_font"/>
                                 <field name="footer_font"/>
-                                <field name="template_so"/>
-                                <field name="template_inv"/>
-                                <field name="template_pk"/>
-                                <field name="template_dn"/>
-                                <field name="template_po"/>
-                                <field name="template_rfq"/>
-                                <field name="aiw_report"/>
+                                <field name="template_inv" options="{'no_create': True}" />
+                                <field name="template_so" options="{'no_create': True}" />
+                                <field name="template_po" options="{'no_create': True}" />
+                                <field name="template_pk" options="{'no_create': True}" />
+                                <field name="template_dn" options="{'no_create': True}" />
+                                <field name="template_rfq" options="{'no_create': True}" />
+                                <field name="aiw_report" />
                                 <field name="show_img"/>
                                 <field name="transparent"/>
                             </group>

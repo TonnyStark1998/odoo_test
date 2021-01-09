@@ -49,8 +49,10 @@ class DN(models.Model):
             'professional_templates.df_style_for_all_reports').id
 
     dn_style = fields.Many2one(
-        'report.template.settings',
-        'Delivery Note Style',
+        related='company_id.df_style',
+        string='Delivery Note Style',
         help="Select style to use when printing the Delivery Note",
-        default=lambda self: self.partner_id.style or self.env.user.company_id.
-        df_style)
+        default=lambda self: self.partner_id.style 
+                                or self.env.user.company_id.df_style,
+        readonly=True
+    )

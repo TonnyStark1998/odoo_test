@@ -39,8 +39,10 @@ class RFQ(models.Model):
     _inherit = ["purchase.order"]
 
     rfq_style = fields.Many2one(
-        'report.template.settings',
-        'RFQ Style',
+        related='company_id.df_style',
+        string='RFQ Style',
         help="Select style to use when printing the RFQ",
-        default=lambda self: self.partner_id.style or self.env.user.company_id.
-        df_style)
+        default=lambda self: self.partner_id.style 
+                                or self.env.user.company_id.df_style,
+        readonly=True
+    )

@@ -6,14 +6,27 @@
             <field name="model">res.company</field>
             <field name="inherit_id" ref="base.view_company_form"/>
             <field name="arch" type="xml">
-
                 <xpath expr="//field[@name = 'company_registry']" position="after">
-                        <field name="facebook"/>
-                        <field name="twitter"/>
-                        <field name="youtube"/>
+                    <field name="df_style" readonly="True" />
+                    <field name="facebook"/>
+                    <field name="twitter"/>
+                    <field name="youtube"/>
                 </xpath>
-	    </field>
-	</record>
+	        </field>
+	    </record>
+        <record model="ir.ui.view" id="res_company_report_settings_df_style_field_form">
+            <field name="name">res.company.report.settings.df_style.field.form</field>
+            <field name="model">res.company</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.user_admin')])]" />
+            <field name="inherit_id" ref="base.view_company_form" />
+            <field name="arch" type="xml">
+                <field name="df_style" position="attributes">
+                    <attribute name="readonly">
+                        False
+                    </attribute>
+                </field>
+            </field>
+        </record>
     </data>
 </odoo>
 

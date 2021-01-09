@@ -50,16 +50,20 @@ class InvoiceTemplates(models.Model):
         return res
 
     style = fields.Many2one(
-        'report.template.settings',
-        'Invoice Style',
+        string='Invoice Style',
+        related='company_id.df_style',
         help="Select style to use when printing this invoice",
-        default=lambda self: self.partner_id.style or self.env.user.company_id.
-        df_style)
+        default=lambda self: self.partner_id.style 
+                                or self.env.user.company_id.df_style,
+        readonly=True
+    )
+
     project_title = fields.Char(
         'Title',
         help=
         "The title of your customer project or work you are doing for your customer"
     )
+
     amount_words = fields.Char(
         'Amount in Words:',
         help=
