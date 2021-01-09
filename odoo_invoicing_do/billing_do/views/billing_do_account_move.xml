@@ -27,13 +27,16 @@
             <xpath expr="//span[hasclass('o_form_label') and @attrs]" position="replace" />
             <xpath expr="//field[@name='invoice_sequence_number_next_prefix' and position()=1]" position="replace" />
             <xpath expr="//field[@name='invoice_sequence_number_next' and position()=1]" position="replace" />
-            <xpath expr="//h1[hasclass('mt0')]" position="before">
+            <xpath expr="//h1[hasclass('mt0')]" position="replace">
                 <span class="o_form_label" attrs="{'invisible': ['|', ('type', 'in', ['entry', 'in_invoice', 'in_refund']), ('name', '=', '/')]}">
                     <field name="type" readonly="1" nolabel="1"/>
                 </span>
                 <h2 class="mt0" style="color:#474747;">
                     <field name="use_sequence" attrs="{'invisible': 1}" />
-                    <field name="name" readonly="True" attrs="{'invisible': ['|', ('name', '=', '/'), '&amp;', ('type','in', ['in_invoice', 'in_refund']), ('use_sequence', '=', False)]}" />
+                    <strong>
+                        <field name="name" readonly="True" attrs="{'invisible': ['|', ('name', '=', '/'), '|', ('type','not in', ['out_invoice', 'out_refund']), ('use_sequence', '=', True)]}" />
+                        <field name="ncf" readonly="True" attrs="{'invisible': ['|', ('state', '=', 'draft'), ('type', 'not in', ['in_invoice', 'in_refund'])]}" />
+                    </strong>
                     <field name="ncf_sequence_next_number" readonly="True" attrs="{'invisible': ['|', ('state','!=','draft'), '|', ('name','!=','/'), '&amp;', ('type', 'in', ['in_invoice', 'in_refund']), ('use_sequence', '=', False)]}" />
                 </h2>
             </xpath>
