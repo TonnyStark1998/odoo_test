@@ -19,7 +19,7 @@
                              style="max-height: 90px;" alt="Company Logo"/>
                     </div>
                     <div t-if="company.twitter or company.facebook or company.youtube"
-                         t-attf-style="background-color:{{o.style.theme_color}};width:auto;padding-left:15px; color:{{o.style.theme_txt_color}}; padding-right:15px; padding-top:4px; padding-bottom:2px;"
+                         t-attf-style="background-color: {{o.style.theme_color}};width:auto;padding-left:15px; color:{{o.style.theme_txt_color}}; padding-right:15px; padding-top:4px; padding-bottom:2px;"
                          class="float-left">
                         <span t-if="company.twitter" style="padding-left:0px;" class="fa fa-twitter-square "/>&#160;<span
                             t-field="company.twitter"/>
@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-5 mb8 float-right"
                          style="font-size:12px !important; padding-bottom:2px;padding-right:0px;">
-                        <h1 t-attf-style="color:{{o.style.name_color}}">FACTURA</h1>
+                        <h1 t-attf-style="color: {{o.style.name_color}}">FACTURA</h1>
                         <div t-if="company.email">
                             <span class="fa fa-envelope-square fa-lg"/> 
                             <span t-field="company.email"/>
@@ -56,7 +56,7 @@
                     <!--start of wrapper -->
                     <div class="col-6 pull-left"
                          t-attf-style="font-size:{{int(o.style.body_font)}}px !important;padding-left:0px;">
-                        <div t-attf-style="background-color:{{o.style.cust_color}}; padding-top:2px; padding-bottom:2px; color:{{o.style.theme_txt_color}};">
+                        <div t-attf-style="background-color:{{o.style.theme_color}}; padding-top:2px; padding-bottom:2px; color:{{o.style.theme_txt_color}};">
                             <span style="font-size:16px;">
                                 <span class="fa fa-user fa-lg"/>
                                 Cliente
@@ -103,7 +103,7 @@
                         </div>
                     </div>
                     <div class="col-6 mb4 pull-right"
-                         t-attf-style="border:2px solid {{o.style.name_color}}; color:#222;">
+                         t-attf-style="border:2px solid {{o.style.theme_color}}; color:#222;">
                         <t t-if="o.journal_id.sequence_id">
                             <t t-set="journal_code" t-value="o.journal_id.sequence_id.code"/>
                         </t>
@@ -116,7 +116,7 @@
                         <t t-if="not o.journal_id.sequence_id.use_date_range">
                             <t t-set="ncf_date_due" t-value="'31/12/%s' % datetime.date.today().strftime('%Y')"/>
                         </t>
-                        <h5 t-attf-style="color:{{o.style.name_color}}">
+                        <h5>
                             <strong>
                                 <span t-if="o.type == 'out_invoice' and journal_code.upper() == 'B02' and (o.state == 'posted' or o.invoice_payment_state == 'paid')">
                                     CONSUMIDOR FINAL
@@ -143,7 +143,8 @@
                         </h5>
                         <p>
                             <strong>
-                                <span t-field="o.name" t-attf-style="color:{{o.style.name_color}}"/>
+                                <span t-field="o.name" t-if="o.type in ['out_invoice', 'out_refund', 'enrty'] or (o.type in ['in_invoice', 'in_refund'] and o.journal_id.sequence_id.code in ['B11', 'B13'])" />
+                                <span t-field="o.ncf" t-if="o.type in ['in_invoice', 'in_refund'] and o.journal_id.sequence_id.code not in ['B11', 'B13']" />
                             </strong>
                         </p>
                         <div t-if="o.invoice_date">
@@ -165,7 +166,7 @@
                 <div class="col-12 mt8 mb9"
                      t-attf-style="padding-left:0px; padding-right:0px;font-size:12px !important;">
                     <table class="table table-condensed" t-attf-style="color:{{o.style.text_color}};">
-                        <thead t-attf-style="background-color:{{o.style.name_color}}; page-break-inside: avoid; color:{{o.style.theme_txt_color}};">
+                        <thead t-attf-style="background-color:{{o.style.theme_color}}; page-break-inside: avoid; color:{{o.style.theme_txt_color}};">
                             <tr t-attf-style="page-break-inside: avoid !important; border-bottom: 1px solid {{o.style.text_color}} !important;">
                                 <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">No.</th>
                                 <th class="text-right"
@@ -201,8 +202,9 @@
                                         <span t-esc="l_index + 1"/>
                                     </td>
                                     <td class="text-right">
-                                        <span t-field="l.quantity"/>
-                                        <span t-field="l.uom_id" groups="product.group_uom"/>
+                                        <span t-esc="int(l.quantity)"/>
+                                        <br />
+                                        <span t-field="l.product_uom_id" />
                                     </td>
                                     <td>
                                         <span t-field="l.name"/>
@@ -274,7 +276,7 @@
                          style="padding-left:0px; padding-right:0px; page-break-inside: avoid !important;">
                         <table class="table table-condensed" t-attf-style="color:{{o.style.text_color}};">
 
-                            <thead t-attf-style="background-color:{{o.style.name_color}}; page-break-inside: avoid; color:{{o.style.theme_txt_color}};">
+                            <thead t-attf-style="background-color:{{o.style.theme_color}}; page-break-inside: avoid; color:{{o.style.theme_txt_color}};">
                                 <tr t-attf-style="page-break-inside: avoid !important; border-bottom: 1px solid {{o.style.text_color}} !important;">
                                     <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">No.
                                     </th>

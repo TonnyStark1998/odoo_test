@@ -136,7 +136,7 @@ class BillingDoAccountMove(models.Model):
                 number_next = sequence_date_new.number_next_actual
                 move.ncf_sequence_next_number = str(prefix) + str('%%0%sd' % sequence.padding % number_next)
 
-                if move.type in ['in_invoice', 'in_refund'] and move.journal_id.sequence_id.code in ['B11', 'B13']:
+                if move.type in ['in_invoice', 'in_refund'] and move.journal_id.sequence_id.code in ['B11', 'B13'] and move.state in ['draft']:
                     move.ncf = move.ncf_sequence_next_number
 
     # Account Move - Contraints Field's Functions
