@@ -11,7 +11,7 @@
     'website': "http://www.koalacreativesoftware.com",
     'category': 'Accounting/Accounting',
     'version': '0.1',
-    'depends': ['base', 'account', 'account_accountant'],
+    'depends': ['base', 'account', 'account_accountant', 'sale', 'purchase'],
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
@@ -25,6 +25,8 @@
         'views/billing_do_res_config_settings_views.xml',
         'views/billing_do_account_tax.xml',
         'views/billing_do_account_account.xml',
+        'views/billing_do_sale_views.xml',
+        'views/billing_do_purchase_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
