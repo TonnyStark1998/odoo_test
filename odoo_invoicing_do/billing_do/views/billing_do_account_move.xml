@@ -57,6 +57,13 @@
             <xpath expr="//field[@name='company_id']" position="before">
                 <field name="invoice_user_id" position="move"/>
             </xpath>
+            <field name="quantity" position="replace">
+                <field name="quantity"
+                        widget="float" 
+                        options="{
+                            'digits': (6,2)
+                        }" />
+            </field>
         </field>
     </record>
     <record model="ir.ui.view" id="billing_do_view_invoice_tree">
