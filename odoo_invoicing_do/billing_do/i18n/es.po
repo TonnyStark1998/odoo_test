@@ -439,3 +439,25 @@ msgstr "Permuta"
 #: model:ir.model.fields,field_description:billing_do.field_account_move__report_invoice_other_sale_way_amount
 msgid "Other Sale Way Amount"
 msgstr "Otras Formas de Ventas"
+
+##################################
+#   Fields from other modules    #
+##################################
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.view_invoice_tree
+#: model:ir.model.fields,field_description:account.field_account_move__amount_residual
+msgid "Amount Due"
+msgstr "Importe adeudado"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.view_invoice_tree
+#: model:ir.model.fields,field_description:account.field_account_move__amount_total
+msgid "Total"
+msgstr "Total"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.view_invoice_tree
+#: model:ir.model.fields,field_description:account.field_account_move__amount_untaxed
+msgid "Untaxed Amount"
+msgstr "Impuestos excluidos"
