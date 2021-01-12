@@ -57,6 +57,11 @@
             <xpath expr="//field[@name='company_id']" position="before">
                 <field name="invoice_user_id" position="move"/>
             </xpath>
+            <field name="date" position="attributes">
+                <attribute name="invisible">
+                    1
+                </attribute>
+            </field>
         </field>
     </record>
     <record model="ir.ui.view" id="billing_do_view_invoice_tree">
@@ -73,13 +78,13 @@
                 </attribute>
             </field>
             <field name="amount_untaxed_signed" position="replace">
-                <field name="amount_untaxed" string="Tax Excluded" sum="Total" optional="show"/>
+                <field name="amount_untaxed" sum="Total" optional="show"/>
             </field>
             <field name="amount_total_signed" position="replace">
-                <field name="amount_total" string="Total" sum="Total" optional="show"/>
+                <field name="amount_total" sum="Total" optional="show"/>
             </field>
             <field name="amount_residual_signed" position="replace">
-                <field name="amount_residual" string="Amount Due" sum="Amount Due" optional="show"/>
+                <field name="amount_residual" sum="Amount Due" optional="show"/>
             </field>
         </field>
     </record>
