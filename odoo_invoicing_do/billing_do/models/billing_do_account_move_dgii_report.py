@@ -41,25 +41,21 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_bill_service_amount = fields.Monetary(string='Service Amount', 
                                                     default=0.0, 
                                                     currency_field='company_currency_id',
-                                                    compute='_compute_service_consumable_amount',
-                                                    store=True
+                                                    compute='_compute_service_consumable_amount'
                                                 )
     report_bill_consumable_amount = fields.Monetary(string='Consumable Amount', 
                                                     default=0.0, 
                                                     currency_field='company_currency_id',
-                                                    compute='_compute_service_consumable_amount',
-                                                    store=True
+                                                    compute='_compute_service_consumable_amount'
                                                 )
     report_bill_total_amount = fields.Monetary(string='Total Amount', 
                                                 default=0.0,
-                                                compute='_compute_service_consumable_amount',
-                                                store=True
+                                                compute='_compute_service_consumable_amount'
                                             )
     report_bill_tax_amount = fields.Monetary(string='Tax Amount', 
                                                 currency_field='company_currency_id', 
                                                 default=0.0,
-                                                compute='_compute_report_bill_tax_amount',
-                                                store=True
+                                                compute='_compute_report_bill_tax_amount'
                                             )
     # Fields for DGII report 606 (NOT IN USE RIGHT NOW!)
     report_bill_itbis_held_amount = fields.Monetary(string='ITBIS Held Amount',
@@ -147,16 +143,16 @@ class BillingDoAccountMoveDgiiReport(models.Model):
             move.report_move = move_name
             move.report_move_reversed = move_reversed_name
 
-    @api.depends('date')
+    @api.depends('date', 'invoice_date')
     def _compute_report_dates(self):
         for move in self:
             bill_date_month = ''
             bill_date_day = ''
             invoice_date_month = ''
-            if move.date and move.type not in ['entry']:
-                bill_date_month = move.date.strftime('%Y%m')
-                bill_date_day = move.date.strftime('%d')
-                invoice_date_month = move.date.strftime('%Y%m%d')
+            if move.invoice_date and move.type not in ['entry']:
+                bill_date_month = move.invoice_date.strftime('%Y%m')
+                bill_date_day = move.invoice_date.strftime('%d')
+                invoice_date_month = move.invoice_date.strftime('%Y%m%d')
             move.report_bill_date_month = bill_date_month
             move.report_bill_date_day = bill_date_day
             move.report_invoice_date_month = invoice_date_month
