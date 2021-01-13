@@ -1,6 +1,7 @@
 
 import requests, re
 import logging as log
+from odoo import exceptions
 
 class BillingDoUtils:
     __token_url = "https://login.microsoftonline.com/4e9b7883-1526-4764-abf5-619326b5f34a/oauth2/v2.0/token"
