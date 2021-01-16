@@ -57,11 +57,11 @@
             <xpath expr="//field[@name='company_id']" position="before">
                 <field name="invoice_user_id" position="move"/>
             </xpath>
-            <field name="date" position="attributes">
+            <!-- <field name="date" position="attributes">
                 <attribute name="invisible">
                     1
                 </attribute>
-            </field>
+            </field> -->
         </field>
     </record>
     <record model="ir.ui.view" id="billing_do_view_invoice_tree">

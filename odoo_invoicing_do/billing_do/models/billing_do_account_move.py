@@ -16,7 +16,7 @@ class BillingDoAccountMove(models.Model):
     ]
 
     # Account Move - Modified Fields
-    date = fields.Date(compute='_compute_move_date', store=True)
+    # date = fields.Date(compute='_compute_move_date', store=True)
 
     # Account Move - New Fields
     income_type = fields.Selection(selection=[
