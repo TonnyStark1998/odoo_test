@@ -15,6 +15,9 @@ class BillingDoAccountMove(models.Model):
          "El NCF de las facturas no puede repetirse."),
     ]
 
+    # Account Move - Modified Fields
+    # date = fields.Date(compute='_compute_move_date', store=True)
+
     # Account Move - New Fields
     income_type = fields.Selection(selection=[
                                                 ('01', '01 - Ingresos por Operaciones (No Financieros)'),
@@ -118,6 +121,14 @@ class BillingDoAccountMove(models.Model):
                 }
 
     # Account Move - Compute Field's Functions
+    @api.depends('invoice_date')
+    def _compute_move_date(self):
+        for move in self:
+            if move.invoice_date and move.type not in ['entry']:
+                move.date = move.invoice_date
+            else:
+                move.date = fields.Date.today()
+
     @api.depends('journal_id')
     def _compute_set_name_next_sequence(self):
         for move in self:
@@ -154,6 +165,10 @@ class BillingDoAccountMove(models.Model):
         if ncf:
             if not self.partner_id:
                 raise exceptions.ValidationError("Seleccione primero el proveedor y luego digite el NCF.")
+
+            # ncf_exists = self.env['account.move'].search_count(args=['&', ('ncf', '=', ncf), ('partner_id.vat', '=', self.partner_id.vat)])
+            # if ncf_exists >= 1:
+            #     raise exceptions.ValidationError("El comprobante {0} ya fue utilizado en otra factura con el proveedor {1} - {2}.".format(ncf, self.partner_id.vat, self.partner_id.name))
             
             regex = r"(^(E)?(?=)(41|43)[0-9]{10}|^(B)(?:(11|13)[0-9]{8}))"
             match_ncf = re.match(regex, ncf.upper())
