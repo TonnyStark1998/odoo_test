@@ -200,27 +200,10 @@ class BillingDoAccountMoveDgiiReport(models.Model):
             tax_balance_multiplicator = -1 if move.is_inbound(True) else 1
 
             res = {}
-            # There are as many tax line as there are repartition lines
-            done_taxes = set()
             for line in tax_lines:
                 res.setdefault(line.tax_line_id.tax_group_id.name, {'base': 0.0, 'amount': 0.0})
+                res[line.tax_line_id.tax_group_id.name]['amount'] += tax_balance_multiplicator * line.balance
 
-                res[line.tax_line_id.tax_group_id.name]['amount'] += \
-                            tax_balance_multiplicator \
-                                * (line.amount_currency if line.currency_id else line.balance)
-
-                tax_key_add_base = tuple(move._get_tax_key_for_group_add_base(line))
-                if tax_key_add_base not in done_taxes:
-                    if line.currency_id and line.company_currency_id and line.currency_id != line.company_currency_id:
-                        amount = line.company_currency_id._convert(line.tax_base_amount, 
-                                                                    line.currency_id, 
-                                                                    line.company_id, 
-                                                                    line.date or fields.Date.today())
-                    else:
-                        amount = line.tax_base_amount
-                    res[line.tax_line_id.tax_group_id.name]['base'] += amount
-                    # The base should be added ONCE
-                    done_taxes.add(tax_key_add_base)
             for key, value in res.items():
                 if key == "ITBIS":
                     move.report_bill_tax_amount = value["amount"]
@@ -230,6 +213,7 @@ class BillingDoAccountMoveDgiiReport(models.Model):
                     move.report_bill_other_taxes_amount = value["amount"]
                 elif key == "Propina":
                     move.report_bill_legaltip_amount = value["amount"]
+
             if not move.report_bill_tax_amount:
                 move.report_bill_tax_amount = 0.0
 
