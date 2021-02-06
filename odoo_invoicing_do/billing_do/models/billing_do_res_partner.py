@@ -14,6 +14,7 @@ class BillingDoResPartner(models.Model):
 
     # Res Partner - Modified Fields
     vat = fields.Char(store=True, tracking=True)
+    company_id = fields.Many2one(default=lambda self: self.env.company)
 
     # Res Partner - OnChange Fields Functions
     @api.onchange('vat', 'tax_contributor_type')
