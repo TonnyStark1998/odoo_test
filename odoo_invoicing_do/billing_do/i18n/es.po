@@ -562,7 +562,7 @@ msgstr "Nota de crédito creada"
 #: model_terms:ir.ui.view,arch_db:account.account_journal_dashboard_kanban_view
 #: model_terms:ir.ui.view,arch_db:account.view_account_invoice_report_search
 msgid "Credit Notes"
-msgstr "Notas de crédito"
+msgstr "Facturas de notas de crédito"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_journal__refund_sequence_number_next
@@ -651,7 +651,7 @@ msgstr ""
 #: model:ir.ui.menu,name:account.menu_action_move_in_refund_type
 #: model_terms:ir.ui.view,arch_db:account.account_journal_dashboard_kanban_view
 msgid "Refund"
-msgstr "Factura de nota de crédito"
+msgstr "Facturas de notas de crédito"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_tax_repartition_line__refund_tax_id
