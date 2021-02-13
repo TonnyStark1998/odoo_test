@@ -4,3 +4,7 @@
 [submodule "enterprise"]
 	path = enterprise
 	url = https://github.com/odoo/enterprise.git
+[submodule "odoo_medical_app"]
+	path = odoo_medical_app
+	url = https://kcsprojects@dev.azure.com/kcsprojects/Odoo%20Enterprise/_git/Odoo%20Enterprise%20-%20Medical%20History%20App
+	branch = master
