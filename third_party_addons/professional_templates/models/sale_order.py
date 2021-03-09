@@ -40,19 +40,19 @@ class SO(models.Model):
     printing."""
     _inherit = ["sale.order"]
 
-    @api.onchange('partner_id')
-    def onchange_partner_style(self):
-        """ @onchage method to assign style to a document based on chosen partner"""
+    # @api.onchange('partner_id')
+    # def onchange_partner_style(self):
+    #    """ @onchage method to assign style to a document based on chosen partner"""
 
-        self.style = self.partner_id.style or self.env.user.company_id.df_style or\
-                self.env.ref('professional_templates.df_style_for_all_reports').id
+    #    self.style = self.partner_id.style\
+    #                    or self.env.user.company_id.df_style\
+    #                    or self.env.ref('professional_templates.df_style_for_all_reports').id
 
     style = fields.Many2one(
         string='Quote/Order Style',
         related='company_id.df_style',
         help="Select Style to use when printing the Sales Order or Quote",
-        default=lambda self: self.partner_id.style 
-                                or self.env.user.company_id.df_style,
+        # default=lambda self: self.company_id.df_style,
         readonly=True
     )
 

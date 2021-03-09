@@ -43,6 +43,7 @@ class ResPartner(models.Model):
         related='company_id.df_style',
         string='Reports Style',
         help="Select a style to use when printing reports for this customer",
-        default=lambda self: self.env.user.company_id.df_style,
+        default=lambda self: self.env.company.df_style
+                                or self.env.user.company_id.df_style,
         readonly=True
     )

@@ -43,16 +43,22 @@ class DN(models.Model):
         """method to assign a style to a report based on the selected
         partner."""
 
-        self.pk_style = self.partner_id.style or self.env.user.company_id.df_style or self.env.ref(
-            'professional_templates.df_style_for_all_reports').id
-        self.dn_style = self.partner_id.style or self.env.user.company_id.df_style or self.env.ref(
-            'professional_templates.df_style_for_all_reports').id
+        self.pk_style = self.env.company.df_style\
+                            or self.partner_id.style\
+                            or self.env.user.company_id.df_style\
+                            or self.env.ref('professional_templates.df_style_for_all_reports').id
+
+        self.dn_style = self.env.company.df_style\
+                            or self.partner_id.style\
+                            or self.env.user.company_id.df_style\
+                            or self.env.ref('professional_templates.df_style_for_all_reports').id
 
     dn_style = fields.Many2one(
         related='company_id.df_style',
         string='Delivery Note Style',
         help="Select style to use when printing the Delivery Note",
-        default=lambda self: self.partner_id.style 
+        default=lambda self: self.env.company.df_style 
+                                or self.partner_id.style 
                                 or self.env.user.company_id.df_style,
         readonly=True
     )
