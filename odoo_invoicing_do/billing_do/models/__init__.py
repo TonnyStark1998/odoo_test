@@ -10,3 +10,4 @@ from . import billing_do_account_move_dgii_report
 from . import billing_do_account_tax
 from . import billing_do_account_account
 from . import billing_do_account_payment
+from . import billing_do_product_product
