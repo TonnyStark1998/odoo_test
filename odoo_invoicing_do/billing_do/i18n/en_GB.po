@@ -202,3 +202,8 @@ msgstr "Is tax valuable?"
 #: model:ir.model.fields,field_description:billing_do.field_account_move__use_sequence
 msgid "Use sequence?"
 msgstr "Use sequence?"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_account_payment_search
+msgid "Today"
+msgstr ""
