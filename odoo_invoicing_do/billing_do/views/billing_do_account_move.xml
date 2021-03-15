@@ -181,6 +181,16 @@
             </calendar>
         </field>
     </record>
+    <record model="ir.ui.view" id="billing_do_view_account_move_filter">
+        <field name="name">billing.do.view.account.move.filter</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter" />
+        <field name="arch" type="xml">
+            <field name="name" position="before">
+                <field name="partner_id" position="move" />
+            </field>
+        </field>
+    </record>
     <record model="ir.actions.act_window" id="dgii_reports_format_606">
         <field name="name">Formato de envío de datos 606 (Compras)</field>
         <field name="res_model">account.move</field>
