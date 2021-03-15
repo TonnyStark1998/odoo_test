@@ -774,3 +774,8 @@ msgstr ""
 "No puede validar una factura con un importe total negativo. En su lugar, "
 "debe crear una nota de crédito. Use el menú de acciones para "
 "transformarlo en una nota de crédito o reembolso."
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_account_payment_search
+msgid "Today"
+msgstr "Hoy"
