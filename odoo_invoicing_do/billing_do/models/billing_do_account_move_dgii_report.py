@@ -269,8 +269,9 @@ class BillingDoAccountMoveDgiiReport(models.Model):
 
             _last_payment_date = datetime.date.min
             for payment in reconciled_vals:
-                if payment['date'] > _last_payment_date:
-                    _last_payment_date = payment['date']
+                if payment['date']:
+                   if payment['date'] > _last_payment_date:
+                        _last_payment_date = payment['date']
 
             if move.invoice_payment_state in ['paid']:
                 if _last_payment_date != datetime.date.min:
