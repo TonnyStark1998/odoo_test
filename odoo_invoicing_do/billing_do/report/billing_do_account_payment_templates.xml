@@ -78,7 +78,7 @@
         <template id="billing_do_account_payment_receipt">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
-                    <t t-set="lang" t-value="o.partner_id.lang"/>
+                    <t t-set="lang" t-value="o.partner_id.company_id.partner_id.lang"/>
                     <t t-call="billing_do.billing_do_account_payment_receipt_template" t-lang="lang"/>
                 </t>
             </t>
