@@ -816,8 +816,8 @@ msgstr "<strong>Monto: </strong>"
 
 #. module: billing_do
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
-msgid "<div class=\"card-header\"><p class=\"text-center\">Concept</p></div>"
-msgstr "<div class=\"card-header\"><p class=\"text-center\">Concepto</p></div>"
+msgid "<span>Concept</span>"
+msgstr "<p class=\"text-center;\">Concepto</p>"
 
 #. module: billing_do
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
@@ -826,5 +826,5 @@ msgstr "<span><strong>Recibido por: </strong>____________________________ </span
 
 #. module: billing_do
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
-msgid "<span>Created by:</span>"
-msgstr "<span>Creado por:</span>"
+msgid "<span><strong>Created by: </strong></span>"
+msgstr "<span><strong>Creado por: </strong></span>"
