@@ -207,3 +207,52 @@ msgstr "Use sequence?"
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_account_payment_search
 msgid "Today"
 msgstr ""
+
+################################
+# Payment Reports Translations #
+################################
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<strong style=\"text-transform: uppercase;\">Receipt</strong>"
+msgstr ""
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<strong>Customer: </strong>"
+msgstr ""
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<strong>Vendor: </strong>"
+msgstr ""
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<strong>Payment Date:</strong>"
+msgstr "<strong>Date:</strong>"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<strong>Payment Method:</strong>"
+msgstr ""
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<strong>Payment Amount: </strong>"
+msgstr "<strong>Amount: </strong>"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<span>Concept</span>"
+msgstr "<p class=\"text-center\">Concept</p>"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<span><strong>Received by: </strong>____________________________ </span>"
+msgstr ""
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<span><strong>Created by: </strong></span>"
+msgstr ""
