@@ -3,7 +3,6 @@
 
 from odoo import tools
 from odoo import api, fields, models
-import logging as log
 
 class BillingDoSaleReport(models.Model):
     _inherit = 'sale.report'
@@ -53,7 +52,7 @@ class BillingDoSaleReport(models.Model):
             sum((l.price_unit * l.product_uom_qty * l.discount / 100.0 / CASE COALESCE(s.currency_rate, 0) WHEN 0 THEN 1.0 ELSE s.currency_rate END)) as discount_amount_old,
             s.id as order_id
         """
-        log.info("[KCS] Select Query: {0}".format(select_))
+
         for field in fields.values():
             select_ += field
 
