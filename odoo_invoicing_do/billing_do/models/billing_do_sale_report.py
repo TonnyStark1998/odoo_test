@@ -3,6 +3,7 @@
 
 from odoo import tools
 from odoo import api, fields, models
+import logging as log
 
 class BillingDoSaleReport(models.Model):
     _inherit = 'sale.report'
@@ -18,11 +19,14 @@ class BillingDoSaleReport(models.Model):
             sum(l.qty_delivered / u.factor * u2.factor) as qty_delivered,
             sum(l.qty_invoiced / u.factor * u2.factor) as qty_invoiced,
             sum(l.qty_to_invoice / u.factor * u2.factor) as qty_to_invoice,
-            sum(l.price_total / CASE COALESCE(s.currency_rate, 0) WHEN 0 THEN 1.0 ELSE s.currency_rate END) as price_total,
+            sum(l.price_total) as price_total,
+            sum(l.price_total / CASE COALESCE(s.currency_rate, 0) WHEN 0 THEN 1.0 ELSE s.currency_rate END) as price_total_old,
             sum(l.price_subtotal) as price_subtotal,
             sum(l.price_subtotal / CASE COALESCE(s.currency_rate, 0) WHEN 0 THEN 1.0 ELSE s.currency_rate END) as price_subtotal_old,
-            sum(l.untaxed_amount_to_invoice / CASE COALESCE(s.currency_rate, 0) WHEN 0 THEN 1.0 ELSE s.currency_rate END) as untaxed_amount_to_invoice,
-            sum(l.untaxed_amount_invoiced / CASE COALESCE(s.currency_rate, 0) WHEN 0 THEN 1.0 ELSE s.currency_rate END) as untaxed_amount_invoiced,
+            sum(l.untaxed_amount_to_invoice) as untaxed_amount_to_invoice,
+            sum(l.untaxed_amount_to_invoice / CASE COALESCE(s.currency_rate, 0) WHEN 0 THEN 1.0 ELSE s.currency_rate END) as untaxed_amount_to_invoice_old,
+            sum(l.untaxed_amount_invoiced) as untaxed_amount_invoiced,
+            sum(l.untaxed_amount_invoiced / CASE COALESCE(s.currency_rate, 0) WHEN 0 THEN 1.0 ELSE s.currency_rate END) as untaxed_amount_invoiced_old,
             count(*) as nbr,
             s.name as name,
             s.date_order as date,
@@ -45,10 +49,11 @@ class BillingDoSaleReport(models.Model):
             sum(p.weight * l.product_uom_qty / u.factor * u2.factor) as weight,
             sum(p.volume * l.product_uom_qty / u.factor * u2.factor) as volume,
             l.discount as discount,
-            sum((l.price_unit * l.product_uom_qty * l.discount / 100.0 / CASE COALESCE(s.currency_rate, 0) WHEN 0 THEN 1.0 ELSE s.currency_rate END)) as discount_amount,
+            sum(l.price_unit * l.product_uom_qty * l.discount / 100.0) as discount_amount,
+            sum((l.price_unit * l.product_uom_qty * l.discount / 100.0 / CASE COALESCE(s.currency_rate, 0) WHEN 0 THEN 1.0 ELSE s.currency_rate END)) as discount_amount_old,
             s.id as order_id
         """
-
+        log.info("[KCS] Select Query: {0}".format(select_))
         for field in fields.values():
             select_ += field
 

@@ -12,3 +12,4 @@ from . import billing_do_account_account
 from . import billing_do_account_payment
 from . import billing_do_product_product
 from . import billing_do_stock_warehouse
+from . import billing_do_sale_report
