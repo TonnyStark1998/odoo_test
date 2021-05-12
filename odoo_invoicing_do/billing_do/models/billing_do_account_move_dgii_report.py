@@ -247,7 +247,17 @@ class BillingDoAccountMoveDgiiReport(models.Model):
             move.report_invoice_credit_sale_amount = ''
             move.report_bill_payment_type = '04'
 
-            payment_amount = sum([payment['amount'] for payment in reconciled_vals], 0)
+            payment_amount = sum([payment['amount'] 
+                                    if 
+                                        payment['currency'] == 'RD$' 
+                                    else 
+                                        self.env['res.currency'].search([('name', '=', payment['currency'])])._convert(payment['amount'],
+                                                                                                                        self.env['res.currency'].search([('name', '=', 'RD$')]),
+                                                                                                                        self.env.company,
+                                                                                                                        payment['date'] or move.invoice_date or fields.Date.today(),
+                                                                                                                        True)
+                                for payment in reconciled_vals], 0)
+
             if move.invoice_payment_state in ['paid']:
                 move.report_bill_payment_type = _payment_type
                 if _payment_type in ['01']:
