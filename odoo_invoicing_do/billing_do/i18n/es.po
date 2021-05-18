@@ -774,3 +774,57 @@ msgstr ""
 "No puede validar una factura con un importe total negativo. En su lugar, "
 "debe crear una nota de crédito. Use el menú de acciones para "
 "transformarlo en una nota de crédito o reembolso."
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_account_payment_search
+msgid "Today"
+msgstr "Hoy"
+
+################################
+# Payment Reports Translations #
+################################
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<strong style=\"text-transform: uppercase;\">Receipt</strong>"
+msgstr "<strong style=\"text-transform: uppercase;\">Recibo</strong>"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<strong>Customer: </strong>"
+msgstr "<strong>Cliente: </strong>"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<strong>Vendor: </strong>"
+msgstr "<strong>Proveedor: </strong>"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<strong>Payment Date:</strong>"
+msgstr "<strong>Fecha:</strong>"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<strong>Payment Method:</strong>"
+msgstr "<strong>Método de pago:</strong>"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<strong>Payment Amount: </strong>"
+msgstr "<strong>Monto: </strong>"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<span>Concept</span>"
+msgstr "<p class=\"text-center;\">Concepto</p>"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<span><strong>Received by: </strong>____________________________ </span>"
+msgstr "<span><strong>Recibido por: </strong>____________________________ </span>"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<span><strong>Created by: </strong></span>"
+msgstr "<span><strong>Creado por: </strong></span>"

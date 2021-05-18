@@ -171,6 +171,26 @@
             </tree>
         </field>
     </record>
+    <record model="ir.ui.view" id="billing_do_view_invoice_calendar">
+        <field name="name">billing.do.account.invoice.view.calendar</field>
+        <field name="model">account.move</field>
+        <field name="arch" type="xml">
+            <calendar string="Invoices" date_start="date" date_stop="date" color="journal_id" mode="week">
+                <field name="partner_id" />
+                <field name="amount_total_signed"/>
+            </calendar>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="billing_do_view_account_move_filter">
+        <field name="name">billing.do.view.account.move.filter</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter" />
+        <field name="arch" type="xml">
+            <field name="name" position="before">
+                <field name="partner_id" position="move" />
+            </field>
+        </field>
+    </record>
     <record model="ir.actions.act_window" id="dgii_reports_format_606">
         <field name="name">Formato de envío de datos 606 (Compras)</field>
         <field name="res_model">account.move</field>
@@ -187,6 +207,21 @@
         <field name="search_view_id" ref="billing_do_view_dgii_607_search"/>
         <field name="domain">['&amp;', ('type','in',['out_invoice','out_refund']), ('state', 'in', ['posted'])]</field>
     </record>
+
+    <!-- Inherited Actions -->
+    <record model="ir.actions.act_window" id="account.action_move_out_invoice_type">
+        <field name="view_mode">tree,kanban,form,calendar</field>
+    </record>
+    <record model="ir.actions.act_window" id="account.action_move_out_refund_type">
+        <field name="view_mode">tree,kanban,form,calendar</field>
+    </record>
+    <record model="ir.actions.act_window" id="account.action_move_in_invoice_type">
+        <field name="view_mode">tree,kanban,form,calendar</field>
+    </record>
+    <record model="ir.actions.act_window" id="account.action_move_in_refund_type">
+        <field name="view_mode">tree,kanban,form,calendar</field>
+    </record>
+
     <menuitem id="main_menu_dgii_reports" name="DGII Reports" parent="account_accountant.menu_accounting" sequence="30" />
     <menuitem id="menu_dgii_reports_606" name="Formato de compras (606)" parent="main_menu_dgii_reports" action="dgii_reports_format_606" sequence="1" />
     <menuitem id="menu_dgii_reports_607" name="Formato de ventas (607)" parent="main_menu_dgii_reports" action="dgii_reports_format_607" sequence="2" />
