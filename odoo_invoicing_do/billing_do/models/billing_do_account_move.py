@@ -4,16 +4,10 @@ import datetime as date
 import logging as log
 from odoo import models, fields, api, exceptions
 from . import billing_do_utils as doutils
+from ...base.models.ir_sequence import IrSequenceDateRange as IrSequenceDateRange
 
 class BillingDoAccountMove(models.Model):
     _inherit = "account.move"
-
-    # Account Move - SQL Constraints
-    _sql_constraints = [
-        ('ncf_sequence_next_number',
-         'UNIQUE(ncf_sequence_next_number)',
-         "El NCF de las facturas no puede repetirse."),
-    ]
 
     # Account Move - Modified Fields
     # date = fields.Date(compute='_compute_move_date', store=True)
@@ -63,12 +57,7 @@ class BillingDoAccountMove(models.Model):
                         tracking=True, 
                         states={'posted': [('readonly', True)]}
                     )
-    ncf_sequence_next_number = fields.Char(readonly=True, 
-                                            copy=False, 
-                                            store=False, 
-                                            tracking=False, 
-                                            compute='_compute_set_name_next_sequence'
-                                        )
+
     ncf_date_to = fields.Date(string="NCF valid to:", 
                                 readonly=True, 
                                 copy=False, 
@@ -89,23 +78,7 @@ class BillingDoAccountMove(models.Model):
     # Account Move - OnChange Fields Functions
     @api.onchange('journal_id')
     def _onchange_journal_id_billing_do(self):
-        if self.journal_id:
-            sequence_date = self.date or self.invoice_date
-            if self.type in ('out_refund', 'in_refund'):
-                sequence = self.journal_id.refund_sequence_id
-            else:
-                sequence = self.journal_id.sequence_id
-
-            prefix, suffix = sequence._get_prefix_suffix(date=sequence_date, date_range=sequence_date)
-
-            sequence_date_new = sequence._get_current_sequence(sequence_date=sequence_date)
-            self.ncf_date_to = sequence_date_new.date_to
-            
-            number_next = sequence_date_new.number_next_actual
-            self.ncf_sequence_next_number = str(prefix) + str('%%0%sd' % sequence.padding % number_next)
-
-            if self.type in ['in_invoice', 'in_refund'] and self.journal_id.sequence_id.code in ['B11', 'B13']:
-                self.ncf = self.ncf_sequence_next_number
+        self.__set_ncf()
 
     @api.onchange('ncf', 'partner_id')
     def _onchange_ncf(self):
@@ -128,27 +101,6 @@ class BillingDoAccountMove(models.Model):
                 move.date = move.invoice_date
             else:
                 move.date = fields.Date.today()
-
-    @api.depends('journal_id')
-    def _compute_set_name_next_sequence(self):
-        for move in self:
-            if move.journal_id:
-                sequence_date = move.date or move.invoice_date
-                if move.type in ('out_refund', 'in_refund'):
-                    sequence = move.journal_id.refund_sequence_id
-                else:
-                    sequence = move.journal_id.sequence_id
-                
-                prefix, suffix = sequence._get_prefix_suffix(date=sequence_date, date_range=sequence_date)
-
-                sequence_date_new = sequence._get_current_sequence(sequence_date=sequence_date)
-                move.ncf_date_to = sequence_date_new.date_to
-
-                number_next = sequence_date_new.number_next_actual
-                move.ncf_sequence_next_number = str(prefix) + str('%%0%sd' % sequence.padding % number_next)
-
-                if move.type in ['in_invoice', 'in_refund'] and move.journal_id.sequence_id.code in ['B11', 'B13'] and move.state in ['draft'] and not move.ncf:
-                    move.ncf = move.ncf_sequence_next_number
 
     # Account Move - Contraints Field's Functions
     @api.constrains('ncf', 'type', 'journal_id')
@@ -206,3 +158,47 @@ class BillingDoAccountMove(models.Model):
                                 'message': "El NCF '{0}' y el RNC '{1}' son válidos.".format(ncf, self.partner_id.vat)
                             }
                         }
+
+    def write(self, vals):
+        sequence = self.__get_journal_sequence()
+        if not sequence:
+            pass
+
+        sequence = sequence._get_current_sequence(sequence_date=self.date or self.invoice_date)
+        if self.type in ['in_invoice', 'in_refund'] and self.journal_id.sequence_id.code in ['B11', 'B13'] and self.state in ['draft'] and 'ncf' in vals:
+            vals['name'] = vals['ncf']
+        
+        if 'journal_id' in vals:
+            if self.journal_id.id != vals['journal_id']:
+                sequence._next()
+
+        if isinstance(sequence, IrSequenceDateRange):
+            vals['ncf_date_to'] = sequence.date_to
+
+        return super(BillingDoAccountMove, self).write(vals)
+
+    def __get_journal_sequence(self):
+        if self.journal_id:
+            if self.type in ('out_refund', 'in_refund'):
+                sequence = self.journal_id.refund_sequence_id
+            else:
+                sequence = self.journal_id.sequence_id
+
+            return sequence
+        return None
+
+    def __set_ncf(self):
+        if self.journal_id and not self.use_sequence:
+            self.ncf = ''
+            pass
+
+        sequence = self.__get_journal_sequence()
+        if not sequence:
+            pass
+
+        sequence_date = self.date or self.invoice_date
+        if self.journal_id and self.use_sequence:
+            prefix, suffix = sequence._get_prefix_suffix(date=sequence_date, date_range=sequence_date)
+            padding = sequence.padding
+            sequence = sequence._get_current_sequence(sequence_date=sequence_date)
+            self.ncf =  str(prefix) + str('%%0%sd' % padding % sequence.number_next_actual) + str(suffix)
