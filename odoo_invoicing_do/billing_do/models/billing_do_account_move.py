@@ -166,7 +166,7 @@ class BillingDoAccountMove(models.Model):
 
         if isinstance(sequence, IrSequenceDateRange):
             if 'date_to' in sequence:
-                vals['ncf_date_to'] = sequence.date_to
+                self.ncf_date_to = sequence.date_to
 
         return super(BillingDoAccountMove, self).post()
 
