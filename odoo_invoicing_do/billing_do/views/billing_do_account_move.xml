@@ -76,11 +76,11 @@
         <field name="inherit_id" ref="account.view_invoice_tree" />
         <field name="arch" type="xml">
             <field name="name" position="before">
-                <field name="ncf" invisible="context.get('default_type') not in ('in_invoice', 'in_refund','in_receipt')" />
+                <field name="ncf" invisible="['&amp;', ('type','not in',['out_invoice','out_refund','out_receipt']), ('journal_id.code','in',['B11','B13'])]" />
             </field>
             <field name="name" position="attributes">
                 <attribute name="invisible">
-                    context.get('default_type') not in ('out_invoice', 'out_refund','out_receipt')
+                    ['&amp;', ('type','not in',['in_invoice', 'in_refund', 'in_receipt']), ('journal_id.code','not in',['B11', 'B13'])]
                 </attribute>
             </field>
             <field name="amount_untaxed_signed" position="replace">
