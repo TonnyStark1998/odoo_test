@@ -113,7 +113,7 @@ class BillingDoAccountMove(models.Model):
             if not self.partner_id:
                 raise exceptions.ValidationError("Seleccione primero el proveedor y luego digite el NCF.")
 
-            if self.partner_id.vat:
+            if self.partner_id.vat and self.type in ['in_invoice', 'in_refund', 'in_receipt'] and upper(self.journal_id.code) not in ['B11', 'B13']:
                 ncf_exists = self.env['account.move'].search_count(args=['&', ('ncf', '=', ncf), '&', ('partner_id.vat', '=', self.partner_id.vat), ('company_id', '=', self.env.company)])
                 if ncf_exists > 0:
                      raise exceptions.ValidationError("El comprobante {0} ya fue utilizado en otra factura con el proveedor {1} - {2}.".format(ncf, self.partner_id.vat, self.partner_id.name))
@@ -156,6 +156,10 @@ class BillingDoAccountMove(models.Model):
                         }
 
     def post(self):
+        sequence = self.__get_journal_sequence()
+        if not sequence:
+            pass
+
         sequence = sequence._get_current_sequence(sequence_date=self.date or self.invoice_date)
         if self.type in ['in_invoice', 'in_refund', 'in_receipt'] and self.journal_id.sequence_id.code not in ['B11', 'B13']:
             self.name = self.ncf
