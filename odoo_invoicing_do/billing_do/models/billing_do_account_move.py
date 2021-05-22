@@ -75,11 +75,6 @@ class BillingDoAccountMove(models.Model):
                                     Tracking=False
                                 )
 
-    # Account Move - OnChange Fields Functions
-    @api.onchange('journal_id')
-    def _onchange_journal_id_billing_do(self):
-        self.__set_ncf()
-
     @api.onchange('ncf', 'partner_id')
     def _onchange_ncf(self):
         if self.type in ['in_invoice', 'in_refund'] and self.is_tax_valuable and self.journal_id.sequence_id.code not in ['B11', 'B13']:
@@ -118,9 +113,10 @@ class BillingDoAccountMove(models.Model):
             if not self.partner_id:
                 raise exceptions.ValidationError("Seleccione primero el proveedor y luego digite el NCF.")
 
-            # ncf_exists = self.env['account.move'].search_count(args=['&', ('ncf', '=', ncf), ('partner_id.vat', '=', self.partner_id.vat)])
-            # if ncf_exists >= 1:
-            #     raise exceptions.ValidationError("El comprobante {0} ya fue utilizado en otra factura con el proveedor {1} - {2}.".format(ncf, self.partner_id.vat, self.partner_id.name))
+            if self.partner_id.vat:
+                ncf_exists = self.env['account.move'].search_count(args=['&', ('ncf', '=', ncf), '&', ('partner_id.vat', '=', self.partner_id.vat), ('company_id', '=', self.env.company)])
+                if ncf_exists > 0:
+                     raise exceptions.ValidationError("El comprobante {0} ya fue utilizado en otra factura con el proveedor {1} - {2}.".format(ncf, self.partner_id.vat, self.partner_id.name))
             
             regex = r"(^(E)?(?=)(41|43)[0-9]{10}|^(B)(?:(11|13)[0-9]{8}))"
             match_ncf = re.match(regex, ncf.upper())
@@ -159,23 +155,16 @@ class BillingDoAccountMove(models.Model):
                             }
                         }
 
-    def write(self, vals):
-        sequence = self.__get_journal_sequence()
-        if not sequence:
-            pass
-
+    def post(self):
         sequence = sequence._get_current_sequence(sequence_date=self.date or self.invoice_date)
-        if self.type in ['in_invoice', 'in_refund'] and self.journal_id.sequence_id.code in ['B11', 'B13'] and self.state in ['draft'] and 'ncf' in vals:
-            vals['name'] = vals['ncf']
-        
-        if 'journal_id' in vals:
-            if self.journal_id.id != vals['journal_id']:
-                sequence._next()
+        if self.type in ['in_invoice', 'in_refund', 'in_receipt'] and self.journal_id.sequence_id.code not in ['B11', 'B13']:
+            self.name = self.ncf
 
         if isinstance(sequence, IrSequenceDateRange):
-            vals['ncf_date_to'] = sequence.date_to
+            if 'date_to' in sequence:
+                vals['ncf_date_to'] = sequence.date_to
 
-        return super(BillingDoAccountMove, self).write(vals)
+        return super(BillingDoAccountMove, self).post()
 
     def __get_journal_sequence(self):
         if self.journal_id:
@@ -186,19 +175,3 @@ class BillingDoAccountMove(models.Model):
 
             return sequence
         return None
-
-    def __set_ncf(self):
-        if self.journal_id and not self.use_sequence:
-            self.ncf = ''
-            pass
-
-        sequence = self.__get_journal_sequence()
-        if not sequence:
-            pass
-
-        sequence_date = self.date or self.invoice_date
-        if self.journal_id and self.use_sequence:
-            prefix, suffix = sequence._get_prefix_suffix(date=sequence_date, date_range=sequence_date)
-            padding = sequence.padding
-            sequence = sequence._get_current_sequence(sequence_date=sequence_date)
-            self.ncf =  str(prefix) + str('%%0%sd' % padding % sequence.number_next_actual) + str(suffix)
