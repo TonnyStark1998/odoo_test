@@ -34,8 +34,7 @@
                 <h2 class="mt0" style="color:#474747;">
                     <field name="use_sequence" attrs="{'invisible': 1}" />
                     <strong>
-                        <field name="name" readonly="True" attrs="{'invisible': ['|', ('name', '=', '/'), '|', ('type','not in', ['out_invoice', 'out_refund']), ('use_sequence', '=', True)]}" />
-                        <field name="ncf" readonly="True" attrs="{'invisible': ['|', ('type', 'not in', ['in_invoice', 'in_refund']), '&amp;', ('state', '=', 'draft'), ('use_sequence', '=', False)]}" />
+                        <field name="name" readonly="True" attrs="{'invisible': [('name', '=', '/')]}" />
                     </strong>
                 </h2>
             </xpath>
@@ -75,14 +74,6 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_invoice_tree" />
         <field name="arch" type="xml">
-            <field name="name" position="before">
-                <field name="ncf" invisible="['&amp;', ('type','not in',['out_invoice','out_refund','out_receipt']), ('journal_id.code','in',['B11','B13'])]" />
-            </field>
-            <field name="name" position="attributes">
-                <attribute name="invisible">
-                    ['&amp;', ('type','not in',['in_invoice', 'in_refund', 'in_receipt']), ('journal_id.code','not in',['B11', 'B13'])]
-                </attribute>
-            </field>
             <field name="amount_untaxed_signed" position="replace">
                 <field name="amount_untaxed" sum="Total" optional="show"/>
             </field>
