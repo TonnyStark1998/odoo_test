@@ -101,7 +101,7 @@ class BillingDoAccountMove(models.Model):
     @api.constrains('ncf', 'type', 'journal_id')
     def _check_ncf(self):
         for move in self:
-            if move.type in ['in_invoice', 'in_refund'] and self.is_tax_valuable and self.journal_id.sequence_id.code not in ['B11', 'B13']:
+            if move.type in ['in_invoice', 'in_refund', 'in_receipt'] and self.is_tax_valuable and upper(self.journal_id.sequence_id.code) not in ['B11', 'B13']:
                 try:
                     return self._validate_ncf(move.ncf)
                 except exceptions.ValidationError as ve:
@@ -113,8 +113,8 @@ class BillingDoAccountMove(models.Model):
             if not self.partner_id:
                 raise exceptions.ValidationError("Seleccione primero el proveedor y luego digite el NCF.")
 
-            if self.partner_id.vat and self.type in ['in_invoice', 'in_refund', 'in_receipt'] and upper(self.journal_id.code) not in ['B11', 'B13']:
-                ncf_exists = self.env['account.move'].search_count(args=['&', ('ncf', '=', ncf), '&', ('partner_id.vat', '=', self.partner_id.vat), ('company_id', '=', self.env.company)])
+            if self.partner_id.vat:
+                ncf_exists = self.env['account.move'].search_count(args=['&', ('partner_id.vat', '=', self.partner_id.vat), '|' ('ncf', '=', ncf), ('name', '=', ncf)])
                 if ncf_exists > 0:
                      raise exceptions.ValidationError("El comprobante {0} ya fue utilizado en otra factura con el proveedor {1} - {2}.".format(ncf, self.partner_id.vat, self.partner_id.name))
             
@@ -161,7 +161,7 @@ class BillingDoAccountMove(models.Model):
             pass
 
         sequence = sequence._get_current_sequence(sequence_date=self.date or self.invoice_date)
-        if self.type in ['in_invoice', 'in_refund', 'in_receipt'] and self.journal_id.sequence_id.code not in ['B11', 'B13']:
+        if self.type in ['in_invoice', 'in_refund', 'in_receipt'] and self.journal_id.sequence_id.code.upper() not in ['B11', 'B13']:
             self.name = self.ncf
 
         if isinstance(sequence, IrSequenceDateRange):
