@@ -161,7 +161,7 @@ class BillingDoAccountMove(models.Model):
             pass
 
         sequence = sequence._get_current_sequence(sequence_date=self.date or self.invoice_date)
-        if self.type in ['in_invoice', 'in_refund', 'in_receipt'] and upper(self.journal_id.sequence_id.code) not in ['B11', 'B13']:
+        if self.type in ['in_invoice', 'in_refund', 'in_receipt'] and self.journal_id.sequence_id.code.upper() not in ['B11', 'B13']:
             self.name = self.ncf
 
         if isinstance(sequence, IrSequenceDateRange):
