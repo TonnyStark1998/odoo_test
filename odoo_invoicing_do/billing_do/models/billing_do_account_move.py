@@ -10,7 +10,6 @@ class BillingDoAccountMove(models.Model):
     _inherit = "account.move"
 
     # Account Move - Modified Fields
-    # date = fields.Date(compute='_compute_move_date', store=True)
 
     # Account Move - New Fields
     income_type = fields.Selection(selection=[
@@ -77,7 +76,7 @@ class BillingDoAccountMove(models.Model):
 
     @api.onchange('ncf', 'partner_id')
     def _onchange_ncf(self):
-        if self.type in ['in_invoice', 'in_refund'] and self.is_tax_valuable and self.journal_id.sequence_id.code not in ['B11', 'B13']:
+        if self.type in ['in_invoice', 'in_refund', 'in_receipt'] and self.is_tax_valuable and self.journal_id.sequence_id.code.upper() not in ['B11', 'B13']:
             try:
                 return self._validate_ncf(self.ncf)
             except exceptions.ValidationError as ve:
@@ -114,9 +113,10 @@ class BillingDoAccountMove(models.Model):
                 raise exceptions.ValidationError("Seleccione primero el proveedor y luego digite el NCF.")
 
             if self.partner_id.vat:
-                ncf_exists = self.env['account.move'].search_count(args=['&', ('partner_id.vat', '=', self.partner_id.vat), '|', ('ncf', '=', ncf), ('name', '=', ncf)])
+                ncf_exists = self.env['account.move'].search_count(args=[('id', '!=', self.id if self.id else 0), ('type', 'in', ['in_invoice', 'in_refund', 'in_receipt']), ('partner_id.vat', '=', self.partner_id.vat), '|', ('ncf', '=', ncf), ('name', '=', ncf)])
+
                 if ncf_exists > 0:
-                     raise exceptions.ValidationError("El comprobante {0} ya fue utilizado en otra factura con el proveedor {1} - {2}.".format(ncf, self.partner_id.vat, self.partner_id.name))
+                    raise exceptions.ValidationError("El comprobante {0} ya fue utilizado en otra factura con el proveedor {1} - {2}.".format(ncf, self.partner_id.vat, self.partner_id.name))
             
             regex = r"(^(E)?(?=)(41|43)[0-9]{10}|^(B)(?:(11|13)[0-9]{8}))"
             match_ncf = re.match(regex, ncf.upper())
