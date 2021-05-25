@@ -114,7 +114,7 @@ class BillingDoAccountMove(models.Model):
                 raise exceptions.ValidationError("Seleccione primero el proveedor y luego digite el NCF.")
 
             if self.partner_id.vat:
-                ncf_exists = self.env['account.move'].search_count(args=['&', ('partner_id.vat', '=', self.partner_id.vat), '|' ('ncf', '=', ncf), ('name', '=', ncf)])
+                ncf_exists = self.env['account.move'].search_count(args=['&', ('partner_id.vat', '=', self.partner_id.vat), '|', ('ncf', '=', ncf), ('name', '=', ncf)])
                 if ncf_exists > 0:
                      raise exceptions.ValidationError("El comprobante {0} ya fue utilizado en otra factura con el proveedor {1} - {2}.".format(ncf, self.partner_id.vat, self.partner_id.name))
             
