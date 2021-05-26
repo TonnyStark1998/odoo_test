@@ -2,7 +2,7 @@
 import re
 import datetime as date
 import logging as log
-from odoo import models, fields, api, exceptions
+from odoo import models, fields, api, exceptions, _
 from . import billing_do_utils as doutils
 from ...base.models.ir_sequence import IrSequenceDateRange as IrSequenceDateRange
 
@@ -105,6 +105,31 @@ class BillingDoAccountMove(models.Model):
                     return self._validate_ncf(move.ncf)
                 except exceptions.ValidationError as ve:
                     raise
+    
+    @api.constrains('name', 'journal_id', 'state')
+    def _check_unique_sequence_number(self):
+        moves = self.filtered(lambda move: move.state == 'posted')
+        if not moves:
+            return
+
+        self.flush()
+
+        # /!\ Computed stored fields are not yet inside the database.
+        self._cr.execute('''
+            SELECT move2.id
+            FROM account_move move
+            INNER JOIN account_move move2 ON
+                move2.name = move.name
+                AND move2.journal_id = move.journal_id
+                AND move2.type = move.type
+                AND move2.id != move.id
+                AND move2.company_id = move.company_id
+                AND move2.partner_id = move.partner_id
+            WHERE move.id IN %s AND move2.state = 'posted'
+        ''', [tuple(moves.ids)])
+        res = self._cr.fetchone()
+        if res:
+            raise exceptions.ValidationError(_('Posted journal entry must have an unique sequence number per company.'))
 
     # Account Move - Helper Functions
     def _validate_ncf(self, ncf):
