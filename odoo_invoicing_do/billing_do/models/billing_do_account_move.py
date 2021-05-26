@@ -2,21 +2,14 @@
 import re
 import datetime as date
 import logging as log
-from odoo import models, fields, api, exceptions
+from odoo import models, fields, api, exceptions, _
 from . import billing_do_utils as doutils
+from ...base.models.ir_sequence import IrSequenceDateRange as IrSequenceDateRange
 
 class BillingDoAccountMove(models.Model):
     _inherit = "account.move"
 
-    # Account Move - SQL Constraints
-    _sql_constraints = [
-        ('ncf_sequence_next_number',
-         'UNIQUE(ncf_sequence_next_number)',
-         "El NCF de las facturas no puede repetirse."),
-    ]
-
     # Account Move - Modified Fields
-    # date = fields.Date(compute='_compute_move_date', store=True)
 
     # Account Move - New Fields
     income_type = fields.Selection(selection=[
@@ -63,12 +56,7 @@ class BillingDoAccountMove(models.Model):
                         tracking=True, 
                         states={'posted': [('readonly', True)]}
                     )
-    ncf_sequence_next_number = fields.Char(readonly=True, 
-                                            copy=False, 
-                                            store=False, 
-                                            tracking=False, 
-                                            compute='_compute_set_name_next_sequence'
-                                        )
+
     ncf_date_to = fields.Date(string="NCF valid to:", 
                                 readonly=True, 
                                 copy=False, 
@@ -86,30 +74,9 @@ class BillingDoAccountMove(models.Model):
                                     Tracking=False
                                 )
 
-    # Account Move - OnChange Fields Functions
-    @api.onchange('journal_id')
-    def _onchange_journal_id_billing_do(self):
-        if self.journal_id:
-            sequence_date = self.date or self.invoice_date
-            if self.type in ('out_refund', 'in_refund'):
-                sequence = self.journal_id.refund_sequence_id
-            else:
-                sequence = self.journal_id.sequence_id
-
-            prefix, suffix = sequence._get_prefix_suffix(date=sequence_date, date_range=sequence_date)
-
-            sequence_date_new = sequence._get_current_sequence(sequence_date=sequence_date)
-            self.ncf_date_to = sequence_date_new.date_to
-            
-            number_next = sequence_date_new.number_next_actual
-            self.ncf_sequence_next_number = str(prefix) + str('%%0%sd' % sequence.padding % number_next)
-
-            if self.type in ['in_invoice', 'in_refund'] and self.journal_id.sequence_id.code in ['B11', 'B13']:
-                self.ncf = self.ncf_sequence_next_number
-
     @api.onchange('ncf', 'partner_id')
     def _onchange_ncf(self):
-        if self.type in ['in_invoice', 'in_refund'] and self.is_tax_valuable and self.journal_id.sequence_id.code not in ['B11', 'B13']:
+        if self.type in ['in_invoice', 'in_refund', 'in_receipt'] and self.is_tax_valuable and self.journal_id.sequence_id.code.upper() not in ['B11', 'B13']:
             try:
                 return self._validate_ncf(self.ncf)
             except exceptions.ValidationError as ve:
@@ -129,36 +96,40 @@ class BillingDoAccountMove(models.Model):
             else:
                 move.date = fields.Date.today()
 
-    @api.depends('journal_id')
-    def _compute_set_name_next_sequence(self):
-        for move in self:
-            if move.journal_id:
-                sequence_date = move.date or move.invoice_date
-                if move.type in ('out_refund', 'in_refund'):
-                    sequence = move.journal_id.refund_sequence_id
-                else:
-                    sequence = move.journal_id.sequence_id
-                
-                prefix, suffix = sequence._get_prefix_suffix(date=sequence_date, date_range=sequence_date)
-
-                sequence_date_new = sequence._get_current_sequence(sequence_date=sequence_date)
-                move.ncf_date_to = sequence_date_new.date_to
-
-                number_next = sequence_date_new.number_next_actual
-                move.ncf_sequence_next_number = str(prefix) + str('%%0%sd' % sequence.padding % number_next)
-
-                if move.type in ['in_invoice', 'in_refund'] and move.journal_id.sequence_id.code in ['B11', 'B13'] and move.state in ['draft'] and not move.ncf:
-                    move.ncf = move.ncf_sequence_next_number
-
     # Account Move - Contraints Field's Functions
     @api.constrains('ncf', 'type', 'journal_id')
     def _check_ncf(self):
         for move in self:
-            if move.type in ['in_invoice', 'in_refund'] and self.is_tax_valuable and self.journal_id.sequence_id.code not in ['B11', 'B13']:
+            if move.type in ['in_invoice', 'in_refund', 'in_receipt'] and self.is_tax_valuable and self.journal_id.sequence_id.code.upper() not in ['B11', 'B13']:
                 try:
                     return self._validate_ncf(move.ncf)
                 except exceptions.ValidationError as ve:
                     raise
+    
+    @api.constrains('name', 'journal_id', 'state')
+    def _check_unique_sequence_number(self):
+        moves = self.filtered(lambda move: move.state == 'posted')
+        if not moves:
+            return
+
+        self.flush()
+
+        # /!\ Computed stored fields are not yet inside the database.
+        self._cr.execute('''
+            SELECT move2.id
+            FROM account_move move
+            INNER JOIN account_move move2 ON
+                move2.name = move.name
+                AND move2.journal_id = move.journal_id
+                AND move2.type = move.type
+                AND move2.id != move.id
+                AND move2.company_id = move.company_id
+                AND move2.partner_id = move.partner_id
+            WHERE move.id IN %s AND move2.state = 'posted'
+        ''', [tuple(moves.ids)])
+        res = self._cr.fetchone()
+        if res:
+            raise exceptions.ValidationError(_('Posted journal entry must have an unique sequence number per company.'))
 
     # Account Move - Helper Functions
     def _validate_ncf(self, ncf):
@@ -166,9 +137,11 @@ class BillingDoAccountMove(models.Model):
             if not self.partner_id:
                 raise exceptions.ValidationError("Seleccione primero el proveedor y luego digite el NCF.")
 
-            # ncf_exists = self.env['account.move'].search_count(args=['&', ('ncf', '=', ncf), ('partner_id.vat', '=', self.partner_id.vat)])
-            # if ncf_exists >= 1:
-            #     raise exceptions.ValidationError("El comprobante {0} ya fue utilizado en otra factura con el proveedor {1} - {2}.".format(ncf, self.partner_id.vat, self.partner_id.name))
+            if self.partner_id.vat:
+                ncf_exists = self.env['account.move'].search_count(args=[('id', '!=', self.id if self.id else 0), ('type', 'in', ['in_invoice', 'in_refund', 'in_receipt']), ('partner_id.vat', '=', self.partner_id.vat), '|', ('ncf', '=', ncf), ('name', '=', ncf)])
+
+                if ncf_exists > 0:
+                    raise exceptions.ValidationError("El comprobante {0} ya fue utilizado en otra factura con el proveedor {1} - {2}.".format(ncf, self.partner_id.vat, self.partner_id.name))
             
             regex = r"(^(E)?(?=)(41|43)[0-9]{10}|^(B)(?:(11|13)[0-9]{8}))"
             match_ncf = re.match(regex, ncf.upper())
@@ -206,3 +179,28 @@ class BillingDoAccountMove(models.Model):
                                 'message': "El NCF '{0}' y el RNC '{1}' son válidos.".format(ncf, self.partner_id.vat)
                             }
                         }
+
+    def post(self):
+        sequence = self.__get_journal_sequence()
+        if not sequence:
+            pass
+
+        sequence = sequence._get_current_sequence(sequence_date=self.date or self.invoice_date)
+        if self.type in ['in_invoice', 'in_refund', 'in_receipt'] and self.journal_id.sequence_id.code.upper() not in ['B11', 'B13']:
+            self.name = self.ncf
+
+        if isinstance(sequence, IrSequenceDateRange):
+            if 'date_to' in sequence:
+                self.ncf_date_to = sequence.date_to
+
+        return super(BillingDoAccountMove, self).post()
+
+    def __get_journal_sequence(self):
+        if self.journal_id:
+            if self.type in ('out_refund', 'in_refund'):
+                sequence = self.journal_id.refund_sequence_id
+            else:
+                sequence = self.journal_id.sequence_id
+
+            return sequence
+        return None

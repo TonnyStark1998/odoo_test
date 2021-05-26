@@ -130,19 +130,11 @@ class BillingDoAccountMoveDgiiReport(models.Model):
         for move in self:
             move_name = ''
             move_reversed_name = ''
-            if move.type in ['out_invoice']:
+            if move.type in ['out_invoice', 'in_invoice']:
                 move_name = move.name
-            elif move.type in ['out_refund']:
+            elif move.type in ['out_refund', 'in_refund']:
                 move_name = move.name
                 move_reversed_name = move.reversed_entry_id.name
-            elif move.type in ['in_invoice']:
-                move_name = move.ncf
-            elif move.type in ['in_refund']:
-                move_name = move.ncf
-                if move.reversed_entry_id.journal_id.sequence_id.code in ['B11', 'B13']:
-                    move_reversed_name = move.reversed_entry_id.name
-                else:
-                    move_reversed_name = move.reversed_entry_id.ncf
 
             move.report_move = move_name
             move.report_move_reversed = move_reversed_name
