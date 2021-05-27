@@ -130,19 +130,11 @@ class BillingDoAccountMoveDgiiReport(models.Model):
         for move in self:
             move_name = ''
             move_reversed_name = ''
-            if move.type in ['out_invoice']:
+            if move.type in ['out_invoice', 'in_invoice']:
                 move_name = move.name
-            elif move.type in ['out_refund']:
+            elif move.type in ['out_refund', 'in_refund']:
                 move_name = move.name
                 move_reversed_name = move.reversed_entry_id.name
-            elif move.type in ['in_invoice']:
-                move_name = move.ncf
-            elif move.type in ['in_refund']:
-                move_name = move.ncf
-                if move.reversed_entry_id.journal_id.sequence_id.code in ['B11', 'B13']:
-                    move_reversed_name = move.reversed_entry_id.name
-                else:
-                    move_reversed_name = move.reversed_entry_id.ncf
 
             move.report_move = move_name
             move.report_move_reversed = move_reversed_name
@@ -247,7 +239,17 @@ class BillingDoAccountMoveDgiiReport(models.Model):
             move.report_invoice_credit_sale_amount = ''
             move.report_bill_payment_type = '04'
 
-            payment_amount = sum([payment['amount'] for payment in reconciled_vals], 0)
+            payment_amount = sum([payment['amount'] 
+                                    if 
+                                        payment['currency'] == 'RD$' 
+                                    else 
+                                        self.env['res.currency'].search([('name', '=', payment['currency'])])._convert(payment['amount'],
+                                                                                                                        self.env['res.currency'].search([('name', '=', 'RD$')]),
+                                                                                                                        self.env.company,
+                                                                                                                        payment['date'] or move.invoice_date or fields.Date.today(),
+                                                                                                                        True)
+                                for payment in reconciled_vals], 0)
+
             if move.invoice_payment_state in ['paid']:
                 move.report_bill_payment_type = _payment_type
                 if _payment_type in ['01']:
@@ -269,8 +271,9 @@ class BillingDoAccountMoveDgiiReport(models.Model):
 
             _last_payment_date = datetime.date.min
             for payment in reconciled_vals:
-                if payment['date'] > _last_payment_date:
-                    _last_payment_date = payment['date']
+                if payment['date']:
+                   if payment['date'] > _last_payment_date:
+                        _last_payment_date = payment['date']
 
             if move.invoice_payment_state in ['paid']:
                 if _last_payment_date != datetime.date.min:

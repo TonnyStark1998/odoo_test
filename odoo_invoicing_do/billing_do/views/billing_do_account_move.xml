@@ -34,10 +34,8 @@
                 <h2 class="mt0" style="color:#474747;">
                     <field name="use_sequence" attrs="{'invisible': 1}" />
                     <strong>
-                        <field name="name" readonly="True" attrs="{'invisible': ['|', ('name', '=', '/'), '|', ('type','not in', ['out_invoice', 'out_refund']), ('use_sequence', '=', True)]}" />
-                        <field name="ncf" readonly="True" attrs="{'invisible': ['|', ('state', '=', 'draft'), ('type', 'not in', ['in_invoice', 'in_refund'])]}" />
+                        <field name="name" readonly="True" attrs="{'invisible': [('name', '=', '/')]}" />
                     </strong>
-                    <field name="ncf_sequence_next_number" readonly="True" attrs="{'invisible': ['|', ('state','!=','draft'), '|', ('name','!=','/'), '&amp;', ('type', 'in', ['in_invoice', 'in_refund']), ('use_sequence', '=', False)]}" />
                 </h2>
             </xpath>
             <xpath expr="//field[@name='ref']" position="before">
@@ -57,11 +55,6 @@
             <xpath expr="//field[@name='company_id']" position="before">
                 <field name="invoice_user_id" position="move"/>
             </xpath>
-            <!-- <field name="date" position="attributes">
-                <attribute name="invisible">
-                    1
-                </attribute>
-            </field> -->
             <field name="quantity" position="replace">
                 <field name="quantity"
                         widget="float" 
@@ -76,14 +69,6 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_invoice_tree" />
         <field name="arch" type="xml">
-            <field name="name" position="before">
-                <field name="ncf" invisible="context.get('default_type') not in ('in_invoice', 'in_refund','in_receipt')" />
-            </field>
-            <field name="name" position="attributes">
-                <attribute name="invisible">
-                    context.get('default_type') not in ('out_invoice', 'out_refund','out_receipt')
-                </attribute>
-            </field>
             <field name="amount_untaxed_signed" position="replace">
                 <field name="amount_untaxed" sum="Total" optional="show"/>
             </field>
@@ -171,6 +156,26 @@
             </tree>
         </field>
     </record>
+    <record model="ir.ui.view" id="billing_do_view_invoice_calendar">
+        <field name="name">billing.do.account.invoice.view.calendar</field>
+        <field name="model">account.move</field>
+        <field name="arch" type="xml">
+            <calendar string="Invoices" date_start="date" date_stop="date" color="journal_id" mode="week">
+                <field name="partner_id" />
+                <field name="amount_total_signed"/>
+            </calendar>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="billing_do_view_account_move_filter">
+        <field name="name">billing.do.view.account.move.filter</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter" />
+        <field name="arch" type="xml">
+            <field name="name" position="before">
+                <field name="partner_id" position="move" />
+            </field>
+        </field>
+    </record>
     <record model="ir.actions.act_window" id="dgii_reports_format_606">
         <field name="name">Formato de envío de datos 606 (Compras)</field>
         <field name="res_model">account.move</field>
@@ -187,6 +192,21 @@
         <field name="search_view_id" ref="billing_do_view_dgii_607_search"/>
         <field name="domain">['&amp;', ('type','in',['out_invoice','out_refund']), ('state', 'in', ['posted'])]</field>
     </record>
+
+    <!-- Inherited Actions -->
+    <record model="ir.actions.act_window" id="account.action_move_out_invoice_type">
+        <field name="view_mode">tree,kanban,form,calendar</field>
+    </record>
+    <record model="ir.actions.act_window" id="account.action_move_out_refund_type">
+        <field name="view_mode">tree,kanban,form,calendar</field>
+    </record>
+    <record model="ir.actions.act_window" id="account.action_move_in_invoice_type">
+        <field name="view_mode">tree,kanban,form,calendar</field>
+    </record>
+    <record model="ir.actions.act_window" id="account.action_move_in_refund_type">
+        <field name="view_mode">tree,kanban,form,calendar</field>
+    </record>
+
     <menuitem id="main_menu_dgii_reports" name="DGII Reports" parent="account_accountant.menu_accounting" sequence="30" />
     <menuitem id="menu_dgii_reports_606" name="Formato de compras (606)" parent="main_menu_dgii_reports" action="dgii_reports_format_606" sequence="1" />
     <menuitem id="menu_dgii_reports_607" name="Formato de ventas (607)" parent="main_menu_dgii_reports" action="dgii_reports_format_607" sequence="2" />
