@@ -9,14 +9,19 @@
                     {'readonly': [('tax_contributor_type', 'not in', ['3'])]}
                 </attribute>
             </field>
-            <field name="type" position="before">
-                <field name="tax_contributor_type" />
+            <field name="type" position="after">
                 <field name="vat" position="move" />
             </field>
             <field name="vat" position="attributes">
                 <attribute name="attrs">
                     {'required': [('tax_contributor_type', 'not in', ['3'])]}
                 </attribute>
+            </field>
+            <field name="type" position="before">
+                <field name="tax_contributor_type" />
+            </field>
+            <field name="vat" position="after">
+                <field name="economic_activity" readonly="1" />
             </field>
         </field>
     </record>

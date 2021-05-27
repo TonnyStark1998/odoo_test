@@ -11,6 +11,7 @@ class BillingDoResPartner(models.Model):
             ('2', 'Persona física'),
             ('3', 'Otro')
         ], string='Tax Contributor Type', required=True, store=True, readonly=False, copy=False, tracking=True)
+    economic_activity = fields.Char(string='Economic Activity')
 
     # Res Partner - Modified Fields
     vat = fields.Char(store=True, tracking=True)
@@ -45,12 +46,12 @@ class BillingDoResPartner(models.Model):
                     log.info("[KCS] VAT Response (Status Code): {0}".format(vat_response.status_code))
                     
                     if(vat_response.status_code == 200):
-                        vat_name = vat_response.json()['razonSocial']
-                        self.name = vat_name
+                        self.name = vat_response.json()['razonSocial']
+                        self.economic_activity = vat_response.json()['actividadEconomica']
                         return {
                             'warning': {
                                 'title': "RNC '{0}' encontrado.".format(self.vat),
-                                "message": "Pertenece a '{0}' según los registros de la DGII.".format(vat_name)
+                                "message": "Pertenece a '{0}' según los registros de la DGII.".format(self.name)
                             }
                         }
                     elif(vat_response.status_code == 404):

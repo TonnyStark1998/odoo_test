@@ -43,7 +43,8 @@ class PK(models.Model):
         related='company_id.df_style',
         string='Picking Style',
         help="Select Style to use when printing the picking slip",
-        default=lambda self: self.partner_id.style 
+        default=lambda self: self.env.company.df_style
+                                or self.partner_id.style 
                                 or self.env.user.company_id.df_style,
         readonly=True
     )
