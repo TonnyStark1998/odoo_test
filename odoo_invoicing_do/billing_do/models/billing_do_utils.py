@@ -51,14 +51,14 @@ class BillingDoUtils:
                 BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi(model)
             log.info("[KCS] Payload: ['vat': '{0}', 'ncf': '{1}', 'vat_buyer': '{2}']".format(vat, ncf, vatBuyer))
             log.info("[KCS] Token used: {0}".format(BillingDoUtils.__token))
-            request = requests.post("{0}/{4}/{1}/{2}/{3}".format(BillingDoUtils.__api_dgii_base_url, vat, ncf, vatBuyer, __api_services_tax_receipts_endpoint_temp), headers=BillingDoUtils.__get_request_headers(), data={})
+            request = requests.post("{0}/{3}/{1}/{2}".format(BillingDoUtils.__api_dgii_base_url, vat, ncf, __api_services_tax_receipts_endpoint_temp), headers=BillingDoUtils.__get_request_headers(), data={})
             log.info("[KCS] Request: {0}".format(request))
             log.info("[KCS] Request (Status Code): {0}".format(request.status_code))
             if request.status_code == 401:
                 BillingDoUtils.__token = ""
                 BillingDoUtils.__token = BillingDoUtils.__get_access_token_for_webapi(model)
                 log.info("[KCS] Token new: {0}".format(BillingDoUtils.__token))
-                request = requests.post("{0}/{4}/{1}/{2}/{3}".format(BillingDoUtils.__api_dgii_base_url, vat, ncf, vatBuyer, __api_services_tax_receipts_endpoint_temp), headers=BillingDoUtils.__get_request_headers(), data={})
+                request = requests.post("{0}/{3}/{1}/{2}".format(BillingDoUtils.__api_dgii_base_url, vat, ncf, __api_services_tax_receipts_endpoint_temp), headers=BillingDoUtils.__get_request_headers(), data={})
                 log.info("[KCS] Request: {0}".format(request))
                 log.info("[KCS] Request (Status Code): {0}".format(request.status_code))
             return request
