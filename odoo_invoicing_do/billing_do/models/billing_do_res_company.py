@@ -16,6 +16,9 @@ class BillingDoResCompany(models.Model):
     # Res Company - Modified Fields
     vat = fields.Char(store=True, tracking=True)
 
+    # Res Company - Related Fields
+    economic_activity = fields.Char(related='partner_id.economic_activity')
+
     # Res Company - OnChange Fields Functions
     @api.onchange('vat', 'tax_contributor_type')
     def _onchange_vat_billing_do(self):
@@ -45,12 +48,12 @@ class BillingDoResCompany(models.Model):
                     log.info("[KCS] VAT Response (Status Code): {0}".format(vat_response.status_code))
                     
                     if(vat_response.status_code == 200):
-                        vat_name = vat_response.json()['razonSocial']
-                        self.name = vat_name
+                        self.name = vat_response.json()['razonSocial']
+                        self.economic_activity = vat_response.json()['actividadEconomica']
                         return {
                             'warning': {
                                 'title': "RNC '{0}' encontrado.".format(self.vat),
-                                "message": "Pertenece a '{0}' según los registros de la DGII.".format(vat_name)
+                                "message": "Pertenece a '{0}' según los registros de la DGII.".format(self.name)
                             }
                         }
                     elif(vat_response.status_code == 404):
