@@ -7,11 +7,18 @@ class BillingDoResPartner(models.Model):
 
     # Res Partner - New Fields
     tax_contributor_type = fields.Selection(selection=[
-            ('1', 'Persona jurídica'),
-            ('2', 'Persona física'),
-            ('3', 'Otro')
-        ], string='Tax Contributor Type', required=True, store=True, readonly=False, copy=False, tracking=True)
-    economic_activity = fields.Char(string='Economic Activity', store=True)
+                                                ('1', 'Persona jurídica'),
+                                                ('2', 'Persona física'),
+                                                ('3', 'Otro')
+                                            ],
+                                            string='Tax Contributor Type',
+                                            required=True,
+                                            store=True,
+                                            readonly=False,
+                                            copy=False,
+                                            tracking=True)
+    economic_activity = fields.Char(string='Economic Activity',
+                                    store=True)
 
     # Res Partner - Modified Fields
     vat = fields.Char(store=True, tracking=True)
@@ -40,7 +47,7 @@ class BillingDoResPartner(models.Model):
                             'message': "El RNC ({0}) digitado es inválido. El dígito verificador no coincide. Verifique el valor digitado.".format(self.vat)
                         }
                 }
-            
+
             try:
                 vat_response = doutils.BillingDoUtils.dgii_get_vat_info(self, self.vat)
 

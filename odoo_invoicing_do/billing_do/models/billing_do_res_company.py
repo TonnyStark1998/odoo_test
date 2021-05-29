@@ -99,8 +99,3 @@ class BillingDoResCompany(models.Model):
     def _onchange_tax_contributor_type(self):
         if self.tax_contributor_type and self.tax_contributor_type in ['3']:
             self.name = ''
-
-    def write(self, vals):
-        log.info("[KCS] Self Name: {0} | Vals['name']: {1}".format(self.name))
-        log.info("[KCS] Self Economic Activity: {0} | Vals['economic_activity']: {1}".format(self.economic_activity))
-        super(BillingDoResCompany, self).write(vals)
