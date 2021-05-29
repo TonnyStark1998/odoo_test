@@ -4,10 +4,8 @@
         <field name="model">res.company</field>
         <field name="inherit_id" ref="base.view_company_form" />
         <field name="arch" type="xml">
-            <field name="name" position="attributes">
-                <attribute name="readonly">
-                    True
-                </attribute>
+            <field name="name" position="replace">
+                <field name="name" readonly="1" force_save="1" />
             </field>
             <field name="partner_id" position="before">
                 <field name="tax_contributor_type" />
@@ -22,7 +20,7 @@
                 <field name="googleplus" />
             </field>
             <field name="partner_id" position="after">
-                <field name="economic_activity" readonly="1" />
+                <field name="economic_activity" readonly="1" force_save="1" />
             </field>
         </field>
     </record>
@@ -32,10 +30,8 @@
         <field name="groups_id" eval="[(6,0,[ref('base.user_admin')])]" />
         <field name="inherit_id" ref="base.view_company_form" />
         <field name="arch" type="xml">
-            <field name="name" position="attributes">
-                <attribute name="readonly">
-                    False
-                </attribute>
+            <field name="name" position="replace">
+                <field name="name" readonly="0" force_save="1" />
             </field>
         </field>
     </record>

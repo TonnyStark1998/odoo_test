@@ -25,7 +25,9 @@ class BillingDoResCompany(models.Model):
         self.name = ''
         if self.vat and self.tax_contributor_type and not self.tax_contributor_type in ['3']:
             _validate_vat_result = doutils.BillingDoUtils.validate_vat(self.vat)
+            
             log.info("[KCS] Validate VAT Result: {0}".format(_validate_vat_result))
+            
             if _validate_vat_result == 3:
                 return { 
                     'warning':{
@@ -40,36 +42,51 @@ class BillingDoResCompany(models.Model):
                             'message': "El RNC ({0}) digitado es inválido. El dígito verificador no coincide. Verifique el valor digitado.".format(self.vat)
                         }
                 }
+
             try:
                 vat_response = doutils.BillingDoUtils.dgii_get_vat_info(self, self.vat)
 
-                if not vat_response is None:
-                    log.info("[KCS] VAT Response: {0}".format(vat_response))
-                    log.info("[KCS] VAT Response (Status Code): {0}".format(vat_response.status_code))
-                    
-                    if(vat_response.status_code == 200):
-                        self.name = vat_response.json()['razonSocial']
-                        self.economic_activity = vat_response.json()['actividadEconomica']
-                        return {
-                            'warning': {
-                                'title': "RNC '{0}' encontrado.".format(self.vat),
-                                "message": "Pertenece a '{0}' según los registros de la DGII.".format(self.name)
-                            }
+                log.info("[KCS] VAT Response: {0}".format(vat_response))
+                log.info("[KCS] VAT Response (Status Code): {0}".format(vat_response.status_code))
+
+                if vat_response and vat_response.status_code == 200:
+                    self.name = vat_response.json()['razonSocial']
+                    self.economic_activity = vat_response.json()['actividadEconomica']
+                    return {
+                        'warning': {
+                            'title': "RNC '{0}' encontrado.".format(self.vat),
+                            "message": "Pertenece a '{0}' según los registros de la DGII.".format(self.name)
                         }
-                    elif(vat_response.status_code == 404):
-                        return {
-                            'warning':{
-                                'title': "Consulta fallida",
-                                'message': "El RNC '{0}' no se encuentra en la base de datos de la DGII.".format(self.vat)
-                            }
+                    }
+
+                citizen_response = doutils.BillingDoUtils.dgii_get_citizen_info(self, self.vat)
+
+                log.info("[KCS] Citizen Response: {0}".format(citizen_response))
+                log.info("[KCS] Citizen Response (Status Code): {0}".format(citizen_response.status_code))
+
+                if citizen_response and citizen_response.status_code == 200:
+                    self.name = citizen_response.json()['nombre']
+                    return {
+                        'warning': {
+                            'title': "Ciudadano '{0}' encontrado.".format(self.vat),
+                            "message": "Pertenece a '{0}' según los registros de la DGII.".format(self.name)
                         }
-                    else:
-                        return {
-                            'warning':{
-                                'title': "Error de conexión con servicio",
-                                'message': "Ocurrió un error inesperado al consulta el servicio."
-                            }
+                    }
+
+                if((citizen_response is not None and citizen_response.status_code == 404) or (vat_response is not None and vat_response.status_code == 404)):
+                    return {
+                        'warning':{
+                            'title': "Consulta fallida",
+                            'message': "El RNC '{0}' no se encuentra en la base de datos de la DGII.".format(self.vat)
                         }
+                    }
+                else:
+                    return {
+                        'warning':{
+                            'title': "Error de conexión con servicio",
+                            'message': "Ocurrió un error inesperado al consulta el servicio."
+                        }
+                    }
             except exceptions.ValidationError as ve:
                 return {
                     'warning': {
@@ -82,3 +99,8 @@ class BillingDoResCompany(models.Model):
     def _onchange_tax_contributor_type(self):
         if self.tax_contributor_type and self.tax_contributor_type in ['3']:
             self.name = ''
+
+    def write(self, vals):
+        log.info("[KCS] Self Name: {0} | Vals['name']: {1}".format(self.name))
+        log.info("[KCS] Self Economic Activity: {0} | Vals['economic_activity']: {1}".format(self.economic_activity))
+        super(BillingDoResCompany, self).write(vals)

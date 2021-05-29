@@ -34,6 +34,10 @@
                                     <label string="Tax Receipts Endpoint" for="api_services_tax_receipts_endpoint" class="col-lg-3 o_light_label"/>
                                     <field name="api_services_tax_receipts_endpoint" domain="[('company_id', '=', company_id)]"/>
                                 </div>
+                                <div class="row">
+                                    <label string="Citizens Endpoint" for="api_services_citizens_endpoint" class="col-lg-3 o_light_label"/>
+                                    <field name="api_services_citizens_endpoint" domain="[('company_id', '=', company_id)]"/>
+                                </div>
                             </div>
                         </div>
                     </div>
