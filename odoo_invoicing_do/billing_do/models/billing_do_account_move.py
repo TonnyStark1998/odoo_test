@@ -80,7 +80,27 @@ class BillingDoAccountMove(models.Model):
             if self.type in ['in_invoice', 'in_refund', 'in_receipt'] and self.is_tax_valuable and self.journal_id.sequence_id.code.upper() not in ['B11', 'B13']:
                 return self._validate_ncf(self.ncf)
             elif self.journal_id.sequence_id.code.upper() in ['B11']:
-                return self.__validate_vat_journal_b11(self)
+                if self.partner_id and self.partner_id.vat:
+                    _validate_vat_result = doutils.BillingDoUtils.validate_vat(self.partner_id.vat)
+            
+                    log.info("[KCS] Validate VAT Result: {0}".format(_validate_vat_result))
+                    
+                    if _validate_vat_result == 3:
+                        return { 
+                            'warning':{
+                                    'title': "Valor digitado inválido",
+                                    'message': "El RNC ({0}) digitado es inválido. Posee un formato incorrecto. Verifique el valor digitado.".format(self.partner_id.vat)
+                                }
+                        }
+                    elif _validate_vat_result == 2:
+                        return { 
+                            'warning':{
+                                    'title': "Dígito verificador erróneo",
+                                    'message': "El RNC ({0}) digitado es inválido. El dígito verificador no coincide. Verifique el valor digitado.".format(self.partner_id.vat)
+                                }
+                        }
+
+                    return self.__validate_vat_journal_b11(self)
         except exceptions.ValidationError as ve:
             return {
                 'warning': {
@@ -106,7 +126,17 @@ class BillingDoAccountMove(models.Model):
                 if move.type in ['in_invoice', 'in_refund', 'in_receipt'] and move.is_tax_valuable and move.journal_id.sequence_id.code.upper() not in ['B11', 'B13']:
                     return self._validate_ncf(move.ncf)
                 elif move.journal_id.sequence_id.code.upper() in ['B11']:
-                    return self.__validate_vat_journal_b11(move)
+                    if move.partner_id and move.partner_id.vat:
+                        _validate_vat_result = doutils.BillingDoUtils.validate_vat(move.partner_id.vat)
+                
+                        log.info("[KCS] Validate VAT Result: {0}".format(_validate_vat_result))
+                        
+                        if _validate_vat_result == 3:
+                            raise exceptions.ValidationError("El RNC ({0}) digitado es inválido. Posee un formato incorrecto. Verifique el valor digitado.".format(move.partner_id.vat))
+                        elif _validate_vat_result == 2:
+                            raise exceptions.ValidationError("El RNC ({0}) digitado es inválido. El dígito verificador no coincide. Verifique el valor digitado.".format(move.partner_id.vat))
+
+                        return self.__validate_vat_journal_b11(move)
             except exceptions.ValidationError as ve:
                 raise
     
@@ -201,41 +231,40 @@ class BillingDoAccountMove(models.Model):
                         }
 
     def __validate_vat_journal_b11(self, model):
-        if model.partner_id and model.partner_id.vat:
-            vat_response = doutils.BillingDoUtils.dgii_get_vat_info(model, model.partner_id.vat)
+        vat_response = doutils.BillingDoUtils.dgii_get_vat_info(model, model.partner_id.vat)
 
-            log.info("[KCS] VAT Response: {0}".format(vat_response))
-            log.info("[KCS] VAT Response (Status Code): {0}".format(vat_response.status_code))
+        log.info("[KCS] VAT Response: {0}".format(vat_response))
+        log.info("[KCS] VAT Response (Status Code): {0}".format(vat_response.status_code))
 
-            es_contribuyente = False
-            if vat_response is not None:
-                if vat_response.status_code == 200:
-                    es_contribuyente = bool(vat_response.json()['esContribuyente'])
-                    if es_contribuyente:
-                        partner_id = model.partner_id
-                        model.partner_id = None
-                        raise exceptions.ValidationError("El proveedor con RNC '{0}' perteneciente a '{1}' esta registrado como contribuyente en la DGII y se le debe solicitar una factura con Valor Fiscal.".format(partner_id.vat, partner_id.name))
-                    else:
-                        return {
-                            'warning': {
-                                'title': "RNC '{0}' no es contribuyente.".format(model.partner_id.vat),
-                                "message": "Se validó que el proveedor con RNC '{0}' perteneciente a '{1}' no está registrado como contribuyente en la DGII.".format(model.partner_id.vat, model.partner_id.name)
-                            }
-                        }
-                elif vat_response.status_code == 404:
+        es_contribuyente = False
+        if vat_response is not None:
+            if vat_response.status_code == 200:
+                es_contribuyente = bool(vat_response.json()['esContribuyente'])
+                if es_contribuyente:
+                    partner_id = model.partner_id
+                    model.partner_id = None
+                    raise exceptions.ValidationError("El proveedor con RNC '{0}' perteneciente a '{1}' esta registrado como contribuyente en la DGII y se le debe solicitar una factura con Valor Fiscal.".format(partner_id.vat, partner_id.name))
+                else:
                     return {
                         'warning': {
                             'title': "RNC '{0}' no es contribuyente.".format(model.partner_id.vat),
                             "message": "Se validó que el proveedor con RNC '{0}' perteneciente a '{1}' no está registrado como contribuyente en la DGII.".format(model.partner_id.vat, model.partner_id.name)
                         }
                     }
-                else:
-                    return {
-                        'warning': {
-                            'title': "Error de conexión con el servicio.".format(model.partner_id.vat),
-                            "message": "La comunicación con el servicio de  DGII falló. Valide este RNC '{0}' directamente con la consulta DGII. Si el problema persiste consulte a su administrador.".format(model.partner_id.vat)
-                        }
+            elif vat_response.status_code == 404:
+                return {
+                    'warning': {
+                        'title': "RNC '{0}' no es contribuyente.".format(model.partner_id.vat),
+                        "message": "Se validó que el proveedor con RNC '{0}' perteneciente a '{1}' no está registrado como contribuyente en la DGII.".format(model.partner_id.vat, model.partner_id.name)
                     }
+                }
+            else:
+                return {
+                    'warning': {
+                        'title': "Error de conexión con el servicio.".format(model.partner_id.vat),
+                        "message": "La comunicación con el servicio de  DGII falló. Valide este RNC '{0}' directamente con la consulta DGII. Si el problema persiste consulte a su administrador.".format(model.partner_id.vat)
+                    }
+                }
 
     def __get_journal_sequence(self):
         if self.journal_id:
