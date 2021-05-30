@@ -214,12 +214,7 @@ class BillingDoAccountMove(models.Model):
                     if es_contribuyente:
                         partner_id = model.partner_id
                         model.partner_id = None
-                        return {
-                            'warning': {
-                                'title': "RNC '{0}' es contribuyente.".format(partner_id.vat),
-                                "message": "El proveedor con RNC '{0}' perteneciente a '{1}' esta registrado como contribuyente en la DGII y se le debe solicitar una factura con Valor Fiscal.".format(partner_id.vat, partner_id.name)
-                            }
-                        }
+                        raise exceptions.ValidationError("El proveedor con RNC '{0}' perteneciente a '{1}' esta registrado como contribuyente en la DGII y se le debe solicitar una factura con Valor Fiscal.".format(partner_id.vat, partner_id.name))
                     else:
                         return {
                             'warning': {
