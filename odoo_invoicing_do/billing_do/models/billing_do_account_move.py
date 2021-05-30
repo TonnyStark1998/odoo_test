@@ -108,12 +108,7 @@ class BillingDoAccountMove(models.Model):
                 elif move.journal_id.sequence_id.code.upper() in ['B11']:
                     return self.__validate_vat_journal_b11(move)
             except exceptions.ValidationError as ve:
-                return {
-                    'warning': {
-                        'title': "Ocurrió un error de validadión.",
-                        'message': "{0}".format(ve.name),
-                    }
-                }
+                raise
     
     @api.constrains('name', 'journal_id', 'state')
     def _check_unique_sequence_number(self):
