@@ -462,6 +462,11 @@ msgstr "Total"
 msgid "Untaxed Amount"
 msgstr "Impuestos excluidos"
 
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_partner__economic_activity
+msgid "Economic Activity"
+msgstr "Actividad Económica según DGII"
+
 ##################################
 #   Other modules translations   #
 ##################################
