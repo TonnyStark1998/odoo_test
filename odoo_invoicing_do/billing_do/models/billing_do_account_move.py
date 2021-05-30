@@ -96,7 +96,7 @@ class BillingDoAccountMove(models.Model):
                         return { 
                             'warning':{
                                     'title': "Dígito verificador erróneo",
-                                    'message': "El RNC ({0}) digitado es inválido. El dígito verificador no coincide. Verifique el valor digitado.".format(self.partner_id.vat)
+                                    'message': "No posee la estructura de una cedula y tampoco de un RNC ({0}).".format(self.partner_id.vat)
                                 }
                         }
 
@@ -134,7 +134,7 @@ class BillingDoAccountMove(models.Model):
                         if _validate_vat_result == 3:
                             raise exceptions.ValidationError("El RNC ({0}) digitado es inválido. Posee un formato incorrecto. Verifique el valor digitado.".format(move.partner_id.vat))
                         elif _validate_vat_result == 2:
-                            raise exceptions.ValidationError("El RNC ({0}) digitado es inválido. El dígito verificador no coincide. Verifique el valor digitado.".format(move.partner_id.vat))
+                            raise exceptions.ValidationError("No posee la estructura de una cedula y tampoco de un RNC ({0}).".format(move.partner_id.vat))
 
                         return self.__validate_vat_journal_b11(move)
             except exceptions.ValidationError as ve:

@@ -44,7 +44,7 @@ class BillingDoResPartner(models.Model):
                 return { 
                     'warning':{
                             'title': "Dígito verificador erróneo",
-                            'message': "El RNC ({0}) digitado es inválido. El dígito verificador no coincide. Verifique el valor digitado.".format(self.vat)
+                            'message': "No posee la estructura de una cedula y tampoco de un RNC ({0}).".format(self.vat)
                         }
                 }
 
