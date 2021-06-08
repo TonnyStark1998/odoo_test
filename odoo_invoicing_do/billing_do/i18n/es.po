@@ -440,6 +440,11 @@ msgstr "Permuta"
 msgid "Other Sale Way Amount"
 msgstr "Otras Formas de Ventas"
 
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move__security_code
+msgid "Security Code"
+msgstr "Código de seguridad"
+
 ##################################
 #   Fields from other modules    #
 ##################################
@@ -833,3 +838,85 @@ msgstr "<span><strong>Recibido por: </strong>____________________________ </span
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
 msgid "<span><strong>Created by: </strong></span>"
 msgstr "<span><strong>Creado por: </strong></span>"
+
+################################
+# Code Strings Translations #
+################################
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_vat_helper.py:0
+#, python-format
+msgid "The Identity Number ({0}) entered is invalid. Does not meet the correct format. Please verify the value entered."
+msgstr "El RNC ({0}) digitado es inválido. Posee un formato incorrecto. Verifique el valor digitado."
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_vat_helper.py:0
+#, python-format
+msgid "The format is not compatible with the format of a Dominican Republic Id nor a Tax Payer Id ({0})."
+msgstr "No posee la estructura de una cedula y tampoco de un RNC ({0})."
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_account_move.py:0
+#, python-format
+msgid "¡Validation error!"
+msgstr "¡Error de validación!"
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_account_move.py:0
+#, python-format
+msgid "¡User error!"
+msgstr "¡Error de usuario!"
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_account_move.py:0
+#, python-format
+msgid "Please, first select the vendor and then enter the value for NCF field."
+msgstr "Seleccione primero el proveedor y luego digite el NCF."
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_helper.py:0
+#, python-format
+msgid "The TRN ({0}) is invalid."
+msgstr "El NCF ({0}) es inválido."
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_helper.py:0
+#, python-format
+msgid "The TRN ({0}) has some extra digits. Please verify."
+msgstr "El NCF (%s) posee dígitos extras. Verifique."
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_helper.py:0
+#, python-format
+msgid "The TRNs which starts with B11 or B13 use a specific type of journal. Please use the appropiate journal for registering this vendor invoice."
+msgstr "Los comprobantes de tipo B11 y B13 ({0}) requieren el uso de un diario en específico."
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_http_service_helper.py:0
+#, python-format
+msgid "An unknown error ocurred during the connection to the webservice."
+msgstr "Ocurrió un error desconocido al conectar con el servicio de consulta."
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_http_service_helper.py:0
+#, python-format
+msgid "The tax receipt number {0} entered is not valid or does not belongs to the VAT {1}."
+msgstr "El número de comprobante fiscal {0} digitado no está vigente o no corresponde a este RNC {1}."
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_http_service_helper.py:0
+#, python-format
+msgid "The values entered for TRN ({0}) and VAT ({1}) are invalid."
+msgstr "Los datos suministrados para la consulta no son válidos. NCF:{0}|RNC:{1}."
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_http_service_helper.py:0
+#, python-format
+msgid "TRN is valid."
+msgstr "NCF es válido."
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_http_service_helper.py:0
+#, python-format
+msgid "The TRN \"{0}\" y el RNC \"{1}\" are valid."
+msgstr "El NCF \"{0}\" y el RNC \"{1}\" son válidos."
