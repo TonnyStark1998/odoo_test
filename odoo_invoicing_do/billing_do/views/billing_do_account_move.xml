@@ -39,10 +39,27 @@
                 </h2>
             </xpath>
             <xpath expr="//field[@name='ref']" position="before">
-                <field name="is_tax_valuable" attrs="{'invisible': 1}" />
-                <field name="income_type" attrs="{'invisible': [('type', '!=', 'out_invoice')], 'readonly': [('state', '!=', 'draft')]}" />
-                <field name="ncf" attrs="{'invisible': ['|', ('type', 'not in', ['in_invoice', 'in_refund']), '|', ('is_tax_valuable', '=', False), ('use_sequence', '=', True)], 'required': ['&amp;', ('type', 'in', ['in_invoice', 'in_refund']), '&amp;', ('is_tax_valuable', '=', True), ('use_sequence', '=', False)]}" />
-                <field name="expense_type" attrs="{'invisible': [('type', '!=', 'in_invoice')], 'readonly': [('state', '!=', 'draft')]}" />
+                <field name="is_tax_valuable"
+                        attrs="{'invisible': 1}" />
+                <field name="income_type"
+                        attrs="{'invisible': [('type', '!=', 'out_invoice')],
+                                'readonly': [('state', '!=', 'draft')]}" />
+                <field name="ncf"
+                        attrs="{'invisible': ['|', ('type', 'not in', ['in_invoice', 'in_refund']), 
+                                                '|', ('is_tax_valuable', '=', False), ('use_sequence', '=', True)], 
+                                'required': ['&amp;', ('type', 'in', ['in_invoice', 'in_refund']), 
+                                                '&amp;', ('is_tax_valuable', '=', True), ('use_sequence', '=', False)]}" />
+                <field name="ncf_type" invisible="1" />
+                <field name="security_code" attrs="{'invisible': ['|', ('state', '!=', 'draft'),
+                                                                    '|', ('ncf_type', '!=', 'E'),
+                                                                    '|', ('type', 'not in', ['in_invoice', 'in_refund']), 
+                                                                    '|', ('is_tax_valuable', '=', False), ('use_sequence', '=', True)], 
+                                                    'required': [('ncf_type', '=', 'E'),
+                                                                    '&amp;', ('type', 'in', ['in_invoice', 'in_refund']), 
+                                                                    '&amp;', ('is_tax_valuable', '=', True), ('use_sequence', '=', False)]}" />
+                <field name="expense_type"
+                        attrs="{'invisible': [('type', '!=', 'in_invoice')], 
+                                'readonly': [('state', '!=', 'draft')]}" />
             </xpath>
             <field name="journal_id" position="attributes">
                 <attribute name="attrs">

@@ -1,5 +1,4 @@
 from odoo import models, fields, api, exceptions
-from . import billing_do_utils as doutils
 import logging as log
 
 class BillingDoStockWarehouse(models.Model):
