@@ -57,7 +57,7 @@ class BillingDoResCompany(models.Model):
 
             try:
                 _vat_helper = self.env['billing.do.vat.http.service.helper'].sudo()
-                vat_response = _vat_helper.dgii_get_vat_info(self, self.vat)
+                vat_response = _vat_helper.dgii_get_vat_info(self.vat)
 
                 log.info("[KCS] VAT Response: {0}".format(vat_response))
                 log.info("[KCS] VAT Response (Status Code): {0}".format(vat_response.status_code))
