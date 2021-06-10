@@ -20,13 +20,13 @@ class BillingDoVatHelper(models.AbstractModel):
             
             if _result == 3:
                 raise exceptions.ValidationError(_("The Identity Number ({0}) entered is invalid. Does not meet the correct format. Please verify the value entered.")
-                                                .format(self.partner_id.vat))
+                                                .format(vat))
 
             _result = BillingDoVatHelper.__validate_do_id(vat)
 
             if _result == 2:
                 raise exceptions.ValidationError(_("The format is not compatible with the format of a Dominican Republic Id nor a Tax Payer Id ({0}).")
-                                                .format(self.partner_id.vat))
+                                                .format(vat))
 
             return _result
 

@@ -1,10 +1,12 @@
 [submodule "odoo"]
 	path = odoo
 	url = https://github.com/odoo/odoo.git
+	branch = 13.0
 [submodule "enterprise"]
 	path = enterprise
 	url = https://github.com/odoo/enterprise.git
+	branch = 13.0
 [submodule "odoo_medical_app"]
 	path = odoo_medical_app
 	url = https://kcsprojects@dev.azure.com/kcsprojects/Odoo%20Enterprise/_git/Odoo%20Enterprise%20-%20Medical%20History%20App
-	branch = master
+	branch = develop
