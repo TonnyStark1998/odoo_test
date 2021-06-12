@@ -20,6 +20,8 @@ class BillingDoTrnHelper(models.AbstractModel):
                 if int(len(trn)) != int(match_ncf.end()):
                     raise exceptions.ValidationError(_("The TRN ({0}) has some extra digits. Please verify.").format(trn.upper()))
             return True
+        else:
+            raise exceptions.UserError(_("The TRN parameter must have a value. Nothing was given."))
 
     def is_trn_from_journal_which_use_sequence(self, trn):
         regex = r"(^(E)?(?=)(41|43)[0-9]{10}|^(B)(?:(11|13)[0-9]{8}))"

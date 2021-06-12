@@ -99,11 +99,14 @@ class BillingDoAccountMove(models.Model):
                         }
 
             elif self.journal_id.sequence_id.code.upper() in ['B11']:
-                if self.partner_id and self.partner_id.vat:
-                    _vat_helper = self.env['billing.do.vat.helper'].sudo()
-                    _validate_vat_result = _vat_helper.validate_vat(self.partner_id.vat)
+                if self.partner_id:
+                    if self.partner_id.vat:
+                        _vat_helper = self.env['billing.do.vat.helper'].sudo()
+                        _validate_vat_result = _vat_helper.validate_vat(self.partner_id.vat)
 
-                    return self.__validate_vat_journal_b11(self)
+                        return self.__validate_vat_journal_b11(self)
+                    else:
+                        raise exceptions.UserError(_('You are trying to use a partner who does not have a VAT value. Please verify.'))
 
         except exceptions.UserError as ue:
             return {
@@ -145,17 +148,23 @@ class BillingDoAccountMove(models.Model):
                         raise exceptions.UserError(_("For E NCF ('{0}') type you have to provide the security code.").format(self.ncf))
 
                     self._validate_ncf(move.ncf)
-                
-                elif move.journal_id.sequence_id.code.upper() in ['B11']:
-                    if move.partner_id and move.partner_id.vat:
-                        _vat_helper = self.env['billing.do.vat.helper'].sudo()
-                        _validate_vat_result = _vat_helper.validate_vat(move.partner_id.vat)
 
-                        return self.__validate_vat_journal_b11(move)
+                elif move.journal_id.sequence_id.code.upper() in ['B11']:
+                    if move.partner_id:
+                        if move.partner_id.vat:
+                            _vat_helper = self.env['billing.do.vat.helper'].sudo()
+                            _validate_vat_result = _vat_helper.validate_vat(move.partner_id.vat)
+
+                            return self.__validate_vat_journal_b11(move)
+                        else:
+                            raise exceptions.UserError(_('You are trying to use a partner who does not have a VAT value. Please verify.'))
+                    
+                    else:
+                        raise exceptions.UserError(_('Please, first select the vendor and then enter the value for NCF field.'))
 
             except:
                 raise
-    
+
     @api.constrains('name', 'journal_id', 'state')
     def _check_unique_sequence_number(self):
         moves = self.filtered(lambda move: move.state == 'posted')
@@ -220,6 +229,8 @@ class BillingDoAccountMove(models.Model):
                                                         .format(ncf, 
                                                                 self.partner_id.vat, 
                                                                 self.partner_id.name))
+            else:
+                raise exceptions.UserError(_('You are trying to use a partner who does not have a VAT value. Please verify.'))
             
             _trn_helper = self.env['billing.do.trn.helper'].sudo()
 

@@ -196,10 +196,48 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <t t-set="line_number" 
+                                t-value="0" />
+                            <t t-set="line_number_section" 
+                                t-value="1" />
+
                             <t t-foreach="o.invoice_line_ids" t-as="l">
-                                <tr t-attf-style="background-color:{{o.style.odd if l_parity in 'odd' else o.style.even}}; page-break-inside: avoid !important;">
+                                <t t-if="l.display_type not in ['line_section', 'line_note']" 
+                                    t-set="line_number" 
+                                    t-value="line_number + 1" />
+                                <t t-if="l.display_type in ['line_section']" 
+                                    t-set="line_number_section" 
+                                    t-value="1" />
+                                <t t-if="l.display_type not in ['line_section']" 
+                                    t-set="line_number_section" 
+                                    t-value="line_number_section + 1" />
+
+                                <tr t-if="l.display_type in ['line_section']"
+                                    t-attf-style="background-color:#bdbdbd !important;
+                                                    color:#ffffff !important;
+                                                    page-break-inside: avoid !important;">
+                                    <td colspan="7">
+                                        <span t-field="l.name"/>
+                                    </td>
+                                </tr>
+
+                                <tr t-if="l.display_type in ['line_note']"
+                                    t-attf-style="background-color:#f4f3f3;
+                                                    color: #555555;
+                                                    font-size: 9px;
+                                                    font-style: italic;
+                                                    page-break-inside: avoid !important;">
+                                    <td colspan="7"
+                                        class="text-center">
+                                        <span t-field="l.name"/>
+                                    </td>
+                                </tr>
+
+                                <tr t-if="l.display_type not in ['line_section' , 'line_note']"
+                                    t-attf-style="background-color:{{o.style.odd if line_number_section % 2 != 0 else o.style.even}};
+                                                    page-break-inside: avoid !important;">
                                     <td>
-                                        <span t-esc="l_index + 1"/>
+                                        <span t-esc="line_number"/>
                                     </td>
                                     <td class="text-right">
                                         <span t-esc="int(l.quantity)"/>
@@ -212,11 +250,12 @@
                                     <td class="text-right">
                                         <span t-field="l.price_unit"/>
                                     </td>
-                                    <td class="text-right" groups="sale.group_discount_per_so_line">
+                                    <td class="text-right"
+                                        groups="sale.group_discount_per_so_line">
                                         <span t-field="l.discount"/>
                                     </td>
                                     <td class="text-right">
-                                        <span t-esc="', '.join(map(lambda x: (x.name), l.tax_ids))"/>
+                                        <span t-esc="', '.join(map(lambda x: (x.name), l.tax_ids))" />
                                     </td>
                                     <td class="text-right">
                                         <span t-field="l.price_subtotal"/>
@@ -230,6 +269,7 @@
                 <!--    Start of TOTALS -->
                 <div class="col-12 clearfix"
                      t-attf-style="padding-left:0px; padding-right:0px;font-size:12px !important;">
+
                     <div class="col-5 pull-right"
                          style="padding-left:0px; padding-right:0px; page-break-inside: avoid !important;">
                         <table class="table table-sm" t-attf-style="color:{{o.style.text_color}};">
@@ -276,9 +316,14 @@
                          style="padding-left:0px; padding-right:0px; page-break-inside: avoid !important;">
                         <table class="table table-condensed" t-attf-style="color:{{o.style.text_color}};">
 
-                            <thead t-attf-style="background-color:{{o.style.theme_color}}; page-break-inside: avoid; color:{{o.style.theme_txt_color}};">
-                                <tr t-attf-style="page-break-inside: avoid !important; border-bottom: 1px solid {{o.style.text_color}} !important;">
-                                    <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">No.
+                            <thead t-attf-style="background-color:{{o.style.theme_color}};
+                                                    page-break-inside: avoid;
+                                                    color:{{o.style.theme_txt_color}};">
+
+                                <tr t-attf-style="page-break-inside: avoid !important;
+                                                    border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                    <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                        No.
                                     </th>
                                     <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
                                         Fecha
