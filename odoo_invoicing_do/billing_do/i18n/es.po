@@ -920,3 +920,15 @@ msgstr "NCF es válido."
 #, python-format
 msgid "The TRN \"{0}\" y el RNC \"{1}\" are valid."
 msgstr "El NCF \"{0}\" y el RNC \"{1}\" son válidos."
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_http_service_helper.py:0
+#, python-format
+msgid "You are trying to use a partner who does not have a VAT value. Please verify."
+msgstr "El proveedor que intenta utilizar no posee asignado un RNC/Cédula. Por favor verifique."
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_http_service_helper.py:0
+#, python-format
+msgid "The TRN parameter must have a value. Nothing was given."
+msgstr "El parámetro NCF debe tener un valor. Ninguno fue proveído."
