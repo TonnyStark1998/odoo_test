@@ -1,48 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="custom_purchase_order_lines" name="Personal Purchase Order Data">
+        <template id="custom_purchase_order_lines"
+                    name="Personal Purchase Order Data">
             <!-- Is there tax on at least one line? -->
-            <t t-set="display_taxes" t-value="any([y.taxes_id for y in o.order_line])"/>
+            <t t-set="display_taxes" 
+                t-value="any([y.taxes_id for y in o.order_line])"/>
+            
             <!-- To take care of columns when no discount -->
-            <t t-set="col_span" t-value="7"/>
+            <t t-set="col_span"
+                t-value="7"/>
+            
             <!-- common th styles -->
-            <t t-set="th_style" t-value="'border-bottom: 1px solid #ddd !important;white-space:nowrap;'"/>
-            <table class="table table-sm" t-attf-style="color:{{style.text_color}};">
-                <thead t-attf-style="background-color:{{style.theme_color if not style.transparent else 'transparent'}} !important; page-break-inside: avoid; color:{{style.theme_txt_color if not style.transparent else style.text_color}};">
-                    <tr t-attf-style="page-break-inside: avoid !important; border-bottom: 1px solid {{style.text_color}} !important;font-size:{{int(style.body_font)+2}}px;">
+            <t t-set="th_style"
+                t-value="'border-bottom: 1px solid #ddd !important;white-space:nowrap;'"/>
+            
+            <table class="table table-sm"
+                    t-attf-style="color:{{style.text_color}};">
+                <thead t-attf-style="background-color:{{style.theme_color if not style.transparent else 'transparent'}} !important;
+                                        page-break-inside: avoid;
+                                        color:{{style.theme_txt_color if not style.transparent else style.text_color}};">
+
+                    <tr t-attf-style="page-break-inside: avoid !important;
+                                        border-bottom: 1px solid {{style.text_color}} !important;
+                                        font-size:{{int(style.body_font)+2}}px;">
                         <th t-attf-style="{{th_style}}">
                             #
                         </th>
                         <th t-attf-style="{{th_style}}">
                             Descripción
                         </th>
-                        <th class="text-right" t-attf-style="{{th_style}}">
+                        <th class="text-right"
+                            t-attf-style="{{th_style}}">
                             Fecha Req.
                         </th>
-                        <th class="text-right" t-attf-style="{{th_style}}">
+                        <th class="text-right"
+                            t-attf-style="{{th_style}}">
                             Cantidad
                         </th>
 
-                        <th class="text-right" t-attf-style="{{th_style}}">
+                        <th class="text-right"
+                            t-attf-style="{{th_style}}">
                             Precio Unidad
                         </th>
 
-                        <th t-if="display_taxes" class="text-center" t-attf-style="{{th_style}}">
+                        <th t-if="display_taxes"
+                            class="text-center"
+                            t-attf-style="{{th_style}}">
                             Impuestos
                         </th>
 
-                        <th class="text-center" t-attf-style="{{th_style}}">
+                        <th class="text-center"
+                            t-attf-style="{{th_style}}">
                             Total
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tbody>
-                        <t t-foreach="o.order_line" t-as="line">
-                            <tr t-attf-style="background-color:{{style.odd if (line_parity in 'odd' and not style.transparent) else (not style.transparent and style.even)  or 'transparent'}}; page-break-inside: avoid !important;">
+                        <t t-set="line_number" 
+                            t-value="0" />
+                        <t t-set="line_number_section" 
+                            t-value="1" />
+                                
+                        <t t-foreach="o.order_line.sorted(key=lambda line: line.sequence)" t-as="line">
+                            <t t-if="line.display_type not in ['line_section', 'line_note']" 
+                                    t-set="line_number" 
+                                    t-value="line_number + 1" />
+                            <t t-if="line.display_type in ['line_section']" 
+                                t-set="line_number_section" 
+                                t-value="1" />
+                            <t t-if="line.display_type not in ['line_section']" 
+                                t-set="line_number_section" 
+                                t-value="line_number_section + 1" />
+
+                            <tr t-if="line.display_type in ['line_section']"
+                                t-attf-style="background-color:#bdbdbd !important;
+                                                color:#ffffff !important;
+                                                page-break-inside: avoid !important;">
+                                <td colspan="7">
+                                    <span t-field="line.name"/>
+                                </td>
+                            </tr>
+
+                            <tr t-if="line.display_type in ['line_note']"
+                                t-attf-style="background-color:#f4f3f3;
+                                                color: #555555;
+                                                font-size: 9px;
+                                                font-style: italic;
+                                                page-break-inside: avoid !important;">
+                                <td colspan="7"
+                                    class="text-center">
+                                    <span t-field="line.name"/>
+                                </td>
+                            </tr>
+
+                            <tr t-if="line.display_type not in ['line_section' , 'line_note']"
+                                t-attf-style="background-color:{{style.odd if line_number_section % 2 != 0
+                                                                            else style.even}};
+                                                page-break-inside: avoid !important;">
                                 <td>
-                                    <span t-esc="line_index + 1"/>
+                                    <span t-esc="line_number"/>
                                 </td>
                                 <td>
                                     <span t-field="line.name"/>
@@ -50,10 +108,10 @@
                                 <td class="text-center">
                                     <span t-field="line.date_planned"/>
                                 </td>
-
                                 <td class="text-right">
                                     <span t-field="line.product_qty"/>
-                                    <span t-field="line.product_uom.name" groups="product.group_uom"/>
+                                    <span t-field="line.product_uom.name"
+                                            groups="product.group_uom"/>
                                 </td>
                                 <td class="text-right">
                                     <span t-field="line.price_unit"/>
