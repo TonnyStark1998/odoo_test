@@ -399,12 +399,19 @@
                         <strong>Fiscal Position Remark:</strong>
                         <span t-field="o.fiscal_position_id.note"/>
                     </p>
-                    <p t-if="o.narration">
+                    <br/>
+                    <br/>
+                </div>
+                <div t-if="o.narration"
+                        class="col-12"
+                        style="margin-top:10px;
+                                padding-left:0px;
+                                padding-right:0px;
+                                page-break-inside: avoid ! important;">
+                    <p>
                         <strong>Nota(s):</strong>
                         <span t-field="o.narration"/>
                     </p>
-                    <br/>
-                    <br/>
                 </div>
             </div>
             <!--End of PAGE-->
