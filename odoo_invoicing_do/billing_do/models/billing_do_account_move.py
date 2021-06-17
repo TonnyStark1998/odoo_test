@@ -85,7 +85,8 @@ class BillingDoAccountMove(models.Model):
                 and self.is_tax_valuable\
                 and self.journal_id.sequence_id.code.upper() not in ['B11', 'B13']:
 
-                if self.ncf_type == 'E' and not self.security_code:
+                if self.ncf_type in ['E']\
+                    and not self.security_code:
                     return
 
                 if self._validate_ncf(self.ncf):
@@ -142,8 +143,8 @@ class BillingDoAccountMove(models.Model):
                     and move.is_tax_valuable\
                     and move.journal_id.sequence_id.code.upper() not in ['B11', 'B13']:
 
-                    if move.ncf[0] in ['E']\
-                        and not self.security_code:
+                    if move.ncf_type in ['E']\
+                        and not move.security_code:
 
                         raise exceptions.UserError(_("For E NCF ('{0}') type you have to provide the security code.").format(self.ncf))
 
