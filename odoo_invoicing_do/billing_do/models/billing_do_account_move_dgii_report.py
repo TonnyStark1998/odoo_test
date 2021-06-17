@@ -1,7 +1,7 @@
 import logging as log
 import datetime as datetime
+
 from odoo import models, fields, api, exceptions
-from . import billing_do_utils as doutils
 
 class BillingDoAccountMoveDgiiReport(models.Model):
     _inherit = "account.move"

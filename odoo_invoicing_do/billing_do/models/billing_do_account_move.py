@@ -2,14 +2,12 @@
 import re
 import datetime as date
 import logging as log
-from odoo import models, fields, api, exceptions, _
-from . import billing_do_utils as doutils
-from ...base.models.ir_sequence import IrSequenceDateRange as IrSequenceDateRange
+
+from odoo\
+    import models, fields, api, exceptions, _
 
 class BillingDoAccountMove(models.Model):
     _inherit = "account.move"
-
-    # Account Move - Modified Fields
 
     # Account Move - New Fields
     income_type = fields.Selection(selection=[
@@ -54,58 +52,75 @@ class BillingDoAccountMove(models.Model):
                         copy=False, 
                         store=True, 
                         tracking=True, 
-                        states={'posted': [('readonly', True)]}
-                    )
+                        states={'posted': [('readonly', True)]})
 
     ncf_date_to = fields.Date(string="NCF valid to:", 
                                 readonly=True, 
                                 copy=False, 
                                 store=True, 
-                                tracking=True
-                            )
+                                tracking=True)
+
+    security_code = fields.Char(string='Security Code',
+                                    copy=False)
+
+    ncf_type = fields.Char(string='NCF Type',
+                            store=False,
+                            default='/')
 
     # Account Move - Related Fields
     is_tax_valuable = fields.Boolean(related='journal_id.is_tax_valuable', 
                                         store=False, 
-                                        Tracking=False
-                                    )
+                                        Tracking=False)
     use_sequence = fields.Boolean(related='journal_id.use_sequence', 
                                     store=False, 
-                                    Tracking=False
-                                )
+                                    Tracking=False)
 
-    @api.onchange('ncf', 'partner_id', 'journal_id')
+    @api.onchange('ncf', 'partner_id', 'journal_id', 'security_code')
     def _onchange_ncf(self):
         try:
-            if self.type in ['in_invoice', 'in_refund', 'in_receipt'] and self.is_tax_valuable and self.journal_id.sequence_id.code.upper() not in ['B11', 'B13']:
-                return self._validate_ncf(self.ncf)
-            elif self.journal_id.sequence_id.code.upper() in ['B11']:
-                if self.partner_id and self.partner_id.vat:
-                    _validate_vat_result = doutils.BillingDoUtils.validate_vat(self.partner_id.vat)
-            
-                    log.info("[KCS] Validate VAT Result: {0}".format(_validate_vat_result))
-                    
-                    if _validate_vat_result == 3:
-                        return { 
-                            'warning':{
-                                    'title': "Valor digitado inválido",
-                                    'message': "El RNC ({0}) digitado es inválido. Posee un formato incorrecto. Verifique el valor digitado.".format(self.partner_id.vat)
-                                }
-                        }
-                    elif _validate_vat_result == 2:
-                        return { 
-                            'warning':{
-                                    'title': "Dígito verificador erróneo",
-                                    'message': "No posee la estructura de una cedula y tampoco de un RNC ({0}).".format(self.partner_id.vat)
-                                }
+            if self.ncf and len(self.ncf) > 1:
+                self.ncf_type = self.ncf[0]
+
+            if self.type in ['in_invoice', 'in_refund', 'in_receipt']\
+                and self.is_tax_valuable\
+                and self.journal_id.sequence_id.code.upper() not in ['B11', 'B13']:
+
+                if self.ncf_type == 'E' and not self.security_code:
+                    return
+
+                if self._validate_ncf(self.ncf):
+                    return {
+                            'warning': {
+                                'title': _('TRN is valid.'),
+                                'message': _('The TRN "{0}" y el RNC "{1}" are valid.')
+                                                .format(self.ncf, 
+                                                        self.partner_id.vat)
+                            }
                         }
 
-                    return self.__validate_vat_journal_b11(self)
+            elif self.journal_id.sequence_id.code.upper() in ['B11']:
+                if self.partner_id:
+                    if self.partner_id.vat:
+                        _vat_helper = self.env['billing.do.vat.helper'].sudo()
+                        _validate_vat_result = _vat_helper.validate_vat(self.partner_id.vat)
+
+                        return self.__validate_vat_journal_b11(self)
+                    else:
+                        raise exceptions.UserError(_('You are trying to use a partner who does not have a VAT value. Please verify.'))
+
+        except exceptions.UserError as ue:
+            return {
+                'warning': {
+                    'title': _('¡User error!'),
+                    'message': '{0}'.format(ue.name),
+                }
+            }
+
         except exceptions.ValidationError as ve:
             return {
                 'warning': {
-                    'title': "Ocurrió un error de validadión.",
-                    'message': "{0}".format(ve.name),
+                    'title': _('¡Validation error!'),
+                    'message': '{0}'.format(ve.name),
                 }
             }
 
@@ -123,26 +138,37 @@ class BillingDoAccountMove(models.Model):
     def _check_ncf(self):
         for move in self:
             try:
-                if move.type in ['in_invoice', 'in_refund', 'in_receipt'] and move.is_tax_valuable and move.journal_id.sequence_id.code.upper() not in ['B11', 'B13']:
-                    return self._validate_ncf(move.ncf)
-                elif move.journal_id.sequence_id.code.upper() in ['B11']:
-                    if move.partner_id and move.partner_id.vat:
-                        _validate_vat_result = doutils.BillingDoUtils.validate_vat(move.partner_id.vat)
-                
-                        log.info("[KCS] Validate VAT Result: {0}".format(_validate_vat_result))
-                        
-                        if _validate_vat_result == 3:
-                            raise exceptions.ValidationError("El RNC ({0}) digitado es inválido. Posee un formato incorrecto. Verifique el valor digitado.".format(move.partner_id.vat))
-                        elif _validate_vat_result == 2:
-                            raise exceptions.ValidationError("No posee la estructura de una cedula y tampoco de un RNC ({0}).".format(move.partner_id.vat))
+                if move.type in ['in_invoice', 'in_refund', 'in_receipt']\
+                    and move.is_tax_valuable\
+                    and move.journal_id.sequence_id.code.upper() not in ['B11', 'B13']:
 
-                        return self.__validate_vat_journal_b11(move)
-            except exceptions.ValidationError as ve:
+                    if move.ncf[0] in ['E']\
+                        and not self.security_code:
+
+                        raise exceptions.UserError(_("For E NCF ('{0}') type you have to provide the security code.").format(self.ncf))
+
+                    self._validate_ncf(move.ncf)
+
+                elif move.journal_id.sequence_id.code.upper() in ['B11']:
+                    if move.partner_id:
+                        if move.partner_id.vat:
+                            _vat_helper = self.env['billing.do.vat.helper'].sudo()
+                            _validate_vat_result = _vat_helper.validate_vat(move.partner_id.vat)
+
+                            return self.__validate_vat_journal_b11(move)
+                        else:
+                            raise exceptions.UserError(_('You are trying to use a partner who does not have a VAT value. Please verify.'))
+                    
+                    else:
+                        raise exceptions.UserError(_('Please, first select the vendor and then enter the value for NCF field.'))
+
+            except:
                 raise
-    
+
     @api.constrains('name', 'journal_id', 'state')
     def _check_unique_sequence_number(self):
         moves = self.filtered(lambda move: move.state == 'posted')
+
         if not moves:
             return
 
@@ -172,10 +198,13 @@ class BillingDoAccountMove(models.Model):
             pass
 
         sequence = sequence._get_current_sequence(sequence_date=self.date or self.invoice_date)
-        if self.type in ['in_invoice', 'in_refund', 'in_receipt'] and self.journal_id.sequence_id.code.upper() not in ['B11', 'B13'] and self.journal_id.is_tax_valuable:
+        if self.type in ['in_invoice', 'in_refund', 'in_receipt']\
+                and self.journal_id.sequence_id.code.upper() not in ['B11', 'B13']\
+                    and self.journal_id.is_tax_valuable:
+            
             self.name = self.ncf
 
-        if isinstance(sequence, IrSequenceDateRange):
+        if isinstance(sequence, type(self.env['ir.sequence.date_range'])):
             if 'date_to' in sequence:
                 self.ncf_date_to = sequence.date_to
 
@@ -185,53 +214,38 @@ class BillingDoAccountMove(models.Model):
     def _validate_ncf(self, ncf):
         if ncf:
             if not self.partner_id:
-                raise exceptions.ValidationError("Seleccione primero el proveedor y luego digite el NCF.")
+                raise exceptions.UserError(_('Please, first select the vendor and then enter the value for NCF field.'))
 
             if self.partner_id.vat:
-                ncf_exists = self.env['account.move'].search_count(args=[('id', '!=', self.id if self.id else 0), ('type', 'in', ['in_invoice', 'in_refund', 'in_receipt']), ('partner_id.vat', '=', self.partner_id.vat), '|', ('ncf', '=', ncf), ('name', '=', ncf)])
+                ncf_exists = self.env['account.move'].search_count(args=[
+                                                                        ('id', '!=', self.id if self.id else 0), 
+                                                                        ('type', 'in', ['in_invoice', 'in_refund', 'in_receipt']), 
+                                                                        ('partner_id.vat', '=', self.partner_id.vat), 
+                                                                        '|', ('ncf', '=', ncf), ('name', '=', ncf)
+                                                                    ])
 
                 if ncf_exists > 0:
-                    raise exceptions.ValidationError("El comprobante {0} ya fue utilizado en otra factura con el proveedor {1} - {2}.".format(ncf, self.partner_id.vat, self.partner_id.name))
-            
-            regex = r"(^(E)?(?=)(41|43)[0-9]{10}|^(B)(?:(11|13)[0-9]{8}))"
-            match_ncf = re.match(regex, ncf.upper())
-
-            if match_ncf:
-                raise exceptions.ValidationError("Los comprobantes de tipo B11 y B13 ({0}) requieren el uso de un diario en específico.".format(ncf.upper()))
-
-            regex = r"(^(E)?(?=)(31|32|33|34|41|43|44|45)[0-9]{10}|^(B)(?:(01|02|03|04|11|12|13|14|15|16|17)[0-9]{8}))"
-            match_ncf = re.match(regex, ncf.upper())
-            
-            if not match_ncf:
-                raise exceptions.ValidationError("El NCF ({0}) es inválido.".format(ncf.upper()))
+                    raise exceptions.ValidationError("El comprobante {0} ya fue utilizado en otra factura con el proveedor {1} - {2}."
+                                                        .format(ncf, 
+                                                                self.partner_id.vat, 
+                                                                self.partner_id.name))
             else:
-                if int(len(ncf)) != int(match_ncf.end()):
-                    raise exceptions.ValidationError("El NCF (%s) posee dígitos extras. Verifique." % ncf.upper())
+                raise exceptions.UserError(_('You are trying to use a partner who does not have a VAT value. Please verify.'))
             
-            ncf_response = doutils.BillingDoUtils.dgii_validate_ncf(self, self.partner_id.vat, ncf, self.env.company.vat)
-            
-            if not ncf_response is None:
-                log.info("[KCS] NCF Response: {0}".format(ncf_response))
-                log.info("[KCS] NCF Response (Status Code): {0}".format(ncf_response.status_code))
-                if ncf_response.status_code == 500:
-                    raise exceptions.ValidationError("Ocurrió un error desconocido al conectar con el servicio de consulta.")
-                elif ncf_response.status_code == 404:
-                    raise exceptions.ValidationError("El número de comprobante fiscal {0} digitado no está vigente o no corresponde a este RNC {1}.".format(ncf, self.partner_id.vat))
-                elif ncf_response.status_code == 400:
-                    raise exceptions.ValidationError("Los datos suministrados para la consulta no son válidos. NCF:{0}|RNC:{1}".format(ncf, self.partner_id.vat))
-                elif ncf_response.status_code == 200:
-                    if not bool(ncf_response.json()['isValid']):
-                        raise exceptions.ValidationError("El número de comprobante fiscal {0} digitado no está vigente o no corresponde a este RNC {1}.".format(ncf, self.partner_id.vat))
-                    else:
-                        return {
-                            'warning': {
-                                'title': "NCF es válido.",
-                                'message': "El NCF '{0}' y el RNC '{1}' son válidos.".format(ncf, self.partner_id.vat)
-                            }
-                        }
+            _trn_helper = self.env['billing.do.trn.helper'].sudo()
+
+            _trn_helper.is_trn_from_journal_which_use_sequence(ncf)
+
+            if _trn_helper.is_valid_trn_do(ncf):
+                _trn_service_helper = self.env['billing.do.trn.http.service.helper'].sudo()
+                return _trn_service_helper.dgii_validate_ncf(self.partner_id.vat, 
+                                                                ncf,
+                                                                self.env.company.vat,
+                                                                self.security_code)
 
     def __validate_vat_journal_b11(self, model):
-        vat_response = doutils.BillingDoUtils.dgii_get_vat_info(model, model.partner_id.vat)
+        vat_helper = self.env['billing.do.vat.http.service.helper'].sudo()
+        vat_response = vat_helper.dgii_get_vat_info(model.partner_id.vat)
 
         log.info("[KCS] VAT Response: {0}".format(vat_response))
         log.info("[KCS] VAT Response (Status Code): {0}".format(vat_response.status_code))

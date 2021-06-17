@@ -1,60 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="custom_order_lines" name="Personal Sale Order Data">
+        <template id="custom_order_lines"
+                    name="Personal Sale Order Data">
+            
             <!-- Is there a discount on at least one line? -->
-            <t t-set="display_discount" t-value="any([l.discount for l in doc.order_line])"/>
+            <t t-set="display_discount"
+                t-value="any([l.discount for l in doc.order_line])"/>
+            
             <!-- Is there tax on at least one line? -->
-            <t t-set="display_taxes" t-value="any([y.tax_id for y in doc.order_line])"/>
+            <t t-set="display_taxes"
+                t-value="any([y.tax_id for y in doc.order_line])"/>
+            
             <!-- To take care of columns when no discount -->
-            <t t-set="col_span" t-value="7 if display_discount else 6"/>
+            <t t-set="col_span"
+                t-value="7 if display_discount else 6"/>
+            
             <!-- common th styles -->
-            <t t-set="th_style" t-value="'border-bottom: 1px solid #ddd !important;white-space:nowrap;font-weight:bold;'"/>
-            <table class="table table-sm" t-attf-style="color:{{style.text_color}};">
-                <thead t-attf-style="background-color:{{style.theme_color if not style.transparent else 'transparent'}} !important;
+            <t t-set="th_style"
+                t-value="'border-bottom: 1px solid #ddd !important;
+                                            white-space:nowrap;
+                                            font-weight:bold;'"/>
+            
+            <table class="table table-sm"
+                    t-attf-style="color:{{style.text_color}};">
+
+                <thead t-attf-style="background-color:{{style.theme_color if not style.transparent 
+                                                                            else 'transparent'}} !important;
                                         page-break-inside: avoid;
                                         color:{{style.theme_txt_color if not style.transparent else style.text_color}};">
+
                     <tr t-attf-style="page-break-inside: avoid !important;
                                         border-bottom: 1px solid {{style.text_color}} !important;
                                         font-size:{{int(style.body_font)+2}}px;
                                         border-top:0;">
+
                         <th t-attf-style="{{th_style}}">
                             #
                         </th>
                         <th t-attf-style="{{th_style}}">
                             Descripción
                         </th>
-                        <th class="text-right" t-attf-style="{{th_style}}">
+                        <th class="text-right"
+                            t-attf-style="{{th_style}}">
                             Cantidad
                         </th>
-                        <th class="text-right" t-attf-style="{{th_style}}">
+                        <th class="text-right"
+                            t-attf-style="{{th_style}}">
                             Precio Unidad
                         </th>
-                        <th t-if="display_discount" class="text-right" t-attf-style="{{th_style}}">
+                        <th t-if="display_discount"
+                            class="text-right"
+                            t-attf-style="{{th_style}}">
                             Descuento(%)
                         </th>
-                        <th t-if="display_taxes" class="text-center" t-attf-style="{{th_style}}">
+                        <th t-if="display_taxes"
+                            class="text-center"
+                            t-attf-style="{{th_style}}">
                             Impuestos
                         </th>
-                        <th class="text-right" t-attf-style="{{th_style}}">
+                        <th class="text-right"
+                            t-attf-style="{{th_style}}">
                             <t groups="account.group_show_line_subtotals_tax_excluded">Precio</t>
                             <t groups="account.group_show_line_subtotals_tax_included">Precio</t>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <t t-set="current_subtotal" t-value="0"/>
-                    <t t-set="item_count" t-value="0"/>
-                    <t t-foreach="doc.order_line" t-as="l">
-                        <t t-set="item_count" t-value="item_count + 1"/>
-                        <t t-set="current_subtotal" t-value="current_subtotal + l.price_subtotal"
-                           groups="account.group_show_line_subtotals_tax_excluded"/>
-                        <t t-set="current_subtotal" t-value="current_subtotal + l.price_total"
-                           groups="account.group_show_line_subtotals_tax_included"/>
-                        <tr t-attf-style="background-color:{{style.odd if (l_parity in 'odd' and not style.transparent) else (not style.transparent and style.even) or 'transparent'}}; page-break-inside: avoid">
+
+                    <t t-set="current_subtotal"
+                        t-value="0"/>
+                    <t t-set="item_count"
+                        t-value="0"/>
+                    <t t-set="line_number" 
+                        t-value="0" />
+                    <t t-set="line_number_section" 
+                        t-value="1" />
+
+                    <t t-foreach="doc.order_line.sorted(key=lambda line: line.sequence)"
+                        t-as="l">
+                        
+                        <t t-if="l.display_type not in ['line_section', 'line_note']" 
+                            t-set="line_number" 
+                            t-value="line_number + 1" />
+                        <t t-if="l.display_type in ['line_section']" 
+                            t-set="line_number_section" 
+                            t-value="1" />
+                        <t t-if="l.display_type not in ['line_section']" 
+                            t-set="line_number_section" 
+                            t-value="line_number_section + 1" />
+                        <t t-set="item_count"
+                            t-value="item_count + 1"/>
+                        <t t-set="current_subtotal"
+                            t-value="current_subtotal + l.price_subtotal"
+                            groups="account.group_show_line_subtotals_tax_excluded"/>
+                        <t t-set="current_subtotal"
+                            t-value="current_subtotal + l.price_total"
+                            groups="account.group_show_line_subtotals_tax_included"/>
+
+                        <tr t-if="l.display_type in ['line_section']"
+                            t-attf-style="background-color:#bdbdbd !important;
+                                            color:#ffffff !important;
+                                            page-break-inside: avoid !important;">
+                            <td colspan="7">
+                                <span t-field="l.name"/>
+                            </td>
+                        </tr>
+
+                        <tr t-if="l.display_type in ['line_note']"
+                            t-attf-style="background-color:#f4f3f3;
+                                            color: #555555;
+                                            font-size: 9px;
+                                            font-style: italic;
+                                            page-break-inside: avoid !important;">
+                            <td colspan="7"
+                                class="text-center">
+                                <span t-field="l.name"/>
+                            </td>
+                        </tr>
+
+                        <tr t-if="l.display_type not in ['line_section' , 'line_note']"
+                            t-attf-style="background-color:{{style.odd if line_number_section % 2 != 0 
+                                                                            else style.even}};
+                                            page-break-inside: avoid">
+
                             <t t-if="not l.display_type">
                                 <td>
-                                    <span t-esc="item_count"/>
+                                    <span t-esc="line_number"/>
                                 </td>
                                 <td>
                                     <span t-field="l.name"/>
@@ -66,7 +138,8 @@
                                 </td>
                                 <td class="text-right">
                                     <span t-field="l.price_unit"
-                                          t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                                          t-options='{"widget": "monetary",
+                                                        "display_currency": doc.pricelist_id.currency_id}'/>
                                 </td>
                                 <td t-if="display_discount" class="text-right">
                                     <span t-field="l.discount"/>
@@ -76,9 +149,9 @@
                                 </td>
                                 <td class="text-right">
                                     <span t-field="l.price_subtotal"
-                                          groups="account.group_show_line_subtotals_tax_excluded"/>
+                                            groups="account.group_show_line_subtotals_tax_excluded"/>
                                     <span t-field="l.price_total"
-                                          groups="account.group_show_line_subtotals_tax_included"/>
+                                            groups="account.group_show_line_subtotals_tax_included"/>
                                 </td>
                             </t>
 

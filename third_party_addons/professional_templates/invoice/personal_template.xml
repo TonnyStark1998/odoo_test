@@ -9,14 +9,24 @@
             <t t-if="not o or not 'company_id' in o">
                 <t t-set="company" t-value="res_company"/>
             </t>
-            <div t-attf-style="padding-bottom:0px; padding-left:0px; padding-right:0px; color:{{o.style.text_color}} !important;font-size:{{int(o.style.header_font)}}px !important;font-family:{{o.style.font_family}} !important;"
-                 class="header col-12">
+            <div t-attf-style="padding-bottom:0px;
+                                padding-left:0px;
+                                padding-right:0px;
+                                color:{{o.style.text_color}} !important;
+                                font-size:{{int(o.style.header_font)}}px !important;
+                                font-family:{{o.style.font_family}} !important;"
+                class="header col-12">
+
                 <t t-if="style.header">
                     <div class="col-7 float-left" style="padding-left:0px;">
-                        <img t-if="o.style.logo" t-att-src="image_data_uri(o.style.logo)" style="max-height: 90px;"
-                             alt="Company Logo"/>
-                        <img t-if="not o.style.logo and company.logo" t-att-src="image_data_uri(company.logo)"
-                             style="max-height: 90px;" alt="Company Logo"/>
+                        <img t-if="o.style.logo"
+                                t-att-src="image_data_uri(o.style.logo)"
+                                style="max-height: 90px;"
+                                alt="Company Logo"/>
+                        <img t-if="not o.style.logo and company.logo"
+                                t-att-src="image_data_uri(company.logo)"
+                                style="max-height: 90px;"
+                                alt="Company Logo"/>
                     </div>
                     <div t-if="company.twitter or company.facebook or company.youtube"
                          t-attf-style="background-color: {{o.style.theme_color}};width:auto;padding-left:15px; color:{{o.style.theme_txt_color}}; padding-right:15px; padding-top:4px; padding-bottom:2px;"
@@ -164,11 +174,24 @@
                 <!--    End of INVOICE HEADER   -->
                 <!--    Start of INVOICE LINES  -->
                 <div class="col-12 mt8 mb9"
-                     t-attf-style="padding-left:0px; padding-right:0px;font-size:12px !important;">
-                    <table class="table table-condensed" t-attf-style="color:{{o.style.text_color}};">
-                        <thead t-attf-style="background-color:{{o.style.theme_color}}; page-break-inside: avoid; color:{{o.style.theme_txt_color}};">
-                            <tr t-attf-style="page-break-inside: avoid !important; border-bottom: 1px solid {{o.style.text_color}} !important;">
-                                <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">No.</th>
+                        t-attf-style="padding-left:0px; 
+                                    padding-right:0px;
+                                    font-size:12px !important;"
+                        t-if="o.invoice_line_ids">
+
+                    <table class="table table-condensed" 
+                            t-attf-style="color:{{o.style.text_color}};">
+
+                        <thead t-attf-style="background-color:{{o.style.theme_color}};
+                                                page-break-inside: avoid;
+                                                color:{{o.style.theme_txt_color}};">
+
+                            <tr t-attf-style="page-break-inside: avoid !important;
+                                                border-bottom: 1px solid {{o.style.text_color}} !important;">
+
+                                <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                    No.
+                                </th>
                                 <th class="text-right"
                                     t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
                                     Cantidad
@@ -196,10 +219,48 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <t t-foreach="o.invoice_line_ids" t-as="l">
-                                <tr t-attf-style="background-color:{{o.style.odd if l_parity in 'odd' else o.style.even}}; page-break-inside: avoid !important;">
+                            <t t-set="line_number" 
+                                t-value="0" />
+                            <t t-set="line_number_section" 
+                                t-value="1" />
+
+                            <t t-foreach="o.invoice_line_ids.sorted(key=lambda line: line.sequence)" t-as="l">
+                                <t t-if="l.display_type not in ['line_section', 'line_note']" 
+                                    t-set="line_number" 
+                                    t-value="line_number + 1" />
+                                <t t-if="l.display_type in ['line_section']" 
+                                    t-set="line_number_section" 
+                                    t-value="1" />
+                                <t t-if="l.display_type not in ['line_section']" 
+                                    t-set="line_number_section" 
+                                    t-value="line_number_section + 1" />
+
+                                <tr t-if="l.display_type in ['line_section']"
+                                    t-attf-style="background-color:#bdbdbd !important;
+                                                    color:#ffffff !important;
+                                                    page-break-inside: avoid !important;">
+                                    <td colspan="7">
+                                        <span t-field="l.name"/>
+                                    </td>
+                                </tr>
+
+                                <tr t-if="l.display_type in ['line_note']"
+                                    t-attf-style="background-color:#f4f3f3;
+                                                    color: #555555;
+                                                    font-size: 9px;
+                                                    font-style: italic;
+                                                    page-break-inside: avoid !important;">
+                                    <td colspan="7"
+                                        class="text-center">
+                                        <span t-field="l.name"/>
+                                    </td>
+                                </tr>
+
+                                <tr t-if="l.display_type not in ['line_section' , 'line_note']"
+                                    t-attf-style="background-color:{{o.style.odd if line_number_section % 2 != 0 else o.style.even}};
+                                                    page-break-inside: avoid !important;">
                                     <td>
-                                        <span t-esc="l_index + 1"/>
+                                        <span t-esc="line_number"/>
                                     </td>
                                     <td class="text-right">
                                         <span t-esc="int(l.quantity)"/>
@@ -212,11 +273,12 @@
                                     <td class="text-right">
                                         <span t-field="l.price_unit"/>
                                     </td>
-                                    <td class="text-right" groups="sale.group_discount_per_so_line">
+                                    <td class="text-right"
+                                        groups="sale.group_discount_per_so_line">
                                         <span t-field="l.discount"/>
                                     </td>
                                     <td class="text-right">
-                                        <span t-esc="', '.join(map(lambda x: (x.name), l.tax_ids))"/>
+                                        <span t-esc="', '.join(map(lambda x: (x.name), l.tax_ids))" />
                                     </td>
                                     <td class="text-right">
                                         <span t-field="l.price_subtotal"/>
@@ -230,6 +292,7 @@
                 <!--    Start of TOTALS -->
                 <div class="col-12 clearfix"
                      t-attf-style="padding-left:0px; padding-right:0px;font-size:12px !important;">
+
                     <div class="col-5 pull-right"
                          style="padding-left:0px; padding-right:0px; page-break-inside: avoid !important;">
                         <table class="table table-sm" t-attf-style="color:{{o.style.text_color}};">
@@ -276,9 +339,14 @@
                          style="padding-left:0px; padding-right:0px; page-break-inside: avoid !important;">
                         <table class="table table-condensed" t-attf-style="color:{{o.style.text_color}};">
 
-                            <thead t-attf-style="background-color:{{o.style.theme_color}}; page-break-inside: avoid; color:{{o.style.theme_txt_color}};">
-                                <tr t-attf-style="page-break-inside: avoid !important; border-bottom: 1px solid {{o.style.text_color}} !important;">
-                                    <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">No.
+                            <thead t-attf-style="background-color:{{o.style.theme_color}};
+                                                    page-break-inside: avoid;
+                                                    color:{{o.style.theme_txt_color}};">
+
+                                <tr t-attf-style="page-break-inside: avoid !important;
+                                                    border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                    <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                        No.
                                     </th>
                                     <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
                                         Fecha
@@ -331,12 +399,19 @@
                         <strong>Fiscal Position Remark:</strong>
                         <span t-field="o.fiscal_position_id.note"/>
                     </p>
-                    <p t-if="o.narration">
+                    <br/>
+                    <br/>
+                </div>
+                <div t-if="o.narration"
+                        class="col-12"
+                        style="margin-top:10px;
+                                padding-left:0px;
+                                padding-right:0px;
+                                page-break-inside: avoid ! important;">
+                    <p>
                         <strong>Nota(s):</strong>
                         <span t-field="o.narration"/>
                     </p>
-                    <br/>
-                    <br/>
                 </div>
             </div>
             <!--End of PAGE-->
