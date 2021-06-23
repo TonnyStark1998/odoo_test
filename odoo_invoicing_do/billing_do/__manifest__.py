@@ -11,7 +11,7 @@
     'website': "http://www.koalacreativesoftware.com",
     'category': 'Accounting/Accounting',
     'version': '0.2',
-    'depends': ['base', 'account', 'account_accountant', 'sale', 'purchase'],
+    'depends': ['base', 'account', 'sale', 'purchase'],
     # always loaded
     'data': [
         'security/ir.model.access.csv',
