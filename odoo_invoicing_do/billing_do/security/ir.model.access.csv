@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_billing_do_billing_do,billing_do.billing_do,model_billing_do_billing_do,base.group_user,1,1,1,1
+access_billing_do_tax_report_viewer,billing_do.tax_report viewer,model_billing_do_tax_report,account.group_account_invoice,1,0,0,0
+access_billing_do_tax_report_manager,billing_do.tax_report manager,model_billing_do_tax_report,account.group_account_manager,1,1,1,1
