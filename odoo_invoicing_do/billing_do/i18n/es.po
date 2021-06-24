@@ -932,3 +932,108 @@ msgstr "El proveedor que intenta utilizar no posee asignado un RNC/Cédula. Por 
 #, python-format
 msgid "The TRN parameter must have a value. Nothing was given."
 msgstr "El parámetro NCF debe tener un valor. Ninguno fue proveído."
+
+#################################
+# Tax Report Model Translations #
+#################################
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_form
+msgid "Report Items"
+msgstr ""
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_form
+msgid "Generate"
+msgstr "Generar reporte"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_form
+msgid "Are you sure you want to generate the report? This can't be undone."
+msgstr "¿Está seguro que desea generar el reporte? Para generar el reporte nuevamente tendrá que crear uno nuevo."
+
+#. module: billing_do
+#: model:ir.ui.menu,name:billing_do.menu_billing_do_tax_reports_main
+msgid "Tax Reports"
+msgstr "Informes de impuestos"
+
+#. module: billing_do
+#: model:ir.ui.menu,name:billing_do.menu_tax_reports_list
+msgid "List all reports"
+msgstr "Listado de reportes"
+
+#. module: billing_do
+#: model:ir.ui.menu,name:billing_do.menu_tax_reports_create
+msgid "Create new report"
+msgstr "Crear reporte"
+
+#. module: billing_do
+#: model:ir.actions.act_window,name:billing_do.action_billing_do_tax_report_list
+msgid "Tax Report List"
+msgstr "Listado de informe de impuestos"
+
+#. module: billing_do
+#: model:ir.actions.act_window,name:billing_do.action_billing_do_tax_report_create
+msgid "Create new tax report"
+msgstr "Crear un nuevo informe de impuestos"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_search
+msgid "Tax Report 606"
+msgstr "Reporte 606"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_search
+msgid "Tax Report 607"
+msgstr "Reporte 607"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__state
+msgid "State"
+msgstr "Estado"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__type
+msgid "Tax Report Type"
+msgstr "Tipo de reporte"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__tax_term_year
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_search
+msgid "Tax Term Year"
+msgstr "Año"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__tax_term_month
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_search
+msgid "Tax Term Month"
+msgstr "Mes"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__date_generated
+msgid "Generated Date"
+msgstr "Fecha de creación"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__user_who_generated
+msgid "User Who Generated"
+msgstr "Usuario creador"
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report__type__606
+#: code:odoo_invoicing_do/billing_do/models/billing_do_tax_report.py:0
+#, python-format
+msgid "Tax Report 606"
+msgstr "Reporte 606"
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report__type__607
+#: code:odoo_invoicing_do/billing_do/models/billing_do_tax_report.py:0
+#, python-format
+msgid "Tax Report 607"
+msgstr "Reporte 607"

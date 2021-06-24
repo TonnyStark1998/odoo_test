@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Views
+    -->
+    <record model="ir.ui.view" id="billing_do_tax_report_view_tree">
+        <field name="name">billing.do.tax.report.view.tree</field>
+        <field name="model">billing.do.tax.report</field>
+        <field name="arch" type="xml">
+            <tree default_order="type,tax_term_year,tax_term_month desc" 
+                    create="false" 
+                    import="false"
+                    decoration-danger="state in ['created']">
+                <field name="state" invisible="1" />
+                <field name="name" />
+                <field name="type" />
+                <field name="tax_term_year" />
+                <field name="tax_term_month" />
+                <field name="user_who_generated" />
+                <field name="date_generated" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="billing_do_tax_report_view_form">
+        <field name="name">billing.do.tax.report.view.form</field>
+        <field name="model">billing.do.tax.report</field>
+        <field name="arch" type="xml">
+            <form crete="false">
+                <header>
+                    <button string="Generate" 
+                                class="oe_highlight"
+                                name="generate_report" 
+                                type="object"
+                                states="created"
+                                confirm="Are you sure you want to generate the report? This can't be undone." />
+                    <field name="state" 
+                            widget="statusbar" />
+                </header>
+                <sheet>
+                    <group>
+                        <h1 class="oe_title oe_left">
+                            <strong>
+                                <field name="name" 
+                                        nolabel="True" />
+                            </strong>
+                        </h1>
+                    </group>
+                    <group col="3">
+                        <group>
+                            <field name="type" 
+                                    attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                        </group>
+                        <group>
+                            <field name="tax_term_year"
+                                    attrs="{'readonly': [('state', 'not in', ['draft'])]}" />
+                        </group>
+                        <group>
+                            <field name="tax_term_month"
+                                    attrs="{'readonly': [('state', 'not in', ['draft'])]}" />
+                        </group>
+                        <group>
+                            <field name="user_who_generated" />
+                        </group>
+                        <group colspan="2">
+                            <field name="date_generated" 
+                                    attrs="{'invisible': [('state', 'not in', ['generated'])],
+                                                'readonly': 1}" />
+                        </group>
+                        <separator />
+                        <group string="Report Items" 
+                                    attrs="{'invisible': [('state', 'not in', ['generated'])]}">
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--
+        Search views
+    -->
+    <record model="ir.ui.view" id="billing_do_tax_report_view_search">
+        <field name="name">billing.do.tax.report.view.search</field>
+        <field name="model">billing.do.tax.report</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="tax_term_year" 
+                        string="Tax Term Year" />
+                <field name="tax_term_month" 
+                        string="Tax Term Month" />
+                <filter name="filter_billing_do_tax_report_type_606" 
+                            string="Tax Report 606" 
+                            domain="[('type', 'in', ['606'])]" />
+                <filter name="filter_billing_do_tax_report_type_607" 
+                            string="Tax Report 607" 
+                            domain="[('type', 'in', ['607'])]" />
+            </search>
+        </field>
+    </record>
+
+    <!--
+        Windows actions
+    -->
+    <record model="ir.actions.act_window" id="action_billing_do_tax_report_list">
+        <field name="name">Tax Report List</field>
+        <field name="res_model">billing.do.tax.report</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" 
+                ref="billing_do_tax_report_view_tree" />
+        <field name="search_view_id" 
+                ref="billing_do_tax_report_view_search"/>
+    </record>
+    
+    <record model="ir.actions.act_window" id="action_billing_do_tax_report_create">
+        <field name="name">Create new tax report</field>
+        <field name="res_model">billing.do.tax.report</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" 
+                ref="billing_do_tax_report_view_form" />
+    </record>
+
+    <!--
+        Menu items for Tax Reports
+    -->
+    <menuitem id="menu_billing_do_tax_reports_main"
+                groups="account.group_account_user"
+                name="Tax Reports" 
+                parent="account_accountant.menu_accounting" 
+                sequence="30" />
+    <menuitem id="menu_tax_reports_list"
+                groups="account.group_account_user"
+                name="List all reports" 
+                parent="menu_billing_do_tax_reports_main" 
+                action="action_billing_do_tax_report_list" 
+                sequence="1" />
+    <menuitem id="menu_tax_reports_create"
+                groups="-account.group_account_user"
+                name="Create new report" 
+                parent="menu_billing_do_tax_reports_main" 
+                action="action_billing_do_tax_report_create" 
+                sequence="2" />
+</odoo>
