@@ -13,11 +13,13 @@ from . import billing_do_res_config_settings, \
 				billing_do_ir_sequence, \
 				billing_do_res_partner, \
 				billing_do_res_company, \
-				billing_do_account_move_dgii_report, \
 				billing_do_account_tax, \
 				billing_do_account_account, \
 				billing_do_account_payment, \
 				billing_do_product_product, \
 				billing_do_stock_warehouse, \
 				billing_do_sale_report, \
-                billing_do_taxes_report
+                billing_do_tax_report, \
+				billing_do_tax_report_item_common,\
+				billing_do_tax_report_item_606, \
+				billing_do_tax_report_item_607

@@ -7,11 +7,13 @@
         <field name="name">billing.do.tax.report.view.tree</field>
         <field name="model">billing.do.tax.report</field>
         <field name="arch" type="xml">
-            <tree default_order="type,tax_term_year,tax_term_month desc" 
+            <tree default_order="type, tax_term_year, tax_term_month desc" 
                     create="false" 
                     import="false"
-                    decoration-danger="state in ['created']">
+                    decoration-danger="state in ['created']"
+                    expand="true">
                 <field name="state" invisible="1" />
+                <field name="company_id" invisible="1" />
                 <field name="name" />
                 <field name="type" />
                 <field name="tax_term_year" />
@@ -30,10 +32,15 @@
                 <header>
                     <button string="Generate" 
                                 class="oe_highlight"
-                                name="generate_report" 
+                                name="action_generate_report" 
                                 type="object"
                                 states="created"
                                 confirm="Are you sure you want to generate the report? This can't be undone." />
+                    <button string="Show items" 
+                                class="oe_highlight"
+                                name="action_show_report_items" 
+                                type="object"
+                                states="generated" />
                     <field name="state" 
                             widget="statusbar" />
                 </header>
@@ -66,10 +73,6 @@
                             <field name="date_generated" 
                                     attrs="{'invisible': [('state', 'not in', ['generated'])],
                                                 'readonly': 1}" />
-                        </group>
-                        <separator />
-                        <group string="Report Items" 
-                                    attrs="{'invisible': [('state', 'not in', ['generated'])]}">
                         </group>
                     </group>
                 </sheet>
@@ -110,6 +113,10 @@
                 ref="billing_do_tax_report_view_tree" />
         <field name="search_view_id" 
                 ref="billing_do_tax_report_view_search"/>
+        <field name="context">{'group_by': 'type'}</field>
+        <field name="domain">
+            [('company_id', '=', allowed_company_ids[0])]
+        </field>
     </record>
     
     <record model="ir.actions.act_window" id="action_billing_do_tax_report_create">
@@ -118,6 +125,9 @@
         <field name="view_mode">tree,form</field>
         <field name="view_id" 
                 ref="billing_do_tax_report_view_form" />
+        <field name="domain">
+            [('company_id', '=', allowed_company_ids[0])]
+        </field>
     </record>
 
     <!--
