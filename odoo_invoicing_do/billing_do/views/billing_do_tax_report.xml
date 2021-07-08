@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
+    <!--
+        Rules
+    -->
+    <record model="ir.rule" id="billing_do_tax_report_rule">
+        <field name="name">Tax Report Multicompany Rule</field>
+        <field name="model_id" ref="model_billing_do_tax_report"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">['|', ('company_id', '=', False),
+            ('company_id', '=', company_id)]</field>
+    </record>
+
     <!--
         Views
     -->
@@ -150,4 +162,5 @@
                 parent="menu_billing_do_tax_reports_main" 
                 action="action_billing_do_tax_report_create" 
                 sequence="2" />
+
 </odoo>

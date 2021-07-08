@@ -132,35 +132,12 @@ class BillingDoTaxReport(models.Model):
             'date_generated': datetime.datetime.now()
         })
 
-        res_model, view_id = self._get_action_window_by_type(self.type)
-        return {
-            'name': _('Report Items'),
-            'type': 'ir.actions.act_window',
-            'res_model': res_model,
-            'res_id': self.id,
-            'view_mode': 'tree',
-            'view_id': self.env.ref('billing_do.{}'.format(view_id)).id,
-            'target': 'current',
-            'domain': '[]',
-            'limit': count_moves,
-            'context': '{}'
-        }
+        model, view = self._get_action_window_by_type(self.type)
+        return self._generate_action_window_json(view, model)
 
     def action_show_report_items(self):
-        res_model, view_id = self._get_action_window_by_type(self.type)
-        return {
-            'name': _('Report Items'),
-            'type': 'ir.actions.act_window',
-            'res_model': res_model,
-            'res_id': self.id,
-            'view_mode': 'tree',
-            'view_id': self.env.ref('billing_do.{}'.format(view_id)).id,
-            'target': 'current',
-            'domain': '[]',
-            'limit': self.env[res_model]\
-                            .search_count([('tax_report', '=', self.id)]),
-            'context': '{}'
-        }
+        model, view = self._get_action_window_by_type(self.type)
+        return self._generate_action_window_json(view, model)
 
     # Helpers methods
     def _get_action_window_by_type(self, type):
@@ -175,6 +152,20 @@ class BillingDoTaxReport(models.Model):
             view_id = 'billing_do_tax_report_item_607_view_tree'
 
         return res_model, view_id
+    
+    def _generate_action_window_json(self, view, model):
+        return {
+            'name': _('Report Items'),
+            'type': 'ir.actions.act_window',
+            'res_model': model,
+            'view_mode': 'tree',
+            'view_id': self.env.ref('billing_do.{}'.format(view)).id,
+            'target': 'fullscreen',
+            'domain': "[('tax_report', '=', active_id)]",
+            'limit': self.env[model]\
+                            .search_count([('tax_report', '=', self.id)]),
+            'context': '{}'
+        }
 
 class BillingDoTaxReportItem(models.Model):
     _name = 'billing.do.tax.report.item'

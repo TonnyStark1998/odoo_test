@@ -10,6 +10,10 @@ class BillingDoTaxReportItem607(models.Model):
     _check_company_auto = True
     _inherit = 'billing.do.tax.report.item.common'
 
+    company_id = fields.Many2one(string='Company',
+                                    comodel_name='res.company',
+                                    default=lambda self: self.env.company.id)
+
     # Model fields
     income_type = fields.Selection(selection=[
                                                 ('01', '01 - Ingresos por Operaciones (No Financieros)'),
