@@ -6,8 +6,9 @@ import logging as log
 
 class BillingDoTaxReportItem606(models.Model):
     _name = 'billing.do.tax.report.item.606'
-    _description = 'Billing DO Tax Report 606'
+    _description = 'Billing DO - Tax Report 606'
     _inherit = 'billing.do.tax.report.item.common'
+    _order = 'date_invoice_month, date_invoice_day desc'
 
     # Model fields
     date_invoice_month = fields.Char(string='Invoice Date Month')
@@ -71,13 +72,27 @@ class BillingDoTaxReportItem606(models.Model):
     isr_type = fields.Char(string='ISR Type',
                             default='')
 
+    def generate_item(self, move, tax_report):
+        return {
+            'consumable_amount': 0.0,
+            'service_amount': 0.0,
+            'total_amount': 0.0,
+            'tax_amount': 0.0,
+            'other_taxes_amount': 0.0,
+            'legaltip_amount': 0.0,
+            'payment_type': '04',
+        }
+
     def generate_items(self, search_domain_common, tax_report):
         moves = self.env['account.move'].search(search_domain_common +
                                                     [('type', 'in', ['in_invoice', 'in_refund'])])
         
         for move in moves:
             tax_report_item = super(BillingDoTaxReportItem606, self)\
-                                .generate_item(move, tax_report)
+                                    .generate_item(move, tax_report)\
+            
+            tax_report_item\
+                    .update(self.generate_item(move, tax_report))
 
             tax_report_item['expense_type'] = move.expense_type
 
@@ -96,13 +111,6 @@ class BillingDoTaxReportItem606(models.Model):
 
             _payment_type = False
             _tax_balance_multiplicator = -1 if move.is_inbound(True) else 1
-
-            tax_report_item['consumable_amount'] = 0.0
-            tax_report_item['service_amount'] = 0.0
-            tax_report_item['total_amount'] = 0.0
-            tax_report_item['tax_amount'] = 0.0
-            tax_report_item['other_taxes_amount'] = 0.0
-            tax_report_item['legaltip_amount'] = 0.0
 
             for move_line in _move_lines:
                 if move_line.account_internal_type in ['receivable']\
@@ -149,7 +157,6 @@ class BillingDoTaxReportItem606(models.Model):
             tax_report_item['total_amount'] = \
                         tax_report_item['consumable_amount'] + tax_report_item['service_amount']
 
-            tax_report_item['payment_type'] = '04'
             if move.invoice_payment_state in ['paid']:
                 tax_report_item['payment_type'] = _payment_type
 

@@ -4,11 +4,6 @@ import datetime
 import calendar
 import logging as log
 
-TAX_REPORT_TYPES = [
-                    ('606', 'Tax Report 606'),
-                    ('607', 'Tax Report 607'),
-                    ]
-
 class BillingDoTaxReport(models.Model):
     _name = 'billing.do.tax.report'
     _description = 'Billing DO Tax Report'
@@ -29,8 +24,8 @@ class BillingDoTaxReport(models.Model):
                         store=True,
                         readonly=True,
                         compute='_compute_name')
-    type = fields.Selection(selection=TAX_REPORT_TYPES,
-                                string='Tax Report Type',
+    type = fields.Many2one(string='Tax Report Type',
+                                comodel_name='billing.do.tax.report.type',
                                 required=True)
     tax_term_year = fields.Selection(selection=lambda self: self._get_years(),
                                         string='Tax Term Year',
@@ -51,11 +46,6 @@ class BillingDoTaxReport(models.Model):
                                                                     and self.env.user.id 
                                                                     or False)
 
-    tax_report_items = fields.One2many(string='Tax Report Items',
-                                        comodel_name='billing.do.tax.report.item',
-                                        inverse_name='tax_report',
-                                        default=False)
-
     # Compute methods
     @api.depends('type', 'tax_term_year', 'tax_term_month')
     def _compute_name(self):
@@ -64,8 +54,7 @@ class BillingDoTaxReport(models.Model):
                 and tax_report.tax_term_year \
                 and tax_report.tax_term_month:
                 tax_report.name = '{} ({}-{})'.format(_('Report') if not tax_report.type 
-                                                                    else _('{}'.format(dict(self._fields['type'].selection)
-                                                                                            .get(tax_report.type))), 
+                                                                    else tax_report.type.name, 
                                                                                 tax_report.tax_term_year,
                                                                                 tax_report.tax_term_month)
             else:
@@ -102,7 +91,8 @@ class BillingDoTaxReport(models.Model):
     @api.model
     def write(self, values):
         if self.state in ['generated']:
-            raise exceptions.ValidationError(_('A report which was generated can be modified. You can create another report if you want.'))
+            raise exceptions\
+                    .ValidationError(_('A report which was generated can be modified. You can create another report if you want.'))
         return super(BillingDoTaxReport, self).write(values)
 
     # Button actions
@@ -120,58 +110,38 @@ class BillingDoTaxReport(models.Model):
                             ('state', 'in', ['posted']),
                             ('journal_id.is_tax_valuable', '=', True)]
         
-        if self.type in ['606']:
-            count_moves = self.env['billing.do.tax.report.item.606']\
-                                .generate_items(search_domain, self)
-        elif self.type in ['607']:
-            count_moves = self.env['billing.do.tax.report.item.607']\
-                                .generate_items(search_domain, self)
+        self.env[self.type.model.model]\
+                .generate_items(search_domain, self)
 
         self.write({
             'state':'generated',
             'date_generated': datetime.datetime.now()
         })
 
-        model, view = self._get_action_window_by_type(self.type)
-        return self._generate_action_window_json(view, model)
+        return self._generate_action_window_json(self.type.view.name, 
+                                                    self.type.model.model)
 
     def action_show_report_items(self):
-        model, view = self._get_action_window_by_type(self.type)
-        return self._generate_action_window_json(view, model)
+        return self._generate_action_window_json(self.type.view.name, 
+                                                    self.type.model.model)
 
-    # Helpers methods
-    def _get_action_window_by_type(self, type):
-        res_model = 'billing.do.tax.report'
-        view_id = 'billing_do_tax_report_view_form'
-
-        if type in ['606']:
-            res_model = 'billing.do.tax.report.item.606'
-            view_id = 'billing_do_tax_report_item_606_view_tree'
-        elif type in ['607']:
-            res_model = 'billing.do.tax.report.item.607'
-            view_id = 'billing_do_tax_report_item_607_view_tree'
-
-        return res_model, view_id
-    
     def _generate_action_window_json(self, view, model):
         return {
             'name': _('Report Items'),
             'type': 'ir.actions.act_window',
             'res_model': model,
             'view_mode': 'tree',
-            'view_id': self.env.ref('billing_do.{}'.format(view)).id,
+            'view_id': self.env['ir.ui.view']\
+                            .search([('name', '=', view)]).id,
             'target': 'fullscreen',
             'domain': "[('tax_report', '=', active_id)]",
             'limit': self.env[model]\
-                            .search_count([('tax_report', '=', self.id)]),
-            'context': '{}'
+                            .search_count([('tax_report', '=', self.id)])
         }
 
-class BillingDoTaxReportItem(models.Model):
+class BillingDoTaxReportItem(models.AbstractModel):
     _name = 'billing.do.tax.report.item'
-    _description = '''
-        This model represents an item for Tax Report.
-    '''
+    _description = 'Billing DO - Tax Report Item'
     _check_company_auto = True
 
     # Model fields
@@ -189,6 +159,7 @@ class BillingDoTaxReportItem(models.Model):
                                     ondelete='cascade',
                                     check_company=True)
     
+    
     def generate_item(self, move, tax_report):
         return {
             'vat': '' if not move.partner_id else move.partner_id.vat,
@@ -200,3 +171,65 @@ class BillingDoTaxReportItem(models.Model):
                                     else move.reversed_entry_id.name,
             'tax_report': tax_report.id
         }
+    
+    def generate_items(self, search_domain_common, tax_report):
+        moves = self.env['account.move'].search(search_domain_common)
+        
+        for move in moves:
+            tax_report_item = self.generate_item(move, tax_report)
+        
+        self.create(tax_report_item)
+
+class BillingDoTaxReportType(models.Model):
+    _name = 'billing.do.tax.report.type'
+    _description = 'Billing DO - Tax Report Type'
+
+    # Model fields
+    name = fields.Char(string='Tax Report Type Name',
+                        required=True)
+    code = fields.Char(string='Tax Report Type Code',
+                        required=True)
+
+    model = fields.Many2one(string='Model',
+                                comodel_name='ir.model',
+                                domain=lambda self: self._get_tax_report_item_extended_models_domain(['billing.do.tax.report.item'],\
+                                                                                                        True),
+                                required=True)
+    view = fields.Many2one(string='View',
+                                comodel_name='ir.ui.view',
+                                domain=[],
+                                required=True)
+
+    # OnChange Methods
+    @api.onchange('model')
+    def _on_change_model(self):
+        if self.model:
+            return {'domain': 
+                        {'view': [('model', '=', self.model.model), 
+                                    ('type', '=', 'tree')]}}
+
+    # Helper methods
+    @api.model
+    def _get_tax_report_item_extended_models_domain(self, tax_report_items_models, rescan):
+        _ir_models = self.env['ir.model']\
+                            .search([('transient', '=', False),\
+                                        ('model', 'not in', tax_report_items_models)])
+
+        if rescan:
+            rescan = False
+
+            for _ir_model in _ir_models:
+                try:
+                    _inherit = self.env[_ir_model.model]._inherit
+
+                    if _ir_model.model not in tax_report_items_models \
+                        and _inherit in tax_report_items_models:
+                        tax_report_items_models.append(_ir_model.model)
+                        rescan = True
+                
+                except KeyError:
+                    continue
+            
+            self._get_tax_report_item_extended_models_domain(tax_report_items_models, rescan)
+        
+        return "[('model', 'in', %s)]" % tax_report_items_models

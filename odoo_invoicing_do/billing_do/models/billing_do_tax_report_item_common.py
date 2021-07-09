@@ -3,9 +3,9 @@ from odoo import models, api, fields, _
 
 import logging as log
 
-class BillingDoTaxReportItemCommon(models.Model):
+class BillingDoTaxReportItemCommon(models.AbstractModel):
     _name = 'billing.do.tax.report.item.common'
-    _description = 'Billing DO Tax Report Common'
+    _description = 'Billing DO - Tax Report Common'
     _inherit = 'billing.do.tax.report.item'
 
     currency_id = fields.Many2one(string='Currency',
@@ -20,7 +20,7 @@ class BillingDoTaxReportItemCommon(models.Model):
     
     def generate_item(self, move, tax_report):
         tax_report_item = super(BillingDoTaxReportItemCommon, self)\
-                            .generate_item(move, tax_report)
+                                .generate_item(move, tax_report)
         
         tax_report_item.update({
                         'held_amount_itbis': 0.00,
@@ -29,6 +29,14 @@ class BillingDoTaxReportItemCommon(models.Model):
                     })
 
         return tax_report_item
+
+    def generate_items(self, search_domain_common, tax_report):
+        moves = self.env['account.move'].search(search_domain_common)
+        
+        for move in moves:
+            tax_report_item = self.generate_item(move, tax_report)
+        
+        self.create(tax_report_item)
     
     def _get_payment_type(self, journal):
         if journal.type in ['cash']:
