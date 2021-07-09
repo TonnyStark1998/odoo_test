@@ -31,6 +31,7 @@
         'views/billing_do_tax_report_item_606.xml',
         'views/billing_do_tax_report_item_607.xml',
         'report/billing_do_account_payment_templates.xml',
+        'data/default_tax_report_types.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

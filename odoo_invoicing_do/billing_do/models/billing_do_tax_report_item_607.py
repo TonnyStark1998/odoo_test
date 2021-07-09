@@ -6,9 +6,10 @@ import logging as log
 
 class BillingDoTaxReportItem607(models.Model):
     _name = 'billing.do.tax.report.item.607'
-    _description = 'Billing DO Tax Report 607'
+    _description = 'Billing DO - Tax Report 607'
     _check_company_auto = True
     _inherit = 'billing.do.tax.report.item.common'
+    _order = 'date_invoice desc'
 
     company_id = fields.Many2one(string='Company',
                                     comodel_name='res.company',
@@ -57,13 +58,19 @@ class BillingDoTaxReportItem607(models.Model):
     amount_other_sale_way = fields.Monetary(string='Other Sale Amount',
                                                 default=0.00)
 
+    def generate_item(self, move, tax_report):
+        return {}
+
     def generate_items(self, search_domain_common, tax_report):
         moves = self.env['account.move'].search(search_domain_common +
                                                     [('type', 'in', ['out_invoice', 'out_refund'])])
         
         for move in moves:
             tax_report_item = super(BillingDoTaxReportItem607, self)\
-                                .generate_item(move, tax_report)
+                                    .generate_item(move, tax_report)
+
+            tax_report_item\
+                .update(self.generate_item(move, tax_report))
 
             # Set the invoice amount without any taxes
             if move.amount_untaxed_signed:

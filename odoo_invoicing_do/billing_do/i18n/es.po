@@ -759,6 +759,16 @@ msgid "Create new report"
 msgstr "Crear reporte"
 
 #. module: billing_do
+#: model:ir.ui.menu,name:billing_do.menu_billing_do_tax_report_settings_label
+msgid "Tax Report Settings"
+msgstr "Reporte de impuestos"
+
+#. module: billing_do
+#: model:ir.ui.menu,name:billing_do.menu_tax_reports_type_list
+msgid "Report Types"
+msgstr "Tipos de reportes"
+
+#. module: billing_do
 #: model:ir.actions.act_window,name:billing_do.action_billing_do_tax_report_list
 msgid "Tax Report List"
 msgstr "Listado de informe de impuestos"
@@ -777,6 +787,11 @@ msgstr "Reporte 606"
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_search
 msgid "Tax Report 607"
 msgstr "Reporte 607"
+
+#. module: billing_do
+#: model:ir.actions.act_window,name:billing_do.action_billing_do_tax_report_type_list
+msgid "Tax Report Types"
+msgstr "Tipos de reporte de impuestos"
 
 #. module: billing_do
 #: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__state
@@ -832,40 +847,47 @@ msgstr "Reporte 607"
 #. module: billing_do
 #: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__vat
 #: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__vat
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item__vat
 msgid "Tax Contributor ID"
 msgstr "RNC"
 
 #. module: billing_do
 #: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__vat_type
 #: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__vat_type
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item__vat_type
 msgid "Tax Contributor Type"
 msgstr "Tipo Id"
 
 #. module: billing_do
 #: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__move
 #: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__move
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item__move
 msgid "Tax Receipt Number"
 msgstr "NCF"
 
 #. module: billing_do
 #: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__move_reversed
 #: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__move_reversed
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item__move_reversed
 msgid "Tax Receipt Reversed"
 msgstr "NCF ó Documento Modificado"
 
 #. module: billing_do
 #: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__held_amount_itbis
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_common__held_amount_itbis
 msgid "ITBIS Held Amount"
 msgstr "ITBIS Retenido"
 
 #. module: billing_do
 #: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__held_amount_isr
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_common__held_amount_isr
 msgid "ISR Held Amount"
 msgstr "Monto Retención Renta"
 
 #. module: billing_do
 #: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__isc_amount
 #: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__isc_amount
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_common__isc_amount
 msgid "ISC Amount"
 msgstr "Impuesto Selectivo al Consumo"
 
@@ -1049,3 +1071,23 @@ msgstr "ITBIS Facturado"
 #, python-format
 msgid "Report Items"
 msgstr "Facturas"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type__name
+msgid "Tax Report Type Name"
+msgstr "Nombre"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type__code
+msgid "Tax Report Type Code"
+msgstr "Código"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type__model
+msgid "Model"
+msgstr "Modelo"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type__view
+msgid "View"
+msgstr "Vista"

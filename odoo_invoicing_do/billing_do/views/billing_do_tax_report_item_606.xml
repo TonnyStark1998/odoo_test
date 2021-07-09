@@ -7,19 +7,14 @@
     <record model="ir.ui.view" id="billing_do_tax_report_item_606_view_tree">
         <field name="name">billing.do.tax.report.item.606.view.tree</field>
         <field name="model">billing.do.tax.report.item.606</field>
+        <field name="inherit_id"
+                ref="billing_do.billing_do_tax_report_item_view_tree" />
         <field name="arch" type="xml">
-            <tree default_order="date_invoice_month,
-                                    date_invoice_day desc"
-                    create="false"
-                    import="false">
-                    <field name="company_id"
-                            invisible="1" />
-                    <field name="vat" />
-                    <field name="vat_type" />
-                    <field name="expense_type" />
-                    <field name="move" />
-                    <field name="move_reversed" />
-                    <field name="date_invoice_month" />
+            <field name="vat_type" position="after">
+                <field name="expense_type" />
+            </field>
+            <field name="move_reversed" position="after">
+                <field name="date_invoice_month" />
                     <field name="date_invoice_day" />
                     <field name="date_payment_month" />
                     <field name="date_payment_day" />
@@ -65,7 +60,7 @@
                             sum="Legal Tip Amount"
                             optional="True" />
                     <field name="payment_type" />
-            </tree>
+            </field>
         </field>
     </record>
 

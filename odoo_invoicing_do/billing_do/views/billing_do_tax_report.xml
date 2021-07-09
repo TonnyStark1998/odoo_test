@@ -92,6 +92,64 @@
         </field>
     </record>
 
+    <record model="ir.ui.view" id="billing_do_tax_report_item_view_tree">
+        <field name="name">billing.do.tax.report.item.view.tree</field>
+        <field name="model">billing.do.tax.report.item</field>
+        <field name="arch" type="xml">
+            <tree create="false"
+                    import="false">
+                    <field name="company_id"
+                            invisible="1" />
+                    <field name="vat" />
+                    <field name="vat_type" />
+                    <field name="move" />
+                    <field name="move_reversed" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="billing_do_tax_report_type_view_tree">
+        <field name="name">billing.do.tax.report.type.view.tree</field>
+        <field name="model">billing.do.tax.report.type</field>
+        <field name="arch" type="xml">
+            <tree default_order="name asc">
+                <field name="name" />
+                <field name="code" />
+                <field name="model" />
+                <field name="view" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="billing_do_tax_report_type_view_form">
+        <field name="name">billing.do.tax.report.type.view.tree</field>
+        <field name="model">billing.do.tax.report.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group col="2">
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group>
+                            <field name="code" />
+                        </group>
+                    </group>
+                    <group col="2">
+                        <group>
+                            <field name="model" 
+                                    options="{'no_create': True}" />
+                        </group>
+                        <group>
+                            <field name="view"
+                                    options="{'no_create': True}" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
     <!--
         Search views
     -->
@@ -142,6 +200,17 @@
         </field>
     </record>
 
+    <record model="ir.actions.act_window" id="action_billing_do_tax_report_type_list">
+        <field name="name">Tax Report Types</field>
+        <field name="res_model">billing.do.tax.report.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" 
+                ref="billing_do_tax_report_type_view_tree" />
+        <field name="domain">
+            []
+        </field>
+    </record>
+
     <!--
         Menu items for Tax Reports
     -->
@@ -162,5 +231,16 @@
                 parent="menu_billing_do_tax_reports_main" 
                 action="action_billing_do_tax_report_create" 
                 sequence="2" />
+
+    <menuitem id="menu_billing_do_tax_report_settings_label"
+                name="Tax Report Settings" 
+                sequence="36"
+                parent="account.menu_finance_configuration"
+                groups="-account.group_account_user" />
+    <menuitem id="menu_tax_reports_type_list"
+                name="Report Types" 
+                parent="billing_do.menu_billing_do_tax_report_settings_label" 
+                action="action_billing_do_tax_report_type_list" 
+                sequence="1" />
 
 </odoo>
