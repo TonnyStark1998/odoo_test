@@ -14,4 +14,4 @@ class TestTrnHelper(SingleTransactionCase):
     
     def test_is_trn_from_journal_which_use_sequence(self):
         with self.assertRaises(exceptions.ValidationError) as ex:
-            self._trn_helper.is_trn_from_journal_which_use_sequence(self._trn_helper)
+            self._trn_helper.is_trn_from_journal_which_use_sequence(self._invalid_trn)
