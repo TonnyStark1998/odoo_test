@@ -10,3 +10,6 @@ class TestTrnHelper(SingleTransactionCase):
         
         with self.assertRaises(exceptions.ValidationError) as ex:
             _trn_helper.is_valid_trn_do(_trn)
+    
+    def test_is_trn_from_journal_which_use_sequence(self):
+        pass
