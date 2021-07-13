@@ -13,5 +13,5 @@ class TestTrnHelper(SingleTransactionCase):
             self._trn_helper.is_valid_trn_do(self._invalid_trn)
     
     def test_is_trn_from_journal_which_use_sequence(self):
-        with self.assertRaises(exceptions.AccessDenied) as ex:
+        with self.assertRaises(exceptions.ValidationError) as ex:
             self._trn_helper.is_trn_from_journal_which_use_sequence(self._invalid_trn)
