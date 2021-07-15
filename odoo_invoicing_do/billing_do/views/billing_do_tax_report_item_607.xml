@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+            Views
+    -->
+    <record model="ir.ui.view" id="billing_do_tax_report_item_607_view_tree">
+        <field name="name">billing.do.tax.report.item.607.view.tree</field>
+        <field name="model">billing.do.tax.report.item.607</field>
+        <field name="inherit_id"
+                ref="billing_do.billing_do_tax_report_item_view_tree" />
+        <field name="arch" type="xml">
+            <field name="move_reversed" position="after">
+                <field name="income_type" />
+                <field name="date_invoice" />
+                <field name="date_amount_held" />
+                <field name="amount_untaxed_signed"
+                        sum="Untaxed Amount" />
+                <field name="amount_tax_signed"
+                        sum="Tax Amount" />
+                <field name="held_amount_itbis"
+                        sum="ITBIS Held Amount" />
+                <field name="amount_itbis_perceived"
+                        sum="ITBIS Perceived Amount" 
+                        optional="True" />
+                <field name="held_amount_isr"
+                        sum="ISR Held Amount" />
+                <field name="amount_isr_perceived"
+                        sum="ISR Perceived Amount" 
+                        optional="True" />
+                <field name="isc_amount"
+                        sum="ISC Amount"
+                        optional="True" />
+                <field name="amount_other_taxes"
+                        sum="Other Taxes Amount"
+                        optional="True" />
+                <field name="amount_legaltip"
+                        sum="Legal Tip Amount"
+                        optional="True" />
+                <field name="amount_cash"
+                        sum="Cash Amount" />
+                <field name="amount_bank"
+                        sum="Bank Amount" />
+                <field name="amount_credit_debit_card"
+                        sum="Credit/Debit Card Amount" />
+                <field name="amount_credit_sale"
+                        sum="Credit Sale Amount" />
+                <field name="amount_gift"
+                        sum="Gift Amount" />
+                <field name="amount_permute"
+                        sum="Permute Amount" />
+                <field name="amount_other_sale_way"
+                        sum="Other Sale Amount" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

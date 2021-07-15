@@ -22,41 +22,41 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_isc_amount = fields.Monetary(string='ISC Amount')
 
     # Fields for DGII report 606
-    report_bill_date_month = fields.Char(string='Bill Date Month',
-                                            compute='_compute_report_dates',
-                                            store=True
-                                        )
-    report_bill_date_day = fields.Char(string='Bill Date Day',
-                                        compute='_compute_report_dates',
-                                        store=True
-                                    )
-    report_bill_payment_date_month = fields.Char(string='Payment Date Month',
-                                                    compute='_compute_report_held_values',
-                                                    store=True
-                                                )
-    report_bill_payment_date_day = fields.Char(string='Payment Date Day',
-                                                compute='_compute_report_held_values',
-                                                store=True
-                                            )
-    report_bill_service_amount = fields.Monetary(string='Service Amount', 
-                                                    default=0.0, 
-                                                    currency_field='company_currency_id',
-                                                    compute='_compute_service_consumable_amount'
-                                                )
-    report_bill_consumable_amount = fields.Monetary(string='Consumable Amount', 
-                                                    default=0.0, 
-                                                    currency_field='company_currency_id',
-                                                    compute='_compute_service_consumable_amount'
-                                                )
-    report_bill_total_amount = fields.Monetary(string='Total Amount', 
-                                                default=0.0,
-                                                compute='_compute_service_consumable_amount'
-                                            )
-    report_bill_tax_amount = fields.Monetary(string='Tax Amount', 
-                                                currency_field='company_currency_id', 
-                                                default=0.0,
-                                                compute='_compute_report_bill_tax_amount'
-                                            )
+    # report_bill_date_month = fields.Char(string='Bill Date Month',
+    #                                         compute='_compute_report_dates',
+    #                                         store=True
+    #                                     )
+    # report_bill_date_day = fields.Char(string='Bill Date Day',
+    #                                     compute='_compute_report_dates',
+    #                                     store=True
+    #                                 )
+    # report_bill_payment_date_month = fields.Char(string='Payment Date Month',
+    #                                                 compute='_compute_report_held_values',
+    #                                                 store=True
+    #                                             )
+    # report_bill_payment_date_day = fields.Char(string='Payment Date Day',
+    #                                             compute='_compute_report_held_values',
+    #                                             store=True
+    #                                         )
+    # report_bill_service_amount = fields.Monetary(string='Service Amount', 
+    #                                                 default=0.0, 
+    #                                                 currency_field='company_currency_id',
+    #                                                 compute='_compute_service_consumable_amount'
+    #                                             )
+    # report_bill_consumable_amount = fields.Monetary(string='Consumable Amount', 
+    #                                                 default=0.0, 
+    #                                                 currency_field='company_currency_id',
+    #                                                 compute='_compute_service_consumable_amount'
+    #                                             )
+    # report_bill_total_amount = fields.Monetary(string='Total Amount', 
+    #                                             default=0.0,
+    #                                             compute='_compute_service_consumable_amount'
+    #                                         )
+    # report_bill_tax_amount = fields.Monetary(string='Tax Amount', 
+    #                                             currency_field='company_currency_id', 
+    #                                             default=0.0,
+    #                                             compute='_compute_report_bill_tax_amount'
+    #                                         )
     # Fields for DGII report 606 (NOT IN USE RIGHT NOW!)
     report_bill_itbis_held_amount = fields.Monetary(string='ITBIS Held Amount',
                                                         compute='_compute_report_held_values',
@@ -218,8 +218,9 @@ class BillingDoAccountMoveDgiiReport(models.Model):
             
             reconciled_vals = move._get_reconciled_info_JSON_values()
             move_ids = [move_line['move_id'] for move_line in reconciled_vals]
+            move_lines =  move.line_ids + self.env['account.move.line']\
+                                                .search(args=[('move_id', 'in', move_ids)])
 
-            move_lines = self.env['account.move.line'].search(args=[('move_id', 'in', move_ids)]) + move.line_ids
             for move_line in move_lines:
                 if not _payment_type:
                     _payment_type = move._get_payment_type(move_line.journal_id)
