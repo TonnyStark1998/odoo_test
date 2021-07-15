@@ -78,6 +78,8 @@ class BillingDoAccountMove(models.Model):
     @api.onchange('ncf', 'partner_id', 'journal_id', 'security_code')
     def _onchange_ncf(self):
         try:
+            self._ensure_journal_code_is_set()
+
             if self.ncf and len(self.ncf) > 1:
                 self.ncf_type = self.ncf[0]
 
@@ -139,6 +141,8 @@ class BillingDoAccountMove(models.Model):
     def _check_ncf(self):
         for move in self:
             try:
+                self._ensure_journal_code_is_set()
+
                 if move.type in ['in_invoice', 'in_refund', 'in_receipt']\
                     and move.is_tax_valuable\
                     and move.journal_id.sequence_id.code.upper() not in ['B11', 'B13']:
@@ -194,22 +198,27 @@ class BillingDoAccountMove(models.Model):
 
     @api.model
     def post(self):
-        sequence = self.__get_journal_sequence()
-        if not sequence:
-            pass
+        try:
+            self._ensure_journal_code_is_set()
 
-        sequence = sequence._get_current_sequence(sequence_date=self.date or self.invoice_date)
-        if self.type in ['in_invoice', 'in_refund', 'in_receipt']\
-                and self.journal_id.sequence_id.code.upper() not in ['B11', 'B13']\
-                    and self.journal_id.is_tax_valuable:
-            
-            self.name = self.ncf
+            sequence = self.__get_journal_sequence()
+            if not sequence:
+                return
 
-        if isinstance(sequence, type(self.env['ir.sequence.date_range'])):
-            if 'date_to' in sequence:
-                self.ncf_date_to = sequence.date_to
+            sequence = sequence._get_current_sequence(sequence_date=self.date or self.invoice_date)
+            if self.type in ['in_invoice', 'in_refund', 'in_receipt']\
+                    and self.journal_id.sequence_id.code.upper() not in ['B11', 'B13']\
+                        and self.journal_id.is_tax_valuable:
+                
+                self.name = self.ncf
 
-        return super(BillingDoAccountMove, self).post()
+            if isinstance(sequence, type(self.env['ir.sequence.date_range'])):
+                if 'date_to' in sequence:
+                    self.ncf_date_to = sequence.date_to
+
+            return super(BillingDoAccountMove, self).post()
+        except exceptions.UserError:
+            raise
 
     # Account Move - Helper Functions
     def _validate_ncf(self, ncf):
@@ -290,3 +299,9 @@ class BillingDoAccountMove(models.Model):
 
             return sequence
         return None
+    
+    def _ensure_journal_code_is_set(self):
+        if self.journal_id:
+            if not self.journal_id.sequence_id.code:
+                raise exceptions.UserError(_('The code is missing for the sequence associated with this journal {0}.')
+                                                .format(self.journal_id.name))
