@@ -1,8 +1,8 @@
 from odoo import models, fields, api, exceptions, _
 
-import datetime
-import calendar
-import logging as log
+import datetime, \
+        calendar, \
+        logging as log
 
 class BillingDoTaxReport(models.Model):
     _name = 'billing.do.tax.report'
@@ -97,21 +97,13 @@ class BillingDoTaxReport(models.Model):
 
     # Button actions
     def action_generate_report(self):
-        search_domain = [('invoice_date', '>=', datetime
-                                                    .datetime(int(self.tax_term_year), 
-                                                                int(self.tax_term_month), 
-                                                                1)),
-                            ('invoice_date', '<=', datetime
-                                                        .datetime(int(self.tax_term_year), 
-                                                                int(self.tax_term_month), 
-                                                                calendar
-                                                                    .monthrange(int(self.tax_term_year),
-                                                                                int(self.tax_term_month))[1])),
-                            ('state', 'in', ['posted']),
-                            ('journal_id.is_tax_valuable', '=', True)]
-        
+        _tax_term_date = datetime\
+                            .date(int(self.tax_term_year), 
+                                        int(self.tax_term_month), 
+                                        1)
+
         self.env[self.type.model.model]\
-                .generate_items(search_domain, self)
+                .generate_items(self, _tax_term_date)
 
         self.write({
             'state':'generated',
@@ -172,13 +164,18 @@ class BillingDoTaxReportItem(models.AbstractModel):
             'tax_report': tax_report.id
         }
     
-    def generate_items(self, search_domain_common, tax_report):
-        moves = self.env['account.move'].search(search_domain_common)
+    def generate_items(self, tax_report, tax_term_date):
+        search_domain = [('state', 'in', ['posted']),
+                            ('journal_id.is_tax_valuable', '=', True)]
+
+        moves = self.env['account.move'].search(search_domain)
         
         for move in moves:
             tax_report_item = self.generate_item(move, tax_report)
         
         self.create(tax_report_item)
+
+        return moves
 
 class BillingDoTaxReportType(models.Model):
     _name = 'billing.do.tax.report.type'

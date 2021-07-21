@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from odoo import models, api, fields, _
 
-import datetime
-import logging as log
+import datetime, \
+        calendar, \
+        logging as log
 
 class BillingDoTaxReportItem607(models.Model):
     _name = 'billing.do.tax.report.item.607'
@@ -61,9 +62,9 @@ class BillingDoTaxReportItem607(models.Model):
     def generate_item(self, move, tax_report):
         return {}
 
-    def generate_items(self, search_domain_common, tax_report):
-        moves = self.env['account.move'].search(search_domain_common +
-                                                    [('type', 'in', ['out_invoice', 'out_refund'])])
+    def generate_items(self, tax_report, tax_term_date):
+
+        moves = self._get_items(tax_report, tax_term_date)
         
         for move in moves:
             tax_report_item = super(BillingDoTaxReportItem607, self)\
@@ -92,9 +93,7 @@ class BillingDoTaxReportItem607(models.Model):
             # Get all reconciled info for the move, these are the payments.
             _reconciled_values = move._get_reconciled_info_JSON_values()
 
-            _move_lines = self._get_move_lines_and_payment_lines(move, _reconciled_values)
-
-            tax_report_item.update(self._get_held_amounts(_move_lines))
+            tax_report_item.update(self._get_held_amounts(move.line_ids))
             
             tax_report_item.update(self._calcuate_payments_amounts(move, _reconciled_values))
 
@@ -167,3 +166,32 @@ class BillingDoTaxReportItem607(models.Model):
                 tax_report_item['held_amount_isr'] += _line_amount
 
         return tax_report_item
+
+    def _get_items(self, tax_report, tax_term_date):
+        tax_term_date_end = datetime\
+                                .date(int(tax_term_date.year), 
+                                        int(tax_term_date.month), 
+                                        calendar
+                                            .monthrange(int(tax_term_date.year),
+                                                        int(tax_term_date.month))[1])
+
+        _moves = super(BillingDoTaxReportItem607, self)\
+                    .generate_items(tax_report, tax_term_date)\
+                    .filtered(lambda move:\
+                                move.type in ['out_invoice', 'out_refund']\
+                                    and move.invoice_date >= tax_term_date\
+                                    and move.invoice_date <= tax_term_date_end)
+
+        _moves_ids = [_move_line.id for _move_line in 
+                                            self.env['account.move.line']\
+                                                .search([('move_id.type', 'in', ['out_invoice', 'out_refund']),
+                                                            ('company_id', '=', self.env.company.id),
+                                                            ('account_id.withholding_tax_type', 'in', ["RET-ISR-606", \
+                                                                                                        "RET-ITBIS-606", \
+                                                                                                        "RET-ISR-607", \
+                                                                                                        "RET-ITBIS-607"]),
+                                                            ('date', '>=', tax_term_date),
+                                                            ('date', '<=', tax_term_date_end)])]
+
+        return _moves + self.env['account.move']\
+                            .browse(_moves_ids)
