@@ -30,13 +30,16 @@ class BillingDoTaxReportItemCommon(models.AbstractModel):
 
         return tax_report_item
 
-    def generate_items(self, search_domain_common, tax_report):
-        moves = self.env['account.move'].search(search_domain_common)
+    def generate_items(self, tax_report, tax_term_date):
+        _moves = super(BillingDoTaxReportItemCommon, self)\
+                    .generate_items(tax_report, tax_term_date)
         
-        for move in moves:
+        for move in _moves:
             tax_report_item = self.generate_item(move, tax_report)
         
         self.create(tax_report_item)
+
+        return _moves
     
     def _get_payment_type(self, journal):
         if journal.type in ['cash']:
@@ -48,14 +51,14 @@ class BillingDoTaxReportItemCommon(models.AbstractModel):
         else:
             return '07'
     
-    def _get_move_lines_and_payment_lines(self, move, reconciled_values):
+    def _get_payment_lines(self, reconciled_values):
         move_ids = [move_line['move_id'] \
                         for move_line in reconciled_values]
 
-        move_lines = move.line_ids + self.env['account.move.line']\
-                                            .search(args=[('move_id', 'in', move_ids)])
+        _payment_move_lines = self.env['account.move.line']\
+                                    .search(args=[('move_id', 'in', move_ids)])
 
-        return move_lines
+        return _payment_move_lines
 
     def _get_payment_last_date(self, reconciled_values):
         _last_payment_date = False

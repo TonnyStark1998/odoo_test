@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from odoo import models, api, fields, _
 
-import datetime
-import logging as log
+import datetime, \
+        calendar, \
+        logging as log
 
 class BillingDoTaxReportItem606(models.Model):
     _name = 'billing.do.tax.report.item.606'
@@ -83,9 +84,9 @@ class BillingDoTaxReportItem606(models.Model):
             'payment_type': '04',
         }
 
-    def generate_items(self, search_domain_common, tax_report):
-        moves = self.env['account.move'].search(search_domain_common +
-                                                    [('type', 'in', ['in_invoice', 'in_refund'])])
+    def generate_items(self, tax_report, tax_term_date):
+
+        moves = self._get_items(tax_report, tax_term_date)
         
         for move in moves:
             tax_report_item = super(BillingDoTaxReportItem606, self)\
@@ -107,15 +108,11 @@ class BillingDoTaxReportItem606(models.Model):
             _reconciled_values = move._get_reconciled_info_JSON_values()
 
             # Get all the move lines include the payments move lines.
-            _move_lines = self._get_move_lines_and_payment_lines(move, _reconciled_values)
+            _payment_move_lines = self._get_payment_lines(_reconciled_values)
 
-            _payment_type = False
             _tax_balance_multiplicator = -1 if move.is_inbound(True) else 1
 
-            for move_line in _move_lines:
-                if move_line.account_internal_type in ['receivable']\
-                    and move_line.payment_id:
-                    _payment_type = self._get_payment_type(move_line.journal_id)
+            for move_line in move.line_ids:
 
                 if move_line.account_id.withholding_tax_type in ["RET-ITBIS-606"]:
                     tax_report_item['held_amount_itbis'] += \
@@ -158,7 +155,13 @@ class BillingDoTaxReportItem606(models.Model):
                         tax_report_item['consumable_amount'] + tax_report_item['service_amount']
 
             if move.invoice_payment_state in ['paid']:
-                tax_report_item['payment_type'] = _payment_type
+                for _payment_move_line in _payment_move_lines:
+
+                    if _payment_move_line.account_internal_type \
+                        in ['receivable', 'payable']:
+
+                        tax_report_item['payment_type'] = \
+                            self._get_payment_type(_payment_move_line.journal_id)
 
                 if tax_report_item['held_amount_itbis'] > 0 \
                         or tax_report_item['held_amount_isr'] > 0:
@@ -171,3 +174,44 @@ class BillingDoTaxReportItem606(models.Model):
             self.create(tax_report_item)
 
         return len(moves)
+
+    def _get_items(self, tax_report, tax_term_date):
+        tax_term_date_end = datetime\
+                                .date(int(tax_term_date.year), 
+                                        int(tax_term_date.month), 
+                                        calendar
+                                            .monthrange(int(tax_term_date.year),
+                                                        int(tax_term_date.month))[1])
+
+        _moves = super(BillingDoTaxReportItem606, self)\
+                    .generate_items(tax_report, tax_term_date)\
+                    .filtered(lambda move:\
+                                move.type in ['in_invoice', 'in_refund']\
+                                    and move.invoice_date >= tax_term_date\
+                                    and move.invoice_date <= tax_term_date_end)
+
+        _payment_moves_ids = []
+        pay_term_line_ids = self.env['account.move.line'].filtered(lambda line: 
+                                                                    line.account_id.user_type_id.type\
+                                                                        in ('receivable', 'payable')\
+                                                                    and line.company_id == self.env.company.id)
+
+        partials = pay_term_line_ids.mapped('matched_debit_ids') +\
+                    pay_term_line_ids.mapped('matched_credit_ids')
+
+        for partial in partials:
+            counterpart_lines = partial.debit_move_id +\
+                                    partial.credit_move_id
+
+            # In case we are in an onchange, line_ids is a NewId, not an integer. By using line_ids.ids we get the correct integer value.
+            counterpart_line = counterpart_lines\
+                                    .filtered(lambda line: \
+                                                line.id not in self.line_ids.ids)
+
+            if counterpart_line.date\
+                and counterpart_line.date >= tax_term_date\
+                and counterpart_line.date <= tax_term_date_end:
+                _payment_moves_ids.append(counterpart_line.move_id.id)
+
+        return _moves + self.env['account.move']\
+                            .browse(_payment_moves_ids)
