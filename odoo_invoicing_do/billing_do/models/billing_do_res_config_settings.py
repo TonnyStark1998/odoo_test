@@ -12,6 +12,7 @@ class ResConfigSettings(models.TransientModel):
     api_services_tax_receipts_endpoint = fields.Char(string='Tax Receipts Endpoint')
     api_services_tax_contributors_switch = fields.Boolean(string='Tax Contributors Switch')
     api_services_tax_receipts_switch = fields.Boolean(string='Tax Receipts Switch')
+    api_services_citizens_endpoint = fields.Char(string='Citizens Endpoint')
 
     # Rates Configuration Settings
     rate_service_url = fields.Char(string='Rate Service URL')
@@ -31,6 +32,7 @@ class ResConfigSettings(models.TransientModel):
         self.env['ir.config_parameter'].sudo().set_param('billing_do.rate_service_url', self.rate_service_url)
         self.env['ir.config_parameter'].sudo().set_param('billing_do.rate_regex_usd', self.rate_regex_usd)
         self.env['ir.config_parameter'].sudo().set_param('billing_do.rate_regex_eur', self.rate_regex_eur)
+        self.env['ir.config_parameter'].sudo().set_param('billing_do.api_services_citizens_endpoint', self.api_services_citizens_endpoint)
 
     @api.model
     def get_values(self):
@@ -46,6 +48,7 @@ class ResConfigSettings(models.TransientModel):
         rate_service_url = self.env['ir.config_parameter'].sudo().get_param('billing_do.rate_service_url')
         rate_regex_usd = self.env['ir.config_parameter'].sudo().get_param('billing_do.rate_regex_usd')
         rate_regex_eur = self.env['ir.config_parameter'].sudo().get_param('billing_do.rate_regex_eur')
+        api_services_citizens_endpoint = self.env['ir.config_parameter'].sudo().get_param('billing_do.api_services_citizens_endpoint')
         config.update({'token_url': token_url})
         config.update({'api_services_base_url': api_services_base_url})
         config.update({'token_client_id': token_client_id})
@@ -57,4 +60,5 @@ class ResConfigSettings(models.TransientModel):
         config.update({'rate_service_url': rate_service_url})
         config.update({'rate_regex_usd': rate_regex_usd})
         config.update({'rate_regex_eur': rate_regex_eur})
+        config.update({'api_services_citizens_endpoint': api_services_citizens_endpoint})
         return config

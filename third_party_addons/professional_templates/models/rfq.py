@@ -42,7 +42,8 @@ class RFQ(models.Model):
         related='company_id.df_style',
         string='RFQ Style',
         help="Select style to use when printing the RFQ",
-        default=lambda self: self.partner_id.style 
+        default=lambda self: self.env.company.df_style
+                                or self.partner_id.style 
                                 or self.env.user.company_id.df_style,
         readonly=True
     )

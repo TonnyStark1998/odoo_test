@@ -1,55 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record model="ir.ui.view" id="billing_do_view_dgii_606_search">
-        <field name="name">billing.do.account.dgii.606.search</field>
-        <field name="model">account.move</field>
-        <field name="arch" type="xml">
-            <search>
-                <field name="report_bill_payment_date_month" string="Report Date" filter_domain="['|', ('report_bill_date_month', '=', self), ('report_bill_payment_date_month', '=', self)]" />
-            </search>
-        </field>
-    </record>
-    <record model="ir.ui.view" id="billing_do_view_dgii_607_search">
-        <field name="name">billing.do.account.dgii.607.search</field>
-        <field name="model">account.move</field>
-        <field name="arch" type="xml">
-            <search>
-                <field name="report_invoice_date_month" string="Report Date" filter_domain="['|', ('report_invoice_date_month', 'like', self), ('report_invoice_held_date', 'like', self)]" />
-            </search>
-        </field>
-    </record>
     <record model="ir.ui.view" id="billing_do_view_move_form">
         <field name="name">billing.do.account.move.form</field>
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='type' and position()=1]" position="replace" />
-            <xpath expr="//span[hasclass('o_form_label') and @attrs]" position="replace" />
-            <xpath expr="//field[@name='invoice_sequence_number_next_prefix' and position()=1]" position="replace" />
-            <xpath expr="//field[@name='invoice_sequence_number_next' and position()=1]" position="replace" />
-            <xpath expr="//h1[hasclass('mt0')]" position="replace">
-                <span class="o_form_label" attrs="{'invisible': ['|', ('type', 'in', ['entry', 'in_invoice', 'in_refund']), ('name', '=', '/')]}">
-                    <field name="type" readonly="1" nolabel="1"/>
+            <xpath expr="//field[@name='type' and position()=1]"
+                    position="replace" />
+            <xpath expr="//span[hasclass('o_form_label') and @attrs]"
+                    position="replace" />
+            <xpath expr="//field[@name='invoice_sequence_number_next_prefix'
+                            and position()=1]"
+                    position="replace" />
+            <xpath expr="//field[@name='invoice_sequence_number_next'
+                                and position()=1]"
+                    position="replace" />
+            <xpath expr="//h1[hasclass('mt0')]"
+                    position="replace">
+                <span class="o_form_label"
+                        attrs="{'invisible': ['|', ('type', 'in', ['entry', 'in_invoice', 'in_refund']),
+                                                    ('name', '=', '/')]}">
+                    <field name="type"
+                            readonly="1"
+                            nolabel="1" />
                 </span>
                 <h2 class="mt0" style="color:#474747;">
-                    <field name="use_sequence" attrs="{'invisible': 1}" />
+                    <field name="use_sequence"
+                            attrs="{'invisible': 1}" />
                     <strong>
-                        <field name="name" readonly="True" attrs="{'invisible': ['|', ('name', '=', '/'), '|', ('type','not in', ['out_invoice', 'out_refund']), ('use_sequence', '=', True)]}" />
-                        <field name="ncf" readonly="True" attrs="{'invisible': ['|', ('state', '=', 'draft'), ('type', 'not in', ['in_invoice', 'in_refund'])]}" />
+                        <field name="name"
+                                readonly="True"
+                                attrs="{'invisible': [('name', '=', '/')]}" />
                     </strong>
-                    <field name="ncf_sequence_next_number" readonly="True" attrs="{'invisible': ['|', ('state','!=','draft'), '|', ('name','!=','/'), '&amp;', ('type', 'in', ['in_invoice', 'in_refund']), ('use_sequence', '=', False)]}" />
                 </h2>
             </xpath>
-            <xpath expr="//field[@name='ref']" position="before">
-                <field name="is_tax_valuable" attrs="{'invisible': 1}" />
-                <field name="income_type" attrs="{'invisible': [('type', '!=', 'out_invoice')], 'readonly': [('state', '!=', 'draft')]}" />
-                <field name="ncf" attrs="{'invisible': ['|', ('type', 'not in', ['in_invoice', 'in_refund']), '|', ('is_tax_valuable', '=', False), ('use_sequence', '=', True)], 'required': ['&amp;', ('type', 'in', ['in_invoice', 'in_refund']), '&amp;', ('is_tax_valuable', '=', True), ('use_sequence', '=', False)]}" />
-                <field name="expense_type" attrs="{'invisible': [('type', '!=', 'in_invoice')], 'readonly': [('state', '!=', 'draft')]}" />
+            <xpath expr="//field[@name='ref']"
+                    position="before">
+                <field name="is_tax_valuable"
+                        attrs="{'invisible': 1}" />
+                <field name="income_type"
+                        attrs="{'invisible': [('type', '!=', 'out_invoice')],
+                                'readonly': [('state', '!=', 'draft')]}" />
+                <field name="ncf"
+                        attrs="{'invisible': ['|', ('type', 'not in', ['in_invoice', 'in_refund']), 
+                                                '|', ('is_tax_valuable', '=', False), ('use_sequence', '=', True)], 
+                                'required': ['&amp;', ('type', 'in', ['in_invoice', 'in_refund']), 
+                                                '&amp;', ('is_tax_valuable', '=', True), ('use_sequence', '=', False)]}" />
+                <field name="ncf_type"
+                        invisible="1" />
+                <field name="security_code"
+                        attrs="{'invisible': ['|', ('state', '!=', 'draft'),
+                                                                    '|', ('ncf_type', '!=', 'E'),
+                                                                    '|', ('type', 'not in', ['in_invoice', 'in_refund']), 
+                                                                    '|', ('is_tax_valuable', '=', False), ('use_sequence', '=', True)], 
+                                                    'required': [('ncf_type', '=', 'E'),
+                                                                    '&amp;', ('type', 'in', ['in_invoice', 'in_refund']), 
+                                                                    '&amp;', ('is_tax_valuable', '=', True), ('use_sequence', '=', False)]}" />
+                <field name="expense_type"
+                        attrs="{'invisible': [('type', '!=', 'in_invoice')], 
+                                'readonly': [('state', '!=', 'draft')]}" />
             </xpath>
-            <field name="journal_id" position="attributes">
-                <attribute name="attrs">
-                    {'readonly': [('state', '!=', 'draft')]}
-                </attribute>
+            <field name="journal_id" position="replace">
+                <field name="journal_id"
+                    invisible="context.get('default_journal_id') and context.get('type', 'entry') != 'entry'"
+                    groups="account.group_account_invoice"
+                    options="{'no_create': True}"
+                    domain="[('type', '=?', invoice_filter_type_domain)]"
+                    attrs="{'readonly': [('state', '!=', 'draft')]}"/>
             </field>
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="journal_id" position="move" />
@@ -57,11 +74,6 @@
             <xpath expr="//field[@name='company_id']" position="before">
                 <field name="invoice_user_id" position="move"/>
             </xpath>
-            <!-- <field name="date" position="attributes">
-                <attribute name="invisible">
-                    1
-                </attribute>
-            </field> -->
             <field name="quantity" position="replace">
                 <field name="quantity"
                         widget="float" 
@@ -74,24 +86,25 @@
     <record model="ir.ui.view" id="billing_do_view_invoice_tree">
         <field name="name">billing.do.account.move.tree</field>
         <field name="model">account.move</field>
-        <field name="inherit_id" ref="account.view_invoice_tree" />
+        <field name="inherit_id"
+                ref="account.view_invoice_tree" />
         <field name="arch" type="xml">
-            <field name="name" position="before">
-                <field name="ncf" invisible="context.get('default_type') not in ('in_invoice', 'in_refund','in_receipt')" />
+            <field name="amount_untaxed_signed"
+                    position="replace">
+                <field name="amount_untaxed"
+                        sum="Total" optional="show"/>
             </field>
-            <field name="name" position="attributes">
-                <attribute name="invisible">
-                    context.get('default_type') not in ('out_invoice', 'out_refund','out_receipt')
-                </attribute>
+            <field name="amount_total_signed"
+                    position="replace">
+                <field name="amount_total"
+                        sum="Total"
+                        optional="show"/>
             </field>
-            <field name="amount_untaxed_signed" position="replace">
-                <field name="amount_untaxed" sum="Total" optional="show"/>
-            </field>
-            <field name="amount_total_signed" position="replace">
-                <field name="amount_total" sum="Total" optional="show"/>
-            </field>
-            <field name="amount_residual_signed" position="replace">
-                <field name="amount_residual" sum="Amount Due" optional="show"/>
+            <field name="amount_residual_signed"
+                    position="replace">
+                <field name="amount_residual"
+                        sum="Amount Due"
+                        optional="show"/>
             </field>
         </field>
     </record>
@@ -100,94 +113,55 @@
         <field name="model">account.move.reversal</field>
         <field name="inherit_id" ref="account.view_account_move_reversal" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='journal_id']" position="replace">
-                <field name="journal_id" attrs="{'invisible': 1}"/>
+            <xpath expr="//field[@name='journal_id']"
+                    position="replace">
+                <field name="journal_id"
+                        attrs="{'invisible': 1}"/>
             </xpath>
         </field>
     </record>
-    <record model="ir.ui.view" id="billing_do_view_dgii_606_tree">
-        <field name="name">billing.do.account.dgii.606.tree</field>
+    <record model="ir.ui.view" id="billing_do_view_invoice_calendar">
+        <field name="name">billing.do.account.invoice.view.calendar</field>
         <field name="model">account.move</field>
         <field name="arch" type="xml">
-            <tree default_order="report_bill_date_month desc" create="false" import="false">
-                <field name="state" invisible="1" />
-                <field name="report_vat" />
-                <field name="report_vat_type" />
-                <field name="expense_type" />
-                <field name="report_move" />
-                <field name="report_move_reversed" />
-                <field name="report_bill_date_month" />
-                <field name="report_bill_date_day" />
-                <field name="report_bill_payment_date_month" />
-                <field name="report_bill_payment_date_day" />
-                <field name="report_bill_service_amount" sum="Bill Service Amount" />
-                <field name="report_bill_consumable_amount" sum="Bill Consumable Amount" />
-                <field name="report_bill_total_amount" sum="Total Amount" />
-                <field name="report_bill_tax_amount" sum="Tax Amount" />
-                <field name="report_bill_itbis_held_amount" sum="ITBIS Held Amount" />
-                <field name="report_bill_itbis_proportional_amount" sum="ITBIS Proportional Amount" />
-                <field name="report_bill_itbis_expense_amount" sum="ITBIS Expense Amount" />
-                <field name="report_bill_itbis_ahead_amount" sum="ITBIS Ahead Amount" />
-                <field name="report_bill_itbis_purchases_amount" sum="ITBIS Purchase Amount" />
-                <field name="report_bill_isr_type" />
-                <field name="report_bill_isr_held_amount" sum="ISR Held Amount" />
-                <field name="report_bill_isr_purchases_amount" sum="ISR Purchase Amount" />
-                <field name="report_isc_amount" sum="ISC Amount" />
-                <field name="report_bill_other_taxes_amount" sum="Other Taxes Amount" />
-                <field name="report_bill_legaltip_amount" sum="Legal Tip Amount" />
-                <field name="report_bill_payment_type" />
-            </tree>
+            <calendar string="Invoices"
+                        date_start="date"
+                        date_stop="date"
+                        color="journal_id"
+                        mode="week">
+                <field name="partner_id" />
+                <field name="amount_total_signed" />
+            </calendar>
         </field>
     </record>
-    <record model="ir.ui.view" id="billing_do_view_dgii_607_tree">
-        <field name="name">billing.do.account.dgii.607.tree</field>
+    <record model="ir.ui.view" id="billing_do_view_account_move_filter">
+        <field name="name">billing.do.view.account.move.filter</field>
         <field name="model">account.move</field>
+        <field name="inherit_id" 
+                ref="account.view_account_invoice_filter" />
         <field name="arch" type="xml">
-            <tree default_order="report_invoice_date_month desc" create="false" import="false">
-                <field name="state" invisible="1" />
-                <field name="report_vat" />
-                <field name="report_vat_type" />
-                <field name="report_move" />
-                <field name="report_move_reversed" />
-                <field name="income_type" />
-                <field name="report_invoice_date_month" />
-                <field name="report_invoice_held_date" />
-                <field name="amount_untaxed_signed" sum="Untaxed Amount" />
-                <field name="amount_tax_signed" sum="Tax Amount" />
-                <field name="report_invoice_itbis_held_by_thirdparty_amount" sum="ITBIS Held Amount" />
-                <field name="report_invoice_itbis_perceived_amount" sum="ITBIS Perceived Amount" />
-                <field name="report_invoice_isr_held_by_thirdparty_amount" sum="ISR Held Amount" />
-                <field name="report_invoice_isr_perceived_amount" sum="ISR Perceived Amount" />
-                <field name="report_isc_amount" sum="ISC Amount" />
-                <field name="report_invoice_other_taxes_amount" sum="Other Taxes Amount" />
-                <field name="report_invoice_legaltip_amount" sum="Legaltip Amount" />
-                <field name="report_invoice_cash_amount" sum="Cash Amount" />
-                <field name="report_invoice_bank_amount" sum="Bank Amount" />
-                <field name="report_invoice_credit_debit_card_amount" sum="Credit/Debit Card Amount" />
-                <field name="report_invoice_credit_sale_amount" sum="Credit Sale Amount" />
-                <field name="report_invoice_gift_amount" sum="Gift Amount" />
-                <field name="report_invoice_permute_amount" sum="Permute Amount" />
-                <field name="report_invoice_other_sale_way_amount" sum="Other Sale Amount" />
-            </tree>
+            <field name="name" position="before">
+                <field name="partner_id"
+                        position="move" />
+            </field>
+            <field name="date" position="after">
+                <field name="ncf"
+                        string="TRN" />
+            </field>
         </field>
     </record>
-    <record model="ir.actions.act_window" id="dgii_reports_format_606">
-        <field name="name">Formato de envío de datos 606 (Compras)</field>
-        <field name="res_model">account.move</field>
-        <field name="view_mode">tree</field>
-        <field name="view_id" ref="billing_do_view_dgii_606_tree" />
-        <field name="search_view_id" ref="billing_do_view_dgii_606_search"/>
-        <field name="domain">['&amp;', ('type','in',['in_invoice', 'in_refund']), ('state','in',['posted'])]</field>
+
+    <!-- Inherited Actions -->
+    <record model="ir.actions.act_window" id="account.action_move_out_invoice_type">
+        <field name="view_mode">tree,kanban,form,calendar</field>
     </record>
-    <record model="ir.actions.act_window" id="dgii_reports_format_607">
-        <field name="name">Formato de envío de datos 607 (Ventas)</field>
-        <field name="res_model">account.move</field>
-        <field name="view_mode">tree</field>
-        <field name="view_id" ref="billing_do_view_dgii_607_tree" />
-        <field name="search_view_id" ref="billing_do_view_dgii_607_search"/>
-        <field name="domain">['&amp;', ('type','in',['out_invoice','out_refund']), ('state', 'in', ['posted'])]</field>
+    <record model="ir.actions.act_window" id="account.action_move_out_refund_type">
+        <field name="view_mode">tree,kanban,form,calendar</field>
     </record>
-    <menuitem id="main_menu_dgii_reports" name="DGII Reports" parent="account_accountant.menu_accounting" sequence="30" />
-    <menuitem id="menu_dgii_reports_606" name="Formato de compras (606)" parent="main_menu_dgii_reports" action="dgii_reports_format_606" sequence="1" />
-    <menuitem id="menu_dgii_reports_607" name="Formato de ventas (607)" parent="main_menu_dgii_reports" action="dgii_reports_format_607" sequence="2" />
+    <record model="ir.actions.act_window" id="account.action_move_in_invoice_type">
+        <field name="view_mode">tree,kanban,form,calendar</field>
+    </record>
+    <record model="ir.actions.act_window" id="account.action_move_in_refund_type">
+        <field name="view_mode">tree,kanban,form,calendar</field>
+    </record>
 </odoo>

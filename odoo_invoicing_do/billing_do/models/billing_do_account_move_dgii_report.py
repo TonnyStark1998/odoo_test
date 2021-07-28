@@ -1,7 +1,7 @@
 import logging as log
 import datetime as datetime
+
 from odoo import models, fields, api, exceptions
-from . import billing_do_utils as doutils
 
 class BillingDoAccountMoveDgiiReport(models.Model):
     _inherit = "account.move"
@@ -22,41 +22,41 @@ class BillingDoAccountMoveDgiiReport(models.Model):
     report_isc_amount = fields.Monetary(string='ISC Amount')
 
     # Fields for DGII report 606
-    report_bill_date_month = fields.Char(string='Bill Date Month',
-                                            compute='_compute_report_dates',
-                                            store=True
-                                        )
-    report_bill_date_day = fields.Char(string='Bill Date Day',
-                                        compute='_compute_report_dates',
-                                        store=True
-                                    )
-    report_bill_payment_date_month = fields.Char(string='Payment Date Month',
-                                                    compute='_compute_report_held_values',
-                                                    store=True
-                                                )
-    report_bill_payment_date_day = fields.Char(string='Payment Date Day',
-                                                compute='_compute_report_held_values',
-                                                store=True
-                                            )
-    report_bill_service_amount = fields.Monetary(string='Service Amount', 
-                                                    default=0.0, 
-                                                    currency_field='company_currency_id',
-                                                    compute='_compute_service_consumable_amount'
-                                                )
-    report_bill_consumable_amount = fields.Monetary(string='Consumable Amount', 
-                                                    default=0.0, 
-                                                    currency_field='company_currency_id',
-                                                    compute='_compute_service_consumable_amount'
-                                                )
-    report_bill_total_amount = fields.Monetary(string='Total Amount', 
-                                                default=0.0,
-                                                compute='_compute_service_consumable_amount'
-                                            )
-    report_bill_tax_amount = fields.Monetary(string='Tax Amount', 
-                                                currency_field='company_currency_id', 
-                                                default=0.0,
-                                                compute='_compute_report_bill_tax_amount'
-                                            )
+    # report_bill_date_month = fields.Char(string='Bill Date Month',
+    #                                         compute='_compute_report_dates',
+    #                                         store=True
+    #                                     )
+    # report_bill_date_day = fields.Char(string='Bill Date Day',
+    #                                     compute='_compute_report_dates',
+    #                                     store=True
+    #                                 )
+    # report_bill_payment_date_month = fields.Char(string='Payment Date Month',
+    #                                                 compute='_compute_report_held_values',
+    #                                                 store=True
+    #                                             )
+    # report_bill_payment_date_day = fields.Char(string='Payment Date Day',
+    #                                             compute='_compute_report_held_values',
+    #                                             store=True
+    #                                         )
+    # report_bill_service_amount = fields.Monetary(string='Service Amount', 
+    #                                                 default=0.0, 
+    #                                                 currency_field='company_currency_id',
+    #                                                 compute='_compute_service_consumable_amount'
+    #                                             )
+    # report_bill_consumable_amount = fields.Monetary(string='Consumable Amount', 
+    #                                                 default=0.0, 
+    #                                                 currency_field='company_currency_id',
+    #                                                 compute='_compute_service_consumable_amount'
+    #                                             )
+    # report_bill_total_amount = fields.Monetary(string='Total Amount', 
+    #                                             default=0.0,
+    #                                             compute='_compute_service_consumable_amount'
+    #                                         )
+    # report_bill_tax_amount = fields.Monetary(string='Tax Amount', 
+    #                                             currency_field='company_currency_id', 
+    #                                             default=0.0,
+    #                                             compute='_compute_report_bill_tax_amount'
+    #                                         )
     # Fields for DGII report 606 (NOT IN USE RIGHT NOW!)
     report_bill_itbis_held_amount = fields.Monetary(string='ITBIS Held Amount',
                                                         compute='_compute_report_held_values',
@@ -130,19 +130,11 @@ class BillingDoAccountMoveDgiiReport(models.Model):
         for move in self:
             move_name = ''
             move_reversed_name = ''
-            if move.type in ['out_invoice']:
+            if move.type in ['out_invoice', 'in_invoice']:
                 move_name = move.name
-            elif move.type in ['out_refund']:
+            elif move.type in ['out_refund', 'in_refund']:
                 move_name = move.name
                 move_reversed_name = move.reversed_entry_id.name
-            elif move.type in ['in_invoice']:
-                move_name = move.ncf
-            elif move.type in ['in_refund']:
-                move_name = move.ncf
-                if move.reversed_entry_id.journal_id.sequence_id.code in ['B11', 'B13']:
-                    move_reversed_name = move.reversed_entry_id.name
-                else:
-                    move_reversed_name = move.reversed_entry_id.ncf
 
             move.report_move = move_name
             move.report_move_reversed = move_reversed_name
@@ -226,8 +218,9 @@ class BillingDoAccountMoveDgiiReport(models.Model):
             
             reconciled_vals = move._get_reconciled_info_JSON_values()
             move_ids = [move_line['move_id'] for move_line in reconciled_vals]
+            move_lines =  move.line_ids + self.env['account.move.line']\
+                                                .search(args=[('move_id', 'in', move_ids)])
 
-            move_lines = self.env['account.move.line'].search(args=[('move_id', 'in', move_ids)]) + move.line_ids
             for move_line in move_lines:
                 if not _payment_type:
                     _payment_type = move._get_payment_type(move_line.journal_id)
@@ -247,7 +240,17 @@ class BillingDoAccountMoveDgiiReport(models.Model):
             move.report_invoice_credit_sale_amount = ''
             move.report_bill_payment_type = '04'
 
-            payment_amount = sum([payment['amount'] for payment in reconciled_vals], 0)
+            payment_amount = sum([payment['amount'] 
+                                    if 
+                                        payment['currency'] == 'RD$' 
+                                    else 
+                                        self.env['res.currency'].search([('name', '=', payment['currency'])])._convert(payment['amount'],
+                                                                                                                        self.env['res.currency'].search([('name', '=', 'RD$')]),
+                                                                                                                        self.env.company,
+                                                                                                                        payment['date'] or move.invoice_date or fields.Date.today(),
+                                                                                                                        True)
+                                for payment in reconciled_vals], 0)
+
             if move.invoice_payment_state in ['paid']:
                 move.report_bill_payment_type = _payment_type
                 if _payment_type in ['01']:
@@ -269,8 +272,9 @@ class BillingDoAccountMoveDgiiReport(models.Model):
 
             _last_payment_date = datetime.date.min
             for payment in reconciled_vals:
-                if payment['date'] > _last_payment_date:
-                    _last_payment_date = payment['date']
+                if payment['date']:
+                   if payment['date'] > _last_payment_date:
+                        _last_payment_date = payment['date']
 
             if move.invoice_payment_state in ['paid']:
                 if _last_payment_date != datetime.date.min:

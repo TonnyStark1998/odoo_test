@@ -53,8 +53,9 @@ class InvoiceTemplates(models.Model):
         string='Invoice Style',
         related='company_id.df_style',
         help="Select style to use when printing this invoice",
-        default=lambda self: self.partner_id.style 
-                                or self.env.user.company_id.df_style,
+        # default=lambda self: self.env.company.df_style
+        #                        or self.partner_id.style 
+        #                        or self.env.user.company_id.df_style,
         readonly=True
     )
 
