@@ -38,6 +38,10 @@
                                     <label string="Citizens Endpoint" for="api_services_citizens_endpoint" class="col-lg-3 o_light_label"/>
                                     <field name="api_services_citizens_endpoint" domain="[('company_id', '=', company_id)]"/>
                                 </div>
+                                <div class="row">
+                                    <label string="Currency Rates Endpoint" for="api_services_currency_rates_endpoint" class="col-lg-3 o_light_label"/>
+                                    <field name="api_services_currency_rates_endpoint" domain="[('company_id', '=', company_id)]"/>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -62,6 +66,18 @@
                             <span class="fa fa-lg fa-toggle-on" role="img"></span>
                             <div class="text-muted">
                                 Allow you to switch on/off the Tax Receipts validation.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box" title="These are settings for the Billing Do module.">
+                        <div class="o_setting_left_pane">
+                            <field name="api_services_currency_rates_switch" domain="[('company_id', '=', company_id)]"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="api_services_currency_rates_switch"/>
+                            <span class="fa fa-lg fa-toggle-on" role="img"></span>
+                            <div class="text-muted">
+                                Allow you to switch on/off the Currency Rates load service.
                             </div>
                         </div>
                     </div>

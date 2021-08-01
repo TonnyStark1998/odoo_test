@@ -11,7 +11,7 @@
     'website': "http://www.koalacreativesoftware.com",
     'category': 'Accounting/Accounting',
     'version': '0.2',
-    'depends': ['base', 'account', 'sale', 'purchase'],
+    'depends': ['base', 'account', 'sale', 'purchase', 'l10n_do', 'account_accountant'],
     # always loaded
     'data': [
         'security/ir.model.access.csv',
@@ -30,6 +30,7 @@
         'views/billing_do_tax_report.xml',
         'views/billing_do_tax_report_item_606.xml',
         'views/billing_do_tax_report_item_607.xml',
+        'views/billing_do_res_currency.xml',
         'report/billing_do_account_payment_templates.xml',
         'data/default_tax_report_types.xml',
     ],
