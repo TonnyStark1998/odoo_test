@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import logging as log
 
 from odoo\
@@ -6,9 +8,7 @@ from odoo\
 class BillingDoTrnHttpServiceHelper(models.AbstractModel):
     _name = "billing.do.trn.http.service.helper"
     _inherit = "billing.do.authentication.http.service.helper"
-    _description = """
-    
-    """
+    _description = ""
 
     def dgii_validate_ncf(self, vat, ncf, vat_buyer, security_code):
         config = self.env['ir.config_parameter'].sudo()

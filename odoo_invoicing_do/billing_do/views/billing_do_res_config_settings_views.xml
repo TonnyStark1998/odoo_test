@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="billing_do_rates_services_cron" model="ir.cron">
-
-    </record>
     <record id="billing_do_res_config_settings_view_form" model="ir.ui.view">
         <field name="name">billing.do.res.config.settings.view.form.inherit.account</field>
         <field name="model">res.config.settings</field>
@@ -41,6 +38,10 @@
                                     <label string="Citizens Endpoint" for="api_services_citizens_endpoint" class="col-lg-3 o_light_label"/>
                                     <field name="api_services_citizens_endpoint" domain="[('company_id', '=', company_id)]"/>
                                 </div>
+                                <div class="row">
+                                    <label string="Currency Rates Endpoint" for="api_services_currency_rates_endpoint" class="col-lg-3 o_light_label"/>
+                                    <field name="api_services_currency_rates_endpoint" domain="[('company_id', '=', company_id)]"/>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -68,6 +69,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 col-lg-6 o_setting_box" title="These are settings for the Billing Do module.">
+                        <div class="o_setting_left_pane">
+                            <field name="api_services_currency_rates_switch" domain="[('company_id', '=', company_id)]"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="api_services_currency_rates_switch"/>
+                            <span class="fa fa-lg fa-toggle-on" role="img"></span>
+                            <div class="text-muted">
+                                Allow you to switch on/off the Currency Rates load service.
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-12 o_setting_box" title="These settings are intented to provide the information for the token authentication generation from Azure.">
                         <div class="o_setting_left_pane"/>
                         <div class="o_setting_right_pane">
@@ -84,30 +97,6 @@
                                 <div class="row">
                                     <label string="Client Secret" for="token_client_secret" class="col-lg-3 o_light_label"/>
                                     <field name="token_client_secret" domain="[('company_id', '=', company_id)]"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 o_setting_box" title="These settings are intented to provide the information for the rates loading process from external sources.">
-                        <div class="o_setting_left_pane"/>
-                        <div class="o_setting_right_pane">
-                            <span class="o_form_label">Token Generation Settings</span>
-                            <span class="fa fa-lg fa-lock" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
-                            <div class="text-muted">
-                                Settings for the Rate service for loading the rates from an external source.
-                            </div>
-                            <div class="content-group">
-                                <div class="row mt16">
-                                    <label string="Rate Service URL" for="rate_service_url" class="col-lg-3 o_light_label"/>
-                                    <field name="rate_service_url" domain="[('company_id', '=', company_id)]"/>
-                                </div>
-                                <div class="row mt16">
-                                    <label string="Regular Expression USD Rate" for="rate_regex_usd" class="col-lg-3 o_light_label"/>
-                                    <field name="rate_regex_usd" domain="[('company_id', '=', company_id)]"/>
-                                </div>
-                                <div class="row mt16">
-                                    <label string="Regular Expression EUR Rate" for="rate_regex_eur" class="col-lg-3 o_light_label"/>
-                                    <field name="rate_regex_eur" domain="[('company_id', '=', company_id)]"/>
                                 </div>
                             </div>
                         </div>
