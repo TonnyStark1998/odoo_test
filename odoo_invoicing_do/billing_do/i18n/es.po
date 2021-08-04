@@ -680,8 +680,8 @@ msgstr "El NCF ({0}) es inválido."
 #. module: billing_do
 #: code:odoo_invoicing_do/billing_do/models/billing_do_trn_helper.py:0
 #, python-format
-msgid "The TRN ({0}) has some extra digits. Please verify."
-msgstr "El NCF (%s) posee dígitos extras. Verifique."
+msgid "The TRN ({}) has some extra digits. Please verify."
+msgstr "El NCF ({}) posee dígitos extras. Verifique."
 
 #. module: billing_do
 #: code:odoo_invoicing_do/billing_do/models/billing_do_trn_helper.py:0
@@ -778,6 +778,12 @@ msgstr "{} Excepción arrojada al intentar cargar las Tasas de Cambio: {}."
 #, python-format
 msgid "{} Currency Rate Inserted: {} - {} (Rate: {})"
 msgstr "{} Tasa de cambio insertada: {} - {} (Tasa de cambio: {})"
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_helper.py:0
+#, python-format
+msgid "There isn't any TRN type for validate. Please check with your administrator."
+msgstr "No existen Tipos de comprobantes registrados para validar. Consulte con el administrador."
 
 #################################
 # Tax Report Model Translations #
@@ -1151,3 +1157,38 @@ msgstr "Modelo"
 #: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type__view
 msgid "View"
 msgstr "Vista"
+
+###############################
+# TRN Type Model Translations #
+###############################
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__code_length
+msgid "Code Length"
+msgstr "Cantidad de dígitos que identifica el tipo"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__code
+msgid "Code"
+msgstr "Código de identificación"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__min_length
+msgid "Minimun Length"
+msgstr "Longitud mínima"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__max_length
+msgid "Maximun Length"
+msgstr "Longitud máxima"
+
+#. module: billing_do
+#: model:ir.actions.act_window,name:billing_do.action_billing_do_trn_type_list
+#: model:ir.ui.menu,name:billing_do.menu_trn_type_list
+msgid "TRN Types"
+msgstr "Tipo de comprobantes"

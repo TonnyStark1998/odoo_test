@@ -10,8 +10,6 @@
                 <field name="name" />
                 <field name="code" />
                 <field name="regular_expression" />
-                <field name="min_length" />
-                <field name="max_length" />
                 <field name="active" />
             </tree>
         </field>
@@ -23,12 +21,17 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <group>
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </group>
                     <group col="2">
                         <group>
-                            <field name="name" />
+                            <field name="code" />
                         </group>
                         <group>
-                            <field name="code" />
+                            <field name="code_length" />
                         </group>
                     </group>
                     <group col="2">

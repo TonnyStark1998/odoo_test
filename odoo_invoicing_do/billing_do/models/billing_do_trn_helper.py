@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
-import requests, re
-import logging as log
+import re,\
+        logging as log
 
-from odoo import models, exceptions, _
+from odoo import models,\
+                    exceptions,\
+                    _
 
 class BillingDoTrnHelper(models.AbstractModel):
     _name = 'billing.do.trn.helper'
@@ -22,7 +24,7 @@ class BillingDoTrnHelper(models.AbstractModel):
                         _trn_type_found = True
 
                         if not _trn_type.min_length <= len(trn) <= _trn_type.max_length:
-                            raise exceptions.ValidationError(_("The TRN ({0}) has some extra digits. Please verify.")
+                            raise exceptions.ValidationError(_("The TRN ({}) has some extra digits. Please verify.")
                                                                 .format(trn.upper())) 
 
                         _match = re.match(_trn_type.regular_expression,
