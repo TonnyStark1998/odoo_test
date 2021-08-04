@@ -20,6 +20,10 @@ class BillingDoTrnType(models.Model):
                                         required=True)
     active = fields.Boolean(string='Active',
                                 default=False)
+    min_length = fields.Integer(string='Minimun Length',
+                                    required=True)
+    max_length = fields.Integer(string='Maximun Length',
+                                    required=True)
 
     # TRN Type - onchange Fields Functions
     @api.onchange('regular_expression')
