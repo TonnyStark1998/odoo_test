@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="billing_do.default_trn_type_b" model="billing.do.trn.type">
+        <field name="name">Comprobantes Físicos (B)</field>
+        <field name="code">B</field>
+        <field name="min_length">10</field>
+        <field name="max_length">10</field>
+        <field name="regular_expression">^B(01|02|03|04|11|12|13|14|15|16|17)[0-9]{8}$</field>
+        <field name="description">
+            Este tipo de comprobantes se expiden de manera física a los contribuyentes y ciudadanos que los soliciten ante cualquier entidad comercial.
+        </field>
+    </record>
+
+    <record id="billing_do.default_trn_type_e" model="billing.do.trn.type">
+        <field name="name">Comprobantes Electrónicos (E)</field>
+        <field name="code">E</field>
+        <field name="min_length">13</field>
+        <field name="max_length">13</field>
+        <field name="regular_expression">^E(31|32|33|34|41|43|44|45)[0-9]{10}$</field>
+        <field name="description">
+            Este tipo de comprobantes se expiden de manera electrínica a los contribuyentes y ciudadanos involucrdos en trasancciones de facturación electrónica.
+        </field>
+    </record>
+
+</odoo>
