@@ -3,6 +3,7 @@
 from odoo import models,\
                     fields,\
                     exceptions,\
+                    api,\
                     _
 
 class BillingDoTrnType(models.Model):
