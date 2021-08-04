@@ -75,5 +75,6 @@
                 name="TRN Types" 
                 parent="base.menu_ir_property" 
                 action="action_billing_do_trn_type_list" 
-                sequence="15" />
+                sequence="15"
+                groups="account.group_account_manager" />
 </odoo>
