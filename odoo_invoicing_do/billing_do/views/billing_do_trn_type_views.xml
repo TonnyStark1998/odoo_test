@@ -21,35 +21,37 @@
         <field name="name">billing.do.view.trn.type.form</field>
         <field name="model">billing.do.trn.type</field>
         <field name="arch" type="xml">
-            <sheet>
-                <group col="2">
-                    <group>
-                        <field name="name" />
+            <form>
+                <sheet>
+                    <group col="2">
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group>
+                            <field name="code" />
+                        </group>
                     </group>
-                    <group>
-                        <field name="code" />
+                    <group col="2">
+                        <group>
+                            <field name="min_length" />
+                        </group>
+                        <group>
+                            <field name="max_length" />
+                        </group>
                     </group>
-                </group>
-                <group col="2">
-                    <group>
-                        <field name="min_length" />
+                    <group col="2">
+                        <group>
+                            <field name="regular_expression" />
+                        </group>
+                        <group>
+                            <field name="active" />
+                        </group>
                     </group>
-                    <group>
-                        <field name="max_length" />
+                    <group colspan="2">
+                        <field name="description" />
                     </group>
-                </group>
-                <group col="2">
-                    <group>
-                        <field name="regular_expression" />
-                    </group>
-                    <group>
-                        <field name="active" />
-                    </group>
-                </group>
-                <group colspan="2">
-                    <field name="description" />
-                </group>
-            </sheet>
+                </sheet>
+            </form>
         </field>
     </record>
 
