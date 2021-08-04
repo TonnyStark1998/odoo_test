@@ -10,16 +10,26 @@ class BillingDoTrnHelper(models.AbstractModel):
     _description = 'Billing DO - TRN Helper'
 
     def is_valid_trn_do(self, trn):
-        if trn:
-            regex = r"(^(E)?(?=)(31|32|33|34|41|43|44|45)[0-9]{10}|^(B)(?:(01|02|03|04|11|12|13|14|15|16|17)[0-9]{8}))"
-            match_ncf = re.match(regex, trn.upper())
+        _trn_types = self.env['billing.do.trn.type']\
+                            .search([('active', '=', True)])
 
-            if not match_ncf:
-                raise exceptions.ValidationError(_("The TRN ({0}) is invalid.").format(trn.upper()))
+        if trn:
+            if _trn_types:
+                for _trn_type in _trn_types:
+
+                    if not _trn_type.min_length <= len(trn) <= _trn_type.max_length:
+                        raise exceptions.ValidationError(_("The TRN ({0}) has some extra digits. Please verify.")
+                                                            .format(trn.upper())) 
+
+                    _match = re.match(_trn_type.regular_expression, trn.upper())
+
+                    if not _match:
+                        raise exceptions.ValidationError(_("The TRN ({0}) is invalid.")
+                                                            .format(trn.upper()))
+
+                return True
             else:
-                if int(len(trn)) != int(match_ncf.end()):
-                    raise exceptions.ValidationError(_("The TRN ({0}) has some extra digits. Please verify.").format(trn.upper()))
-            return True
+                raise exceptions.UserError(_("There isn't any TRN type for validate. Please check with your administrator."))
         else:
             raise exceptions.UserError(_("The TRN parameter must have a value. Nothing was given."))
 
