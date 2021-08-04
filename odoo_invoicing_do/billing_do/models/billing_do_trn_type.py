@@ -14,8 +14,10 @@ class BillingDoTrnType(models.Model):
     name = fields.Char(string='Name',
                         required=True)
     description = fields.Text(string='Description')
+    code_length = fields.Integer(string='Code Length',
+                                    required=True,
+                                    default=1)
     code = fields.Char(string='Code',
-                        size=1,
                         required=True)
     regular_expression = fields.Char(string='Regular Expression',
                                         required=True)
