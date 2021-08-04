@@ -10,6 +10,8 @@
                 <field name="name" />
                 <field name="code" />
                 <field name="regular_expression" />
+                <field name="min_length" />
+                <field name="max_length" />
                 <field name="active" />
             </tree>
         </field>
@@ -26,6 +28,14 @@
                     </group>
                     <group>
                         <field name="code" />
+                    </group>
+                </group>
+                <group col="2">
+                    <group>
+                        <field name="min_length" />
+                    </group>
+                    <group>
+                        <field name="max_length" />
                     </group>
                 </group>
                 <group col="2">
