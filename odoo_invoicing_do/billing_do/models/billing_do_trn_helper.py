@@ -7,9 +7,7 @@ from odoo import models, exceptions, _
 
 class BillingDoTrnHelper(models.AbstractModel):
     _name = 'billing.do.trn.helper'
-    _description = '''
-    
-    '''
+    _description = 'Billing DO - TRN Helper'
 
     def is_valid_trn_do(self, trn):
         if trn:

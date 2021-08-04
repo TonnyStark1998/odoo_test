@@ -2,6 +2,7 @@
 
 from . import billing_do_exceptions,\
 				billing_do_res_config_settings, \
+				billing_do_trn_type,\
 				billing_do_vat_helper, \
 				billing_do_trn_helper, \
 				billing_do_http_service_helper, \
