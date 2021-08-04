@@ -31,9 +31,9 @@ class BillingDoTrnType(models.Model):
     # TRN Type - onchange Fields Functions
     @api.onchange('regular_expression')
     def _onchange_regular_expression(self):
-        return True
+        pass
     
     # TRN Type - Contraints Fields Functions
     @api.constrains('regular_expression')
     def _check_regular_expression(self):
-        return True
+        pass

@@ -1188,6 +1188,16 @@ msgid "Maximun Length"
 msgstr "Longitud máxima"
 
 #. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__regular_expression
+msgid "Regular Expression"
+msgstr "Expresión regular"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__active
+msgid "Active"
+msgstr "Activo"
+
+#. module: billing_do
 #: model:ir.actions.act_window,name:billing_do.action_billing_do_trn_type_list
 #: model:ir.ui.menu,name:billing_do.menu_trn_type_list
 #: model:ir.ui.menu,name:billing_do.menu_accounting_trn_type_list
