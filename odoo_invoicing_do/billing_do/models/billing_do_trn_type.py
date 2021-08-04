@@ -5,15 +5,16 @@ from odoo import models,\
                     exceptions,\
                     _
 
-class BillingDoTrnType(models.AbstractModel):
+class BillingDoTrnType(models.Model):
     _name = 'billing.do.trn.type'
     _description = 'Billing DO - TRN Type'
 
     # TRN Type - New Fields
     name = fields.Char(string='Name',
                         required=True)
-    description = fields.Char(string='Description')
+    description = fields.Text(string='Description')
     code = fields.Char(string='Code',
+                        size=1,
                         required=True)
     regular_expression = fields.Char(string='Regular Expression',
                                         required=True)
