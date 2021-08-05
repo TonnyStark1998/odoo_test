@@ -13,13 +13,13 @@ class ResConfigSettings(models.TransientModel):
     api_services_base_url = fields.Char(string='API Base URL')
     api_services_tax_contributors_endpoint = fields.Char(string='Tax Contributors Endpoint')
     api_services_tax_receipts_endpoint = fields.Char(string='Tax Receipts Endpoint')
+    api_services_citizens_endpoint = fields.Char(string='Citizens Endpoint')
     api_services_tax_contributors_switch = fields.Boolean(string='Tax Contributors Switch')
     api_services_tax_receipts_switch = fields.Boolean(string='Tax Receipts Switch')
-    api_services_citizens_endpoint = fields.Char(string='Citizens Endpoint')
-    api_services_currency_rates_switch = fields.Boolean(string='Currency Rates Switch')
 
     # Rates Configuration Settings
-    api_services_currency_rates_endpoint = fields.Char(string='Rate Service URL')
+    api_services_currency_rates_switch = fields.Boolean(string='Currency Rates Switch')
+    api_services_currency_rates_endpoint = fields.Char(string='Currency Rates Endpoint')
 
     def set_values(self):
         super(ResConfigSettings, self).set_values()

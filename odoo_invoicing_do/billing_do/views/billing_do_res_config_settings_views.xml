@@ -73,15 +73,15 @@
                                 title="These are settings for the Billing Do module.">
                             <div class="o_setting_left_pane"/>
                             <div class="o_setting_right_pane">
-                                <span class="o_form_label">Services URL</span>
+                                <div class="o_form_label" style="display: inline;">Services URL</div>
                                 <span class="fa fa-lg fa-globe" 
                                         role="img"/>
                                 <div class="text-muted">
                                     These are the URL used to query the services of validations.
                                 </div>
                                 <div class="content-group">
-                                    <div class="row">
-                                        <label string="API Services Base URL" 
+                                    <div class="row mt16">
+                                        <label string="API Base URL" 
                                                 for="api_services_base_url" 
                                                 class="col-lg-3 o_light_label"/>
                                         <field name="api_services_base_url" 
@@ -126,11 +126,8 @@
                                 title="These settings are intented to provide the information for the token authentication generation from Azure.">
                             <div class="o_setting_left_pane"/>
                             <div class="o_setting_right_pane">
-                                <span class="o_form_label">Token Generation Settings</span>
+                                <div class="o_form_label" style="display: inline;">Token Generation Settings</div>
                                 <span class="fa fa-lg fa-lock" 
-                                        title="Values set here are company-specific." 
-                                        aria-label="Values set here are company-specific." 
-                                        groups="base.group_multi_company" 
                                         role="img"/>
                                 <div class="text-muted">
                                     Settings for the Azure token generation for consuming the Api Common Services.
