@@ -1272,7 +1272,7 @@ msgstr "<div class=\"o_form_label\" style=\"display: inline;\">Configuración pa
 #: model:ir.model.fields,field_description:billing_do.field_res_config_settings__token_url
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
 msgid "Token URL"
-msgstr "URL de Generación de Token"
+msgstr "URL Generación de Token"
 
 #. module: billing_do
 #: model:ir.model.fields,field_description:billing_do.field_res_config_settings__token_client_id
