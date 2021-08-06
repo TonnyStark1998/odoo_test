@@ -680,8 +680,8 @@ msgstr "El NCF ({0}) es inválido."
 #. module: billing_do
 #: code:odoo_invoicing_do/billing_do/models/billing_do_trn_helper.py:0
 #, python-format
-msgid "The TRN ({0}) has some extra digits. Please verify."
-msgstr "El NCF (%s) posee dígitos extras. Verifique."
+msgid "The TRN ({}) has some extra digits. Please verify."
+msgstr "El NCF ({}) posee dígitos extras. Verifique."
 
 #. module: billing_do
 #: code:odoo_invoicing_do/billing_do/models/billing_do_trn_helper.py:0
@@ -778,6 +778,12 @@ msgstr "{} Excepción arrojada al intentar cargar las Tasas de Cambio: {}."
 #, python-format
 msgid "{} Currency Rate Inserted: {} - {} (Rate: {})"
 msgstr "{} Tasa de cambio insertada: {} - {} (Tasa de cambio: {})"
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_helper.py:0
+#, python-format
+msgid "There isn't any TRN type for validate. Please check with your administrator."
+msgstr "No existen Tipos de comprobantes registrados para validar. Consulte con el administrador."
 
 #################################
 # Tax Report Model Translations #
@@ -1151,3 +1157,179 @@ msgstr "Modelo"
 #: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type__view
 msgid "View"
 msgstr "Vista"
+
+###############################
+# TRN Type Model Translations #
+###############################
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__code_length
+msgid "Code Length"
+msgstr "Cantidad de dígitos que identifica el tipo"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__code
+msgid "Code"
+msgstr "Código de identificación"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__min_length
+msgid "Minimun Length"
+msgstr "Longitud mínima"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__max_length
+msgid "Maximun Length"
+msgstr "Longitud máxima"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__regular_expression
+msgid "Regular Expression"
+msgstr "Expresión regular"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__active
+msgid "Active"
+msgstr "Activo"
+
+#. module: billing_do
+#: model:ir.actions.act_window,name:billing_do.action_billing_do_trn_type_list
+#: model:ir.ui.menu,name:billing_do.menu_trn_type_list
+#: model:ir.ui.menu,name:billing_do.menu_accounting_trn_type_list
+msgid "TRN Types"
+msgstr "Tipo de comprobantes"
+
+####################################
+# Billing DO Settings Translations #
+####################################
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Billing DO"
+msgstr "Facturación RD"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Services Switches"
+msgstr "Encendido/Apagado Servicios"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Services Endpoints"
+msgstr "Rutas de Acceso a Servicios"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Token Settings"
+msgstr "Configuración de Token de Seguridad"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "These are settings for the Billing Do module."
+msgstr "Estas configuraciones son del módulo de Facturación RD."
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Allow you to switch on/off the Tax Contributors validation."
+msgstr "Permite encender/apagar la validación de contribuyentes."
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Allow you to switch on/off the Tax Receipts validation."
+msgstr "Permite encender/apagar la validación de comprobantes fiscales."
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Allow you to switch on/off the Currency Rates load service."
+msgstr "Permite encender/apagar la carga automática de las tasas de cambio."
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "These are the URL used to query the services of validations."
+msgstr "Estas son las URL utilizadas para la consulta de los servicios de validación."
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Settings for the Azure token generation for consuming the Api Common Services."
+msgstr "Configuraciones para la generación de tokens de seguridad que permite consumir los Servicios de Api Común."
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "<div class=\"o_form_label\" style=\"display: inline;\">Services URL</div>"
+msgstr "<div class=\"o_form_label\" style=\"display: inline;\">URL de Servicios</div>"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "<div class=\"o_form_label\" style=\"display: inline;\">Token Generation Settings</div>"
+msgstr "<div class=\"o_form_label\" style=\"display: inline;\">Configuración para Tokens</div>"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__token_url
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Token URL"
+msgstr "URL de Generación de Token"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__token_client_id
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Client ID"
+msgstr "ID de Cliente"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__token_client_secret
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Client Secret"
+msgstr "Llave Privada de Cliente"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_tax_contributors_switch
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Tax Contributors Switch"
+msgstr "Validación Contribuyentes On/Off"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_tax_receipts_switch
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Tax Receipts Switch"
+msgstr "Validación NCF On/Off"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_currency_rates_switch
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Currency Rates Switch"
+msgstr "Carga Tasas de Cambio On/Off"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_base_url
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "API Base URL"
+msgstr "URL Base para Servicios"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_tax_contributors_endpoint
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Tax Contributors Endpoint"
+msgstr "Ruta para Contribuyentes"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_tax_receipts_endpoint
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Tax Receipts Endpoint"
+msgstr "Ruta para NCF"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_citizens_endpoint
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Citizens Endpoint"
+msgstr "Ruta para Ciudadanos"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_currency_rates_endpoint
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Currency Rates Endpoint"
+msgstr "Ruta para Tasas de Cambio"
