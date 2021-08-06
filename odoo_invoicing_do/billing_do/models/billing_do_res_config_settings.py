@@ -22,7 +22,9 @@ class ResConfigSettings(models.TransientModel):
     api_services_currency_rates_endpoint = fields.Char(string='Currency Rates Endpoint')
 
     def set_values(self):
-        super(ResConfigSettings, self).set_values()
+        super(ResConfigSettings, self)\
+            .set_values()
+
         self.env['ir.config_parameter'].sudo()\
                                         .set_param('billing_do.token_url',\
                                                     self.token_url)
@@ -59,7 +61,8 @@ class ResConfigSettings(models.TransientModel):
 
     @api.model
     def get_values(self):
-        config = super(ResConfigSettings, self).get_values()
+        config = super(ResConfigSettings, self)\
+                    .get_values()
 
         token_url = self.env['ir.config_parameter'].sudo()\
                                                     .get_param('billing_do.token_url')
