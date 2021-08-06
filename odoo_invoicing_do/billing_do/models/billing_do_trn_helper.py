@@ -45,7 +45,8 @@ class BillingDoTrnHelper(models.AbstractModel):
 
     def is_trn_from_journal_which_use_sequence(self, trn):
         regex = r"(^(E)?(?=)(41|43)[0-9]{10}|^(B)(?:(11|13)[0-9]{8}))"
-        match_ncf = re.match(regex, trn.upper())
+        match_ncf = re.match(regex, 
+                                trn.upper())
 
         if match_ncf:
             raise exceptions.ValidationError(_("The TRNs which starts with B11 or B13 use a specific type of journal. Please use the appropiate journal for registering this vendor invoice.").format(trn.upper()))
