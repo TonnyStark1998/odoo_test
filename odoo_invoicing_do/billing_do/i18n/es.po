@@ -1278,7 +1278,7 @@ msgstr "URL de Generación de Token"
 #: model:ir.model.fields,field_description:billing_do.field_res_config_settings__token_client_id
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
 msgid "Client ID"
-msgstr "ID de Cliente"
+msgstr "ID Cliente"
 
 #. module: billing_do
 #: model:ir.model.fields,field_description:billing_do.field_res_config_settings__token_client_secret
