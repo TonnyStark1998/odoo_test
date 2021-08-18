@@ -52,7 +52,7 @@
                         <th t-if="display_discount"
                             class="text-right"
                             t-attf-style="{{th_style}}">
-                            Descuento(%)
+                            Descuento
                         </th>
                         <th t-if="display_taxes"
                             class="text-center"
@@ -141,8 +141,10 @@
                                           t-options='{"widget": "monetary",
                                                         "display_currency": doc.pricelist_id.currency_id}'/>
                                 </td>
-                                <td t-if="display_discount" class="text-right">
-                                    <span t-field="l.discount"/>
+                                <td class="text-right">
+                                    <span t-field="l.discount" 
+                                            t-if="l.discount > 0" /> 
+                                    <span t-if="l.discount > 0"> %</span>
                                 </td>
                                 <td t-if="display_taxes" class="text-center">
                                     <span t-esc="', '.join(map(lambda x: (x.description or x.name), l.tax_id))"/>

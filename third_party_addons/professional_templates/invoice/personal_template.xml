@@ -13,8 +13,7 @@
                                 padding-left:0px;
                                 padding-right:0px;
                                 color:{{o.style.text_color}} !important;
-                                font-size:{{int(o.style.header_font)}}px !important;
-                                font-family:{{o.style.font_family}} !important;"
+                                font-size:{{int(o.style.header_font)}}px !important;"
                 class="header col-12">
 
                 <t t-if="style.header">
@@ -205,8 +204,8 @@
                                 </th>
                                 <th class="text-right"
                                     t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;"
-                                    groups="sale.group_discount_per_so_line">
-                                    Desc.(%)
+                                    t-if="sum(l.discount for l in o.invoice_line_ids) > 0">
+                                    Descuento
                                 </th>
                                 <th class="text-right"
                                     t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
@@ -273,9 +272,10 @@
                                     <td class="text-right">
                                         <span t-field="l.price_unit"/>
                                     </td>
-                                    <td class="text-right"
-                                        groups="sale.group_discount_per_so_line">
-                                        <span t-field="l.discount"/>
+                                    <td class="text-right">
+                                        <span t-field="l.discount"
+                                                 t-if="l.discount > 0" />
+                                        <span t-if="l.discount > 0"> %</span>
                                     </td>
                                     <td class="text-right">
                                         <span t-esc="', '.join(map(lambda x: (x.name), l.tax_ids))" />
