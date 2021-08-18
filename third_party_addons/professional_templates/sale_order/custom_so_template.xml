@@ -37,8 +37,7 @@
             <!--start of page data-->
             <div class="article page clearfix"
                  t-attf-style="color:{{style.text_color}} !important;
-                                font-size:{{int(style.body_font)}}px !important;
-                                font-family:{{style.font_family}} !important;">
+                                font-size:{{int(style.body_font)}}px !important;">
                 <div class="col-12 pull-left" style="padding-left:0px;
                                                         padding-right:0px;
                                                         padding-bottom:2px;">
@@ -64,7 +63,7 @@
                         </div>
                     </div>
                     <div class="col-6 mb4 pull-right"
-                         t-attf-style="border:2px solid {{style.theme_color}};color:{{style.text_color}} !important;font-size:{{int(style.header_font)}}px !important;font-family:{{style.font_family}} !important;">
+                         t-attf-style="border:2px solid {{style.theme_color}};color:{{style.text_color}} !important;font-size:{{int(style.header_font)}}px !important;">
                         <div class="row">
                             <div class="col-10"
                                  t-attf-style="margin-top:7px; margin-bottom: 7px; font-size:{{int(style.body_font)+10}}px; font-weight:bold;">
