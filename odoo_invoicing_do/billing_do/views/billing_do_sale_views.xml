@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record model="ir.ui.view" id="billing_do_view_order_form">
+    <record model="ir.ui.view"
+            id="billing_do_view_order_form">
+        
         <field name="name">billing.do.sale.order.form</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
-            <xpath expr="//form//group//group//div//field[@name='product_uom_qty']" position="replace">
+            <xpath expr="//form//group//group//div//field[@name='product_uom_qty']" 
+                    position="replace">
                 <field
                     context="{
                         'partner_id':parent.partner_id, 
@@ -21,7 +24,9 @@
                         'digits': (6,2)
                     }" />
             </xpath>
-            <xpath expr="//tree//field[@name='product_uom_qty']" position="replace">
+
+            <xpath expr="//tree//field[@name='product_uom_qty']" 
+                    position="replace">
                 <field
                     name="product_uom_qty"
                     context="{
@@ -36,6 +41,13 @@
                         'digits': (6,2)
                     }" />
             </xpath>
+
+            <field name="payment_term_id" 
+                    position="after">
+                <field name="user_id" 
+                        position="move" />
+            </field>
+
         </field>
     </record>
 </odoo>
