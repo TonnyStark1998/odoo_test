@@ -272,7 +272,8 @@
                                     <td class="text-right">
                                         <span t-field="l.price_unit"/>
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-right"
+                                        t-if="l.discount > 0">
                                         <span t-field="l.discount"
                                                  t-if="l.discount > 0" />
                                         <span t-if="l.discount > 0"> %</span>
