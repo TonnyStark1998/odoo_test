@@ -1,4 +1,7 @@
+# -*- coding: utf-8 -*-
+
 from odoo import models, fields, api, exceptions
+
 import logging as log
 
 class BillingDoStockWarehouse(models.Model):
