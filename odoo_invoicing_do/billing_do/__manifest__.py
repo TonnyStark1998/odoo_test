@@ -29,6 +29,7 @@
         'views/billing_do_purchase_views.xml',
         'views/billing_do_account_payment_views.xml',
         'views/billing_do_account_payment_reports.xml',
+        'views/billing_do_stock_report_views.xml',
         'report/billing_do_account_payment_templates.xml',
     ],
     # only loaded in demonstration mode
