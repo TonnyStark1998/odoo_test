@@ -27,6 +27,7 @@
         'views/billing_do_purchase_views.xml',
         'views/billing_do_account_payment_views.xml',
         'views/billing_do_account_payment_reports.xml',
+        'views/billing_do_stock_report_views.xml',
         'views/billing_do_tax_report.xml',
         'views/billing_do_tax_report_item_606.xml',
         'views/billing_do_tax_report_item_607.xml',
