@@ -120,7 +120,7 @@
                     </div>
                 </div>
 
-                <div class="col-8 mb4 pull-right"
+                <div class="col-8 mb-3 pull-right"
                      t-attf-style="background-color:{{style.theme_color}}; padding:10px; color:{{style.theme_txt_color}};">
                     <h5>
                         <strong>
@@ -156,6 +156,17 @@
                 <br/>
                 <t t-call="professional_templates.custom_purchase_order_lines"/>
                 <!-- end of order data-->
+                <br />
+                <span class="col-12 mt-5 pull-right">
+                    <div class="row">
+                        <div class="col-6 text-left">
+                            <strong>Solicitado por:</strong> ________________________
+                        </div>
+                        <div class="col-6 text-right">
+                            <strong>Aprobado por:</strong> ________________________
+                        </div>
+                    </div>
+                </span>
             </div>
             <!-- end of page -->
 
