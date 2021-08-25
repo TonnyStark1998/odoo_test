@@ -31,20 +31,21 @@ class BillingDoResCurrency(models.AbstractModel):
 
                     companys = self.env['res.company'].search([])
                     for company in companys:
-                        self.env['res.currency.rate'].create({
-                            'name': currency_rate['date'],
-                            'rate': currency_rate['rate'],
-                            'currency_id': _currency_id.id,
-                            'company_id': company.id,
-                            'source': currency_rate['source']
-                        })
+                        if company.load_currency_rates:
+                            self.env['res.currency.rate'].create({
+                                'name': currency_rate['date'],
+                                'rate': currency_rate['rate'],
+                                'currency_id': _currency_id.id,
+                                'company_id': company.id,
+                                'source': currency_rate['source']
+                            })
 
-                        log.info(_('{} Company {} Currency Rate Inserted: {} - {} (Rate: {})')\
-                                        .format('[KCS] ',
-                                                    company.name,
-                                                    currency_rate['date'],
-                                                    currency_rate['rate'],
-                                                    currency_rate['currency']))
+                            log.info(_('{} Company {} Currency Rate Inserted: {} - {} (Rate: {})')\
+                                            .format('[KCS] ',
+                                                        company.name,
+                                                        currency_rate['date'],
+                                                        currency_rate['rate'],
+                                                        currency_rate['currency']))
 
         except Exception as ex:
             log.warning(_('{} Exception thrown while loading Currencies Rates: {}').format('[KCS] ', ex))

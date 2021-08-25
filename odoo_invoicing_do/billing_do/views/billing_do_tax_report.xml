@@ -97,7 +97,8 @@
         <field name="model">billing.do.tax.report.item</field>
         <field name="arch" type="xml">
             <tree create="false"
-                    import="false">
+                    import="false"
+                    delete="false">
                     <field name="company_id"
                             invisible="1" />
                     <field name="vat" />

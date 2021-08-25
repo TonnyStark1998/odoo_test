@@ -24,6 +24,10 @@ class BillingDoResCompany(models.Model):
                                 store=True, 
                                 default='')
 
+    load_currency_rates = fields.Boolean(string='Load Currency Rates?',
+                                            default=True,
+                                            copy=True)
+
     # Res Company - Modified Fields
     vat = fields.Char(store=True, tracking=True)
 

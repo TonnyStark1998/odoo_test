@@ -127,7 +127,6 @@ class BillingDoTaxReport(models.Model):
             'view_mode': 'tree',
             'view_id': self.env['ir.ui.view']\
                             .search([('name', '=', view)]).id,
-            'target': 'fullscreen',
             'domain': "[('tax_report', '=', active_id)]",
             'limit': self.env[model]\
                             .search_count([('tax_report', '=', self.id)])
