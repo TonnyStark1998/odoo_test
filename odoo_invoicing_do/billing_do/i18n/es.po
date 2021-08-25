@@ -233,6 +233,17 @@ msgstr "Monedas: Cargar tasas del día"
 msgid "Source"
 msgstr "Fuente"
 
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_partner__economic_activity
+#: model:ir.model.fields,field_description:billing_do.field_res_company__economic_activity
+msgid "Economic Activity"
+msgstr "Actividad Económica según DGII"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_company__load_currency_rates
+msgid "Load Currency Rates?"
+msgstr "¿Cargar Tasas Automáticas?"
+
 ##################################
 #   Fields from other modules    #
 ##################################
@@ -254,11 +265,6 @@ msgstr "Total"
 #: model:ir.model.fields,field_description:account.field_account_move__amount_untaxed
 msgid "Untaxed Amount"
 msgstr "Impuestos excluidos"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_res_partner__economic_activity
-msgid "Economic Activity"
-msgstr "Actividad Económica según DGII"
 
 ##################################
 #   Other modules translations   #
