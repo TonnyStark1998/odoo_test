@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields, api
+from odoo \
+    import models, \
+            fields, \
+            api, \
+            _
 
-class BillindDoAccountJournal(models.Model):
+class BillingDoAccountJournal(models.Model):
     _inherit = "account.journal"
 
     # Account Journal - New Fields
