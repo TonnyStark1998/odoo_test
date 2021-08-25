@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="billing_do.default_tax_report_type_606" model="billing.do.tax.report.type">
+        <field name="name">Reporte 606</field>
+        <field name="code">606</field>
+        <field name="model"
+                ref="billing_do.model_billing_do_tax_report_item_606" />
+        <field name="view"
+                ref="billing_do.billing_do_tax_report_item_606_view_tree" />
+    </record>
+
+    <record id="billing_do.default_tax_report_type_607" model="billing.do.tax.report.type">
+        <field name="name">Reporte 607</field>
+        <field name="code">607</field>
+        <field name="model"
+                ref="billing_do.model_billing_do_tax_report_item_607" />
+        <field name="view"
+                ref="billing_do.billing_do_tax_report_item_607_view_tree" />
+    </record>
+
+</odoo>

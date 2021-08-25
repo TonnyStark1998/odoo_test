@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import logging as log
 
 from odoo\
@@ -6,18 +8,15 @@ from odoo\
 class BillingDoAuthenticationHttpServiceHelper(models.AbstractModel):
     _name = "billing.do.authentication.http.service.helper"
     _inherit = "billing.do.http.service.helper"
-    _description = """
-    
-    """
+    _description = "Billing DO - Authentication HTTP Service Helper"
 
-    __token_url = "https://login.microsoftonline.com/4e9b7883-1526-4764-abf5-619326b5f34a/oauth2/v2.0/token"
-    __api_dgii_base_url = "https://api-dev.koalacreativesoftware.com/webapi"
     __token = ""
 
     def get_access_token_for_webapi(self):
         config = self.env['ir.config_parameter'].sudo()
 
-        response = self.send_request("{0}/resources/".format(config.get_param('billing_do.api_services_base_url')),
+        response = self.send_request("{0}/resources/"\
+                                        .format(config.get_param('billing_do.api_services_base_url')),
                                         http_method=self.HTTP_METHODS['get'],
                                         headers=self.get_request_headers())
 
@@ -33,7 +32,7 @@ class BillingDoAuthenticationHttpServiceHelper(models.AbstractModel):
                     or response.status_code == 404 
                     or response.status_code == 400):
                 
-                raise exceptions.ValidationError("No se puedo obtener un token de acceso para conusltas del API.")
+                raise exceptions.ValidationError("No se puedo obtener un token de acceso para consultas del API.")
 
         return self.__token
 
