@@ -938,3 +938,9 @@ msgstr "El parámetro NCF debe tener un valor. Ninguno fue proveído."
 #, python-format
 msgid "The code is missing for the sequence associated with this journal {0}.."
 msgstr "El código de la secuencia asociado a este diario {0} no ha sido ajustado."
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_account_journal.py:0
+#, python-format
+msgid "<NOT_SET>"
+msgstr "<NO_AJUSTADO>"
