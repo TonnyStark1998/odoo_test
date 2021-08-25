@@ -182,6 +182,10 @@
                     <t t-set="display_discount"
                         t-value="any([l.discount for l in o.invoice_line_ids])"/>
 
+                    <!-- Is there a discount on at least one line? -->
+                    <t t-set="display_discount"
+                        t-value="any([l.discount for l in o.invoice_line_ids])"/>
+
                     <table class="table table-condensed" 
                             t-attf-style="color:{{o.style.text_color}};">
 
