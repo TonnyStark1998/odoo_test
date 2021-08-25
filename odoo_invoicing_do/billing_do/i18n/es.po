@@ -749,6 +749,7 @@ msgstr "El código de la secuencia asociado a este diario {0} no ha sido ajustad
 msgid "<NOT_SET>"
 msgstr "<NO_AJUSTADO>"
 
+#. module: billing_do
 #: code:odoo_invoicing_do/billing_do/models/billing_do_currency_rate_http_service_helper.py:0
 #, python-format
 msgid "URL for querying the Currencies Rates is misconfigured or not exist. Check with your administrator."
