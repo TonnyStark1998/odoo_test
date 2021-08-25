@@ -178,6 +178,10 @@
                                     font-size:12px !important;"
                         t-if="o.invoice_line_ids">
 
+                    <!-- Is there a discount on at least one line? -->
+                    <t t-set="display_discount"
+                        t-value="any([l.discount for l in o.invoice_line_ids])"/>
+
                     <table class="table table-condensed" 
                             t-attf-style="color:{{o.style.text_color}};">
 
@@ -204,7 +208,7 @@
                                 </th>
                                 <th class="text-right"
                                     t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;"
-                                    t-if="sum(l.discount for l in o.invoice_line_ids) > 0">
+                                    t-if="display_discount">
                                     Descuento
                                 </th>
                                 <th class="text-right"
@@ -272,7 +276,8 @@
                                     <td class="text-right">
                                         <span t-field="l.price_unit"/>
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-right"
+                                        t-if="display_discount">
                                         <span t-field="l.discount"
                                                  t-if="l.discount > 0" />
                                         <span t-if="l.discount > 0"> %</span>

@@ -141,7 +141,8 @@
                                           t-options='{"widget": "monetary",
                                                         "display_currency": doc.pricelist_id.currency_id}'/>
                                 </td>
-                                <td class="text-right">
+                                <td class="text-right"
+                                    t-if="display_discount">
                                     <span t-field="l.discount" 
                                             t-if="l.discount > 0" /> 
                                     <span t-if="l.discount > 0"> %</span>
