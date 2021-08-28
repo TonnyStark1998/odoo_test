@@ -94,7 +94,8 @@ class BillingDoTaxReportItem607(models.Model):
             # Get all reconciled info for the move, these are the payments.
             _reconciled_values = move._get_reconciled_info_JSON_values()
 
-            tax_report_item.update(self._get_held_amounts(move.line_ids))
+            tax_report_item.update(self._get_held_amounts(move.line_ids
+                                                            + self._get_payment_lines(_reconciled_values)))
             
             tax_report_item.update(self._calcuate_payments_amounts(move, _reconciled_values))
 
