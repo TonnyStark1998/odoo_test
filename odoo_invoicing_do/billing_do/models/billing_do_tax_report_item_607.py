@@ -121,8 +121,11 @@ class BillingDoTaxReportItem607(models.Model):
             'amount_credit_sale': 0.00,
         }
 
+        _payment_amount = 0.0
+
         if move.invoice_payment_state in ['paid']:
             for _payment in reconciled_values:
+                log.info('[KCS] Payment ID: {} > Currency: {}'.format(_payment['payment_id'], _payment['currency']))
                 _payment_type = self._get_payment_type(self.env['account.move.line']
                                                             .search([('id', '=', _payment['payment_id'])])
                                                             .journal_id)
@@ -149,7 +152,21 @@ class BillingDoTaxReportItem607(models.Model):
                 elif _payment_type in ['03']:
                     tax_report_item['amount_credit_debit_card'] += _payment_amount
         else:
-            tax_report_item['amount_credit_sale'] = move.amount_total
+            if move.currency_id.name == "RD$":
+                _payment_amount = move.amount_total
+            else:
+                _payment_amount = self.env['res.currency'] \
+                                            .search([('name', '=', move.currency_id.name)]) \
+                                            ._convert(move.amount_total,
+                                                        self.env['res.currency']
+                                                            .search([('name', '=', 'RD$')]),
+                                                        self.env.company,
+                                                        move.invoice_date \
+                                                            or fields.Date.today(),
+                                                        True)
+            
+            tax_report_item['amount_credit_sale'] \
+                = _payment_amount
 
         return tax_report_item
 
