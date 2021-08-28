@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import logging as log
 
 from odoo\
@@ -21,6 +23,10 @@ class BillingDoResCompany(models.Model):
                                 copy=True, 
                                 store=True, 
                                 default='')
+
+    load_currency_rates = fields.Boolean(string='Load Currency Rates?',
+                                            default=True,
+                                            copy=True)
 
     # Res Company - Modified Fields
     vat = fields.Char(store=True, tracking=True)
