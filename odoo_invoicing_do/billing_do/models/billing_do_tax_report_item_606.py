@@ -113,7 +113,7 @@ class BillingDoTaxReportItem606(models.Model):
 
             _tax_balance_multiplicator = -1 if move.is_inbound(True) else 1
 
-            for move_line in move.line_ids:
+            for move_line in (move.line_ids + _payment_move_lines):
 
                 if move_line.account_id.withholding_tax_type in ["RET-ITBIS-606"]:
                     tax_report_item['held_amount_itbis'] += \
