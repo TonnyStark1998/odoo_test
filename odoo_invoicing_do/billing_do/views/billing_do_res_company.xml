@@ -22,6 +22,9 @@
             <field name="partner_id" position="after">
                 <field name="economic_activity" readonly="1" force_save="1" />
             </field>
+            <field name="website" position="after">
+                <field name="load_currency_rates" />
+            </field>
         </field>
     </record>
     <record model="ir.ui.view" id="billing_do_view_company_name_field_form">

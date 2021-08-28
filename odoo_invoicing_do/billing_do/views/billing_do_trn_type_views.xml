@@ -1,0 +1,89 @@
+<odoo>
+    <!-- 
+        Views 
+    -->
+    <record id="billing_do_view_trn_type_tree" model="ir.ui.view">
+        <field name="name">billing.do.view.trn.type.tree</field>
+        <field name="model">billing.do.trn.type</field>
+        <field name="arch" type="xml">
+            <tree default_order="create_date asc">
+                <field name="name" />
+                <field name="code" />
+                <field name="regular_expression" />
+                <field name="active" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="billing_do_view_trn_type_form" model="ir.ui.view">
+        <field name="name">billing.do.view.trn.type.form</field>
+        <field name="model">billing.do.trn.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </group>
+                    <group col="2">
+                        <group>
+                            <field name="code" />
+                        </group>
+                        <group>
+                            <field name="code_length" />
+                        </group>
+                    </group>
+                    <group col="2">
+                        <group>
+                            <field name="min_length" />
+                        </group>
+                        <group>
+                            <field name="max_length" />
+                        </group>
+                    </group>
+                    <group col="2">
+                        <group>
+                            <field name="regular_expression" />
+                        </group>
+                        <group>
+                            <field name="active" />
+                        </group>
+                    </group>
+                    <group colspan="2">
+                        <field name="description" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--
+        Windows actions
+    -->
+    <record model="ir.actions.act_window"
+            id="action_billing_do_trn_type_list">
+
+        <field name="name">TRN Types</field>
+        <field name="res_model">billing.do.trn.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" 
+                ref="billing_do_view_trn_type_tree" />
+    </record>
+
+    <!--
+        Menu items
+    -->
+    <menuitem id="menu_trn_type_list"
+                name="TRN Types" 
+                parent="base.menu_ir_property" 
+                action="action_billing_do_trn_type_list" 
+                sequence="15"
+                groups="account.group_account_manager" />
+    <menuitem id="menu_accounting_trn_type_list"
+                name="TRN Types" 
+                parent="account.account_invoicing_menu" 
+                action="action_billing_do_trn_type_list" 
+                sequence="50"
+                groups="account.group_account_manager" />
+</odoo>
