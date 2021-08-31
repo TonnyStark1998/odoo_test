@@ -197,9 +197,15 @@ class BillingDoTaxReportItem607(models.Model):
         _moves = super(BillingDoTaxReportItem607, self)\
                     .generate_items(tax_report, tax_term_date)\
                     .filtered(lambda move:\
-                                move.type in ['out_invoice', 'out_refund']\
+                                (move.type in ['out_invoice', 'out_refund']\
                                     and move.invoice_date >= tax_term_date\
                                     and move.invoice_date <= tax_term_date_end)
+                                or (move.type in ['entry']
+                                        and any(line.account_id
+                                                        .withholding_tax_type in ['RET-ITBIS-607', 'RET-ISR-607']
+                                                    and line.date >= tax_term_date
+                                                    and line.date >= tax_term_date_end
+                                                for line in move.lines_id)))
 
         _moves_ids = [_move_line.id for _move_line in 
                                             self.env['account.move.line']\
