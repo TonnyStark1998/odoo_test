@@ -15,6 +15,7 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'security/billing_do_stock_quant_rule.xml',
         'views/billing_do_account_journal.xml',
         'views/billing_do_account_move.xml',
         'views/billing_do_ir_sequence.xml',
