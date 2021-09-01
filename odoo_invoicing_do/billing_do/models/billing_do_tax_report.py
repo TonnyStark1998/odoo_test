@@ -151,8 +151,7 @@ class BillingDoTaxReportItem(models.AbstractModel):
                                     comodel_name='billing.do.tax.report',
                                     ondelete='cascade',
                                     check_company=True)
-    
-    
+
     def generate_item(self, move, tax_report):
         return {
             'vat': '' if not move.partner_id else move.partner_id.vat,
@@ -164,13 +163,14 @@ class BillingDoTaxReportItem(models.AbstractModel):
                                     else move.reversed_entry_id.name,
             'tax_report': tax_report.id
         }
-    
+
     def generate_items(self, tax_report, tax_term_date):
         search_domain = [('state', 'in', ['posted']),
                             ('journal_id.is_tax_valuable', '=', True)]
 
-        moves = self.env['account.move'].search(search_domain)
-        
+        moves = self.env['account.move']\
+                    .search(search_domain)
+
         for move in moves:
             tax_report_item = self.generate_item(move, tax_report)
         
