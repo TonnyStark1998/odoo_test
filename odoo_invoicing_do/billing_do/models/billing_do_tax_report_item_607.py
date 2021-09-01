@@ -4,7 +4,8 @@ from odoo import models, api, fields, _
 
 import datetime, \
         calendar, \
-        logging as log
+        logging as log, \
+        json
 
 class BillingDoTaxReportItem607(models.Model):
     _name = 'billing.do.tax.report.item.607'
@@ -125,7 +126,6 @@ class BillingDoTaxReportItem607(models.Model):
 
         if move.invoice_payment_state in ['paid']:
             for _payment in reconciled_values:
-                log.info('[KCS] Payment ID: {} > Currency: {}'.format(_payment['payment_id'], _payment['currency']))
                 _payment_type = self._get_payment_type(self.env['account.move.line']
                                                             .search([('id', '=', _payment['payment_id'])])
                                                             .journal_id)
@@ -198,14 +198,18 @@ class BillingDoTaxReportItem607(models.Model):
                     .generate_items(tax_report, tax_term_date)\
                     .filtered(lambda move:\
                                 (move.type in ['out_invoice', 'out_refund']\
-                                    and move.invoice_date >= tax_term_date\
-                                    and move.invoice_date <= tax_term_date_end)
-                                or (move.type in ['entry']
-                                        and any(line.account_id
-                                                        .withholding_tax_type in ['RET-ITBIS-607', 'RET-ISR-607']
-                                                    and line.date >= tax_term_date
-                                                    and line.date >= tax_term_date_end
-                                                for line in move.lines_id)))
+                                    and ((move.company_id.id == self.env.company.id\
+                                            and move.invoice_date >= tax_term_date\
+                                            and move.invoice_date <= tax_term_date_end)
+                                        or (move.invoice_date < tax_term_date
+                                                and move.invoice_payment_state in ['paid']
+                                                and any(datetime.datetime
+                                                                    .strptime(payment['date'], '%Y-%m-%d') 
+                                                                    .date() >= tax_term_date
+                                                            and datetime.datetime
+                                                                    .strptime(payment['date'], '%Y-%m-%d')
+                                                                    .date() <= tax_term_date_end 
+                                                        for payment in json.loads(move.invoice_payments_widget)['content'])))))
 
         _moves_ids = [_move_line.id for _move_line in 
                                             self.env['account.move.line']\
