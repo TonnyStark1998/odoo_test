@@ -194,33 +194,30 @@ class BillingDoTaxReportItem607(models.Model):
                                             .monthrange(int(tax_term_date.year),
                                                         int(tax_term_date.month))[1])
 
-        _moves = super(BillingDoTaxReportItem607, self)\
-                    .generate_items(tax_report, tax_term_date)\
-                    .filtered(lambda move:\
-                                (move.type in ['out_invoice', 'out_refund']\
-                                    and ((move.company_id.id == self.env.company.id\
-                                            and move.invoice_date >= tax_term_date\
+        _tmp_moves = super(BillingDoTaxReportItem607, self)\
+                        .generate_items(tax_report, tax_term_date)
+        _moves = _tmp_moves.filtered(lambda move:
+                                        move.type in ['out_invoice', 'out_refund']
+                                            and move.company_id.id == self.env.company.id
+                                            and move.invoice_date >= tax_term_date
                                             and move.invoice_date <= tax_term_date_end)
-                                        or (move.invoice_date < tax_term_date
-                                                and move.invoice_payment_state in ['paid']
-                                                and any(datetime.datetime
-                                                                    .strptime(payment['date'], '%Y-%m-%d') 
-                                                                    .date() >= tax_term_date
-                                                            and datetime.datetime
-                                                                    .strptime(payment['date'], '%Y-%m-%d')
-                                                                    .date() <= tax_term_date_end 
-                                                        for payment in json.loads(move.invoice_payments_widget)['content'])))))
 
-        _moves_ids = [_move_line.id for _move_line in 
-                                            self.env['account.move.line']\
-                                                .search([('move_id.type', 'in', ['out_invoice', 'out_refund']),
-                                                            ('company_id', '=', self.env.company.id),
-                                                            ('account_id.withholding_tax_type', 'in', ["RET-ISR-606", \
-                                                                                                        "RET-ITBIS-606", \
-                                                                                                        "RET-ISR-607", \
-                                                                                                        "RET-ITBIS-607"]),
-                                                            ('date', '>=', tax_term_date),
-                                                            ('date', '<=', tax_term_date_end)])]
+        _moves += _tmp_moves.filtered(lambda move:
+                                        move.type in ['out_invoice', 'out_refund']
+                                            and move.invoice_date < tax_term_date
+                                            and move.invoice_payment_state in ['paid']
+                                            and any(datetime.datetime
+                                                                .strptime(payment['date'], '%Y-%m-%d') 
+                                                                .date() >= tax_term_date
+                                                        and datetime.datetime
+                                                                .strptime(payment['date'], '%Y-%m-%d')
+                                                                .date() <= tax_term_date_end
+                                                        and any(move_line.account_id
+                                                                        .withholding_tax_type in ['RET-ITBIS-607', 
+                                                                                                    'RET-ISR-607']
+                                                                for move_line in self.env['account.move']
+                                                                                        .browse(payment['move_id'])
+                                                                                        .line_ids)
+                                                    for payment in json.loads(move.invoice_payments_widget)['content']))
 
-        return _moves + self.env['account.move']\
-                            .browse(_moves_ids)
+        return _moves
