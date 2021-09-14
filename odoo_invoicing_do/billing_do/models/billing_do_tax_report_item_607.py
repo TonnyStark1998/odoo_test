@@ -44,6 +44,8 @@ class BillingDoTaxReportItem607(models.Model):
                                                 default=0.00)
     amount_credit_sale = fields.Monetary(string='Credit Sale Amount',
                                             default=0.00)
+    amount_other_sale_way = fields.Monetary(string='Other Sale Amount',
+                                                default=0.00)
 
     # Fields NOT IN USE!!!
     amount_itbis_perceived = fields.Monetary(string='ITBIS Perceived Amount',
@@ -58,8 +60,6 @@ class BillingDoTaxReportItem607(models.Model):
                                     default=0.00)
     amount_permute = fields.Monetary(string='Permute Amount',
                                         default=0.00)
-    amount_other_sale_way = fields.Monetary(string='Other Sale Amount',
-                                                default=0.00)
 
     def generate_item(self, move, tax_report):
         return {}
@@ -120,6 +120,7 @@ class BillingDoTaxReportItem607(models.Model):
             'amount_bank': 0.00,
             'amount_credit_debit_card': 0.00,
             'amount_credit_sale': 0.00,
+            'amount_other_sale_way': 0.00,
         }
 
         _payment_amount = 0.0
@@ -151,6 +152,9 @@ class BillingDoTaxReportItem607(models.Model):
 
                 elif _payment_type in ['03']:
                     tax_report_item['amount_credit_debit_card'] += _payment_amount
+                
+                else:
+                    tax_report_item['amount_other_sale_way'] += _payment_amount
         else:
             if move.currency_id.name == "RD$":
                 _payment_amount = move.amount_total
@@ -206,6 +210,7 @@ class BillingDoTaxReportItem607(models.Model):
                                         move.type in ['out_invoice', 'out_refund']
                                             and move.invoice_date < tax_term_date
                                             and move.invoice_payment_state in ['paid']
+                                            and json.loads(move.invoice_payments_widget)
                                             and any(datetime.datetime
                                                                 .strptime(payment['date'], '%Y-%m-%d') 
                                                                 .date() >= tax_term_date
