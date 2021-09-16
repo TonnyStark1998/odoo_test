@@ -14,7 +14,6 @@ class BillingDoAccountJournal(models.Model):
 
     # Account Journal - Modified Fields
     refund_sequence_id = fields.Many2one(domain = "['&', ('company_id', '=', company_id), ('is_refund_sequence', '=', True)]")
-    refund_sequence = fields.Boolean(readonly=True)
     type = fields.Selection(selection_add=[
             ('credit_debit_card', 'Credit/Debit Card'),
         ])
