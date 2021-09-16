@@ -295,10 +295,19 @@ class BillingDoAccountMove(models.Model):
         if self.journal_id:
             if self.type in ('out_refund', 'in_refund'):
                 sequence = self.journal_id.refund_sequence_id
+                sequence_type = _('refund sequence')
             else:
                 sequence = self.journal_id.sequence_id
+                sequence_type = _('sequence')
 
+            if not sequence:
+                raise exceptions.UserError(_("The journal '{0}' doesn\'t have a {1} associated with it.")
+                                            .format(self.journal_id.name, sequence_type))
             return sequence
+        
+        if self.id:
+            raise exceptions.UserError(_("There isn\'t a journal associated with this move: {0} ({1}).")
+                                        .format(self.name, self.id))
         return None
     
     def _ensure_journal_code_is_set(self):

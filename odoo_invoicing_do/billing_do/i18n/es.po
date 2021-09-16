@@ -797,6 +797,30 @@ msgstr "{} Tasa de cambio insertada: {} - {} (Tasa de cambio: {})"
 msgid "There isn't any TRN type for validate. Please check with your administrator."
 msgstr "No existen Tipos de comprobantes registrados para validar. Consulte con el administrador."
 
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_account_move.py:0
+#, python-format
+msgid "The journal '{0}' doesn't have a {1} associated with it."
+msgstr "El diario '{0}' no tiene una {1} asociada."
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_account_move:0
+#, python-format
+msgid "There isn't a journal associated with this move: {0} ({1})."
+msgstr "No existe un diario asociado con este movimiento: {0} ({1})."
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_account_move:0
+#, python-format
+msgid "refund sequence"
+msgstr "secuencia de reembolso"
+
+#. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_account_move:0
+#, python-format
+msgid "sequence"
+msgstr "secuencia"
+
 #################################
 # Tax Report Model Translations #
 #################################
