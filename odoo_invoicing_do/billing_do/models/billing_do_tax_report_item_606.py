@@ -111,24 +111,29 @@ class BillingDoTaxReportItem606(models.Model):
             # Get all the move lines include the payments move lines.
             _payment_move_lines = self._get_payment_lines(_reconciled_values)
 
-            _tax_balance_multiplicator = -1 if move.is_inbound(True) else 1
-
-            for move_line in (move.line_ids + _payment_move_lines):
-
+            for move_line in (_payment_move_lines):
                 if move_line.account_id.withholding_tax_type in ["RET-ITBIS-606"]:
                     tax_report_item['held_amount_itbis'] += \
                         move_line.credit + move_line.debit
                 elif move_line.account_id.withholding_tax_type in ["RET-ISR-606"]:
                     tax_report_item['held_amount_isr'] += \
                         move_line.credit + move_line.debit
+
+            for move_line in (move.line_ids):
                 
                 if not move_line.exclude_from_invoice_tab:
+
                     # Calculate the consumable and services amounts
                     unit_price = move_line.price_subtotal
-                    if move_line.currency_id:
+
+                    if move_line.currency_id\
+                        and not move_line.currency_id.name == 'RD$':
+
                         unit_price = move_line.currency_id\
                                                 ._convert(unit_price, 
-                                                            self.env.company.currency_id, 
+                                                            self.env['res.currency'].search([(
+                                                                'name', '=', 'RD$'
+                                                            )]), 
                                                             self.env.company, 
                                                             move.invoice_date or fields.Date.today(), 
                                                             True
@@ -141,7 +146,20 @@ class BillingDoTaxReportItem606(models.Model):
                 # Calculate the tax amounts
                 if move_line.tax_line_id:
                     tax = move_line.tax_line_id.tax_group_id.name
-                    tax_amount = _tax_balance_multiplicator * move_line.balance
+                    tax_amount = move_line.price_subtotal
+
+                    if move_line.currency_id\
+                        and not move_line.currency_id.name == 'RD$':
+
+                        tax_amount = move_line.currency_id\
+                                                ._convert(tax_amount, 
+                                                            self.env['res.currency'].search([(
+                                                                'name', '=', 'RD$'
+                                                            )]), 
+                                                            self.env.company, 
+                                                            move.invoice_date or fields.Date.today(), 
+                                                            True
+                                                        )
 
                     if tax == "ITBIS":
                         tax_report_item['tax_amount'] += tax_amount
