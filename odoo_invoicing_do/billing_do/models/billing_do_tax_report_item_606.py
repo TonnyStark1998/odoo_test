@@ -126,18 +126,19 @@ class BillingDoTaxReportItem606(models.Model):
                     # Calculate the consumable and services amounts
                     unit_price = move_line.price_subtotal
 
-                    if move_line.currency_id\
-                        and not move_line.currency_id.name == 'RD$':
+                    # if move_line.currency_id\
+                    #     and not move_line.currency_id.name == 'RD$':
 
-                        unit_price = move_line.currency_id\
-                                                ._convert(unit_price, 
-                                                            self.env['res.currency'].search([(
-                                                                'name', '=', 'RD$'
-                                                            )]), 
-                                                            self.env.company, 
-                                                            move.invoice_date or fields.Date.today(), 
-                                                            True
-                                                        )
+                    #     unit_price = move_line.currency_id\
+                    #                             ._convert(unit_price, 
+                    #                                         self.env['res.currency'].search([(
+                    #                                             'name', '=', 'RD$'
+                    #                                         )]), 
+                    #                                         self.env.company, 
+                    #                                         move.invoice_date or fields.Date.today(), 
+                    #                                         True
+                    #                                     )
+
                     if move_line.product_id.type in ['consu', 'product']:
                         tax_report_item['consumable_amount'] += unit_price
                     elif move_line.product_id.type in ['service']:
@@ -148,18 +149,18 @@ class BillingDoTaxReportItem606(models.Model):
                     tax = move_line.tax_line_id.tax_group_id.name
                     tax_amount = move_line.price_subtotal
 
-                    if move_line.currency_id\
-                        and not move_line.currency_id.name == 'RD$':
+                    # if move_line.currency_id\
+                    #     and not move_line.currency_id.name == 'RD$':
 
-                        tax_amount = move_line.currency_id\
-                                                ._convert(tax_amount, 
-                                                            self.env['res.currency'].search([(
-                                                                'name', '=', 'RD$'
-                                                            )]), 
-                                                            self.env.company, 
-                                                            move.invoice_date or fields.Date.today(), 
-                                                            True
-                                                        )
+                    #     tax_amount = move_line.currency_id\
+                    #                             ._convert(tax_amount, 
+                    #                                         self.env['res.currency'].search([(
+                    #                                             'name', '=', 'RD$'
+                    #                                         )]), 
+                    #                                         self.env.company, 
+                    #                                         move.invoice_date or fields.Date.today(), 
+                    #                                         True
+                    #                                     )
 
                     if tax == "ITBIS":
                         tax_report_item['tax_amount'] += tax_amount
