@@ -150,6 +150,21 @@
             </field>
         </field>
     </record>
+    <record model="ir.ui.view" id="billing_do_view_account_invoice_filter">
+        <field name="name">billing.do.view.account.invoice.filter</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter" />
+        <field name="arch" type="xml">
+            <filter name="posted"
+                    position="after">
+                <separator />
+                <filter string="Today" 
+                        name="today" 
+                        domain="['&amp;', ('invoice_date', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')), 
+                                            ('invoice_date', '&lt;=', datetime.datetime.now().strftime('%Y-%m-%d 23:59:59'))]" />
+            </filter>
+        </field>
+    </record>
 
     <!-- Inherited Actions -->
     <record model="ir.actions.act_window" id="account.action_move_out_invoice_type">
