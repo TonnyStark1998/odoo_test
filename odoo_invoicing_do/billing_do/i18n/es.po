@@ -584,6 +584,11 @@ msgstr ""
 msgid "Today"
 msgstr "Hoy"
 
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_account_invoice_filter
+msgid "Today"
+msgstr "Hoy"
+
 ################################
 # Payment Reports Translations #
 ################################
