@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging as log
+import json
 
 from odoo\
     import models, exceptions, _
@@ -29,18 +30,29 @@ class BillingDoTrnHttpServiceHelper(models.AbstractModel):
             log.info("[KCS] Token used: {0}"
                         .format(self.get_access_token_for_webapi()))
 
-            request_uri = "{0}/{3}/{1}/{2}".format(config.get_param('billing_do.api_services_base_url'),\
-                                                                vat,\
-                                                                ncf,\
+            request_uri = "{0}/{1}".format(config.get_param('billing_do.api_services_base_url'),\
                                                                 config.get_param('billing_do.api_services_tax_receipts_endpoint'))
 
+            headers = self.get_request_headers()
+            headers.update({
+                'Content-Type': 'application/x-www-form-urlencoded'
+            })
+
+            data = {
+                'rncIssuer': vat,
+                'trn': ncf
+            }
+
             if ncf[0] in ['E']:
-                request_uri = "{0}/{1}/{2}".format(request_uri, vat_buyer, security_code)
+                data.update({
+                    'rncConsumer': vat_buyer,
+                    'securityCode': security_code
+                })
 
             response = self.send_request(request_uri, 
-                                            http_method=self.HTTP_METHODS['get'],
-                                            headers=self.get_request_headers(),
-                                            data={})
+                                            http_method=self.HTTP_METHODS['post'],
+                                            headers=headers,
+                                            data=data)
 
             log.info("[KCS] Request (Status Code): {0}".format(response.status_code))
 
