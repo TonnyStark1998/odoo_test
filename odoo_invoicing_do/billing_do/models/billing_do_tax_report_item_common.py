@@ -71,3 +71,19 @@ class BillingDoTaxReportItemCommon(models.AbstractModel):
                                             and payment['date']])
 
         return _last_payment_date
+
+    def _get_move_line_currency(self, move_line):
+        return move_line.currency_id or move_line.company_currency_id
+
+    def _convert_amount_to_dop(self, currency, amount, date, company):
+        if currency.name == 'RD$':
+            return amount
+        
+        return currency._convert(amount, 
+                                    self.env['res.currency'].search([(
+                                        'name', '=', 'RD$'
+                                    )]), 
+                                    company, 
+                                    date, 
+                                    True
+                                )
