@@ -121,3 +121,30 @@ class BillingDoResCompany(models.Model):
         if self.tax_contributor_type and self.tax_contributor_type in ['3']:
             self.name = ''
             self.economic_activity = ''
+
+    @api.model
+    def create(self, vals):
+        _new_company = super(BillingDoResCompany, self)\
+                        .create(vals)
+        _new_company.flush()
+
+        _base_sale_order_sequence = self.env['ir.sequence']\
+                                            .search(args=[('code', '=', 'sale.order'),
+                                                            ('company_id', '=', False)],
+                                                        limit = 1)
+        _base_purchase_order_sequence = self.env['ir.sequence']\
+                                            .search(args=[('code', '=', 'purchase.order'),
+                                                            ('company_id', '=', False)],
+                                                        limit = 1)
+
+        if _base_sale_order_sequence:
+            _base_sale_order_sequence.copy({
+                                            'company_id' : _new_company.id
+                                        })
+
+        if _base_purchase_order_sequence:
+            _base_purchase_order_sequence.copy({
+                                                'company_id' : _new_company.id
+                                            })
+
+        return _new_company
