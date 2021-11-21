@@ -161,12 +161,22 @@ class TemplateSettings(models.Model):
         attachment=True,
         help="This field holds the image used as logo for the reports,\
                         if non is uploaded, the company logo will be used")
+    logo_size = fields.Selection([(str(x), str(x)) for x in range(90, 200)],
+                                   string="Header Logo Size (px):",
+                                   default='130',
+                                   required=True)
+
     footer_logo = fields.Binary(
         "Footer Logo",
         attachment=True,
         help="This field holds the image used as footer logo for the reports,\
                         if non is uploaded and footer logo is enabled then the company logo will be used"
     )
+    footer_logo_size = fields.Selection([(str(x), str(x)) for x in range(90, 200)],
+                                   string="Footer Logo Size (px):",
+                                   default='130',
+                                   required=True)
+
     odd = fields.Char(
         'Odd parity Color',
         size=7,
