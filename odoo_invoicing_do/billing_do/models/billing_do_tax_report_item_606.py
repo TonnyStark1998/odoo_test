@@ -112,7 +112,7 @@ class BillingDoTaxReportItem606(models.Model):
             _payment_move_lines = self._get_payment_lines(_reconciled_values)
 
             for move_line in (_payment_move_lines):
-                held_amount = self._convert_amount_to_dop(self.env.company.currency_id,
+                held_amount = self._convert_amount_to_dop(move.company_id.currency_id,
                                                         move_line.credit + move_line.debit,
                                                         move.invoice_date,
                                                         move.company_id
