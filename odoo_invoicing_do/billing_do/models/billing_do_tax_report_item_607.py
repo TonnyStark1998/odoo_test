@@ -77,11 +77,19 @@ class BillingDoTaxReportItem607(models.Model):
 
             # Set the invoice amount without any taxes
             if move.amount_untaxed_signed:
-                tax_report_item['amount_untaxed_signed'] = move.amount_untaxed_signed
+                tax_report_item['amount_untaxed_signed'] = self._convert_amount_to_dop(move.currency_id,
+                                                                                        move.amount_untaxed_signed,
+                                                                                        move.invoice_date,
+                                                                                        move.company_id
+                                                                                    )
             
             # Set the amount for the taxes charge to this invoice
             if move.amount_tax_signed:
-                tax_report_item['amount_tax_signed'] = move.amount_tax_signed
+                tax_report_item['amount_tax_signed'] = self._convert_amount_to_dop(move.currency_id,
+                                                                                    move.amount_tax_signed,
+                                                                                    move.invoice_date,
+                                                                                    move.company_id
+                                                                                )
 
             # Set the income type for this move if the move has an income type value
             if move.income_type:
@@ -130,20 +138,14 @@ class BillingDoTaxReportItem607(models.Model):
                 _payment_type = self._get_payment_type(self.env['account.move.line']
                                                             .search([('id', '=', _payment['payment_id'])])
                                                             .journal_id)
-                _payment_amount = _payment['amount'] \
-                                    if \
-                                        _payment['currency'] == 'RD$' \
-                                    else \
-                                        self.env['res.currency'] \
-                                            .search([('name', '=', _payment['currency'])]) \
-                                            ._convert(_payment['amount'],
-                                                        self.env['res.currency']
-                                                            .search([('name', '=', 'RD$')]),
-                                                        self.env.company,
-                                                        _payment['date'] \
-                                                            or move.invoice_date \
-                                                            or fields.Date.today(),
-                                                        True)
+
+                _payment_amount = self._convert_amount_to_dop(self.env['res.currency']
+                                                                    .search([('name', '=', _payment['currency'])]),
+                                                        _payment['amount'],
+                                                        move.invoice_date,
+                                                        move.company_id
+                                                    )
+
                 if _payment_type in ['01']:
                     tax_report_item['amount_cash'] += _payment_amount
 
@@ -156,18 +158,11 @@ class BillingDoTaxReportItem607(models.Model):
                 else:
                     tax_report_item['amount_other_sale_way'] += _payment_amount
         else:
-            if move.currency_id.name == "RD$":
-                _payment_amount = move.amount_total
-            else:
-                _payment_amount = self.env['res.currency'] \
-                                            .search([('name', '=', move.currency_id.name)]) \
-                                            ._convert(move.amount_total,
-                                                        self.env['res.currency']
-                                                            .search([('name', '=', 'RD$')]),
-                                                        self.env.company,
-                                                        move.invoice_date \
-                                                            or fields.Date.today(),
-                                                        True)
+            _payment_amount = self._convert_amount_to_dop(move.currency_id,
+                                                            move.amount_total,
+                                                            move.invoice_date,
+                                                            move.company_id
+                                                        )
             
             tax_report_item['amount_credit_sale'] \
                 = _payment_amount
@@ -181,7 +176,12 @@ class BillingDoTaxReportItem607(models.Model):
         }
         
         for move_line in move_lines:
-            _line_amount = move_line.credit + move_line.debit
+            _line_amount = self._convert_amount_to_dop(move_line.move_id.company_id.currency_id,
+                                                        move_line.credit + move_line.debit,
+                                                        move_line.move_id.invoice_date or 
+                                                            move_line.move_id.date,
+                                                        move_line.move_id.company_id
+                                                    )
 
             if move_line.account_id.withholding_tax_type in ["RET-ITBIS-607"]:
                 tax_report_item['held_amount_itbis'] += _line_amount
