@@ -77,7 +77,7 @@ class BillingDoTaxReportItem607(models.Model):
 
             # Set the invoice amount without any taxes
             if move.amount_untaxed_signed:
-                tax_report_item['amount_untaxed_signed'] = self._convert_amount_to_dop(move.currency_id,
+                tax_report_item['amount_untaxed_signed'] = self._convert_amount_to_dop(move.company_id.currency_id,
                                                                                         move.amount_untaxed_signed,
                                                                                         move.invoice_date,
                                                                                         move.company_id
@@ -85,7 +85,7 @@ class BillingDoTaxReportItem607(models.Model):
             
             # Set the amount for the taxes charge to this invoice
             if move.amount_tax_signed:
-                tax_report_item['amount_tax_signed'] = self._convert_amount_to_dop(move.currency_id,
+                tax_report_item['amount_tax_signed'] = self._convert_amount_to_dop(move.company_id.currency_id,
                                                                                     move.amount_tax_signed,
                                                                                     move.invoice_date,
                                                                                     move.company_id
