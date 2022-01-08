@@ -200,22 +200,23 @@ class BillingDoAccountMove(models.Model):
     @api.model
     def post(self):
         try:
-            self._ensure_journal_code_is_set()
+            for move in self:
+                move._ensure_journal_code_is_set()
 
-            sequence = self.__get_journal_sequence()
-            if not sequence:
-                return
+                sequence = move.__get_journal_sequence()
+                if not sequence:
+                    return
 
-            sequence = sequence._get_current_sequence(sequence_date=self.date or self.invoice_date)
-            if self.type in ['in_invoice', 'in_refund', 'in_receipt']\
-                    and self.journal_id.sequence_id.code.upper() not in ['B11', 'B13']\
-                        and self.journal_id.is_tax_valuable:
-                
-                self.name = self.ncf
+                sequence = sequence._get_current_sequence(sequence_date=move.date or move.invoice_date)
+                if move.type in ['in_invoice', 'in_refund', 'in_receipt']\
+                        and move.journal_id.sequence_id.code.upper() not in ['B11', 'B13']\
+                            and move.journal_id.is_tax_valuable:
+                    
+                    move.name = move.ncf
 
-            if isinstance(sequence, type(self.env['ir.sequence.date_range'])):
-                if 'date_to' in sequence:
-                    self.ncf_date_to = sequence.date_to
+                if isinstance(sequence, type(move.env['ir.sequence.date_range'])):
+                    if 'date_to' in sequence:
+                        move.ncf_date_to = sequence.date_to
 
             return super(BillingDoAccountMove, self).post()
         except exceptions.UserError:
