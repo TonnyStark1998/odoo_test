@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import logging as log
 
 from odoo import models, fields, api
 
@@ -19,3 +20,14 @@ class BillindDoAccountPayment(models.Model):
             return invoices[0].invoice_payment_ref or invoices[0].ref or invoices[0].name or invoices[0].ncf
         else:
             return 'Write-Off Label'
+
+    def _compute_journal_domain_and_types(self):
+        journal_types_and_domain = super(BillindDoAccountPayment, self)._compute_journal_domain_and_types()
+        journal_types = journal_types_and_domain['journal_types']
+        journal_types.add('credit_debit_card')
+        journal_types_and_domain.update({
+            'domain' : journal_types_and_domain['domain'],
+            'journal_types' : journal_types
+        })
+        log.info('[KCS] Journal Types & Domain: {}'.format(journal_types_and_domain))
+        return journal_types_and_domain
