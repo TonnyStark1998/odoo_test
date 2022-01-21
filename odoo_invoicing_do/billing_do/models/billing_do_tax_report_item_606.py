@@ -4,7 +4,8 @@ from odoo import models, api, fields, _
 
 import datetime, \
         calendar, \
-        logging as log
+        logging as log, \
+        json
 
 class BillingDoTaxReportItem606(models.Model):
     _name = 'billing.do.tax.report.item.606'
@@ -191,35 +192,32 @@ class BillingDoTaxReportItem606(models.Model):
                                             .monthrange(int(tax_term_date.year),
                                                         int(tax_term_date.month))[1])
 
-        _moves = super(BillingDoTaxReportItem606, self)\
-                    .generate_items(tax_report, tax_term_date)\
-                    .filtered(lambda move:\
+        _tmp_moves = super(BillingDoTaxReportItem606, self)\
+                        .generate_items(tax_report, tax_term_date)
+
+        _moves = _tmp_moves.filtered(lambda move:\
                                 move.type in ['in_invoice', 'in_refund']\
+                                    and move.company_id.id == self.env.company.id
                                     and move.invoice_date >= tax_term_date\
                                     and move.invoice_date <= tax_term_date_end)
 
-        _payment_moves_ids = []
-        pay_term_line_ids = self.env['account.move.line'].filtered(lambda line: 
-                                                                    line.account_id.user_type_id.type\
-                                                                        in ('receivable', 'payable')\
-                                                                    and line.company_id == self.env.company.id)
+        _moves += _tmp_moves.filtered(lambda move:
+                                        move.type in ['in_invoice', 'in_refund']
+                                            and move.invoice_date < tax_term_date
+                                            and move.invoice_payment_state in ['paid']
+                                            and json.loads(move.invoice_payments_widget)
+                                            and any(datetime.datetime
+                                                                .strptime(payment['date'], '%Y-%m-%d') 
+                                                                .date() >= tax_term_date
+                                                        and datetime.datetime
+                                                                .strptime(payment['date'], '%Y-%m-%d')
+                                                                .date() <= tax_term_date_end
+                                                        and any(move_line.account_id
+                                                                        .withholding_tax_type in ['RET-ITBIS-607', 
+                                                                                                    'RET-ISR-607']
+                                                                for move_line in self.env['account.move']
+                                                                                        .browse(payment['move_id'])
+                                                                                        .line_ids)
+                                                    for payment in json.loads(move.invoice_payments_widget)['content']))
 
-        partials = pay_term_line_ids.mapped('matched_debit_ids') +\
-                    pay_term_line_ids.mapped('matched_credit_ids')
-
-        for partial in partials:
-            counterpart_lines = partial.debit_move_id +\
-                                    partial.credit_move_id
-
-            # In case we are in an onchange, line_ids is a NewId, not an integer. By using line_ids.ids we get the correct integer value.
-            counterpart_line = counterpart_lines\
-                                    .filtered(lambda line: \
-                                                line.id not in self.line_ids.ids)
-
-            if counterpart_line.date\
-                and counterpart_line.date >= tax_term_date\
-                and counterpart_line.date <= tax_term_date_end:
-                _payment_moves_ids.append(counterpart_line.move_id.id)
-
-        return _moves + self.env['account.move']\
-                            .browse(_payment_moves_ids)
+        return _moves
