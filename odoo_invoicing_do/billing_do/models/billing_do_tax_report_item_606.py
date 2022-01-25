@@ -112,8 +112,12 @@ class BillingDoTaxReportItem606(models.Model):
             # Get all the move lines include the payments move lines.
             _payment_move_lines = self._get_payment_lines(_reconciled_values)
 
-            for move_line in (_payment_move_lines):
-                held_amount = self._convert_amount_to_dop(move.company_id.currency_id,
+            move_lines = _payment_move_lines + move.line_ids
+
+            for move_line in move_lines:
+                currency = self._get_move_line_currency(move_line)
+
+                held_amount = self._convert_amount_to_dop(currency,
                                                         move_line.credit + move_line.debit,
                                                         move.invoice_date,
                                                         move.company_id
@@ -124,9 +128,6 @@ class BillingDoTaxReportItem606(models.Model):
 
                 elif move_line.account_id.withholding_tax_type in ["RET-ISR-606"]:
                     tax_report_item['held_amount_isr'] += held_amount
-
-            for move_line in (move.line_ids):
-                currency = self._get_move_line_currency(move_line)
 
                 if not move_line.exclude_from_invoice_tab:
 
@@ -196,10 +197,10 @@ class BillingDoTaxReportItem606(models.Model):
                         .generate_items(tax_report, tax_term_date)
 
         _moves = _tmp_moves.filtered(lambda move:\
-                                move.type in ['in_invoice', 'in_refund']\
-                                    and move.company_id.id == self.env.company.id
-                                    and move.invoice_date >= tax_term_date\
-                                    and move.invoice_date <= tax_term_date_end)
+                                        move.type in ['in_invoice', 'in_refund']\
+                                            and move.company_id.id == self.env.company.id
+                                            and move.invoice_date >= tax_term_date\
+                                            and move.invoice_date <= tax_term_date_end)
 
         _moves += _tmp_moves.filtered(lambda move:
                                         move.type in ['in_invoice', 'in_refund']
@@ -212,12 +213,16 @@ class BillingDoTaxReportItem606(models.Model):
                                                         and datetime.datetime
                                                                 .strptime(payment['date'], '%Y-%m-%d')
                                                                 .date() <= tax_term_date_end
-                                                        and any(move_line.account_id
-                                                                        .withholding_tax_type in ['RET-ITBIS-607', 
-                                                                                                    'RET-ISR-607']
+                                                        and (any(move_line.account_id
+                                                                        .withholding_tax_type in ['RET-ITBIS-606', 
+                                                                                                    'RET-ISR-606']
                                                                 for move_line in self.env['account.move']
                                                                                         .browse(payment['move_id'])
                                                                                         .line_ids)
+                                                            or any(move_line.account_id
+                                                                            .withholding_tax_type in ['RET-ITBIS-606', 
+                                                                                                        'RET-ISR-606']
+                                                                for move_line in move.line_ids))
                                                     for payment in json.loads(move.invoice_payments_widget)['content']))
 
         return _moves
