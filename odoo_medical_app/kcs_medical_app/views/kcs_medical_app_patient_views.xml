@@ -145,6 +145,24 @@
                                         <field name="smoked_length" nolabel="1" attrs="{'invisible': [('smoked', '=', False)]}" />
                                         <label for="smoked_stopped_since" style="font-weight: normal !important;" attrs="{'invisible': [('smoked', '=', False)]}" />
                                         <field name="smoked_stopped_since" nolabel="1" attrs="{'invisible': [('smoked', '=', False)]}" />
+                                        <newline />
+                                        <label for="has_tested_postitive_to_covid" 
+                                                style="font-weight: normal !important;" />
+                                        <field name="has_tested_postitive_to_covid" 
+                                                nolabel="1" />
+                                        <label for="date_tested_positive_to_covid" 
+                                                style="font-weight: normal !important;" 
+                                                attrs="{'invisible': [('has_tested_postitive_to_covid', '=', False)]}" />
+                                        <field name="date_tested_positive_to_covid" 
+                                                nolabel="1" 
+                                                attrs="{'invisible': [('has_tested_postitive_to_covid', '=', False)],
+                                                        'required': [('has_tested_postitive_to_covid', '=', True)]}" />
+                                        <label for="has_been_in_hospital_for_covid" 
+                                                style="font-weight: normal !important;" 
+                                                attrs="{'invisible': [('has_tested_postitive_to_covid', '=', False)]}" />
+                                        <field name="has_been_in_hospital_for_covid" 
+                                                nolabel="1" 
+                                                attrs="{'invisible': [('has_tested_postitive_to_covid', '=', False)]}" />
                                     </group>
                                 </group>
                             </group>

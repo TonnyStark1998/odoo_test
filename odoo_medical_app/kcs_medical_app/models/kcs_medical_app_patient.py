@@ -2,7 +2,12 @@
 
 import logging as log
 import datetime as date
-from odoo import models, fields, api, exceptions
+from odoo \
+    import models, \
+            fields, \
+            api, \
+            exceptions, \
+            _
 
 class Patient(models.Model):
     _name = 'kcs.medical.app.patient'
@@ -284,6 +289,22 @@ class Patient(models.Model):
                                                         required=False,
                                                         readonly=True)
 
+    # Patient - COVID Info
+    has_tested_postitive_to_covid = \
+        fields.Boolean(string='Has tested positive to COVID-19?', 
+                        copy=False, 
+                        store=True, 
+                        default=False)
+    has_been_in_hospital_for_covid = \
+        fields.Boolean(string='Has been in the hospital for COVID-19?', 
+                        copy=False, 
+                        store=True, 
+                        default=False)
+    date_tested_positive_to_covid = \
+        fields.Date(string='Which date did you test positive for COVID-19?', 
+                        copy=False, 
+                        store=True)
+
     channel_ids = fields.Many2many('mail.channel', 'mail_channel_patients', 'partner_id', 'channel_id', string='Channels', copy=False)
 
     # Patient - Compute Field's Functions
@@ -368,13 +389,17 @@ class Patient(models.Model):
         for patient in self:
             if patient.so2_value:
                 if not self._validate_value_range(self.so2_value, 0, 100):
-                    # self.so2_value = 0.00
-                    return {
-                        'warning': {
-                            'title': "Campo con valor erróneo",
-                            'message': "El valor del campo SO2 (Saturación en oxígeno) debe estar en 0 y 100."
-                        }
-                    }
+                    raise exceptions.UserError(_('The value for the SO2 field (Oxygen Saturation) must be between 0 and 100.'))
+
+    @api.constrains('date_tested_positive_to_covid')
+    def _check_date_tested_positive_to_covid(self):
+        for patient in self:
+            if patient.date_tested_positive_to_covid:
+                log.info('[{0}] ({1}) = {2}'.format(patient.date_tested_positive_to_covid, date.date.today(), patient.date_tested_positive_to_covid > date.date.today()))
+                if patient.date_tested_positive_to_covid > date.date.today():
+                    raise exceptions.UserError(_('The date you tested positive ({0}) must be before the current date ({1}).')
+                                                    .format(patient.date_tested_positive_to_covid.strftime('%d-%m-%Y'), 
+                                                            date.date.today().strftime('%d-%m-%Y')))
 
     @api.model
     def create(self, values):

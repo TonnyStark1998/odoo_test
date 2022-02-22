@@ -860,6 +860,25 @@ msgstr "Comentarios Cirujano"
 msgid "Evolution History Stetic Comments"
 msgstr "Comentarios Médico Estético"
 
+### ADDED...
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__has_tested_postitive_to_covid
+msgid "Has tested positive to COVID-19?"
+msgstr "¿Tuvo COVID?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__has_been_in_hospital_for_covid
+msgid "Has been in the hospital for COVID-19?"
+msgstr "¿Estuvo interno en la clínica?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__date_tested_positive_to_covid
+msgid "Which date did you test positive for COVID-19?"
+msgstr "¿En qué fecha dió positivo?"
+
+### END ADDED
+
 #######################
 #   Security Groups   #
 #######################
@@ -1037,3 +1056,19 @@ msgstr "Área corporal"
 #: model:ir.model.fields,field_description:kcs_medical_app.field_product_template__patient_evolution_type
 msgid "Patient Evolution Product Type"
 msgstr "Tipo de producto quirúrgico"
+
+###############################
+#  Code Strings Translations  #
+###############################
+
+#. module: kcs_medical_app
+#: code:odoo_medical_app/kcs_medical_app/models/kcs_medical_app_patient.py:0
+#, python-format
+msgid "The date you tested positive ({0}) must be before the current date ({1})."
+msgstr "La fecha en qué dió positivo ({0}) no puede ser mayor a la fecha actual ({1})."
+
+#. module: kcs_medical_app
+#: code:odoo_medical_app/kcs_medical_app/models/kcs_medical_app_patient.py:0
+#, python-format
+msgid "The value for the SO2 field (Oxygen Saturation) must be between 0 and 100."
+msgstr "El valor del campo SO2 (Saturación en oxígeno) debe estar en 0 y 100."
