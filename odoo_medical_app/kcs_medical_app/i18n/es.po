@@ -1,0 +1,1074 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* kcs_medical_app
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-04 19:47+0000\n"
+"PO-Revision-Date: 2020-06-04 19:47+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Add evolution"
+msgstr "Agregar"
+
+#. module: kcs_medical_app
+#: model:ir.actions.act_window,name:kcs_medical_app.action_kcs_medical_app_patients
+#: model:ir.ui.menu,name:kcs_medical_app.menu_kcs_medical_app_patients
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Patients"
+msgstr "Pacientes"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Personal"
+msgstr ""
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Labor"
+msgstr ""
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Contact"
+msgstr ""
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Address"
+msgstr "Dirección"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Occupation"
+msgstr "Ocupación"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Evolution Details"
+msgstr "Procesos"
+
+#. module: kcs_medical_app
+#: model:ir.ui.menu,name:kcs_medical_app.main_menu_kcs_medical_app_history
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Medical History"
+msgstr "Historial Médico"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Medical Antecedents"
+msgstr "Antecedentes Médicos"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Previous Surgeries"
+msgstr "Cirugías Previas"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Relatives History"
+msgstr "Antecedentes Familiares"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Physical Exam"
+msgstr "Examen Físico"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Appointment Reason"
+msgstr "Motivo de consulta"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Stetic Medicine"
+msgstr "Medicina Estética"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Plastic Surgery"
+msgstr "Cirugía Plástica"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Dermatology"
+msgstr "Dermatología"
+
+#. module: kcs_medical_app
+#: model:ir.ui.menu,name:kcs_medical_app.main_menu_kcs_medical_app_selectable_lists
+msgid "Values Lists"
+msgstr "Listas de valores"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patient_evolutions_view_form
+msgid "Evolutions"
+msgstr "Evoluciones"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "<span>New patient</span>"
+msgstr "<span>Nuevo paciente</span>"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Antecedents Details"
+msgstr "Detalle de antecedentes"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid ""
+"<span colspan=\"2\" style=\"font-weight: bold;\">Choose if suffered or has "
+"suffered one of the diseases or medical conditions listed in the field "
+"below</span>"
+msgstr ""
+"<span colspan=\"2\" style=\"font-weight: bold;\">Seleccione si sufre o ha "
+"sufrido una de las enfermedades o condiciones que se listan en el campo "
+"debajo</span>"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Given Births (specify quantities)"
+msgstr "Partos (especificar cantidad)"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid ""
+"<span colspan=\"2\" style=\"font-weight: bold;\">Fill the information of "
+"relative's (father, mother, siblings and sons) medical antecedents (diseases)"
+"</span>"
+msgstr ""
+"<span colspan=\"2\" style=\"font-weight: bold;\">Digíte la información de "
+"antecedentes médicos (enfermedades) de la familia cercana (padre, madre, "
+"hermanos e hijos)</span>"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Stetic Medicine - Patient Images"
+msgstr "Imágenes ME"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Plastic Surgery - Patient Images"
+msgstr "Imágenes CP"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Dermatology - Patient Images"
+msgstr "Imágenes D"
+
+#. module: kcs_medical_app
+#: model:ir.actions.act_window,name:kcs_medical_app.action_kcs_medical_app_diseases
+#: model:ir.ui.menu,name:kcs_medical_app.menu_kcs_medical_app_diseases
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_disease_view_form
+msgid "Diseases"
+msgstr "Enfermedades"
+
+#. module: kcs_medical_app
+#: model:ir.actions.act_window,name:kcs_medical_app.action_kcs_medical_app_body_part
+#: model:ir.ui.menu,name:kcs_medical_app.menu_kcs_medical_app_bodypart
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_bodypart_view_form
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__appointment_body_parts_ids
+msgid "Body Parts"
+msgstr "Áreas corporales"
+
+#. module: kcs_medical_app
+#: model:ir.actions.act_window,name:kcs_medical_app.action_kcs_medical_app_blood_types
+#: model:ir.ui.menu,name:kcs_medical_app.menu_kcs_medical_app_blood_type
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_blood_type_view_form
+msgid "Blood Types"
+msgstr "Tipos de sangre"
+
+#. module: kcs_medical_app
+#: model:ir.actions.act_window,name:kcs_medical_app.action_kcs_medical_app_allergies
+#: model:ir.ui.menu,name:kcs_medical_app.menu_kcs_medical_app_allergies
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_allergies_view_form
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__allergy_ids
+msgid "Allergies"
+msgstr "Alergias"
+
+#. module: kcs_medical_app
+#: model:ir.actions.act_window,name:kcs_medical_app.action_kcs_medical_app_virus
+#: model:ir.ui.menu,name:kcs_medical_app.menu_kcs_medical_app_virus
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_virus_view_form
+msgid "Viruses"
+msgstr "Virus"
+
+#. module: kcs_medical_app
+#: model:ir.actions.act_window,name:kcs_medical_app.action_kcs_medical_app_stetic_skin_type
+#: model:ir.ui.menu,name:kcs_medical_app.menu_kcs_medical_app_stetic_skin_type
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_stetic_skin_type_view_form
+msgid "Skin Types"
+msgstr "Tipos de piel"
+
+#. module: kcs_medical_app
+#: model:ir.actions.act_window,name:kcs_medical_app.action_kcs_medical_app_stetic_contraindications
+#: model:ir.ui.menu,name:kcs_medical_app.menu_kcs_medical_app_stetic_contraindications
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_stetic_contraindications_view_form
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__stetic_contraindications_ids
+msgid "Contraindications"
+msgstr "Contraindicaciones"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Process 1"
+msgstr "Proceso 1"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Pre-surgery 1"
+msgstr "Pre operatorio"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Process 2"
+msgstr "Proceso 2"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Pre-surgery 2"
+msgstr "Pre operatorio"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Process 3"
+msgstr "Proceso 3"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Pre-surgery 3"
+msgstr "Pre operatorio"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Process 4"
+msgstr "Proceso 4"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Pre-surgery 4"
+msgstr "Pre operatorio"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Post-surgery 1"
+msgstr "Post operatorio"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Post-surgery 2"
+msgstr "Post operatorio"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Post-surgery 3"
+msgstr "Post operatorio"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Post-surgery 4"
+msgstr "Post operatorio"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Process 1 - Add"
+msgstr "Agregar"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Process 2 - Add"
+msgstr "Agregar"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Process 3 - Add"
+msgstr "Agregar"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Process 4 - Add"
+msgstr "Agregar"
+
+#####################
+#   Models Fields   #
+#####################
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__active
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_allergy__active
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_bloodtype__active
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_bodypart__active
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_disease__active
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_stetic_contraindication__active
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_stetic_skin_type__active
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_virus__active
+msgid "Active"
+msgstr "Activo"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__state
+msgid "State"
+msgstr "Estado"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__national_identity_number
+msgid "Identity Number"
+msgstr "Número de Identificación"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__genre
+msgid "Genre"
+msgstr "Género"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__genre__female
+msgid "Female"
+msgstr "Femenino"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__genre__male
+msgid "Male"
+msgstr "Masculino"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__genre__other
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__relative_relation__other
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__stetic_skin_type_fitzpatrick__other
+msgid "Other"
+msgstr "Otro"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__birthdate
+msgid "Birthdate"
+msgstr "Fecha de nacimiento"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__age
+msgid "Age"
+msgstr "Edad"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__phone_international
+msgid "Phone International"
+msgstr "Teléfono Internacional"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__image_profile
+msgid "Image Profile"
+msgstr "Imagen de Perfil"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__recommended_by
+msgid "Recommended By"
+msgstr "Recomendado Por"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__relative_name
+msgid "Relative Name"
+msgstr "Nombre de pariente"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__relative_phone
+msgid "Relative Phone"
+msgstr "Teléfono Pariente"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__relative_relation
+msgid "Relative Relation"
+msgstr "Relación Pariente"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__relative_relation__grandparent
+msgid "Grandparent"
+msgstr "Abuelo/a"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__relative_relation__friend
+msgid "Friend"
+msgstr "Amigo/a"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__relative_relation__roommate
+msgid "Roommate"
+msgstr "Compañero/a de cuarto"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__relative_relation__wife
+msgid "Wife"
+msgstr "Esposa"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__relative_relation__husband
+msgid "Husband"
+msgstr "Esposo"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__relative_relation__sister
+msgid "Sister"
+msgstr "Hermana"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__relative_relation__brother
+msgid "Brother"
+msgstr "Hermano"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__relative_relation__daughter
+msgid "Daughter"
+msgstr "Hija"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__relative_relation__son
+msgid "Son"
+msgstr "Hijo"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__relative_relation__mother
+msgid "Mother"
+msgstr "Madre"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__relative_relation__grandchild
+msgid "Grandchild"
+msgstr "Nieto/a"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__relative_relation__father
+msgid "Father"
+msgstr "Padre"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__disease_ids
+msgid "Diseases or Medical Conditions"
+msgstr "Enfermedades o Condiciones"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__virus_ids
+msgid "Virus"
+msgstr "Virus"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__medical_history_viruses_notes
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__medical_history_notes
+msgid "Notes"
+msgstr "Observaciones"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__medical_history_allergies_notes
+msgid "Allergies Notes"
+msgstr "Detalle de alergias"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__medicines_in_use
+msgid "Medicine in use (Include contraceptives, vitamins, proteins, any supplement for weight losing)"
+msgstr "Medicamentos en uso (Incluye anticonceptivos, vitaminas, proteínas, suplementos para pérdida de peso, etc)"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__count_given_birth
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__count_given_birth_by_cesarean
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__count_aborted
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__has_given_birth
+msgid "Has given birth?"
+msgstr "¿Ha tenido partos?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__last_date_given_birth
+msgid "Last date has given birth"
+msgstr "Última fecha de parto"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__has_given_birth_by_cesarean
+msgid "Has given birth by cesarean?"
+msgstr "¿Ha tenido partos por cesárea?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__last_date_given_birth_by_cesarean
+msgid "Last date has given birth by cesarean"
+msgstr "Última fecha de parto"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__has_aborted
+msgid "Has aborted?"
+msgstr "¿Ha abortado?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__drink_alcohol
+msgid "Drink alcohol?"
+msgstr "¿Toma alcohol?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__drink_alcohol_frequency
+msgid "More than 3 times per week"
+msgstr "¿Más de tres (3) veces por semana?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__smoke
+msgid "Smoke?"
+msgstr "¿Fuma?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__smoke_frequency
+msgid "How many cigarettes per day?"
+msgstr "¿Cuantos cigarrillos por día?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__smoke_since
+msgid "How many months have been smoking?"
+msgstr "¿Cuantos meses lleva fumando?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__smoked
+msgid "Did you smoke?"
+msgstr "¿Fumaba?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__smoked_frequency
+msgid "How many cigarettes per day did you smoke?"
+msgstr "¿Cuántos cigarrillos fumaba?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__smoked_length
+msgid "For how long did you smoke?"
+msgstr "¿Por cuántos meses fumó?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__smoked_stopped_since
+msgid "How many months ago did you quit smoking?"
+msgstr "¿Hace cuántos meses dejó de fumar?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__general_surgeries
+msgid "General Surgeries"
+msgstr "General (cirugías diferentes a cirugía estética)"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__stetic_surgeries
+msgid "Stetic Surgeries"
+msgstr "Cirugías Estéticas Anteriores (especificar procedimientos y año)"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__family_medical_history_father
+msgid "Father Medical History"
+msgstr "Padre"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__family_medical_history_mother
+msgid "Mother Medical History"
+msgstr "Madre"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__family_medical_history_siblings
+msgid "Siblings Medical History"
+msgstr "Hermanos/as"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__family_medical_history_children
+msgid "Children Medical History"
+msgstr "Hijos/as"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__appointment_reason
+msgid "Appointment Reason"
+msgstr "Motivo de consulta"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__appointment_date
+msgid "Appointment Date"
+msgstr "Fecha"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__heart_rate
+msgid "HR"
+msgstr "FC (latidos por minutos)"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__blood_pressure_low
+msgid "BPL"
+msgstr "PA (mmHg)"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__blood_pressure_high
+msgid "BPH"
+msgstr "PA (mmHg)"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__weight_measure
+msgid "WM"
+msgstr "Peso (lb)"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__height_measure_feet
+msgid "HM Feet"
+msgstr "Talla (pies/pulgadas)"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "<span class=\"oe_inline\"> inches</span>"
+msgstr "<span class=\"oe_inline\"> pulgadas</span>"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "<span class=\"oe_inline\"> feet</span>"
+msgstr "<span class=\"oe_inline\"> pies</span>"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__imc_value
+msgid "IMC"
+msgstr "IMC (%)"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__so2_value
+msgid "SO2"
+msgstr "% SO2 (Saturación de oxígeno)"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__stetic_medicine_budget_product_ids
+msgid "Stetic Medicine Products"
+msgstr "Productos"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__stetic_medicine_budget_total
+msgid "Stetic Medicine Budget Total"
+msgstr "Presupuesto"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__stetic_medicine_budget_medical_procedures
+msgid "Stetic Medicine Procedures"
+msgstr "Procedimientos"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__plastic_surgery_budget_product_ids
+msgid "Plastic Surgery Products"
+msgstr "Productos"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__plastic_surgery_budget_total
+msgid "Plastic Surgery Budget Total"
+msgstr "Presupuesto"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__plastic_surgery_budget_medical_procedures
+msgid "Plastic Surgery Procedures"
+msgstr "Procedimientos"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__plastic_surgery_budget_doctor_surgery_notes
+msgid "Surgery Doctor Notes"
+msgstr "Comentarios Cirujano"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__budget_doctor_stetic_medicine_notes
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__stetic_medicine_budget_doctor_stetic_medicine_notes
+msgid "Stetic Doctor Notes"
+msgstr "Comentarios Medico Estético"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__stetic_medicine_patient_images
+msgid "Stetic Medicine - Patient Images"
+msgstr "Imágenes ME"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__plastic_surgery_process_1_patient_images
+msgid "Plastic Surgery - Process 1 - Patient Images"
+msgstr "Imágenes PS - Proceso 1"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__plastic_surgery_process_2_patient_images
+msgid "Plastic Surgery - Process 2 - Patient Images"
+msgstr "Imágenes PS - Proceso 2"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__plastic_surgery_process_3_patient_images
+msgid "Plastic Surgery - Process 3 - Patient Images"
+msgstr "Imágenes PS - Proceso 3"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__plastic_surgery_process_4_patient_images
+msgid "Plastic Surgery - Process 4 - Patient Images"
+msgstr "Imágenes PS - Proceso 4"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__dermatology_patient_images
+msgid "Dermatology - Patient Images"
+msgstr "Imágenes Dermatología"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__stetic_medicine_comment_medical
+msgid "Stetic Medicine - Medical Comments"
+msgstr "Comentario médico"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__stetic_medicine_comment_administrative
+msgid "Stetic Medicine - Administrative Comments"
+msgstr "Comentario administración"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__plastic_surgery_comment_medical
+msgid "Plastic Surgery - Medical Comments"
+msgstr "Comentario médico"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__plastic_surgery_comment_administrative
+msgid "Plastic Surgery - Administrative Comments"
+msgstr "Comentario administración"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__dermatology_comment_medical
+msgid "Dermatology - Medical Comments"
+msgstr "Comentario médico"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__dermatology_comment_administrative
+msgid "Dermatology - Administrative Comments"
+msgstr "Comentario administración"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_evolution__next_date
+msgid "Next Date (Days)"
+msgstr "Próxima visita (días)"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_evolution__procedure_type
+msgid "Procedure Type"
+msgstr "Tipo de proceso"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient_evolution__procedure_type__pre_surgery
+msgid "Pre-Surgery"
+msgstr "Pre operatorio"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient_evolution__procedure_type__post_surgery
+msgid "Post-Surgery"
+msgstr "Post operatorio"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_evolution__process_number
+msgid "Process Number"
+msgstr "Proceso"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient_evolution__process_number__process_1
+msgid "Process 1"
+msgstr "1"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient_evolution__process_number__process_2
+msgid "Process 2"
+msgstr "2"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient_evolution__process_number__process_3
+msgid "Process 3"
+msgstr "3"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient_evolution__process_number__process_4
+msgid "Process 4"
+msgstr "4"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__evolution_ids_plastic_surgery_pre_surgery_process_1
+msgid "Pre-surgery - Plastic Surgery - Process 1"
+msgstr "Pre operatorio"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__evolution_ids_plastic_surgery_pre_surgery_process_2
+msgid "Pre-surgery - Plastic Surgery - Process 2"
+msgstr "Pre operatorio"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__evolution_ids_plastic_surgery_pre_surgery_process_3
+msgid "Pre-surgery - Plastic Surgery - Process 3"
+msgstr "Pre operatorio"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__evolution_ids_plastic_surgery_pre_surgery_process_4
+msgid "Pre-surgery - Plastic Surgery - Process 4"
+msgstr "Pre operatorio"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__evolution_ids_plastic_surgery_post_surgery_process_1
+msgid "Post-surgery - Plastic Surgery - Process 1"
+msgstr "Post operatorio"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__evolution_ids_plastic_surgery_post_surgery_process_2
+msgid "Post-surgery - Plastic Surgery - Process 2"
+msgstr "Post operatorio"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__evolution_ids_plastic_surgery_post_surgery_process_3
+msgid "Post-surgery - Plastic Surgery - Process 3"
+msgstr "Post operatorio"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__evolution_ids_plastic_surgery_post_surgery_process_4
+msgid "Post-surgery - Plastic Surgery - Process 4"
+msgstr "Post operatorio"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__evolution_ids_plastic_surgery_procedure_ids_process_1
+msgid "Plastic Surgery - Process 1 - Evolution Procedures"
+msgstr "Procedimientos"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__evolution_ids_plastic_surgery_procedure_ids_process_2
+msgid "Plastic Surgery - Process 2 - Evolution Procedures"
+msgstr "Procedimientos"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__evolution_ids_plastic_surgery_procedure_ids_process_3
+msgid "Plastic Surgery - Process 3 - Evolution Procedures"
+msgstr "Procedimientos"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__evolution_ids_plastic_surgery_procedure_ids_process_4
+msgid "Plastic Surgery - Process 4 - Evolution Procedures"
+msgstr "Procedimientos"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__evolution_history_ids
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "Evolutions History"
+msgstr "Evoluciones Históricas"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__evolution_history_budget_procedures
+msgid "Evolution History Procedures"
+msgstr "Procedimientos Históricos"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__evolution_history_budget_plastic_comments
+msgid "Evolution History Plastic Comments"
+msgstr "Comentarios Cirujano"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__evolution_history_budget_stetic_comments
+msgid "Evolution History Stetic Comments"
+msgstr "Comentarios Médico Estético"
+
+### ADDED...
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__has_tested_postitive_to_covid
+msgid "Has tested positive to COVID-19?"
+msgstr "¿Tuvo COVID?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__has_been_in_hospital_for_covid
+msgid "Has been in the hospital for COVID-19?"
+msgstr "¿Estuvo interno en la clínica?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__date_tested_positive_to_covid
+msgid "Which date did you test positive for COVID-19?"
+msgstr "¿En qué fecha dió positivo?"
+
+### END ADDED
+
+#######################
+#   Security Groups   #
+#######################
+
+#. module: kcs_medical_app
+#: model:res.groups,name:kcs_medical_app.kcs_medical_app_group_doctors
+msgid "KCS Medical App / Doctors"
+msgstr "KCS Medical App / Doctores"
+
+#. module: kcs_medical_app
+#: model:res.groups,name:kcs_medical_app.kcs_medical_app_group_managers
+msgid "KCS Medical App / Managers"
+msgstr "KCS Medical App / Administradores"
+
+#. module: kcs_medical_app
+#: model:res.groups,name:kcs_medical_app.kcs_medical_app_group_patients
+msgid "KCS Medical App / Patients"
+msgstr "KCS Medical App / Pacientes"
+
+###############################
+#   Evolution Models Fields   #
+###############################
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_evolution__patient_id
+msgid "Patient"
+msgstr "Paciente"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_evolution__description
+msgid "Description"
+msgstr "Comentario/Nota"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_evolution__date_recorded
+msgid "Recorded Date"
+msgstr "Fecha"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_evolution__user_who_recorded_id
+msgid "User"
+msgstr "Escrito Por"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_evolution__evolution_type
+msgid "Evolution Type"
+msgstr "Tipo de cirugía"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_evolution__procedure_ids
+msgid "Evolution Procedures"
+msgstr "Procedimientos"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_evolution__budget_product_ids
+msgid "Products"
+msgstr "Productos"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_evolution__budget_total
+msgid "Budget Total"
+msgstr "Presupuesto"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_evolution__doctor_notes
+msgid "Doctor Notes"
+msgstr "Notas del médico"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient_evolution__evolution_type__plastic_surgery
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__product_template__patient_evolution_type__plastic_surgery
+msgid "Plastic Surgery"
+msgstr "Plástica"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient_evolution__evolution_type__stetic_surgery
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__product_template__patient_evolution_type__stetic_surgery
+msgid "Stetic Surgery"
+msgstr "Estética"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient_evolution__evolution_type__dermatology
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__product_template__patient_evolution_type__dermatology
+msgid "Dermatology"
+msgstr "Dermatología"
+
+#######################################
+#   Evolution History Models Fields   #
+#######################################
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_evolution_history__description
+msgid "Description"
+msgstr "Descripción"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_evolution_history__date_recorded
+msgid "Recorded Date"
+msgstr "Fecha"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_evolution_history__user_who_recorded
+msgid "User Who Recorded"
+msgstr "Usuario"
+
+################################
+#   Blood Type Models Fields   #
+################################
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_bloodtype__name
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__blood_type_id
+msgid "Blood Type"
+msgstr "Tipo de sangre"
+
+#############################
+#   Disease Models Fields   #
+#############################
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_disease__name
+msgid "Disease"
+msgstr "Enfermedad"
+
+###########################
+#   Virus Models Fields   #
+###########################
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_virus__name
+msgid "Virus"
+msgstr ""
+
+#############################
+#   Allergy Models Fields   #
+#############################
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_allergy__name
+msgid "Allergy"
+msgstr "Alergia"
+
+######################################
+#   Contraindication Models Fields   #
+######################################
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_stetic_contraindication__name
+msgid "Contraindication"
+msgstr "Contraindicación"
+
+###############################
+#   Skin Type Models Fields   #
+###############################
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_stetic_skin_type__name
+msgid "Skin Type"
+msgstr "Tipo de piel"
+
+###############################
+#   Body Part Models Fields   #
+###############################
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient_bodypart__name
+msgid "Body Part"
+msgstr "Área corporal"
+
+######################################
+#   Product Template Models Fields   #
+######################################
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_product_template__patient_evolution_type
+msgid "Patient Evolution Product Type"
+msgstr "Tipo de producto quirúrgico"
+
+###############################
+#  Code Strings Translations  #
+###############################
+
+#. module: kcs_medical_app
+#: code:odoo_medical_app/kcs_medical_app/models/kcs_medical_app_patient.py:0
+#, python-format
+msgid "The date you tested positive ({0}) must be before the current date ({1})."
+msgstr "La fecha en qué dió positivo ({0}) no puede ser mayor a la fecha actual ({1})."
+
+#. module: kcs_medical_app
+#: code:odoo_medical_app/kcs_medical_app/models/kcs_medical_app_patient.py:0
+#, python-format
+msgid "The value for the SO2 field (Oxygen Saturation) must be between 0 and 100."
+msgstr "El valor del campo SO2 (Saturación en oxígeno) debe estar en 0 y 100."
