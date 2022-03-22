@@ -535,8 +535,12 @@ msgstr "<span class=\"oe_inline\"> meses</span>"
 
 #. module: kcs_medical_app
 #: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
-msgid "<span class=\"oe_inline\">How long have you been smoking?</span>"
-msgstr "<span class=\"oe_inline\">¿Cuánto tiempo tiene fumando?</span>"
+msgid ""
+"<span class=\"oe_inline\" attrs=\"{'invisible': [('smoke', '=', "
+"False)]}\">How long have you been smoking?</span>"
+msgstr ""
+"<span class=\"oe_inline\" attrs=\"{'invisible': [('smoke', '=', "
+"False)]}\">¿Cuánto tiempo tiene fumando?</span>"
 
 #. module: kcs_medical_app
 #: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__smoke_since_years
@@ -560,8 +564,12 @@ msgstr "¿Cuántos cigarrillos fumaba?"
 
 #. module: kcs_medical_app
 #: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
-msgid "<span class=\"oe_online\">For how long did you smoke?</span>"
-msgstr "<span class=\"oe_inline\">¿Por cuánto tiempo fumó?</span>"
+msgid ""
+"<span class=\"oe_inline\" attrs=\"{'invisible': [('smoked', '=', "
+"False)]}\">For how long did you smoke?</span>"
+msgstr ""
+"<span class=\"oe_inline\" attrs=\"{'invisible': [('smoked', '=', "
+"False)]}\">¿Por cuánto tiempo fumó?</span>"
 
 #. module: kcs_medical_app
 #: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__smoked_length_years
@@ -575,8 +583,12 @@ msgstr "¿Por cuántos meses fumó?"
 
 #. module: kcs_medical_app
 #: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
-msgid "<span class=\"oe_online\">How long did you quit smoking?</span>"
-msgstr "<span class=\"oe_inline\">¿Hace cuánto dejó de fumar?</span>"
+msgid ""
+"<span class=\"oe_inline\" attrs=\"{'invisible': [('smoked', '=', "
+"False)]}\">How long did you quit smoking?</span>"
+msgstr ""
+"<span class=\"oe_inline\" attrs=\"{'invisible': [('smoked', '=', "
+"False)]}\">¿Hace cuánto dejó de fumar?</span>"
 
 #. module: kcs_medical_app
 #: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__smoked_stopped_since_years
