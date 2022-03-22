@@ -115,12 +115,15 @@ class Patient(models.Model):
     drink_alcohol_frequency = fields.Boolean(string='More than 3 times per week', copy=False, store=True, default=False)
     smoke = fields.Boolean(string='Smoke?', copy=False, store=True, default=False)
     smoke_frequency = fields.Integer(string='How many cigarettes per day?', copy=False, store=True, default=0)
-    smoke_since = fields.Integer(string='How many months have been smoking?', copy=False, store=True, default=0)
+    smoke_since_years = fields.Integer(string='How many years have been smoking?', copy=False, store=True, default=0)
+    smoke_since_months = fields.Integer(string='How many months have been smoking?', copy=False, store=True, default=0)
 
     smoked = fields.Boolean(string='Did you smoke?', copy=False, store=True, default=False)
     smoked_frequency = fields.Integer(string='How many cigarettes per day did you smoke?', copy=False, store=True, default=0)
-    smoked_length = fields.Integer(string='For how long did you smoke?', copy=False, store=True, default=0)
-    smoked_stopped_since = fields.Integer(string='How many months ago did you quit smoking?', copy=False, store=True, default=0)
+    smoked_length_years = fields.Integer(string='For how many years did you smoke?', copy=False, store=True, default=0)
+    smoked_length_months = fields.Integer(string='For how many months did you smoke?', copy=False, store=True, default=0)
+    smoked_stopped_since_years = fields.Integer(string='How many years ago did you quit smoking?', copy=False, store=True, default=0)
+    smoked_stopped_since_months = fields.Integer(string='How many months ago did you quit smoking?', copy=False, store=True, default=0)
 
     # Patient - Surgeries Information
     general_surgeries = fields.Text(string='General Surgeries', copy=False, store=True)

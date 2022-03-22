@@ -132,19 +132,39 @@
                                         <newline />
                                         <label for="smoke" style="font-weight: normal !important;" />
                                         <field name="smoke" nolabel="1" />
+                                        <newline />
                                         <label for="smoke_frequency" style="font-weight: normal !important;" attrs="{'invisible': [('smoke', '=', False)]}" />
                                         <field name="smoke_frequency" nolabel="1" attrs="{'invisible': [('smoke', '=', False)]}" />
-                                        <label for="smoke_since" style="font-weight: normal !important;" attrs="{'invisible': [('smoke', '=', False)]}" />
-                                        <field name="smoke_since" nolabel="1" attrs="{'invisible': [('smoke', '=', False)]}" />
+                                        <newline />
+                                        <span class="oe_inline" attrs="{'invisible': [('smoke', '=', False)]}">How long have you been smoking?</span>
+                                        <div attrs="{'invisible': [('smoke', '=', False)]}">
+                                            <field name="smoke_since_years" class="oe_inline" nolabel="1" style="width:13% !important;text-align:center !important;" />
+                                            <span class="oe_inline"> years / </span>
+                                            <field name="smoke_since_months" class="oe_inline" nolabel="1" style="width:13% !important;text-align:center !important;" />
+                                            <span class="oe_inline"> months</span>
+                                        </div>
                                         <newline />
                                         <label for="smoked" style="font-weight: normal !important;" />
                                         <field name="smoked" nolabel="1" />
+                                        <newline />
                                         <label for="smoked_frequency" style="font-weight: normal !important;" attrs="{'invisible': [('smoked', '=', False)]}" />
                                         <field name="smoked_frequency" nolabel="1" attrs="{'invisible': [('smoked', '=', False)]}" />
-                                        <label for="smoked_length" style="font-weight: normal !important;" attrs="{'invisible': [('smoked', '=', False)]}" />
-                                        <field name="smoked_length" nolabel="1" attrs="{'invisible': [('smoked', '=', False)]}" />
-                                        <label for="smoked_stopped_since" style="font-weight: normal !important;" attrs="{'invisible': [('smoked', '=', False)]}" />
-                                        <field name="smoked_stopped_since" nolabel="1" attrs="{'invisible': [('smoked', '=', False)]}" />
+                                        <newline />
+                                        <span class="oe_inline" attrs="{'invisible': [('smoked', '=', False)]}">For how long did you smoke?</span>
+                                        <div attrs="{'invisible': [('smoked', '=', False)]}">
+                                            <field name="smoked_length_years" class="oe_inline" nolabel="1" style="width:13% !important;text-align:center !important;" />
+                                            <span class="oe_inline"> years / </span>
+                                            <field name="smoked_length_months" class="oe_inline" nolabel="1" style="width:13% !important;text-align:center !important;" />
+                                            <span class="oe_inline"> months</span>
+                                        </div>
+                                        <newline />
+                                        <span class="oe_inline" attrs="{'invisible': [('smoked', '=', False)]}">How long did you quit smoking?</span>
+                                        <div attrs="{'invisible': [('smoked', '=', False)]}">
+                                            <field name="smoked_stopped_since_years" class="oe_inline" nolabel="1" style="width:13% !important;text-align:center !important;" />
+                                            <span class="oe_inline"> years / </span>
+                                            <field name="smoked_stopped_since_months" class="oe_inline" nolabel="1" style="width:13% !important;text-align:center !important;" />
+                                            <span class="oe_inline"> months</span>
+                                        </div>
                                         <newline />
                                         <label for="has_tested_postitive_to_covid" 
                                                 style="font-weight: normal !important;" />
@@ -255,8 +275,7 @@
                                     <label for="height_measure_feet" style="font-weight: normal;" />
                                     <div>
                                         <field name="height_measure_feet" nolabel="1" class="oe_inline" style="width:10% !important;text-align:center !important;" />
-                                        <span class="oe_inline"> feet</span>
-                                        <span class="oe_inline"> / </span>
+                                        <span class="oe_inline"> feet / </span>
                                         <field name="height_measure_inches" nolabel="1" class="oe_inline" style="width:10% !important;text-align:center !important;" />
                                         <span class="oe_inline"> inches</span>
                                     </div>

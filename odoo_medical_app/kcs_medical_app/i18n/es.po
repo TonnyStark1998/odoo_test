@@ -524,7 +524,27 @@ msgid "How many cigarettes per day?"
 msgstr "¿Cuantos cigarrillos por día?"
 
 #. module: kcs_medical_app
-#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__smoke_since
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "<span class=\"oe_inline\"> years / </span>"
+msgstr "<span class=\"oe_inline\"> años / </span>"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "<span class=\"oe_inline\"> months</span>"
+msgstr "<span class=\"oe_inline\"> meses</span>"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "<span class=\"oe_inline\">How long have you been smoking?</span>"
+msgstr "<span class=\"oe_inline\">¿Cuánto tiempo tiene fumando?</span>"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__smoke_since_years
+msgid "How many years have been smoking?"
+msgstr "¿Cuantos años lleva fumando?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__smoke_since_months
 msgid "How many months have been smoking?"
 msgstr "¿Cuantos meses lleva fumando?"
 
@@ -539,12 +559,32 @@ msgid "How many cigarettes per day did you smoke?"
 msgstr "¿Cuántos cigarrillos fumaba?"
 
 #. module: kcs_medical_app
-#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__smoked_length
-msgid "For how long did you smoke?"
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "<span class=\"oe_online\">For how long did you smoke?</span>"
+msgstr "<span class=\"oe_inline\">¿Por cuánto tiempo fumó?</span>"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__smoked_length_years
+msgid "For how many years did you smoke?"
+msgstr "¿Por cuántos años fumó?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__smoked_length_months
+msgid "For how many months did you smoke?"
 msgstr "¿Por cuántos meses fumó?"
 
 #. module: kcs_medical_app
-#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__smoked_stopped_since
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
+msgid "<span class=\"oe_online\">How long did you quit smoking?</span>"
+msgstr "<span class=\"oe_inline\">¿Hace cuánto dejó de fumar?</span>"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__smoked_stopped_since_years
+msgid "How many years ago did you quit smoking?"
+msgstr "¿Hace cuántos años dejó de fumar?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__smoked_stopped_since_months
 msgid "How many months ago did you quit smoking?"
 msgstr "¿Hace cuántos meses dejó de fumar?"
 
@@ -620,8 +660,8 @@ msgstr "<span class=\"oe_inline\"> pulgadas</span>"
 
 #. module: kcs_medical_app
 #: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_view_form
-msgid "<span class=\"oe_inline\"> feet</span>"
-msgstr "<span class=\"oe_inline\"> pies</span>"
+msgid "<span class=\"oe_inline\"> feet / </span>"
+msgstr "<span class=\"oe_inline\"> pies / </span>"
 
 #. module: kcs_medical_app
 #: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__imc_value
