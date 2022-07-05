@@ -585,7 +585,7 @@
                                 <field name="plastic_surgery_process_4_patient_images" nolabel="1" widget="many2many_binary" colspan="2" />
                             </group>
                         </page>
-                        <page string="Evolutions History">
+                        <page name="evolutions_history" string="Evolutions History">
                             <group colspan="2">
                                 <field name="evolution_history_budget_procedures" readonly="1" required="0" />
                                 <field name="evolution_history_budget_plastic_comments" readonly="1" required="0" />

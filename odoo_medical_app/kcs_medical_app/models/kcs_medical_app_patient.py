@@ -420,7 +420,8 @@ class Patient(models.Model):
                 'street2': values['street2'],
                 'city': values['city'],
                 'country_id': values['country_id'],
-                'function': values['function']
+                'function': values['function'],
+                'tax_contributor_type': '3'
             }).id
         else:
             values['partner_id'] = partner.id
