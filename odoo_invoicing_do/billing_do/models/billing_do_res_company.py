@@ -13,12 +13,14 @@ class BillingDoResCompany(models.Model):
                                                 ('1', 'Persona jurídica'),
                                                 ('2', 'Persona física'),
                                                 ('3', 'Otro')
-                                            ], 
-                                            required=True, 
-                                            store=True, 
-                                            readonly=False, 
-                                            copy=False, 
+                                            ],
+                                            string='Tax Contributor Type',
+                                            required=True,
+                                            store=True,
+                                            readonly=False,
+                                            copy=False,
                                             tracking=True)
+
     googleplus = fields.Char(string='Google Plus ID', 
                                 copy=True, 
                                 store=True, 
@@ -124,6 +126,22 @@ class BillingDoResCompany(models.Model):
 
     @api.model
     def create(self, vals):
+        _new_partner = self.env['res.partner'].create({
+            'name': vals['name'],
+            'is_company': True,
+            'image_1920': vals.get('logo'),
+            'email': vals.get('email'),
+            'phone': vals.get('phone'),
+            'website': vals.get('website'),
+            'vat': vals.get('vat'),
+            'country_id': vals.get('country_id'),
+            'tax_contributor_type': vals.get('tax_contributor_type'),
+            'economic_activity': vals.get('economic_activity'),
+        })
+        # compute stored fields, for example address dependent fields
+        _new_partner.flush()
+        vals['partner_id'] = _new_partner.id
+
         _new_company = super(BillingDoResCompany, self)\
                         .create(vals)
         _new_company.flush()
@@ -148,3 +166,16 @@ class BillingDoResCompany(models.Model):
                                             })
 
         return _new_company
+
+    def write(self, values):
+        self.clear_caches()
+
+        partner = self.env['res.partner'].browse(self.partner_id.id)
+
+        if values.get('tax_contributor_type'):
+            partner.write({'tax_contributor_type': values.get('tax_contributor_type')})
+
+        if values.get('economic_activity'):
+            partner.write({'economic_activity': values.get('economic_activity')})
+    
+        return super(BillingDoResCompany, self).write(values)
