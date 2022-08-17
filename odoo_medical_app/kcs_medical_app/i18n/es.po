@@ -1100,6 +1100,262 @@ msgstr "Tipo de piel"
 msgid "Body Part"
 msgstr "Área corporal"
 
+####################################
+#  Functional Medicine/Nutrition   #
+####################################
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__menstrual_period_last_date
+msgid "Menstrual Period Last Date"
+msgstr "Fecha Última Menstruación"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_functional_medicine_nutrition_view_form
+msgid "Functional Medicine/Nutrition"
+msgstr "Med. Funcional/Nutrición"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_functional_medicine_nutrition_view_form
+msgid "Menstrual Period"
+msgstr "Período Menstrual"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__menstrual_period_is_regular
+msgid "Is regular?"
+msgstr "¿Es regular?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__menstrual_period_needs_painkiller
+msgid "Needs painkiller?"
+msgstr "¿Presenta dolor que requiere calmante?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__menstrual_period_is_voluminous
+msgid "Is voluminous?"
+msgstr "¿Es muy voluminosa?"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_functional_medicine_nutrition_view_form
+msgid "Physical Activities"
+msgstr "Actividades Físicas"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__physical_activity
+msgid "Physical activities?"
+msgstr "¿Actividad física?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__physical_activity_which
+msgid "Which physical activities?"
+msgstr "¿Cuál actividad?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__physical_activity_which__cardio
+msgid "Cardio"
+msgstr ""
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__physical_activity_which__dumbbells
+msgid "Dumbbells"
+msgstr "Pesas"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__physical_activity_which__crossfit
+msgid "Crossfit"
+msgstr ""
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__physical_activity_which__yoga_pilates
+msgid "Yoga/Pilates"
+msgstr ""
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__physical_activity_which__hit_boxing
+msgid "Hit/Boxing"
+msgstr "Hit/Boxeo"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__physical_activity_which__sports
+msgid "Sports"
+msgstr "Deportes"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__physical_activity_frequency
+msgid "Physical activities frequency?"
+msgstr "Frecuencia"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__physical_activity_frequency__more_than_3_times_per_week
+msgid "More than 3 times per week"
+msgstr "Más de 3 veces por semana"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__physical_activity_frequency__less_than_3_time_per_week
+msgid "Less than 3 times per week"
+msgstr "Menos de 3 veces por semana"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__physical_activity_time
+msgid "When do you do physical activities?"
+msgstr "Hora en que la realiza"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_functional_medicine_nutrition_view_form
+msgid "Defecation"
+msgstr "Evacuación"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__defecation_consistency
+msgid "Defecation Consistency"
+msgstr "Consistencia"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__defecation_consistency__constipation
+msgid "Constipation"
+msgstr "Estreñimiento"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__defecation_consistency__diarrhea
+msgid "Diarrhea"
+msgstr "Diarrea"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__defecation_consistency__normal
+msgid "Normal"
+msgstr "Normal"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__defecation_see_food_residuals
+msgid "See Food Residuals?"
+msgstr "¿Ve restos de alimentos?"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_functional_medicine_nutrition_view_form
+msgid "Sleep"
+msgstr "Sueño"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__sleep_range
+msgid "Sleep Average Range"
+msgstr "Hora aproximada en que duerme"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__sleep_range__8_to_10
+msgid "8 to 10"
+msgstr "8 a 10"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__sleep_range__10_to_12
+msgid "10 to 12"
+msgstr "10 a 12"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__sleep_range__after_12
+msgid "After 12"
+msgstr " Después de las 12"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__sleep_hours_amount
+msgid "How many hours do you sleep?"
+msgstr "¿Cuántas horas duerme en promedio?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__sleep_hours_amount__less_than_6
+msgid "Less than 6 hours"
+msgstr "Menos de 6 horas"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__sleep_hours_amount__between_6_and_8
+msgid "Between 6 and 8 hours"
+msgstr "6 a 8 horas"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__sleep_hours_amount__more_than_8
+msgid "More than 8 hours"
+msgstr "Más de 8 horas"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__sleep_wake_up_tired
+msgid "Do you wake up tired?"
+msgstr "¿Despierta cansado/a?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__sleep_insomnia
+msgid "Suffer insomnia?"
+msgstr "¿Sufre insomnio?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__sleep_insomnia_type
+msgid "Insomnia Type"
+msgstr "Tipo de insomnio"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__sleep_insomnia_type__conciliatory
+msgid "Conciliatory"
+msgstr "Conciliatorio"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__sleep_insomnia_type__of_maintenance
+msgid "Of maintenance"
+msgstr "De mantenimiento"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_functional_medicine_nutrition_view_form
+msgid "Water Consumption"
+msgstr "Consumo de agua"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__water_consumption
+msgid "How many liter of water do you consume per day?"
+msgstr "¿Cuántos litros por día?"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__water_consumption__less_than_1_liter
+msgid "Less than 1 liter"
+msgstr "Menos de 1 litro"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__water_consumption__between_1_and_2_liter
+msgid "Between 1 and 2 liters"
+msgstr "De 1 a 2 litros"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__water_consumption__more_than_2_liter
+msgid "More than 2 liters"
+msgstr "Más de 2 litros"
+
+#. module: kcs_medical_app
+#: model_terms:ir.ui.view,arch_db:kcs_medical_app.kcs_medical_app_patients_functional_medicine_nutrition_view_form
+msgid "Nourishment"
+msgstr "Alimentación"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__foods_not_eat
+msgid "List the food you dont eat"
+msgstr "Enumere los alimentos que NO consume"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__menstrual_period_is_regular__yes
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__menstrual_period_needs_painkiller__yes
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__menstrual_period_is_voluminous__yes
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__physical_activity__yes
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__defecation_see_food_residuals__yes
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__sleep_wake_up_tired__yes
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__sleep_insomnia__yes
+msgid "Yes"
+msgstr "Sí"
+
+#. module: kcs_medical_app
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__menstrual_period_is_regular__no
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__menstrual_period_needs_painkiller__no
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__menstrual_period_is_voluminous__no
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__physical_activity__no
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__defecation_see_food_residuals__no
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__sleep_wake_up_tired__no
+#: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__sleep_insomnia__no
+msgid "No"
+msgstr ""
+
 ######################################
 #   Product Template Models Fields   #
 ######################################
