@@ -51,6 +51,12 @@ class BillingDoResCurrency(models.AbstractModel):
             log.warning(_('{} Exception thrown while loading Currencies Rates: {}').format('[KCS] ', ex))
 
 class BillingDoResCurrencyModel(models.Model):
+    _inherit = 'res.currency'
+
+    def is_dop_currency(self):
+        return self.name == 'RD$'
+
+class BillingDoResCurrencyModel(models.Model):
     _inherit = 'res.currency.rate'
 
     source = fields.Char(string="Source", 

@@ -1151,3 +1151,8 @@ msgstr ""
 #: model:ir.model.fields.selection,name:kcs_medical_app.selection__kcs_medical_app_patient__sleep_insomnia__no
 msgid "No"
 msgstr ""
+
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__nutrition_notes
+msgid "Nutrition Notes"
+msgstr ""
