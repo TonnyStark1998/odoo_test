@@ -76,14 +76,18 @@ class BillingDoTaxReportItemCommon(models.AbstractModel):
         return move_line.currency_id or move_line.company_currency_id
 
     def _convert_amount_to_dop(self, currency, amount, date, company):
-        if currency.name == 'RD$':
+        if self._is_dop_currency(currency):
             return amount
         
         return currency._convert(amount, 
-                                    self.env['res.currency'].search([(
-                                        'name', '=', 'RD$'
-                                    )]), 
+                                    self.env['res.currency']
+                                        .search([('name', '=', 'RD$')]), 
                                     company, 
                                     date, 
                                     True
                                 )
+
+    def _is_dop_currency(self, currency):
+        return self.env['res.currency']\
+                    .search([('name', '=', currency.name)])\
+                    .is_dop_currency()

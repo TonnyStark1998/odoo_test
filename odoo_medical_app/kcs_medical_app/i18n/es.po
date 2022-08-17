@@ -1356,6 +1356,11 @@ msgstr "Sí"
 msgid "No"
 msgstr ""
 
+#. module: kcs_medical_app
+#: model:ir.model.fields,field_description:kcs_medical_app.field_kcs_medical_app_patient__nutrition_notes
+msgid "Nutrition Notes"
+msgstr "Observaciones de Nutrición"
+
 ######################################
 #   Product Template Models Fields   #
 ######################################

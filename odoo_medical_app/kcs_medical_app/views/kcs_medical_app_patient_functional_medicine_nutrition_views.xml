@@ -93,6 +93,14 @@
                                 <field name="foods_not_eat" nolabel="1" />
                             </group>
                         </group>
+                        <group colspan="2">
+                            <group colspan="2">
+                                <label for="nutrition_notes" style="font-weight: normal !important;" />
+                            </group>
+                            <group colspan="2">
+                                <field name="nutrition_notes" nolabel="1" />
+                            </group>
+                        </group>
                     </group>
                 </page>
             </xpath>
