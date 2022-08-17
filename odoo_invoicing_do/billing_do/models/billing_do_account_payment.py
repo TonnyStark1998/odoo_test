@@ -21,6 +21,12 @@ class BillindDoAccountPayment(models.Model):
         else:
             return 'Write-Off Label'
 
+    def action_draft(self):
+        # TODO: Add log to see which user execute this action
+        super(BillindDoAccountPayment, self).action_draft()
+        log.info("AccountPayment.ActionDraft: User {} revert the payment {} to draft state."
+                    .format(self.env.user.login, self.id))
+
     def _compute_journal_domain_and_types(self):
         journal_types_and_domain = super(BillindDoAccountPayment, self)._compute_journal_domain_and_types()
         journal_types = journal_types_and_domain['journal_types']

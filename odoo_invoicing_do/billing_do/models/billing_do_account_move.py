@@ -222,6 +222,12 @@ class BillingDoAccountMove(models.Model):
         except exceptions.UserError:
             raise
 
+    def js_assign_outstanding_line(self, line_id):
+        # TODO: Add log to see which user execute this action
+        super(BillingDoAccountMove, self).js_assign_outstanding_line(line_id)
+        log.info("[KCS] AccountMove.JsAssignOutstandingLine: User {} added a payment {} to move id {}."
+                    .format(self.env.user.login, line_id.id, self.id))
+
     # Account Move - Helper Functions
     def _validate_ncf(self, ncf):
         if ncf:
