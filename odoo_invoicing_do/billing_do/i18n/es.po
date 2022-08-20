@@ -701,6 +701,12 @@ msgid "The TRNs which starts with B11 or B13 use a specific type of journal. Ple
 msgstr "Los comprobantes de tipo B11 y B13 ({0}) requieren el uso de un diario en específico."
 
 #. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_helper.py:0
+#, python-format
+msgid "The TRN ({}) is not valid for tax purpose."
+msgstr "Este tipo de NCF ({}) no posee crédito fiscal."
+
+#. module: billing_do
 #: code:odoo_invoicing_do/billing_do/models/billing_do_trn_http_service_helper.py:0
 #, python-format
 msgid "An unknown error ocurred during the connection to the webservice."
