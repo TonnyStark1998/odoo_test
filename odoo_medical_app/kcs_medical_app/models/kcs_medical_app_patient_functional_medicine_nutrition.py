@@ -112,3 +112,7 @@ class PatientFunctionalMedicineNutrition(models.Model):
                             string='How many liter of water do you consume per day?')
 
     foods_not_eat = fields.Text(string='List the food you dont eat')
+
+    nutrition_notes = fields.Text(string='Nutrition Notes', 
+                                            copy=False, 
+                                            store=True)
