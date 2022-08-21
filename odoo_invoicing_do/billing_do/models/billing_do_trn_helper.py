@@ -34,6 +34,11 @@ class BillingDoTrnHelper(models.AbstractModel):
                             raise exceptions.ValidationError(_("The TRN ({0}) is invalid.")
                                                                 .format(trn.upper()))
 
+                        # Validate specific B02 NCF type
+                        if not self.is_valid_for_tax_purpose(trn.upper()):
+                            raise exceptions.ValidationError(_("The TRN ({}) is not valid for tax purpose.")
+                                                                .format(trn.upper()))
+
                         break
 
             if not _trn_type_found:
@@ -50,3 +55,10 @@ class BillingDoTrnHelper(models.AbstractModel):
 
         if match_ncf:
             raise exceptions.ValidationError(_("The TRNs which starts with B11 or B13 use a specific type of journal. Please use the appropiate journal for registering this vendor invoice.").format(trn.upper()))
+
+    def is_valid_for_tax_purpose(self, trn):
+        # Validate specific B02 NCF type
+        if re.match("^B02[0-9]{8}$", trn.upper()):
+            return False
+        
+        return True
