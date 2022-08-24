@@ -26,4 +26,5 @@ from . import billing_do_exceptions,\
 				billing_do_tax_report_item_606, \
 				billing_do_tax_report_item_607,\
 				billing_do_res_currency,\
-				billing_do_currency_rate_http_service_helper
+				billing_do_currency_rate_http_service_helper,\
+				billing_do_account_move_line

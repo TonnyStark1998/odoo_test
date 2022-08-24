@@ -1380,3 +1380,8 @@ msgstr "Ruta para Ciudadanos"
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
 msgid "Currency Rates Endpoint"
 msgstr "Ruta para Tasas de Cambio"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_move__invoice_user_id
+msgid "Salesperson"
+msgstr "Vendedor"
