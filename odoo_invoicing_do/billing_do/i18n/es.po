@@ -1383,5 +1383,6 @@ msgstr "Ruta para Tasas de Cambio"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_move__invoice_user_id
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_move_line_search
 msgid "Salesperson"
 msgstr "Vendedor"

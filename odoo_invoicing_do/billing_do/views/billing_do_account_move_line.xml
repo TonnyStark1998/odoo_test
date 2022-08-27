@@ -11,4 +11,19 @@
             </xpath>
         </field>
     </record>
+
+    <record model="ir.ui.view" id="billing_do_view_move_line_search">
+        <field name="name">billing.do.account.move.line.search</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_account_move_line_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='groupby_date']"
+                    position="after">
+                <filter string="Salesperson" 
+                        name="groupby_invoice_user_id"
+                        domain="[]" 
+                        context="{'group_by': 'invoice_user_id'}"/>
+            </xpath>
+        </field>
+    </record>
 </odoo>

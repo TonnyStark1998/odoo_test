@@ -7,6 +7,4 @@ class BillingDoAccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     # Account Move Line - Related Fields
-    invoice_user_id = fields.Many2one(related='move_id.invoice_user_id', 
-                                        store=False, 
-                                        Tracking=False)
+    invoice_user_id = fields.Many2one(related='move_id.invoice_user_id', store=True)
