@@ -37,6 +37,7 @@
         'report/billing_do_account_payment_templates.xml',
         'data/default_tax_report_types.xml',
         'data/default_trn_types.xml',
+        'views/billing_do_account_move_line.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

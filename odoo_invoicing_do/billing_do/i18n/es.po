@@ -701,6 +701,12 @@ msgid "The TRNs which starts with B11 or B13 use a specific type of journal. Ple
 msgstr "Los comprobantes de tipo B11 y B13 ({0}) requieren el uso de un diario en específico."
 
 #. module: billing_do
+#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_helper.py:0
+#, python-format
+msgid "The TRN ({}) is not valid for tax purpose."
+msgstr "Este tipo de NCF ({}) no posee crédito fiscal."
+
+#. module: billing_do
 #: code:odoo_invoicing_do/billing_do/models/billing_do_trn_http_service_helper.py:0
 #, python-format
 msgid "An unknown error ocurred during the connection to the webservice."
@@ -1374,3 +1380,9 @@ msgstr "Ruta para Ciudadanos"
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
 msgid "Currency Rates Endpoint"
 msgstr "Ruta para Tasas de Cambio"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_move__invoice_user_id
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_move_line_search
+msgid "Salesperson"
+msgstr "Vendedor"
