@@ -21,6 +21,23 @@ class BillindDoAccountPayment(models.Model):
         else:
             return 'Write-Off Label'
 
+    def action_draft(self):
+        super(BillindDoAccountPayment, self).action_draft()
+
+        self.env['auditlog.log'].create({
+            'name': 'Payment set to draft'
+                        .format(self.env.user.login, self.id),
+            'model_id': self.env['ir.model']
+                            .search([('model', '=', 'account.payment')], limit = 1).id,
+            'res_id': self.id,
+            'user_id': self.env.user.id,
+            'method': 'write',
+            'log_type': 'fast'
+        })
+
+        log.info("[KCS] AccountPayment.ActionDraft: User {} revert the payment {} to draft state."
+                    .format(self.env.user.login, self.id))
+
     def _compute_journal_domain_and_types(self):
         journal_types_and_domain = super(BillindDoAccountPayment, self)._compute_journal_domain_and_types()
         journal_types = journal_types_and_domain['journal_types']
