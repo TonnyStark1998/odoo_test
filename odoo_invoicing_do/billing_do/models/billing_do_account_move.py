@@ -222,6 +222,22 @@ class BillingDoAccountMove(models.Model):
         except exceptions.UserError:
             raise
 
+    def js_assign_outstanding_line(self, line_id):
+        super(BillingDoAccountMove, self).js_assign_outstanding_line(line_id)
+
+        self.env['auditlog.log'].create({
+            'name': 'Account Move - Add Payment: Line Id {}'.format(line_id),
+            'model_id': self.env['ir.model']
+                            .search([('model', '=', 'account.move')], limit = 1).id,
+            'res_id': self.id,
+            'user_id': self.env.user.id,
+            'method': 'write',
+            'log_type': 'fast'
+        })
+
+        log.info("[KCS] AccountMove.JsAssignOutstandingLine: User {} added a payment {} to move id {}."
+                    .format(self.env.user.login, line_id, self.id))
+
     # Account Move - Helper Functions
     def _validate_ncf(self, ncf):
         if ncf:
