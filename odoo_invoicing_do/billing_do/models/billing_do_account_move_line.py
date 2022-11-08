@@ -11,11 +11,23 @@ class BillingDoAccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     def remove_move_reconcile(self):
-        # TODO: Add log to see which user execute this action
         super(BillingDoAccountMoveLine, self).remove_move_reconcile()
+
         for line in self:
-            log.info("[KCS] AccountMoveLine.RemoveMoveReconcicle: User {} removed reconcile {} from move id {}"
-                        .format(self.env.user.login, line.id, line.move_id.id))
+            self.env['auditlog.log']\
+                .create({
+                        'name': 'Move Line - Remove Reconcile: Line Id {}'
+                                    .format(line.id),
+                        'model_id': self.env['ir.model']
+                                        .search([('model', '=', 'account.move.line')], limit = 1).id,
+                        'res_id': line.id,
+                        'user_id': self.env.user.id,
+                        'method': 'write',
+                        'log_type': 'fast'
+                    })
+
+            log.info("[KCS] AccountMoveLine.RemoveMoveReconcicle: User {} removed reconcile line id {}."
+                        .format(self.env.user.login, line.id))
     
     # Account Move Line - Related Fields
     invoice_user_id = fields.Many2one(related='move_id.invoice_user_id', store=True)
