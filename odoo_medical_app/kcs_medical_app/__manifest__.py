@@ -11,7 +11,7 @@
     'category': 'Medical/History',
     'version': '0.1',
     'css': ['static/src/css/*.css'],
-    'depends': ['base', 'contacts', 'billing_do'],
+    'depends': ['base', 'contacts', 'billing_do', 'sale'],
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
