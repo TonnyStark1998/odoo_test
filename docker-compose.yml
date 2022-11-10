@@ -5,7 +5,7 @@ services:
     depends_on:
       - odoo-db
     ports:
-      - "19801:19805"
+      - "19801:8069"
     volumes:
       - type: bind
         source: /var/data/accounterprise/odoo
