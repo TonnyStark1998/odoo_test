@@ -4,6 +4,8 @@ services:
     image: odoo:13.0
     depends_on:
       - odoo-db
+    ports:
+      - "${ENV_HOST_PORT}:8069"
     volumes:
       - type: bind
         source: /var/data/accounterprise/odoo
