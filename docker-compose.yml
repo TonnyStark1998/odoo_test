@@ -10,9 +10,6 @@ services:
       - type: bind
         source: /var/data/accounterprise/odoo
         target: /var/data/odoo
-      - type: bind
-        source: /var/data/production-backups/accounterprise/
-        target: /var/data/backups
       - ./conf:/etc/odoo
       - ./third_party_addons:/mnt/extra-addons
       - /opt/odoo/enterprise:/opt/odoo/enterprise
@@ -33,6 +30,9 @@ services:
       - type: bind
         source: /var/data/accounterprise/pgdata
         target: /var/lib/postgresql/data/pgdata
+      - type: bind
+        source: /var/data/production-backups/accounterprise/
+        target: /var/data/backups
     secrets:
       - postgresql_password
 
