@@ -9,9 +9,9 @@ if [[ -z ${DATABASE_NAME} ]]; then
 fi
 
 if [[ "$DATABASE_NAME" == "accounterprise" ]]; then
-    rsync -vr -e "ssh -p 6546" samuel.luciano@$PRODUCTION_SERVER_NAME:/var/data/odoo/filestore /var/data/$DATABASE_NAME/odoo/
+    rsync -vr -e "sshpass -f samuel_luciano_password ssh -p 6546" samuel.luciano@$PRODUCTION_SERVER_NAME:/var/data/odoo/filestore /var/data/$DATABASE_NAME/odoo/
 else
-    rsync -vr -e "ssh -p 6546" samuel.luciano@$PRODUCTION_SERVER_NAME:/var/data/odoo-$DATABASE_NAME/filestore /var/data/$DATABASE_NAME/odoo/
+    rsync -vr -e "sshpass -f samuel_luciano_password ssh -p 6546" samuel.luciano@$PRODUCTION_SERVER_NAME:/var/data/odoo-$DATABASE_NAME/filestore /var/data/$DATABASE_NAME/odoo/
 fi
 
 if [[ "$?" -ne 0 ]]; then
