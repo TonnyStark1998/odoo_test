@@ -2,7 +2,7 @@
 docker compose --env-file .docker-compose-env up --force-recreate --detach
 
 DATABASE_USER=usr_odoo
-DATABASE_NAME=accounterprise
+DATABASE_NAME=sculptor
 ODOO_CONTAINER_ID=$(docker container ls -f name=$DATABASE_NAME-odoo-ee-1 -q)
 DB_CONTAINER_ID=$(docker container ls -f name=$DATABASE_NAME-odoo-db-1 -q)
 BACKUP_FILE=$(ls -1t /var/data/production-backups/$DATABASE_NAME | head -1)
