@@ -2,7 +2,7 @@
 docker compose --env-file .docker-compose-env up --force-recreate --detach
 
 DATABASE_USER=usr_odoo
-DATABASE_NAME=sculptor
+DATABASE_NAME=remicon
 ODOO_CONTAINER_ID=$(docker container ls -f name=$DATABASE_NAME-odoo-ee-1 -q)
 DB_CONTAINER_ID=$(docker container ls -f name=$DATABASE_NAME-odoo-db-1 -q)
 BACKUP_FILE=$(ls -1t /var/data/production-backups/$DATABASE_NAME | head -1)
@@ -18,10 +18,10 @@ docker container stop $DB_CONTAINER_ID
 docker container start $DB_CONTAINER_ID
 
 # Drop the database
-docker container exec $DB_CONTAINER_ID psql -U usr_odoo -d postgres -c "DROP DATABASE $DATABASE_NAME;"
+docker container exec $DB_CONTAINER_ID psql -U $DATABASE_USER -d postgres -c "DROP DATABASE $DATABASE_NAME;"
 
 # Create the empty database
-docker container exec $DB_CONTAINER_ID psql -U usr_odoo -d postgres -c "CREATE DATABASE $DATABASE_NAME WITH TEMPLATE template0 OWNER $DATABASE_USER;"
+docker container exec $DB_CONTAINER_ID psql -U $DATABASE_USER -d postgres -c "CREATE DATABASE $DATABASE_NAME WITH TEMPLATE template0 OWNER $DATABASE_USER;"
 
 # Restore last database backup
 docker container exec $DB_CONTAINER_ID pg_restore --verbose --no-owner --no-privileges --clean --create --if-exists --port 5432 --format t --username $DATABASE_USER --role $DATABASE_USER --password --dbname $DATABASE_NAME /var/data/backups/$BACKUP_FILE
