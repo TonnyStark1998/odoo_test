@@ -3,12 +3,12 @@ CURRENT_DATE=`date +%Y%m%d_%H%M`
 DATABASE_NAME=$1
 DATABASE_USER=$2
 
-if [[ -n ${DATABASE_NAME} ]]; then
+if [[ -z ${DATABASE_NAME} ]]; then
     echo "Must specify the database name."
     exit 1
 fi
 
-if [[ -n ${DATABASE_USER} ]]; then
+if [[ -z ${DATABASE_USER} ]]; then
     DATABASE_USER=usr_odoo
 fi
 
