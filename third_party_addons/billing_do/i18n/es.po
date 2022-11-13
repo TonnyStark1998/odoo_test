@@ -1386,3 +1386,39 @@ msgstr "Ruta para Tasas de Cambio"
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_move_line_search
 msgid "Salesperson"
 msgstr "Vendedor"
+
+#. module: account
+#: code:third_party_addons/billing_do/models/billing_do_account_payment.py:0
+#, python-format
+msgid "Payment reset to draft."
+msgstr "Pago reestablecido a borrador."
+
+#. module: account
+#: code:third_party_addons/billing_do/models/billing_do_account_payment.py:0
+#, python-format
+msgid "<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif'>A payment ({} - {}) which was associated with this move has been reverted to draft state.</p>"
+msgstr "<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif'>Un pago ({} - {}) que estaba asociado con este asiento fue reestablecido a borrador.</p>"
+
+#. module: account
+#: code:third_party_addons/billing_do/models/billing_do_account_move.py:0
+#, python-format
+msgid "Payment reconciled."
+msgstr "Pago conciliado."
+
+#. module: account
+#: code:third_party_addons/billing_do/models/billing_do_account_move.py:0
+#, python-format
+msgid "<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif'><strong>Payment reconciled with line id:</strong> {} - {}.</p>"
+msgstr "<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif'><strong>Pago conciliado con línea de id:</strong> {} - {}.</p>"
+
+#. module: account
+#: code:third_party_addons/billing_do/models/billing_do_account_move_line.py:0
+#, python-format
+msgid "Payment unreconciled."
+msgstr "Pago desconciliado."
+
+#. module: account
+#: code:third_party_addons/billing_do/models/billing_do_account_move_line.py:0
+#, python-format
+msgid "<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif'><strong>Payment with line id</strong> {} - {} <strong>has been unreconciled.</strong> </p>"
+msgstr "<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif'><strong>Pago con linea de id</strong> {} - {} <strong>ha sido desconciliado.</strong> </p>"
