@@ -235,6 +235,20 @@ class BillingDoAccountMove(models.Model):
             'log_type': 'fast'
         })
 
+        line = self.env['account.move.line'].browse(line_id)
+        self.env['mail.message'].create({
+            'subject': _('Payment reconciled.'),
+            'body': _("<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif'><strong>Payment reconciled with line id:</strong> {} - {}.</p>")
+                        .format(line.id, line.name),
+            'email_from': self.env.user.login,
+            'author_id': self.env.user.partner_id.id,
+            'model': 'account.move',
+            'res_id': self.id,
+            'record_name': self.name,
+            'message_type': 'comment',
+            'subtype_id': 2
+        })
+
         log.info("[KCS] AccountMove.JsAssignOutstandingLine: User {} added a payment {} to move id {}."
                     .format(self.env.user.login, line_id, self.id))
 

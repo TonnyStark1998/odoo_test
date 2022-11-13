@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging as log
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 class BillindDoAccountPayment(models.Model):
     _inherit = "account.payment"
@@ -33,6 +33,23 @@ class BillindDoAccountPayment(models.Model):
             'user_id': self.env.user.id,
             'method': 'write',
             'log_type': 'fast'
+        })
+
+        move_id = self.env.context.get('move_id')
+        move = self.env['account.move'].browse(move_id)\
+                if move_id\
+                else self.env['account.move'].search([('name', '=', self.communication)], limit = 1)
+        self.env['mail.message'].create({
+            'subject': _('Payment reset to draft.'),
+            'body': _("<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif'>A payment ({} - {}) which was associated with this move has been reverted to draft state.</p>")
+                        .format(self.id, self.name),
+            'email_from': self.env.user.login,
+            'author_id': self.env.user.partner_id.id,
+            'model': 'account.move',
+            'res_id': move.id,
+            'record_name': move.name,
+            'message_type': 'comment',
+            'subtype_id': 2
         })
 
         log.info("[KCS] AccountPayment.ActionDraft: User {} revert the payment {} to draft state."
