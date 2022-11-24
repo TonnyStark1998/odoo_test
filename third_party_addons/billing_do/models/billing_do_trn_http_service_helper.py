@@ -27,8 +27,6 @@ class BillingDoTrnHttpServiceHelper(models.AbstractModel):
                                 ncf, 
                                 vat_buyer, 
                                 security_code))
-            log.info("[KCS] Token used: {0}"
-                        .format(self.get_access_token_for_webapi()))
 
             request_uri = "{0}/{1}".format(config.get_param('billing_do.api_services_base_url'),\
                                                                 config.get_param('billing_do.api_services_tax_receipts_endpoint'))
