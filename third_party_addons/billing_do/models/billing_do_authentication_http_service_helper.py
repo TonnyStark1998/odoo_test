@@ -38,7 +38,6 @@ class BillingDoAuthenticationHttpServiceHelper(models.AbstractModel):
 
     def get_request_headers(self):
         return {
-            "Authorization":"Bearer {0}".format(self.__token),
             "Cache-Control":"max-age=3600"
         }
 

@@ -24,7 +24,6 @@ class BillingDoCurrencyRateHttpServiceHelper(models.AbstractModel):
         if _currency_rates_switch:
             log.info("[KCS] Common Api Base URL: {0}".format(config.get_param('billing_do.api_services_base_url')))
             log.info("[KCS] Service Currency Rates Endpoint: {0}".format(config.get_param('billing_do.api_services_currency_rates_endpoint')))
-            log.info("[KCS] Token used: {0}".format(self.get_access_token_for_webapi()))
             
             currency_rates = []
 

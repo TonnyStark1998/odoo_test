@@ -21,7 +21,6 @@ class BillingDoVatHttpServiceHelper(models.AbstractModel):
             log.info("[KCS] DGII Api Base URL: {0}".format(config.get_param('billing_do.api_services_base_url')))
             log.info("[KCS] Service Tax Contributors Endpoint: {0}".format(config.get_param('billing_do.api_services_tax_contributors_endpoint')))
             log.info("[KCS] Payload: ['vat': '{0}']".format(vat))
-            log.info("[KCS] Token used: {0}".format(self.get_access_token_for_webapi()))
             
             response = self.send_request("{0}/{1}/{2}".format(config.get_param('billing_do.api_services_base_url'),
                                                             config.get_param('billing_do.api_services_tax_contributors_endpoint'),
