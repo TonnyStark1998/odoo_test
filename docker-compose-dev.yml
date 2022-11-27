@@ -6,12 +6,11 @@ services:
       - odoo-db
     ports:
       - "${ENV_HOST_PORT}:8069"
-      - "${ENV_LONGPOLLING_PORT}:8071"
     volumes:
       - type: bind
         source: /var/data/${ENV_DATABASE_NAME}/odoo
         target: /var/data/odoo
-      - ./conf:/etc/odoo
+      - ./conf-dev:/etc/odoo
       - ./third_party_addons:/mnt/extra-addons
       - /opt/odoo/enterprise:/opt/odoo/enterprise
     environment:
@@ -22,6 +21,10 @@ services:
       - postgresql_password
     extra_hosts:
       - "odoo-host:host-gateway"
+     entrypoint:
+      - /entrypoint.sh
+      - --init
+      - web_environment_ribbon
   odoo-db:
     image: postgres:13
     environment:
