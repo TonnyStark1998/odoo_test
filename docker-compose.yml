@@ -6,7 +6,7 @@ services:
       - odoo-db
     ports:
       - "${ENV_HOST_PORT}:8069"
-      - "${ENV_LONGPOLLING_PORT}:8071"
+      - "${ENV_LONGPOLLING_PORT}:8072"
     volumes:
       - type: bind
         source: /var/data/${ENV_DATABASE_NAME}/odoo
