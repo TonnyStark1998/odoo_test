@@ -21,7 +21,7 @@ services:
       - postgresql_password
     extra_hosts:
       - "odoo-host:host-gateway"
-     entrypoint:
+    entrypoint:
       - /entrypoint.sh
       - --init
       - web_environment_ribbon
