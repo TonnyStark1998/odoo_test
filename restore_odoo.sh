@@ -8,13 +8,14 @@ if [[ -z ${DATABASE_NAME} ]]; then
 fi
 
 # Get up and running the services required for this app
-cd /opt/odoo/$DATABASE_NAME
-docker compose --env-file .docker-compose-env up --force-recreate --detach
+cd /opt/odoo/dev-envs/$DATABASE_NAME
+docker compose --env-file .docker-compose-env --file docker-compose-dev.yml stop
+docker compose --env-file .docker-compose-env --file docker-compose-dev.yml rm --force
+docker compose --env-file .docker-compose-env --file docker-compose-dev.yml up --force-recreate --detach
 
 ODOO_CONTAINER_ID=$(docker container ls -f name=$DATABASE_NAME-odoo-ee-1 -q)
 DB_CONTAINER_ID=$(docker container ls -f name=$DATABASE_NAME-odoo-db-1 -q)
 BACKUP_FILE=$(ls -1t /var/data/production-backups/$DATABASE_NAME | head -1)
-PRODUCTION_SERVER_NAME=vmazlxol8odoofeprod01
 
 if [[ -z ${ODOO_CONTAINER_ID} ]]; then
     echo "Couldn't find any container running with name $DATABASE_NAME-odoo-ee-1. Please check an try again."
@@ -31,6 +32,9 @@ docker container stop $ODOO_CONTAINER_ID
 # Stop and start the Postgres container to close all user connections
 docker container stop $DB_CONTAINER_ID
 docker container start $DB_CONTAINER_ID
+
+# Sleep for a minute so the Database container can get up and running
+sleep 30s
 
 # Drop the database
 docker container exec $DB_CONTAINER_ID psql -U $DATABASE_USER -d postgres -c "DROP DATABASE $DATABASE_NAME;"
