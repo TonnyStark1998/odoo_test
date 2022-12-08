@@ -1,17 +1,35 @@
 #!/bin/sh
 DATABASE_USER=usr_odoo
 DATABASE_NAME=$1
+ODOO_PATH=$2
+DOCKER_ENV_FILE=$3
+DOCKER_COMPOSE_FILE=$4
 
 if [[ -z ${DATABASE_NAME} ]]; then
     echo "Must specify the database name."
     exit -1
 fi
 
+if [[ -z ${ODOO_PATH} ]]; then
+    echo "Must specify the path for the Odoo installation."
+    exit -1
+fi
+
+if [[ -z ${DOCKER_ENV_FILE} ]]; then
+    echo "Must specify the Docker environment variables file."
+    exit -1
+fi
+
+if [[ -z ${DOCKER_COMPOSE_FILE} ]]; then
+    echo "Must specify the Docker compose file."
+    exit -1
+fi
+
 # Get up and running the services required for this app
-cd /opt/odoo/dev-envs/$DATABASE_NAME
-docker compose --env-file .docker-compose-env --file docker-compose-dev.yml stop
-docker compose --env-file .docker-compose-env --file docker-compose-dev.yml rm --force
-docker compose --env-file .docker-compose-env --file docker-compose-dev.yml up --force-recreate --detach
+cd $ODOO_PATH$DATABASE_NAME
+docker compose --env-file $DOCKER_ENV_FILE --file $DOCKER_COMPOSE_FILE stop
+docker compose --env-file $DOCKER_ENV_FILE --file $DOCKER_COMPOSE_FILE rm --force
+docker compose --env-file $DOCKER_ENV_FILE --file $DOCKER_COMPOSE_FILE up --force-recreate --detach
 
 ODOO_CONTAINER_ID=$(docker container ls -f name=$DATABASE_NAME-odoo-ee-1 -q)
 DB_CONTAINER_ID=$(docker container ls -f name=$DATABASE_NAME-odoo-db-1 -q)
