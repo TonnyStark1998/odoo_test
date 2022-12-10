@@ -27,6 +27,8 @@ services:
       - web_environment_ribbon
   odoo-db:
     image: postgres:13
+    ports:
+      - "${ENV_DATABASE_PORT}:5432"
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD_FILE=/run/secrets/postgresql_password

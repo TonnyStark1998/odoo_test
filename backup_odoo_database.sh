@@ -3,11 +3,13 @@ function remove_slash_if_exists(){
         ARGUMENT=$1
         if [[ "${ARGUMENT:(-1)}" == "/" ]]; then
                 return "${ARGUMENT::-1}"
-        if
+        fi
 }
 
 function print_usage(){
-        echo "./$0 <database_name> <backup_folder> <log_folder>"
+        printf "\n"
+        printf "Usage:\n\n"
+        printf "$0 <database_name> <backup_folder> <log_folder>\n\n"
 }
 
 CURRENT_DATE=`date +%Y%m%d_%H%M`
@@ -34,17 +36,17 @@ if [[ -z $LOG_FOLDER_PATH ]]; then
         exit -1
 fi
 
-if [[ ! -d $BACKUP_FOLDER_PATH ]]; then
-        echo "$BACKUP_FOLDER_PATH must be a directory."
-        exit -2
-fi
+# if [[ ! -d $BACKUP_FOLDER_PATH ]]; then
+#         echo "$BACKUP_FOLDER_PATH must be a directory."
+#         exit -2
+# fi
 
-if [[ ! -e $LOG_FOLDER_PATH ]]; then
-        mkdir -p $LOG_FOLDER_PATH
-fi
+# if [[ ! -e $LOG_FOLDER_PATH ]]; then
+#         mkdir -p $LOG_FOLDER_PATH
+# fi
 
-BACKUP_FOLDER_PATH=remove_slash_if_exists $BACKUP_FOLDER_PATH
-LOG_FOLDER_PATH=remove_slash_if_exists $LOG_FOLDER_PATH
+BACKUP_FOLDER_PATH=$(remove_slash_if_exists $BACKUP_FOLDER_PATH)
+LOG_FOLDER_PATH=$(remove_slash_if_exists $LOG_FOLDER_PATH)
 
 exec > ${LOG_FOLDER_PATH}/odoo_${DATABASE_NAME}_${CURRENT_DATE}_backup.log 2>&1
 
