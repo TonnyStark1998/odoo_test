@@ -6,6 +6,16 @@ function remove_slash_if_exists(){
         fi
 }
 
+function check_if_folder_exists_in_container(){
+        FOLDER=$1
+        CONTAINER_ID=$2
+        docker exec ${CONTAINER_ID} ls ${FOLDER}
+        if [[ $? > 0 ]]; then
+                printf "${FOLDER} does not exists in container ${CONTAINER_ID}."
+                exit -2
+        fi
+}
+
 function print_usage(){
         printf "\n"
         printf "Usage:\n\n"
@@ -36,21 +46,16 @@ if [[ -z $LOG_FOLDER_PATH ]]; then
         exit -1
 fi
 
-# if [[ ! -d $BACKUP_FOLDER_PATH ]]; then
-#         echo "$BACKUP_FOLDER_PATH must be a directory."
-#         exit -2
-# fi
-
-# if [[ ! -e $LOG_FOLDER_PATH ]]; then
-#         mkdir -p $LOG_FOLDER_PATH
-# fi
+DATABASE_FILENAME=odoo_${DATABASE_NAME}_${CURRENT_DATE}.dump
+DB_CONTAINER_ID=$(docker container ls -f name=$DATABASE_NAME-odoo-db-1 -q)
 
 BACKUP_FOLDER_PATH=$(remove_slash_if_exists $BACKUP_FOLDER_PATH)
 LOG_FOLDER_PATH=$(remove_slash_if_exists $LOG_FOLDER_PATH)
 
+# Check if log and backup folder exists
+check_if_folder_exists_in_container ${BACKUP_FOLDER_PATH} ${DB_CONTAINER_ID}
+check_if_folder_exists_in_container ${LOG_FOLDER_PATH} ${DB_CONTAINER_ID}
+
 exec > ${LOG_FOLDER_PATH}/odoo_${DATABASE_NAME}_${CURRENT_DATE}_backup.log 2>&1
 
-DATABASE_FILENAME=odoo_${DATABASE_NAME}_${CURRENT_DATE}.dump
-DB_CONTAINER_ID=$(docker container ls -f name=$DATABASE_NAME-odoo-db-1 -q)
-
-docker container exec ${DB_CONTAINER_ID} pg_dump --verbose --no-owner --username ${DATABASE_USER} --format c --no-password -f ${BACKUP_FOLDER_PATH}/${DATABASE_FILENAME} ${DATABASE_NAME}
+docker exec ${DB_CONTAINER_ID} pg_dump --verbose --no-owner --username ${DATABASE_USER} --format c --no-password -f ${BACKUP_FOLDER_PATH}/${DATABASE_FILENAME} ${DATABASE_NAME}
