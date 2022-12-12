@@ -24,17 +24,6 @@ class BillindDoAccountPayment(models.Model):
     def action_draft(self):
         super(BillindDoAccountPayment, self).action_draft()
 
-        self.env['auditlog.log'].create({
-            'name': 'Payment set to draft'
-                        .format(self.env.user.login, self.id),
-            'model_id': self.env['ir.model']
-                            .search([('model', '=', 'account.payment')], limit = 1).id,
-            'res_id': self.id,
-            'user_id': self.env.user.id,
-            'method': 'write',
-            'log_type': 'fast'
-        })
-
         move_id = self.env.context.get('move_id')
         move = self.env['account.move'].browse(move_id)\
                 if move_id\

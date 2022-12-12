@@ -225,16 +225,6 @@ class BillingDoAccountMove(models.Model):
     def js_assign_outstanding_line(self, line_id):
         super(BillingDoAccountMove, self).js_assign_outstanding_line(line_id)
 
-        self.env['auditlog.log'].create({
-            'name': 'Account Move - Add Payment: Line Id {}'.format(line_id),
-            'model_id': self.env['ir.model']
-                            .search([('model', '=', 'account.move')], limit = 1).id,
-            'res_id': self.id,
-            'user_id': self.env.user.id,
-            'method': 'write',
-            'log_type': 'fast'
-        })
-
         line = self.env['account.move.line'].browse(line_id)
         self.env['mail.message'].create({
             'subject': _('Payment reconciled.'),
