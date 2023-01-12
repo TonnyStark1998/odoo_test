@@ -211,37 +211,4 @@
             []
         </field>
     </record>
-
-    <!--
-        Menu items for Tax Reports
-    -->
-    <menuitem id="menu_billing_do_tax_reports_main"
-                groups="account.group_account_user"
-                name="Tax Reports" 
-                parent="account_accountant.menu_accounting" 
-                sequence="30" />
-    <menuitem id="menu_tax_reports_list"
-                groups="account.group_account_user"
-                name="List all reports" 
-                parent="menu_billing_do_tax_reports_main" 
-                action="action_billing_do_tax_report_list" 
-                sequence="1" />
-    <menuitem id="menu_tax_reports_create"
-                groups="-account.group_account_user"
-                name="Create new report" 
-                parent="menu_billing_do_tax_reports_main" 
-                action="action_billing_do_tax_report_create" 
-                sequence="2" />
-
-    <menuitem id="menu_billing_do_tax_report_settings_label"
-                name="Tax Report Settings" 
-                sequence="36"
-                parent="account.menu_finance_configuration"
-                groups="-account.group_account_user" />
-    <menuitem id="menu_tax_reports_type_list"
-                name="Report Types" 
-                parent="billing_do.menu_billing_do_tax_report_settings_label" 
-                action="action_billing_do_tax_report_type_list" 
-                sequence="1" />
-
 </odoo>

@@ -23,7 +23,7 @@ services:
     entrypoint:
       - /entrypoint.sh
       - --init
-      - web_environment_ribbon
+      - web_environment_ribbon,billing_do_ce
   odoo-db:
     image: postgres:13
     ports:
