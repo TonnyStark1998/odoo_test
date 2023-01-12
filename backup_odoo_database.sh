@@ -2,7 +2,7 @@
 function remove_slash_if_exists(){
         ARGUMENT=$1
         if [[ "${ARGUMENT:(-1)}" == "/" ]]; then
-                return "${ARGUMENT::-1}"
+                echo "${ARGUMENT::-1}"
         fi
 }
 

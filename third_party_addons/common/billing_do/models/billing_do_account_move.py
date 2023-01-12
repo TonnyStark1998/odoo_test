@@ -222,6 +222,25 @@ class BillingDoAccountMove(models.Model):
         except exceptions.UserError:
             raise
 
+    def action_duplicate(self):
+        self.ensure_one()
+
+        lines_wo_product = 0
+        for line in self.line_ids:
+            if not line.product_id:
+                lines_wo_product += 1
+        log.info('Lines w/o products: {}'.format(lines_wo_product))
+        if lines_wo_product > 0:
+            raise exceptions.UserError(_('There is(are) a(some) line(s) which does not have any product associated. Please correct this error before duplicating.'))
+
+        action = self.env.ref('account.action_move_journal_line').read()[0]
+        action['context'] = dict(self.env.context)
+        action['context']['form_view_initial_mode'] = 'edit'
+        action['context']['view_no_maturity'] = False
+        action['views'] = [(self.env.ref('account.view_move_form').id, 'form')]
+        action['res_id'] = self.copy().id
+        return action
+
     def js_assign_outstanding_line(self, line_id):
         super(BillingDoAccountMove, self).js_assign_outstanding_line(line_id)
 
