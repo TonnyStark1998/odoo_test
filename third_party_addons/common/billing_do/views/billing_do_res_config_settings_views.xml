@@ -119,45 +119,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <h2>Token Settings</h2>
-                    <div class="row mt16 o_settings_container">
-                        <div class="col-12 o_setting_box" 
-                                title="These settings are intented to provide the information for the token authentication generation from Azure.">
-                            <div class="o_setting_left_pane"/>
-                            <div class="o_setting_right_pane">
-                                <div class="o_form_label" style="display: inline;">Token Generation Settings</div>
-                                <span class="fa fa-lg fa-lock" 
-                                        role="img"/>
-                                <div class="text-muted">
-                                    Settings for the Azure token generation for consuming the Api Common Services.
-                                </div>
-                                <div class="content-group">
-                                    <div class="row mt16">
-                                        <label string="Token URL" 
-                                                for="token_url" 
-                                                class="col-lg-3 o_light_label"/>
-                                        <field name="token_url" 
-                                                domain="[('company_id', '=', company_id)]"/>
-                                    </div>
-                                    <div class="row">
-                                        <label string="Client ID" 
-                                                for="token_client_id" 
-                                                class="col-lg-3 o_light_label"/>
-                                        <field name="token_client_id" 
-                                                domain="[('company_id', '=', company_id)]"/>
-                                    </div>
-                                    <div class="row">
-                                        <label string="Client Secret" 
-                                                for="token_client_secret" 
-                                                class="col-lg-3 o_light_label"/>
-                                        <field name="token_client_secret" 
-                                                domain="[('company_id', '=', company_id)]"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </xpath>
         </field>
