@@ -431,8 +431,21 @@
                     <ul class="list-inline mb4">
                         <li t-if="company.partner_id" class="list-inline-item d-inline">
                             <span class="fa fa-map-marker fa-fw"/>
-                            <span class="o_force_ltr" t-field="company.partner_id.contact_address_complete"/>
-
+                            <span t-if="o.company_id.street" class="fa fa-map-marker fa-lg"/>
+                            <span t-if="o.company_id.street" t-field="o.company_id.street"/>
+                            <span t-if="o.company_id.street and o.company_id.street2 ">,</span>
+                            <span t-if="o.company_id.street2" t-field="o.company_id.street2"/>
+                            <span t-if="o.company_id.zip and o.company_id.street or o.company_id.street2 ">,
+                            </span>
+                            <span t-if="o.company_id.zip">
+                                ZIP:
+                                <span t-field="o.company_id.zip"/>
+                            </span>
+                            <span t-if="o.company_id.zip and o.company_id.city">,</span>
+                            <span t-if="o.company_id.city or o.company_id.country_id"
+                                  t-field="o.company_id.city"/>
+                            <span t-if="o.company_id.country_id and o.company_id.city ">,</span>
+                            <span t-field="o.company_id.country_id"/>
                         </li>
                     </ul>
                     <ul class="list-inline mb4">
