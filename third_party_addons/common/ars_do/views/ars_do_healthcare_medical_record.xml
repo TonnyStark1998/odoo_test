@@ -64,7 +64,7 @@
                                 <field name="heparin" 
                                         nolabel="1"
                                         style="width:20% !important;text-align:right !important;" />
-                                <span>cc</span>
+                                <span> cc</span>
                             </div>
                             <field name="ufr" />
                             <label for="temperature_display_value" />
@@ -72,21 +72,22 @@
                                 <field name="temperature"
                                         nolabel="1"
                                         style="width:20% !important;text-align:right !important;" />
-                                <span>&#248;</span>
+                                <span> &#8451;</span>
                             </div>
                             <field name="medicines"
                                     widget="many2many_tags"
                                     options="{'no_create': True}" />
                         </group>
                         <group>
-                            <field name="bfr" />
+                            <field name="bfr"
+                                    style="width:20% !important;text-align:right !important;" />
                             <label for="weight" />
                             <div>
                                 <field name="weight"
                                         nolabel="1" 
                                         class="oe_inline"
                                         style="width:20% !important;text-align:right !important;" />
-                                <span>kg</span>
+                                <span> kg</span>
                             </div>
                             <field name="saline"
                                     widget="radio"
@@ -97,8 +98,10 @@
                             <field name="fdp"
                                     widget="radio"
                                     options="{'horizontal': True}" />
-                            <field name="ptm" />
-                            <field name="ktv" />
+                            <field name="ptm"
+                                    style="width:20% !important;text-align:right !important;" />
+                            <field name="ktv"
+                                    style="width:20% !important;text-align:right !important;" />
                         </group>
                     </group>
                     <group>

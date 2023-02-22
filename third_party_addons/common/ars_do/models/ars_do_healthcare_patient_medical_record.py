@@ -44,7 +44,7 @@ class ArsDoHealthcareMedicalRecord(models.Model):
                                 required=True,
                                 size=3)
     temperature_display_value = fields.Char(string='Temperature',
-                                            compute='')
+                                            compute='_compute_temperature_display_value')
     temperature = fields.Integer(string='Temperature',
                                     required=True,
                                     size=2)
@@ -79,17 +79,26 @@ class ArsDoHealthcareMedicalRecord(models.Model):
     @api.onchange('weight')
     def _compute_weight_display_value(self):
         for record in self:
-            record.weight_display_value = '{} kg'.format(record.weight)
+            if record.weight:
+                record.weight_display_value = '{} kg'.format(record.weight)
+            else:
+                record.weight_display_value = ''
 
     @api.onchange('heparin')
     def _compute_heparin_display_value(self):
         for record in self:
-            record.heparin_display_value = '{} cc'.format(record.heparin)
+            if record.heparin:
+                record.heparin_display_value = '{} cc'.format(record.heparin)
+            else:
+                record.heparin_display_value = ''
 
     @api.onchange('temperature')
-    def _compute_heparin_display_value(self):
+    def _compute_temperature_display_value(self):
         for record in self:
-            record.temperature_display_value = '{} °'.format(record.temperature)
+            if record.temperature:
+                record.temperature_display_value = '{} °'.format(record.temperature)
+            else:
+                record.temperature_display_value = ''
 
     # Constrains methods
     @api.constrains('saline')
