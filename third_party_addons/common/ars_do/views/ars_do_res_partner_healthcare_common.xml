@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Views -->
+    <record model="ir.ui.view" id="ars_do_healthcare_common_view_kanban">
+        <field name="name">ars.do.healthcare.provider.view.kanban</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view" />
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="healthcare_plans_count" />
+                <field name="healthcare_cards_count" />
+            </field>
+            <xpath expr="//div[hasclass('oe_kanban_details')]" position="inside">
+                <ul t-if="record.is_ars === True">
+                    <li>
+                        <span>Plans Count: </span>
+                        <field name="healthcare_plans_count" />
+                    </li>
+                </ul>
+                <ul t-if="record.is_patient === True">
+                    <li>
+                        <span>Cards Count:</span>
+                        <field name="healthcare_cards_count" />
+                    </li>
+                </ul>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="ars_do_healthcare_common_view_form">
+        <field name="name">ars.do.healthcare.provider.view.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="attributes">
+                <attribute name="readonly" eval="['|', ('is_ars', '=', True), ('is_patient', '=', True)]" />
+            </xpath>
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <field name="is_ars" invisible="1" />
+                <field name="is_patient" invisible="1" />
+                <page name="healthcare_plans" 
+                        string="Healthcare Plans"
+                        attrs="{'invisible': ['|', ('is_ars', '=', False),
+                                                    ('id', '=', False)]}">
+                    <field name="healthcare_plans" />
+                </page>
+                <page name="healthcare_cards" 
+                        string="Healthcare Cards" 
+                        attrs="{'invisible': ['|', ('is_patient', '=', False),
+                                                    ('id', '=', False)]}">
+                    <field name="healthcare_cards" />
+                </page>
+                <page name="medical_records" 
+                        string="Medical Records" 
+                        attrs="{'invisible': ['|', ('is_patient', '=', False),
+                                                    ('id', '=', False)]}">
+                    <field name="medical_records" />
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Menu items -->
+    <menuitem id="main_menu_ars_do" 
+                name="ARS Healthcare" 
+                sequence="1" 
+                web_icon="ars_do,static/description/icon.png" />
+</odoo>

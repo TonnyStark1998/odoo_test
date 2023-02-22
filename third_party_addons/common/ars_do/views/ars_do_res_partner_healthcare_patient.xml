@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Actions -->
+    <record model="ir.actions.act_window" id="action_ars_do_healthcare_patients_kanban">
+        <field name="name">Patients</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="view_id" 
+                ref="ars_do_healthcare_common_view_kanban" />
+        <field name="domain" 
+                eval="[('is_patient', '=', True)]" />
+        <field name="context"
+                eval="{'default_category_id': [ref('ars_do.healthcare_provider_category_patient')],
+                        'default_is_patient': True}" />
+    </record>
+
+    <!-- Menu items -->
+    <menuitem id="menu_ars_do_healthcare_patients"
+                name="Patients" 
+                parent="main_menu_ars_do" 
+                action="action_ars_do_healthcare_patients_kanban" 
+                sequence="2"
+                groups="-account.group_account_user,account.group_account_manager" />
+</odoo>

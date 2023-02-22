@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Views -->
+    <record model="ir.ui.view" id="ars_do_healthcare_card_view_form">
+        <field name="name">ars.do.healthcare.card.view.form</field>
+        <field name="model">ars.do.healthcare.card</field>
+        <field name="arch" type="xml">
+            <form string="Adding a new card">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="number" />
+                            <field name="default_card" />
+                            <field name="expiry_date" />
+                        </group>
+                        <group>
+                            <field name="healthcare_provider" 
+                                    widget="many2one" 
+                                    options="{'no_create': True}" />
+                            <field name="healthcare_plan" 
+                                    widget="many2one" 
+                                    options="{'no_create': True}" />
+                            <field name="healthcare_patient"
+                                    readonly="1" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="ars_do_healthcare_card_view_tree">
+        <field name="name">ars.do.healthcare.card.view.tree</field>
+        <field name="model">ars.do.healthcare.card</field>
+        <field name="arch" type="xml">
+            <tree default_order="number asc">
+                <field name="number" />
+                <field name="default_card" />
+                <field name="expiry_date" />
+                <field name="healthcare_provider" />
+                <control>
+                    <create string="Add a card"
+                            context="{'default_healthcare_patient': id}" />
+                </control>
+            </tree>
+        </field>
+    </record>
+</odoo>

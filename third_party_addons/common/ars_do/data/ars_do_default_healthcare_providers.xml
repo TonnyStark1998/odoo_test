@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ars_do.healtcare_provider_1" model="res.partner">
+        <field name="name">HUMANO SEGUROS</field>
+        <field name="tax_contributor_type">1</field>
+        <field name="vat">102017174</field>
+        <field eval="[(6, 0, [ref('healthcare_provider_category_ars')])]" name="category_id"/>
+        <field name="is_company">1</field>
+        <field name="is_ars">1</field>
+        <field name="street"></field>
+        <field name="city"></field>
+        <field name="country_id" ref="base.do" />
+        <field name="phone">(809) 000-0000</field>
+        <field name="email">contact@local</field>
+        <field name="image_1920" type="base64" file="ars_do/static/img/ars_humano.png" />
+    </record>
+    <record id="ars_do.healtcare_provider_2" model="res.partner">
+        <field name="name">MAPFRE SALUD ARS</field>
+        <field name="tax_contributor_type">1</field>
+        <field eval="[(6, 0, [ref('healthcare_provider_category_ars')])]" name="category_id"/>
+        <field name="is_company">1</field>
+        <field name="is_ars">1</field>
+        <field name="vat">101761581</field>
+        <field name="street"></field>
+        <field name="city"></field>
+        <field name="country_id" ref="base.do" />
+        <field name="phone">(809) 000-0000</field>
+        <field name="email">contacto@local</field>
+        <field name="image_1920" type="base64" file="ars_do/static/img/ars_mapfre.jpg" />
+    </record>
+    <record id="ars_do.healtcare_provider_3" model="res.partner">
+        <field name="name">ARS SIMAG</field>
+        <field name="tax_contributor_type">1</field>
+        <field eval="[(6, 0, [ref('healthcare_provider_category_ars')])]" name="category_id"/>
+        <field name="is_company">1</field>
+        <field name="is_ars">1</field>
+        <field name="vat">101064129</field>
+        <field name="street"></field>
+        <field name="city"></field>
+        <field name="country_id" ref="base.do" />
+        <field name="phone">(809) 000-0000</field>
+        <field name="email">contact@local</field>
+        <field name="image_1920" type="base64" file="ars_do/static/img/ars_simag.png" />
+    </record>
+    <record id="ars_do.healtcare_provider_4" model="res.partner">
+        <field name="name">ADMINISTRADORA DE RIESGOS DE SALUD RESERVAS</field>
+        <field name="tax_contributor_type">1</field>
+        <field eval="[(6, 0, [ref('healthcare_provider_category_ars')])]" name="category_id"/>
+        <field name="is_company">1</field>
+        <field name="is_ars">1</field>
+        <field name="vat">130020736</field>
+        <field name="street"></field>
+        <field name="city"></field>
+        <field name="country_id" ref="base.do" />
+        <field name="phone">(809) 000-0000</field>
+        <field name="email">contact@local</field>
+        <field name="image_1920" type="base64" file="ars_do/static/img/ars_reservas.png" />
+    </record>
+    <record id="ars_do.healtcare_provider_5" model="res.partner">
+        <field name="name">ARS META SALUD</field>
+        <field name="tax_contributor_type">1</field>
+        <field eval="[(6, 0, [ref('healthcare_provider_category_ars')])]" name="category_id"/>
+        <field name="is_company">1</field>
+        <field name="is_ars">1</field>
+        <field name="vat">124032423</field>
+        <field name="street"></field>
+        <field name="city"></field>
+        <field name="country_id" ref="base.do" />
+        <field name="phone">(809) 000-0000</field>
+        <field name="email">contact@local</field>
+        <field name="image_1920" type="base64" file="ars_do/static/img/ars_meta_salud.png" />
+    </record>
+    <record id="ars_do.healtcare_provider_6" model="res.partner">
+        <field name="name">ARS-UASD</field>
+        <field name="tax_contributor_type">1</field>
+        <field eval="[(6, 0, [ref('healthcare_provider_category_ars')])]" name="category_id"/>
+        <field name="is_company">1</field>
+        <field name="is_ars">1</field>
+        <field name="vat">430059277</field>
+        <field name="street"></field>
+        <field name="city"></field>
+        <field name="country_id" ref="base.do" />
+        <field name="phone">(809) 000-0000</field>
+        <field name="email">contact@local</field>
+        <field name="image_1920" type="base64" file="ars_do/static/img/ars_uasd.png" />
+    </record>
+    <record id="ars_do.healtcare_provider_7" model="res.partner">
+        <field name="name">ARS SEMMA</field>
+        <field name="tax_contributor_type">1</field>
+        <field eval="[(6, 0, [ref('healthcare_provider_category_ars')])]" name="category_id"/>
+        <field name="is_company">1</field>
+        <field name="is_ars">1</field>
+        <field name="vat">401052662</field>
+        <field name="street"></field>
+        <field name="city"></field>
+        <field name="country_id" ref="base.do" />
+        <field name="phone">(809) 000-0000</field>
+        <field name="email">contact@local</field>
+        <field name="image_1920" type="base64" file="ars_do/static/img/ars_semma.png" />
+    </record>
+    <record id="ars_do.healtcare_provider_8" model="res.partner">
+        <field name="name">ARS FFAA</field>
+        <field name="tax_contributor_type">1</field>
+        <field eval="[(6, 0, [ref('healthcare_provider_category_ars')])]" name="category_id"/>
+        <field name="is_company">1</field>
+        <field name="is_ars">1</field>
+        <field name="vat">430013821</field>
+        <field name="street"></field>
+        <field name="city"></field>
+        <field name="country_id" ref="base.do" />
+        <field name="phone">(809) 000-0000</field>
+        <field name="email">contact@local</field>
+        <field name="image_1920" type="base64" file="ars_do/static/img/ars_ffaa.jpg" />
+    </record>
+    <record id="ars_do.healtcare_provider_9" model="res.partner">
+        <field name="name">ARS ASISTANET</field>
+        <field name="tax_contributor_type">1</field>
+        <field eval="[(6, 0, [ref('healthcare_provider_category_ars')])]" name="category_id"/>
+        <field name="is_company">1</field>
+        <field name="is_ars">1</field>
+        <field name="vat">122023704</field>
+        <field name="street"></field>
+        <field name="city"></field>
+        <field name="country_id" ref="base.do" />
+        <field name="phone">(809) 000-0000</field>
+        <field name="email">contact@local</field>
+        <field name="image_1920" type="base64" file="ars_do/static/img/ars_asistanet.jpg" />
+    </record>
+    <record id="ars_do.healtcare_provider_10" model="res.partner">
+        <field name="name">ARS PLAN SALUD BANCO CENTRAL</field>
+        <field name="tax_contributor_type">1</field>
+        <field eval="[(6, 0, [ref('healthcare_provider_category_ars')])]" name="category_id"/>
+        <field name="is_company">1</field>
+        <field name="is_ars">1</field>
+        <field name="vat">430027715</field>
+        <field name="street"></field>
+        <field name="city"></field>
+        <field name="country_id" ref="base.do" />
+        <field name="phone">(809) 000-0000</field>
+        <field name="email">contact@local</field>
+        <field name="image_1920" type="base64" file="ars_do/static/img/ars_banco_central.jpg" />
+    </record>
+    <record id="ars_do.healtcare_provider_11" model="res.partner">
+        <field name="name">ARS MONUMENTAL</field>
+        <field name="tax_contributor_type">1</field>
+        <field eval="[(6, 0, [ref('healthcare_provider_category_ars')])]" name="category_id"/>
+        <field name="is_company">1</field>
+        <field name="is_ars">1</field>
+        <field name="vat">130058008</field>
+        <field name="street"></field>
+        <field name="city"></field>
+        <field name="country_id" ref="base.do" />
+        <field name="phone">(809) 000-0000</field>
+        <field name="email">contact@local</field>
+        <field name="image_1920" type="base64" file="ars_do/static/img/ars_monumental.png" />
+    </record>
+    <record id="ars_do.healtcare_provider_12" model="res.partner">
+        <field name="name">ARS RENACER</field>
+        <field name="tax_contributor_type">1</field>
+        <field eval="[(6, 0, [ref('healthcare_provider_category_ars')])]" name="category_id"/>
+        <field name="is_company">1</field>
+        <field name="is_ars">1</field>
+        <field name="vat">101886481</field>
+        <field name="street"></field>
+        <field name="city"></field>
+        <field name="country_id" ref="base.do" />
+        <field name="phone">(809) 000-0000</field>
+        <field name="email">contact@local</field>
+        <field name="image_1920" type="base64" file="ars_do/static/img/ars_renacer.jpg" />
+    </record>
+    <record id="ars_do.healtcare_provider_13" model="res.partner">
+        <field name="name">ARS APS</field>
+        <field name="tax_contributor_type">1</field>
+        <field eval="[(6, 0, [ref('healthcare_provider_category_ars')])]" name="category_id"/>
+        <field name="is_company">1</field>
+        <field name="is_ars">1</field>
+        <field name="vat">101788682</field>
+        <field name="street"></field>
+        <field name="city"></field>
+        <field name="country_id" ref="base.do" />
+        <field name="phone">(809) 000-0000</field>
+        <field name="email">contact@local</field>
+        <field name="image_1920" type="base64" file="ars_do/static/img/ars_aps.png" />
+    </record>
+    <record id="ars_do.healtcare_provider_14" model="res.partner">
+        <field name="name">ARS FUTURO</field>
+        <field name="tax_contributor_type">1</field>
+        <field eval="[(6, 0, [ref('healthcare_provider_category_ars')])]" name="category_id"/>
+        <field name="is_company">1</field>
+        <field name="is_ars">1</field>
+        <field name="vat">101557542</field>
+        <field name="street"></field>
+        <field name="city"></field>
+        <field name="country_id" ref="base.do" />
+        <field name="phone">(809) 000-0000</field>
+        <field name="email">contact@local</field>
+        <field name="image_1920" type="base64" file="ars_do/static/img/ars_futuro.png" />
+    </record>
+    <record id="ars_do.healtcare_provider_15" model="res.partner">
+        <field name="name">ARS DR YUNEN</field>
+        <field name="tax_contributor_type">1</field>
+        <field eval="[(6, 0, [ref('healthcare_provider_category_ars')])]" name="category_id"/>
+        <field name="is_company">1</field>
+        <field name="is_ars">1</field>
+        <field name="vat">101875887</field>
+        <field name="street"></field>
+        <field name="city"></field>
+        <field name="country_id" ref="base.do" />
+        <field name="phone">(809) 000-0000</field>
+        <field name="email">contact@local</field>
+        <field name="image_1920" type="base64" file="ars_do/static/img/ars_dr_yunen.png" />
+    </record>
+    <record id="ars_do.healtcare_provider_16" model="res.partner">
+        <field name="name">ARS-CMD</field>
+        <field name="tax_contributor_type">1</field>
+        <field eval="[(6, 0, [ref('healthcare_provider_category_ars')])]" name="category_id"/>
+        <field name="is_company">1</field>
+        <field name="is_ars">1</field>
+        <field name="vat">401501015</field>
+        <field name="street"></field>
+        <field name="city"></field>
+        <field name="country_id" ref="base.do" />
+        <field name="phone">(809) 000-0000</field>
+        <field name="email">contact@local</field>
+        <field name="image_1920" type="base64" file="ars_do/static/img/ars_cmd.jpg" />
+    </record>
+</odoo>

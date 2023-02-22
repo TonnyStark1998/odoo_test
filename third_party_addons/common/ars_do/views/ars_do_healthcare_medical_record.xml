@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Views -->
+    <record model="ir.ui.view" id ="ars_do_healthcare_medical_record_view_tree">
+        <field name="name">ars.do.healthcare.medical.record.view.tree</field>
+        <field name="model">ars.do.healthcare.medical.record</field>
+        <field name="arch" type="xml">
+            <tree default_order="date asc">
+                <field name="date" />
+                <field name="blood_pressure" />
+                <field name="time" widget="float_time" />
+                <field name="bfr" />
+                <field name="weight_display_value" />
+                <field name="fdp"
+                        optional="hide" />
+                <field name="fldrmvd"
+                        optional="hide" />
+                <field name="heparin_display_value"
+                        optional="hide" />
+                <field name="saline"
+                        optional="hide" />
+                <field name="ufr"
+                        optional="hide" />
+                <field name="temperature_display_value"
+                        optional="hide" />
+                <field name="ptm"
+                        optional="hide" />
+                <field name="channel"
+                        optional="hide" />
+                <field name="ktv"
+                        optional="hide" />
+                <control>
+                    <create string="Add a record"
+                            context="{'default_healthcare_patient': id}" />
+                </control>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="ars_do_healthcare_medical_record_view_form">
+        <field name="name">ars.do.healthcare.medical.record.view.form</field>
+        <field name="model">ars.do.healthcare.medical.record</field>
+        <field name="arch" type="xml">
+            <form string="Adding a new medical record">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date" />
+                            <field name="time" widget="float_time" />
+                            <label for="blood_pressure" />
+                            <div>
+                                <field name="blood_pressure_high"
+                                        nolabel="1"
+                                        class="oe_inline"
+                                        style="width:30% !important;text-align:center !important;" />
+                                <span> / </span>
+                                <field name="blood_pressure_low"
+                                        nolabel="1"
+                                        class="oe_inline"
+                                        style="width:30% !important;text-align:center !important;" />
+                            </div>
+                            <field name="fldrmvd" />
+                            <label for="heparin_display_value" />
+                            <div>
+                                <field name="heparin" 
+                                        nolabel="1"
+                                        style="width:20% !important;text-align:right !important;" />
+                                <span>cc</span>
+                            </div>
+                            <field name="ufr" />
+                            <label for="temperature_display_value" />
+                            <div>
+                                <field name="temperature"
+                                        nolabel="1"
+                                        style="width:20% !important;text-align:right !important;" />
+                                <span>&#248;</span>
+                            </div>
+                            <field name="medicines"
+                                    widget="many2many_tags"
+                                    options="{'no_create': True}" />
+                        </group>
+                        <group>
+                            <field name="bfr" />
+                            <label for="weight" />
+                            <div>
+                                <field name="weight"
+                                        nolabel="1" 
+                                        class="oe_inline"
+                                        style="width:20% !important;text-align:right !important;" />
+                                <span>kg</span>
+                            </div>
+                            <field name="saline"
+                                    widget="radio"
+                                    options="{'horizontal': True}" />
+                            <field name="channel"
+                                    widget="radio"
+                                    options="{'horizontal': True}" />
+                            <field name="fdp"
+                                    widget="radio"
+                                    options="{'horizontal': True}" />
+                            <field name="ptm" />
+                            <field name="ktv" />
+                        </group>
+                    </group>
+                    <group>
+                        <group colspan="2">
+                            <field name="notes" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

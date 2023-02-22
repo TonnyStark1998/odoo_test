@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="ars_do_account_move_view_tree">
+        <field name="name">ars.do.account.move.view.tree</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='partner_id' and position()=1]/.." position="before">
+                <field name="healthcare_invoice" 
+                        widget="radio" 
+                        class="oe_edit_only"
+                        attrs="{'invisible': [('type', 'not in', ['out_invoice', 'out_refund'])]}" />
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="healthcare_provider"
+                        attrs="{'invisible': ['|', '|', ('type', 'not in', ['out_invoice', 'out_refund']),
+                                                        ('healthcare_invoice', '=', 'not_healthcare_invoice'),
+                                                        ('partner_id', '=', False)]}" />
+                <field name="healthcare_plan"
+                        attrs="{'invisible': ['|', '|', ('type', 'not in', ['out_invoice', 'out_refund']),
+                                                        ('healthcare_invoice', '=', 'not_healthcare_invoice'),
+                                                        ('partner_id', '=', False)]}" />
+                <field name="healthcare_card"
+                        attrs="{'invisible': ['|', '|', ('type', 'not in', ['out_invoice', 'out_refund']),
+                                                        ('healthcare_invoice', '=', 'not_healthcare_invoice'),
+                                                        ('partner_id', '=', False)]}" />
+                <field name="healthcare_authorization_number"
+                        attrs="{'required': [('healthcare_invoice', '=', 'healthcare_invoice')], 
+                                'invisible': ['|', '|', ('type', 'not in', ['out_invoice', 'out_refund']),
+                                                        ('healthcare_invoice', '=', 'not_healthcare_invoice'),
+                                                        ('partner_id', '=', False)]}" />
+            </xpath>
+            <xpath expr="//field[@name='price_unit']" position="after">
+                <field name="healthcare_invoice" invisible="1" />
+                <field name="coverage" 
+                        optional="show"
+                        attrs="{'required': [('healthcare_invoice', '=', 'healthcare_invoice')], 
+                                'invisible': [('healthcare_invoice', '=', 'not_healthcare_invoice')]}" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

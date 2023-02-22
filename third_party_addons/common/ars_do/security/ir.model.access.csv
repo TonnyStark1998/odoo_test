@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ars_do_healthcare_plan_manager,ars_do.healthcare_plan manager,model_ars_do_healthcare_plan,account.group_account_manager,1,1,1,0
+access_ars_do_healthcare_card_manager,ars_do.healthcare_card manager,model_ars_do_healthcare_card,account.group_account_manager,1,1,1,0
+access_ars_do_healthcare_medical_record_manager,ars_do.healthcare_medical_record manager,model_ars_do_healthcare_medical_record,account.group_account_manager,1,1,1,0

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Views -->
+    <record model="ir.ui.view" id="ars_do_healthcare_medicines_view_form">
+        <field name="name">ars.do.healthcare.medicines.view.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='options']" position="inside">
+                <div>
+                    <field name="is_medicine"
+                            readonly="1" />
+                    <label for="is_medicine" />
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record model="ir.actions.act_window" id="action_ars_do_healthcare_medicines_kanban">
+        <field name="name">Patients</field>
+        <field name="res_model">product.product</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="view_id" 
+                ref="product.product_kanban_view" />
+        <field name="domain" 
+                eval="[('is_medicine', '=', True)]" />
+        <field name="context"
+                eval="{'default_is_medicine': True}" />
+    </record>
+
+    <!-- Menu items -->
+    <menuitem id="menu_ars_do_healthcare_medicines"
+                name="Medicines" 
+                parent="main_menu_ars_do" 
+                action="action_ars_do_healthcare_medicines_kanban" 
+                sequence="3"
+                groups="-account.group_account_user,account.group_account_manager" />
+</odoo>
