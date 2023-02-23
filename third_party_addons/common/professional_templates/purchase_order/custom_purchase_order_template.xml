@@ -14,13 +14,13 @@
                  class="header col-12">
                 <t t-if="style.header">
                     <div class="col-7 float-left" style="padding-left:0px;">
-                        <img t-if="style.logo" t-att-src="image_data_uri(style.logo)" style="max-height: 90px;"
+                        <img t-if="style.logo" t-att-src="image_data_uri(style.logo)" style="max-height: {{int(o.style.logo_size)}}px;"
                              alt="Company Logo"/>
                         <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
-                             style="max-height: 90px;" alt="Company Logo"/>
+                             style="max-height: {{int(o.style.logo_size)}}px;" alt="Company Logo"/>
                     </div>
 
-                    <div class="col-5 mb8 float-right"
+                    <div class="col-5 mb-8 float-right"
                          style="font-size:12px !important; padding-bottom:2px;padding-right:0px;">
                         <h1 t-attf-style="color:{{style.text_color}}">
                             <span t-field="o.name"/>
@@ -70,7 +70,7 @@
             <!--start of page-->
             <div class="article page clearfix" t-attf-data-oe-model="purchase.order" t-attf-data-oe-id="{{o.id}}"
                  t-attf-style="margin-top:4px; padding-top:5px; padding-left:0px; padding-right:0px; color:{{style.text_color}} !important;">
-                <div class="col-12 float-left" style="padding-left:0px; padding-right:0px; padding-bottom:2px;">
+                <div class="col-12 float-left mt-5" style="padding-left:0px; padding-right:0px; padding-bottom:2px;">
                     <div class="col-5 pull-left"
                          t-attf-style="font-size:{{int(style.body_font)}}px !important;">
                         <div t-attf-style="background-color:{{style.theme_color}}; padding:5px;color:{{style.theme_txt_color}};">
@@ -118,40 +118,41 @@
                             <span t-field="o.partner_id.website"/>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-8 mb-3 pull-right"
+                    <div class="col-7 mb-3 pull-right"
                      t-attf-style="background-color:{{style.theme_color}}; padding:10px; color:{{style.theme_txt_color}};">
-                    <h5>
-                        <strong>
-                            <span t-if="o.state == 'draft'">Solicitud de Cotización #</span>
-                            <span t-if="o.state != 'draft'">Pedido #</span>
-                            <span t-field="o.name"/>
-                        </strong>
-                    </h5>
-                    <div class="row"
-                         t-attf-style="margin-top:10px;margin-left:10px;font-size:{{int(style.body_font)+5}}px; font-weight:bold;">
-                        <div class="col-5">Nuestra orden Ref:</div>
-                        <div class="col-5">Fecha de orden:</div>
-                        <div class="col-2"/>
-                    </div>
-
-                    <div class="row"
-                         t-attf-style="margin-left:10px;font-size:{{int(style.body_font)+5}}px;">
-
-                        <div class="col-5">
-                            <span t-field="o.name"/>
+                        <h5>
+                            <strong>
+                                <span t-if="o.state == 'draft'">Solicitud de Cotización #</span>
+                                <span t-if="o.state != 'draft'">Pedido #</span>
+                                <span t-field="o.name"/>
+                            </strong>
+                        </h5>
+                        <div class="row"
+                            t-attf-style="margin-top:10px;margin-left:10px;font-size:{{int(style.body_font)+5}}px; font-weight:bold;">
+                            <div class="col-5">Nuestra orden Ref:</div>
+                            <div class="col-5">Fecha de orden:</div>
+                            <div class="col-2"/>
                         </div>
 
+                        <div class="row"
+                            t-attf-style="margin-left:10px;font-size:{{int(style.body_font)+5}}px;">
 
-                        <div class="col-5">
-                            <span t-field="o.date_order"/>
+                            <div class="col-5">
+                                <span t-field="o.name"/>
+                            </div>
+
+
+                            <div class="col-5">
+                                <span t-field="o.date_order"/>
+                            </div>
+
+
+                            <div class="col-2"/>
                         </div>
-
-
-                        <div class="col-2"/>
                     </div>
                 </div>
+
                 <!-- start of order data-->
                 <br/>
                 <t t-call="professional_templates.custom_purchase_order_lines"/>
