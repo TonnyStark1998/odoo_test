@@ -5,11 +5,6 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
-            <field name="partner_id" position="attributes">
-                <attribute name="domain">[('type', 'in', ['out_invoice', 'out_refund']),
-                                            ('healthcare_invoice', '=', 'healthcare_invoice'),
-                                            ('is_patient', '=', True)]</attribute>
-            </field>
             <xpath expr="//label[@for='partner_id' and position()=1]/.." position="before">
                 <field name="healthcare_invoice" 
                         widget="radio" 

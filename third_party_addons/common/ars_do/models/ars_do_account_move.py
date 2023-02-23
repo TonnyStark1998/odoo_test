@@ -61,6 +61,14 @@ class ArsDoAccountMove(models.Model):
 
             if self.healthcare_invoice == 'healthcare_invoice':
                 if self.partner_id:
+                    if not self.partner_id.is_patient:
+                        self.partner_id = False
+                        return {
+                            'domain': {
+                                    'partner_id': [('is_patient', '=', True)]
+                            }
+                        }
+
                     self.healthcare_card = self.partner_id.healthcare_cards\
                                                             .filtered(lambda self: self.default_card == True)
 

@@ -65,7 +65,8 @@ class ArsDoHealthcareMedicalRecord(models.Model):
     medicines = fields.Many2many(string='Medicines',
                                     comodel_name='product.product',
                                     relation='ars_do_healthcare_medical_records_medicines',
-                                    domain=[('is_medicine', '=', True)])
+                                    domain=[('is_medicine', '=', True)],
+                                    required=True)
     healthcare_patient = fields.Many2one(string='Patient',
                                             comodel_name='res.partner')
 
