@@ -49,7 +49,7 @@ class ArsDoAccountMove(models.Model):
 
     @api.onchange('partner_id')
     def _onchange_partner_id(self):
-        if self.type in ['in_invoice', 'in_refund']:
+        if self.type in ['out_invoice', 'out_refund']:
             if not self.healthcare_invoice and self.partner_id:
                 self.partner_id = False
                 return { 
@@ -68,5 +68,5 @@ class ArsDoAccountMove(models.Model):
     @api.constrains('healthcare_invoice')
     def _constrain_healthcare_invoice(self):
         for move in self:
-            if move.type in ['in_invoice', 'in_refund'] and not move.healthcare_invoice:
+            if move.type in ['out_invoice', 'out_refund'] and not move.healthcare_invoice:
                 raise exceptions.ValidationError(_('You must indicate if this is a Healthcare or Regular invoice.'))
