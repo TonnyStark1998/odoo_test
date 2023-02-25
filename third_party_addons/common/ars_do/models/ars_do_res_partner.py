@@ -34,5 +34,7 @@ class ArsDoResPartner(models.Model):
     @api.depends('healthcare_plans', 'healthcare_cards')
     def _compute_healthcare_counts(self):
         for partner in self:
-            partner.healthcare_plans_count = 1 #len(partner.healthcare_plans)
-            partner.healthcare_cards_count = 2 #len(partner.healthcare_cards)
+            partner.healthcare_plans_count = self.env['ars.do.healthcare.plan']\
+                                                    .search_count([('healthcare_provider', '=', partner.id)])
+            partner.healthcare_cards_count = self.env['ars.do.healthcare.card']\
+                                                    .search_count([('healthcare_patient', '=', partner.id)])

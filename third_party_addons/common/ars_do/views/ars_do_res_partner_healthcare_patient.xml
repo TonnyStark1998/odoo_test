@@ -13,6 +13,12 @@
                 eval="{'default_category_id': [ref('ars_do.healthcare_provider_category_patient')],
                         'default_is_patient': True}" />
     </record>
+    <record model="ir.actions.act_url" id="actions_ars_do_patient_admission_form">
+        <field name="name">actions_ars_do_patient_admission_form</field>
+        <field name="url" 
+                eval="'/web/content/{}?download=true'.format(str(ref('ars_do.ars_do_patient_form')))" />
+        <field name="target">new</field>
+    </record>
 
     <!-- Menu items -->
     <menuitem id="menu_ars_do_healthcare_patients"
@@ -20,5 +26,12 @@
                 parent="main_menu_ars_do" 
                 action="action_ars_do_healthcare_patients_kanban" 
                 sequence="2"
+                groups="-account.group_account_user,account.group_account_manager" />
+
+    <menuitem id="menu_ars_do_healthcare_patient_form"
+                name="Admission Form" 
+                parent="main_menu_ars_do" 
+                action="actions_ars_do_patient_admission_form" 
+                sequence="5"
                 groups="-account.group_account_user,account.group_account_manager" />
 </odoo>

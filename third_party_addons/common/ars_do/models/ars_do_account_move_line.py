@@ -43,4 +43,6 @@ class ArsDoAccountMoveLine(models.Model):
             price_total_and_subtotal['price_subtotal'] = \
                 price_total_and_subtotal['price_subtotal'] * (1 - (self.coverage / 100))
 
+        price_total_and_subtotal['coverage'] = self.coverage
+
         return price_total_and_subtotal

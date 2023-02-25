@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id ="ars_do_healthcare_report_ars_view_tree">
+        <field name="name">ars.do.healthcare.report.ars.view.tree</field>
+        <field name="model">ars.do.healthcare.report.ars.item</field>
+        <field name="arch" type="xml">
+            <tree default_order="invoice_date,healthcare_provider desc"
+                    create="0"
+                    edit="0"
+                    delete="0"
+                    import="0">
+                <field name="invoice_date" />
+                <field name="healthcare_patient" />
+                <field name="identity_number" 
+                        optional="show" />
+                <field name="healthcare_provider" />
+                <field name="healthcare_plan" />
+                <field name="healthcare_card"  />
+                <field name="healthcare_authorization_number" />
+                <field name="healthcare_procedure" />
+                <field name="amount" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="ars_do_healthcare_report_ars_view_search">
+        <field name="name">ars.do.healthcare.report.ars.view.search</field>
+        <field name="model">ars.do.healthcare.report.ars.item</field>
+        <field name="arch" type="xml">
+            <search string="Filter Report ARS Items">
+                <field string="ARS" 
+                        name="healthcare_provider"
+                        filter_domain="[('healthcare_provider', 'ilike', self)]" />
+                <filter string="Date" 
+                        name="invoice_date"
+                        date="invoice_date" />
+                <group expand="0" string="Group By">
+                    <filter string="Healthcare Provider (ARS)" 
+                            name="group_by_ars" 
+                            domain="[]" 
+                            context="{'group_by': 'healthcare_provider'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

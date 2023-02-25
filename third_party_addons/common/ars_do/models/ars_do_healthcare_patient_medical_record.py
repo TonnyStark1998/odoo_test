@@ -119,3 +119,32 @@ class ArsDoHealthcareMedicalRecord(models.Model):
         for record in self:
             if not record.fdp:
                 raise exceptions.ValidationError(_('You must specify a value for FDP field.'))
+
+    @api.constrains('blood_pressure_high', 'blood_pressure_low', 'time', 'bfr', 'weight', 'fldrmvd', 'heparin', 'ufr', 'temperature', 'ptm', 'ktv')
+    def _constrain_value_greater_than_zero(self):
+        field_name = False
+        if self.blood_pressure_high <= 0:
+            field_name = 'blood_pressure_high'
+        if self.blood_pressure_high <= 0:
+            field_name = 'blood_pressure_high'
+        if self.time < 0:
+            field_name = 'time'
+        if self.bfr <= 0:
+            field_name = 'BFR'
+        if self.weight <= 0:
+            field_name = 'Weight'
+        if self.fldrmvd <= 0:
+            field_name = 'FLDRMVD'
+        if self.heparin <= 0:
+            field_name = 'Heparin'
+        if self.ufr <= 0:
+            field_name = 'UFR'
+        if self.temperature <= 0:
+            field_name = 'Temperature'
+        if self.ptm <= 0:
+            field_name = 'PTM'
+        if self.ktv <= 0:
+            field_name = 'KTV'
+        
+        if field_name:
+            raise exceptions.UserError(_('Field {} can\'t have a value equal or below to 0.'.format(field_name)))

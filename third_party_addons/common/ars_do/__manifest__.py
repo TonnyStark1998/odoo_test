@@ -17,6 +17,7 @@
         'data/ars_do_res_partner_category.xml',
         'data/ars_do_default_healthcare_providers.xml',
         'data/ars_do_healthcare_medicines.xml',
+        'data/ars_do_ir_attachment_patient_form.xml',
         'views/ars_do_account_move_views.xml',
         'views/ars_do_healthcare_card.xml',
         'views/ars_do_healthcare_plans.xml',
@@ -25,6 +26,8 @@
         'views/ars_do_res_partner_healthcare_patient.xml',
         'views/ars_do_healthcare_medical_record.xml',
         'views/ars_do_healthcare_medicines.xml',
+        'views/ars_do_healthcare_report_ars.xml',
+        'views/ars_do_healthcare_report_actions.xml',
     ],
     'qweb':[
     ],

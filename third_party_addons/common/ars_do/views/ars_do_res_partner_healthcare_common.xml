@@ -11,13 +11,13 @@
                 <field name="healthcare_cards_count" />
             </field>
             <xpath expr="//div[hasclass('oe_kanban_details')]" position="inside">
-                <ul t-if="record.is_ars === True">
+                <ul t-if="record.is_ars == True">
                     <li>
                         <span>Plans Count: </span>
                         <field name="healthcare_plans_count" />
                     </li>
                 </ul>
-                <ul t-if="record.is_patient === True">
+                <ul t-if="record.is_patient == True">
                     <li>
                         <span>Cards Count:</span>
                         <field name="healthcare_cards_count" />
