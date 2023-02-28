@@ -52,7 +52,7 @@
                             type="object"
                             states="reconciling"
                             confirm="Are you sure you want to mark this report as reconciled?" />
-                    <button string="View" 
+                    <button string="View reconciled" 
                             class="oe_highlight"
                             name="action_view" 
                             type="object"
