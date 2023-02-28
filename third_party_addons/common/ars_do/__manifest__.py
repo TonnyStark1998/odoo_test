@@ -27,6 +27,7 @@
         'views/ars_do_healthcare_medical_record.xml',
         'views/ars_do_healthcare_medicines.xml',
         'views/ars_do_healthcare_report_ars.xml',
+        'views/ars_do_healthcare_report_ars_item.xml',
         'views/ars_do_healthcare_report_actions.xml',
     ],
     'qweb':[

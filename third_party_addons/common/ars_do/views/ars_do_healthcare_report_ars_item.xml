@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="ars_do_healthcare_report_ars_item_view_tree">
+        <field name="name">ars.do.healthcare.report.ars.item.view.tree</field>
+        <field name="model">ars.do.healthcare.report.ars.item</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree default_order="invoice_date,healthcare_provider desc"
+                    create="0"
+                    edit="0"
+                    delete="0"
+                    import="0">
+                <field name="invoice_date" />
+                <field name="healthcare_patient" />
+                <field name="identity_number" 
+                        optional="hide" />
+                <field name="healthcare_provider"
+                        optional="hide" />
+                <field name="healthcare_plan"
+                        optional="hide" />
+                <field name="healthcare_card" 
+                        optional="hide" />
+                <field name="healthcare_authorization_number" 
+                        optional="hide" />
+                <field name="healthcare_procedure" />
+                <field name="amount" 
+                        optional="hide" />
+                <field name="amount_due" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="ars_do_healthcare_report_ars_item_reconcile_view_tree">
+        <field name="name">ars.do.healthcare.report.ars.item.reconcile.view.tree</field>
+        <field name="model">ars.do.healthcare.report.ars.item</field>
+        <field name="priority">2</field>
+        <field name="arch" type="xml">
+            <tree default_order="invoice_date,healthcare_provider desc"
+                    create="0"
+                    editable="top"
+                    delete="0"
+                    import="0"
+                    export_xlsx="0">
+                <field name="report_state" />
+                <field name="invoice_date" 
+                        readonly="1" />
+                <field name="healthcare_patient" 
+                        readonly="1" />
+                <field name="identity_number" 
+                        readonly="1" 
+                        optional="show" />
+                <field name="healthcare_provider" 
+                        readonly="1" />
+                <field name="healthcare_plan" 
+                        readonly="1" />
+                <field name="healthcare_card" 
+                        readonly="1" />
+                <field name="healthcare_authorization_number" 
+                        readonly="1" />
+                <field name="healthcare_procedure" 
+                        readonly="1" />
+                <field name="amount" 
+                        readonly="1" />
+                <field name="payment_ids"
+                        widget="many2many_tags"
+                        options="{'no_create': 1}"
+                        attrs="{'readonly': [('report_state', 'in', ['reconciled'])]}" />
+                <field name="amount_paid"
+                        attrs="{'readonly': [('report_state', 'in', ['reconciled'])]}" />
+                <field name="amount_due"
+                        readonly="1"
+                        force_save="1" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="ars_do_healthcare_report_ars_item_reconcile_noneditable_view_tree">
+        <field name="name">ars.do.healthcare.report.ars.item.reconcile.noneditable.view.tree</field>
+        <field name="model">ars.do.healthcare.report.ars.item</field>
+        <field name="priority">3</field>
+        <field name="arch" type="xml">
+            <tree default_order="invoice_date,healthcare_provider desc"
+                    create="0"
+                    edit="0"
+                    delete="0"
+                    import="0"
+                    export_xlsx="0">
+                <field name="report_state" />
+                <field name="invoice_date" 
+                        readonly="1" />
+                <field name="healthcare_patient" 
+                        readonly="1" />
+                <field name="identity_number" 
+                        readonly="1" 
+                        optional="show" />
+                <field name="healthcare_provider" 
+                        readonly="1" />
+                <field name="healthcare_plan" 
+                        readonly="1" />
+                <field name="healthcare_card" 
+                        readonly="1" />
+                <field name="healthcare_authorization_number" 
+                        readonly="1" />
+                <field name="healthcare_procedure" 
+                        readonly="1" />
+                <field name="amount" 
+                        readonly="1" />
+                <field name="payment_ids"
+                        widget="many2many_tags"
+                        options="{'no_create': 1}"
+                        readonly="1" />
+                <field name="amount_paid"
+                        readonly="1" />
+                <field name="amount_due"
+                        readonly="1"
+                        force_save="1" />
+            </tree>
+        </field>
+    </record>
+</odoo>

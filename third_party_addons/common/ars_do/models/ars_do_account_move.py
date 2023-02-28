@@ -9,14 +9,14 @@ class ArsDoAccountMove(models.Model):
 
     healthcare_invoice = fields.Selection(string='Healthcare Invoice',
                                             selection=[
-                                                ('healthcare_invoice', 'Healthcare'),
-                                                ('not_healthcare_invoice', 'Regular')
+                                                ('healthcare_invoice', 'Insurance'),
+                                                ('not_healthcare_invoice', 'Private')
                                             ])
 
     healthcare_card = fields.Many2one(string='Healthcare Card',
                                         comodel_name='ars.do.healthcare.card')
-    healthcare_provider = fields.Char(related='healthcare_card.healthcare_plan.healthcare_provider.name',
-                                        store=True)
+    healthcare_provider = fields.Many2one(related='healthcare_card.healthcare_plan.healthcare_provider',
+                                            store=True)
     healthcare_plan = fields.Char(related='healthcare_card.healthcare_plan.name',
                                     store=True)
     healthcare_authorization_number = fields.Char(string='Healthcare Authorization Number',
@@ -28,8 +28,8 @@ class ArsDoAccountMove(models.Model):
         self.ensure_one()
         self.partner_id = None
         self.healthcare_card = None
-        if self.line_ids:
-            for line in self.line_ids:
+        if self.invoice_line_ids:
+            for line in self.invoice_line_ids:
                 line.coverage = 0.0
                 if not line.move_id.is_invoice(include_receipts=True):
                     continue
@@ -92,15 +92,20 @@ class ArsDoAccountMove(models.Model):
             invoice_date = self.invoice_date
             healthcare_patient = self.partner_id.name
             identity_number = self.partner_id.vat or ''
-            healthcare_provider = self.healthcare_provider
+            healthcare_provider = self.healthcare_provider.id
             healthcare_plan = self.healthcare_plan
             healthcare_card = self.healthcare_card.number
             healthcare_authorization_number = self.healthcare_authorization_number
             currency_id = self.currency_id
+            report = self._create_report()
+
+            if report.state in ['sent', 'reconciling', 'reconciled']:
+                return exceptions.ValidationError(_('You can\'t more invoice to the ARS report for this month.'))
 
             for invoice_line in self.invoice_line_ids:
                 self.env['ars.do.healthcare.report.ars.item']\
                         .create({
+                            'report_id': report.id,
                             'invoice_id': invoice_id,
                             'invoice_line_id': invoice_line.id,
                             'invoice_date': invoice_date,
@@ -126,3 +131,23 @@ class ArsDoAccountMove(models.Model):
             self.env['ars.do.healthcare.report.ars.item']\
                     .search([('invoice_id', '=', move_id)])\
                     .unlink()
+
+    # Private Methods
+    def _create_report(self):
+        if self.invoice_date:
+            invoice_month = str(self.invoice_date.month).rjust(2,'0')
+            invoice_year = str(self.invoice_date.year)
+            healthcare_provider = self.healthcare_provider.id
+            report = self.env['ars.do.healthcare.report.ars']\
+                            .search([('healthcare_provider', '=', healthcare_provider),
+                                        ('report_year', '=', invoice_year),
+                                        ('report_month', '=', invoice_month)])
+            if not report:
+                return self.env['ars.do.healthcare.report.ars']\
+                            .create({
+                                'healthcare_provider': healthcare_provider,
+                                'report_year': invoice_year,
+                                'report_month': invoice_month,
+                                'state': 'draft'
+                            })
+            return report

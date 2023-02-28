@@ -37,11 +37,11 @@
                                                         ('partner_id', '=', False)]}" />
             </xpath>
             <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='price_unit']" position="after">
-                <field name="healthcare_invoice" invisible="1" />
+                <field name="healthcare_invoice"
+                        invisible="1" />
                 <field name="coverage" 
                         optional="show"
-                        attrs="{'required': [('healthcare_invoice', '=', 'healthcare_invoice')], 
-                                'invisible': [('healthcare_invoice', '=', 'not_healthcare_invoice')]}" />
+                        attrs="{'required': [('healthcare_invoice', '=', 'healthcare_invoice')]}" />
             </xpath>
             <xpath expr="//field[@name='line_ids']/tree/field[@name='price_unit']" position="after">
                 <field name="healthcare_invoice" 
