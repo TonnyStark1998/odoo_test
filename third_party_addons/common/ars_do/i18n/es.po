@@ -786,3 +786,58 @@ msgstr "Debe especificar un valor para el campo 'Saline (M)'."
 #: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_view_form
 msgid "View downloadable version"
 msgstr "Visualizar versión descargable"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_account_move__created_from_sale
+msgid "Created from sale"
+msgstr "Creada desde Ventas"
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_account_move.py:0
+#, python-format
+msgid ""
+"Report of {} for period {}-{} has been already sent. Can't add more invoice "
+"to it."
+msgstr ""
+"Reporte de {} para el perído {}-{} ha sido enviado. No puede agregar mas facturas "
+"a este."
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_account_move.py:0
+#, python-format
+msgid "Report restriction!"
+msgstr "Error de restricción en reporte!"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_item_reconcile_noneditable_view_tree
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_item_reconcile_view_tree
+msgid "Total Amount"
+msgstr "Total Facturado"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_item_reconcile_noneditable_view_tree
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_item_reconcile_view_tree
+msgid "Total Due"
+msgstr "Total Adeudado"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_item_reconcile_noneditable_view_tree
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_item_reconcile_view_tree
+msgid "Total Paid"
+msgstr "Total Pagado"
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_sale_order.py:0
+#, python-format
+msgid ""
+"You must indicate if this is a Healthcare or Regular sale before selecting "
+"the Customer."
+msgstr ""
+"Debe especificar si esta venta es con Seguro o Privada antes de seleccionar"
+" al cliente."
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_sale_order.py:0
+#, python-format
+msgid "You must indicate if this is a Healthcare or Regular sale."
+msgstr "Debe especificar si esta venta es con Seguro o Privado."
