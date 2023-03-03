@@ -8,7 +8,6 @@
             <xpath expr="//label[@for='partner_id' and position()=1]/.." position="before">
                 <field name="healthcare_invoice" 
                         widget="radio" 
-                        class="oe_edit_only"
                         attrs="{'invisible': [('type', 'not in', ['out_invoice', 'out_refund'])]}" />
             </xpath>
             <xpath expr="//field[@name='partner_id']" position="after">

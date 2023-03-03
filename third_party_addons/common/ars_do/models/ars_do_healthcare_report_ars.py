@@ -69,6 +69,9 @@ class ArsDoHealthcareReportArs(models.Model):
     def action_view(self):
         return self._get_report_view_action('ars_do.ars_do_healthcare_report_ars_item_reconcile_noneditable_view_tree')
 
+    def action_view_printable_version(self):
+        return self._get_report_view_action('ars_do.ars_do_healthcare_report_ars_item_printable_view_tree')
+
     # Constrains Methods
     @api.constrains('report_year')
     def _constrain_report_year(self):

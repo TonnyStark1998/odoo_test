@@ -22,12 +22,18 @@ class ArsDoAccountMove(models.Model):
     healthcare_authorization_number = fields.Char(string='Healthcare Authorization Number',
                                                     size=20)
 
+    created_from_sale = fields.Boolean(string='Created from sale',
+                                        store=False,
+                                        default=False)
+
     # Changes methods
     @api.onchange('healthcare_invoice')
     def _onchange_healthcare_invoice(self):
         self.ensure_one()
-        self.partner_id = None
-        self.healthcare_card = None
+        if not self.created_from_sale:
+            self.partner_id = None
+            self.healthcare_card = None
+
         if self.invoice_line_ids:
             for line in self.invoice_line_ids:
                 line.coverage = 0.0
@@ -98,9 +104,18 @@ class ArsDoAccountMove(models.Model):
             healthcare_authorization_number = self.healthcare_authorization_number
             currency_id = self.currency_id
             report = self._create_report()
-
+            
+            log.info('[KCS] Report State: {}'.format(report.state))
             if report.state in ['sent', 'reconciling', 'reconciled']:
-                return exceptions.ValidationError(_('You can\'t more invoice to the ARS report for this month.'))
+                posted = False
+                return {
+                    'warning': {
+                        'title': _('Report restriction!'),
+                        '': _('Report of {} for period {}-{} has been already sent. Can\'t add more invoice to it.'
+                                    .format(report.healthcare_provider.name, report.report_month, report.report_year))
+                    }
+                }
+                # return exceptions.ValidationError(_('You can\'t more invoice to the ARS report for this month.'))
 
             for invoice_line in self.invoice_line_ids:
                 self.env['ars.do.healthcare.report.ars.item']\

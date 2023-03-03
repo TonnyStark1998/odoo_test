@@ -11,7 +11,7 @@
     'category': 'Accounting/Accounting',
     'version': '0.1',
     'css': ['static/src/css/*.css'],
-    'depends': ['base', 'contacts', 'billing_do', 'kcs_medical_app'],
+    'depends': ['base', 'contacts', 'sale', 'sale_management', 'billing_do', 'kcs_medical_app'],
     'data': [
         'security/ir.model.access.csv',
         'data/ars_do_res_partner_category.xml',
@@ -29,6 +29,7 @@
         'views/ars_do_healthcare_report_ars.xml',
         'views/ars_do_healthcare_report_ars_item.xml',
         'views/ars_do_healthcare_report_actions.xml',
+        'views/ars_do_sale_views.xml',
     ],
     'qweb':[
     ],

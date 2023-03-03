@@ -23,9 +23,9 @@
                 <field name="healthcare_authorization_number" 
                         optional="hide" />
                 <field name="healthcare_procedure" />
-                <field name="amount" 
-                        optional="hide" />
+                <field name="amount" />
                 <field name="amount_due" />
+                <field name="amount_paid" />
             </tree>
         </field>
     </record>
@@ -39,7 +39,7 @@
                     editable="top"
                     delete="0"
                     import="0"
-                    export_xlsx="0">
+                    export_xlsx="1">
                 <field name="report_state" />
                 <field name="invoice_date" 
                         readonly="1" />
@@ -58,17 +58,20 @@
                         readonly="1" />
                 <field name="healthcare_procedure" 
                         readonly="1" />
-                <field name="amount" 
-                        readonly="1" />
                 <field name="payment_ids"
                         widget="many2many_tags"
                         options="{'no_create': 1}"
                         attrs="{'readonly': [('report_state', 'in', ['reconciled'])]}" />
+                <field name="amount" 
+                        readonly="1"
+                        sum="Total Amount" />
                 <field name="amount_paid"
-                        attrs="{'readonly': [('report_state', 'in', ['reconciled'])]}" />
+                        attrs="{'readonly': [('report_state', 'in', ['reconciled'])]}" 
+                        sum="Total Paid" />
                 <field name="amount_due"
                         readonly="1"
-                        force_save="1" />
+                        force_save="1" 
+                        sum="Total Due" />
             </tree>
         </field>
     </record>
@@ -101,17 +104,43 @@
                         readonly="1" />
                 <field name="healthcare_procedure" 
                         readonly="1" />
-                <field name="amount" 
-                        readonly="1" />
                 <field name="payment_ids"
                         widget="many2many_tags"
                         options="{'no_create': 1}"
                         readonly="1" />
+                <field name="amount" 
+                        readonly="1" 
+                        sum="Total Amount" />
                 <field name="amount_paid"
-                        readonly="1" />
+                        readonly="1" 
+                        sum="Total Paid" />
                 <field name="amount_due"
                         readonly="1"
-                        force_save="1" />
+                        force_save="1" 
+                        sum="Total Due" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="ars_do_healthcare_report_ars_item_printable_view_tree">
+        <field name="name">ars.do.healthcare.report.ars.item.printable.view.tree</field>
+        <field name="model">ars.do.healthcare.report.ars.item</field>
+        <field name="priority">4</field>
+        <field name="arch" type="xml">
+            <tree default_order="invoice_date,healthcare_provider desc"
+                    create="0"
+                    edit="0"
+                    delete="0"
+                    import="0"
+                    export_xlsx="1">
+                <field name="invoice_date" />
+                <field name="healthcare_patient" />
+                <field name="identity_number"  />
+                <field name="healthcare_provider" />
+                <field name="healthcare_plan" />
+                <field name="healthcare_card" />
+                <field name="healthcare_authorization_number" />
+                <field name="healthcare_procedure" />
+                <field name="amount" />
             </tree>
         </field>
     </record>

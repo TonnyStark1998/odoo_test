@@ -16,14 +16,8 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: ars_do
-#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_medical_record__saline__0_45
-msgid "0.45%"
-msgstr ""
-
-#. module: ars_do
 #: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_medical_record__saline__0_9
 msgid "0.9%"
-msgstr ""
 
 #. module: ars_do
 #: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_report_ars__report_month__01
@@ -101,21 +95,6 @@ msgid "3 weekly"
 msgstr "3 semanas"
 
 #. module: ars_do
-#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_medical_record_view_form
-msgid "<span> cc</span>"
-msgstr ""
-
-#. module: ars_do
-#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_medical_record_view_form
-msgid "<span> kg</span>"
-msgstr ""
-
-#. module: ars_do
-#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_medical_record_view_form
-msgid "<span> mmHg</span>"
-msgstr ""
-
-#. module: ars_do
 #: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_common_view_kanban
 msgid "<span>Cards Count:</span>"
 msgstr "<span>Cantidad de seguros:</span>"
@@ -124,13 +103,6 @@ msgstr "<span>Cantidad de seguros:</span>"
 #: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_common_view_kanban
 msgid "<span>Plans Count: </span>"
 msgstr "<span>Cantidad de planes: </span>"
-
-#. module: ars_do
-#: model:ir.ui.menu,name:ars_do.menu_ars_do_healthcare_report_ars
-#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_view_search
-#: model:res.partner.category,name:ars_do.healthcare_provider_category_ars
-msgid "ARS"
-msgstr ""
 
 #. module: ars_do
 #: model:ir.ui.menu,name:ars_do.main_menu_ars_do
@@ -248,12 +220,6 @@ msgid "Channel"
 msgstr "Acceso"
 
 #. module: ars_do
-#: model:product.product,name:ars_do.medicine_1
-#: model:product.template,name:ars_do.medicine_1_product_template
-msgid "Complejo B"
-msgstr ""
-
-#. module: ars_do
 #: model:ir.model.fields,field_description:ars_do.field_account_move_line__coverage
 msgid "Coverage (%)"
 msgstr "Cobertura (%)"
@@ -321,18 +287,6 @@ msgid "Draft"
 msgstr "Borrador"
 
 #. module: ars_do
-#: model:product.product,name:ars_do.medicine_3
-#: model:product.template,name:ars_do.medicine_3_product_template
-msgid "Eritropoyetina 10 mil"
-msgstr ""
-
-#. module: ars_do
-#: model:product.product,name:ars_do.medicine_2
-#: model:product.template,name:ars_do.medicine_2_product_template
-msgid "Eritropoyetina 4 mil"
-msgstr ""
-
-#. module: ars_do
 #: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_card__expiry_date
 msgid "Expiry Date"
 msgstr "Fecha de expiración"
@@ -357,11 +311,6 @@ msgstr "Número de filtro"
 #: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_view_search
 msgid "Filter Report ARS"
 msgstr "Filtros de reporte de ARS"
-
-#. module: ars_do
-#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_medical_record__channel__fistula
-msgid "Fistula"
-msgstr ""
 
 #. module: ars_do
 #: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_view_search
@@ -446,21 +395,6 @@ msgstr "Proveedor de Seguro Médico (ARS)"
 #: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__heparin_display_value
 msgid "Heparin"
 msgstr "Heparina"
-
-#. module: ars_do
-#: model:product.product,name:ars_do.medicine_4
-#: model:product.template,name:ars_do.medicine_4_product_template
-msgid "Hierro"
-msgstr ""
-
-#. module: ars_do
-#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_card__id
-#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__id
-#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_plan__id
-#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars__id
-#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__id
-msgid "ID"
-msgstr ""
 
 #. module: ars_do
 #: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__identity_number
@@ -624,11 +558,6 @@ msgid "PTM"
 msgstr "BPV/LP"
 
 #. module: ars_do
-#: model:res.partner.category,name:ars_do.healthcare_provider_category_patient
-msgid "Paciente"
-msgstr ""
-
-#. module: ars_do
 #: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__healthcare_patient
 #: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__healthcare_patient
 msgid "Patient"
@@ -645,11 +574,6 @@ msgstr "Pacientes"
 #: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__payment_ids
 msgid "Payments Associated"
 msgstr "Referencia de pagos"
-
-#. module: ars_do
-#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__healthcare_plan
-msgid "Plan"
-msgstr ""
 
 #. module: ars_do
 #: model:ir.model.fields.selection,name:ars_do.selection__account_move__healthcare_invoice__not_healthcare_invoice
@@ -790,12 +714,6 @@ msgid "User error!"
 msgstr "Error de usuario"
 
 #. module: ars_do
-#: model:product.product,name:ars_do.medicine_6
-#: model:product.template,name:ars_do.medicine_6_product_template
-msgid "Vancomicina"
-msgstr ""
-
-#. module: ars_do
 #: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_view_form
 msgid "View reconciled"
 msgstr "Ver conciliación"
@@ -865,6 +783,6 @@ msgid "You must specify a value for Saline field."
 msgstr "Debe especificar un valor para el campo 'Saline (M)'."
 
 #. module: ars_do
-#: model:ir.actions.act_url,name:ars_do.actions_ars_do_patient_admission_form
-msgid "actions_ars_do_patient_admission_form"
-msgstr ""
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_view_form
+msgid "View downloadable version"
+msgstr "Visualizar versión descargable"

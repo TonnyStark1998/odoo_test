@@ -53,3 +53,14 @@ class ArsDoHealthcareCard(models.Model):
                     'message': _('There is already a default card for this patient. Deactivate it first before marking another one as default.')
                 }
             }
+
+    # Model Methods
+    def create(self, values):
+        for card in values:
+            has_default_card = self.env['ars.do.healthcare.card']\
+                                .search_count(args=[('default_card', '=',True), 
+                                                    ('healthcare_patient', '=', card['healthcare_patient'])]) > 0
+            if 'default_card' in card:
+                if not has_default_card:
+                    card['default_card'] = True
+        super(ArsDoHealthcareCard,self).create(values)
