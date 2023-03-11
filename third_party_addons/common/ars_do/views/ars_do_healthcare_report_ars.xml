@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id ="ars_do_healthcare_report_ars_view_tree">
+        <field name="name">ars.do.healthcare.report.ars.view.tree</field>
+        <field name="model">ars.do.healthcare.report.ars</field>
+        <field name="arch" type="xml">
+            <tree default_order="healthcare_provider,report_year,report_month desc"
+                    decoration-success="'state' in ['reconciled']"
+                    decoration-danger="'state' in ['sent']"
+                    create="0"
+                    edit="0"
+                    delete="0"
+                    import="0">
+                <field name="healthcare_provider" />
+                <field name="report_month" />
+                <field name="report_year" />
+                <field name="report_items_count" />
+                <field name="create_uid" 
+                        optional="show" />
+                <field name="create_date" 
+                        optional="show" />
+                <field name="write_uid" 
+                        optional="hide" />
+                <field name="write_date" 
+                        optional="hide" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="ars_do_healthcare_report_ars_view_form">
+        <field name="name">ars.do.healthcare.report.ars.view.form</field>
+        <field name="model">ars.do.healthcare.report.ars</field>
+        <field name="arch" type="xml">
+            <form string="Add a new report"
+                    create="0"
+                    edit="0"
+                    delete="0">
+                <header>
+                    <button string="View downloadable version" 
+                            class="btn btn-secondary"
+                            name="action_view_printable_version" 
+                            type="object" />
+                    <button string="Mark as sent"
+                            class="btn btn-primary"
+                            name="action_mark_as_sent"
+                            type="object"
+                            states="draft"
+                            confirm="Do you confirm that this report was already sent to the provider? Once the report is sent, you won't be able to add more invoices." />
+                    <button string="Reconcile" 
+                            class="btn btn-primary"
+                            name="action_reconcile" 
+                            type="object"
+                            states="sent,reconciling" />
+                    <button string="Mark as reconciled"
+                            class="btn btn-primary"
+                            name="action_mark_as_reconciled"
+                            type="object"
+                            states="reconciling"
+                            confirm="Are you sure you want to mark this report as reconciled?" />
+                    <button string="View reconciled" 
+                            class="btn btn-primary"
+                            name="action_view" 
+                            type="object"
+                            states="reconciled" />
+                    <field name="state" 
+                            widget="statusbar" />
+                </header>
+                <sheet>
+                    <group>
+                        <h1 class="oe_title oe_left">
+                            <strong>
+                                <field name="name" 
+                                        nolabel="True" />
+                            </strong>
+                        </h1>
+                    </group>
+                    <group col="3">
+                        <group>
+                            <field name="healthcare_provider"
+                                    readonly="1" />
+                        </group>
+                        <group>
+                            <field name="report_year"
+                                    readonly="1" />
+                        </group>
+                        <group>
+                            <field name="report_month"
+                                    readonly="1" />
+                        </group>
+                        <group>
+                            <field name="create_uid" />
+                        </group>
+                        <group>
+                            <field name="create_date" />
+                        </group>
+                        <group>
+                            <field name="write_date" />
+                        </group>
+                    </group>
+                    <group>
+                        <group colspan="2">
+                            <h2 style="font-weight: bold;">Report Items</h2>
+                        </group>
+                        <group colspan="2">
+                            <field name="report_items"
+                                    nolabel="1" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="ars_do_healthcare_report_ars_view_search">
+        <field name="name">ars.do.healthcare.report.ars.view.search</field>
+        <field name="model">ars.do.healthcare.report.ars</field>
+        <field name="arch" type="xml">
+            <search string="Filter Report ARS">
+                <field string="ARS" 
+                        name="healthcare_provider"
+                        filter_domain="[('healthcare_provider', 'ilike', self)]" />
+                <field string="Year"
+                        name="report_year"
+                        filter_domain="[('report_year', '=', self)]" />
+                <field string="Month"
+                        name="report_month"
+                        filter_domain="[('report_month', '=', self)]" />
+                <group expand="0" string="Group By">
+                    <filter string="Healthcare Provider (ARS)" 
+                            name="group_by_ars" 
+                            domain="[]" 
+                            context="{'group_by': 'healthcare_provider'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

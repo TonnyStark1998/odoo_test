@@ -16,11 +16,11 @@
                     <div class="col-7 float-left" style="padding-left:0px;">
                         <img t-if="style.logo" 
                                 t-att-src="image_data_uri(style.logo)" 
-                                t-attf-style="max-height: {{int(o.style.logo_size)}}px;"
+                                t-attf-style="max-height: {{int(company.df_style.logo_size)}}px;"
                                 alt="Company Logo"/>
                         <img t-if="company.logo" 
                                 t-att-src="image_data_uri(company.logo)"
-                                t-attf-style="max-height: {{int(o.style.logo_size)}}px;" 
+                                t-attf-style="max-height: {{int(company.df_style.logo_size)}}px;" 
                                 alt="Company Logo"/>
                     </div>
 

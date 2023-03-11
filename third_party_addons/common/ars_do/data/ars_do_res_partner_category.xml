@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="healthcare_provider_category_ars" model="res.partner.category">
+        <field name="name">ARS</field>
+        <field name="color" eval="2"/>
+    </record>
+    <record id="healthcare_provider_category_patient" model="res.partner.category">
+        <field name="name">Paciente</field>
+        <field name="color" eval="2"/>
+    </record>
+</odoo>

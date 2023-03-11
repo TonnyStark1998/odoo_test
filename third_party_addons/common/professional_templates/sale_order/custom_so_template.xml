@@ -15,7 +15,7 @@
                     <div class="col-7 pull-left" style="padding-left:0;">
                         <img t-if="company.logo" 
                                 t-att-src="image_data_uri(company.logo)"
-                                t-attf-style="max-height: {{int(o.style.logo_size)}}px;"/>
+                                t-attf-style="max-height: {{int(company.df_style.logo_size)}}px;"/>
                     </div>
                     <div class="col-5 mb8 float-right"
                             style="font-size:12px !important; padding-bottom:2px; padding-right:0px;">
