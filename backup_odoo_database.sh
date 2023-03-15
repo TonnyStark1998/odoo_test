@@ -3,6 +3,8 @@ function remove_slash_if_exists(){
         ARGUMENT=$1
         if [[ "${ARGUMENT:(-1)}" == "/" ]]; then
                 echo "${ARGUMENT::-1}"
+        else
+                echo "${ARGUMENT}"
         fi
 }
 
