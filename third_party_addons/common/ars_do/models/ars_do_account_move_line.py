@@ -22,13 +22,14 @@ class ArsDoAccountMoveLine(models.Model):
                 line.update(line._get_price_total_and_subtotal())
                 line.update(line._get_fields_onchange_subtotal())
             elif line.move_id.healthcare_invoice == 'not_healthcare_invoice':
-                line.coverage = 0.0
-                return {
-                    'warning': {
-                        'title': _('User error!'),
-                        'message': _('This invoice is not a healthcare invoice, you can\'t apply any coverage value.')
+                if line.coverage > 0.0:
+                    line.coverage = 0.0
+                    return {
+                        'warning': {
+                            'title': _('User error!'),
+                            'message': _('This invoice is not a healthcare invoice, you can\'t apply any coverage value.')
+                        }
                     }
-                }
     
     def _get_price_total_and_subtotal(self, 
                                         price_unit=None, 
