@@ -7,7 +7,8 @@ class ArsDoAccountMoveLine(models.Model):
     _description = 'Model representing a Invoice Line.'
 
     coverage = fields.Float(string='Coverage (%)', 
-                                digits=(3,2))
+                                digits=(3,2),
+                                tracking=True)
     
     healthcare_invoice = fields.Selection(string='Healthcare Invoice',
                                             related='move_id.healthcare_invoice')
@@ -22,13 +23,14 @@ class ArsDoAccountMoveLine(models.Model):
                 line.update(line._get_price_total_and_subtotal())
                 line.update(line._get_fields_onchange_subtotal())
             elif line.move_id.healthcare_invoice == 'not_healthcare_invoice':
-                line.coverage = 0.0
-                return {
-                    'warning': {
-                        'title': _('User error!'),
-                        'message': _('This invoice is not a healthcare invoice, you can\'t apply any coverage value.')
+                if line.coverage > 0.0:
+                    line.coverage = 0.0
+                    return {
+                        'warning': {
+                            'title': _('User error!'),
+                            'message': _('This invoice is not a healthcare invoice, you can\'t apply any coverage value.')
+                        }
                     }
-                }
     
     def _get_price_total_and_subtotal(self, 
                                         price_unit=None, 
