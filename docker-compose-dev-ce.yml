@@ -8,7 +8,7 @@ services:
       - "${ENV_HOST_PORT}:8069"
     volumes:
       - type: bind
-        source: /c/Users/saluc/AppData/Local/Odoo/${ENV_DATABASE_NAME}/odoo
+        source: /var/data/${ENV_DATABASE_NAME}/odoo
         target: /var/data/odoo
       - ./conf-dev-ce:/etc/odoo
       - ./third_party_addons:/mnt/extra-addons
@@ -35,10 +35,10 @@ services:
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - type: bind
-        source: /c/Users/saluc/AppData/Local/Odoo/${ENV_DATABASE_NAME}/pgdata
+        source: /var/data/${ENV_DATABASE_NAME}/pgdata
         target: /var/lib/postgresql/data/pgdata
       - type: bind
-        source: /c/Users/saluc/AppData/Local/Odoo/production-backups/${ENV_DATABASE_NAME}/
+        source: /var/data/production-backups/${ENV_DATABASE_NAME}/
         target: /var/data/backups
     secrets:
       - postgresql_password
