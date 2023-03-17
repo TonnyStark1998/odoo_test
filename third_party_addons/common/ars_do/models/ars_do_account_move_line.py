@@ -7,7 +7,8 @@ class ArsDoAccountMoveLine(models.Model):
     _description = 'Model representing a Invoice Line.'
 
     coverage = fields.Float(string='Coverage (%)', 
-                                digits=(3,2))
+                                digits=(3,2),
+                                tracking=True)
     
     healthcare_invoice = fields.Selection(string='Healthcare Invoice',
                                             related='move_id.healthcare_invoice')

@@ -20,7 +20,8 @@ class ArsDoAccountMove(models.Model):
     healthcare_plan = fields.Char(related='healthcare_card.healthcare_plan.name',
                                     store=True)
     healthcare_authorization_number = fields.Char(string='Healthcare Authorization Number',
-                                                    size=20)
+                                                    size=20,
+                                                    tracking=True)
 
     created_from_sale = fields.Boolean(string='Created from sale',
                                         store=False,
