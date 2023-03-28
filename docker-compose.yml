@@ -13,7 +13,7 @@ services:
         target: /var/data/odoo
       - ./conf:/etc/odoo
       - ./third_party_addons:/mnt/extra-addons
-      - ../enterprise:/opt/odoo/enterprise
+      - /opt/odoo/enterprise:/opt/odoo/enterprise
     environment:
       - HOST=odoo-db
       - USER=usr_odoo
@@ -36,7 +36,7 @@ services:
         source: /var/data/odoo/${ENV_DATABASE_NAME}/pgdata
         target: /var/lib/postgresql/data/pgdata
       - type: bind
-        source: /var/data/odoo/production-backups/${ENV_DATABASE_NAME}/
+        source: /var/data/production-backups/${ENV_DATABASE_NAME}/
         target: /var/data/backups
     secrets:
       - postgresql_password

@@ -12,7 +12,7 @@ services:
         target: /var/data/odoo
       - ./conf-dev:/etc/odoo
       - ./third_party_addons:/mnt/extra-addons
-      - ../enterprise:/opt/odoo/enterprise
+      - /opt/odoo/enterprise:/opt/odoo/enterprise
     environment:
       - HOST=odoo-db
       - USER=usr_odoo
