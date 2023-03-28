@@ -855,27 +855,6 @@ msgstr "Mostrar reporte"
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_form
 msgid "Are you sure you want to generate the report? This can't be undone."
 msgstr "¿Está seguro que desea generar el reporte? Para generar el reporte nuevamente tendrá que crear uno nuevo."
-
-#. module: billing_do
-#: model:ir.ui.menu,name:billing_do.menu_billing_do_tax_reports_main
-msgid "Tax Reports"
-msgstr "Informes de impuestos"
-
-#. module: billing_do
-#: model:ir.ui.menu,name:billing_do.menu_tax_reports_list
-msgid "List all reports"
-msgstr "Listado de reportes"
-
-#. module: billing_do
-#: model:ir.ui.menu,name:billing_do.menu_tax_reports_create
-msgid "Create new report"
-msgstr "Crear reporte"
-
-#. module: billing_do
-#: model:ir.ui.menu,name:billing_do.menu_billing_do_tax_report_settings_label
-msgid "Tax Report Settings"
-msgstr "Reporte de impuestos"
-
 #. module: billing_do
 #: model:ir.ui.menu,name:billing_do.menu_tax_reports_type_list
 msgid "Report Types"
