@@ -9,7 +9,7 @@ services:
       - "${ENV_LONGPOLLING_PORT}:8072"
     volumes:
       - type: bind
-        source: /var/data/${ENV_DATABASE_NAME}/odoo
+        source: /var/data/odoo/${ENV_DATABASE_NAME}/odoo
         target: /var/data/odoo
       - ./conf-ce:/etc/odoo
       - ./third_party_addons:/mnt/extra-addons
