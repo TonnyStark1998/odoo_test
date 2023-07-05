@@ -11,14 +11,20 @@
     'website': "http://www.koalacreativesoftware.com",
     'category': 'Accounting/Accounting',
     'version': '1.0',
-    'depends': ['base', 'account', 'sale_management', 'purchase', 'crm', 'stock', 'l10n_do'],
+    'depends': ['base', 
+                'account', 
+                'delivery', 
+                'sale_management', 
+                'purchase', 
+                'crm', 
+                'stock', 
+                'l10n_do'],
     # always loaded
     'data': [
         'security/ir.model.access.csv',
         'security/billing_do_stock_quant_rule.xml',
         'views/billing_do_account_journal.xml',
         'views/billing_do_account_move.xml',
-        'views/billing_do_ir_sequence.xml',
         'views/billing_do_res_partner.xml',
         'views/billing_do_res_company.xml',
         'views/billing_do_res_config_settings_views.xml',
@@ -36,11 +42,14 @@
         'report/billing_do_account_payment_templates.xml',
         'data/default_tax_report_types.xml',
         'data/default_trn_types.xml',
+        'data/default_ncf_types_ir_sequences.xml',
+        'data/default_ncf_types.xml',
         'views/billing_do_account_move_line.xml',
+        'views/billing_do_ncf_types.xml',
+        'views/billing_do_ir_sequence_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
-        'demo/demo.xml'
     ],
     'installable': True,
     'application': True,

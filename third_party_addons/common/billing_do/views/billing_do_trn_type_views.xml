@@ -80,10 +80,4 @@
                 action="action_billing_do_trn_type_list" 
                 sequence="15"
                 groups="account.group_account_manager" />
-    <menuitem id="menu_accounting_trn_type_list"
-                name="TRN Types" 
-                parent="account.account_invoicing_menu" 
-                action="action_billing_do_trn_type_list" 
-                sequence="50"
-                groups="account.group_account_manager" />
 </odoo>

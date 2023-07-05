@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- Comprobantes no electrónicos -->
+    <record id="billing_do.default_ncf_type_b01" model="billing.do.ncf.type">
+        <field name="serie">B</field>
+        <field name="name">Factura de Crédito Fiscal</field>
+        <field name="code">01</field>
+        <field name="display_name">Factura de Crédito Fiscal</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_b01" />
+        <field name="is_sale_usable">true</field>
+        <field name="is_purchase_usable">false</field>
+    </record>
+    <record id="billing_do.default_ncf_type_b02" model="billing.do.ncf.type">
+        <field name="serie">B</field>
+        <field name="name">Factura de Consumo</field>
+        <field name="code">02</field>
+        <field name="display_name">Factura de Consumo</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_b02" />
+        <field name="is_sale_usable">true</field>
+        <field name="is_purchase_usable">false</field>
+    </record>
+    <record id="billing_do.default_ncf_type_b03" model="billing.do.ncf.type">
+        <field name="serie">B</field>
+        <field name="name">​Notas de Débito</field>
+        <field name="code">03</field>
+        <field name="display_name">​Notas de Débito</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_b03" />
+        <field name="is_sale_usable">true</field>
+        <field name="is_purchase_usable">false</field>
+    </record>
+    <record id="billing_do.default_ncf_type_b04" model="billing.do.ncf.type">
+        <field name="serie">B</field>
+        <field name="name">Notas de Crédito</field>
+        <field name="code">04</field>
+        <field name="display_name">Notas de Crédito</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_b04" />
+        <field name="is_sale_usable">true</field>
+        <field name="is_purchase_usable">false</field>
+    </record>
+    <record id="billing_do.default_ncf_type_b11" model="billing.do.ncf.type">
+        <field name="serie">B</field>
+        <field name="name">Comprobante de Compras</field>
+        <field name="code">11</field>
+        <field name="display_name">Comprobante de Compras</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_b11" />
+        <field name="is_sale_usable">false</field>
+        <field name="is_purchase_usable">true</field>
+    </record>
+    <record id="billing_do.default_ncf_type_b12" model="billing.do.ncf.type">
+        <field name="serie">B</field>
+        <field name="name">Registro Único de Ingresos</field>
+        <field name="code">12</field>
+        <field name="display_name">Registro Único de Ingresos</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_b12" />
+        <field name="is_sale_usable">true</field>
+        <field name="is_purchase_usable">false</field>
+    </record>
+    <record id="billing_do.default_ncf_type_b13" model="billing.do.ncf.type">
+        <field name="serie">B</field>
+        <field name="name">Comprobante para Gastos Menores</field>
+        <field name="code">13</field>
+        <field name="display_name">Comprobante para Gastos Menores</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_b13" />
+        <field name="is_sale_usable">false</field>
+        <field name="is_purchase_usable">true</field>
+    </record>
+    <record id="billing_do.default_ncf_type_b14" model="billing.do.ncf.type">
+        <field name="serie">B</field>
+        <field name="name">Comprobante de Regímenes Especiales</field>
+        <field name="code">14</field>
+        <field name="display_name">Comprobante de Regímenes Especiales</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_b14" />
+        <field name="is_sale_usable">true</field>
+        <field name="is_purchase_usable">false</field>
+    </record>
+    <record id="billing_do.default_ncf_type_b15" model="billing.do.ncf.type">
+        <field name="serie">B</field>
+        <field name="name">Comprobante Gubernamental</field>
+        <field name="code">15</field>
+        <field name="display_name">Comprobante Gubernamental</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_b15" />
+        <field name="is_sale_usable">true</field>
+        <field name="is_purchase_usable">false</field>
+    </record>
+    <record id="billing_do.default_ncf_type_b16" model="billing.do.ncf.type">
+        <field name="serie">B</field>
+        <field name="name">Comprobante para exportaciones</field>
+        <field name="code">16</field>
+        <field name="display_name">Comprobante para exportaciones</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_b16" />
+        <field name="is_sale_usable">true</field>
+        <field name="is_purchase_usable">false</field>
+    </record>
+    <record id="billing_do.default_ncf_type_b17" model="billing.do.ncf.type">
+        <field name="serie">B</field>
+        <field name="name">Comprobante para Pagos al Exterior</field>
+        <field name="code">17</field>
+        <field name="display_name">Comprobante para Pagos al Exterior</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_b17" />
+        <field name="is_sale_usable">false</field>
+        <field name="is_purchase_usable">true</field>
+    </record>
+
+    <!-- Comprobantes electrónicos -->
+    <record id="billing_do.default_ncf_type_e31" model="billing.do.ncf.type">
+        <field name="serie">E</field>
+        <field name="name">Factura de Crédito Fiscal Electrónica</field>
+        <field name="code">31</field>
+        <field name="display_name">Factura de Crédito Fiscal Electrónica</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_e31" />
+        <field name="is_sale_usable">true</field>
+        <field name="is_purchase_usable">false</field>
+    </record>
+    <record id="billing_do.default_ncf_type_e32" model="billing.do.ncf.type">
+        <field name="serie">E</field>
+        <field name="name">Factura de Consumo Electrónica</field>
+        <field name="code">32</field>
+        <field name="display_name">Factura de Consumo Electrónica</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_e32" />
+        <field name="is_sale_usable">true</field>
+        <field name="is_purchase_usable">false</field>
+    </record>
+    <record id="billing_do.default_ncf_type_e33" model="billing.do.ncf.type">
+        <field name="serie">E</field>
+        <field name="name">Nota de Débito Electrónica</field>
+        <field name="code">33</field>
+        <field name="display_name">Nota de Débito Electrónica</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_e33" />
+        <field name="is_sale_usable">true</field>
+        <field name="is_purchase_usable">false</field>
+    </record>
+    <record id="billing_do.default_ncf_type_e34" model="billing.do.ncf.type">
+        <field name="serie">E</field>
+        <field name="name">Nota de Crédito Electrónica</field>
+        <field name="code">34</field>
+        <field name="display_name">Nota de Crédito Electrónica</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_e34" />
+        <field name="is_sale_usable">true</field>
+        <field name="is_purchase_usable">false</field>
+    </record>
+    <record id="billing_do.default_ncf_type_e41" model="billing.do.ncf.type">
+        <field name="serie">E</field>
+        <field name="name">Comprobante Electrónico de Compras</field>
+        <field name="code">41</field>
+        <field name="display_name">Comprobante Electrónico de Compras</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_e41" />
+        <field name="is_sale_usable">false</field>
+        <field name="is_purchase_usable">true</field>
+    </record>
+    <record id="billing_do.default_ncf_type_e43" model="billing.do.ncf.type">
+        <field name="serie">E</field>
+        <field name="name">Comprobante Electrónico para Gastos Menores</field>
+        <field name="code">43</field>
+        <field name="display_name">Comprobante Electrónico para Gastos Menores</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_e43" />
+        <field name="is_sale_usable">false</field>
+        <field name="is_purchase_usable">true</field>
+    </record>
+    <record id="billing_do.default_ncf_type_e44" model="billing.do.ncf.type">
+        <field name="serie">E</field>
+        <field name="name">Comprobante Electrónico para Regímenes Especiales</field>
+        <field name="code">44</field>
+        <field name="display_name">Comprobante Electrónico para Regímenes Especiales</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_e44" />
+        <field name="is_sale_usable">true</field>
+        <field name="is_purchase_usable">false</field>
+    </record>
+    <record id="billing_do.default_ncf_type_e45" model="billing.do.ncf.type">
+        <field name="serie">E</field>
+        <field name="name">Comprobante Electrónico Gubernamental</field>
+        <field name="code">45</field>
+        <field name="display_name">Comprobante Electrónico Gubernamental</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_e45" />
+        <field name="is_sale_usable">true</field>
+        <field name="is_purchase_usable">false</field>
+    </record>
+    <record id="billing_do.default_ncf_type_e46" model="billing.do.ncf.type">
+        <field name="serie">E</field>
+        <field name="name">Comprobante Electrónico para Exportaciones</field>
+        <field name="code">46</field>
+        <field name="display_name">Comprobante Electrónico para Exportaciones</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_e46" />
+        <field name="is_sale_usable">true</field>
+        <field name="is_purchase_usable">false</field>
+    </record>
+    <record id="billing_do.default_ncf_type_e47" model="billing.do.ncf.type">
+        <field name="serie">E</field>
+        <field name="name">Comprobante Electrónico para Pagos al Exterior</field>
+        <field name="code">47</field>
+        <field name="display_name">Comprobante Electrónico para Pagos al Exterior</field>
+        <field name="sequence" ref="billing_do.default_ncf_type_ir_sequence_e47" />
+        <field name="is_sale_usable">true</field>
+        <field name="is_purchase_usable">false</field>
+    </record>
+</odoo>

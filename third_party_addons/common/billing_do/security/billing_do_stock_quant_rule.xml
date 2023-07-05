@@ -7,9 +7,9 @@
             <value eval="{'noupdate': False}"/>
         </function>
 
-        <record model="ir.rule" id="stock.stock_quant_rule">
+        <!-- <record model="ir.rule" id="stock.stock_quant_rule">
             <field name="domain_force">[('company_id', 'in', company_ids)]</field>
-        </record>
+        </record> -->
 
         <function name="write" model="ir.model.data">
             <function name="search" model="ir.model.data">

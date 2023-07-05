@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Menu items for NCF Types
+    -->
+    <menuitem id="menu_ncf_types_list"
+                name="NCF Types" 
+                parent="billing_do_ce.menu_billing_do_dominican_taxes_settings_label" 
+                action="billing_do.action_billing_do_ncf_types_list" 
+                sequence="2" />
+    <menuitem id="menu_accounting_trn_type_list"
+                name="TRN Types" 
+                parent="billing_do_ce.menu_billing_do_dominican_taxes_settings_label" 
+                action="billing_do.action_billing_do_trn_type_list" 
+                sequence="3"
+                groups="account.group_account_manager" />
+</odoo>

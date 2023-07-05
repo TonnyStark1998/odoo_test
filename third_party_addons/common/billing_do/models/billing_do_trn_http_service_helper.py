@@ -9,7 +9,7 @@ from odoo\
 class BillingDoTrnHttpServiceHelper(models.AbstractModel):
     _name = "billing.do.trn.http.service.helper"
     _inherit = "billing.do.authentication.http.service.helper"
-    _description = ""
+    _description = "Billing DO - TRN HTTP Service Helper"
 
     def dgii_validate_ncf(self, vat, ncf, vat_buyer, security_code):
         config = self.env['ir.config_parameter'].sudo()

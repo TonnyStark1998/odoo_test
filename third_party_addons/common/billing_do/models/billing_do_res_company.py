@@ -6,7 +6,8 @@ from odoo\
     import models, fields, api, exceptions
 
 class BillingDoResCompany(models.Model):
-    _inherit = "res.company"
+    _name = 'res.company'
+    _inherit = ['res.company', 'mail.thread']
 
     # Res Company - New Fields
     tax_contributor_type = fields.Selection(selection=[

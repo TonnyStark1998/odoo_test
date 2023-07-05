@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="billig_do_sequence_view">
+        <field name="name">billing.do.ir.sequence.view.list</field>
+        <field name="model">ir.sequence</field>
+        <field name="inherit_id" 
+            ref="base.sequence_view" />
+        <field name="arch" type="xml">
+            <field name="active" 
+                position="after">
+                <field name="ncf_type"
+                    invisible="true" />
+            </field>
+            <field name="use_date_range" 
+                position="attributes">
+                <attribute name="attrs">
+                    {'readonly': ['!', ('ncf_type', '=', False)],
+                    'force_save': '1'}
+                </attribute>
+            </field>
+            <field name="number_next_actual"
+                position="attributes">
+                <attribute name="attrs">
+                    {'readonly': ['!', ('ncf_type', '=', False)],
+                    'invsible': ['!', ('ncf_type', '=', False)]}
+                </attribute>
+            </field>
+            <field name="number_increment"
+                position="attributes">
+                <attribute name="attrs">
+                    {'readonly': ['!', ('ncf_type', '=', False)]}
+                </attribute>
+            </field>
+            <field name="implementation" 
+                position="attributes">
+                <attribute name="attrs">
+                    {'readonly': ['!', ('ncf_type', '=', False)],
+                    'force_save': '1'}
+                </attribute>
+            </field>
+            <field name="code"
+                position="attributes">
+                <attribute name="attrs">
+                    {'readonly': ['!', ('ncf_type', '=', False)],
+                    'force_save': '1'}
+                </attribute>
+            </field>
+            <field name="prefix"
+                position="attributes">
+                <attribute name="attrs">
+                    {'readonly': ['!', ('ncf_type', '=', False)],
+                    'force_save': '1'}
+                </attribute>
+            </field>
+            <field name="suffix"
+                position="attributes">
+                <attribute name="attrs">
+                    {'readonly': ['!', ('ncf_type', '=', False)]}
+                </attribute>
+            </field>
+            <xpath expr="//field[@name='date_range_ids']/tree/field[@name='number_next_actual']" 
+                position="after">
+                <field name="number_last" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

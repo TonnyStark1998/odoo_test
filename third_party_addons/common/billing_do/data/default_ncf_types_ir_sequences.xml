@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- Secuencias para Comprobantes No Electrónicos -->
+    <record id="billing_do.default_ncf_type_ir_sequence_b01" model="ir.sequence">
+        <field name="name">B01 Sequence</field>
+        <field name="code">B01</field>
+        <field name="prefix">B01</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b01" />
+        <field name="padding">8</field>
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_b02" model="ir.sequence">
+        <field name="name">B02 Sequence</field>
+        <field name="code">B02</field>
+        <field name="prefix">B02</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b02" />
+        <field name="padding">8</field>
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_b03" model="ir.sequence">
+        <field name="name">B03 Sequence</field>
+        <field name="code">B03</field>
+        <field name="prefix">B03</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b03" />
+        <field name="padding">8</field>
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_b04" model="ir.sequence">
+        <field name="name">B04 Sequence</field>
+        <field name="code">B04</field>
+        <field name="prefix">B04</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b04" />
+        <field name="padding">8</field>
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_b11" model="ir.sequence">
+        <field name="name">B11 Sequence</field>
+        <field name="code">B11</field>
+        <field name="prefix">B11</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b11" />
+        <field name="padding">8</field>
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_b12" model="ir.sequence">
+        <field name="name">B12 Sequence</field>
+        <field name="code">B12</field>
+        <field name="prefix">B12</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b12" />
+        <field name="padding">8</field>
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_b13" model="ir.sequence">
+        <field name="name">B13 Sequence</field>
+        <field name="code">B13</field>
+        <field name="prefix">B13</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b13" />
+        <field name="padding">8</field>
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_b14" model="ir.sequence">
+        <field name="name">B14 Sequence</field>
+        <field name="code">B14</field>
+        <field name="prefix">B14</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b14" />
+        <field name="padding">8</field>
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_b15" model="ir.sequence">
+        <field name="name">B15 Sequence</field>
+        <field name="code">B15</field>
+        <field name="prefix">B15</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b15" />
+        <field name="padding">8</field>
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_b16" model="ir.sequence">
+        <field name="name">B16 Sequence</field>
+        <field name="code">B16</field>
+        <field name="prefix">B16</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b16" />
+        <field name="padding">8</field>
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_b17" model="ir.sequence">
+        <field name="name">B17 Sequence</field>
+        <field name="code">B17</field>
+        <field name="prefix">B17</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b17" />
+        <field name="padding">8</field>
+    </record>
+
+    <!-- Secuencias para Comprobantes Electrónicos -->
+    <record id="billing_do.default_ncf_type_ir_sequence_e31" model="ir.sequence">
+        <field name="name">E31 Sequence</field>
+        <field name="code">E31</field>
+        <field name="prefix">E31</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_e31" />
+        <field name="padding">10</field>
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_e32" model="ir.sequence">
+        <field name="name">E32 Sequence</field>
+        <field name="code">E32</field>
+        <field name="prefix">E32</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_e32" />
+        <field name="padding">10</field>
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_e33" model="ir.sequence">
+        <field name="name">E33 Sequence</field>
+        <field name="code">E33</field>
+        <field name="prefix">E33</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_e33" />
+        <field name="padding">10</field>
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_e34" model="ir.sequence">
+        <field name="name">E34 Sequence</field>
+        <field name="code">E34</field>
+        <field name="prefix">E34</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_e34" />
+        <field name="padding">10</field>
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_e41" model="ir.sequence">
+        <field name="name">E41 Sequence</field>
+        <field name="code">E41</field>
+        <field name="prefix">E41</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_e41" />
+        <field name="padding">10</field>
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_e43" model="ir.sequence">
+        <field name="name">E43 Sequence</field>
+        <field name="code">E43</field>
+        <field name="prefix">E43</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_e43" />
+        <field name="padding">10</field>
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_e44" model="ir.sequence">
+        <field name="name">E44 Sequence</field>
+        <field name="code">E44</field>
+        <field name="prefix">E44</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_e44" />
+        <field name="padding">10</field>
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_e45" model="ir.sequence">
+        <field name="name">E45 Sequence</field>
+        <field name="code">E45</field>
+        <field name="prefix">E45</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_e45" />
+        <field name="padding">10</field>
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_e46" model="ir.sequence">
+        <field name="name">E46 Sequence</field>
+        <field name="code">E46</field>
+        <field name="prefix">E46</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_e46" />
+        <field name="padding">10</field>
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_e47" model="ir.sequence">
+        <field name="name">E47 Sequence</field>
+        <field name="code">E47</field>
+        <field name="prefix">E47</field>
+        <field name="use_date_range">true</field>
+        <field name="ncf_type" ref="billing_do.default_ncf_type_e47" />
+        <field name="padding">10</field>
+    </record>
+</odoo>

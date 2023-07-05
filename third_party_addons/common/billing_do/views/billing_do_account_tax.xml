@@ -22,13 +22,12 @@
     <record model="ir.ui.view" id="billing_do_view_tax_form_admin_fields">
         <field name="name">billing.do.account.tax.form.admin.fields</field>
         <field name="model">account.tax</field>
-        <field name="groups_id" eval="[(6,0,[ref('base.user_admin')])]" />
         <field name="inherit_id" ref="account.view_tax_form" />
         <field name="arch" type="xml">
             <field name="tax_type" position="attributes">
-                <attribute name="readonly">
-                    False
-                </attribute>
+                <t groups="base.user_admin">
+                    <attribute name="readonly">False</attribute>
+                </t>
             </field>
         </field>
     </record>

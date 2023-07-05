@@ -15,6 +15,7 @@
     # always loaded
     'data': [
         'views/billing_do_tax_report.xml',
+        'views/billing_do_ncf_types.xml',
     ],
     # only loaded in demonstration mode
     'demo': [],

@@ -5,54 +5,44 @@
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
             <field name="name" position="replace">
-                <field name="name" default_focus="1" placeholder="Name" attrs="{'required' : [('type', '=', 'contact')], 'readonly': [('tax_contributor_type', 'not in', ['3'])]}" force_save="1" />
+                <field name="name" 
+                        default_focus="1" 
+                        placeholder="Name" 
+                        attrs="{'required' : [('type', '=', 'contact')], 'readonly': [('tax_contributor_type', 'not in', ['3'])]}" 
+                        force_save="1" />
             </field>
-            <field name="type" position="after">
+            <field name="type" position="before">
+                <field name="tax_contributor_type" />
                 <field name="vat" position="move" />
             </field>
             <field name="vat" position="attributes">
                 <attribute name="attrs">
                     {'required': [('tax_contributor_type', 'not in', ['3'])]}
                 </attribute>
-            </field>
-            <field name="type" position="before">
-                <field name="tax_contributor_type" />
             </field>
             <field name="vat" position="after">
                 <field name="economic_activity" readonly="1" force_save="1" />
             </field>
         </field>
     </record>
-    <record model="ir.ui.view" id="billing_do_view_partner_short_form">
-        <field name="name">billing.do.res.partner.short.form</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_short_form" />
-        <field name="arch" type="xml">
-            <field name="name" position="replace">
-                <field name="name" default_focus="1" placeholder="Name" attrs="{'required' : [('type', '=', 'contact')], 'readonly': [('tax_contributor_type', 'not in', ['3'])]}" force_save="1" />
-            </field>
-            <field name="type" position="before">
-                <field name="tax_contributor_type" readonly="1" />
-                <field name="vat" position="move" />
-            </field>
-            <field name="vat" position="attributes">
-                <attribute name="attrs">
-                    {'required': [('tax_contributor_type', 'not in', ['3'])]}
-                </attribute>
-            </field>
-        </field>
-    </record>
     <record model="ir.ui.view" id="billing_do_view_partner_name_field_form">
         <field name="name">billing.do.res.partner.name.field.form</field>
         <field name="model">res.partner</field>
-        <field name="groups_id" eval="[(6,0,[ref('base.user_admin')])]" />
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
-            <field name="name" position="replace">
-                <field name="name" default_focus="1" placeholder="Name" attrs="{'required' : [('type', '=', 'contact')], 'readonly': False}" force_save="1" />
-            </field>
+            <!-- <field name="name" position="replace">
+                <t groups="base.user_admin">
+                    <field name="name" 
+                            default_focus="1" 
+                            placeholder="Name" 
+                            attrs="{'required' : [('type', '=', 'contact')], 'readonly': False}" 
+                            force_save="1" />
+                </t>
+            </field> -->
             <field name="type" position="before">
-                <field name="vat" position="move" />
+                <t groups="base.user_admin">
+                    <field name="vat" position="move" />
+                </t>
             </field>
         </field>
     </record>

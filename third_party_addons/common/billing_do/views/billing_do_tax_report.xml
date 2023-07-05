@@ -40,7 +40,7 @@
         <field name="name">billing.do.tax.report.view.form</field>
         <field name="model">billing.do.tax.report</field>
         <field name="arch" type="xml">
-            <form crete="false">
+            <form create="false">
                 <header>
                     <button string="Generate" 
                                 class="oe_highlight"
@@ -185,9 +185,9 @@
         <field name="search_view_id" 
                 ref="billing_do_tax_report_view_search"/>
         <field name="context">{'group_by': 'type'}</field>
-        <field name="domain">
+        <!-- <field name="domain">
             [('company_id', '=', allowed_company_ids[0])]
-        </field>
+        </field> -->
     </record>
     
     <record model="ir.actions.act_window" id="action_billing_do_tax_report_create">
@@ -196,9 +196,9 @@
         <field name="view_mode">tree,form</field>
         <field name="view_id" 
                 ref="billing_do_tax_report_view_form" />
-        <field name="domain">
+        <!-- <field name="domain">
             [('company_id', '=', allowed_company_ids[0])]
-        </field>
+        </field> -->
     </record>
 
     <record model="ir.actions.act_window" id="action_billing_do_tax_report_type_list">

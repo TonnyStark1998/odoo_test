@@ -21,8 +21,7 @@
                         <div class="col-12 col-lg-4 o_setting_box" 
                             title="These are settings for the Billing Do module.">
                             <div class="o_setting_left_pane">
-                                <field name="api_services_tax_contributors_switch" 
-                                        domain="[('company_id', '=', company_id)]"/>
+                                <field name="api_services_tax_contributors_switch" />
                             </div>
                             <div class="o_setting_right_pane">
                                 <label for="api_services_tax_contributors_switch"/>
@@ -37,8 +36,7 @@
                         <div class="col-12 col-lg-4 o_setting_box" 
                                 title="These are settings for the Billing Do module.">
                             <div class="o_setting_left_pane">
-                                <field name="api_services_tax_receipts_switch" 
-                                        domain="[('company_id', '=', company_id)]" />
+                                <field name="api_services_tax_receipts_switch" />
                             </div>
                             <div class="o_setting_right_pane">
                                 <label for="api_services_tax_receipts_switch"/>
@@ -52,8 +50,7 @@
                         <div class="col-12 col-lg-4 o_setting_box" 
                                 title="These are settings for the Billing Do module.">
                             <div class="o_setting_left_pane">
-                                <field name="api_services_currency_rates_switch" 
-                                        domain="[('company_id', '=', company_id)]"/>
+                                <field name="api_services_currency_rates_switch" />
                             </div>
                             <div class="o_setting_right_pane">
                                 <label for="api_services_currency_rates_switch"/>
@@ -84,36 +81,31 @@
                                         <label string="API Base URL" 
                                                 for="api_services_base_url" 
                                                 class="col-lg-3 o_light_label"/>
-                                        <field name="api_services_base_url" 
-                                                domain="[('company_id', '=', company_id)]"/>
+                                        <field name="api_services_base_url" />
                                     </div>
                                     <div class="row">
                                         <label string="Tax Contributors Endpoint" 
                                                 for="api_services_tax_contributors_endpoint" 
                                                 class="col-lg-3 o_light_label"/>
-                                        <field name="api_services_tax_contributors_endpoint" 
-                                                domain="[('company_id', '=', company_id)]"/>
+                                        <field name="api_services_tax_contributors_endpoint" />
                                     </div>
                                     <div class="row">
                                         <label string="Tax Receipts Endpoint" 
                                                 for="api_services_tax_receipts_endpoint" 
                                                 class="col-lg-3 o_light_label"/>
-                                        <field name="api_services_tax_receipts_endpoint" 
-                                                domain="[('company_id', '=', company_id)]"/>
+                                        <field name="api_services_tax_receipts_endpoint" />
                                     </div>
                                     <div class="row">
                                         <label string="Citizens Endpoint" 
                                                 for="api_services_citizens_endpoint" 
                                                 class="col-lg-3 o_light_label"/>
-                                        <field name="api_services_citizens_endpoint" 
-                                                domain="[('company_id', '=', company_id)]"/>
+                                        <field name="api_services_citizens_endpoint" />
                                     </div>
                                     <div class="row">
                                         <label string="Currency Rates Endpoint" 
                                                 for="api_services_currency_rates_endpoint" 
                                                 class="col-lg-3 o_light_label"/>
-                                        <field name="api_services_currency_rates_endpoint" 
-                                                domain="[('company_id', '=', company_id)]"/>
+                                        <field name="api_services_currency_rates_endpoint" />
                                     </div>
                                 </div>
                             </div>

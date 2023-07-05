@@ -1,18 +1,17 @@
 from odoo \
     import models, \
-            fields, \
-            api, \
-            exceptions, \
-            _
+            fields
 
 class BillingDoIrSequence(models.Model):
     _inherit = "ir.sequence"
 
-    # Account Move - Modified Fields
-    code = fields.Char(required=True,
-                        default=_('<NOT_SET>'))
+    ncf_type = fields.Many2one(comodel_name='billing.do.ncf.type',
+                               string='NCF Type',
+                               ondelete='restrict')
+    
+class IrSequenceDateRange(models.Model):
+    _inherit = 'ir.sequence.date_range'
 
-    # Ir Sequence - New Fields
-    is_refund_sequence = fields.Boolean(default=False, 
-                                            store=True, 
-                                            tracking=True)
+    number_last = fields.Integer(string='Last Number', 
+                                 required=True, 
+                                 help="Last number of this sequence")

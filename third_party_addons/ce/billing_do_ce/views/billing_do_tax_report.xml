@@ -21,14 +21,14 @@
                 action="billing_do.action_billing_do_tax_report_create" 
                 sequence="2" />
 
-    <menuitem id="menu_billing_do_tax_report_settings_label"
-                name="Tax Report Settings" 
+    <menuitem id="menu_billing_do_dominican_taxes_settings_label"
+                name="Dominican Taxes" 
                 sequence="36"
                 parent="account.menu_finance_configuration"
                 groups="-account.group_account_user" />
     <menuitem id="menu_tax_reports_type_list"
                 name="Report Types" 
-                parent="billing_do_ce.menu_billing_do_tax_report_settings_label" 
+                parent="billing_do_ce.menu_billing_do_dominican_taxes_settings_label" 
                 action="billing_do.action_billing_do_tax_report_type_list" 
                 sequence="1" />
 </odoo>

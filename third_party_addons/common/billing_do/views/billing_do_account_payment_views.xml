@@ -6,7 +6,11 @@
         <field name="arch" type="xml">
             <filter name="reconciled" position="after">
                 <separator />
-                <filter string="Today" name="today" domain="['&amp;', ('payment_date', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')), ('payment_date', '&lt;=', datetime.datetime.now().strftime('%Y-%m-%d 23:59:59'))]" />
+                <filter string="Today" 
+                        name="today" 
+                        domain="['&amp;', 
+                                    ('date', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')), 
+                                    ('date', '&lt;=', datetime.datetime.now().strftime('%Y-%m-%d 23:59:59'))]" />
             </filter>
         </field>
     </record>

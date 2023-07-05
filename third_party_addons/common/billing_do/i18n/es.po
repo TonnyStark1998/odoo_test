@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0+e\n"
+"Project-Id-Version: Odoo Server 16.0-20230317\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-04 19:47+0000\n"
-"PO-Revision-Date: 2020-06-04 19:47+0000\n"
+"POT-Creation-Date: 2023-06-26 23:28+0000\n"
+"PO-Revision-Date: 2023-06-26 23:28+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,582 +16,197 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: billing_do
-#: model:ir.model.fields.selection,name:billing_do.selection__account_move__expense_type__01
-msgid "01 - Gastos de personal"
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_606__payment_type__01
+msgid "01 - EFECTIVO"
 msgstr ""
 
 #. module: billing_do
 #: model:ir.model.fields.selection,name:billing_do.selection__account_move__income_type__01
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_607__income_type__01
 msgid "01 - Ingresos por Operaciones (No Financieros)"
 msgstr ""
 
 #. module: billing_do
-#: model:ir.model.fields.selection,name:billing_do.selection__account_move__expense_type__02
-msgid "02 - Gastos por trabajos, suministros y servicios"
+#: model:ir.model.fields.selection,name:billing_do.selection__account_move__expense_type__01
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_606__expense_type__01
+msgid "01 -GASTOS DE PERSONAL"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_606__payment_type__02
+msgid "02 - CHEQUES/TRANSFERENCIAS/DEPÓSITO"
 msgstr ""
 
 #. module: billing_do
 #: model:ir.model.fields.selection,name:billing_do.selection__account_move__income_type__02
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_607__income_type__02
 msgid "02 - Ingresos Financieros"
 msgstr ""
 
 #. module: billing_do
-#: model:ir.model.fields.selection,name:billing_do.selection__account_move__expense_type__03
-msgid "03 - Arrendamientos"
+#: model:ir.model.fields.selection,name:billing_do.selection__account_move__expense_type__02
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_606__expense_type__02
+msgid "02-GASTOS POR TRABAJOS, SUMINISTROS Y SERVICIOS"
 msgstr ""
 
 #. module: billing_do
 #: model:ir.model.fields.selection,name:billing_do.selection__account_move__income_type__03
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_607__income_type__03
 msgid "03 - Ingresos Extraordinarios"
 msgstr ""
 
 #. module: billing_do
-#: model:ir.model.fields.selection,name:billing_do.selection__account_move__expense_type__04
-msgid "04 - Gastos de activo fijo"
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_606__payment_type__03
+msgid "03 - TARJETA CRÉDITO/DÉBITO"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__account_move__expense_type__03
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_606__expense_type__03
+msgid "03-ARRENDAMIENTOS"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_606__payment_type__04
+msgid "04 - COMPRA A CREDITO"
 msgstr ""
 
 #. module: billing_do
 #: model:ir.model.fields.selection,name:billing_do.selection__account_move__income_type__04
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_607__income_type__04
 msgid "04 - Ingresos por Arrendamientos"
 msgstr ""
 
 #. module: billing_do
-#: model:ir.model.fields.selection,name:billing_do.selection__account_move__expense_type__05
-msgid "05 - Gastos de representaciรณn"
+#: model:ir.model.fields.selection,name:billing_do.selection__account_move__expense_type__04
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_606__expense_type__04
+msgid "04-GASTOS DE ACTIVOS FIJO"
 msgstr ""
 
 #. module: billing_do
 #: model:ir.model.fields.selection,name:billing_do.selection__account_move__income_type__05
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_607__income_type__05
 msgid "05 - Ingresos por Venta de Activo Depreciable"
 msgstr ""
 
 #. module: billing_do
-#: model:ir.model.fields.selection,name:billing_do.selection__account_move__expense_type__06
-msgid "06 - Otras deducciones admitidas"
+#: model:ir.model.fields.selection,name:billing_do.selection__account_move__expense_type__05
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_606__expense_type__05
+msgid "05 -GASTOS DE REPRESENTACIÓN"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_606__payment_type__05
+msgid "05 -  PERMUTA"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_606__payment_type__06
+msgid "06 - NOTA DE CREDITO"
 msgstr ""
 
 #. module: billing_do
 #: model:ir.model.fields.selection,name:billing_do.selection__account_move__income_type__06
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_607__income_type__06
 msgid "06 - Otros Ingresos"
 msgstr ""
 
 #. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__account_move__expense_type__06
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_606__expense_type__06
+msgid "06 -OTRAS DEDUCCIONES ADMITIDAS"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_606__payment_type__07
+msgid "07 - MIXTO"
+msgstr ""
+
+#. module: billing_do
 #: model:ir.model.fields.selection,name:billing_do.selection__account_move__expense_type__07
-msgid "07 - Gastos financieros"
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_606__expense_type__07
+msgid "07 -GASTOS FINANCIEROS"
 msgstr ""
 
 #. module: billing_do
 #: model:ir.model.fields.selection,name:billing_do.selection__account_move__expense_type__08
-msgid "08 - Gastos extraordinarios"
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_606__expense_type__08
+msgid "08 -GASTOS EXTRAORDINARIOS"
 msgstr ""
 
 #. module: billing_do
 #: model:ir.model.fields.selection,name:billing_do.selection__account_move__expense_type__09
-msgid "09 - Compras y gastos que formarรกn parte del costo de venta"
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_606__expense_type__09
+msgid "09 -COMPRAS Y GASTOS QUE FORMARAN PARTE DEL COSTO DE VENTA"
 msgstr ""
 
 #. module: billing_do
 #: model:ir.model.fields.selection,name:billing_do.selection__account_move__expense_type__10
-msgid "10 - Adquisiciones de activos"
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_606__expense_type__10
+msgid "10 -ADQUISICIONES DE ACTIVOS"
 msgstr ""
 
 #. module: billing_do
 #: model:ir.model.fields.selection,name:billing_do.selection__account_move__expense_type__11
-msgid "11 - Gastos de seguro"
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_606__expense_type__11
+msgid "11- GASTOS DE SEGUROS"
 msgstr ""
 
 #. module: billing_do
-#: model:ir.model.fields,help:billing_do.field_account_journal__refund_sequence
-msgid ""
-"Check this box if you don't want to share the same sequence for invoices and"
-" credit notes made from this journal"
-msgstr ""
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_account_journal__refund_sequence_id
-msgid "Credit Note Entry Sequence"
-msgstr "Secuencia de Nota de Crédito"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_account_journal__refund_sequence
-msgid "Dedicated Credit Note Sequence"
-msgstr "¿Utilizará una Secuencia de Nota de Crédito Dedicada?"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_account_move__expense_type
-msgid "Expense Type"
-msgstr "Tipo de gasto"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_account_move__income_type
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__income_type
-msgid "Income Type"
-msgstr "Tipo de ingreso"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_ir_sequence__is_refund_sequence
-msgid "Is Refund Sequence"
-msgstr "¿Es una Secuencia de Nota de Crédito?"
-
-#. module: billing_do
-#: model:ir.model,name:billing_do.model_account_journal
-msgid "Journal"
-msgstr "Diario"
-
-#. module: billing_do
-#: model:ir.model,name:billing_do.model_account_move
-msgid "Journal Entries"
-msgstr "Entradas de diario"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_account_move__ncf
-msgid "NCF"
-msgstr ""
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_account_move__ncf_sequence_next_number
-msgid "Ncf Sequence Next Number"
-msgstr "Próxima Secuencia de NCF"
-
-#. module: billing_do
-#: model:ir.model,name:billing_do.model_ir_sequence
-msgid "Sequence"
-msgstr "Secuencia"
-
-#. module: billing_do
-#: model:ir.model.fields,help:billing_do.field_account_journal__refund_sequence_id
-msgid ""
-"This field contains the information related to the numbering of the credit "
-"note entries of this journal."
-msgstr ""
-
-# Error Translated Messages
-
-#. module: billing_do
-#: model:ir.model,name:billing_do.model_account_move_invalid_ncf_error_message
-msgid "El NCF es inválido."
-msgstr "El NCF es inválido."
-
-#. module: billing_do
-#: model:ir.model,name:billing_do.model_account_move_digit_count_ncf_error_message
-msgid "El NCF (%s) posee dígitos extras. Verifique."
-msgstr "El NCF (%s) posee dígitos extras. Verifique."
-
-#. module: billing_do
-#: model:ir.model.constraint,message:billing_do.constraint_account_move_ncf_sequence_next_number
-msgid "El NCF de las facturas no puede repetirse."
-msgstr "El NCF no puede repetirse."
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:base.field_res_company__vat
-#: model:ir.model.fields,field_description:base.field_res_partner__vat
-#: model:ir.model.fields,field_description:base.field_res_users__vat
-msgid "Tax ID"
-msgstr "RNC"
-
-#. module: billing_do
-#: model_terms:ir.ui.view,arch_db:base.view_partner_form
-#: model_terms:ir.ui.view,arch_db:base.view_partner_short_form
-msgid "e.g. BE0477472701"
-msgstr "Ejemplos: 130000000, 00100000000, 430000000..."
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_res_company__tax_contributor_type
-#: model:ir.model.fields,field_description:billing_do.field_res_partner__tax_contributor_type
-#: model:ir.model.fields,field_description:billing_do.field_res_users__tax_contributor_type
-msgid "Tax Contributor Type"
-msgstr "Tipo de contribuyente"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_account_bank_statement_import_journal_creation__is_tax_valuable
-#: model:ir.model.fields,field_description:billing_do.field_account_journal__is_tax_valuable
-#: model:ir.model.fields,field_description:billing_do.field_account_move__is_tax_valuable
-msgid "Is tax valuable?"
-msgstr "¿Posee valor fiscal?"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_account_bank_statement_import_journal_creation__use_sequence
-#: model:ir.model.fields,field_description:billing_do.field_account_journal__use_sequence
-#: model:ir.model.fields,field_description:billing_do.field_account_move__use_sequence
-msgid "Use sequence?"
-msgstr "Usar secuencia?"
-
-#. module: billing_do
-#: model_terms:ir.ui.view,arch_db:account.report_invoice_document_with_payments
-msgid "Amount Due"
-msgstr "Monto Adeudado"
-
-#. module: billing_do
-#: model:ir.actions.server,name:billing_do.billing_do_rates_services_cron_ir_actions_server
-#: model:ir.cron,cron_name:billing_do.billing_do_rates_services_cron
-#: model:ir.cron,name:billing_do.billing_do_rates_services_cron
-msgid "Currency: Load Today Rates"
-msgstr "Monedas: Cargar tasas del día"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_res_currency_rate__source
-msgid "Source"
-msgstr "Fuente"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_res_partner__economic_activity
-#: model:ir.model.fields,field_description:billing_do.field_res_company__economic_activity
-msgid "Economic Activity"
-msgstr "Actividad Económica según DGII"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_res_company__load_currency_rates
-msgid "Load Currency Rates?"
-msgstr "¿Cargar Tasas Automáticas?"
-
-##################################
-#   Fields from other modules    #
-##################################
-
-#. module: account
-#: model_terms:ir.ui.view,arch_db:account.view_invoice_tree
-#: model:ir.model.fields,field_description:account.field_account_move__amount_residual
-msgid "Amount Due"
-msgstr "Importe adeudado"
-
-#. module: account
-#: model_terms:ir.ui.view,arch_db:account.view_invoice_tree
-#: model:ir.model.fields,field_description:account.field_account_move__amount_total
-msgid "Total"
-msgstr "Total"
-
-#. module: account
-#: model_terms:ir.ui.view,arch_db:account.view_invoice_tree
-#: model:ir.model.fields,field_description:account.field_account_move__amount_untaxed
-msgid "Untaxed Amount"
-msgstr "Impuestos excluidos"
-
-##################################
-#   Other modules translations   #
-##################################
-
-#. module: account
-#: model_terms:ir.ui.view,arch_db:account.setup_opening_move_wizard_form
-#: model_terms:ir.ui.view,arch_db:account.view_move_form
-msgid "Post"
-msgstr "Validar"
-
-#. module: account
-#: model_terms:ir.ui.view,arch_db:account.invoice_form
-#: model_terms:ir.ui.view,arch_db:account.view_account_invoice_refund
-#: model_terms:ir.ui.view,arch_db:account.view_move_form
-msgid "Add Credit Note"
-msgstr "Agregar nota de crédito"
-
-#. module: account
-#: model:ir.model.fields.selection,name:account.selection__account_move__state__posted
-#: model_terms:ir.ui.view,arch_db:account.view_account_invoice_filter
-#: model_terms:ir.ui.view,arch_db:account.view_account_move_filter
-#: model_terms:ir.ui.view,arch_db:account.view_account_move_line_filter
-#: model_terms:ir.ui.view,arch_db:account.view_account_payment_search
-msgid "Posted"
-msgstr "Validado"
-
-#. module: account
-#: model_terms:ir.ui.view,arch_db:account.view_move_form
-msgid ""
-"<span attrs=\"{'invisible': ['|', '|', ('type', '!=', 'out_invoice'), ('state', '!=', 'draft'), ('name', '!=', '/')]}\">Draft Invoice</span>\n"
-"                                <span attrs=\"{'invisible': ['|', '|', ('type', '!=', 'out_refund'), ('state', '!=', 'draft'), ('name', '!=', '/')]}\">Draft Credit Note</span>\n"
-"                                <span attrs=\"{'invisible': ['|', '|', ('type', '!=', 'in_invoice'), ('state', '!=', 'draft'), ('name', '!=', '/')]}\">Draft Bill</span>\n"
-"                                <span attrs=\"{'invisible': ['|', '|', ('type', '!=', 'in_refund'), ('state', '!=', 'draft'), ('name', '!=', '/')]}\">Draft Refund</span>\n"
-"                                <span attrs=\"{'invisible': ['|', '|', ('type', '!=', 'out_receipt'), ('state', '!=', 'draft'), ('name', '!=', '/')]}\">Draft Sales Receipt</span>\n"
-"                                <span attrs=\"{'invisible': ['|', '|', ('type', '!=', 'in_receipt'), ('state', '!=', 'draft'), ('name', '!=', '/')]}\">Draft Purchase Receipt</span>"
-msgstr ""
-"<span attrs=\"{'invisible': ['|', '|', ('type', '!=', 'out_invoice'), ('state', '!=', 'draft'), ('name', '!=', '/')]}\">Borrador de factura</span>\n"
-"<span attrs=\"{'invisible': ['|', '|', ('type', '!=', 'out_refund'), ('state', '!=', 'draft'), ('name', '!=', '/')]}\">Borrador de nota de crédito</span>\n"
-"<span attrs=\"{'invisible': ['|', '|', ('type', '!=', 'in_invoice'), ('state', '!=', 'draft'), ('name', '!=', '/')]}\">Borrador de recibo</span>\n"
-"<span attrs=\"{'invisible': ['|', '|', ('type', '!=', 'in_refund'), ('state', '!=', 'draft'), ('name', '!=', '/')]}\">Borrador de reembolso</span>\n"
-"<span attrs=\"{'invisible': ['|', '|', ('type', '!=', 'out_receipt'), ('state', '!=', 'draft'), ('name', '!=', '/')]}\">Borrador de recibo de venta</span>\n"
-"<span attrs=\"{'invisible': ['|', '|', ('type', '!=', 'in_receipt'), ('state', '!=', 'draft'), ('name', '!=', '/')]}\">Borrador de recibo de compra</span>"
-
-#. module: account
-#: model:ir.model.fields,help:account.field_account_move__invoice_partner_bank_id
-msgid ""
-"Bank Account Number to which the invoice will be paid. A Company bank "
-"account if this is a Customer Invoice or Vendor Credit Note, otherwise a "
-"Partner bank account number."
-msgstr ""
-"Número de cuenta bancaria a la que se pagará la factura. Una cuenta bancaria"
-" de la Compañía si ésta es una factura de cliente o una "
-"nota de crédito de proveedor, de lo contrario se usará el número de cuenta "
-"bancaria de la empresa."
-
-#. module: account
-#: model:ir.filters,name:account.filter_invoice_refund
-msgid "By Credit Note"
-msgstr "Por nota de crédito"
-
-#. module: account
-#: model:ir.model.fields,help:account.field_account_journal__refund_sequence
-msgid ""
-"Check this box if you don't want to share the same sequence for invoices and"
-" credit notes made from this journal"
-msgstr ""
-"Marque esta casilla si no desea compartir la misma secuencia de facturas y "
-"notas de crédito para este diario"
-
-#. module: account
-#: model_terms:ir.actions.act_window,help:account.action_move_out_refund_type
-msgid "Create a credit note"
-msgstr "Crear una nota de crédito"
-
-#. module: account
-#: model_terms:ir.actions.act_window,help:account.action_move_in_refund_type
-msgid "Create a vendor credit note"
-msgstr "Crear una nota de crédito de proveedor"
-
-#. module: account
-#: code:addons/account/models/account_move.py:0
-#: code:addons/account/models/account_move.py:0
-#: model_terms:ir.ui.view,arch_db:account.account_journal_dashboard_kanban_view
-#: model_terms:ir.ui.view,arch_db:account.report_invoice_document
-#, python-format
-msgid "Credit Note"
-msgstr "Nota de crédito"
-
-#. module: account
-#: code:addons/account/models/account_move.py:0
-#, python-format
-msgid "Credit Note Created"
-msgstr "Nota de crédito creada"
-
-#. module: account
-#: model:ir.actions.act_window,name:account.action_move_out_refund_type
-#: model:ir.ui.menu,name:account.menu_action_move_out_refund_type
-#: model_terms:ir.ui.view,arch_db:account.account_journal_dashboard_kanban_view
-#: model_terms:ir.ui.view,arch_db:account.view_account_invoice_report_search
-msgid "Credit Notes"
-msgstr "Facturas de notas de crédito"
-
-#. module: account
-#: model:ir.model.fields,field_description:account.field_account_journal__refund_sequence_number_next
-msgid "Credit Notes Next Number"
-msgstr "Número siguiente para las notas de crédito"
-
-#. module: account
-#: code:addons/account/models/account_payment.py:0
-#: model:ir.model.fields.selection,name:account.selection__account_invoice_report__type__out_refund
-#: model:ir.model.fields.selection,name:account.selection__account_move__type__out_refund
-#, python-format
-msgid "Customer Credit Note"
-msgstr "Nota de crédito de cliente"
-
-#. module: account
-#: code:addons/account/models/account_move.py:0
-#, python-format
-msgid "Draft Credit Note"
-msgstr "Borrador de nota de crédito"
-
-#. module: account
-#: code:addons/account/models/account_move.py:0
-#, python-format
-msgid "Draft Vendor Credit Note"
-msgstr "Borrador de nota de crédito de proveedor"
-
-#. module: account
-#: code:addons/account/models/account_move.py:0
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_move.py:0
 #, python-format
 msgid ""
-"Duplicated vendor reference detected. You probably encoded twice the same vendor bill/credit note:\n"
-"%s"
+"<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', "
+"Helvetica, Verdana, Arial, sans-serif'><strong>Payment reconciled with line "
+"id:</strong> {} - {}.</p>"
 msgstr ""
-"Referencia de proveedor duplicada detectada. Probablemente registró dos veces la misma factura / nota de crédito del proveedor:\n"
-"%s"
-
-#. module: account
-#: code:addons/account/models/account.py:0
-#, python-format
-msgid ""
-"Invoice and credit note repartition should each contain exactly one line for"
-" the base."
-msgstr ""
-"La distribución de factura y nota de crédito debe contener exactamente"
-" una línea para la base."
-
-#. module: account
-#: code:addons/account/models/account.py:0
-#, python-format
-msgid ""
-"Invoice and credit note repartition should have the same number of lines."
-msgstr ""
-"La distribución de factura y nota de crédito debe contener el mismo "
-"número de líneas."
-
-#. module: account
-#: code:addons/account/models/account.py:0
-#, python-format
-msgid ""
-"Invoice and credit note repartitions should match (same percentages, in the "
-"same order)."
-msgstr ""
-"La distribución de factura y nota de crédito deben coincidir (los "
-"mismos porcentajes, en el mismo orden)."
-
-#. module: account
-#: model_terms:ir.actions.act_window,help:account.action_move_out_refund_type
-msgid ""
-"Note that the easiest way to create a credit note is to do it directly\n"
-"                from the customer invoice."
-msgstr ""
-"Tenga en cuenta que la manera más sencilla para crear una nota "
-"de crédito es crearla directamente desde la factura de cliente. "
-
-#. module: account
-#: model_terms:ir.actions.act_window,help:account.action_move_in_refund_type
-msgid ""
-"Note that the easiest way to create a vendor credit note it to do it "
-"directly from the vendor bill."
-msgstr ""
-"Tenga en cuenta que la forma más sencilla de crear una nota de crédito"
-" de proveedor es crearlo directamente desde la factura del proveedor. "
-
-#. module: account
-#: model:ir.actions.act_window,name:account.action_move_in_refund_type
-#: model:ir.ui.menu,name:account.menu_action_move_in_refund_type
-#: model_terms:ir.ui.view,arch_db:account.account_journal_dashboard_kanban_view
-msgid "Refund"
-msgstr "Facturas de notas de crédito"
-
-#. module: account
-#: model:ir.model.fields,field_description:account.field_account_tax_repartition_line__refund_tax_id
-#: model:ir.model.fields,field_description:account.field_account_tax_repartition_line_template__refund_tax_id
-msgid "Refund Tax"
-msgstr "Impuesto para notas de crédito"
-
-#. module: account
-#: model:ir.model.fields,help:account.field_account_tax__refund_repartition_line_ids
-#: model:ir.model.fields,help:account.field_account_tax_template__refund_repartition_line_ids
-msgid "Repartition when the tax is used on a refund"
-msgstr "Repartición cuando el impuesto se utiliza en una nota de crédito"
-
-#. module: account
-#: model:ir.actions.server,name:account.action_move_switch_invoice_to_credit_note
-msgid "Switch into refund/credit note"
-msgstr "Cambiar a reembolso/nota de crédito"
-
-#. module: account
-#: code:addons/account/models/chart_template.py:0
-#, python-format
-msgid ""
-"Tax repartition line templates should apply to either invoices or refunds, "
-"not both at the same time. invoice_tax_id and refund_tax_id should not be "
-"set together."
-msgstr ""
-"Las plantillas de línea de reparto de impuestos deben aplicarse a las "
-"facturas o notas de crédito, no a ambos al mismo tiempo. "
-"invoice_tax_id y refund_tax_id no deben establecerse juntos."
-
-#. module: account
-#: model_terms:ir.ui.view,arch_db:account.view_account_move_reversal
-msgid "The credit note is auto-validated and reconciled with the invoice."
-msgstr ""
-"La nota de crédito se valida automáticamente y se concilia con la "
-"factura."
-
-#. module: account
-#: model_terms:ir.ui.view,arch_db:account.view_account_move_reversal
-msgid ""
-"The credit note is auto-validated and reconciled with the invoice.\n"
-"                               The original invoice is duplicated as a new draft."
-msgstr ""
-"La nota de crédito se valida automáticamente y se concilia con la factura.\n"
-"                               La factura original se duplica como un nuevo borrador."
-
-#. module: account
-#: model_terms:ir.ui.view,arch_db:account.view_account_move_reversal
-msgid ""
-"The credit note is created in draft and can be edited before being issued."
-msgstr ""
-"La nota de crédito se crea en borrador y puede ser editada antes de "
-"expedirse."
-
-#. module: account
-#: model:ir.model.fields,help:account.field_account_journal__refund_sequence_number_next
-msgid "The next sequence number will be used for the next credit note."
-msgstr ""
-"El siguiente número de secuencia que se usará para la siguiente nota "
-"de crédito."
-
-#. module: account
-#: model:ir.model.fields,help:account.field_account_tax_repartition_line__sequence
-msgid ""
-"The order in which display and match repartition lines. For refunds to work "
-"properly, invoice repartition lines should be arranged in the same order as "
-"the credit note repartition lines they correspond to."
-msgstr ""
-"El orden en que se muestran y coinciden las líneas de reparto. Para que los "
-"reembolsos funcionen correctamente, las líneas de reparto de facturas deben "
-"organizarse en el mismo orden que las líneas de reparto de las notas "
-"de crédito a las que corresponden."
-
-#. module: account
-#: model:ir.model.fields,help:account.field_account_tax_repartition_line__refund_tax_id
-#: model:ir.model.fields,help:account.field_account_tax_repartition_line_template__refund_tax_id
-msgid ""
-"The tax set to apply this repartition on refund invoices. Mutually exclusive"
-" with invoice_tax_id"
-msgstr ""
-"El impuesto establecido para aplicar esta distribución en las notas "
-"de crédito. Mutuamente exclusivo con invoice_tax_id"
-
-#. module: account
-#: model:ir.model.fields,help:account.field_account_journal__refund_sequence_id
-msgid ""
-"This field contains the information related to the numbering of the credit "
-"note entries of this journal."
-msgstr ""
-"Este campo contiene la información relacionada con la numeración de los "
-"asientos de las notas de crédito de este diario."
-
-#. module: account
-#: code:addons/account/models/account_payment.py:0
-#: model:ir.model.fields.selection,name:account.selection__account_invoice_report__type__in_refund
-#: model:ir.model.fields.selection,name:account.selection__account_move__type__in_refund
-#: model_terms:ir.ui.view,arch_db:account.report_invoice_document
-#, python-format
-msgid "Vendor Credit Note"
-msgstr "Nota de crédito de proveedor"
-
-#. module: account
-#: code:addons/account/models/account_payment.py:0
-#, python-format
-msgid ""
-"You cannot register payments for customer invoices and credit notes at the "
-"same time."
-msgstr ""
-"No puede registrar pagos para facturas de clientes y notas de crédito"
-" al mismo tiempo. "
-
-#. module: account
-#: code:addons/account/models/account_move.py:0
-#, python-format
-msgid ""
-"You cannot validate an invoice with a negative total amount. You should "
-"create a credit note instead. Use the action menu to transform it into a "
-"credit note or refund."
-msgstr ""
-"No puede validar una factura con un importe total negativo. En su lugar, "
-"debe crear una nota de crédito. Use el menú de acciones para "
-"transformarlo en una nota de crédito o reembolso."
+"<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', "
+"Helvetica, Verdana, Arial, sans-serif'><strong>Pago conciliado con línea de "
+"id:</strong> {} - {}.</p>"
 
 #. module: billing_do
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_account_payment_search
-msgid "Today"
-msgstr "Hoy"
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_move_line.py:0
+#, python-format
+msgid ""
+"<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', "
+"Helvetica, Verdana, Arial, sans-serif'><strong>Payment with line id</strong>"
+" {} - {} <strong>has been unreconciled.</strong> </p>"
+msgstr ""
+"<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', "
+"Helvetica, Verdana, Arial, sans-serif'><strong>Pago con linea de id</strong>"
+" {} - {} <strong>ha sido desconciliado.</strong> </p>"
 
 #. module: billing_do
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_account_invoice_filter
-msgid "Today"
-msgstr "Hoy"
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_payment.py:0
+#, python-format
+msgid ""
+"<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', "
+"Helvetica, Verdana, Arial, sans-serif'>A payment ({} - {}) which was "
+"associated with this move has been reverted to draft state.</p>"
+msgstr ""
+"<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', "
+"Helvetica, Verdana, Arial, sans-serif'>Un pago ({} - {}) que estaba asociado"
+" con este asiento fue reestablecido a borrador.</p>"
 
-################################
-# Payment Reports Translations #
-################################
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<span><strong>Created by: </strong></span>"
+msgstr "<span><strong>Creado por: </strong></span>"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid ""
+"<span><strong>Received by: </strong>____________________________ </span>"
+msgstr ""
+"<span><strong>Recibido por: </strong>____________________________ </span>"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<span>Concept</span>"
+msgstr "<span>Concepto</span>"
 
 #. module: billing_do
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
@@ -600,17 +215,17 @@ msgstr "<strong style=\"text-transform: uppercase;\">Recibo</strong>"
 
 #. module: billing_do
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
+msgid "<strong>Amount: </strong>"
+msgstr "<strong>Monto: </strong>"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
 msgid "<strong>Customer: </strong>"
 msgstr "<strong>Cliente: </strong>"
 
 #. module: billing_do
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
-msgid "<strong>Vendor: </strong>"
-msgstr "<strong>Proveedor: </strong>"
-
-#. module: billing_do
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
-msgid "<strong>Payment Date:</strong>"
+msgid "<strong>Date:</strong>"
 msgstr "<strong>Fecha:</strong>"
 
 #. module: billing_do
@@ -620,603 +235,35 @@ msgstr "<strong>Método de pago:</strong>"
 
 #. module: billing_do
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
-msgid "<strong>Payment Amount: </strong>"
-msgstr "<strong>Monto: </strong>"
+msgid "<strong>Vendor: </strong>"
+msgstr "<strong>Proveedor: </strong>"
 
 #. module: billing_do
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
-msgid "<span>Concept</span>"
-msgstr "<p class=\"text-center;\">Concepto</p>"
-
-#. module: billing_do
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
-msgid "<span><strong>Received by: </strong>____________________________ </span>"
-msgstr "<span><strong>Recibido por: </strong>____________________________ </span>"
-
-#. module: billing_do
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
-msgid "<span><strong>Created by: </strong></span>"
-msgstr "<span><strong>Creado por: </strong></span>"
-
-#. module: billing_do
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_account_move_filter
-msgid "TRN"
-msgstr "NCF"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_account_move__security_code
-msgid "Security Code"
-msgstr "Código de seguridad"
-
-################################
-# Code Strings Translations #
-################################
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_vat_helper.py:0
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_tax_report.py:0
 #, python-format
-msgid "The Identity Number ({0}) entered is invalid. Does not meet the correct format. Please verify the value entered."
-msgstr "El RNC ({0}) digitado es inválido. Posee un formato incorrecto. Verifique el valor digitado."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_vat_helper.py:0
-#, python-format
-msgid "The format is not compatible with the format of a Dominican Republic Id nor a Tax Payer Id ({0})."
-msgstr "No posee la estructura de una cedula y tampoco de un RNC ({0})."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_account_move.py:0
-#, python-format
-msgid "¡Validation error!"
-msgstr "¡Error de validación!"
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_account_move.py:0
-#, python-format
-msgid "¡User error!"
-msgstr "¡Error de usuario!"
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_account_move.py:0
-#, python-format
-msgid "Please, first select the vendor and then enter the value for NCF field."
-msgstr "Seleccione primero el proveedor y luego digite el NCF."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_helper.py:0
-#, python-format
-msgid "The TRN ({0}) is invalid."
-msgstr "El NCF ({0}) es inválido."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_helper.py:0
-#, python-format
-msgid "The TRN ({}) has some extra digits. Please verify."
-msgstr "El NCF ({}) posee dígitos extras. Verifique."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_helper.py:0
-#, python-format
-msgid "The TRNs which starts with B11 or B13 use a specific type of journal. Please use the appropiate journal for registering this vendor invoice."
-msgstr "Los comprobantes de tipo B11 y B13 ({0}) requieren el uso de un diario en específico."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_helper.py:0
-#, python-format
-msgid "The TRN ({}) is not valid for tax purpose."
-msgstr "Este tipo de NCF ({}) no posee crédito fiscal."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_http_service_helper.py:0
-#, python-format
-msgid "An unknown error ocurred during the connection to the webservice."
-msgstr "Ocurrió un error desconocido al conectar con el servicio de consulta."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_http_service_helper.py:0
-#, python-format
-msgid "The tax receipt number {0} entered is not valid or does not belongs to the VAT {1}."
-msgstr "El número de comprobante fiscal {0} digitado no está vigente o no corresponde a este RNC {1}."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_http_service_helper.py:0
-#, python-format
-msgid "The values entered for TRN ({0}) and VAT ({1}) are invalid."
-msgstr "Los datos suministrados para la consulta no son válidos. NCF:{0}|RNC:{1}."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_http_service_helper.py:0
-#, python-format
-msgid "TRN is valid."
-msgstr "NCF es válido."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_http_service_helper.py:0
-#, python-format
-msgid "The TRN \"{0}\" y el RNC \"{1}\" are valid."
-msgstr "El NCF \"{0}\" y el RNC \"{1}\" son válidos."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_http_service_helper.py:0
-#, python-format
-msgid "You are trying to use a partner who does not have a VAT value. Please verify."
-msgstr "El proveedor que intenta utilizar no posee asignado un RNC/Cédula. Por favor verifique."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_http_service_helper.py:0
-#, python-format
-msgid "The TRN parameter must have a value. Nothing was given."
-msgstr "El parámetro NCF debe tener un valor. Ninguno fue proveído."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_account_move.py:0
-#, python-format
-msgid "The code is missing for the sequence associated with this journal {0}.."
-msgstr "El código de la secuencia asociado a este diario {0} no ha sido ajustado."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_account_journal.py:0
-#, python-format
-msgid "<NOT_SET>"
-msgstr "<NO_AJUSTADO>"
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_currency_rate_http_service_helper.py:0
-#, python-format
-msgid "URL for querying the Currencies Rates is misconfigured or not exist. Check with your administrator."
-msgstr "La URL para la consulta de Tasas de cambio está mal configurado o no existe. Consulte con su administrador."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_currency_rate_http_service_helper.py:0
-#, python-format
-msgid "Something went wrong while querying the Currencies Rates service. Check with your administrator."
-msgstr "Algo falló al realizar la consulta con el servicio de Tasas de Cambio. Consulte con su administrador."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_currency_rate_http_service_helper.py:0
-#, python-format
-msgid "There was a Connection problem while querying the Currencies Rates service. Check with your administrator."
-msgstr "Hubo un problema de conexión con el servicio de consultas de Tasas de Cambio. Consulte con su administrador."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_currency_rate_http_service_helper.py:0
-#, python-format
-msgid "{} Automatically loading of Currencies is disabled."
-msgstr "{} Carga automática de tasas de cambios está deshabilitado."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_res_currency.py:0
-#, python-format
-msgid "Resource with name {} not found in model."
-msgstr "No se encontró el recurso con el nombre {}."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_res_currency.py:0
-#, python-format
-msgid "{} Exception thrown while loading Currencies Rates: {}"
-msgstr "{} Excepción arrojada al intentar cargar las Tasas de Cambio: {}."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_res_currency.py:0
-#, python-format
-msgid "{} Currency Rate Inserted: {} - {} (Rate: {})"
-msgstr "{} Tasa de cambio insertada: {} - {} (Tasa de cambio: {})"
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_trn_helper.py:0
-#, python-format
-msgid "There isn't any TRN type for validate. Please check with your administrator."
-msgstr "No existen Tipos de comprobantes registrados para validar. Consulte con el administrador."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_account_move.py:0
-#, python-format
-msgid "The journal '{0}' doesn't have a {1} associated with it."
-msgstr "El diario '{0}' no tiene una {1} asociada."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_account_move:0
-#, python-format
-msgid "There isn't a journal associated with this move: {0} ({1})."
-msgstr "No existe un diario asociado con este movimiento: {0} ({1})."
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_account_move:0
-#, python-format
-msgid "refund sequence"
-msgstr "secuencia de reembolso"
-
-#. module: billing_do
-#: code:odoo_invoicing_do/billing_do/models/billing_do_account_move:0
-#, python-format
-msgid "sequence"
-msgstr "secuencia"
-
-#################################
-# Tax Report Model Translations #
-#################################
-
-#. module: billing_do
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_form
-msgid "Report Items"
+msgid ""
+"A report which was generated can be modified. You can create another report "
+"if you want."
 msgstr ""
+"Un reporte ya generado no puede ser modificado. Puede crear otro reporte "
+"si lo desea."
 
 #. module: billing_do
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_form
-msgid "Generate"
-msgstr "Generar reporte"
+#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_base_url
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "API Base URL"
+msgstr "URL Base para Servicios"
 
 #. module: billing_do
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_form
-msgid "Show items"
-msgstr "Mostrar reporte"
+#: model:ir.model,name:billing_do.model_account_account
+msgid "Account"
+msgstr "Cuenta"
 
 #. module: billing_do
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_form
-msgid "Are you sure you want to generate the report? This can't be undone."
-msgstr "¿Está seguro que desea generar el reporte? Para generar el reporte nuevamente tendrá que crear uno nuevo."
-#. module: billing_do
-#: model:ir.ui.menu,name:billing_do.menu_tax_reports_type_list
-msgid "Report Types"
-msgstr "Tipos de reportes"
-
-#. module: billing_do
-#: model:ir.actions.act_window,name:billing_do.action_billing_do_tax_report_list
-msgid "Tax Report List"
-msgstr "Listado de informe de impuestos"
-
-#. module: billing_do
-#: model:ir.actions.act_window,name:billing_do.action_billing_do_tax_report_create
-msgid "Create new tax report"
-msgstr "Crear un nuevo informe de impuestos"
-
-#. module: billing_do
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_search
-msgid "Tax Report 606"
-msgstr "Reporte 606"
-
-#. module: billing_do
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_search
-msgid "Tax Report 607"
-msgstr "Reporte 607"
-
-#. module: billing_do
-#: model:ir.actions.act_window,name:billing_do.action_billing_do_tax_report_type_list
-msgid "Tax Report Types"
-msgstr "Tipos de reporte de impuestos"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__state
-msgid "State"
-msgstr "Estado"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__name
-msgid "Name"
-msgstr "Nombre"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__type
-msgid "Tax Report Type"
-msgstr "Tipo de reporte"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__tax_term_year
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_search
-msgid "Tax Term Year"
-msgstr "Año"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__tax_term_month
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_search
-msgid "Tax Term Month"
-msgstr "Mes"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__date_generated
-msgid "Generated Date"
-msgstr "Fecha de creación"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__user_who_generated
-msgid "User Who Generated"
-msgstr "Usuario creador"
-
-#. module: billing_do
-#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report__type__606
-#: code:odoo_invoicing_do/billing_do/models/billing_do_tax_report.py:0
-#, python-format
-msgid "Tax Report 606"
-msgstr "Reporte 606"
-
-#. module: billing_do
-#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report__type__607
-#: code:odoo_invoicing_do/billing_do/models/billing_do_tax_report.py:0
-#, python-format
-msgid "Tax Report 607"
-msgstr "Reporte 607"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__vat
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__vat
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item__vat
-msgid "Tax Contributor ID"
-msgstr "RNC"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__vat_type
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__vat_type
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item__vat_type
-msgid "Tax Contributor Type"
-msgstr "Tipo Id"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__move
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__move
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item__move
-msgid "Tax Receipt Number"
-msgstr "NCF"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__move_reversed
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__move_reversed
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item__move_reversed
-msgid "Tax Receipt Reversed"
-msgstr "NCF ó Documento Modificado"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__held_amount_itbis
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_common__held_amount_itbis
-msgid "ITBIS Held Amount"
-msgstr "ITBIS Retenido"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__held_amount_isr
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_common__held_amount_isr
-msgid "ISR Held Amount"
-msgstr "Monto Retención Renta"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__isc_amount
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__isc_amount
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_common__isc_amount
-msgid "ISC Amount"
-msgstr "Impuesto Selectivo al Consumo"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__date_invoice_month
-msgid "Invoice Date Month"
-msgstr "Fecha Comprobante (Mes)"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__date_invoice_day
-msgid "Invoice Date Day"
-msgstr "Fecha Comprobante (Día)"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__expense_type
-msgid "Expense Type"
-msgstr "Tipo de gasto"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__consumable_amount
-msgid "Consumable Amount"
-msgstr "Monto Facturado en Bienes"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__service_amount
-msgid "Service Amount"
-msgstr "Monto Facturado en Servicios"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__total_amount
-msgid "Total Amount"
-msgstr "Total Monto Facturado"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__date_payment_month
-msgid "Payment Date Month"
-msgstr "Fecha Pago (Mes)"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__date_payment_day
-msgid "Payment Date Day"
-msgstr "Fecha Pago (Día)"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__payment_type
-msgid "Payment Type"
-msgstr "Forma de Pago"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__tax_amount
-msgid "Tax Amount"
-msgstr "ITBIS Facturado"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__other_taxes_amount
-msgid "Other Taxes Amount"
-msgstr "Otros Impuestos/Tasas"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__legaltip_amount
-msgid "Legal Tip Amount"
-msgstr "Monto Propina Legal"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__amount_isr_purchases
-msgid "ISR Purchases Amount"
-msgstr "ISR percibido en compras"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__amount_itbis_proportional
-msgid "ITBIS Proportional Amount"
-msgstr "ITBIS Sujeto a Proporcionalidad (Art. 349)"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__amount_itbis_expenses
-msgid "ITBIS Expenses Amount"
-msgstr "ITBIS llevado al Costo"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__amount_itbis_ahead
-msgid "ITBIS Ahead Amount"
-msgstr "ITBIS por Adelantar"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__amount_itbis_purchases
-msgid "ITBIS Purchases Amount"
-msgstr "ITBIS percibido en compras"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__isr_type
-msgid "ISR Type"
-msgstr "Tipo de retención en ISR"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__date_invoice
-msgid "Invoice Date"
-msgstr "Fecha Comprobante"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_credit_debit_card
-msgid "Credit/Debit Card Amount"
-msgstr "Tarjeta Crédito/Débito"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__date_amount_held
-msgid "Invoice Held Date"
-msgstr "Fecha de Retención"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_itbis_perceived
-msgid "ITBIS Perceived Amount"
-msgstr "ITBIS Percibido"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__held_amount_itbis
-msgid "ITBIS Held Amount"
-msgstr "ITBIS Retenido por terceros"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__held_amount_isr
-msgid "ISR Held Amount"
-msgstr "Retención Renta Por Terceros"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_isr_perceived
-msgid "ISR Perceived Amount"
-msgstr "ISR Percibido"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_other_taxes
-msgid "Invoice Other Taxes Amount"
-msgstr "Otros Impuestos/Tasas"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_legaltip
-msgid "Legal Tip Amount"
-msgstr "Monto Propina Legal"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_cash
-msgid "Cash Amount"
-msgstr "Efectivo"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_bank
-msgid "Bank Amount"
-msgstr "Cheque/Transferencia/Depósito"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_credit_sale
-msgid "Credit Sale Amount"
-msgstr "Venta a Crédito"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_gift
-msgid "Gift Amount"
-msgstr "Bonos o Certificados de Regalo"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_permute
-msgid "Permute Amount"
-msgstr "Permuta"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_other_sale_way
-msgid "Other Sale Amount"
-msgstr "Otras Formas de Ventas"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_untaxed_signed
-msgid "Untaxed Amount Signed"
-msgstr "Monto Facturado"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_tax_signed
-msgid "Tax Amount Signed"
-msgstr "ITBIS Facturado"
-
-#. module: account
-#: code:odoo_invoicing_do/billing_do/models/billing_do_tax_report.py:0
-#, python-format
-msgid "Report Items"
-msgstr "Facturas"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type__name
-msgid "Tax Report Type Name"
-msgstr "Nombre"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type__code
-msgid "Tax Report Type Code"
-msgstr "Código"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type__model
-msgid "Model"
-msgstr "Modelo"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type__view
-msgid "View"
-msgstr "Vista"
-
-###############################
-# TRN Type Model Translations #
-###############################
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__name
-msgid "Name"
-msgstr "Nombre"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__code_length
-msgid "Code Length"
-msgstr "Cantidad de dígitos que identifica el tipo"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__code
-msgid "Code"
-msgstr "Código de identificación"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__min_length
-msgid "Minimun Length"
-msgstr "Longitud mínima"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__max_length
-msgid "Maximun Length"
-msgstr "Longitud máxima"
-
-#. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__regular_expression
-msgid "Regular Expression"
-msgstr "Expresión regular"
+#: model:ir.model.fields,field_description:billing_do.field_res_company__message_needaction
+msgid "Action Needed"
+msgstr "Acción requerida"
 
 #. module: billing_do
 #: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__active
@@ -1224,35 +271,9 @@ msgid "Active"
 msgstr "Activo"
 
 #. module: billing_do
-#: model:ir.actions.act_window,name:billing_do.action_billing_do_trn_type_list
-#: model:ir.ui.menu,name:billing_do.menu_trn_type_list
-#: model:ir.ui.menu,name:billing_do.menu_accounting_trn_type_list
-msgid "TRN Types"
-msgstr "Tipo de comprobantes"
-
-####################################
-# Billing DO Settings Translations #
-####################################
-
-#. module: billing_do
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
-msgid "Billing DO"
-msgstr "Facturación RD"
-
-#. module: billing_do
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
-msgid "Services Switches"
-msgstr "Encendido/Apagado Servicios"
-
-#. module: billing_do
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
-msgid "Services Endpoints"
-msgstr "Rutas de Acceso a Servicios"
-
-#. module: billing_do
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
-msgid "These are settings for the Billing Do module."
-msgstr "Estas configuraciones son del módulo de Facturación RD."
+msgid "Allow you to switch on/off the Currency Rates load service."
+msgstr "Permite encender/apagar la carga automática de las tasas de cambio."
 
 #. module: billing_do
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
@@ -1265,55 +286,125 @@ msgid "Allow you to switch on/off the Tax Receipts validation."
 msgstr "Permite encender/apagar la validación de comprobantes fiscales."
 
 #. module: billing_do
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
-msgid "Allow you to switch on/off the Currency Rates load service."
-msgstr "Permite encender/apagar la carga automática de las tasas de cambio."
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_invoice_tree
+msgid "Amount Due"
+msgstr "Monto Adeudado"
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_trn_http_service_helper.py:0
+#, python-format
+msgid "An unknown error ocurred during the connection to the webservice."
+msgstr "Ocurrió un error desconocido al conectar con el servicio de consulta."
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_form
+msgid "Are you sure you want to generate the report? This can't be undone."
+msgstr ""
+"¿Está seguro que desea generar el reporte? Para generar el reporte "
+"nuevamente tendrá que crear uno nuevo."
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_company__message_attachment_count
+msgid "Attachment Count"
+msgstr "Nº de archivos adjuntos"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_bank
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_607_view_tree
+msgid "Bank Amount"
+msgstr "Cheque/Transferencia/Depósito"
 
 #. module: billing_do
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
-msgid "These are the URL used to query the services of validations."
-msgstr "Estas son las URL utilizadas para la consulta de los servicios de validación."
+msgid "Billing DO"
+msgstr "Facturación RD"
 
 #. module: billing_do
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
-msgid "<div class=\"o_form_label\" style=\"display: inline;\">Services URL</div>"
-msgstr "<div class=\"o_form_label\" style=\"display: inline;\">URL de Servicios</div>"
+#: model:ir.model,name:billing_do.model_billing_do_authentication_http_service_helper
+msgid "Billing DO - Authentication HTTP Service Helper"
+msgstr "Billing DO - Auxiliar de Servicio de Autenticación HTTP"
 
 #. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_tax_contributors_switch
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
-msgid "Tax Contributors Switch"
-msgstr "Validación Contribuyentes On/Off"
+#: model:ir.model,name:billing_do.model_billing_do_currency_rate_http_service_helper
+msgid "Billing DO - Currency Rate HTTP Service Helper"
+msgstr "Billing DO - Auxiliar de Servicio HTTP para Carga de Tasas de Cambio"
 
 #. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_tax_receipts_switch
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
-msgid "Tax Receipts Switch"
-msgstr "Validación NCF On/Off"
+#: model:ir.model,name:billing_do.model_billing_do_res_currency
+msgid "Billing DO - Res Currency"
+msgstr ""
 
 #. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_currency_rates_switch
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
-msgid "Currency Rates Switch"
-msgstr "Carga Tasas de Cambio On/Off"
+#: model:ir.model,name:billing_do.model_billing_do_trn_http_service_helper
+msgid "Billing DO - TRN HTTP Service Helper"
+msgstr ""
 
 #. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_base_url
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
-msgid "API Base URL"
-msgstr "URL Base para Servicios"
+#: model:ir.model,name:billing_do.model_billing_do_trn_helper
+msgid "Billing DO - TRN Helper"
+msgstr ""
 
 #. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_tax_contributors_endpoint
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
-msgid "Tax Contributors Endpoint"
-msgstr "Ruta para Contribuyentes"
+#: model:ir.model,name:billing_do.model_billing_do_trn_type
+msgid "Billing DO - TRN Type"
+msgstr ""
 
 #. module: billing_do
-#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_tax_receipts_endpoint
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
-msgid "Tax Receipts Endpoint"
-msgstr "Ruta para NCF"
+#: model:ir.model,name:billing_do.model_billing_do_tax_report_item_606
+msgid "Billing DO - Tax Report 606"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_billing_do_tax_report_item_607
+msgid "Billing DO - Tax Report 607"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_billing_do_tax_report_item_common
+msgid "Billing DO - Tax Report Common"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_billing_do_tax_report_item
+msgid "Billing DO - Tax Report Item"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_billing_do_tax_report_type
+msgid "Billing DO - Tax Report Type"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_billing_do_ncf_type
+msgid "Billing DO NCF Type"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_billing_do_tax_report
+msgid "Billing DO Tax Report"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__account_tax__tax_type__cdt
+msgid "CDT"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_ncf_type__is_purchase_usable
+msgid "Can be use in purchases?"
+msgstr "¿Puede ser usado en compras?"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_ncf_type__is_sale_usable
+msgid "Can be use in sales?"
+msgstr "¿Puede ser usado en ventas?"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_cash
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_607_view_tree
+msgid "Cash Amount"
+msgstr "Efectivo"
 
 #. module: billing_do
 #: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_citizens_endpoint
@@ -1322,49 +413,1286 @@ msgid "Citizens Endpoint"
 msgstr "Ruta para Ciudadanos"
 
 #. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_ncf_type__code
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__code
+msgid "Code"
+msgstr "Código de identificación"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__code_length
+msgid "Code Length"
+msgstr "Cantidad de dígitos que identifica el tipo"
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__company_id
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__company_id
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__company_id
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item__company_id
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_common__company_id
+#: model:ir.model.fields,field_description:billing_do.field_product_product__company_id
+#: model:ir.model.fields,field_description:billing_do.field_product_template__company_id
+#: model:ir.model.fields,field_description:billing_do.field_res_partner__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de configuración"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__consumable_amount
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_606_view_tree
+msgid "Consumable Amount"
+msgstr "Monto Facturado en Bienes"
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: billing_do
+#: model:ir.actions.act_window,name:billing_do.action_billing_do_tax_report_create
+msgid "Create new tax report"
+msgstr "Crear un nuevo informe de impuestos"
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report__state__created
+msgid "Created"
+msgstr "Creado"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_ncf_type__create_uid
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__create_uid
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__create_uid
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__create_uid
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type__create_uid
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_ncf_type__create_date
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__create_date
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__create_date
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__create_date
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type__create_date
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_credit_sale
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_607_view_tree
+msgid "Credit Sale Amount"
+msgstr "Venta a Crédito"
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__account_journal__type__credit_debit_card
+msgid "Credit/Debit Card"
+msgstr "Tarjeta Crédito/Débito"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_credit_debit_card
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_607_view_tree
+msgid "Credit/Debit Card Amount"
+msgstr "Tarjeta Crédito/Débito"
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_res_currency
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__currency_id
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__currency_id
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_common__currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_res_currency_rate
+msgid "Currency Rate"
+msgstr "Tasa monetaria"
+
+#. module: billing_do
 #: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_currency_rates_endpoint
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
 msgid "Currency Rates Endpoint"
 msgstr "Ruta para Tasas de Cambio"
 
-#. module: account
-#: model:ir.model.fields,field_description:account.field_account_move__invoice_user_id
-#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_move_line_search
-msgid "Salesperson"
-msgstr "Vendedor"
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_currency_rates_switch
+msgid "Currency Rates Switch"
+msgstr "Carga Tasas de Cambio On/Off"
 
-#. module: account
-#: code:third_party_addons/billing_do/models/billing_do_account_payment.py:0
+#. module: billing_do
+#: model:ir.actions.server,name:billing_do.billing_do_rates_services_cron_ir_actions_server
+#: model:ir.cron,cron_name:billing_do.billing_do_rates_services_cron
+msgid "Currency: Load Today Rates"
+msgstr "Monedas: Cargar tasas del día"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__description
+msgid "Description"
+msgstr "Descripción"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_ncf_type__display_name
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__display_name
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__display_name
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__display_name
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type__display_name
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report__state__draft
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_company__economic_activity
+#: model:ir.model.fields,field_description:billing_do.field_res_partner__economic_activity
+#: model:ir.model.fields,field_description:billing_do.field_res_users__economic_activity
+msgid "Economic Activity"
+msgstr "Actividad Económica según DGII"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_bank_statement_line__expense_type
+#: model:ir.model.fields,field_description:billing_do.field_account_move__expense_type
+#: model:ir.model.fields,field_description:billing_do.field_account_payment__expense_type
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__expense_type
+msgid "Expense Type"
+msgstr "Tipo de gasto"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_company__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_company__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (Contactos)"
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_move.py:0
 #, python-format
-msgid "Payment reset to draft."
-msgstr "Pago reestablecido a borrador."
+msgid "For E NCF ('{0}') type you have to provide the security code."
+msgstr "Para los NCF de tipo E ('{0}') es requerido colocar el código de seguridad."
 
-#. module: account
-#: code:third_party_addons/billing_do/models/billing_do_account_payment.py:0
-#, python-format
-msgid "<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif'>A payment ({} - {}) which was associated with this move has been reverted to draft state.</p>"
-msgstr "<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif'>Un pago ({} - {}) que estaba asociado con este asiento fue reestablecido a borrador.</p>"
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_form
+msgid "Generate"
+msgstr "Generar reporte"
 
-#. module: account
-#: code:third_party_addons/billing_do/models/billing_do_account_move.py:0
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report__state__generated
+msgid "Generated"
+msgstr "Generado"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__date_generated
+msgid "Generated Date"
+msgstr "Fecha de creación"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_gift
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_607_view_tree
+msgid "Gift Amount"
+msgstr "Bonos o Certificados de Regalo"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_company__googleplus
+msgid "Google Plus ID"
+msgstr "ID de Google Plus"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_company__has_message
+msgid "Has Message"
+msgstr "Tiene un mensaje"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_ncf_type__id
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__id
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__id
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__id
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type__id
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__id
+msgid "ID"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__account_tax__tax_type__ipi
+msgid "IPI"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__account_tax__tax_type__isc
+msgid "ISC"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__isc_amount
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__isc_amount
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_common__isc_amount
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_606_view_tree
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_607_view_tree
+msgid "ISC Amount"
+msgstr "Impuesto Selectivo al Consumo"
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__account_tax__tax_type__isr
+msgid "ISR"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__held_amount_isr
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__held_amount_isr
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_common__held_amount_isr
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_606_view_tree
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_607_view_tree
+msgid "ISR Held Amount"
+msgstr "Monto Retención Renta"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_isr_perceived
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_607_view_tree
+msgid "ISR Perceived Amount"
+msgstr "ISR Percibido"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__amount_isr_purchases
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_606_view_tree
+msgid "ISR Purchases Amount"
+msgstr "ISR percibido en compras"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__isr_type
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_606_view_tree
+msgid "ISR Type"
+msgstr "Tipo de retención en ISR"
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__account_tax__tax_type__itbis
+msgid "ITBIS"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__amount_itbis_ahead
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_606_view_tree
+msgid "ITBIS Ahead Amount"
+msgstr "ITBIS por Adelantar"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__amount_itbis_expenses
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_606_view_tree
+msgid "ITBIS Expenses Amount"
+msgstr "ITBIS llevado al Costo"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__held_amount_itbis
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__held_amount_itbis
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_common__held_amount_itbis
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_606_view_tree
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_607_view_tree
+msgid "ITBIS Held Amount"
+msgstr "ITBIS Retenido"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_itbis_perceived
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_607_view_tree
+msgid "ITBIS Perceived Amount"
+msgstr "ITBIS Percibido"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__amount_itbis_proportional
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_606_view_tree
+msgid "ITBIS Proportional Amount"
+msgstr "ITBIS Sujeto a Proporcionalidad (Art. 349)"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__amount_itbis_purchases
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_606_view_tree
+msgid "ITBIS Purchases Amount"
+msgstr "ITBIS percibido en compras"
+
+#. module: billing_do
+#: model:ir.model.fields,help:billing_do.field_res_company__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+"Si se encuentra seleccionado, hay nuevos mensajes que requieren tu atención."
+
+#. module: billing_do
+#: model:ir.model.fields,help:billing_do.field_res_company__message_has_error
+#: model:ir.model.fields,help:billing_do.field_res_company__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si se encuentra seleccionado, algunos mensajes tienen error de envío."
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_bank_statement_line__income_type
+#: model:ir.model.fields,field_description:billing_do.field_account_move__income_type
+#: model:ir.model.fields,field_description:billing_do.field_account_payment__income_type
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__income_type
+msgid "Income Type"
+msgstr "Tipo de ingreso"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__date_invoice
+msgid "Invoice Date"
+msgstr "Fecha Comprobante"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__date_invoice_day
+msgid "Invoice Date Day"
+msgstr "Fecha Comprobante (Día)"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__date_invoice_month
+msgid "Invoice Date Month"
+msgstr "Fecha Comprobante (Mes)"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__date_amount_held
+msgid "Invoice Held Date"
+msgstr "Fecha de Retención"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_other_taxes
+msgid "Invoice Other Taxes Amount"
+msgstr "Otros Impuestos/Tasas"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_invoice_calendar
+msgid "Invoices"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_company__message_is_follower
+msgid "Is Follower"
+msgstr "Es un seguidor"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_bank_statement_line__is_tax_valuable
+#: model:ir.model.fields,field_description:billing_do.field_account_journal__is_tax_valuable
+#: model:ir.model.fields,field_description:billing_do.field_account_move__is_tax_valuable
+#: model:ir.model.fields,field_description:billing_do.field_account_payment__is_tax_valuable
+msgid "Is tax valuable?"
+msgstr "¿Posee valor fiscal?"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_bank_statement_line__is_third_party_ncf
+#: model:ir.model.fields,field_description:billing_do.field_account_move__is_third_party_ncf
+#: model:ir.model.fields,field_description:billing_do.field_account_payment__is_third_party_ncf
+msgid "Is third-party NCF?"
+msgstr "¿Es un NCF de terceros?"
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_account_journal
+#: model:ir.model.fields,field_description:billing_do.field_account_payment_register__journal_id
+msgid "Journal"
+msgstr "Diario"
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_account_move
+msgid "Journal Entry"
+msgstr "Asiento contable"
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_account_move_line
+msgid "Journal Item"
+msgstr "Apunte contable"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_ncf_type____last_update
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report____last_update
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606____last_update
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607____last_update
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type____last_update
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_ir_sequence_date_range__number_last
+msgid "Last Number"
+msgstr "Último Número"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_ncf_type__write_uid
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__write_uid
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__write_uid
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__write_uid
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type__write_uid
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__write_uid
+msgid "Last Updated by"
+msgstr "Última Actualización por"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_ncf_type__write_date
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__write_date
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__write_date
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__write_date
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type__write_date
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__write_date
+msgid "Last Updated on"
+msgstr "Última Actualización en"
+
+#. module: billing_do
+#: model:ir.model.fields,help:billing_do.field_ir_sequence_date_range__number_last
+msgid "Last number of this sequence"
+msgstr "Último número de este secuencia"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__legaltip_amount
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_legaltip
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_606_view_tree
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_607_view_tree
+msgid "Legal Tip Amount"
+msgstr "Monto Propina Legal"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_company__load_currency_rates
+msgid "Load Currency Rates?"
+msgstr "¿Cargar Tasas Automáticas?"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_company__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Adjuntos principales"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__max_length
+msgid "Maximun Length"
+msgstr "Longitud máxima"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_company__message_has_error
+msgid "Message Delivery error"
+msgstr "Error de Envío de Mensaje"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_company__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__min_length
+msgid "Minimun Length"
+msgstr "Longitud mínima"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type__model
+msgid "Model"
+msgstr "Modelo"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_bank_statement_line__ncf
+#: model:ir.model.fields,field_description:billing_do.field_account_move__ncf
+#: model:ir.model.fields,field_description:billing_do.field_account_payment__ncf
+msgid "NCF"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_bank_statement_line__ncf_serie
+#: model:ir.model.fields,field_description:billing_do.field_account_move__ncf_serie
+#: model:ir.model.fields,field_description:billing_do.field_account_payment__ncf_serie
+msgid "NCF Serie"
+msgstr "Serie de NCF"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_bank_statement_line__ncf_type
+#: model:ir.model.fields,field_description:billing_do.field_account_move__ncf_type
+#: model:ir.model.fields,field_description:billing_do.field_account_payment__ncf_type
+#: model:ir.model.fields,field_description:billing_do.field_ir_sequence__ncf_type
+msgid "NCF Type"
+msgstr "Tipo de comprobante"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_bank_statement_line__ncf_type_sequence
+#: model:ir.model.fields,field_description:billing_do.field_account_move__ncf_type_sequence
+#: model:ir.model.fields,field_description:billing_do.field_account_payment__ncf_type_sequence
+msgid "NCF Type Sequence Used"
+msgstr "Secuencia de Tipo de Comprobante utilizada"
+
+#. module: billing_do
+#: model:ir.actions.act_window,name:billing_do.action_billing_do_ncf_types_list
+msgid "NCF Types"
+msgstr "Tipos de NCF"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_bank_statement_line__ncf_date_to
+#: model:ir.model.fields,field_description:billing_do.field_account_move__ncf_date_to
+#: model:ir.model.fields,field_description:billing_do.field_account_payment__ncf_date_to
+msgid "NCF valid to:"
+msgstr "Válido hasta:"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_ncf_type__name
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__name
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__name
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_partner_form
+msgid "Name"
+msgstr "Nombre"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_company__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de acciones"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_company__message_has_error_counter
+msgid "Number of errors"
+msgstr "Numero de errores"
+
+#. module: billing_do
+#: model:ir.model.fields,help:billing_do.field_res_company__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Número de mensajes que requieren una acción"
+
+#. module: billing_do
+#: model:ir.model.fields,help:billing_do.field_res_company__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de envío"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_other_sale_way
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_607_view_tree
+msgid "Other Sale Amount"
+msgstr "Otras Formas de Ventas"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__other_taxes_amount
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_606_view_tree
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_607_view_tree
+msgid "Other Taxes Amount"
+msgstr "Otros Impuestos/Tasas"
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__account_tax__tax_type__otro
+#: model:ir.model.fields.selection,name:billing_do.selection__res_company__tax_contributor_type__3
+#: model:ir.model.fields.selection,name:billing_do.selection__res_partner__tax_contributor_type__3
+msgid "Otro"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__date_payment_day
+msgid "Payment Date Day"
+msgstr "Fecha Pago (Día)"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__date_payment_month
+msgid "Payment Date Month"
+msgstr "Fecha Pago (Mes)"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__payment_type
+msgid "Payment Type"
+msgstr "Forma de Pago"
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_move.py:0
 #, python-format
 msgid "Payment reconciled."
 msgstr "Pago conciliado."
 
-#. module: account
-#: code:third_party_addons/billing_do/models/billing_do_account_move.py:0
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_payment.py:0
 #, python-format
-msgid "<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif'><strong>Payment reconciled with line id:</strong> {} - {}.</p>"
-msgstr "<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif'><strong>Pago conciliado con línea de id:</strong> {} - {}.</p>"
+msgid "Payment reset to draft."
+msgstr "Pago reestablecido a borrador."
 
-#. module: account
-#: code:third_party_addons/billing_do/models/billing_do_account_move_line.py:0
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_move_line.py:0
 #, python-format
 msgid "Payment unreconciled."
 msgstr "Pago desconciliado."
 
-#. module: account
-#: code:third_party_addons/billing_do/models/billing_do_account_move_line.py:0
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_account_payment
+msgid "Payments"
+msgstr "Pagos"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_permute
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_607_view_tree
+msgid "Permute Amount"
+msgstr "Permuta"
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__res_company__tax_contributor_type__2
+#: model:ir.model.fields.selection,name:billing_do.selection__res_partner__tax_contributor_type__2
+msgid "Persona física"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__res_company__tax_contributor_type__1
+#: model:ir.model.fields.selection,name:billing_do.selection__res_partner__tax_contributor_type__1
+msgid "Persona jurídica"
+msgstr ""
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_move.py:0
 #, python-format
-msgid "<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif'><strong>Payment with line id</strong> {} - {} <strong>has been unreconciled.</strong> </p>"
-msgstr "<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif'><strong>Pago con linea de id</strong> {} - {} <strong>ha sido desconciliado.</strong> </p>"
+msgid "Please select the invoice date first."
+msgstr "Por favor seleccione primero la fecha de la factura."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#, python-format
+msgid "Please select the type of NCF."
+msgstr "Por favor seleccione el tipo de comprobante."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#, python-format
+msgid ""
+"Please, first select the vendor and then enter the value for NCF field."
+msgstr "Seleccione primero el proveedor y luego digite el NCF."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#, python-format
+msgid "Posted journal entry must have an unique sequence number per company."
+msgstr "Las entradas de diarios que son validadas deben tener un número único de secuencia por compañía."
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_product_template
+msgid "Product"
+msgstr "Producto"
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_account_payment_register
+msgid "Register Payment"
+msgstr "Registrar pago"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_trn_type__regular_expression
+msgid "Regular Expression"
+msgstr "Expresión regular"
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_tax_report.py:0
+#: code:addons/billing_do/models/billing_do_tax_report.py:0
+#, python-format
+msgid "Report"
+msgstr "Reporte"
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_tax_report.py:0
+#, python-format
+msgid "Report Items"
+msgstr "Facturas"
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_res_currency.py:0
+#, python-format
+msgid "Resource with name {} not found in model."
+msgstr "No se encontró el recurso con el nombre {}."
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__account_account__withholding_tax_type__ret-isr-606
+msgid "Retencion ISR 606"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__account_account__withholding_tax_type__ret-isr-607
+msgid "Retencion ISR 607"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__account_account__withholding_tax_type__ret-itbis-606
+msgid "Retencion ITBIS 606"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__account_account__withholding_tax_type__ret-itbis-607
+msgid "Retencion ITBIS 607"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_company__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Error de entrega del SMS"
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_sale_report
+msgid "Sales Analysis Report"
+msgstr "Informe de análisis de ventas"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_move_line__invoice_user_id
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_move_line_search
+msgid "Salesperson"
+msgstr "Vendedor"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_bank_statement_line__security_code
+#: model:ir.model.fields,field_description:billing_do.field_account_move__security_code
+#: model:ir.model.fields,field_description:billing_do.field_account_payment__security_code
+msgid "Security Code"
+msgstr "Código de seguridad"
+
+#. module: billing_do
+#: model:ir.model.fields,help:billing_do.field_account_journal__type
+msgid ""
+"Select 'Sale' for customer invoices journals.\n"
+"Select 'Purchase' for vendor bills journals.\n"
+"Select 'Cash' or 'Bank' for journals that are used in customer or vendor payments.\n"
+"Select 'General' for miscellaneous operations journals."
+msgstr ""
+"Selecciona 'Ventas' para diarios de facturas de cliente.\n"
+"Selecciona 'Compras' para diarios de facturas de proveedor.\n"
+"Selecciona 'Caja' o 'Banco' para diarios que se usan para pagos de clientes y proveedores. \n"
+"Selecciona 'General' para diarios que contienen operaciones varias."
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_ir_sequence
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_ir_sequence_date_range
+msgid "Sequence Date Range"
+msgstr "Rango de fechas de la secuencia"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_ncf_type__sequence
+msgid "Sequences"
+msgstr "Secuencias"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_ncf_type__serie
+msgid "Serie"
+msgstr "Serie de NCF"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__service_amount
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_606_view_tree
+msgid "Service Amount"
+msgstr "Monto Facturado en Servicios"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Services Endpoints"
+msgstr "Rutas de Acceso a Servicios"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Services Switches"
+msgstr "Encendido/Apagado Servicios"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Services URL"
+msgstr "URL de servicios"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_form
+msgid "Show items"
+msgstr "Mostrar reporte"
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_currency_rate_http_service_helper.py:0
+#, python-format
+msgid ""
+"Something went wrong while querying the Currencies Rates service. Check with"
+" your administrator."
+msgstr ""
+"Algo falló al realizar la consulta con el servicio de Tasas de Cambio. "
+"Consulte con su administrador."
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_currency_rate__source
+msgid "Source"
+msgstr "Fuente"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__state
+msgid "State"
+msgstr "Estado"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_account_move_filter
+msgid "TRN"
+msgstr "NCF"
+
+#. module: billing_do
+#: model:ir.actions.act_window,name:billing_do.action_billing_do_trn_type_list
+#: model:ir.ui.menu,name:billing_do.menu_trn_type_list
+msgid "TRN Types"
+msgstr "Validadores de comprobantes"
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#, python-format
+msgid "TRN is valid."
+msgstr "NCF es válido."
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_account_tax
+msgid "Tax"
+msgstr "Impuesto"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__tax_amount
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_606_view_tree
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_607_view_tree
+msgid "Tax Amount"
+msgstr "ITBIS Facturado"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_tax_signed
+msgid "Tax Amount Signed"
+msgstr "ITBIS Facturado"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__vat
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__vat
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item__vat
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_common__vat
+msgid "Tax Contributor ID"
+msgstr "RNC"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__vat_type
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__vat_type
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item__vat_type
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_common__vat_type
+#: model:ir.model.fields,field_description:billing_do.field_res_company__tax_contributor_type
+#: model:ir.model.fields,field_description:billing_do.field_res_partner__tax_contributor_type
+#: model:ir.model.fields,field_description:billing_do.field_res_users__tax_contributor_type
+msgid "Tax Contributor Type"
+msgstr "Tipo Id"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_tax_contributors_endpoint
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Tax Contributors Endpoint"
+msgstr "Ruta para Contribuyentes"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_tax_contributors_switch
+msgid "Tax Contributors Switch"
+msgstr "Validación Contribuyentes On/Off"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_company__vat
+#: model:ir.model.fields,field_description:billing_do.field_res_partner__vat
+#: model:ir.model.fields,field_description:billing_do.field_res_users__vat
+msgid "Tax ID"
+msgstr "RNC"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__move
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__move
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item__move
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_common__move
+msgid "Tax Receipt Number"
+msgstr "NCF"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__move_reversed
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__move_reversed
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item__move_reversed
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_common__move_reversed
+msgid "Tax Receipt Reversed"
+msgstr "NCF ó Documento Modificado"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_tax_receipts_endpoint
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "Tax Receipts Endpoint"
+msgstr "Ruta para NCF"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_tax_receipts_switch
+msgid "Tax Receipts Switch"
+msgstr "Validación NCF On/Off"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__tax_report
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__tax_report
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item__tax_report
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_common__tax_report
+msgid "Tax Report"
+msgstr "Report de Impuesto"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_search
+msgid "Tax Report 606"
+msgstr "Reporte 606"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_search
+msgid "Tax Report 607"
+msgstr "Reporte 607"
+
+#. module: billing_do
+#: model:ir.actions.act_window,name:billing_do.action_billing_do_tax_report_list
+msgid "Tax Report List"
+msgstr "Listado de informe de impuestos"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__type
+msgid "Tax Report Type"
+msgstr "Tipo de reporte"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type__code
+msgid "Tax Report Type Code"
+msgstr "Código"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type__name
+msgid "Tax Report Type Name"
+msgstr "Nombre"
+
+#. module: billing_do
+#: model:ir.actions.act_window,name:billing_do.action_billing_do_tax_report_type_list
+msgid "Tax Report Types"
+msgstr "Tipos de reporte de impuestos"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__tax_term_month
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_search
+msgid "Tax Term Month"
+msgstr "Mes"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__tax_term_year
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_view_search
+msgid "Tax Term Year"
+msgstr "Año"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_tax__tax_type
+msgid "Tax Type"
+msgstr "Tipo de impuesto"
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_vat_helper.py:0
+#, python-format
+msgid ""
+"The Identity Number ({0}) entered is invalid. Does not meet the correct "
+"format. Please verify the value entered."
+msgstr ""
+"El RNC ({0}) digitado es inválido. Posee un formato incorrecto. Verifique el"
+" valor digitado."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#, python-format
+msgid "The TRN \"{0}\" y el RNC \"{1}\" are valid."
+msgstr "El NCF \"{0}\" y el RNC \"{1}\" son válidos."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_trn_helper.py:0
+#, python-format
+msgid "The TRN ({0}) is invalid."
+msgstr "El NCF ({0}) es inválido."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_trn_helper.py:0
+#, python-format
+msgid "The TRN ({}) has some extra digits. Please verify."
+msgstr "El NCF ({}) posee dígitos extras. Verifique."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_trn_helper.py:0
+#, python-format
+msgid "The TRN ({}) is not valid for tax purpose."
+msgstr "Este tipo de NCF ({}) no posee crédito fiscal."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_trn_helper.py:0
+#, python-format
+msgid "The TRN parameter must have a value. Nothing was given."
+msgstr "El parámetro NCF debe tener un valor. Ninguno fue proveído."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_trn_helper.py:0
+#, python-format
+msgid ""
+"The TRNs which starts with B11 or B13 use a specific type of journal. Please"
+" use the appropiate journal for registering this vendor invoice."
+msgstr ""
+"Los comprobantes de tipo B11 y B13 ({0}) requieren el uso de un diario en "
+"específico."
+
+#. module: billing_do
+#: model:ir.model.fields,help:billing_do.field_res_company__vat
+#: model:ir.model.fields,help:billing_do.field_res_partner__vat
+#: model:ir.model.fields,help:billing_do.field_res_users__vat
+msgid ""
+"The Tax Identification Number. Values here will be validated based on the "
+"country format. You can use '/' to indicate that the partner is not subject "
+"to tax."
+msgstr ""
+"El número de RNC. Los valores serán validados de acuerdo con el "
+"formato del país. Puede usar '/' para indicar que un Contacto no posee "
+"obligaciones fiscales."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_vat_helper.py:0
+#, python-format
+msgid ""
+"The format is not compatible with the format of a Dominican Republic Id nor "
+"a Tax Payer Id ({0})."
+msgstr "No posee la estructura de una cedula y tampoco de un RNC ({0})."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#, python-format
+msgid "The sequence associated with this NCF type does not contain any range."
+msgstr "La secuencia asociada con este tipo de comprobante no contiene ningún rango."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#, python-format
+msgid ""
+"The sequence associated with this NCF type does not have a valid range "
+"according to the Invoice Date."
+msgstr ""
+"La secuencia asociada con este tipo de comprobantes no posee un rango válido de secuencias "
+"que pueda ser utilizada según la fecha de la factura."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_trn_http_service_helper.py:0
+#: code:addons/billing_do/models/billing_do_trn_http_service_helper.py:0
+#, python-format
+msgid ""
+"The tax receipt number {0} entered is not valid or does not belongs to the "
+"VAT {1}."
+msgstr ""
+"El número de comprobante fiscal {0} digitado no está vigente o no "
+"corresponde a este RNC {1}."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_trn_http_service_helper.py:0
+#, python-format
+msgid "The values entered for TRN ({0}) and VAT ({1}) are invalid."
+msgstr ""
+"Los datos suministrados para la consulta no son válidos. NCF:{0}|RNC:{1}."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#, python-format
+msgid ""
+"There is(are) a(some) line(s) which does not have any product associated. "
+"Please correct this error before duplicating."
+msgstr ""
+"Existe(n) alguna(s) línea(s) que no poseen ningún producto asociado. "
+"Por favor corrija este error antes de duplicar esta factura."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_trn_helper.py:0
+#, python-format
+msgid ""
+"There isn't any TRN type for validate. Please check with your administrator."
+msgstr ""
+"No existen Tipos de comprobantes registrados para validar. Consulte con el "
+"administrador."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_currency_rate_http_service_helper.py:0
+#, python-format
+msgid ""
+"There was a Connection problem while querying the Currencies Rates service. "
+"Check with your administrator."
+msgstr ""
+"Hubo un problema de conexión con el servicio de consultas de Tasas de "
+"Cambio. Consulte con su administrador."
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "These are settings for the Billing Do module."
+msgstr "Estas configuraciones son del módulo de Facturación RD."
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_res_config_settings_view_form
+msgid "These are the URL used to query the services of validations."
+msgstr ""
+"Estas son las URL utilizadas para la consulta de los servicios de "
+"validación."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#, python-format
+msgid "This type of NCF does not have any sequence associated."
+msgstr "Este tipo de comprobante no posee ninguna secuencia asociada."
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_account_invoice_filter
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_account_payment_search
+msgid "Today"
+msgstr "Hoy"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_invoice_tree
+msgid "Total"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_606__total_amount
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_606_view_tree
+msgid "Total Amount"
+msgstr "Total Monto Facturado"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_bank_statement_line__ncf_type_code
+#: model:ir.model.fields,field_description:billing_do.field_account_journal__type
+#: model:ir.model.fields,field_description:billing_do.field_account_move__ncf_type_code
+#: model:ir.model.fields,field_description:billing_do.field_account_payment__ncf_type_code
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_ncf_type__type
+msgid "Type"
+msgstr "Tipo"
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_currency_rate_http_service_helper.py:0
+#, python-format
+msgid ""
+"URL for querying the Currencies Rates is misconfigured or not exist. Check "
+"with your administrator."
+msgstr ""
+"La URL para la consulta de Tasas de cambio está mal configurado o no existe."
+" Consulte con su administrador."
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_tax_report_item_607_view_tree
+msgid "Untaxed Amount"
+msgstr "Monto sin impuestos"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_item_607__amount_untaxed_signed
+msgid "Untaxed Amount Signed"
+msgstr "Monto Facturado"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_journal__use_sequence
+msgid "Use sequence?"
+msgstr "Usar secuencia?"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report__user_who_generated
+msgid "User Who Generated"
+msgstr "Usuario creador"
+
+#. module: billing_do
+#: model:ir.model.fields.selection,name:billing_do.selection__account_tax__tax_type__veh
+msgid "VEH"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_billing_do_tax_report_type__view
+msgid "View"
+msgstr "Vista"
+
+#. module: billing_do
+#: model:ir.model,name:billing_do.model_stock_warehouse
+msgid "Warehouse"
+msgstr "Almacén"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_res_company__website_message_ids
+msgid "Website Messages"
+msgstr "Mensajes del sitio web"
+
+#. module: billing_do
+#: model:ir.model.fields,help:billing_do.field_res_company__website_message_ids
+msgid "Website communication history"
+msgstr "Historial de comunicaciones del sitio web"
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_account__withholding_tax_type
+msgid "Withholding Tax Type"
+msgstr ""
+
+#. module: billing_do
+#: model:ir.model.fields,field_description:billing_do.field_account_payment__writeoff_label
+msgid "Writeoff Label"
+msgstr ""
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#, python-format
+msgid ""
+"You are trying to use a partner who does not have a VAT value. Please "
+"verify."
+msgstr ""
+"El proveedor que intenta utilizar no posee asignado un RNC/Cédula. Por favor"
+" verifique."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_currency_rate_http_service_helper.py:0
+#, python-format
+msgid "{} Automatically loading of Currencies is disabled."
+msgstr "{} Carga automática de tasas de cambios está deshabilitado."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_res_currency.py:0
+#, python-format
+msgid "{} Company {} Currency Rate Inserted: {} - {} (Rate: {})"
+msgstr "{} Compañía {} Tasa de cambio agregada: {} - {} (Tasa de cambio: {})"
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_res_currency.py:0
+#, python-format
+msgid "{} Exception thrown while loading Currencies Rates: {}"
+msgstr "{} Excepción arrojada al intentar cargar las Tasas de Cambio: {}."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#, python-format
+msgid "¡User error!"
+msgstr "¡Error de usuario!"
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#, python-format
+msgid "¡Validation error!"
+msgstr "¡Error de validación!"

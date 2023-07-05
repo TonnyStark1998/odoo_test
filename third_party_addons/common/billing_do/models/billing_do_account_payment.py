@@ -4,10 +4,10 @@ import logging as log
 from odoo import models, fields, api, _
 
 class BillindDoAccountPayment(models.Model):
-    _inherit = "account.payment"
+    _name = 'account.payment'
+    _inherit = 'account.payment'
 
     # Account Payment - Modified Fields
-    journal_id = fields.Many2one(domain="[('type', 'in', ('bank', 'cash', 'credit_debit_card')), ('company_id', '=', company_id)]")
     writeoff_label = fields.Char(default=lambda self: self._default_get_writeoff_label())
 
     @api.model
@@ -17,7 +17,7 @@ class BillindDoAccountPayment(models.Model):
 
         if active_ids and active_model == 'account.move':
             invoices = self.env['account.move'].browse(active_ids).filtered(lambda move: move.is_invoice(include_receipts=True))
-            return invoices[0].invoice_payment_ref or invoices[0].ref or invoices[0].name or invoices[0].ncf
+            return invoices[0].payment_reference or invoices[0].ref or invoices[0].name or invoices[0].ncf
         else:
             return 'Write-Off Label'
 

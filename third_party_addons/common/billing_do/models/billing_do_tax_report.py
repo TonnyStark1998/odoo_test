@@ -42,8 +42,8 @@ class BillingDoTaxReport(models.Model):
     user_who_generated = fields.Many2one('res.users', 
                                             string='User Who Generated', 
                                             readonly=True, 
-                                            required=True, 
-                                            ondelete='restrict', 
+                                            required=False, 
+                                            ondelete='set null', 
                                             default=lambda self: self.env.user 
                                                                     and self.env.user.id 
                                                                     or False)
@@ -190,6 +190,7 @@ class BillingDoTaxReportType(models.Model):
 
     model = fields.Many2one(string='Model',
                                 comodel_name='ir.model',
+                                ondelete='cascade',
                                 domain=lambda self: self._get_tax_report_item_extended_models_domain(['billing.do.tax.report.item'],\
                                                                                                         True),
                                 required=True)
