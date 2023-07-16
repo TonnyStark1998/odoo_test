@@ -9,22 +9,29 @@
             <t t-if="not o or not 'company_id' in o">
                 <t t-set="company" t-value="res_company"/>
             </t>
-            <t t-if="o and 'style' in o" t-set="style" t-value="o.style" />
-            <t t-if="o and not 'style' in o" t-set="style" t-value="company.style" />
+            <t t-if="o and 'style' in o" 
+                t-set="style" 
+                t-value="o.style" />
+            <t t-if="o and not 'style' in o" 
+                t-set="style" 
+                t-value="company.style" />
+            <t t-if="o and 'partner_id' in o and 'style' in o.partner_id" 
+                t-set="style" 
+                t-value="o.partner_id.style" />
             <div t-attf-style="padding-bottom:0px;
                                 padding-left:0px;
                                 padding-right:0px;
                                 color:{{style.text_color}} !important;
                                 font-size:{{int(style.header_font)}}px !important;
                                 font-family:{{style.font_family}} !important;"
-                class="header col">
+                class="container header col">
                 <t t-if="style.header">
                     <div class="row mb-2">
-                        <div class="col mt-2" style="padding-left:0px;">
+                        <div class="col-6 mt-2" style="padding-left:0px;">
                             <div class="row">
                                 <div class="col">
                                     <img t-if="style.logo"
-                                        t-att-src="image_data_uri(o.style.logo)"
+                                        t-att-src="image_data_uri(style.logo)"
                                         alt="Company Logo"
                                         style="max-width:100px !important;" />
                                     <img t-if="not style.logo and company.logo"
@@ -54,14 +61,14 @@
                             </div>
                         </div>
                         <div t-if="company.twitter or company.facebook or company.youtube"
-                            t-attf-style="background-color: {{o.style.theme_color}};
+                            t-attf-style="background-color: {{style.theme_color}};
                                 width:auto;
                                 padding-left:15px; 
-                                color:{{o.style.theme_txt_color}}; 
+                                color:{{style.theme_txt_color}}; 
                                 padding-right:15px; 
                                 padding-top:4px; 
                                 padding-bottom:2px;"
-                            class="col-auto mb-8">
+                            class="col-6 mb-2">
                             <span t-if="company.twitter" 
                                 style="padding-left:0px;" 
                                 class="fa fa-twitter-square "/>&#160;
@@ -75,9 +82,9 @@
                                 class="fa fa-youtube-square "/>&#160;
                             <span t-field="company.youtube"/>
                         </div>
-                        <div class="col mb-8"
+                        <div class="col-6 mb-2"
                             style="font-size:12px !important; padding-bottom:2px;padding-right:0px;">
-                            <h1 t-attf-style="color: {{o.style.name_color}}">FACTURA</h1>
+                            <h1 t-attf-style="color: {{style.name_color}}">FACTURA</h1>
                             <div t-if="company.email">
                                 <span class="fa fa-envelope-square fa-lg"/> 
                                 <span t-field="company.email"/>
@@ -95,22 +102,22 @@
             <div class="article page" 
                 t-attf-data-oe-model="account.move" 
                 t-attf-data-oe-id="{{o.id}}"
-                t-attf-style="margin-top:4px; padding-top:5px; padding-left:0px; padding-right:0px; color:{{o.style.text_color}} !important;">
+                t-attf-style="margin-top:4px; padding-top:5px; padding-left:0px; padding-right:0px; color:{{style.text_color}} !important;">
                 <!--  Start of INVOICE HEADER    -->
                 <div class="container mb-4" 
                     style="padding-left:0px; padding-right:0px; padding-bottom:2px;">
                     <div class="row">
                         <!--start of wrapper -->
-                        <div class="col pull-left"
-                            t-attf-style="font-size:{{int(o.style.body_font)}}px !important;padding-left:0px;">
-                            <div t-attf-style="background-color:{{o.style.theme_color}}; padding-top:2px; padding-bottom:2px; color:{{o.style.theme_txt_color}};">
+                        <div class="col-5 mt-3 mb-3"
+                            t-attf-style="font-size:{{int(style.body_font)}}px !important;padding-left:0px;">
+                            <div t-attf-style="background-color:{{style.theme_color}}; padding-top:2px; padding-bottom:2px; color:{{style.theme_txt_color}};">
                                 <span style="font-size:16px;">
                                     <span class="fa fa-user fa-lg"/>
                                     Cliente
                                 </span>
                             </div>
                             <h5 t-if="o.partner_id"
-                                t-attf-style="color:{{o.style.cust_color}}; margin-top:2px; margin-bottom:5px; margin-left:0px;">
+                                t-attf-style="color:{{style.cust_color}}; margin-top:2px; margin-bottom:5px; margin-left:0px;">
                                 <span t-if="o.partner_id.title" t-field="o.partner_id.title"/>
                                 <span t-field="o.partner_id"/>
                             </h5>
@@ -149,8 +156,8 @@
                                 <span t-field="o.partner_id.website"/>
                             </div>
                         </div>
-                        <div class="col mb4 pull-right"
-                            t-attf-style="border:2px solid {{o.style.theme_color}}; color:#222;">
+                        <div class="col-6 p-1 mt-3 ms-3 mb-3"
+                            t-attf-style="border:2px solid {{style.theme_color}}; color:#222;">
                             <t t-if="o.ncf_date_to">
                                 <t t-set="ncf_date_due" t-value="o.ncf_date_to"/>
                             </t>
@@ -195,7 +202,7 @@
                 </div>
                 <!--    End of INVOICE HEADER   -->
                 <!--    Start of INVOICE LINES  -->
-                <div class="col-12 mt8 mb9"
+                <div class="col-12 mt-3 mb-3"
                         t-attf-style="padding-left:0px; 
                                     padding-right:0px;
                                     font-size:12px !important;"
@@ -209,41 +216,41 @@
                     <t t-set="display_discount"
                         t-value="any([l.discount for l in o.invoice_line_ids])"/>
 
-                    <table class="table table-condensed" 
-                            t-attf-style="color:{{o.style.text_color}};">
+                    <table class="table" 
+                            t-attf-style="color:{{style.text_color}};">
 
-                        <thead t-attf-style="background-color:{{o.style.theme_color}};
+                        <thead t-attf-style="background-color:{{style.theme_color}};
                                                 page-break-inside: avoid;
-                                                color:{{o.style.theme_txt_color}};">
+                                                color:{{style.theme_txt_color}};">
 
                             <tr t-attf-style="page-break-inside: avoid !important;
-                                                border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                                border-bottom: 1px solid {{style.text_color}} !important;">
 
-                                <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                <th t-attf-style="border-bottom: 1px solid {{style.text_color}} !important;">
                                     No.
                                 </th>
                                 <th class="text-right"
-                                    t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                    t-attf-style="border-bottom: 1px solid {{style.text_color}} !important;">
                                     Cantidad
                                 </th>
-                                <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                <th t-attf-style="border-bottom: 1px solid {{style.text_color}} !important;">
                                     Descripción
                                 </th>
                                 <th class="text-right"
-                                    t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                    t-attf-style="border-bottom: 1px solid {{style.text_color}} !important;">
                                     Precio Unitario
                                 </th>
                                 <th class="text-right"
-                                    t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;"
+                                    t-attf-style="border-bottom: 1px solid {{style.text_color}} !important;"
                                     t-if="display_discount">
                                     Descuento
                                 </th>
                                 <th class="text-right"
-                                    t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                    t-attf-style="border-bottom: 1px solid {{style.text_color}} !important;">
                                     Impuestos
                                 </th>
                                 <th class="text-right"
-                                    t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                    t-attf-style="border-bottom: 1px solid {{style.text_color}} !important;">
                                     Monto
                                 </th>
                             </tr>
@@ -287,7 +294,7 @@
                                 </tr>
 
                                 <tr t-if="l.display_type not in ['line_section' , 'line_note']"
-                                    t-attf-style="background-color:{{o.style.odd if line_number_section % 2 != 0 else o.style.even}};
+                                    t-attf-style="background-color:{{style.odd if line_number_section % 2 != 0 else style.even}};
                                                     page-break-inside: avoid !important;">
                                     <td>
                                         <span t-esc="line_number"/>
@@ -327,14 +334,14 @@
                     <div class="row"
                          style="padding-left:0px; padding-right:0px; page-break-inside: avoid !important;">
                         <div class=" offset-7 col-5">
-                            <table class="table table-sm" t-attf-style="color:{{o.style.text_color}};">
+                            <table class="table table-sm" t-attf-style="color:{{style.text_color}};">
                                 <tbody>
-                                    <tr t-attf-style="border-top: 1px solid {{o.style.text_color}};">
-                                        <td t-attf-style="border-top: 1px solid {{o.style.text_color}} !important;">
+                                    <tr t-attf-style="border-top: 1px solid {{style.text_color}};">
+                                        <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
                                             <strong>Subtotal</strong>
                                         </td>
                                         <td class="text-right"
-                                            t-attf-style="border-top: 1px solid {{o.style.text_color}} !important;">
+                                            t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
                                             <span t-field="o.amount_untaxed"/>
                                         </td>
                                     </tr>
@@ -344,12 +351,12 @@
                                             <span t-field="o.amount_tax"/>
                                         </td>
                                     </tr>
-                                    <tr t-attf-style="border-bottom: 1px solid {{o.style.text_color}};">
-                                        <td t-attf-style="border-top: 1px solid {{o.style.text_color}} !important;">
+                                    <tr t-attf-style="border-bottom: 1px solid {{style.text_color}};">
+                                        <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
                                             <strong>Total</strong>
                                         </td>
                                         <td class="text-right"
-                                            t-attf-style="border-top: 1px solid {{o.style.text_color}} !important;">
+                                            t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
                                             <strong>
                                                 <span style="font-weight:bold; text-decoration:underline;"
                                                     t-field="o.amount_total"/>
