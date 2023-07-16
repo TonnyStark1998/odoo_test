@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- Secuencias para Comprobantes No Electrónicos -->
+    <record id="billing_do.default_ncf_type_ir_sequence_b01" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b01" />
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_b02" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b02" />
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_b03" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b03" />
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_b04" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b04" />
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_b11" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b11" />
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_b12" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b12" />
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_b13" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b13" />
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_b14" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b14" />
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_b15" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b15" />
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_b16" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b16" />
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_b17" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_b17" />
+    </record>
+
+    <!-- Secuencias para Comprobantes Electrónicos -->
+    <record id="billing_do.default_ncf_type_ir_sequence_e31" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_e31" />
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_e32" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_e32" />
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_e33" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_e33" />
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_e34" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_e34" />
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_e41" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_e41" />
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_e43" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_e43" />
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_e44" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_e44" />
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_e45" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_e45" />
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_e46" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_e46" />
+    </record>
+    <record id="billing_do.default_ncf_type_ir_sequence_e47" model="ir.sequence">
+        <field name="ncf_type" ref="billing_do.default_ncf_type_e47" />
+    </record>
+</odoo>

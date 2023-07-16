@@ -81,7 +81,7 @@
             </div>
             <!--end of Header-->
             <!-- START OF PAGE -->
-            <div class="page" 
+            <div class="article page" 
                 t-attf-data-oe-model="account.move" 
                 t-attf-data-oe-id="{{o.id}}"
                 t-attf-style="margin-top:4px; padding-top:5px; padding-left:0px; padding-right:0px; color:{{o.style.text_color}} !important;">

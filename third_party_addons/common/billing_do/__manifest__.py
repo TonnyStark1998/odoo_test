@@ -44,6 +44,7 @@
         'data/default_trn_types.xml',
         'data/default_ncf_types_ir_sequences.xml',
         'data/default_ncf_types.xml',
+        'data/update_ncf_types_ir_sequences.xml',
         'views/billing_do_account_move_line.xml',
         'views/billing_do_ncf_types.xml',
         'views/billing_do_ir_sequence_views.xml',
