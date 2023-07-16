@@ -17,74 +17,78 @@
                                 color:{{style.text_color}} !important;
                                 font-size:{{int(style.header_font)}}px !important;
                                 font-family:{{style.font_family}} !important;"
-                class="container mb-2">
-                <div t-if="style.header" class="row">
-                    <div class="col mt-2" style="padding-left:0px;">
-                        <div class="row">
-                            <div class="col">
-                                <img t-if="style.logo"
-                                    t-att-src="image_data_uri(o.style.logo)"
-                                    alt="Company Logo"/>
-                                <img t-if="not style.logo and company.logo"
-                                    t-att-src="image_data_uri(company.logo)"
-                                    alt="Company Logo"/>
+                class="header col">
+                <t t-if="style.header">
+                    <div class="row mb-2">
+                        <div class="col mt-2" style="padding-left:0px;">
+                            <div class="row">
+                                <div class="col">
+                                    <img t-if="style.logo"
+                                        t-att-src="image_data_uri(o.style.logo)"
+                                        alt="Company Logo"
+                                        style="max-width:100px !important;" />
+                                    <img t-if="not style.logo and company.logo"
+                                        t-att-src="image_data_uri(company.logo)"
+                                        alt="Company Logo"
+                                        style="max-width:100px !important;" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div t-if="company.vat" class="col">
+                                    <h6>
+                                        <strong>
+                                            RNC: <span t-field="company.vat"/>
+                                        </strong>
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div t-if="o.invoice_date" class="col">
+                                    <h6>
+                                        <strong>
+                                            Fecha:
+                                            <span t-field="o.invoice_date"/>
+                                        </strong>
+                                    </h6>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div t-if="company.vat" class="col">
-                                <h5>
-                                    <strong>
-                                        RNC: <span t-field="company.vat"/>
-                                    </strong>
-                                </h5>
-                            </div>
+                        <div t-if="company.twitter or company.facebook or company.youtube"
+                            t-attf-style="background-color: {{o.style.theme_color}};
+                                width:auto;
+                                padding-left:15px; 
+                                color:{{o.style.theme_txt_color}}; 
+                                padding-right:15px; 
+                                padding-top:4px; 
+                                padding-bottom:2px;"
+                            class="col-auto mb-8">
+                            <span t-if="company.twitter" 
+                                style="padding-left:0px;" 
+                                class="fa fa-twitter-square "/>&#160;
+                            <span t-field="company.twitter"/>
+                            <span t-if="company.facebook" 
+                                style="padding-left:13px;" 
+                                class="fa fa-facebook-square "/>&#160;
+                            <span t-field="company.facebook"/>
+                            <span t-if="company.youtube" 
+                                style="padding-left:13px;" 
+                                class="fa fa-youtube-square "/>&#160;
+                            <span t-field="company.youtube"/>
                         </div>
-                        <div class="row">
-                            <div t-if="o.invoice_date" class="col">
-                                <h5>
-                                    <strong>
-                                        Fecha:
-                                        <span t-field="o.invoice_date"/>
-                                    </strong>
-                                </h5>
+                        <div class="col mb-8"
+                            style="font-size:12px !important; padding-bottom:2px;padding-right:0px;">
+                            <h1 t-attf-style="color: {{o.style.name_color}}">FACTURA</h1>
+                            <div t-if="company.email">
+                                <span class="fa fa-envelope-square fa-lg"/> 
+                                <span t-field="company.email"/>
+                            </div>
+                            <div t-if="company.website">
+                                <span class="fa fa-globe fa-lg"/> 
+                                <span t-field="company.website"/>
                             </div>
                         </div>
                     </div>
-                    <div t-if="company.twitter or company.facebook or company.youtube"
-                        t-attf-style="background-color: {{o.style.theme_color}};
-                            width:auto;
-                            padding-left:15px; 
-                            color:{{o.style.theme_txt_color}}; 
-                            padding-right:15px; 
-                            padding-top:4px; 
-                            padding-bottom:2px;"
-                        class="col-auto mb-8">
-                        <span t-if="company.twitter" 
-                            style="padding-left:0px;" 
-                            class="fa fa-twitter-square "/>&#160;
-                        <span t-field="company.twitter"/>
-                        <span t-if="company.facebook" 
-                            style="padding-left:13px;" 
-                            class="fa fa-facebook-square "/>&#160;
-                        <span t-field="company.facebook"/>
-                        <span t-if="company.youtube" 
-                            style="padding-left:13px;" 
-                            class="fa fa-youtube-square "/>&#160;
-                        <span t-field="company.youtube"/>
-                    </div>
-                    <div class="col mb-8"
-                        style="font-size:12px !important; padding-bottom:2px;padding-right:0px;">
-                        <h1 t-attf-style="color: {{o.style.name_color}}">FACTURA</h1>
-                        <div t-if="company.email">
-                            <span class="fa fa-envelope-square fa-lg"/> 
-                            <span t-field="company.email"/>
-                        </div>
-                        <div t-if="company.website">
-                            <span class="fa fa-globe fa-lg"/> 
-                            <span t-field="company.website"/>
-                        </div>
-                    </div>
-                </div>
+                </t>
             </div>
             <!--end of Header-->
             <!-- START OF PAGE -->
