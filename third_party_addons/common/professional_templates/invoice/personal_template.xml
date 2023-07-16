@@ -19,7 +19,7 @@
                                 font-family:{{style.font_family}} !important;"
                 class="container mb-2">
                 <div t-if="style.header" class="row">
-                    <div class="col-6 mt-2" style="padding-left:0px;">
+                    <div class="col mt-2" style="padding-left:0px;">
                         <div class="row">
                             <div class="col">
                                 <img t-if="style.logo"
@@ -32,14 +32,21 @@
                         </div>
                         <div class="row">
                             <div t-if="company.vat" class="col">
-                                RNC:
-                                <span t-field="company.vat"/>
+                                <h5>
+                                    <strong>
+                                        RNC: <span t-field="company.vat"/>
+                                    </strong>
+                                </h5>
                             </div>
                         </div>
                         <div class="row">
                             <div t-if="o.invoice_date" class="col">
-                                Fecha:
-                                <span t-field="o.invoice_date"/>
+                                <h5>
+                                    <strong>
+                                        Fecha:
+                                        <span t-field="o.invoice_date"/>
+                                    </strong>
+                                </h5>
                             </div>
                         </div>
                     </div>
@@ -65,7 +72,7 @@
                             class="fa fa-youtube-square "/>&#160;
                         <span t-field="company.youtube"/>
                     </div>
-                    <div class="col-auto mb-8"
+                    <div class="col mb-8"
                         style="font-size:12px !important; padding-bottom:2px;padding-right:0px;">
                         <h1 t-attf-style="color: {{o.style.name_color}}">FACTURA</h1>
                         <div t-if="company.email">
