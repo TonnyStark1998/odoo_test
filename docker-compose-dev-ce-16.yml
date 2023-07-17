@@ -22,8 +22,10 @@ services:
       - "odoo-host:host-gateway"
     entrypoint:
       - /entrypoint.sh
+      - -i
+      - stock
       - -u
-      - billing_do
+      - billing_do, kcs_medical_app
   odoo-db:
     image: postgres:13
     ports:

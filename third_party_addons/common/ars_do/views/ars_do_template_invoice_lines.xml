@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="ars_do_invoice_lines" inherit_id="professional_templates.INVOICE_15_document">
+        <template id="ars_do_invoice_lines" inherit_id="professional_templates.invoice_lines">
             <xpath expr="//t[@*='display_discount']" position="after">
                 <t t-set="display_coverage"
                     t-value="any([l.coverage for l in o.invoice_line_ids])"/>

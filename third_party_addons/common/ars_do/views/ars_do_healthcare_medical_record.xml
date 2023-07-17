@@ -47,6 +47,8 @@
                             <field name="date" />
                             <field name="time" widget="float_time" />
                             <label for="blood_pressure" />
+                            <field name="blood_pressure" 
+                                invisible="true"/>
                             <div>
                                 <field name="blood_pressure_high"
                                         nolabel="1"
@@ -61,6 +63,7 @@
                             </div>
                             <field name="fldrmvd" />
                             <label for="heparin_display_value" />
+                            <field name="heparin_display_value" />
                             <div>
                                 <field name="heparin" 
                                         nolabel="1"
@@ -69,6 +72,7 @@
                             </div>
                             <field name="ufr" />
                             <label for="temperature_display_value" />
+                            <field name="temperature_display_value" />
                             <div>
                                 <field name="temperature"
                                         nolabel="1"

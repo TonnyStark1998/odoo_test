@@ -11,7 +11,11 @@
     'category': 'Medical/History',
     'version': '0.1',
     'css': ['static/src/css/*.css'],
-    'depends': ['base', 'contacts', 'billing_do', 'sale'],
+    'depends': ['base', 
+                'contacts', 
+                'billing_do', 
+                'sale',
+                'stock'],
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
@@ -24,7 +28,7 @@
         'views/kcs_medical_app_stetic_skin_type_views.xml',
         'views/kcs_medical_app_body_part_views.xml',
         'views/kcs_medical_app_patient_evolution_views.xml',
-        'views/kcs_medical_app_product_template.xml',
+        #'views/kcs_medical_app_product_template.xml',
         'views/kcs_medical_app_patient_functional_medicine_nutrition_views.xml',
     ],
     # only loaded in demonstration mode

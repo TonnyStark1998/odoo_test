@@ -8,30 +8,30 @@
             <xpath expr="//label[@for='partner_id' and position()=1]/.." position="before">
                 <field name="healthcare_invoice" 
                         widget="radio" 
-                        attrs="{'invisible': [('type', 'not in', ['out_invoice', 'out_refund'])]}" />
+                        attrs="{'invisible': [('move_type', 'not in', ['out_invoice', 'out_refund'])]}" />
             </xpath>
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="healthcare_provider"
-                        attrs="{'invisible': ['|', '|', ('type', 'not in', ['out_invoice', 'out_refund']),
+                        attrs="{'invisible': ['|', '|', ('move_type', 'not in', ['out_invoice', 'out_refund']),
                                                         ('healthcare_invoice', '=', 'not_healthcare_invoice'),
                                                         ('partner_id', '=', False)]}"
                         readonly="1"
                         force_save="1" />
                 <field name="healthcare_plan"
-                        attrs="{'invisible': ['|', '|', ('type', 'not in', ['out_invoice', 'out_refund']),
+                        attrs="{'invisible': ['|', '|', ('move_type', 'not in', ['out_invoice', 'out_refund']),
                                                         ('healthcare_invoice', '=', 'not_healthcare_invoice'),
                                                         ('partner_id', '=', False)]}"
                         readonly="1"
                         force_save="1" />
                 <field name="healthcare_card"
-                        attrs="{'invisible': ['|', '|', ('type', 'not in', ['out_invoice', 'out_refund']),
+                        attrs="{'invisible': ['|', '|', ('move_type', 'not in', ['out_invoice', 'out_refund']),
                                                         ('healthcare_invoice', '=', 'not_healthcare_invoice'),
                                                         ('partner_id', '=', False)]}"
                         readonly="1"
                         force_save="1" />
                 <field name="healthcare_authorization_number"
                         attrs="{'required': [('healthcare_invoice', '=', 'healthcare_invoice')], 
-                                'invisible': ['|', '|', ('type', 'not in', ['out_invoice', 'out_refund']),
+                                'invisible': ['|', '|', ('move_type', 'not in', ['out_invoice', 'out_refund']),
                                                         ('healthcare_invoice', '=', 'not_healthcare_invoice'),
                                                         ('partner_id', '=', False)]}" />
             </xpath>
@@ -42,7 +42,7 @@
                         optional="show"
                         attrs="{'required': [('healthcare_invoice', '=', 'healthcare_invoice')]}" />
             </xpath>
-            <xpath expr="//field[@name='line_ids']/tree/field[@name='price_unit']" position="after">
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='account_type']" position="after">
                 <field name="healthcare_invoice" 
                         invisible="1" />
                 <field name="coverage" 
