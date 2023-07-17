@@ -73,7 +73,7 @@ class ArsDoSaleOrder(models.Model):
             "view_mode": "form",
             "domain": [],
             "context": {
-                'default_type': 'out_invoice',
+                'default_move_type': 'out_invoice',
                 'default_healthcare_invoice': self.healthcare_invoice,
                 'default_partner_id': self.partner_id.id,
                 'default_healthcare_card': self.partner_id.healthcare_cards

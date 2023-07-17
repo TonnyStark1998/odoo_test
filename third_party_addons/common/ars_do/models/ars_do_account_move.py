@@ -59,7 +59,7 @@ class ArsDoAccountMove(models.Model):
 
     @api.onchange('partner_id')
     def _onchange_partner_id(self):
-        if self.type in ['out_invoice', 'out_refund']:
+        if self.move_type in ['out_invoice', 'out_refund']:
             if not self.healthcare_invoice and self.partner_id:
                 self.partner_id = False
                 return { 
@@ -86,13 +86,13 @@ class ArsDoAccountMove(models.Model):
     @api.constrains('healthcare_invoice')
     def _constrain_healthcare_invoice(self):
         for move in self:
-            if move.type in ['out_invoice', 'out_refund'] and not move.healthcare_invoice:
+            if move.move_type in ['out_invoice', 'out_refund'] and not move.healthcare_invoice:
                 raise exceptions.ValidationError(_('You must indicate if this is a Healthcare or Regular invoice.'))
 
     # Override methods
     def action_post(self):
         posted = super(ArsDoAccountMove, self).action_post()
-        if self.type in ['out_invoice', 'out_refund'] \
+        if self.move_type in ['out_invoice', 'out_refund'] \
             and self.healthcare_invoice == 'healthcare_invoice'\
             and posted:
             invoice_id = self.id
@@ -141,7 +141,7 @@ class ArsDoAccountMove(models.Model):
 
     def button_draft(self):
         super(ArsDoAccountMove, self).button_draft()
-        if self.type in ['out_invoice', 'out_refund'] \
+        if self.move_type in ['out_invoice', 'out_refund'] \
             and self.healthcare_invoice == 'healthcare_invoice':
             move_id = self.id
             self.env['ars.do.healthcare.report.ars.item']\
