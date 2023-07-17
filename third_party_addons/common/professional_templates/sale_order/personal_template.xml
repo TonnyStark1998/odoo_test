@@ -114,7 +114,7 @@
             <!-- company footer -->
             <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
                 <div class="text-center" style="border-top: 1px solid black;">
-                    <ul class="list-inline mb4">
+                    <ul class="list-inline mb-2">
                         <li t-if="company.phone" class="list-inline-item d-inline">
                             <span class="fa fa-phone"/>
                             <span class="o_force_ltr" t-field="company.phone"/>

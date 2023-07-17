@@ -39,16 +39,16 @@
                         <th t-attf-style="{{th_style}}">
                             Descripción
                         </th>
-                        <th class="text-right"
+                        <th class="text-end"
                             t-attf-style="{{th_style}}">
                             Cantidad
                         </th>
-                        <th class="text-right"
+                        <th class="text-end"
                             t-attf-style="{{th_style}}">
                             Precio Unidad
                         </th>
                         <th t-if="display_discount"
-                            class="text-right"
+                            class="text-end"
                             t-attf-style="{{th_style}}">
                             Descuento
                         </th>
@@ -57,7 +57,7 @@
                             t-attf-style="{{th_style}}">
                             Impuestos
                         </th>
-                        <th class="text-right"
+                        <th class="text-end"
                             t-attf-style="{{th_style}}">
                             <t groups="account.group_show_line_subtotals_tax_excluded">Precio</t>
                             <t groups="account.group_show_line_subtotals_tax_included">Precio</t>
@@ -129,17 +129,17 @@
                                 <td>
                                     <span t-field="l.name"/>
                                 </td>
-                                <td class="text-right">
+                                <td class="text-end">
                                     <span t-esc="int(l.product_uom_qty)" />
                                     <br />
                                     <span t-field="l.product_uom" />
                                 </td>
-                                <td class="text-right">
+                                <td class="text-end">
                                     <span t-field="l.price_unit"
                                           t-options='{"widget": "monetary",
                                                         "display_currency": sale.pricelist_id.currency_id}'/>
                                 </td>
-                                <td class="text-right"
+                                <td class="text-end"
                                     t-if="display_discount">
                                     <span t-field="l.discount" 
                                             t-if="l.discount > 0" /> 
@@ -148,7 +148,7 @@
                                 <td t-if="display_taxes" class="text-center">
                                     <span t-esc="', '.join(map(lambda x: (x.description or x.name), l.tax_id))"/>
                                 </td>
-                                <td class="text-right">
+                                <td class="text-end">
                                     <span t-field="l.price_subtotal"
                                             groups="account.group_show_line_subtotals_tax_excluded"/>
                                     <span t-field="l.price_total"
@@ -172,7 +172,7 @@
                             </t>
                         </tr>
                         <t t-if="current_section and (l_last or sale.order_line[l_index+1].display_type == 'line_section')">
-                            <tr class="is-subtotal text-right">
+                            <tr class="is-subtotal text-end">
                                 <td t-att-colspan="col_span">
                                     <strong class="mr16">Subtotal</strong>
                                     <span

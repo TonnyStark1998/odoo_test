@@ -29,27 +29,27 @@
                             <th t-attf-style="border-bottom: 1px solid {{style.text_color}} !important;">
                                 No.
                             </th>
-                            <th class="text-right"
+                            <th class="text-end"
                                 t-attf-style="border-bottom: 1px solid {{style.text_color}} !important;">
                                 Cantidad
                             </th>
                             <th t-attf-style="border-bottom: 1px solid {{style.text_color}} !important;">
                                 Descripción
                             </th>
-                            <th class="text-right"
+                            <th class="text-end"
                                 t-attf-style="border-bottom: 1px solid {{style.text_color}} !important;">
                                 Precio Unitario
                             </th>
-                            <th class="text-right"
+                            <th class="text-end"
                                 t-attf-style="border-bottom: 1px solid {{style.text_color}} !important;"
                                 t-if="display_discount">
                                 Descuento
                             </th>
-                            <th class="text-right"
+                            <th class="text-end"
                                 t-attf-style="border-bottom: 1px solid {{style.text_color}} !important;">
                                 Impuestos
                             </th>
-                            <th class="text-right"
+                            <th class="text-end"
                                 t-attf-style="border-bottom: 1px solid {{style.text_color}} !important;">
                                 Monto
                             </th>
@@ -99,7 +99,7 @@
                                 <td>
                                     <span t-esc="line_number"/>
                                 </td>
-                                <td class="text-right">
+                                <td class="text-end">
                                     <span t-esc="int(l.quantity)"/>
                                     <br />
                                     <span t-field="l.product_uom_id" />
@@ -107,19 +107,19 @@
                                 <td>
                                     <span t-field="l.name"/>
                                 </td>
-                                <td class="text-right">
+                                <td class="text-end">
                                     <span t-field="l.price_unit"/>
                                 </td>
-                                <td class="text-right"
+                                <td class="text-end"
                                     t-if="display_discount">
                                     <span t-field="l.discount"
                                                 t-if="l.discount > 0" />
                                     <span t-if="l.discount > 0"> %</span>
                                 </td>
-                                <td class="text-right">
+                                <td class="text-end">
                                     <span t-esc="', '.join(map(lambda x: (x.name), l.tax_ids))" />
                                 </td>
-                                <td class="text-right">
+                                <td class="text-end">
                                     <span t-field="l.price_subtotal"/>
                                 </td>
                             </tr>

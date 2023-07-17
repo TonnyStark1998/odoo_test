@@ -126,6 +126,7 @@
         "purchase_order/cubic_template.xml",
         "purchase_order/clean_template.xml",
         "purchase_order/ascend_template.xml",
+        "purchase_order/personal_template.xml",
         "rfq/rfq_lines.xml",
         "rfq/switch_templates.xml",
         "rfq/rfq_view.xml",

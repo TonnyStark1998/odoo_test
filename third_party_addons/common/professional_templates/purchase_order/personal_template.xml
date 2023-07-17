@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="PO_15_document" name="Personal Template">
+            <!-- Multicompany -->
+            <t t-if="purchase and 'company_id' in purchase">
+                <t t-set="company" t-value="purchase.company_id"/>
+            </t>
+            <t t-if="not purchase or not 'company_id' in purchase">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+            <!--start of header-->
+            <div t-attf-style="padding-bottom:0px;
+                    padding-left:0px; 
+                    padding-right:0px; 
+                    color:{{style.text_color}} !important;
+                    font-size:{{int(style.header_font)}}px !important;"
+                 class="container header col">
+                <div class="row">
+                    <t t-if="style.header">
+                        <div class="col-7 mb-5" style="padding-left:0px;">
+                            <img t-if="style.logo" 
+                                    t-att-src="image_data_uri(style.logo)" 
+                                    t-attf-style="max-width: 150px;"
+                                    alt="Company Logo"/>
+                            <img t-if="company.logo" 
+                                    t-att-src="image_data_uri(company.logo)"
+                                    t-attf-style="max-width: 150px;" 
+                                    alt="Company Logo"/>
+                        </div>
+                        <div class="col-5 mb-5"
+                            style="font-size:12px !important; padding-bottom:2px;padding-right:0px;">
+                            <h1 t-attf-style="color:{{style.text_color}}">
+                                <span t-field="purchase.name"/>
+                            </h1>
+                            <div>
+                                <span t-if="purchase.company_id.street" 
+                                    class="fa fa-map-marker fa-lg"/>
+                                <span t-if="purchase.company_id.street" 
+                                    t-field="purchase.company_id.street"/>
+                                <span t-if="purchase.company_id.street and purchase.company_id.street2 ">,</span>
+                                <span t-if="purchase.company_id.street2" 
+                                    t-field="purchase.company_id.street2"/>
+                                <span t-if="purchase.company_id.zip and purchase.company_id.street or purchase.company_id.street2 ">,
+                                </span>
+                                <span t-if="purchase.company_id.zip">
+                                    ZIP:
+                                    <span t-field="purchase.company_id.zip"/>
+                                </span>
+                                <span t-if="purchase.company_id.zip and purchase.company_id.city">,</span>
+                                <span t-if="purchase.company_id.city or purchase.company_id.country_id"
+                                    t-field="purchase.company_id.city"/>
+                                <span t-if="purchase.company_id.country_id and purchase.company_id.city ">,</span>
+                                <span t-field="purchase.company_id.country_id"/>
+                            </div>
+                            <div t-if="purchase.company_id.phone">
+                                <span class="fa fa-phone-square fa-lg"/>
+                                <span t-field="purchase.company_id.phone"/>
+                            </div>
+                            <div t-if="purchase.company_id.email">
+                                <span class="fa fa-envelope-square fa-lg"/>
+                                <span t-field="purchase.company_id.email"/>
+                            </div>
+                            <div t-if="purchase.company_id.website">
+                                <span class="fa fa-globe fa-lg"/>
+                                <span t-field="purchase.company_id.website"/>
+                            </div>
+                            <div t-if="purchase.company_id.vat">
+                                <span class="fa fa-building fa-lg"/>
+                                RNC:
+                                <span t-field="purchase.company_id.vat"/>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+            <!--end of header-->
+            <!--start of page-->
+            <div class="article page" 
+                t-attf-data-oe-model="purchase.order" 
+                t-attf-data-oe-id="{{purchase.id}}"
+                t-attf-style="color:{{style.text_color}} !important;">
+                <div class="row" 
+                    style="padding-left:0px; padding-right:0px; padding-bottom:2px;">
+                    <div class="col-6 mt-5 mb-2"
+                         t-attf-style="font-size:{{int(style.body_font)}}px !important;">
+                        <div t-attf-style="background-color:{{style.theme_color}}; padding:5px;color:{{style.theme_txt_color}};">
+                            <span style="font-size:16px;">
+                                <strong>Dirección del proveedor</strong>
+                            </span>
+                        </div>
+                        <h5 t-if="purchase.partner_id"
+                            t-attf-style="color:{{style.cust_color}}; margin-top:2px; margin-bottom:5px; margin-left:0px;">
+                            <span t-if="purchase.partner_id.title" 
+                                t-field="purchase.partner_id.title"/>
+                            <span t-field="purchase.partner_id"/>
+                        </h5>
+                        <div t-if="purchase.partner_id.vat">
+                            <span class="fa fa-building fa-lg"/>
+                            RNC:
+                            <span t-field="purchase.partner_id.vat"/>
+                        </div>
+                        <div>
+                            <span t-if="purchase.partner_id.street" class="fa fa-map-marker fa-lg"/>
+                            <span t-if="purchase.partner_id.street" t-field="purchase.partner_id.street"/>
+                            <span t-if="purchase.partner_id.street and purchase.partner_id.street2 ">,</span>
+                            <span t-if="purchase.partner_id.street2" t-field="purchase.partner_id.street2"/>
+                            <span t-if="purchase.partner_id.zip and purchase.partner_id.street or purchase.partner_id.street2 ">,</span>
+                            <span t-if="purchase.partner_id.zip">
+                                ZIP:
+                                <span t-field="purchase.partner_id.zip"/>
+                            </span>
+                            <span t-if="purchase.partner_id.zip and purchase.partner_id.city">,</span>
+                            <span t-if="purchase.partner_id.city or purchase.partner_id.country_id" t-field="purchase.partner_id.city"/>
+                            <span t-if="purchase.partner_id.country_id and purchase.partner_id.city ">,</span>
+                            <span t-field="purchase.partner_id.country_id"/>
+                        </div>
+                        <div t-if="purchase.partner_id.phone or purchase.partner_id.mobile">
+                            <span class="fa fa-phone-square fa-lg"/>
+                            <span t-field="purchase.partner_id.phone"/>
+                            <span t-if="purchase.partner_id.mobile and purchase.partner_id.phone ">,</span>
+                            <span t-field="purchase.partner_id.mobile"/>
+                        </div>
+                        <div t-if="purchase.partner_id.email">
+                            <span class="fa fa-envelope-square fa-lg"/>
+                            <span t-field="purchase.partner_id.email"/>
+                        </div>
+                        <div t-if="purchase.partner_id.website">
+                            <span class="fa fa-globe fa-lg"/>
+                            <span t-field="purchase.partner_id.website"/>
+                        </div>
+                    </div>
+                    <div class="col-6 mt-5 ms-1 mb-3"
+                     t-attf-style="background-color:{{style.theme_color}}; padding:10px; color:{{style.theme_txt_color}};">
+                        <div class="row">
+                            <div class="col ps-2">
+                                <h5>
+                                    <strong>
+                                        <span t-if="purchase.state == 'draft'">Solicitud de Cotización #</span>
+                                        <span t-if="purchase.state != 'draft'">Pedido #</span>
+                                        <span t-field="purchase.name"/>
+                                    </strong>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="row"
+                            t-attf-style="font-size:{{int(style.body_font) + 5}}px !important;">
+                            <div class="col-6 ps-4 mt-2">
+                                <strong>Nuestra orden Ref:</strong>
+                                <br />
+                                <span t-field="purchase.name"/>
+                            </div>
+                            <div class="col-6 ps-4 mt-2">
+                                <strong>Fecha de orden:</strong>
+                                <br />
+                                <span t-field="purchase.date_order"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- start of order data-->
+                <div class="row">
+                    <div class="col-12 mt-4 pt-3"
+                        t-attf-style="font-size:12px !important;">
+                        <t t-call="professional_templates.purchase_lines"/>
+                    </div>
+                </div>
+                <!-- end of order data-->
+                <div class="row">
+                    <div class="col-12 mt-4 text-center">
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>Solicitado por:</strong> ________________________
+                            </div>
+                            <div class="col-6">
+                                <strong>Aprobado por:</strong> ________________________
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of page -->
+            <!--start of footer-->
+            <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+                <div class="text-center" style="border-top: 1px solid black;">
+                    <ul class="list-inline mb-2">
+                        <li t-if="company.phone" class="list-inline-item d-inline">
+                            <span class="fa fa-phone"/>
+                            <span class="o_force_ltr" t-field="company.phone"/>
+
+                        </li>
+                        <li t-if="company.email" class="list-inline-item d-inline">
+                            <span class="fa fa-envelope"/>
+                            <span class="o_force_ltr" t-field="company.email"/>
+                        </li>
+                        <li t-if="company.website" class="list-inline-item d-inline">
+                            <span class="fa fa-globe"/>
+                            <span class="o_force_ltr" t-field="company.website"/>
+                        </li>
+                    </ul>
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Página:
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+            <!--end of footer-->
+        </template>
+    </data>
+</odoo>
