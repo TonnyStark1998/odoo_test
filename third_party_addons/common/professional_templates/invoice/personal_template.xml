@@ -9,13 +9,13 @@
             <t t-if="not o or not 'company_id' in o">
                 <t t-set="company" t-value="res_company"/>
             </t>
-            <t t-if="o and 'style' in o" 
+            <t t-if="o and 'style' in o and o.style" 
                 t-set="style" 
                 t-value="o.style" />
             <t t-if="o and not 'style' in o" 
                 t-set="style" 
                 t-value="company.style" />
-            <t t-if="o and 'partner_id' in o and 'style' in o.partner_id" 
+            <t t-if="o and 'partner_id' in o and 'style' in o.partner_id and o.partner_id.style" 
                 t-set="style" 
                 t-value="o.partner_id.style" />
             <div t-attf-style="padding-bottom:0px;
@@ -108,7 +108,7 @@
                     style="padding-left:0px; padding-right:0px; padding-bottom:2px;">
                     <div class="row">
                         <!--start of wrapper -->
-                        <div class="col-5 mt-3 mb-3"
+                        <div class="col-6 mt-3 mb-3"
                             t-attf-style="font-size:{{int(style.body_font)}}px !important;padding-left:0px;">
                             <div t-attf-style="background-color:{{style.theme_color}}; padding-top:2px; padding-bottom:2px; color:{{style.theme_txt_color}};">
                                 <span style="font-size:16px;">
@@ -156,7 +156,7 @@
                                 <span t-field="o.partner_id.website"/>
                             </div>
                         </div>
-                        <div class="col-6 p-1 mt-3 ms-3 mb-3"
+                        <div class="col-5 offset-1 p-1 mt-3 mb-3"
                             t-attf-style="border:2px solid {{style.theme_color}}; color:#222;">
                             <t t-if="o.ncf_date_to">
                                 <t t-set="ncf_date_due" t-value="o.ncf_date_to"/>
