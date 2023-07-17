@@ -31,7 +31,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_2_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_2_document
 msgid "&amp;  <i class=\"fa fa-truck \"/> Delivery Address"
-msgstr ""
+msgstr "&amp;  <i class=\"fa fa-truck \"/> Dirección de entrega"
 
 #. module: professional_templates
 #: model:ir.model.fields.selection,name:professional_templates.selection__report_template_settings__opacity__0_05
@@ -2768,31 +2768,34 @@ msgid ""
 "                        NOTE: Watermark and Last Pages PDF uploaded here will override the one uploaded at company level in the general settings menu.\n"
 "                    </code>"
 msgstr ""
+"<code colspan=\"2\" attrs=\"{'invisible': [('pdf_watermark', '=', False), ('pdf_last_page', '=', False)]}\">\n"
+"                        NOTA: Las configuraciones de Marca de Agua y las Últimas Páginas del PDF cargadas aquí, reemplazarán a las configuraciones cargadas en las opciones generales de la compañía.\n"
+"                    </code>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.picking_lines
 msgid "<i class=\"fa fa-arrow-left\"/> To"
-msgstr ""
+msgstr "<i class=\"fa fa-arrow-left\"/> Para"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.picking_lines
 msgid "<i class=\"fa fa-arrow-right\"/> From"
-msgstr ""
+msgstr "<i class=\"fa fa-arrow-right\"/> Desde"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.picking_lines
 msgid "<i class=\"fa fa-barcode\"/> Product Barcode"
-msgstr ""
+msgstr "<i class=\"fa fa-barcode\"/> Código de barra del producto"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.purchase_lines
 msgid "<i class=\"fa fa-calendar\"/> Date Req."
-msgstr ""
+msgstr "<i class=\"fa fa-calendar\"/> Fecha de orden de compra"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.rfq_lines
 msgid "<i class=\"fa fa-calendar\"/> Expected Date"
-msgstr ""
+msgstr "<i class=\"fa fa-calendar\"/> Fecha Estimada"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.delivery_lines
@@ -2800,12 +2803,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.order_lines
 #: model_terms:ir.ui.view,arch_db:professional_templates.picking_lines
 msgid "<i class=\"fa fa-camera\"/> Image"
-msgstr ""
+msgstr "<i class=\"fa fa-camera\"/> Imagen"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.company_footer
 msgid "<i class=\"fa fa-certificate\" aria-hidden=\"true\"/> VAT:"
-msgstr ""
+msgstr "<i class=\"fa fa-certificate\" aria-hidden=\"true\"/> RNC:"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.picking_lines
@@ -2813,6 +2816,8 @@ msgid ""
 "<i class=\"fa fa-exclamation-triangle\"/>\n"
 "                All products could not be reserved. Click on the \"Check Availability\" button to try to reserve products."
 msgstr ""
+"<i class=\"fa fa-exclamation-triangle\"/>\n"
+"                Todos los productos no puede ser reservados. Haga clic en el botón \"Verificar Disponibilidad\" para intentar reservar un producto."
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.delivery_lines
@@ -2822,13 +2827,13 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.purchase_lines
 #: model_terms:ir.ui.view,arch_db:professional_templates.rfq_lines
 msgid "<i class=\"fa fa-list-ol\"/> Item"
-msgstr ""
+msgstr "<i class=\"fa fa-list-ol\"/> Artículo"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.invoice_lines
 #: model_terms:ir.ui.view,arch_db:professional_templates.order_lines
 msgid "<i class=\"fa fa-minus-square\"/> Discount(%)"
-msgstr ""
+msgstr "<i class=\"fa fa-minus-square\"/> Descuento(%)"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.invoice_lines
@@ -2837,28 +2842,31 @@ msgid ""
 "                            <span groups=\"account.group_show_line_subtotals_tax_excluded\">Amount</span>\n"
 "                            <span groups=\"account.group_show_line_subtotals_tax_included\">Total Price</span>"
 msgstr ""
+"<i class=\"fa fa-money\"/>\n"
+"                            <span groups=\"account.group_show_line_subtotals_tax_excluded\">Monto</span>\n"
+"                            <span groups=\"account.group_show_line_subtotals_tax_included\">Total</span>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.purchase_lines
 msgid "<i class=\"fa fa-money\"/> Amount"
-msgstr ""
+msgstr "<i class=\"fa fa-money\"/> Monto"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.delivery_lines
 msgid "<i class=\"fa fa-pencil\"/> Ordered"
-msgstr ""
+msgstr "<i class=\"fa fa-pencil\"/> Pedido"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.delivery_lines
 msgid "<i class=\"fa fa-pencil\"/> Quantity"
-msgstr ""
+msgstr "<i class=\"fa fa-pencil\"/> Cantidad"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.invoice_lines
 #: model_terms:ir.ui.view,arch_db:professional_templates.order_lines
 #: model_terms:ir.ui.view,arch_db:professional_templates.purchase_lines
 msgid "<i class=\"fa fa-pencil-square\"/> Taxes"
-msgstr ""
+msgstr "<i class=\"fa fa-pencil-square\"/> Impuestos"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.invoice_lines
@@ -2867,24 +2875,24 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.purchase_lines
 #: model_terms:ir.ui.view,arch_db:professional_templates.rfq_lines
 msgid "<i class=\"fa fa-sort-amount-asc\"/> Quantity"
-msgstr ""
+msgstr "<i class=\"fa fa-sort-amount-asc\"/> Cantidad"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.delivery_lines
 msgid "<i class=\"fa fa-tag\"/> Lot/Serial No."
-msgstr ""
+msgstr "<i class=\"fa fa-tag\"/> No. de Serie/Lote"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.picking_lines
 msgid "<i class=\"fa fa-tag\"/> Lot/Serial Number"
-msgstr ""
+msgstr "<i class=\"fa fa-tag\"/> Número de Serie/Lote"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.invoice_lines
 #: model_terms:ir.ui.view,arch_db:professional_templates.order_lines
 #: model_terms:ir.ui.view,arch_db:professional_templates.purchase_lines
 msgid "<i class=\"fa fa-tags\"/> Unit Price"
-msgstr ""
+msgstr "<i class=\"fa fa-tags\"/> Precio Unitario"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.invoice_lines
@@ -2892,23 +2900,23 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.purchase_lines
 #: model_terms:ir.ui.view,arch_db:professional_templates.rfq_lines
 msgid "<i class=\"fa fa-th-large\"/> Description"
-msgstr ""
+msgstr "<i class=\"fa fa-th-large\"/> Descripción"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.picking_lines
 msgid "<i class=\"fa fa-th-large\"/> Package"
-msgstr ""
+msgstr "<i class=\"fa fa-th-large\"/> Paquete"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.delivery_lines
 #: model_terms:ir.ui.view,arch_db:professional_templates.picking_lines
 msgid "<i class=\"fa fa-th-large\"/> Product"
-msgstr ""
+msgstr "<i class=\"fa fa-th-large\"/> Producto"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.invoice_lines
 msgid "<i class=\"fa fa-th-large\"/> Source Document"
-msgstr ""
+msgstr "<i class=\"fa fa-th-large\"/> Documento de origen"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_2_document
@@ -2916,7 +2924,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_2_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_2_document
 msgid "<i class=\"fa fa-truck \"/> Delivery Address"
-msgstr ""
+msgstr "<i class=\"fa fa-truck \"/> Dirección de Entrega"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_3_document
@@ -2928,12 +2936,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_3_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_4_document
 msgid "<i class=\"fa fa-truck \"/> Ship To:"
-msgstr ""
+msgstr "<i class=\"fa fa-truck \"/> Enviar a:"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.delivery_lines
 msgid "<i class=\"fa fa-truck\"/> Delivered"
-msgstr ""
+msgstr "<i class=\"fa fa-truck\"/> Entregado"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_3_document
@@ -2941,7 +2949,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_3_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_4_document
 msgid "<i class=\"fa fa-user \"/> Address:"
-msgstr ""
+msgstr "<i class=\"fa fa-user \"/> Dirección:"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_3_document
@@ -2949,7 +2957,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_3_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_4_document
 msgid "<i class=\"fa fa-user \"/> Bill To:"
-msgstr ""
+msgstr "<i class=\"fa fa-user \"/> Facturar a:"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_3_document
@@ -2958,42 +2966,44 @@ msgid ""
 "<i class=\"fa fa-user \"/> Bill   &amp;  <span class=\"fa fa-truck \"/> Ship"
 " To:"
 msgstr ""
+"<i class=\"fa fa-user \"/> Facturar   &amp;  <span class=\"fa fa-truck \"/> Enviar"
+" a:"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_2_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_2_document
 msgid "<i class=\"fa fa-user \"/> Invoicing Address"
-msgstr ""
+msgstr "<i class=\"fa fa-user \"/> Dirección de facturación"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_2_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_2_document
 msgid "<i class=\"fa fa-user \"/> Vendor Address"
-msgstr ""
+msgstr "<i class=\"fa fa-user \"/> Dirección del proveedor"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_4_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_4_document
 msgid "<i class=\"fa fa-user\"/> Address:"
-msgstr ""
+msgstr "<i class=\"fa fa-user\"/> Dirección:"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_4_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_4_document
 msgid "<i class=\"fa fa-user\"/> Bill  &amp;  <i class=\"fa fa-truck \"/> Ship To:"
-msgstr ""
+msgstr "<i class=\"fa fa-user\"/> Factura  &amp;  <i class=\"fa fa-truck \"/> Enviar a:"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_1_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_1_document
 msgid "<span class=\"fa fa-user \"/> Address:"
-msgstr ""
+msgstr "<span class=\"fa fa-user \"/> Dirección:"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_1_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_1_document
 msgid "<span class=\"fa fa-user \"/> Invoicing Address"
-msgstr ""
+msgstr "<span class=\"fa fa-user \"/> Dirección de facturación"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_1_document
@@ -3002,6 +3012,8 @@ msgid ""
 "<span class=\"fa fa-user \"/> Invoicing  &amp;  <span class=\"fa fa-truck "
 "\"/> Shipping Address"
 msgstr ""
+"<span class=\"fa fa-user \"/> Dirección de Facturación &amp;  <span class=\"fa fa-truck "
+"\"/> Entrega"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.view_report_style_form
@@ -3009,6 +3021,8 @@ msgid ""
 "<span class=\"label label-info orders_label_text_align\"><span class=\"fa fa-info-circle\"/> NOTE</span>\n"
 "                                    <code>Install the font first.</code>"
 msgstr ""
+"<span class=\"label label-info orders_label_text_align\"><span class=\"fa fa-info-circle\"/> NOTA</span>\n"
+"                                    <code>Instale la fuente primero.</code>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.view_report_style_form
@@ -3016,6 +3030,8 @@ msgid ""
 "<span class=\"label label-info orders_label_text_align\"><span class=\"fa fa-info-circle\"/> NOTE</span>\n"
 "                                To upload your watermark design in PDF format for each report, go to <code>Settings <span class=\"fa fa-long-arrow-right\"/> Technical <span class=\"fa fa-long-arrow-right\"/> Actions <span class=\"fa fa-long-arrow-right\"/> Reports </code> and search for <code>professional_templates</code> then open each of the report and proceed to <code>Advanced Properties</code> where you can upload your PDF. The PDF will form the background of your report as shown in example below."
 msgstr ""
+"<span class=\"label label-info orders_label_text_align\"><span class=\"fa fa-info-circle\"/> NOTA</span>\n"
+"                                Para cargar el diseño de su marca de agua en formato PDF para cada reporte, haga clic en <code>Configuración <span class=\"fa fa-long-arrow-right\"/> Técnico <span class=\"fa fa-long-arrow-right\"/> Acciones <span class=\"fa fa-long-arrow-right\"/> Reportes </code> y busque <code>professional_templates</code>, luego abra cada reporte y proceda a <code>Propiedades Avanzadas</code> donde puede cargar el PDF. El PDF será colocado como fondo del reporte como se muestra en el ejmplo debajo."
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.res_config_professional_report_templates
@@ -3023,6 +3039,8 @@ msgid ""
 "<span class=\"o_form_label\">Professional Report Templates</span>\n"
 "                            <span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-specific.\" groups=\"base.group_multi_company\"/>"
 msgstr ""
+"<span class=\"o_form_label\">Plantillas de Reportes Profesionales</span>\n"
+"                            <span class=\"fa fa-lg fa-building-o\" title=\"Los valores colocados aquí son específicos de la compañía.\" groups=\"base.group_multi_company\"/>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_4_document
@@ -3031,7 +3049,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_4_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_4_document
 msgid "<span style=\"font-weight:bold;\">Date: </span>"
-msgstr ""
+msgstr "<span style=\"font-weight:bold;\">Fecha: </span>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_8_document
@@ -3040,6 +3058,9 @@ msgid ""
 "                                <strong>Delivery Address:</strong>\n"
 "                            </span>"
 msgstr ""
+"<span>\n"
+"                                <strong>Dirección de entrega:</strong>\n"
+"                            </span>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_8_document
@@ -3048,6 +3069,9 @@ msgid ""
 "                            <strong>Delivery Address:</strong>\n"
 "                        </span>"
 msgstr ""
+"<span>\n"
+"                            <strong>Dirección de entrega:</strong>\n"
+"                        </span>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_7_document
@@ -3056,6 +3080,9 @@ msgid ""
 "                                <span>Request for Quotation</span>\n"
 "                                <span><i class=\"fa fa-star\"/></span>"
 msgstr ""
+"<span><i class=\"fa fa-star\"/></span>\n"
+"                                <span>Solicitud de Cotización</span>\n"
+"                                <span><i class=\"fa fa-star\"/></span>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_1_document
@@ -3063,7 +3090,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_1_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_1_document
 msgid "<span><span class=\"fa fa-truck \"/> Shipping Address</span>"
-msgstr ""
+msgstr "<span><span class=\"fa fa-truck \"/> Dirección de entrega</span>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_10_document
@@ -3085,7 +3112,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_9_document
 msgid "<span><strong>Customer Address:</strong></span>"
-msgstr ""
+msgstr "<span><strong>Dirección del cliente:</strong></span>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_10_document
@@ -3105,7 +3132,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_9_document
 msgid "<span><strong>Delivery Address:</strong></span>"
-msgstr ""
+msgstr "<span><strong>Dirección de entrega:</strong></span>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_10_document
@@ -3127,7 +3154,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_9_document
 msgid "<span><strong>Vendor Address:</strong></span>"
-msgstr ""
+msgstr "<span><strong>Dirección del proveedor:</strong></span>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_10_document
@@ -3150,62 +3177,62 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_9_document
 msgid "<span><strong>Warehouse Address:</strong></span>"
-msgstr ""
+msgstr "<span><strong>Dirección del Centro de Distribución:</strong></span>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PAYMENT_1_document
 msgid "<span>Amount </span><i class=\"fa fa-money\"/>"
-msgstr ""
+msgstr "<span>Monto </span><i class=\"fa fa-money\"/>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PAYMENT_1_document
 msgid "<span>Amount In Currency</span>"
-msgstr ""
+msgstr "<span>Monto en Moneda</span>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PAYMENT_1_document
 msgid "<span>Invoice Date </span><i class=\"fa fa-calendar\"/>"
-msgstr ""
+msgstr "<span>Fecha de factura </span><i class=\"fa fa-calendar\"/>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PAYMENT_1_document
 msgid "<span>Invoice Number </span><i class=\"fa fa-hashtag\"/>"
-msgstr ""
+msgstr "<span>Número de factura </span><i class=\"fa fa-hashtag\"/>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.order_lines
 msgid "<span>Options</span>"
-msgstr ""
+msgstr "<span>Opciones</span>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_10_document
 msgid "<span>RFQ #</span>"
-msgstr ""
+msgstr "<span>Solicitud de cotización #</span>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PAYMENT_1_document
 msgid "<span>Reference </span><i class=\"fa fa-hashtag\"/>"
-msgstr ""
+msgstr "<span>Referencia </span><i class=\"fa fa-hashtag\"/>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.delivery_lines
 msgid "<span>Remaining quantities not yet delivered:</span>"
-msgstr ""
+msgstr "<span>Cantidades restantes no entregadas:</span>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_6_document
 msgid "<span>Request for Quotation #</span>"
-msgstr ""
+msgstr "<span>Solicitud de Cotización #</span>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_9_document
 msgid "<span>Request for Quotation</span>"
-msgstr ""
+msgstr "<span>Solicitud de Cotización</span>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.purchase_lines
 msgid "<span>Shipping:</span>"
-msgstr ""
+msgstr "<span>Envío:</span>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.invoice_lines
@@ -3220,65 +3247,67 @@ msgid ""
 "<strong class=\"text-center\">Scan me with your banking "
 "app.</strong><br/><br/>"
 msgstr ""
+"<strong class=\"text-center\">Escanéame con tu aplicación "
+"del banco.</strong><br/><br/>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_3_document
 msgid "<strong style=\"white-space:nowrap;\">Customer Code:</strong>"
-msgstr ""
+msgstr "<strong style=\"white-space:nowrap;\">Código del cliente:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_13_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_3_document
 msgid "<strong style=\"white-space:nowrap;\">Due Date:</strong>"
-msgstr ""
+msgstr "<strong style=\"white-space:nowrap;\">Fecha límite:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_13_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_1_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_3_document
 msgid "<strong style=\"white-space:nowrap;\">Expiration:</strong>"
-msgstr ""
+msgstr "<strong style=\"white-space:nowrap;\">Expiración:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_13_document
 msgid "<strong style=\"white-space:nowrap;\">Fiscal Position:</strong>"
-msgstr ""
+msgstr "<strong style=\"white-space:nowrap;\">Posición Fiscal:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_13_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_3_document
 msgid "<strong style=\"white-space:nowrap;\">Invoice Date:</strong>"
-msgstr ""
+msgstr "<strong style=\"white-space:nowrap;\">Fecha de Factura:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_13_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_3_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_13_document
 msgid "<strong style=\"white-space:nowrap;\">Order Date:</strong>"
-msgstr ""
+msgstr "<strong style=\"white-space:nowrap;\">Fecha de Orden:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_13_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_3_document
 msgid "<strong style=\"white-space:nowrap;\">Order Deadline:</strong>"
-msgstr ""
+msgstr "<strong style=\"white-space:nowrap;\">Fecha límite de orden:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_13_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_13_document
 msgid "<strong style=\"white-space:nowrap;\">Order:</strong>"
-msgstr ""
+msgstr "<strong style=\"white-space:nowrap;\">Orden:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_13_document
 msgid "<strong style=\"white-space:nowrap;\">Purchase Representative:</strong>"
-msgstr ""
+msgstr "<strong style=\"white-space:nowrap;\">Representante de compra:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_13_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_3_document
 msgid "<strong style=\"white-space:nowrap;\">Reference:</strong>"
-msgstr ""
+msgstr "<strong style=\"white-space:nowrap;\">Referencia:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_13_document
@@ -3286,49 +3315,49 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_1_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_3_document
 msgid "<strong style=\"white-space:nowrap;\">Salesperson:</strong>"
-msgstr ""
+msgstr "<strong style=\"white-space:nowrap;\">Vendedor:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_13_document
 msgid "<strong style=\"white-space:nowrap;\">Scheduled Date:</strong>"
-msgstr ""
+msgstr "<strong style=\"white-space:nowrap;\">Fecha Prevista:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_13_document
 msgid "<strong style=\"white-space:nowrap;\">Shipping Date:</strong>"
-msgstr ""
+msgstr "<strong style=\"white-space:nowrap;\">Fecha de envío:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_13_document
 msgid "<strong style=\"white-space:nowrap;\">Source Doc:</strong>"
-msgstr ""
+msgstr "<strong style=\"white-space:nowrap;\">Documento origen:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_3_document
 msgid "<strong style=\"white-space:nowrap;\">Source:</strong>"
-msgstr ""
+msgstr "<strong style=\"white-space:nowrap;\">Origen:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_13_document
 msgid "<strong style=\"white-space:nowrap;\">Status:</strong>"
-msgstr ""
+msgstr "<strong style=\"white-space:nowrap;\">Estado:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_3_document
 msgid "<strong style=\"white-space:nowrap;\">Vendor Code:</strong>"
-msgstr ""
+msgstr "<strong style=\"white-space:nowrap;\">Código del Vendedor:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_13_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_3_document
 msgid "<strong style=\"white-space:nowrap;\">Your Order Reference:</strong>"
-msgstr ""
+msgstr "<strong style=\"white-space:nowrap;\">Su referencia de orden:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_1_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_3_document
 msgid "<strong style=\"white-space:nowrap;\">Your Reference:</strong>"
-msgstr ""
+msgstr "<strong style=\"white-space:nowrap;\">Su referencia:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_13_document
@@ -3340,6 +3369,9 @@ msgid ""
 "                                <i class=\"fa fa-truck \"/> Ship To:\n"
 "                            </strong>"
 msgstr ""
+"<strong>\n"
+"                                <i class=\"fa fa-truck \"/> Enviar a:\n"
+"                            </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_7_document
@@ -3348,6 +3380,9 @@ msgid ""
 "                                <span>Request for Quotation #</span>\n"
 "                            </strong>"
 msgstr ""
+"<strong>\n"
+"                                <span>Solicitud de Cotización #</span>\n"
+"                            </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_11_document
@@ -3357,34 +3392,37 @@ msgid ""
 "                            <span>Request for Quotation #</span>\n"
 "                        </strong>"
 msgstr ""
+"<strong>\n"
+"                            <span>Solicitud de Cotización #</span>\n"
+"                        </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_13_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_13_document
 msgid "<strong><i class=\"fa fa-file-text-o\"/> Address:</strong>"
-msgstr ""
+msgstr "<strong><i class=\"fa fa-file-text-o\"/> Dirección:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_13_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_13_document
 msgid "<strong><i class=\"fa fa-file-text-o\"/> Invoice To:</strong>"
-msgstr ""
+msgstr "<strong><i class=\"fa fa-file-text-o\"/> Facturar a:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.invoice_lines
 msgid "<strong>Amount Due</strong>"
-msgstr ""
+msgstr "<strong>Monto Adeudado</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.order_lines
 msgid "<strong>Amount in Words: </strong>"
-msgstr ""
+msgstr "<strong>Monto en palabras: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.invoice_lines
 #: model_terms:ir.ui.view,arch_db:professional_templates.purchase_lines
 msgid "<strong>Amount in Words:</strong>"
-msgstr ""
+msgstr "<strong>Monto en palabras:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.report_dn1_document2
@@ -3396,19 +3434,19 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.report_pk3_document2
 #: model_terms:ir.ui.view,arch_db:professional_templates.report_pk4_document2
 msgid "<strong>Carrier:</strong>"
-msgstr ""
+msgstr "<strong>Transportista:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_10_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_14_document
 msgid "<strong>Credit Note Date: </strong>"
-msgstr ""
+msgstr "<strong>Fecha de Nota de Crédito: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_2_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_6_document
 msgid "<strong>Credit Note Date:</strong>"
-msgstr ""
+msgstr "<strong>Fecha de Nota de Crédito:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_13_document
@@ -3418,7 +3456,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_1_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_2_document
 msgid "<strong>Customer Address:</strong>"
-msgstr ""
+msgstr "<strong>Dirección del cliente:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_10_document
@@ -3426,7 +3464,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_14_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_9_document
 msgid "<strong>Customer Code: </strong>"
-msgstr ""
+msgstr "<strong>Código del cliente: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_0_document
@@ -3437,23 +3475,23 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_8_document
 msgid "<strong>Customer Code:</strong>"
-msgstr ""
+msgstr "<strong>Código del cliente:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_14_document
 msgid "<strong>Customer ID: </strong>"
-msgstr ""
+msgstr "<strong>Id del cliente: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_14_document
 msgid "<strong>Date: </strong>"
-msgstr ""
+msgstr "<strong>Fecha: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_2_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_6_document
 msgid "<strong>Date:</strong>"
-msgstr ""
+msgstr "<strong>Fecha:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_13_document
@@ -3463,7 +3501,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_1_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_2_document
 msgid "<strong>Delivery Address:</strong>"
-msgstr ""
+msgstr "<strong>Fecha de Entrega:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_10_document
@@ -3471,7 +3509,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_14_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_9_document
 msgid "<strong>Due Date: </strong>"
-msgstr ""
+msgstr "<strong>Fecha Límite: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_0_document
@@ -3482,7 +3520,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_8_document
 msgid "<strong>Due Date:</strong>"
-msgstr ""
+msgstr "<strong>Fecha Límite:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_10_document
@@ -3490,7 +3528,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_14_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_9_document
 msgid "<strong>Expiration: </strong>"
-msgstr ""
+msgstr "<strong>Expiración: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_0_document
@@ -3500,17 +3538,17 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_8_document
 msgid "<strong>Expiration:</strong>"
-msgstr ""
+msgstr "<strong>Expiración:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.order_lines
 msgid "<strong>Fiscal Position Remark:</strong>"
-msgstr ""
+msgstr "<strong>Observación de Posición Fiscal:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.view_report_style_form
 msgid "<strong>Footer Logo</strong>"
-msgstr ""
+msgstr "<strong>Logo del Pie de Página</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.invoice_lines
@@ -3523,7 +3561,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_14_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_9_document
 msgid "<strong>Invoice Date: </strong>"
-msgstr ""
+msgstr "<strong>Fecha de factura: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_0_document
@@ -3534,18 +3572,18 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_8_document
 msgid "<strong>Invoice Date:</strong>"
-msgstr ""
+msgstr "<strong>Fecha de factura:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.view_report_style_form
 msgid "<strong>Main Logo</strong>"
-msgstr ""
+msgstr "<strong>Logo Principal</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_11_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_9_document
 msgid "<strong>Order Date: </strong>"
-msgstr ""
+msgstr "<strong>Fecha de Orden: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_0_document
@@ -3558,7 +3596,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_8_document
 msgid "<strong>Order Date:</strong>"
-msgstr ""
+msgstr "<strong>Fecha de Orden:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_10_document
@@ -3566,7 +3604,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_14_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_9_document
 msgid "<strong>Order Deadline: </strong>"
-msgstr ""
+msgstr "<strong>Fecha Límite de Orden: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_0_document
@@ -3577,7 +3615,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_8_document
 msgid "<strong>Order Deadline:</strong>"
-msgstr ""
+msgstr "<strong>Fecha Límite de Orden:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_10_document
@@ -3589,7 +3627,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_14_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_9_document
 msgid "<strong>Order: </strong>"
-msgstr ""
+msgstr "<strong>Orden: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_1_document
@@ -3607,19 +3645,19 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_8_document
 msgid "<strong>Order:</strong>"
-msgstr ""
+msgstr "<strong>Orden:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_10_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_14_document
 msgid "<strong>Receipt Date: </strong>"
-msgstr ""
+msgstr "<strong>Fecha de Recepción: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_2_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_6_document
 msgid "<strong>Receipt Date:</strong>"
-msgstr ""
+msgstr "<strong>Fecha de Recepción:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_10_document
@@ -3627,7 +3665,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_14_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_9_document
 msgid "<strong>Reference: </strong>"
-msgstr ""
+msgstr "<strong>Referencia: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_0_document
@@ -3638,7 +3676,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_8_document
 msgid "<strong>Reference:</strong>"
-msgstr ""
+msgstr "<strong>Referencia:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_10_document
@@ -3646,7 +3684,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_14_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_9_document
 msgid "<strong>Salesperson: </strong>"
-msgstr ""
+msgstr "<strong>Vendedor: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_0_document
@@ -3656,7 +3694,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_8_document
 msgid "<strong>Salesperson:</strong>"
-msgstr ""
+msgstr "<strong>Vendedor:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_10_document
@@ -3664,7 +3702,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_14_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_9_document
 msgid "<strong>Scheduled Date: </strong>"
-msgstr ""
+msgstr "<strong>Fecha Prevista: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_1_document
@@ -3675,7 +3713,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_8_document
 msgid "<strong>Scheduled Date:</strong>"
-msgstr ""
+msgstr "<strong>Fecha Prevista:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_10_document
@@ -3683,7 +3721,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_14_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_9_document
 msgid "<strong>Shipping Date: </strong>"
-msgstr ""
+msgstr "<strong>Fecha de Envío: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_1_document
@@ -3694,35 +3732,35 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_8_document
 msgid "<strong>Shipping Date:</strong>"
-msgstr ""
+msgstr "<strong>Fecha de Envío:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.order_lines
 msgid "<strong>Shipping:</strong>"
-msgstr ""
+msgstr "<strong>Envío:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.delivery_lines
 #: model_terms:ir.ui.view,arch_db:professional_templates.order_lines
 msgid "<strong>Signature</strong>"
-msgstr ""
+msgstr "<strong>Firma</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_11_document
 msgid "<strong>Source Document: </strong>"
-msgstr ""
+msgstr "<strong>Documento de Origen: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_8_document
 msgid "<strong>Source Document:</strong>"
-msgstr ""
+msgstr "<strong>Documento de Origen:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_10_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_14_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_9_document
 msgid "<strong>Source: </strong>"
-msgstr ""
+msgstr "<strong>Origen: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_0_document
@@ -3732,7 +3770,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_6_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_7_document
 msgid "<strong>Source:</strong>"
-msgstr ""
+msgstr "<strong>Origen:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_10_document
@@ -3740,7 +3778,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_14_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_9_document
 msgid "<strong>Status: </strong>"
-msgstr ""
+msgstr "<strong>Estado: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_1_document
@@ -3750,7 +3788,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_8_document
 msgid "<strong>Status:</strong>"
-msgstr ""
+msgstr "<strong>Estado:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.subtotal_template
@@ -3761,7 +3799,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_14_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_14_document
 msgid "<strong>VAT Tax ID: </strong>"
-msgstr ""
+msgstr "<strong>RNC: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_13_document
@@ -3771,7 +3809,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_1_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_2_document
 msgid "<strong>Vendor Address:</strong>"
-msgstr ""
+msgstr "<strong>Dirección del Proveedor:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_10_document
@@ -3779,7 +3817,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_14_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_9_document
 msgid "<strong>Vendor Code: </strong>"
-msgstr ""
+msgstr "<strong>Código del Vendedor: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_0_document
@@ -3790,12 +3828,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_8_document
 msgid "<strong>Vendor Code:</strong>"
-msgstr ""
+msgstr "<strong>Código del Vendedor:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_14_document
 msgid "<strong>Vendor Tax ID: </strong>"
-msgstr ""
+msgstr "<strong>RNC del Proveedor: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_13_document
@@ -3805,7 +3843,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_1_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PICK_2_document
 msgid "<strong>Warehouse Address:</strong>"
-msgstr ""
+msgstr "<strong>Dirección del Centro de Distribución:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.report_dn1_document2
@@ -3817,7 +3855,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.report_pk3_document2
 #: model_terms:ir.ui.view,arch_db:professional_templates.report_pk4_document2
 msgid "<strong>Weight:</strong>"
-msgstr ""
+msgstr "<strong>Peso:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_10_document
@@ -3825,7 +3863,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_14_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_9_document
 msgid "<strong>Your Order Reference: </strong>"
-msgstr ""
+msgstr "<strong>Su referencia de orden: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_0_document
@@ -3836,7 +3874,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_8_document
 msgid "<strong>Your Order Reference:</strong>"
-msgstr ""
+msgstr "<strong>Su referencia de orden:</strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_10_document
@@ -3844,7 +3882,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_14_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_9_document
 msgid "<strong>Your Reference: </strong>"
-msgstr ""
+msgstr "<strong>Su referencia: </strong>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_0_document
@@ -3854,17 +3892,17 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_8_document
 msgid "<strong>Your Reference:</strong>"
-msgstr ""
+msgstr "<strong>Su referencia:</strong>"
 
 #. module: professional_templates
 #: model:ir.model,name:professional_templates.model_report_professional_templates_report_invoice_with_payments
 msgid "Account report with payment lines"
-msgstr ""
+msgstr "Reporte de cuenta con líneas de pago"
 
 #. module: professional_templates
 #: model:ir.model,name:professional_templates.model_report_professional_templates_report_invoice
 msgid "Account report without payment lines"
-msgstr ""
+msgstr "Reporte de cuenta sin líneas de pago"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_10_document
@@ -3880,12 +3918,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_9_document
 msgid "Address:"
-msgstr ""
+msgstr "Dirección:"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.order_lines
 msgid "Amount"
-msgstr ""
+msgstr "Monto"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_account_bank_statement_line__amount_words
@@ -3894,17 +3932,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:professional_templates.field_purchase_order__amount_words
 #: model:ir.model.fields,field_description:professional_templates.field_sale_order__amount_words
 msgid "Amount in Words:"
-msgstr ""
+msgstr "Monto en palabras:"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PAYMENT_1_document
 msgid "Amount:"
-msgstr ""
+msgstr "Monto:"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__transparent
 msgid "Background transparent"
-msgstr ""
+msgstr "Fondo transparente"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_10_document
@@ -3920,7 +3958,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_9_document
 msgid "Bill To:"
-msgstr ""
+msgstr "Facturar a:"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_10_document
@@ -3936,12 +3974,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_9_document
 msgid "Bill &amp; Ship To:"
-msgstr ""
+msgstr "Facturar y Enviar a:"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__body_font
 msgid "Body Font(px):"
-msgstr ""
+msgstr "Fuente del cuerpo (px):"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_10_document
@@ -3949,7 +3987,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_9_document
 msgid "CANCELLED"
-msgstr ""
+msgstr "CANCELADO"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_0_document
@@ -3965,7 +4003,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_9_document
 msgid "Cancelled"
-msgstr ""
+msgstr "Cancelado"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_10_document
@@ -3973,7 +4011,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_9_document
 msgid "Cancelled Purchase Order"
-msgstr ""
+msgstr "Orden de compra cancelada"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_0_document
@@ -3988,12 +4026,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_8_document
 msgid "Cancelled Purchase Order #"
-msgstr ""
+msgstr "Orden de compra cancelada #"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__show_footer_logo
 msgid "Check this box to display footer logo in the reports"
-msgstr ""
+msgstr "Marque esta casilla para mostrar el logo en el pie de página de los reportes"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__show_img
@@ -4001,6 +4039,8 @@ msgid ""
 "Check this box to display product image in Sales Order, Quotation,"
 "                         Invoice and Delivery Note"
 msgstr ""
+"Marque este casilla para mostrar la imagen del producto en la Orden de Venta, Cotizaciones,"
+"                         Facturas y Notas de Entrega"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__footer
@@ -4008,6 +4048,8 @@ msgid ""
 "Check this box to enable footer in your reports. \n"
 "You may want to disable footer                         if you are using a watermark PDF with a footer content already"
 msgstr ""
+"Marque esta casilla para habilitar el pie de página en sus reportes. \n"
+"Quizás quiera deshabilitar el pie de página                         si está utilizando una marca de agua en PDF que posee el pie de página."
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__header
@@ -4015,6 +4057,8 @@ msgid ""
 "Check this box to enable header in your reports. \n"
 "You may want to disable header if                        you are using a watermark PDF with a header content already"
 msgstr ""
+"Marque esta casilla para habilitar el encabezado en sus reportes. \n"
+"Quizás quiera deshabilitar el encabezado                         si está utilizando una marca de agua en PDF que posee el encabezado."
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__aiw_report
@@ -4022,6 +4066,8 @@ msgid ""
 "Check this box to enable the display of amount in words in the"
 "                         invoice/quote/sale order reports"
 msgstr ""
+"Marque esta casilla para habilitar que se muestre el monto en palabras para"
+"                         las facturas/órdenes de ventas/cotizaciones."
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__transparent
@@ -4029,58 +4075,60 @@ msgid ""
 "Check this box to have a transparent background for your reports. \n"
 "                        This is useful when the watermark feature is enabled so that your                         watermark is not hidden behind the report content/text"
 msgstr ""
+"Marque esta casilla si desea que sus reportes tengan un fondo transparente. \n"
+"                        Esto es útil cuando la funcionalidad de la marca de agua está habilitada así                         su marca de agua no se oculta detrás del texto/contenido."
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PAYMENT_1_document
 msgid "Client:"
-msgstr ""
+msgstr "Cliente:"
 
 #. module: professional_templates
 #: model:ir.model,name:professional_templates.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Compañías"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__name_color
 msgid "Company Name Color"
-msgstr ""
+msgstr "Color del Nombre de la Compañía"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.res_config_professional_report_templates
 msgid "Company specific settings for printed reports"
-msgstr ""
+msgstr "Configuraciones específicas de la compañía para los reportes impresos"
 
 #. module: professional_templates
 #: model:ir.model,name:professional_templates.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Ajuste de Configuraciones"
 
 #. module: professional_templates
 #: model:ir.model,name:professional_templates.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contacto"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado en"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__cust_color
 msgid "Customer Name Color"
-msgstr ""
+msgstr "Color del Nombre del Cliente"
 
 #. module: professional_templates
 #. odoo-python
 #: code:addons/professional_templates/models/invoice.py:0
 #, python-format
 msgid "DISABLED"
-msgstr ""
+msgstr "DESHABILITADO"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_10_document
@@ -4088,34 +4136,34 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_9_document
 msgid "DRAFT"
-msgstr ""
+msgstr "BORRADOR"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_res_company__df_style
 #: model:ir.model.fields,field_description:professional_templates.field_res_config_settings__df_style
 msgid "Default Style"
-msgstr ""
+msgstr "Estilo por defecto"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_res_partner__delivery_instructions
 #: model:ir.model.fields,field_description:professional_templates.field_res_users__delivery_instructions
 msgid "Delivery Instructions"
-msgstr ""
+msgstr "Instrucciones de Entrega"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.ke_res_partner_inherit1
 msgid "Delivery Instructions..."
-msgstr ""
+msgstr "Instrucciones de Entrega..."
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_stock_picking__dn_style
 msgid "Delivery Note Style"
-msgstr ""
+msgstr "Estilo de Notas de Entrega"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__template_dn
 msgid "Delivery Note Template"
-msgstr ""
+msgstr "Plantilla de Notas de Entrega"
 
 #. module: professional_templates
 #. odoo-python
@@ -4123,22 +4171,22 @@ msgstr ""
 #: code:addons/professional_templates/models/sale_order.py:0
 #, python-format
 msgid "Disabled"
-msgstr ""
+msgstr "Deshabilitado"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.order_lines
 msgid "Discount(%)"
-msgstr ""
+msgstr "Descuento(%)"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre para mostrar"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__show_img
 msgid "Display product image"
-msgstr ""
+msgstr "Mostrar imagen del producto"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_account_journal__display_on_footer
@@ -4146,16 +4194,18 @@ msgid ""
 "Display this bank account on the footer of printed documents like invoices "
 "and sales orders."
 msgstr ""
+"Mostrar la cuenta de banco en el pie de página de los documentos impresos como las facturas "
+"y las órdenes de venta."
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__leftpadding
 msgid "Distance from left (mm)"
-msgstr ""
+msgstr "Margen izquierdo (mm)"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__toppadding
 msgid "Distance from top (mm)"
-msgstr ""
+msgstr "Margen superior (mm)"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_0_document
@@ -4171,70 +4221,70 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_9_document
 msgid "Draft"
-msgstr ""
+msgstr "Borrador"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PAYMENT_1_document
 msgid "Due Amount for"
-msgstr ""
+msgstr "Monto adeudado por"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__aiw_report
 msgid "Enable amount in words"
-msgstr ""
+msgstr "Habilitar el monto en palabras"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__footer
 msgid "Enable footer"
-msgstr ""
+msgstr "Habilitar el pie de página"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__show_footer_logo
 msgid "Enable footer logo"
-msgstr ""
+msgstr "Habilitar el logo en el pie de página"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__header
 msgid "Enable header"
-msgstr ""
+msgstr "Habilitar el encabezado"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__even
 msgid "Even parity Color"
-msgstr ""
+msgstr "Color para pares"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_res_company__facebook
 msgid "Facebook ID"
-msgstr ""
+msgstr "Id de Facebook"
 
 #. module: professional_templates
 #. odoo-python
 #: code:addons/professional_templates/models/report.py:0
 #, python-format
 msgid "Failed to load the non PDF watermark..."
-msgstr ""
+msgstr "Falló la carga de la marca de agua que no es PDF..."
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__font_family
 msgid "Font Family:"
-msgstr ""
+msgstr "Familia de Fuente"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__footer_font
 msgid "Footer Font(px):"
-msgstr ""
+msgstr "Fuente del pie de página (px):"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__footer_logo
 #: model_terms:ir.ui.view,arch_db:professional_templates.company_footer
 msgid "Footer Logo"
-msgstr ""
+msgstr "Logo de pie de página"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.picking_lines
 msgid "From"
-msgstr ""
+msgstr "Desde"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_9_document
@@ -4242,22 +4292,22 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_9_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_9_document
 msgid "From:"
-msgstr ""
+msgstr "Desde:"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__name
 msgid "Give a unique name for this report style"
-msgstr ""
+msgstr "Otorgue un nombre único para este estilo de reporte"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__header_font
 msgid "Header Font(px):"
-msgstr ""
+msgstr "Fuente del encabezado (px):"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__logo
 msgid "Header Logo"
-msgstr ""
+msgstr "Logo del encabezado"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_res_company__pdf_last_page
@@ -4267,6 +4317,9 @@ msgid ""
 " promotional content, advert, sale terms                     and Conditions,..etc.\n"
 " This document will be appended to the printed report"
 msgstr ""
+"Aquí puede cargar un documento PDF que contenga contenido específico                     así como brochure de productos,\n"
+" contenido promocional, anuncios, términos de ventas                     and condiciones,..etc.\n"
+" Este documento será adjuntado al reporte impreso."
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_ir_actions_report__pdf_last_page
@@ -4276,11 +4329,15 @@ msgid ""
 "This document will be appended to the printed report. \n"
 "                    Last pages PDF uploaded here will override the one uploaded at company                     level in the general settings."
 msgstr ""
+"Aquí puede cargar un documento PDF que contenga contenido específico                     así como brochure de productos,\n"
+" contenido promocional, anuncios, términos de ventas                     and condiciones,..etc.\n"
+"Este documento será adjuntado al reporte impreso.\n"
+"                    Últimas páginas PDF cargada en esta sección sobreescribirá                     cualquiera que sea cargado en las configuraciones generales de la compañía."
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__id
 msgid "ID"
-msgstr ""
+msgstr "Id"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_10_document
@@ -4288,7 +4345,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_9_document
 msgid "INVOICE"
-msgstr ""
+msgstr "FACTURA"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_res_company__df_style
@@ -4297,18 +4354,20 @@ msgid ""
 "If no other report style is specified during the printing of document,"
 "                    this default style will be used"
 msgstr ""
+"Si no se especifica otro estilo de reporte durante la impresión del documento,"
+"                    será utilizado este estilo por defecto."
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.add_image_to_odoo_template
 msgid "Image"
-msgstr ""
+msgstr "Imagen"
 
 #. module: professional_templates
 #. odoo-python
 #: code:addons/professional_templates/models/report_settings.py:0
 #, python-format
 msgid "Invalid python expression defined for watermark: "
-msgstr ""
+msgstr "La expresión de python definida para la marca de agua es inválida:"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_0_document
@@ -4323,62 +4382,62 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_9_document
 msgid "Invoice"
-msgstr ""
+msgstr "Factura"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_account_bank_statement_line__style
 #: model:ir.model.fields,field_description:professional_templates.field_account_move__style
 msgid "Invoice Style"
-msgstr ""
+msgstr "Estilo de Factura"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__template_inv
 msgid "Invoice Template"
-msgstr ""
+msgstr "Plantilla de Factura"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_7_document
 msgid "Invoice:"
-msgstr ""
+msgstr "Factura:"
 
 #. module: professional_templates
 #: model:ir.model,name:professional_templates.model_account_journal
 msgid "Journal"
-msgstr ""
+msgstr "Diario"
 
 #. module: professional_templates
 #: model:ir.model,name:professional_templates.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Entrada de diario"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación en"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_ir_actions_report__pdf_last_page_fname
 #: model:ir.model.fields,field_description:professional_templates.field_res_company__pdf_last_page_fname
 #: model:ir.model.fields,field_description:professional_templates.field_res_config_settings__pdf_last_page_fname
 msgid "Last Pages Filename"
-msgstr ""
+msgstr "Nombre de archivo para Últimas Páginas"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_ir_actions_report__pdf_last_page
 #: model:ir.model.fields,field_description:professional_templates.field_res_company__pdf_last_page
 #: model:ir.model.fields,field_description:professional_templates.field_res_config_settings__pdf_last_page
 msgid "Last Pages PDF"
-msgstr ""
+msgstr "PDF para ­Últimas Páginas"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última Actualización por"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última Actualización en"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_10_document
@@ -4456,45 +4515,45 @@ msgstr ""
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PAYMENT_1_document
 msgid "NOTE:"
-msgstr ""
+msgstr "NOTA:"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__name
 msgid "Name of Style"
-msgstr ""
+msgstr "Nombre del Estilo"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.view_report_style_form
 msgid "Name of style.."
-msgstr ""
+msgstr "Nombre del estilo..."
 
 #. module: professional_templates
 #. odoo-python
 #: code:addons/professional_templates/models/report.py:0
 #, python-format
 msgid "No usable watermark found, got "
-msgstr ""
+msgstr "Marca de agua no utilizable, obtuvo "
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_9_document
 msgid "ORDER"
-msgstr ""
+msgstr "ORDEN"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_8_document
 msgid "ORDER #"
-msgstr ""
+msgstr "ORDEN #"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__odd
 msgid "Odd parity Color"
-msgstr ""
+msgstr "Color para impares"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__opacity
 msgid "Opacity (0.05-1.0):"
-msgstr ""
+msgstr "Opacidad (0.05-1.0):"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_0_document
@@ -4511,7 +4570,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_9_document
 msgid "Order #"
-msgstr ""
+msgstr "Orden #"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_0_document
@@ -4527,68 +4586,68 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_9_document
 msgid "Order Date:"
-msgstr ""
+msgstr "Fecha de orden:"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__template_so
 msgid "Order/Quote Template"
-msgstr ""
+msgstr "Plantilla de Orden/Cotización"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_purchase_order__po_style
 msgid "PO Style"
-msgstr ""
+msgstr "Estilo de Orden de Compra"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.company_footer
 msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
-msgstr ""
+msgstr "Página: <span class=\"page\"/> / <span class=\"topage\"/>"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.invoice_lines
 msgid "Paid on"
-msgstr ""
+msgstr "Pagado en"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PAYMENT_1_document
 msgid "Payment Date:"
-msgstr ""
+msgstr "Fecha de pago:"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__template_payment
 msgid "Payment Receipt Template"
-msgstr ""
+msgstr "Plantilla de Recibo de Pago"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PAYMENT_1_document
 msgid "Payment Receipt:"
-msgstr ""
+msgstr "Recibo de pago:"
 
 #. module: professional_templates
 #: model:ir.model,name:professional_templates.model_account_payment
 msgid "Payments"
-msgstr ""
+msgstr "Pagos"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__template_pk
 msgid "Picking Slip Template"
-msgstr ""
+msgstr "Plantilla de Volantes de Recogida"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_stock_picking__pk_style
 msgid "Picking Style"
-msgstr ""
+msgstr "Estilo de Volantes de Recogida"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.invoice_lines
 msgid "Please use the following communication for your payment :"
-msgstr ""
+msgstr "Por favor utilice la siguiente comunicación para sus pagos:"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_9_document
 msgid "Pro-Forma Invoice"
-msgstr ""
+msgstr "Factura Pro-Forma"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_0_document
@@ -4605,7 +4664,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_9_document
 msgid "Pro-Forma Invoice #"
-msgstr ""
+msgstr "Factura Pro-Forma #"
 
 #. module: professional_templates
 #: model:ir.model,name:professional_templates.model_purchase_order
@@ -4614,7 +4673,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_9_document
 msgid "Purchase Order"
-msgstr ""
+msgstr "Orden de Compra"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_0_document
@@ -4629,12 +4688,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_8_document
 msgid "Purchase Order #"
-msgstr ""
+msgstr "Orden de Compra #"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__template_po
 msgid "Purchase Order Template"
-msgstr ""
+msgstr "Plantilla de Orden de Compra"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__watermark
@@ -4642,17 +4701,19 @@ msgid ""
 "Put a python expression/code which when evaluated, will result in some"
 "         text to be printed on PDF as watermark."
 msgstr ""
+"Coloque una expresión/código de python que al ser evaluada, de como resultado un texto"
+"         para ser impreso como marca de agua en el PDF."
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_9_document
 msgid "QUOTATION"
-msgstr ""
+msgstr "COTIZACIÓN"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_8_document
 msgid "QUOTATION #"
-msgstr ""
+msgstr "COTIZACIÓN #"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_0_document
@@ -4669,7 +4730,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_9_document
 msgid "Quotation #"
-msgstr ""
+msgstr "Cotización #"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_0_document
@@ -4685,12 +4746,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_9_document
 msgid "Quotation Date:"
-msgstr ""
+msgstr "Fecha de cotización:"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_sale_order__style
 msgid "Quote/Order Style"
-msgstr ""
+msgstr "Estilo de Orden/Cotización"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_10_document
@@ -4698,22 +4759,22 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_9_document
 msgid "REFUND"
-msgstr ""
+msgstr "REEMBOLSO"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_purchase_order__rfq_style
 msgid "RFQ Style"
-msgstr ""
+msgstr "Estilo de Solicitud de Cotización"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__template_rfq
 msgid "RFQ Template"
-msgstr ""
+msgstr "Plantilla de Solicitud de Cotización"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_account_payment__style
 msgid "Receipt Style"
-msgstr ""
+msgstr "Estilo de Recibo"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_0_document
@@ -4728,40 +4789,40 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_9_document
 msgid "Refund"
-msgstr ""
+msgstr "Reembolso"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_7_document
 msgid "Refund:"
-msgstr ""
+msgstr "Reembolso:"
 
 #. module: professional_templates
 #: model:ir.model,name:professional_templates.model_ir_actions_report
 msgid "Report Action"
-msgstr ""
+msgstr "Acción de Reporte"
 
 #. module: professional_templates
 #: model:ir.model,name:professional_templates.model_report_template_settings
 msgid "Report Style Settings"
-msgstr ""
+msgstr "Configuración de Estilo de Reporte"
 
 #. module: professional_templates
 #: model:ir.ui.menu,name:professional_templates.reports_styles_menuitem
 #: model_terms:ir.ui.view,arch_db:professional_templates.view_report_style_form
 #: model_terms:ir.ui.view,arch_db:professional_templates.view_report_style_tree
 msgid "Report Styles"
-msgstr ""
+msgstr "Estilos de reporte"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_res_partner__style
 #: model:ir.model.fields,field_description:professional_templates.field_res_users__style
 msgid "Reports Style"
-msgstr ""
+msgstr "Estilo de reportes"
 
 #. module: professional_templates
 #: model:ir.actions.act_window,name:professional_templates.reports_styles_action
 msgid "Reports Styles"
-msgstr ""
+msgstr "Estilos de reportes"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_10_document
@@ -4769,7 +4830,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_9_document
 msgid "Request for Quotation"
-msgstr ""
+msgstr "Solicitud de Cotización"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_0_document
@@ -4791,7 +4852,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_4_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_8_document
 msgid "Request for Quotation #"
-msgstr ""
+msgstr "Solicitud de Cotización #"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__rotate
@@ -4799,48 +4860,50 @@ msgid ""
 "Rotates the watermark text a given number of degrees counter clockwise"
 "                    around its centre"
 msgstr ""
+"Rotar el texto de la marca de agua ciertos grados en dirección opuesta a las manesillas del reloj"
+"                    sobre su eje central."
 
 #. module: professional_templates
 #: model:ir.model,name:professional_templates.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Orden de Venta"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_purchase_order__po_style
 msgid "Select Style to use when printing the PO"
-msgstr ""
+msgstr "Seleccione el estilo para usar al momento de imprimir la Orden de Compra"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_sale_order__style
 msgid "Select Style to use when printing the Sales Order or Quote"
-msgstr ""
+msgstr "Seleccione el estilo para usar al momento de imprimir la Orden o Cotización de Venta"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_stock_picking__pk_style
 msgid "Select Style to use when printing the picking slip"
-msgstr ""
+msgstr "Seleccione el estilo para usar al momento de imprimir el volante de recogida"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_res_partner__style
 #: model:ir.model.fields,help:professional_templates.field_res_users__style
 msgid "Select a style to use when printing reports for this customer"
-msgstr ""
+msgstr "Seleccione el estilo para usar al momento de imprimir reportes para el cliente"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_stock_picking__dn_style
 msgid "Select style to use when printing the Delivery Note"
-msgstr ""
+msgstr "Seleccione el estilo para usar al momento de imprimir la Nota de Entrega"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_purchase_order__rfq_style
 msgid "Select style to use when printing the RFQ"
-msgstr ""
+msgstr "Seleccione el estilo para usar al momento de imprimir la Solicitud de Cotización"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_account_bank_statement_line__style
 #: model:ir.model.fields,help:professional_templates.field_account_move__style
 msgid "Select style to use when printing this invoice"
-msgstr ""
+msgstr "Seleccione el estilo para usar al momento de imprimir esta factura"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__opacity
@@ -4848,11 +4911,13 @@ msgid ""
 "Sets the opacity of the watermark text. \n"
 "Give a number between 0.05 and 1.0 with                     1.0 being opaque and 0.05 being almost transparent"
 msgstr ""
+"Ajuste la opacidad del texto de la marca de agua. \n"
+"Coloque un número entre 0.05 y 1.0 siendo                     1.0 opaco and 0.05 casi transparente."
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.view_report_style_form
 msgid "Settings"
-msgstr ""
+msgstr "Configuraciones"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_10_document
@@ -4878,48 +4943,48 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_9_document
 msgid "Ship To:"
-msgstr ""
+msgstr "Enviar a:"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.PO_11_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_11_document
 msgid "Shipping Address:"
-msgstr ""
+msgstr "Dirección de envío:"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_account_journal__display_on_footer
 msgid "Show in Invoices Footer"
-msgstr ""
+msgstr "Mostrar en el pie de página de las facturas"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.res_config_professional_report_templates
 msgid "Style"
-msgstr ""
+msgstr "Estilo"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.view_report_style_form
 msgid "Style Settings"
-msgstr ""
+msgstr "Configuraciones de estilo"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__text_color
 msgid "Text Color"
-msgstr ""
+msgstr "Color de texto"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__rotate
 msgid "Text Rotation (0°-360°):"
-msgstr ""
+msgstr "Rotación del texto (0°-360°):"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__leftpadding
 msgid "Text to start at 'x' distance from left margin of the PDF body"
-msgstr ""
+msgstr "El texto iniciará a partir de 'x' distancia desde el borde izquierdo del cuerpo del PDF"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__toppadding
 msgid "Text to start at 'y' distance from top margin of the PDF body"
-msgstr ""
+msgstr "El texto iniciará a partir de 'y' distancia desde el borde superior del cuerpo del PDF"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.DN_7_document
@@ -4929,7 +4994,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.RFQ_7_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.SO_7_document
 msgid "Thank You."
-msgstr ""
+msgstr "Gracias."
 
 #. module: professional_templates
 #. odoo-python
@@ -4939,6 +5004,8 @@ msgid ""
 "The Last Page PDF document has security restrictions. Can not read or "
 "decrypt it!: "
 msgstr ""
+"El documento de Últimas Páginas de PDF posee restricciones de seguridad. No puede ser le­ido o "
+"desencriptado!: "
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__theme_color
@@ -4946,6 +5013,8 @@ msgid ""
 "The Main Theme color of the invoice. Normally this                        "
 "should be one of your official company colors"
 msgstr ""
+"El color del principal de la factura. Normalmente esto                        "
+"debería ser uno de los colores oficiales de la empresa."
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__name_color
@@ -4953,6 +5022,8 @@ msgid ""
 "The Text color of the Company Name. Normally this should be one of your "
 "official                        company colors or default HTML text color"
 msgstr ""
+"El color del texto del nombre de la compañía. Normalmente esto debería ser uno de los colores "
+"oficiales                        de la compañía o un color HTML por defecto."
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__cust_color
@@ -4960,6 +5031,8 @@ msgid ""
 "The Text color of the Customer Name. Normally this should be one of your "
 "official                        company colors or default HTML text color"
 msgstr ""
+"El color del texto del nombre del cliente. Normalmente esto debería ser uno de los colores "
+"oficiales                        de la compañía o un color HTML por defecto."
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__theme_txt_color
@@ -4968,6 +5041,9 @@ msgid ""
 "NOT                        be the same color as the theme color. Otherwise "
 "the text will not be visible"
 msgstr ""
+"El color del texto de las áreas que llevan al color principal de la compañía. Normalmente estos no "
+"debería                        ser el mismo color que el color principal. De lo contrario "
+"el texto no será visible."
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__text_color
@@ -4975,21 +5051,23 @@ msgid ""
 "The Text color of the invoice. Normally this should be one of your official"
 "                         company colors or default HTML text color"
 msgstr ""
+"El color del texto de la factura. Normalmente esto deberías ser uno de los colores"
+"                         oficiales de la compañía o el color por defecto para el texto de HTML."
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__even
 msgid "The background color for Even invoice lines in the invoice"
-msgstr ""
+msgstr "El color de fondo para las líneas de facturas que son pares."
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__odd
 msgid "The background color for Odd invoice lines in the invoice"
-msgstr ""
+msgstr "El color de fondo para las líneas de facturas que son impares"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__fontsize
 msgid "The font-size of the watermark text to be printed on PDF body"
-msgstr ""
+msgstr "El tamaño de la fuente del texto de la marca de agua para ser impreso en el cuerpo del PDF."
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_account_bank_statement_line__amount_words
@@ -4998,7 +5076,9 @@ msgstr ""
 msgid ""
 "The invoice total amount in words is automatically generated by the "
 "system..few languages are supported currently"
-msgstr ""
+msgstr """
+"El monto total en palabras de la factura es generado de manera automática por el "
+"sistema..algunos idiomas son soportados, no todos."
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_account_bank_statement_line__project_title
@@ -5008,11 +5088,12 @@ msgstr ""
 msgid ""
 "The title of your customer project or work you are doing for your customer"
 msgstr ""
+"El título del proyecto del cliente o trabajo que usted está haciendo para su cliente."
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_sale_order__amount_words
 msgid "The total amount in words is automatically generated by the system"
-msgstr ""
+msgstr "El monto total en palabras de la factura es generado de manera automática por el sistema"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_purchase_order__amount_words
@@ -5020,6 +5101,8 @@ msgid ""
 "The total amount in words is automatically generated by the system..few "
 "languages are supported currently"
 msgstr ""
+"El monto total en palabras de la factura es generado de manera automática por el sistema..algunos"
+"idiomas son soportados, no todos."
 
 #. module: professional_templates
 #. odoo-python
@@ -5029,21 +5112,23 @@ msgid ""
 "The uploaded watermark PDF document has security restrictions. Can not read "
 "or decrypt it!: "
 msgstr ""
+"El documento PDF con la marca de agua que fue cargado posee restricciones de seguridad. No puede ser leído "
+"o desencriptado!: "
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__wm_color
 msgid "The watermark text color"
-msgstr ""
+msgstr "Color del texto de la marca de agua"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__theme_color
 msgid "Theme Color"
-msgstr ""
+msgstr "Color principal"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__theme_txt_color
 msgid "Theme Text Color"
-msgstr ""
+msgstr "Color de texto principal"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__footer_logo
@@ -5052,6 +5137,9 @@ msgid ""
 "                        if non is uploaded and footer logo is enabled then "
 "the company logo will be used"
 msgstr ""
+"Este campo contiene la imagen que será utilizada de fondo en el pie de página,"
+"                        si no contiene ninguna imagen y el pie de página está habilitado entonces "
+"el logo de la compañía será utilizado."
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_report_template_settings__logo
@@ -5059,6 +5147,8 @@ msgid ""
 "This field holds the image used as logo for the reports,"
 "                        if non is uploaded, the company logo will be used"
 msgstr ""
+"Este campo contiene el logo a utilizar en los reportes,"
+"                        si no se coloca ninguna image, ser utilizará el logo de la compañía."
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_account_bank_statement_line__project_title
@@ -5066,32 +5156,32 @@ msgstr ""
 #: model:ir.model.fields,field_description:professional_templates.field_account_payment__project_title
 #: model:ir.model.fields,field_description:professional_templates.field_sale_order__project_title
 msgid "Title"
-msgstr ""
+msgstr "Título"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.picking_lines
 msgid "To"
-msgstr ""
+msgstr "Para"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.order_lines
 msgid "Total Price"
-msgstr ""
+msgstr "Total"
 
 #. module: professional_templates
 #: model:ir.model,name:professional_templates.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Transferencia"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_res_company__twitter
 msgid "Twitter Handle"
-msgstr ""
+msgstr "Manejador de Twitter"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.category_template
 msgid "Uncategorized"
-msgstr ""
+msgstr "Sin categoría"
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_ir_actions_report__pdf_watermark
@@ -5099,6 +5189,8 @@ msgid ""
 "Upload a watermark PDF to be used as the background of each page printed.\n"
 "                    Watermark uploaded here will override the one uploaded at company                     level in the general settings."
 msgstr ""
+"Suba una marca de agua en PDF para ser colocada en el fondo de cada página impresa.\n"
+"                    La marca de agua cargada en este campo sobreescribirá la marca de agua                      colocada en el campo de la configuración general de la compañía."
 
 #. module: professional_templates
 #: model:ir.model.fields,help:professional_templates.field_res_company__pdf_watermark
@@ -5108,6 +5200,9 @@ msgid ""
 "reports.                    This PDF will be used as the background of each "
 "an every page printed."
 msgstr ""
+"Suba el sello de su compañía en PDF o un PDF para el fondo de sus "
+"reportes.                    Este PDF será utilizado como fondo de "
+"cada página impresa."
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_0_document
@@ -5160,7 +5255,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.company_address
 #: model_terms:ir.ui.view,arch_db:professional_templates.company_address_noname
 msgid "VAT:"
-msgstr ""
+msgstr "RNC:"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_10_document
@@ -5168,7 +5263,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_9_document
 msgid "VENDOR BILL"
-msgstr ""
+msgstr "FACTURA DE PROVEEDOR"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_10_document
@@ -5176,7 +5271,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_9_document
 msgid "VENDOR REFUND"
-msgstr ""
+msgstr "REEMBOLSO DE PROVEEDOR"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_0_document
@@ -5191,12 +5286,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_9_document
 msgid "Vendor Bill"
-msgstr ""
+msgstr "Factura de Proveedor"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_7_document
 msgid "Vendor Bill:"
-msgstr ""
+msgstr "Factura de Proveedor:"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_0_document
@@ -5211,56 +5306,56 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_8_document
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_9_document
 msgid "Vendor Refund"
-msgstr ""
+msgstr "Reembolso de Proveedor"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.INVOICE_7_document
 msgid "Vendor Refund:"
-msgstr ""
+msgstr "Reembolso de Proveedor:"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.view_report_style_form
 msgid "Watermark Example"
-msgstr ""
+msgstr "Ejemplo de Marca de Agua"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_ir_actions_report__pdf_watermark_fname
 #: model:ir.model.fields,field_description:professional_templates.field_res_company__pdf_watermark_fname
 #: model:ir.model.fields,field_description:professional_templates.field_res_config_settings__pdf_watermark_fname
 msgid "Watermark Filename"
-msgstr ""
+msgstr "Archivo de Marca de Agua"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_ir_actions_report__pdf_watermark
 #: model:ir.model.fields,field_description:professional_templates.field_res_company__pdf_watermark
 #: model:ir.model.fields,field_description:professional_templates.field_res_config_settings__pdf_watermark
 msgid "Watermark PDF"
-msgstr ""
+msgstr "PDF de Marca de Agua"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__watermark
 msgid "Watermark Python Expression"
-msgstr ""
+msgstr "Expresión Python de Marca de Agua"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.view_report_style_form
 msgid "Watermark Settings"
-msgstr ""
+msgstr "Configuraciones de Marca de Agua"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__wm_color
 msgid "Watermark color (Hex)"
-msgstr ""
+msgstr "Color de Marca de Agua (Hex)"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__fontsize
 msgid "Watermark font-size (px):"
-msgstr ""
+msgstr "Tamaño de la Fuente de la Marca de Agua (px):"
 
 #. module: professional_templates
 #: model:ir.model.fields,field_description:professional_templates.field_res_company__youtube
 msgid "YouTube ID"
-msgstr ""
+msgstr "Id de YouTube"
 
 #. module: professional_templates
 #. odoo-python
@@ -5270,6 +5365,8 @@ msgid ""
 "Your watermark pdf contains more than one page. Only the first page will be "
 "used!"
 msgstr ""
+"Su PDF de marca de agua contiene mas de una (1) página. Solo será utilizada la primera "
+"página!"
 
 #. module: professional_templates
 #. odoo-python
@@ -5278,3 +5375,4 @@ msgstr ""
 msgid ""
 "Your watermark pdf does not contain a page or is not a standard PDF document"
 msgstr ""
+"Su PDF de marca de agua no contiene ninguna página o no es un formato estándar de PDF."
