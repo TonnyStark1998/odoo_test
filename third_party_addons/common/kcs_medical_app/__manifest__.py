@@ -28,7 +28,7 @@
         'views/kcs_medical_app_stetic_skin_type_views.xml',
         'views/kcs_medical_app_body_part_views.xml',
         'views/kcs_medical_app_patient_evolution_views.xml',
-        #'views/kcs_medical_app_product_template.xml',
+        'views/kcs_medical_app_product_template.xml',
         'views/kcs_medical_app_patient_functional_medicine_nutrition_views.xml',
     ],
     # only loaded in demonstration mode
