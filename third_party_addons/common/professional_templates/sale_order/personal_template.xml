@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="SO_15_document" name="Personal Template">
+            <!-- multi company configurations -->
+            <t t-if="sale and 'company_id' in sale">
+                <t t-set="company" t-value="sale.company_id"></t>
+            </t>
+            <t t-if="not sale or not 'company_id' in sale">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+            <!-- company header -->
+            <t t-if="style.header">
+                <div t-attf-class="container header col o_company_#{company.id}_layout" t-att-style="report_header_style">
+                    <div class="row mb-2">
+                        <div class="col-6 mt-2 mb-2" style="padding-left:0;">
+                            <img t-if="company.logo" 
+                                    t-att-src="image_data_uri(company.logo)"
+                                    style="max-width: 150px;"/>
+                        </div>
+                        <div class="col-6 mb-2 mb-2"
+                                style="font-size:12px !important; padding-bottom:2px; padding-right:0px;">
+                            <div t-if="company.email">
+                                <span class="fa fa-envelope-square fa-lg"/> 
+                                <span t-field="company.email"/>
+                            </div>
+                            <div t-if="company.website">
+                                <span class="fa fa-globe fa-lg"/> 
+                                <span t-field="company.website"/>
+                            </div>
+                            <div t-if="company.vat">
+                                <span class="fa fa-building fa-lg"/>
+                                RNC:
+                                <span t-field="company.vat"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+            <!--start of page data-->
+            <div class="article page"
+                t-attf-style="color:{{style.text_color}} !important;
+                                font-size:{{int(style.body_font)}}px !important;">
+                <div class="container mb-4"
+                    style="padding-left:0px;
+                            padding-right:0px;
+                            padding-bottom:2px;">
+                    <div class="row">
+                        <div class="col-6 mb-2">
+                            <center t-attf-style="color:white;
+                                                    font-size:{{int(style.body_font) + 7}}px;
+                                                    font-weight:bold;
+                                                    background-color:{{style.theme_color}};">
+                                Cliente &amp; Dirección de envío
+                            </center>
+                            <div>
+                                <div t-if="sale.partner_id"
+                                    t-attf-style="font-size:{{int(style.body_font)+8}}px;font-weight:500;">
+                                    <span t-field="sale.partner_id"/>
+                                </div>
+                                <address t-field="sale.partner_id" style="margin-bottom:0px;"
+                                        t-options='{"widget": "contact", "fields":["address","phone","email","website"],"no_marker": false}'/>
+                                <span t-if="sale.partner_id.vat">
+                                    <span class="fa fa-building fa-lg"/>
+                                    RNC:
+                                    <span t-field="sale.partner_id.vat"/>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-6 ms-1 ps-1"
+                            t-attf-style="border:2px solid {{style.theme_color}};color:{{style.text_color}} !important;font-size:{{int(style.header_font)}}px !important;">
+                            <div class="row">
+                                <div class="col-12 ps-2 mb-3"
+                                    t-attf-style="font-size:{{int(style.body_font) + 10}}px;">
+                                    <strong>
+                                        Pedido #
+                                        <span t-field="sale.name"/>
+                                    </strong>
+                                </div>
+                            </div>
+                            <div class="row"
+                                t-attf-style="font-size:{{int(style.body_font) + 5}}px;">
+                                <div class="col-6 ps-4 mb-3">
+                                    <strong>Fecha pedido:</strong>
+                                    <br />
+                                    <span t-field="sale.date_order" t-options='{"widget": "date"}'/>
+                                </div>
+                                <div class="col-6 ps-4 mb-3">
+                                    <strong>Vendedor:</strong>
+                                    <br />
+                                    <span t-field="sale.user_id"/>
+                                </div>
+                            </div>
+                            <div class="row"
+                                t-attf-style="font-size:{{int(style.body_font) + 5}}px;">
+                                <div class="col-12 ps-4 mb-3">
+                                    <strong>Moneda:</strong>
+                                    <br />
+                                    <span t-field="sale.currency_id"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- DATA-->
+                    <div class="row">
+                        <div class="col-12 mt-3 pt-3"
+                            t-attf-style="font-size:12px !important;">
+                            <t t-call="professional_templates.order_lines"/>
+                        </div>
+                    </div>
+                    <!--/DATA-->
+                </div>
+            </div>
+            <!-- company footer -->
+            <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+                <div class="text-center" style="border-top: 1px solid black;">
+                    <ul class="list-inline mb4">
+                        <li t-if="company.phone" class="list-inline-item d-inline">
+                            <span class="fa fa-phone"/>
+                            <span class="o_force_ltr" t-field="company.phone"/>
+                        </li>
+                        <li t-if="company.email" class="list-inline-item d-inline">
+                            <span class="fa fa-envelope"/>
+                            <span class="o_force_ltr" t-field="company.email"/>
+                        </li>
+                        <li t-if="company.website" class="list-inline-item d-inline">
+                            <span class="fa fa-globe"/>
+                            <span class="o_force_ltr" t-field="company.website"/>
+                        </li>
+                    </ul>
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Página:
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+
+        </template>
+    </data>
+</odoo>
