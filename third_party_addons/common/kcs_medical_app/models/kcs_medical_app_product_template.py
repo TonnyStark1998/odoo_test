@@ -4,7 +4,7 @@ import logging as log
 from odoo import models, fields, api
 
 class PatientBudgetProduct(models.Model):
-    _inherit = 'product.product'
+    _inherit = 'product.template'
 
     # Patient Budget Product - New Fields
     patient_evolution_type = fields.Selection(selection=[
