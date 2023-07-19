@@ -12,6 +12,18 @@
         </field>
     </record>
 
+    <record id="billing_do_view_currency_rate_tree_rate_ids_field" model="ir.ui.view">
+        <field name="name">billing.do.view.res.currency.rate.tree.rate.ids.field</field>
+        <field name="model">res.currency</field>
+        <field name="inherit_id" 
+            ref="base.view_currency_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='rate_ids']/tree/field[@name='inverse_company_rate']" position="after">
+                <field name="source" />
+            </xpath>
+        </field>
+    </record>
+
     <record id="billing_do_rates_services_cron" model="ir.cron">
         <field name="name">Currency: Load Today Rates</field>
         <field name="interval_number">1</field>
