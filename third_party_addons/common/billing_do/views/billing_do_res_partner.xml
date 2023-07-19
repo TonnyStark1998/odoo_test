@@ -9,12 +9,15 @@
                         default_focus="1" 
                         placeholder="Name" 
                         attrs="{'required' : [('type', '=', 'contact')], 
-                            'readonly': [('tax_contributor_type', 'not in', ['3'])]}" 
+                            'readonly': [('tax_contributor_type', 'not in', ['3'])],
+                            'invisible': [('is_company','=', False)]}" 
                         force_save="1"
                         groups="!base.group_system" />
                 <field name="name" 
                     force_save="1"
                     readonly="0"
+                    attrs="{'required' : [('type', '=', 'contact')],
+                            'invisible': [('is_company','=', False)]}"
                     groups="base.group_system" />
             </field>
             <xpath expr="//span[@name='address_name']" position="before">
