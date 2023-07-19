@@ -69,8 +69,7 @@ class BillingDoAccountMove(models.Model):
 
     ncf_type = fields.Many2one(comodel_name='billing.do.ncf.type',
                                string='NCF Type',
-                               domain=lambda self: self._get_ncf_type_domain(),
-                               required=True)
+                               domain=lambda self: self._get_ncf_type_domain())
     
     ncf_type_sequence = fields.Many2one(comodel_name='ir.sequence.date_range',
                                         string='NCF Type Sequence Used')
@@ -472,7 +471,7 @@ class BillingDoAccountMove(models.Model):
     def _set_name_for_out_move(self, move):
         if move.is_tax_valuable \
             and move.move_type in ['in_invoice', 'in_refund', 'in_receipt']\
-            and move.ncf_type.type.upper() not in ['B11', 'B13', 'B17']:
+            and move.is_tax_valuable:
 
             move.name = move.ncf
 
@@ -480,9 +479,12 @@ class BillingDoAccountMove(models.Model):
         if move.is_tax_valuable and \
             (move.move_type in ['out_invoice', 'out_refund', 'out_receipt'] \
             or (move.move_type in ['in_invoice', 'in_refund', 'in_receipt'] \
-                and move.ncf_type.type.upper() in ['B11', 'B13', 'B17'])):
+                and move.is_third_party_ncf)):
             
-            move.ncf_date_to = move.ncf_type_sequence.date_to
+            if not move.ncf_type_sequence:
+                move.ncf_date_to = '31/12/{}'.format(date.datetime.now().strftime('%Y'))
+            else:
+                move.ncf_date_to = move.ncf_type_sequence.date_to
     
     def _move_to_next_sequence_number(self, sequence):
         sequence.number_next_actual = \
