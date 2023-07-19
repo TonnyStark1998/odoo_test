@@ -1280,7 +1280,7 @@ msgstr "RNC"
 #: model:ir.model.fields,field_description:billing_do.field_res_partner__tax_contributor_type
 #: model:ir.model.fields,field_description:billing_do.field_res_users__tax_contributor_type
 msgid "Tax Contributor Type"
-msgstr "Tipo Id"
+msgstr "Tipo de Contribuyente"
 
 #. module: billing_do
 #: model:ir.model.fields,field_description:billing_do.field_res_config_settings__api_services_tax_contributors_endpoint
