@@ -16,7 +16,6 @@ class ArsDoSaleOrder(models.Model):
     def _onchange_healthcare_invoice(self):
         self.ensure_one()
         self.partner_id = None
-        self.healthcare_card = None
 
         if self.healthcare_invoice == 'healthcare_invoice':
             return {
