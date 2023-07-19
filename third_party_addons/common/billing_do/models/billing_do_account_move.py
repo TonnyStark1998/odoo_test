@@ -395,6 +395,9 @@ class BillingDoAccountMove(models.Model):
                 }
 
     def _compute_name_tax_valuable_invoice(self):
+        if self.posted_before:
+            return
+
         if self.is_tax_valuable\
             and self.ncf_type:
             current_sequence = self.ncf_type\
