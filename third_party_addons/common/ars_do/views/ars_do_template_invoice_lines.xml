@@ -4,11 +4,11 @@
         <template id="ars_do_invoice_lines" inherit_id="professional_templates.invoice_lines">
             <xpath expr="//t[@*='display_discount']" position="after">
                 <t t-set="display_coverage"
-                    t-value="any([l.coverage for l in o.invoice_line_ids])"/>
+                    t-value="any([l.coverage for l in invoice.invoice_line_ids])"/>
             </xpath>
             <xpath expr="//th[contains(., 'Unitario')]" position="after">
                 <th class="text-right"
-                    t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;"
+                    t-attf-style="border-bottom: 1px solid {{invoice.style.text_color}} !important;"
                     t-if="display_coverage">
                     Cobertura
                 </th>
