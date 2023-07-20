@@ -38,9 +38,11 @@
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="ncf_serie"
                     invisible="true" />
-                <field name="is_tax_valuable" />
+                <field name="is_tax_valuable"
+                    attrs="{'readonly': [('posted_before', '=', True)]}" />
                 <field name="is_third_party_ncf"
-                    attrs="{'invisible': [('move_type', 'in', ['out_invoice', 'out_refund', 'out_receipt'])]}" />
+                    attrs="{'invisible': [('move_type', 'in', ['out_invoice', 'out_refund', 'out_receipt'])],
+                        'readonly': [('posted_before', '=', True)]}" />
                 <field name="ncf_type_code"
                     invisible="True" />
                 <field name="ncf_type" 
@@ -52,13 +54,15 @@
                             'required': ['|', 
                                 '&amp;', ('move_type', 'in', ['out_invoice', 'out_refund', 'out_receipt']), 
                                     ('is_tax_valuable', '=', True), 
-                                ('is_third_party_ncf', '=', True)]}" />
+                                ('is_third_party_ncf', '=', True)],
+                            'readonly': [('posted_before', '=', True)]}" />
                 <field name="ncf"
                         attrs="{'invisible': ['|', ('move_type', 'not in', ['in_invoice', 'in_refund', 'in_receipt']), 
                                     '|', ('is_tax_valuable', '=', False),
                                         ('is_third_party_ncf', '=', True)], 
                                 'required': [('move_type', 'in', ['in_invoice', 'in_refund', 'in_receipt']),
-                                    ('is_tax_valuable', '=', True)]}" />
+                                    ('is_tax_valuable', '=', True)],
+                                'readonly': [('posted_before', '=', True)]}" />
                 <field name="security_code"
                         attrs="{'invisible': ['|', ('state', '!=', 'draft'),
                                     '|', ('ncf_serie', '!=', 'E'),
