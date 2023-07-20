@@ -101,14 +101,14 @@ class BillingDoTaxReportItem607(models.Model):
                                                         .strftime('%Y%m%d')
 
             # Get all reconciled info for the move, these are the payments.
-            _reconciled_values = move._get_reconciled_info_JSON_values()
+            _reconciled_values = move.invoice_payments_widget['content']
 
             tax_report_item.update(self._get_held_amounts(move.line_ids
                                                             + self._get_payment_lines(_reconciled_values)))
             
-            tax_report_item.update(self._calcuate_payments_amounts(move, _reconciled_values))
+            tax_report_item.update(self._calculate_payments_amounts(move, _reconciled_values))
 
-            if move.invoice_payment_state in ['paid']:
+            if move.payment_state in ['paid']:
 
                 if tax_report_item['held_amount_itbis'] > 0 \
                         or tax_report_item['held_amount_isr'] > 0:
@@ -122,7 +122,7 @@ class BillingDoTaxReportItem607(models.Model):
         
         return len(moves)
     
-    def _calcuate_payments_amounts(self, move, reconciled_values):
+    def _calculate_payments_amounts(self, move, reconciled_values):
         tax_report_item = {
             'amount_cash': 0.00,
             'amount_bank': 0.00,
@@ -133,14 +133,14 @@ class BillingDoTaxReportItem607(models.Model):
 
         _payment_amount = 0.0
 
-        if move.invoice_payment_state in ['paid']:
+        if move.payment_state in ['paid']:
             for _payment in reconciled_values:
                 _payment_type = self._get_payment_type(self.env['account.move.line']
-                                                            .search([('id', '=', _payment['payment_id'])])
+                                                            .search([('id', '=', _payment['account_payment_id'])])
                                                             .journal_id)
 
                 _payment_amount = self._convert_amount_to_dop(self.env['res.currency']
-                                                                    .search([('name', '=', _payment['currency'])]),
+                                                                    .search([('id', '=', _payment['currency_id'])]),
                                                         _payment['amount'],
                                                         move.invoice_date,
                                                         move.company_id
@@ -201,28 +201,25 @@ class BillingDoTaxReportItem607(models.Model):
         _tmp_moves = super(BillingDoTaxReportItem607, self)\
                         .generate_items(tax_report, tax_term_date)
         _moves = _tmp_moves.filtered(lambda move:
-                                        move.type in ['out_invoice', 'out_refund']
+                                        move.move_type in ['out_invoice', 'out_refund']
                                             and move.company_id.id == self.env.company.id
                                             and move.invoice_date >= tax_term_date
                                             and move.invoice_date <= tax_term_date_end)
 
         _moves += _tmp_moves.filtered(lambda move:
-                                        move.type in ['out_invoice', 'out_refund']
+                                        move.move_type in ['out_invoice', 'out_refund']
                                             and move.invoice_date < tax_term_date
-                                            and move.invoice_payment_state in ['paid']
-                                            and json.loads(move.invoice_payments_widget)
-                                            and any(datetime.datetime
-                                                                .strptime(payment['date'], '%Y-%m-%d') 
-                                                                .date() >= tax_term_date
-                                                        and datetime.datetime
-                                                                .strptime(payment['date'], '%Y-%m-%d')
-                                                                .date() <= tax_term_date_end
+                                            and move.payment_state in ['paid']
+                                            and move.invoice_payments_widget
+                                            and move.invoice_payments_widget['content']
+                                            and any(payment['date'] >= tax_term_date
+                                                        and payment['date'] <= tax_term_date_end
                                                         and any(move_line.account_id
-                                                                        .withholding_tax_type in ['RET-ITBIS-607', 
-                                                                                                    'RET-ISR-607']
-                                                                for move_line in self.env['account.move']
-                                                                                        .browse(payment['move_id'])
-                                                                                        .line_ids)
-                                                    for payment in json.loads(move.invoice_payments_widget)['content']))
+                                                                    .withholding_tax_type in ['RET-ITBIS-607', 
+                                                                                                'RET-ISR-607']
+                                                            for move_line in self.env['account.move']
+                                                                .browse(payment['move_id'])
+                                                                .line_ids)
+                                                    for payment in move.invoice_payments_widget['content']))
 
         return _moves

@@ -57,7 +57,7 @@ class BillingDoTaxReportItemCommon(models.AbstractModel):
                         for move_line in reconciled_values]
 
         _payment_move_lines = self.env['account.move.line']\
-                                    .search(args=[('move_id', 'in', move_ids)])
+                                    .search(domain=[('move_id', 'in', move_ids)])
 
         return _payment_move_lines
 

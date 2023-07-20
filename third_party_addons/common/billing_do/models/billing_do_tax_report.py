@@ -159,7 +159,7 @@ class BillingDoTaxReportItem(models.AbstractModel):
                                 and move.partner_id.tax_contributor_type != '1' 
                             else move.partner_id.tax_contributor_type,
             'move': move.ncf if move.ncf else move.name,
-            'move_reversed': '' if move.type not in ['in_refund', 'out_refund'] 
+            'move_reversed': '' if move.move_type not in ['in_refund', 'out_refund'] 
                                     else move.reversed_entry_id.name,
             'tax_report': tax_report.id
         }
