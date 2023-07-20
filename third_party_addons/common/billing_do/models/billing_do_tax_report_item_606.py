@@ -111,10 +111,11 @@ class BillingDoTaxReportItem606(models.Model):
                 else move.invoice_payments_widget['content']
 
             # Get all the move lines include the payments move lines.
-            _payment_move_lines = [] if not _reconciled_values \
+            _payment_move_lines = False if not _reconciled_values \
                 else self._get_payment_lines(_reconciled_values)
 
-            move_lines = _payment_move_lines + move.line_ids
+            move_lines = move.line_ids if not _payment_move_lines \
+                else _payment_move_lines + move.line_ids
 
             for move_line in move_lines:
                 currency = self._get_move_line_currency(move_line)
@@ -182,7 +183,8 @@ class BillingDoTaxReportItem606(models.Model):
             tax_report_item['total_amount'] = \
                         tax_report_item['consumable_amount'] + tax_report_item['service_amount']
 
-            if move.payment_state in ['paid']:
+            if move.payment_state in ['paid']\
+                and _payment_move_lines:
                 for _payment_move_line in _payment_move_lines:
 
                     if _payment_move_line.account_internal_type \

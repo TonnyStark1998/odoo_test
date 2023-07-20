@@ -105,14 +105,16 @@ class BillingDoTaxReportItem607(models.Model):
                 else move.invoice_payments_widget['content']
             
             # Get all the move lines include the payments move lines.
-            _payment_move_lines = [] if not _reconciled_values \
+            _payment_move_lines = False if not _reconciled_values \
                 else self._get_payment_lines(_reconciled_values)
 
-            tax_report_item.update(self._get_held_amounts(move.line_ids + _payment_move_lines))
+            tax_report_item.update(self._get_held_amounts(move.line_ids if not _payment_move_lines\
+                                                          else move.line_ids + _payment_move_lines))
             
             tax_report_item.update(self._calculate_payments_amounts(move, _reconciled_values))
 
-            if move.payment_state in ['paid'] and _reconciled_values:
+            if move.payment_state in ['paid'] \
+                and _reconciled_values:
 
                 if tax_report_item['held_amount_itbis'] > 0 \
                         or tax_report_item['held_amount_isr'] > 0:
