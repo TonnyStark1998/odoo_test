@@ -84,7 +84,7 @@
                         <group colspan="2">
                             <field name="date_generated" 
                                     attrs="{'invisible': [('state', 'not in', ['generated'])],
-                                                'readonly': 1}" />
+                                                'readonly': True}" />
                         </group>
                     </group>
                 </sheet>
