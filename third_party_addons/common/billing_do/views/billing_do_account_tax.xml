@@ -5,7 +5,7 @@
         <field name="inherit_id" ref="account.view_tax_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
-                <field name="tax_type" attrs="{'readonly': 1}" />
+                <field name="tax_type" attrs="{'readonly': True}" />
             </xpath>
         </field>
     </record>
