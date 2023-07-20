@@ -101,14 +101,18 @@ class BillingDoTaxReportItem607(models.Model):
                                                         .strftime('%Y%m%d')
 
             # Get all reconciled info for the move, these are the payments.
-            _reconciled_values = move.invoice_payments_widget['content']
+            _reconciled_values = False if not move.invoice_payments_widget \
+                else move.invoice_payments_widget['content']
+            
+            # Get all the move lines include the payments move lines.
+            _payment_move_lines = [] if not _reconciled_values \
+                else self._get_payment_lines(_reconciled_values)
 
-            tax_report_item.update(self._get_held_amounts(move.line_ids
-                                                            + self._get_payment_lines(_reconciled_values)))
+            tax_report_item.update(self._get_held_amounts(move.line_ids + _payment_move_lines))
             
             tax_report_item.update(self._calculate_payments_amounts(move, _reconciled_values))
 
-            if move.payment_state in ['paid']:
+            if move.payment_state in ['paid'] and _reconciled_values:
 
                 if tax_report_item['held_amount_itbis'] > 0 \
                         or tax_report_item['held_amount_isr'] > 0:
@@ -133,7 +137,8 @@ class BillingDoTaxReportItem607(models.Model):
 
         _payment_amount = 0.0
 
-        if move.payment_state in ['paid']:
+        if move.payment_state in ['paid']\
+            and reconciled_values:
             for _payment in reconciled_values:
                 _payment_type = self._get_payment_type(self.env['account.move.line']
                                                             .search([('id', '=', _payment['account_payment_id'])])

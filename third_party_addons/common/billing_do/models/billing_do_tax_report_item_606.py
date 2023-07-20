@@ -107,10 +107,12 @@ class BillingDoTaxReportItem606(models.Model):
                                                                 .strftime('%d')
             
             # Get all reconciled info for the move, these are the payments.
-            _reconciled_values = move.invoice_payments_widget['content']
+            _reconciled_values = False if not move.invoice_payments_widget \
+                else move.invoice_payments_widget['content']
 
             # Get all the move lines include the payments move lines.
-            _payment_move_lines = self._get_payment_lines(_reconciled_values)
+            _payment_move_lines = [] if not _reconciled_values \
+                else self._get_payment_lines(_reconciled_values)
 
             move_lines = _payment_move_lines + move.line_ids
 
@@ -189,8 +191,9 @@ class BillingDoTaxReportItem606(models.Model):
                         tax_report_item['payment_type'] = \
                             self._get_payment_type(_payment_move_line.journal_id)
 
-                if tax_report_item['held_amount_itbis'] > 0 \
-                        or tax_report_item['held_amount_isr'] > 0:
+                if (tax_report_item['held_amount_itbis'] > 0 \
+                        or tax_report_item['held_amount_isr'] > 0)\
+                    and _reconciled_values:
                     
                     _last_payment_date = self._get_payment_last_date(_reconciled_values)
 
