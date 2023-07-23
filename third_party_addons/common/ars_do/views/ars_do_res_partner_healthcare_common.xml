@@ -61,7 +61,7 @@
 
     <!-- Menu items -->
     <menuitem id="main_menu_ars_do" 
-                name="ARS Healthcare" 
-                sequence="1" 
-                web_icon="ars_do,static/description/icon.png" />
+        name="ARS Healthcare" 
+        sequence="1" 
+        web_icon="ars_do,static/description/icon.png" />
 </odoo>

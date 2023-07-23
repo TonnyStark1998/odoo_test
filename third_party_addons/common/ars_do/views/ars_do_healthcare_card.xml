@@ -16,12 +16,14 @@
                         <group>
                             <field name="healthcare_provider" 
                                     widget="many2one" 
-                                    options="{'no_create': True}" />
+                                    options="{'no_create': True}"
+                                    context="{'default_healthcare_patient': active_id}" />
                             <field name="healthcare_plan" 
                                     widget="many2one" 
-                                    options="{'no_create': True}" />
+                                    options="{'no_create': True}"
+                                    context="{'default_healthcare_patient': active_id}" />
                             <field name="healthcare_patient"
-                                    readonly="1" />
+                                    readonly="True" />
                         </group>
                     </group>
                 </sheet>
@@ -38,8 +40,7 @@
                 <field name="expiry_date" />
                 <field name="healthcare_provider" />
                 <control>
-                    <create string="Add a card"
-                            context="{'default_healthcare_patient': id}" />
+                    <create string="Add a card" />
                 </control>
             </tree>
         </field>

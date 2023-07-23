@@ -357,7 +357,7 @@ class Patient(models.Model):
     def _onchange_national_identity_number(self):
         _reset_fields = False
         if self.national_identity_number:
-            patient = self.env['kcs.medical.app.patient'].search(args=[('national_identity_number', '=', self.national_identity_number)], limit=1)
+            patient = self.env['kcs.medical.app.patient'].search([('national_identity_number', '=', self.national_identity_number)], limit=1)
             if patient:
                 self = patient
                 return {
@@ -366,7 +366,7 @@ class Patient(models.Model):
                         'message': "La cédula digitada ({0}) pertenece a un paciente ya registrado.".format(patient.national_identity_number)
                     }
                 }
-            self.partner_id = self.env['res.partner'].search(args=[('vat', '=', self.national_identity_number)], limit=1).id
+            self.partner_id = self.env['res.partner'].search([('vat', '=', self.national_identity_number)], limit=1).id
             if not self.partner_id:
                 _reset_fields = True
         else:
@@ -406,7 +406,7 @@ class Patient(models.Model):
 
     @api.model
     def create(self, values):
-        partner = self.env['res.partner'].search(args=[('vat', '=', values['national_identity_number'])], limit=1)
+        partner = self.env['res.partner'].search([('vat', '=', values['national_identity_number'])], limit=1)
         if not partner:
             values['partner_id'] = self.env['res.partner'].create({
                 'type': 'contact',

@@ -30,8 +30,7 @@
                 <field name="ktv"
                         optional="hide" />
                 <control>
-                    <create string="Add a record"
-                            context="{'default_healthcare_patient': id}" />
+                    <create string="Add a record" />
                 </control>
             </tree>
         </field>

@@ -43,8 +43,8 @@ class ArsDoHealthcareCard(models.Model):
     def _onchange_default_card(self):
         self.ensure_one()
         has_default_card = self.env['ars.do.healthcare.card']\
-                                .search_count(args=['&', ('default_card', '=',True), 
-                                                            ('healthcare_patient', '=', self.healthcare_patient._origin.id)]) > 0
+                                .search_count(['&', ('default_card', '=',True), 
+                                    ('healthcare_patient', '=', self.healthcare_patient._origin.id)]) > 0
         if has_default_card and self.default_card:
             self.default_card = False
             return {
@@ -58,8 +58,8 @@ class ArsDoHealthcareCard(models.Model):
     def create(self, values):
         for card in values:
             has_default_card = self.env['ars.do.healthcare.card']\
-                                .search_count(args=[('default_card', '=',True), 
-                                                    ('healthcare_patient', '=', card['healthcare_patient'])]) > 0
+                                .search_count([('default_card', '=',True), 
+                                    ('healthcare_patient', '=', card['healthcare_patient'])]) > 0
             if 'default_card' in card:
                 if not has_default_card:
                     card['default_card'] = True

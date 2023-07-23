@@ -148,11 +148,11 @@ class BillingDoResCompany(models.Model):
         _new_company.flush()
 
         _base_sale_order_sequence = self.env['ir.sequence']\
-                                            .search(args=[('code', '=', 'sale.order'),
+                                            .search([('code', '=', 'sale.order'),
                                                             ('company_id', '=', False)],
                                                         limit = 1)
         _base_purchase_order_sequence = self.env['ir.sequence']\
-                                            .search(args=[('code', '=', 'purchase.order'),
+                                            .search([('code', '=', 'purchase.order'),
                                                             ('company_id', '=', False)],
                                                         limit = 1)
 
