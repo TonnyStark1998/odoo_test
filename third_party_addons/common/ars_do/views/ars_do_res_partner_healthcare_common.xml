@@ -7,19 +7,21 @@
         <field name="inherit_id" ref="base.res_partner_kanban_view" />
         <field name="arch" type="xml">
             <field name="type" position="after">
+                <field name="is_ars" />
+                <field name="is_patient" />
                 <field name="healthcare_plans_count" />
                 <field name="healthcare_cards_count" />
             </field>
             <xpath expr="//div[hasclass('oe_kanban_details')]" position="inside">
-                <ul t-if="record.is_ars == True">
+                <ul t-if="record.is_ars.raw_value">
                     <li>
                         <span>Plans Count: </span>
                         <field name="healthcare_plans_count" />
                     </li>
                 </ul>
-                <ul t-if="record.is_patient == True">
+                <ul t-if="record.is_patient.raw_value">
                     <li>
-                        <span>Cards Count:</span>
+                        <span>Cards Count: </span>
                         <field name="healthcare_cards_count" />
                     </li>
                 </ul>
