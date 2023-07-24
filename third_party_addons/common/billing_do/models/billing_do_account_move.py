@@ -180,7 +180,7 @@ class BillingDoAccountMove(models.Model):
                 move.date = fields.Date.today()
 
     # Account Move - Contraints Field's Functions
-    @api.constrains('ncf', 'move_type',)
+    @api.constrains('ncf', 'move_type')
     def _check_ncf(self):
         for move in self:
             try:
@@ -217,7 +217,7 @@ class BillingDoAccountMove(models.Model):
         if not moves:
             return
         
-        self.flush()
+        self.env.flush_all()
 
         # /!\ Computed stored fields are not yet inside the database.
         self._cr.execute('''
@@ -290,27 +290,30 @@ class BillingDoAccountMove(models.Model):
         log.info("[KCS] AccountMove.JsAssignOutstandingLine: User {} added a payment {} to move id {}."
                     .format(self.env.user.login, line_id, self.id))
 
-    def _get_starting_sequence(self):
-        log.info('[KCS] Getting the sequence')
-        self.ensure_one()
-        if self.move_type in ['out_invoice', 'out_refund']\
-            and self.is_tax_valuable:
-            log.info('[KCS] Move Type is out_invoice or out_refund and, is tax valuable.')
-            if not self.ncf_type:
-                log.info('[KCS] NCF Type has not been selected.')
-                raise exceptions.UserError(_('Please select the type of NCF.'))
+    # def _get_starting_sequence(self):
+    #     log.info('[KCS] Getting the sequence')
+    #     self.ensure_one()
+    #     if self.move_type in ['out_invoice', 'out_refund']\
+    #         and self.is_tax_valuable:
+    #         log.info('[KCS] Move Type is out_invoice or out_refund and, is tax valuable.')
+    #         if not self.ncf_type:
+    #             log.info('[KCS] NCF Type has not been selected.')
+    #             raise exceptions.UserError(_('Please select the type of NCF.'))
 
-            starting_sequence = "%s%d" % (self.ncf_type.type, self._get_last_sequence() or 1)
-        else:
-            starting_sequence = super()._get_starting_sequence()
-        return starting_sequence
+    #         starting_sequence = "%s%d" % (self.ncf_type.type, self._get_last_sequence() or 1)
+    #     else:
+    #         starting_sequence = super()._get_starting_sequence()
+    #     return starting_sequence
 
     @api.depends('ncf_type', 'is_tax_valuable', 'invoice_date')
     def _compute_name(self):
         for move in self:
-            if not move.move_type in ['out_invoice', 'out_receipt', 'out_refund']\
-                and not move.is_tax_valuable:
-                super(BillingDoAccountMove, move)._compute_name()
+            if (move.move_type in ['out_invoice', 'out_receipt', 'out_refund']\
+                    and not move.is_tax_valuable)\
+                or (move.move_type in ['in_invoice', 'in_receipt', 'in_refund']\
+                    and not move.is_tax_valuable\
+                    and not move.is_third_party_ncf):
+                super()._compute_name()
             else:
                 move._onchange_tax_valuable_fields()
 
@@ -397,38 +400,36 @@ class BillingDoAccountMove(models.Model):
         if self.posted_before:
             return
 
-        if self.is_tax_valuable\
-            and self.ncf_type:
-            current_sequence = self.ncf_type\
-                .sequence\
-                .date_range_ids\
-                .filtered(lambda range:
-                    range.date_from <= self.invoice_date and
-                    range.date_to >= self.invoice_date and
-                    range.number_next <= range.number_last
-                )
+        current_sequence = self.ncf_type\
+            .sequence\
+            .date_range_ids\
+            .filtered(lambda range:
+                range.date_from <= self.invoice_date and
+                range.date_to >= self.invoice_date and
+                range.number_next <= range.number_last
+            )
 
-            if not current_sequence:
-                self.ncf_type = None
-                return {
-                    'warning': {
-                        'title': _('¡Validation error!'),
-                        'message': 
-                            _('The sequence associated with this NCF type does not have a valid range according to the Invoice Date.')
-                    }
+        if not current_sequence:
+            self.ncf_type = None
+            return {
+                'warning': {
+                    'title': _('¡Validation error!'),
+                    'message': 
+                        _('The sequence associated with this NCF type does not have a valid range according to the Invoice Date.')
                 }
+            }
 
-            if len(current_sequence) > 1:
-                current_sequence = current_sequence[0]
+        if len(current_sequence) > 1:
+            current_sequence = current_sequence[0]
 
-            self.ncf_type_sequence = current_sequence
-            self.show_name_warning = False
-            self.sequence_prefix = self.ncf_type.type
-            self.sequence_number = current_sequence.number_next
-            self.name = '%s%s' % \
-                (self.ncf_type.type, 
-                 str(self.sequence_number)
-                    .rjust(self.ncf_type.sequence.padding, '0'))
+        self.ncf_type_sequence = current_sequence
+        self.show_name_warning = False
+        self.sequence_prefix = self.ncf_type.type
+        self.sequence_number = current_sequence.number_next
+        self.name = '%s%s' % \
+            (self.ncf_type.type, 
+                str(self.sequence_number)
+                .rjust(self.ncf_type.sequence.padding, '0'))
             
     def _get_ncf_type_domain(self):
         move_type = self._context.get('default_move_type')
