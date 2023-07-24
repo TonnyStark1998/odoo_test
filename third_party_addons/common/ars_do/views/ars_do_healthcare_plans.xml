@@ -24,8 +24,7 @@
                 <field name="name" />
                 <field name="default_coverage" />
                 <control>
-                    <create string="Add a plan"
-                            context="{'default_healthcare_provider': id}" />
+                    <create string="Add a plan" />
                 </control>
             </tree>
         </field>

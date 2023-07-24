@@ -41,13 +41,12 @@ class ArsDoAccountMove(models.Model):
                 if not line.move_id.is_invoice(include_receipts=True):
                     continue
 
-                line.update(line._get_price_total_and_subtotal())
-                line.update(line._get_fields_onchange_subtotal())
+                line._compute_totals()
 
         if self.healthcare_invoice == 'healthcare_invoice':
             return {
                 'domain': {
-                        'partner_id': [('is_patient', '=', True)]
+                    'partner_id': [('is_patient', '=', True), ('healthcare_cards_count', '>', 0)]
                 }
             }
 

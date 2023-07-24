@@ -63,4 +63,4 @@ class ArsDoHealthcareCard(models.Model):
             if 'default_card' in card:
                 if not has_default_card:
                     card['default_card'] = True
-        super(ArsDoHealthcareCard,self).create(values)
+        super().create(values)

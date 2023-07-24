@@ -58,29 +58,3 @@ class ArsDoAccountMoveLine(models.Model):
                 line.price_total = taxes_res['total_included']
             else:
                 line.price_total = line.price_subtotal = subtotal
-
-    # def _get_price_total_and_subtotal(self, 
-    #                                     price_unit=None, 
-    #                                     quantity=None, 
-    #                                     discount=None, 
-    #                                     currency=None, 
-    #                                     product=None, 
-    #                                     partner=None, 
-    #                                     taxes=None, 
-    #                                     move_type=None):
-    #     self.ensure_one()
-    #     price_total_and_subtotal = super(ArsDoAccountMoveLine, self)._get_price_total_and_subtotal(price_unit, 
-    #                                                                                                 quantity, 
-    #                                                                                                 discount, 
-    #                                                                                                 currency, 
-    #                                                                                                 product, 
-    #                                                                                                 partner, 
-    #                                                                                                 taxes, 
-    #                                                                                                 move_type)
-    #     if self.coverage > 0:
-    #         price_total_and_subtotal['price_subtotal'] = \
-    #             price_total_and_subtotal['price_subtotal'] * (1 - (self.coverage / 100))
-
-    #     price_total_and_subtotal['coverage'] = self.coverage
-
-    #     return price_total_and_subtotal
