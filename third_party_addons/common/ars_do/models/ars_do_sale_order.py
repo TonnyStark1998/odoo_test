@@ -20,7 +20,7 @@ class ArsDoSaleOrder(models.Model):
         if self.healthcare_invoice == 'healthcare_invoice':
             return {
                 'domain': {
-                        'partner_id': [('is_patient', '=', True)]
+                        'partner_id': [('is_patient', '=', True), ('healthcare_cards_count', '>', 0)]
                 }
             }
 
@@ -40,19 +40,6 @@ class ArsDoSaleOrder(models.Model):
                         'message': _('You must indicate if this is a Healthcare or Regular sale before selecting the Customer.')
                     }
             }
-
-        if self.healthcare_invoice == 'healthcare_invoice':
-            if self.partner_id:
-                if not self.partner_id.is_patient:
-                    self.partner_id = False
-                else:
-                    self.healthcare_card = self.partner_id.healthcare_cards\
-                                                            .filtered(lambda self: self.default_card == True)
-                return {
-                        'domain': {
-                            'partner_id': [('is_patient', '=', True)]
-                        }
-                    }
 
     # Contraints methods
     @api.constrains('healthcare_invoice')
@@ -76,7 +63,7 @@ class ArsDoSaleOrder(models.Model):
                 'default_healthcare_invoice': self.healthcare_invoice,
                 'default_partner_id': self.partner_id.id,
                 'default_healthcare_card': self.partner_id.healthcare_cards
-                                                .filtered(lambda self: self.default_card == True)
+                                                .filtered(lambda hc: hc.default_card == True)
                                                 .id,
                 'default_created_from_sale': True
             }
