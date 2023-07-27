@@ -48,23 +48,14 @@ class ArsDoSaleOrder(models.Model):
             if not sale_order.healthcare_invoice:
                 raise exceptions.ValidationError(_('You must indicate if this is a Healthcare or Regular sale.'))
 
-    # Actions Methods
-    def action_create_healthcare_invoice(self):
-        log.info('[KCS] Self: {}'.format(self))
-        log.info('[KCS] Partner_Id: {}'.format(self.partner_id))
-        log.info('[KCS] Healthcare Cards: {}'.format(self.partner_id.healthcare_cards))
-        return {
-            "type": "ir.actions.act_window",
-            "res_model": "account.move",
-            "view_mode": "form",
-            "domain": [],
-            "context": {
-                'default_move_type': 'out_invoice',
-                'default_healthcare_invoice': self.healthcare_invoice,
-                'default_partner_id': self.partner_id.id,
-                'default_healthcare_card': self.partner_id.healthcare_cards
-                                                .filtered(lambda hc: hc.default_card == True)
-                                                .id,
-                'default_created_from_sale': True
-            }
-        }
+    def _prepare_invoice(self):
+        invoice = super()._prepare_invoice()
+        invoice.update({
+            'healthcare_invoice': self.healthcare_invoice,
+            'healthcare_card': self.partner_invoice_id
+                                    .healthcare_cards
+                                    .filtered(lambda hc: hc.default_card == True)
+                                    .id,
+            'created_from_sale': True
+        })
+        return invoice
