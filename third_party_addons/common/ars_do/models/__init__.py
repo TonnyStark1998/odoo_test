@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-
-from ..wizard import sale_make_invoice_advance
 from . import ars_do_healthcare_plan,\
                 ars_do_healthcare_card,\
                 ars_do_account_move,\
