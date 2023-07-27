@@ -135,12 +135,14 @@ class BillingDoAccountMove(models.Model):
     @api.onchange('is_tax_valuable')
     def _onchange_is_tax_valuable(self):
         if not self.move_type in ['out_invoice', 'out_refund', 'out_receipt']:
+            self.name = ''
             if self.is_tax_valuable:
                 self.is_third_party_ncf = False
     
     @api.onchange('is_third_party_ncf')
     def _onchange_is_third_party_ncf(self):
         if not self.move_type in ['out_invoice', 'out_refund', 'out_receipt']:
+            self.name = ''
             if self.is_third_party_ncf:
                 self.is_tax_valuable = False
 
@@ -290,30 +292,46 @@ class BillingDoAccountMove(models.Model):
         log.info("[KCS] AccountMove.JsAssignOutstandingLine: User {} added a payment {} to move id {}."
                     .format(self.env.user.login, line_id, self.id))
 
-    # def _get_starting_sequence(self):
-    #     log.info('[KCS] Getting the sequence')
-    #     self.ensure_one()
-    #     if self.move_type in ['out_invoice', 'out_refund']\
-    #         and self.is_tax_valuable:
-    #         log.info('[KCS] Move Type is out_invoice or out_refund and, is tax valuable.')
-    #         if not self.ncf_type:
-    #             log.info('[KCS] NCF Type has not been selected.')
-    #             raise exceptions.UserError(_('Please select the type of NCF.'))
-
-    #         starting_sequence = "%s%d" % (self.ncf_type.type, self._get_last_sequence() or 1)
-    #     else:
-    #         starting_sequence = super()._get_starting_sequence()
-    #     return starting_sequence
-
-    @api.depends('ncf_type', 'is_tax_valuable', 'invoice_date')
+    @api.depends('ncf_type', 'is_tax_valuable', 'invoice_date', 'is_third_party_ncf', 'move_type')
     def _compute_name(self):
         for move in self:
+            if not move.id:
+                return
+
             if (move.move_type in ['out_invoice', 'out_receipt', 'out_refund']\
                     and not move.is_tax_valuable)\
                 or (move.move_type in ['in_invoice', 'in_receipt', 'in_refund']\
                     and not move.is_tax_valuable\
                     and not move.is_third_party_ncf):
-                super()._compute_name()
+                
+                if not move.journal_id:
+                    return {
+                        'warning': {
+                            'title': _('¡Validation error!'),
+                            'message': _('You must select a journal for this entry.')
+                        }
+                    }
+
+                self = \
+                    self.sorted(lambda m: (m.date, m.ref or '', m.id))
+                sequence_prefix = '{}/{}/{}'.format(move.journal_id.code,
+                                                        date.datetime.now().year, 
+                                                        str(date.datetime.now().month)
+                                                            .rjust(2, '0'))
+                highest_name = \
+                    self[0]._get_last_sequence(lock=False, 
+                                               with_prefix=sequence_prefix) if self else False
+
+                move.sequence_prefix = sequence_prefix
+                if highest_name:
+                    move.sequence_number = \
+                        int(re.match('.*/([0-9]*)', highest_name).group(1)) + 1
+                else:
+                    move.sequence_number = 1
+                
+                move.name = '{}/{}'.format(move.sequence_prefix, 
+                                            str(move.sequence_number)
+                                                .rjust(6, '0'))
             else:
                 move._onchange_tax_valuable_fields()
 
