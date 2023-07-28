@@ -2,6 +2,8 @@
 
 from odoo import models, fields, api, exceptions, _
 import logging as log
+import traceback
+from contextlib import contextmanager
 
 class ArsDoAccountMove(models.Model):
     _inherit = 'account.move'
@@ -77,7 +79,7 @@ class ArsDoAccountMove(models.Model):
                                                                 .filtered(lambda self: self.default_card == True)
                     return {
                             'domain': {
-                                'partner_id': [('is_patient', '=', True)]
+                                'partner_id': [('is_patient', '=', True), ('healthcare_cards_count', '>', 0)]
                             }
                         }
 
@@ -89,8 +91,8 @@ class ArsDoAccountMove(models.Model):
                 raise exceptions.ValidationError(_('You must indicate if this is a Healthcare or Regular invoice.'))
 
     # Override methods
-    def action_post(self):
-        posted = super(ArsDoAccountMove, self).action_post()
+    def _post(self, soft=True):
+        posted = super()._post(soft)
         if self.move_type in ['out_invoice', 'out_refund'] \
             and self.healthcare_invoice == 'healthcare_invoice'\
             and posted:
@@ -115,7 +117,6 @@ class ArsDoAccountMove(models.Model):
                                     .format(report.healthcare_provider.name, report.report_month, report.report_year))
                     }
                 }
-                # return exceptions.ValidationError(_('You can\'t more invoice to the ARS report for this month.'))
 
             for invoice_line in self.invoice_line_ids:
                 self.env['ars.do.healthcare.report.ars.item']\
@@ -139,7 +140,7 @@ class ArsDoAccountMove(models.Model):
         return posted
 
     def button_draft(self):
-        super(ArsDoAccountMove, self).button_draft()
+        super().button_draft()
         if self.move_type in ['out_invoice', 'out_refund'] \
             and self.healthcare_invoice == 'healthcare_invoice':
             move_id = self.id
