@@ -77,7 +77,7 @@ class BillingDoAccountMove(models.Model):
     ncf_type_code = fields.Char(related='ncf_type.type')
 
     is_tax_valuable = fields.Boolean(string='Is tax valuable?',
-                                     default=False)
+                                     default=True)
     is_third_party_ncf = fields.Boolean(string='Is third-party NCF?',
                                      default=False)
 
