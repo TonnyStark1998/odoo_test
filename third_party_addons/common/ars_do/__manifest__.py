@@ -18,6 +18,7 @@
                 'billing_do', 
                 'professional_templates'],
     'data': [
+        'security/security.xml',
         'security/ir.model.access.csv',
         'data/ars_do_res_partner_category.xml',
         'data/ars_do_default_healthcare_providers.xml',

@@ -1,0 +1,5 @@
+<odoo>
+    <record id="nefrosalud_admission_form" model="res.groups">
+        <field name="name">Company Specific / Nefrosalud - Admission form access</field>
+    </record>
+</odoo>

@@ -33,5 +33,5 @@
                 parent="main_menu_ars_do" 
                 action="actions_ars_do_patient_admission_form" 
                 sequence="5"
-                groups="-account.group_account_user,account.group_account_manager" />
+                groups="-account.group_account_user,-account.group_account_manager,nefrosalud_admission_form" />
 </odoo>
