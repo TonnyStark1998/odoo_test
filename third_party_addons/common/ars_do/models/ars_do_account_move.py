@@ -2,8 +2,7 @@
 
 from odoo import models, fields, api, exceptions, _
 import logging as log
-import traceback
-from contextlib import contextmanager
+from odoo.exceptions import UserError
 
 class ArsDoAccountMove(models.Model):
     _inherit = 'account.move'
@@ -141,6 +140,12 @@ class ArsDoAccountMove(models.Model):
 
     def button_draft(self):
         super().button_draft()
+        report = self._get_report_or_default()
+        if not report is None \
+            and report.state in ['sent', 'reconciling', 'reconciled']:
+            raise UserError(_('Report of {} for period {}-{} has been already sent. This invoice will not reflect the changes in the report.')
+                                    .format(report.healthcare_provider.name, report.report_month, report.report_year))
+
         if self.move_type in ['out_invoice', 'out_refund'] \
             and self.healthcare_invoice == 'healthcare_invoice':
             move_id = self.id
@@ -148,8 +153,42 @@ class ArsDoAccountMove(models.Model):
                     .search([('invoice_id', '=', move_id)])\
                     .unlink()
 
+    def write(self, values):
+        original_healthcare_authorization_number = \
+            self.healthcare_authorization_number
+        move = super().write(values)
+        if 'healthcare_authorization_number' in values\
+            and self.invoice_date:
+            report = self._get_report_or_default()
+            if not report is None:
+                invoice_id = self.id
+                self.env['ars.do.healthcare.report.ars.item']\
+                    .search([('invoice_id', '=', invoice_id), ('report_id', '=', report.id)])\
+                    .write({
+                        'healthcare_authorization_number': values.get('healthcare_authorization_number')
+                    })
+                log.info('[ARS] Healthcare Authorization Number changed: from {} to {}'
+                         .format(original_healthcare_authorization_number, values.get('healthcare_authorization_number')))
+        return move
+
     # Private Methods
     def _create_report(self):
+        if self.invoice_date:
+            invoice_month = str(self.invoice_date.month).rjust(2,'0')
+            invoice_year = str(self.invoice_date.year)
+            healthcare_provider = self.healthcare_provider.id
+            report = self._get_report_or_default()
+            if not report:
+                return self.env['ars.do.healthcare.report.ars']\
+                            .create({
+                                'healthcare_provider': healthcare_provider,
+                                'report_year': invoice_year,
+                                'report_month': invoice_month,
+                                'state': 'draft'
+                            })
+            return report
+
+    def _get_report_or_default(self):
         if self.invoice_date:
             invoice_month = str(self.invoice_date.month).rjust(2,'0')
             invoice_year = str(self.invoice_date.year)
@@ -159,11 +198,5 @@ class ArsDoAccountMove(models.Model):
                                         ('report_year', '=', invoice_year),
                                         ('report_month', '=', invoice_month)])
             if not report:
-                return self.env['ars.do.healthcare.report.ars']\
-                            .create({
-                                'healthcare_provider': healthcare_provider,
-                                'report_year': invoice_year,
-                                'report_month': invoice_month,
-                                'state': 'draft'
-                            })
+                return None
             return report
