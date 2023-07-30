@@ -118,7 +118,7 @@ class ArsDoHealthcareMedicalRecord(models.Model):
     def _constrain_fdp(self):
         for record in self:
             if not record.fdp:
-                raise exceptions.ValidationError(_('You must specify a value for FDP field.'))
+                raise exceptions.ValidationError(_('You must specify a value for PDF field.'))
 
     @api.constrains('blood_pressure_high', 'blood_pressure_low', 'time', 'bfr', 'weight', 'fldrmvd', 'heparin', 'ufr', 'temperature', 'ptm', 'ktv')
     def _constrain_value_greater_than_zero(self):

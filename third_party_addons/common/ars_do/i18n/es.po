@@ -346,6 +346,7 @@ msgstr "Cantidad de Seguros Médicos"
 #. module: ars_do
 #: model:ir.model.fields,field_description:ars_do.field_account_move__healthcare_invoice
 #: model:ir.model.fields,field_description:ars_do.field_account_move_line__healthcare_invoice
+#: model:ir.model.fields,field_description:ars_do.field_sale_order__healthcare_invoice
 msgid "Healthcare Invoice"
 msgstr "Tipo de Factura de Seguro Médico"
 
@@ -773,7 +774,7 @@ msgstr "Debe especificar un valor para el campo 'Acceso'."
 #. module: ars_do
 #: code:addons/ars_do/models/ars_do_healthcare_patient_medical_record.py:0
 #, python-format
-msgid "You must specify a value for FDP field."
+msgid "You must specify a value for PDF field."
 msgstr "Debe especificar un valor para el campo 'Volumen del paciente'."
 
 #. module: ars_do
@@ -841,3 +842,14 @@ msgstr ""
 #, python-format
 msgid "You must indicate if this is a Healthcare or Regular sale."
 msgstr "Debe especificar si esta venta es con Seguro o Privado."
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_account_move.py:0
+#, python-format
+msgid "Report of {} for period {}-{} has been already sent. The changes in this invoice will not be reflected in the report."
+msgstr "El reporte de {} para el período {}-{} ha sido enviado. Los cambios en esta factura no se reflejarán en el reporte."
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_account_move__amount_coverage
+msgid "Amount Coverage"
+msgstr "Cobertura del Seguro"

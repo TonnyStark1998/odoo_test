@@ -7,9 +7,10 @@ class ArsDoSaleOrder(models.Model):
     _inherit = 'sale.order'
     _description = 'Model representing the Healthcare Sale Order.'
 
-    healthcare_invoice = fields.Selection(selection=[('healthcare_invoice', 'Insurance'),
-                                                        ('not_healthcare_invoice', 'Private')],
-                                            string='Healthcare Invoice')
+    healthcare_invoice = \
+        fields.Selection(selection=[('healthcare_invoice', 'Insurance'),
+                            ('not_healthcare_invoice', 'Private')],
+            string='Healthcare Invoice')
 
     # Changes methods
     @api.onchange('healthcare_invoice')

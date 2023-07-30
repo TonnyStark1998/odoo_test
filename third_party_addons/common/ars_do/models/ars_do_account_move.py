@@ -8,25 +8,40 @@ class ArsDoAccountMove(models.Model):
     _inherit = 'account.move'
     _description = 'Model representing a Account Move.'
 
-    healthcare_invoice = fields.Selection(string='Healthcare Invoice',
-                                            selection=[
-                                                ('healthcare_invoice', 'Insurance'),
-                                                ('not_healthcare_invoice', 'Private')
-                                            ])
+    healthcare_invoice = \
+        fields.Selection(string='Healthcare Invoice',
+            selection=[
+                ('healthcare_invoice', 'Insurance'),
+                ('not_healthcare_invoice', 'Private')
+            ])
 
-    healthcare_card = fields.Many2one(string='Healthcare Card',
-                                        comodel_name='ars.do.healthcare.card')
-    healthcare_provider = fields.Many2one(related='healthcare_card.healthcare_plan.healthcare_provider',
-                                            store=True)
-    healthcare_plan = fields.Char(related='healthcare_card.healthcare_plan.name',
-                                    store=True)
-    healthcare_authorization_number = fields.Char(string='Healthcare Authorization Number',
-                                                    size=20,
-                                                    tracking=True)
+    healthcare_card = \
+        fields.Many2one(string='Healthcare Card',
+            comodel_name='ars.do.healthcare.card')
 
-    created_from_sale = fields.Boolean(string='Created from sale',
-                                        store=False,
-                                        default=False)
+    healthcare_provider = \
+        fields.Many2one(related='healthcare_card.healthcare_plan.healthcare_provider',
+            store=True)
+
+    healthcare_plan = \
+        fields.Char(related='healthcare_card.healthcare_plan.name',
+            store=True)
+
+    healthcare_authorization_number = \
+        fields.Char(string='Healthcare Authorization Number',
+            size=20,
+            tracking=True)
+
+    created_from_sale = \
+        fields.Boolean(string='Created from sale',
+            store=False,
+            default=False)
+    
+    amount_coverage = \
+        fields.Monetary(
+            string='Amount Coverage',
+            compute='_compute_amount_coverage', store=True, readonly=True,
+            currency_field='company_currency_id')
 
     # Changes methods
     @api.onchange('healthcare_invoice')
@@ -82,7 +97,22 @@ class ArsDoAccountMove(models.Model):
                             }
                         }
 
-    # Contraints methods
+    # Compute methods
+    @api.depends('invoice_line_ids')
+    def _compute_amount_coverage(self):
+        for move in self:
+            if move.healthcare_invoice == 'healthcare_invoice':
+                amount_coverage = 0.0
+                for line in move.invoice_line_ids:
+                    if line.display_type == 'product':
+                        amount_coverage += \
+                            ((line.quantity \
+                                * (line.price_unit * (1 - (line.discount / 100)))) \
+                                * (line.coverage / 100))
+
+                move.amount_coverage = amount_coverage
+
+    # Contrains methods
     @api.constrains('healthcare_invoice')
     def _constrain_healthcare_invoice(self):
         for move in self:
@@ -143,7 +173,7 @@ class ArsDoAccountMove(models.Model):
         report = self._get_report_or_default()
         if not report is None \
             and report.state in ['sent', 'reconciling', 'reconciled']:
-            raise UserError(_('Report of {} for period {}-{} has been already sent. This invoice will not reflect the changes in the report.')
+            raise UserError(_('Report of {} for period {}-{} has been already sent. The changes in this invoice will not be reflected in the report.')
                                     .format(report.healthcare_provider.name, report.report_month, report.report_year))
 
         if self.move_type in ['out_invoice', 'out_refund'] \
