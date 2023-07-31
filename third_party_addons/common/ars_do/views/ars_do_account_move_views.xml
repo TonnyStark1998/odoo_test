@@ -41,7 +41,9 @@
                         invisible="1" />
                 <field name="coverage" 
                         optional="show"
-                        attrs="{'required': [('healthcare_invoice', '=', 'healthcare_invoice')]}" />
+                        attrs="{'required': [('healthcare_invoice', '=', 'healthcare_invoice'),
+                                ('parent.move_type', 'in', ['out_invoice', 'out_refund'])],
+                            'column_invisible': [('parent.move_type', 'not in', ['out_invoice', 'out_refund'])]}" />
             </xpath>
             <xpath expr="//field[@name='line_ids']/tree/field[@name='account_type']" position="after">
                 <field name="healthcare_invoice" 
