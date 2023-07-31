@@ -1385,7 +1385,7 @@ msgstr "Año"
 #. module: billing_do
 #: model:ir.model.fields,field_description:billing_do.field_account_tax__tax_type
 msgid "Tax Type"
-msgstr "Tipo de impuesto"
+msgstr "Clasificación Impuesto RD"
 
 #. module: billing_do
 #. odoo-python
