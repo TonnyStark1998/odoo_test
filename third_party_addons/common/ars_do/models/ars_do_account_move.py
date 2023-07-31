@@ -41,7 +41,8 @@ class ArsDoAccountMove(models.Model):
         fields.Monetary(
             string='Amount Coverage',
             compute='_compute_amount_coverage', store=True, readonly=True,
-            currency_field='company_currency_id')
+            currency_field='company_currency_id',
+            default=0.0)
 
     # Changes methods
     @api.onchange('healthcare_invoice')
@@ -116,7 +117,8 @@ class ArsDoAccountMove(models.Model):
     @api.constrains('healthcare_invoice')
     def _constrain_healthcare_invoice(self):
         for move in self:
-            if move.move_type in ['out_invoice', 'out_refund'] and not move.healthcare_invoice:
+            if move.move_type in ['out_invoice', 'out_refund'] \
+                and not move.healthcare_invoice:
                 raise exceptions.ValidationError(_('You must indicate if this is a Healthcare or Regular invoice.'))
 
     # Override methods

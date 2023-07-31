@@ -120,63 +120,29 @@ class ArsDoAccountMoveLine(models.Model):
                 }
 
     def _convert_to_tax_base_line_dict(self):
-        self.ensure_one()
-        is_invoice = self.move_id.is_invoice(include_receipts=True)
-        sign = -1 if self.move_id.is_inbound(include_receipts=True) else 1
+        base_line = super()._convert_to_tax_base_line_dict()
 
-        price_unit = self.price_unit if is_invoice else self.amount_currency
-        price_subtotal = sign * self.amount_currency
-
-        log.info('[KCS][After] Line Id: {}; Price Unit: {}; Price Subtotal: {}'
-                .format(self.id, price_unit, price_subtotal))
-
+        price_unit = base_line['price_unit']
+        price_subtotal = base_line['price_subtotal']
         if self.move_id.healthcare_invoice == 'healthcare_invoice':
             price_unit = price_unit * (1 - (self.coverage / 100.0))
             price_subtotal = price_subtotal * (1 - (self.coverage / 100.0))
 
-        log.info('[KCS][After] Line Id: {}; Price Unit: {}; Price Subtotal: {}'
-                .format(self.id, price_unit, price_subtotal))
+            base_line.update({
+                'price_unit': price_unit,
+                'price_subtotal': price_subtotal
+            })
 
-        return self.env['account.tax']._convert_to_tax_base_line_dict(
-            self,
-            partner=self.partner_id,
-            currency=self.currency_id,
-            product=self.product_id,
-            taxes=self.tax_ids,
-            price_unit=price_unit,
-            quantity=self.quantity if is_invoice else 1.0,
-            discount=self.discount if is_invoice else 0.0,
-            account=self.account_id,
-            analytic_distribution=self.analytic_distribution,
-            price_subtotal=price_subtotal,
-            is_refund=self.is_refund,
-            rate=(abs(self.amount_currency) / abs(self.balance)) if self.balance else 1.0
-        )
+        return base_line
 
     def _convert_to_tax_line_dict(self):
-        self.ensure_one()
-        sign = -1 if self.move_id.is_inbound(include_receipts=True) else 1
+        tax_line = super()._convert_to_tax_line_dict()
 
-        tax_amount = sign * self.amount_currency
-
-        log.info('[KCS][Before] Line Id: {}; Tax Amount: {}'
-                .format(self.id, tax_amount))
-
+        tax_amount = tax_line['tax_amount']
         if self.move_id.healthcare_invoice == 'healthcare_invoice':
             tax_amount = tax_amount * (1 - (self.coverage / 100.0))
+            tax_line.update({
+                'tax_amount': tax_amount
+            })
 
-        log.info('[KCS][After] Line Id: {}; Tax Amount: {}'
-                .format(self.id, tax_amount))
-
-        return self.env['account.tax']._convert_to_tax_line_dict(
-            self,
-            partner=self.partner_id,
-            currency=self.currency_id,
-            taxes=self.tax_ids,
-            tax_tags=self.tax_tag_ids,
-            tax_repartition_line=self.tax_repartition_line_id,
-            group_tax=self.group_tax_id,
-            account=self.account_id,
-            analytic_distribution=self.analytic_distribution,
-            tax_amount=tax_amount,
-        )
+        return tax_line
