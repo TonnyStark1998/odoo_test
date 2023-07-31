@@ -853,3 +853,12 @@ msgstr "El reporte de {} para el período {}-{} ha sido enviado. Los cambios en 
 #: model:ir.model.fields,field_description:ars_do.field_account_move__amount_coverage
 msgid "Amount Coverage"
 msgstr "Cobertura del Seguro"
+
+#######################
+#   Security Groups   #
+#######################
+
+#. module: ars_do
+#: model:res.groups,name:ars_do.nefrosalud_admission_form
+msgid "Company Specific / Nefrosalud - Admission form access"
+msgstr "Para Compañías / Nefrosalud - Accesso a Formulario de Ingreso"
