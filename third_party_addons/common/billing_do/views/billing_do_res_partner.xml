@@ -4,22 +4,54 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
-            <field name="name" position="replace">
-                <field name="name" 
-                        default_focus="1" 
-                        placeholder="Name" 
-                        attrs="{'required' : [('type', '=', 'contact')], 
-                            'readonly': [('tax_contributor_type', 'not in', ['3'])],
-                            'invisible': [('is_company','=', False)]}" 
-                        force_save="1"
-                        groups="!base.group_system" />
-                <field name="name" 
+            <xpath expr="//field[@id='company']" position="replace">
+                <field id="company"
+                    name="name" 
+                    class="text-break" 
+                    default_focus="1"
+                    placeholder="e.g. Accounterprise SRL"
+                    force_save="1"
+                    attrs="{'readonly': 
+                                [('tax_contributor_type', 'not in', ['3'])],
+                            'required': 
+                                [('tax_contributor_type', 'in', ['3']),
+                                ('type', '=', 'contact')],
+                            'invisible': [('is_company','=', False)]}"
+                    groups="!base.group_system" />
+                <field id="company"
+                    name="name" 
+                    class="text-break" 
+                    default_focus="1"
+                    placeholder="e.g. Accounterprise SRL"
                     force_save="1"
                     readonly="0"
-                    attrs="{'required' : [('type', '=', 'contact')],
-                            'invisible': [('is_company','=', False)]}"
+                    attrs="{'invisible': [('is_company','=', False)]}"
                     groups="base.group_system" />
-            </field>
+            </xpath>
+            <xpath expr="//field[@id='individual']" position="replace">
+                <field id="individual"
+                    name="name" 
+                    class="text-break" 
+                    default_focus="1"
+                    placeholder="e.g. Accounterprise SRL"
+                    force_save="1"
+                    attrs="{'readonly': 
+                                [('tax_contributor_type', 'not in', ['3'])],
+                            'required': 
+                                [('tax_contributor_type', 'in', ['3']),
+                                ('type', '=', 'contact')],
+                            'invisible': [('is_company','=', True)]}"
+                    groups="!base.group_system" />
+                <field id="individual"
+                    name="name" 
+                    class="text-break" 
+                    default_focus="1"
+                    placeholder="e.g. Accounterprise SRL"
+                    force_save="1"
+                    readonly="0"
+                    attrs="{'invisible': [('is_company','=', True)]}"
+                    groups="base.group_system" />
+            </xpath>
             <xpath expr="//span[@name='address_name']" position="before">
                 <field name="tax_contributor_type" />
                 <field name="vat" position="move" />
