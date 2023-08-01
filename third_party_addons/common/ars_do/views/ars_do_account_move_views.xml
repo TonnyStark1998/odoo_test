@@ -52,10 +52,6 @@
                         invisible="1" 
                         required="0" />
             </xpath>
-            <field name="tax_totals" position="after">
-                <field name="amount_coverage" 
-                    attrs="{'invisible': [('amount_coverage', '&#60;=', 0)]}" />
-            </field>
         </field>
     </record>
 </odoo>

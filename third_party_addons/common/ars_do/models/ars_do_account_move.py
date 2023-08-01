@@ -3,6 +3,7 @@
 from odoo import models, fields, api, exceptions, _
 import logging as log
 from odoo.exceptions import UserError
+from odoo.tools.misc import formatLang
 
 class ArsDoAccountMove(models.Model):
     _inherit = 'account.move'
@@ -103,15 +104,20 @@ class ArsDoAccountMove(models.Model):
     def _compute_amount_coverage(self):
         for move in self:
             if move.healthcare_invoice == 'healthcare_invoice':
-                amount_coverage = 0.0
-                for line in move.invoice_line_ids:
-                    if line.display_type == 'product':
-                        amount_coverage += \
-                            ((line.quantity \
-                                * (line.price_unit * (1 - (line.discount / 100)))) \
-                                * (line.coverage / 100))
+                move.amount_coverage = \
+                    self._calculate_amount_coverage(move.invoice_line_ids)
 
-                move.amount_coverage = amount_coverage
+    @api.depends('amount_coverage')
+    def _compute_tax_totals(self):
+        for move in self:
+            super(ArsDoAccountMove, move)._compute_tax_totals()
+            move.tax_totals.update({
+                'amount_coverage': move.amount_coverage,
+                'formatted_amount_coverage': \
+                    formatLang(self.env, \
+                        move.amount_coverage, \
+                        currency_obj=move.currency_id or move.journal_id.currency_id or move.company_id.currency_id),
+            })
 
     # Contrains methods
     @api.constrains('healthcare_invoice')
@@ -232,3 +238,16 @@ class ArsDoAccountMove(models.Model):
             if not report:
                 return None
             return report
+        
+
+    def _calculate_amount_coverage(self, invoice_line_ids):
+        amount_coverage = 0.0
+        if invoice_line_ids:
+            for line in invoice_line_ids:
+                if line.display_type == 'product':
+                    amount_coverage += \
+                        ((line.quantity \
+                            * (line.price_unit * (1 - (line.discount / 100)))) \
+                            * (line.coverage / 100))
+
+        return amount_coverage

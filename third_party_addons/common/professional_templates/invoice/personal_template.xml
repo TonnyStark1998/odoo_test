@@ -162,11 +162,11 @@
                                 <t t-set="ncf_date_due" t-value="invoice.ncf_date_to"/>
                             </t>
                             <t t-if="not invoice.ncf_date_to">
-                                <t t-set="ncf_date_due" t-value="'31/12/%s' % datetime.date.today().strftime('%Y')"/>
+                                <t t-set="ncf_date_due" t-value="datetime.date(datetime.date.today().year, 12, 31)"/>
                             </t>
                             <h5>
                                 <strong>
-                                    <span t-if="invoice.move_type == 'out_invoice' and (invoice.state == 'posted' or invoice.invoice_payment_state == 'paid')"
+                                    <span t-if="invoice.move_type == 'out_invoice' and (invoice.state == 'posted' or invoice.payment_state == 'paid')"
                                         t-field="invoice.ncf_type.display_name">
                                     </span>
                                     <span t-if="invoice.move_type == 'out_invoice' and invoice.state == 'proforma2'">PRO-FORMA</span>

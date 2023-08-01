@@ -850,9 +850,20 @@ msgid "Report of {} for period {}-{} has been already sent. The changes in this 
 msgstr "El reporte de {} para el período {}-{} ha sido enviado. Los cambios en esta factura no se reflejarán en el reporte."
 
 #. module: ars_do
+#. odoo-javascript
+#: code:addons/ars_do/static/src/components/tax_totals/tax_totals.xml:0
 #: model:ir.model.fields,field_description:ars_do.field_account_move__amount_coverage
+#: model:ir.model.fields,field_description:ars_do.field_account_bank_statement_line__amount_coverage
+#: model:ir.model.fields,field_description:ars_do.field_account_payment__amount_coverage
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_invoice_personal_template
+#, python-format
 msgid "Amount Coverage"
 msgstr "Cobertura del Seguro"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_invoice_lines
+msgid "Coverage"
+msgstr "Cobertura"
 
 #######################
 #   Security Groups   #

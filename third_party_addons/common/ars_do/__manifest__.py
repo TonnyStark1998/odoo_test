@@ -37,6 +37,7 @@
         'views/ars_do_healthcare_report_actions.xml',
         'views/ars_do_sale_views.xml',
         'views/ars_do_template_invoice_lines.xml',
+        'views/ars_do_template_invoice_personal_template.xml',
     ],
     'qweb':[
     ],
@@ -45,4 +46,9 @@
     'installable': True,
     'application': True,
     'auto_install': False,
+    'assets': {
+        'web.assets_backend': [
+            'ars_do/static/src/components/tax_totals/tax_totals.xml',
+        ]
+    }
 }

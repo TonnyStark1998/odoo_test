@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+    <t t-name="ars_do.TaxTotalsField"
+        t-inherit="account.TaxTotalsField"
+        t-inherit-mode="extension"
+        owl="1">
+        <xpath expr="//table/tbody/tr[1]" position="before">
+            <tr t-if="totals.amount_coverage &#62; 0">
+                <td class="o_td_label">
+                    <label class="o_form_label o_tax_total_label">Amount Coverage</label>
+                </td>
+
+                <td>
+                    <span
+                        name="amount_coverage"
+                        t-att-class="Object.keys(totals.groups_by_subtotal).length > 0 ? 'oe_subtotal_footer_separator' : ''"
+                        t-out="totals.formatted_amount_coverage"
+                        style="font-size: 1em;"
+                    />
+                </td>
+            </tr>
+        </xpath>
+    </t>
+</templates>
