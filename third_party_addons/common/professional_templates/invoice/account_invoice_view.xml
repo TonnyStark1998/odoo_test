@@ -13,7 +13,9 @@
                     </h2>
                 </xpath> -->
                 <xpath expr="//field[@name='invoice_date']" position="after">
-                    <field name="style"/>
+                    <field name="style"
+                        readonly="1"
+                        force_save="1" />
                 </xpath>
                 <xpath expr="//field[@name='narration']" position="before">
                     <group>

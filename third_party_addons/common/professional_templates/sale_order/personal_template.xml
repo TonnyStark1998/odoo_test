@@ -16,10 +16,12 @@
                         <div class="col-6 mt-2 mb-2" style="padding-left:0;">
                             <img t-if="company.logo" 
                                     t-att-src="image_data_uri(company.logo)"
-                                    style="max-width: 150px;"/>
+                                    style="max-width: 200px !important;"/>
                         </div>
-                        <div class="col-6 mb-2 mb-2"
-                                style="font-size:12px !important; padding-bottom:2px; padding-right:0px;">
+                        <div class="col-6 mt-3 mb-2"
+                                t-attf-style="font-size:{{int(style.header_font)}}px !important;
+                                    padding-bottom:2px; 
+                                    padding-right:0px;">
                             <div t-if="company.email">
                                 <span class="fa fa-envelope-square fa-lg"/> 
                                 <span t-field="company.email"/>
