@@ -98,7 +98,7 @@
             </div>
             <!--end of Header-->
             <!-- START OF PAGE -->
-            <div class="article page" 
+            <div class="article page mt-1" 
                 t-attf-data-oe-model="account.move" 
                 t-attf-data-oe-id="{{invoice.id}}"
                 t-attf-style="margin-top:4px; padding-top:5px; padding-left:0px; padding-right:0px; color:{{style.text_color}} !important;">
