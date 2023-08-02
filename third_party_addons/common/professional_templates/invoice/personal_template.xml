@@ -22,25 +22,24 @@
                                 padding-left:0px;
                                 padding-right:0px;
                                 color:{{style.text_color}} !important;
-                                font-size:{{int(style.header_font)}}px !important;
-                                font-family:{{style.font_family}} !important;"
+                                font-size:{{int(style.header_font)}}px !important;"
                 class="container header col">
                 <t t-if="style.header">
                     <div class="row mb-2">
-                        <div class="col-6 mt-2" style="padding-left:0px;">
+                        <div class="col-6 mt-2 mb-2" style="padding-left:0px;">
                             <div class="row">
                                 <div class="col">
                                     <img t-if="style.logo"
                                         t-att-src="image_data_uri(style.logo)"
                                         alt="Company Logo"
-                                        style="max-width:100px !important;" />
+                                        style="max-width:180px !important;" />
                                     <img t-if="not style.logo and company.logo"
                                         t-att-src="image_data_uri(company.logo)"
                                         alt="Company Logo"
-                                        style="max-width:100px !important;" />
+                                        style="max-width:180px !important;" />
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row mt-2">
                                 <div t-if="company.vat" class="col">
                                     <h6>
                                         <strong>
@@ -99,14 +98,14 @@
             </div>
             <!--end of Header-->
             <!-- START OF PAGE -->
-            <div class="article page" 
+            <div class="article page mt-1" 
                 t-attf-data-oe-model="account.move" 
                 t-attf-data-oe-id="{{invoice.id}}"
                 t-attf-style="margin-top:4px; padding-top:5px; padding-left:0px; padding-right:0px; color:{{style.text_color}} !important;">
                 <!--  Start of INVOICE HEADER    -->
-                <div class="container mb-4" 
+                <div class="container mt-3 mb-4" 
                     style="padding-left:0px; padding-right:0px; padding-bottom:2px;">
-                    <div class="row">
+                    <div class="row mt-3">
                         <!--start of wrapper -->
                         <div class="col-6 mt-3 mb-3"
                             t-attf-style="font-size:{{int(style.body_font)}}px !important;padding-left:0px;">

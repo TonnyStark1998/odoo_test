@@ -4,7 +4,7 @@
     <record id="account_report_print_journal_view" model="ir.ui.view">
         <field name="name">Journals Audit</field>
         <field name="model">account.print.journal</field>
-        <field name="inherit_id" ref="account.account_common_report_view"/>
+        <field name="inherit_id" ref="accounting_pdf_reports.account_common_report_view"/>
         <field name="arch" type="xml">
             <data>
                 <xpath expr="//field[@name='target_move']" position="after">
@@ -27,8 +27,8 @@
 
     <menuitem id="menu_print_journal"
               name="Journals Audit"
-              sequence="50"
-              parent="accounting_pdf_reports.menu_finance_audit_reports"
+              sequence="40"
+              parent="menu_finance_audit_reports"
               action="action_account_print_journal_menu"
               groups="account.group_account_manager,account.group_account_user"/>
 

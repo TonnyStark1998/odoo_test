@@ -88,7 +88,7 @@ odoo.define('om_dynamic_reports.DynamicReportActions', function (require) {
                     this.$el.find('.ctrl_body').replaceWith($(Qweb.render('tax_report', {widget: this})));
                     this.addField('date_from', 'input');
                     this.addField('date_to', 'input');
-
+                    this.addField('target_move', 'select');
                     this.$el.find('.ctrl_body .date_from').addClass('o_required');
                     this.$el.find('.ctrl_body .date_to').addClass('o_required');
 

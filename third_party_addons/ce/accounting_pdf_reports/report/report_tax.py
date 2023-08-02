@@ -6,7 +6,7 @@ from odoo.exceptions import UserError
 
 class ReportTax(models.AbstractModel):
     _name = 'report.accounting_pdf_reports.report_tax'
-    _description = 'Report Tax'
+    _description = 'Tax Report'
 
     @api.model
     def _get_report_values(self, docids, data=None):
@@ -20,7 +20,7 @@ class ReportTax(models.AbstractModel):
     def _sql_from_amls_one(self):
         sql = """SELECT "account_move_line".tax_line_id, COALESCE(SUM("account_move_line".debit-"account_move_line".credit), 0)
                     FROM %s
-                    WHERE %s AND "account_move_line".tax_exigible GROUP BY "account_move_line".tax_line_id"""
+                    WHERE %s GROUP BY "account_move_line".tax_line_id"""
         return sql
 
     def _sql_from_amls_two(self):
@@ -28,7 +28,7 @@ class ReportTax(models.AbstractModel):
                  FROM %s
                  INNER JOIN account_move_line_account_tax_rel r ON ("account_move_line".id = r.account_move_line_id)
                  INNER JOIN account_tax t ON (r.account_tax_id = t.id)
-                 WHERE %s AND "account_move_line".tax_exigible GROUP BY r.account_tax_id"""
+                 WHERE %s GROUP BY r.account_tax_id"""
         return sql
 
     def _compute_from_amls(self, options, taxes):
@@ -62,7 +62,9 @@ class ReportTax(models.AbstractModel):
                     taxes[child.id] = {'tax': 0, 'net': 0, 'name': child.name, 'type': tax.type_tax_use}
             else:
                 taxes[tax.id] = {'tax': 0, 'net': 0, 'name': tax.name, 'type': tax.type_tax_use}
-        self.with_context(date_from=options['date_from'], date_to=options['date_to'], strict_range=True)._compute_from_amls(options, taxes)
+        self.with_context(date_from=options['date_from'], date_to=options['date_to'],
+                          state=options['target_move'],
+                          strict_range=True)._compute_from_amls(options, taxes)
         groups = dict((tp, []) for tp in ['sale', 'purchase'])
         for tax in taxes.values():
             if tax['tax']:

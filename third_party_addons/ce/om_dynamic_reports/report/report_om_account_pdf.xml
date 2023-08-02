@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data>
+
         <template id="om_account_reports_pdf">
             <t t-call="web.html_container">
                 <t t-call="web.external_layout">
@@ -17,5 +18,6 @@
                 </t>
             </t>
         </template>
+
     </data>
 </odoo>

@@ -12,20 +12,21 @@
                           <field name="project_title" class="oe_inline"/>
                         </h2>
                  </xpath>
-
-		 <xpath expr="//field[@name='validity_date']" position="after">
-			<field name="style"/>
-		 </xpath>
-		 <xpath expr="//field[@name='note']" position="before">
-                     <group>
-			<field name="amount_words"/>
+                <xpath expr="//field[@name='validity_date']" position="after">
+                    <field name="style"
+                        readonly="1"
+                        force_save="1" />
+                </xpath>
+                <xpath expr="//field[@name='note']" position="before">
+                    <group>
+                        <field name="amount_words"/>
                     </group>
-		 </xpath>
-	    </field>
-	</record>
-<record id="sale.report_saleorder_document" model="ir.ui.view">
-  <field name="name">Odoo Template</field>
-</record>
+                </xpath>
+            </field>
+        </record>
+        <record id="sale.report_saleorder_document" model="ir.ui.view">
+            <field name="name">Odoo Template</field>
+        </record>
     </data>
 </odoo>
 

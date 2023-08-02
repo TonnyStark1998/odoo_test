@@ -18,18 +18,18 @@
                  class="container header col">
                 <div class="row">
                     <t t-if="style.header">
-                        <div class="col-7 mb-5" style="padding-left:0px;">
+                        <div class="col-7 mt-2 mb-5" style="padding-left:0px;">
                             <img t-if="style.logo" 
                                     t-att-src="image_data_uri(style.logo)" 
-                                    t-attf-style="max-width: 150px;"
+                                    t-attf-style="max-width: 200px !important;"
                                     alt="Company Logo"/>
                             <img t-if="company.logo" 
                                     t-att-src="image_data_uri(company.logo)"
-                                    t-attf-style="max-width: 150px;" 
+                                    t-attf-style="max-width: 200px !important;" 
                                     alt="Company Logo"/>
                         </div>
                         <div class="col-5 mb-5"
-                            style="font-size:12px !important; padding-bottom:2px;padding-right:0px;">
+                            t-attf-style="font-size:{{int(style.header_font)}}px !important; padding-bottom:2px;padding-right:0px;">
                             <h1 t-attf-style="color:{{style.text_color}}">
                                 <span t-field="purchase.name"/>
                             </h1>
