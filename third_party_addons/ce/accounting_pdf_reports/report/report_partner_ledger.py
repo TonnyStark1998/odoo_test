@@ -7,7 +7,7 @@ from odoo.exceptions import UserError
 
 class ReportPartnerLedger(models.AbstractModel):
     _name = 'report.accounting_pdf_reports.report_partnerledger'
-    _description = 'Report Partner Ledger'
+    _description = 'Partner Ledger Report'
 
     def _lines(self, data, partner):
         full_account = []
@@ -71,7 +71,6 @@ class ReportPartnerLedger(models.AbstractModel):
     def _get_report_values(self, docids, data=None):
         if not data.get('form'):
             raise UserError(_("Form content is missing, this report cannot be printed."))
-
         data['computed'] = {}
 
         obj_partner = self.env['res.partner']
@@ -81,16 +80,16 @@ class ReportPartnerLedger(models.AbstractModel):
             data['computed']['move_state'] = ['posted']
         result_selection = data['form'].get('result_selection', 'customer')
         if result_selection == 'supplier':
-            data['computed']['ACCOUNT_TYPE'] = ['payable']
+            data['computed']['ACCOUNT_TYPE'] = ['liability_payable']
         elif result_selection == 'customer':
-            data['computed']['ACCOUNT_TYPE'] = ['receivable']
+            data['computed']['ACCOUNT_TYPE'] = ['asset_receivable']
         else:
-            data['computed']['ACCOUNT_TYPE'] = ['payable', 'receivable']
+            data['computed']['ACCOUNT_TYPE'] = ['asset_receivable', 'liability_payable']
 
         self.env.cr.execute("""
             SELECT a.id
             FROM account_account a
-            WHERE a.internal_type IN %s
+            WHERE a.account_type IN %s
             AND NOT a.deprecated""", (tuple(data['computed']['ACCOUNT_TYPE']),))
         data['computed']['account_ids'] = [a for (a,) in self.env.cr.fetchall()]
         params = [tuple(data['computed']['move_state']), tuple(data['computed']['account_ids'])] + query_get_data[2]
@@ -106,7 +105,11 @@ class ReportPartnerLedger(models.AbstractModel):
                 AND NOT account.deprecated
                 AND """ + query_get_data[1] + reconcile_clause
         self.env.cr.execute(query, tuple(params))
-        partner_ids = [res['partner_id'] for res in self.env.cr.dictfetchall()]
+        if data['form']['partner_ids']:
+            partner_ids = data['form']['partner_ids']
+        else:
+            partner_ids = [res['partner_id'] for res in
+                           self.env.cr.dictfetchall()]
         partners = obj_partner.browse(partner_ids)
         partners = sorted(partners, key=lambda x: (x.ref or '', x.name or ''))
 

@@ -1,21 +1,11 @@
 ## Module <accounting_pdf_reports>
 
-#### 02.03.2022
-#### Version 13.0.4.0.0
-##### IMP
-- Menu re-arrangement
-
-#### 28.02.2022
-#### Version 13.0.3.0.0
-##### IMP
-- code refactoring
-
-#### 01.02.2022
-#### Version 13.0.2.1.0
+#### 18.03.2023
+#### Version 16.0.1.0.2
 ##### FIX
-- Translation de 
+- temp remove analytic filer in TB and GL
 
-#### 03.12.2019
-#### Version 13.0.2.0.0
-##### FIX
-- General Ledger Issue 
+#### 22.10.2022
+#### Version 16.0.1.0.1
+##### IMP
+- initial release

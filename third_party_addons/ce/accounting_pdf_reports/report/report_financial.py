@@ -7,7 +7,7 @@ from odoo.exceptions import UserError
 
 class ReportFinancial(models.AbstractModel):
     _name = 'report.accounting_pdf_reports.report_financial'
-    _description = 'Report Financial'
+    _description = 'Financial Reports'
 
     def _compute_account_balance(self, accounts):
         """ compute the balance, debit and credit for the provided accounts
@@ -60,7 +60,9 @@ class ReportFinancial(models.AbstractModel):
                         res[report.id][field] += value.get(field)
             elif report.type == 'account_type':
                 # it's the sum the leaf accounts with such an account type
-                accounts = self.env['account.account'].search([('user_type_id', 'in', report.account_type_ids.ids)])
+                accounts = self.env['account.account'].search(
+                    [('account_type', 'in', report.account_type_ids.mapped('type'))])
+
                 res[report.id]['account'] = self._compute_account_balance(accounts)
                 for value in res[report.id]['account'].values():
                     for field in fields:
@@ -81,11 +83,14 @@ class ReportFinancial(models.AbstractModel):
 
     def get_account_lines(self, data):
         lines = []
-        account_report = self.env['account.financial.report'].search([('id', '=', data['account_report_id'][0])])
+        account_report = self.env['account.financial.report'].search(
+            [('id', '=', data['account_report_id'][0])])
         child_reports = account_report._get_children_by_order()
         res = self.with_context(data.get('used_context'))._compute_report_balance(child_reports)
         if data['enable_filter']:
-            comparison_res = self.with_context(data.get('comparison_context'))._compute_report_balance(child_reports)
+            comparison_res = self.with_context(
+                data.get('comparison_context'))._compute_report_balance(
+                child_reports)
             for report_id, value in comparison_res.items():
                 res[report_id]['comp_bal'] = value['balance']
                 report_acc = res[report_id].get('account')
@@ -124,7 +129,7 @@ class ReportFinancial(models.AbstractModel):
                         'balance': value['balance'] * float(report.sign) or 0.0,
                         'type': 'account',
                         'level': report.display_detail == 'detail_with_hierarchy' and 4,
-                        'account_type': account.internal_type,
+                        'account_type': account.account_type,
                     }
                     if data['debit_credit']:
                         vals['debit'] = value['debit']
@@ -147,12 +152,12 @@ class ReportFinancial(models.AbstractModel):
         if not data.get('form') or not self.env.context.get('active_model') or not self.env.context.get('active_id'):
             raise UserError(_("Form content is missing, this report cannot be printed."))
 
-        self.model = self.env.context.get('active_model')
-        docs = self.env[self.model].browse(self.env.context.get('active_id'))
+        model = self.env.context.get('active_model')
+        docs = self.env[model].browse(self.env.context.get('active_id'))
         report_lines = self.get_account_lines(data.get('form'))
         return {
             'doc_ids': self.ids,
-            'doc_model': self.model,
+            'doc_model': model,
             'data': data['form'],
             'docs': docs,
             'time': time,

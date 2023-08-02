@@ -5,13 +5,8 @@ odoo.define('om_dynamic_reports.DynamicReportPrint', function (require) {
     var AbstractAction = require('web.AbstractAction');
     var core = require('web.core');
     var Qweb = core.qweb;
-
-    var ActionManager = require('web.ActionManager');
-
     var framework = require('web.framework');
-
     var session = require('web.session');
-
     var rpc = require("web.rpc");
 
 	DynamicReports.include({

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import api, models, fields
 
@@ -31,16 +30,19 @@ class AccountFinancialReport(models.Model):
     parent_id = fields.Many2one('account.financial.report', 'Parent')
     children_ids = fields.One2many('account.financial.report', 'parent_id', 'Account Report')
     sequence = fields.Integer('Sequence')
-    level = fields.Integer(compute='_get_level', string='Level', store=True)
+    level = fields.Integer(compute='_get_level', string='Level', store=True, recursive=True)
     type = fields.Selection([
         ('sum', 'View'),
         ('accounts', 'Accounts'),
         ('account_type', 'Account Type'),
         ('account_report', 'Report Value'),
         ], 'Type', default='sum')
-    account_ids = fields.Many2many('account.account', 'account_account_financial_report', 'report_line_id', 'account_id', 'Accounts')
+    account_ids = fields.Many2many('account.account', 'account_account_financial_report',
+                                   'report_line_id', 'account_id', 'Accounts')
     account_report_id = fields.Many2one('account.financial.report', 'Report Value')
-    account_type_ids = fields.Many2many('account.account.type', 'account_account_financial_report_type', 'report_id', 'account_type_id', 'Account Types')
+    account_type_ids = fields.Many2many('account.account.type', 'account_account_financial_report_type',
+                                        'report_id', 'account_type_id', 'Account Types')
+    report_domain = fields.Char(string="Report Domain")
     sign = fields.Selection([('-1', 'Reverse balance sign'), ('1', 'Preserve balance sign')], 'Sign on Reports',
                             required=True, default='1',
                             help='For accounts that are typically more debited than credited and that you would'
@@ -65,3 +67,5 @@ class AccountFinancialReport(models.Model):
         help="You can set up here the format you want this record to be displayed. "
              "If you leave the automatic formatting, it will be computed based on the "
              "financial reports hierarchy (auto-computed field 'level').")
+    children_ids = fields.One2many('account.financial.report', 'parent_id', string='Children')
+

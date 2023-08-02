@@ -17,6 +17,7 @@ except ImportError:
 
 class DynamicReportConfig(models.TransientModel):
     _name = 'dynamic.report.config'
+    _description = 'Dynamic Report Config'
 
     def get_xlsx_report(self, data, response):
         output = io.BytesIO()
@@ -219,14 +220,16 @@ class DynamicReportConfig(models.TransientModel):
                                      time.strftime('%Y-%m-%d'))
 
                 if data['result_selection'] == 'customer':
-                    account_type = ['receivable']
+                    account_type = ['asset_receivable']
                 elif data['result_selection'] == 'supplier':
-                    account_type = ['payable']
+                    account_type = ['liability_payable']
                 else:
-                    account_type = ['payable', 'receivable']
+                    account_type = ['liability_payable', 'asset_receivable']
+                # todo check partner_ids
+                partner_ids = []
 
                 movelines, total, dummy = ReportObj._get_partner_move_lines(
-                    account_type, date_from, target_move,
+                    account_type, partner_ids, date_from, target_move,
                     int(data['period_length']))
 
                 report_lines = ReportObj.dynamic_report_lines(data,
@@ -298,56 +301,6 @@ class ReportFinancialExt(models.AbstractModel):
         return res
 
     def _compute_report_balance(self, reports):
-        """returns a dictionary with key=the ID of a record
-         and value=the credit, debit and balance amount
-           computed for this record. If the record is of type :
-               'accounts' : it's the sum of the linked accounts
-               'account_type' : it's the sum of leaf accoutns with
-                such an account_type
-               'account_report' : it's the amount of the related report
-               'sum' : it's the sum of the children of this record
-                (aka a 'view' record)"""
-        res = {}
-        fields = ['credit', 'debit', 'balance']
-        for report in reports:
-            if report.id in res:
-                continue
-            res[report.id] = dict((fn, 0.0) for fn in fields)
-            if report.type == 'accounts':
-                # it's the sum of the linked accounts
-                res[report.id]['account'] = self._compute_account_balance(
-                    report.account_ids)
-                # res[report.id]['journal_items'] = self._compute_journal_items(
-                #     report.account_ids)
-                for value in res[report.id]['account'].values():
-                    for field in fields:
-                        res[report.id][field] += value.get(field)
-            elif report.type == 'account_type':
-                # it's the sum the leaf accounts with such an account type
-                accounts = self.env['account.account'].search(
-                    [('user_type_id', 'in', report.account_type_ids.ids)])
-                res[report.id]['account'] = self._compute_account_balance(
-                    accounts)
-                # res[report.id]['journal_items'] = self._compute_journal_items(
-                #     accounts)
-                for value in res[report.id]['account'].values():
-                    for field in fields:
-                        res[report.id][field] += value.get(field)
-            elif report.type == 'account_report' and report.account_report_id:
-                # it's the amount of the linked report
-                res2 = self._compute_report_balance(report.account_report_id)
-                for key, value in res2.items():
-                    for field in fields:
-                        res[report.id][field] += value[field]
-            elif report.type == 'sum':
-                # it's the sum of the children of this account.report
-                res2 = self._compute_report_balance(report.children_ids)
-                for key, value in res2.items():
-                    for field in fields:
-                        res[report.id][field] += value[field]
-        return res
-
-    def _compute_report_balance(self, reports):
         """returns a dictionary with key=the ID of a record and
         value=the credit, debit and balance amount
            computed for this record. If the record is of type :
@@ -375,7 +328,7 @@ class ReportFinancialExt(models.AbstractModel):
             elif report.type == 'account_type':
                 # it's the sum the leaf accounts with such an account type
                 accounts = self.env['account.account'].search(
-                    [('user_type_id', 'in', report.account_type_ids.ids)])
+                    [('account_type', 'in', report.account_type_ids.mapped('type'))])
                 res[report.id]['account'] = self._compute_account_balance(
                     accounts)
                 # res[report.id]['journal_items'] = self._compute_journal_items(
@@ -465,7 +418,7 @@ class ReportFinancialExt(models.AbstractModel):
                             report.sign) or 0.0,
                         'type': 'account',
                         'level': report.display_detail == 'detail_with_hierarchy' and 4,
-                        'account_type': account.internal_type,
+                        'account_type': account.account_type,
                         'parent': 'report_' + str(report.id),
                         'active_id': 'account_' + str(account_id),
                         'has_child_lines': True,
@@ -803,16 +756,16 @@ class ReportPartnerLedgerExt(models.AbstractModel):
             data['computed']['move_state'] = ['posted']
         result_selection = data['form'].get('result_selection', 'customer')
         if result_selection == 'supplier':
-            data['computed']['ACCOUNT_TYPE'] = ['payable']
+            data['computed']['ACCOUNT_TYPE'] = ['liability_payable']
         elif result_selection == 'customer':
-            data['computed']['ACCOUNT_TYPE'] = ['receivable']
+            data['computed']['ACCOUNT_TYPE'] = ['asset_receivable']
         else:
-            data['computed']['ACCOUNT_TYPE'] = ['payable', 'receivable']
+            data['computed']['ACCOUNT_TYPE'] = ['liability_payable', 'asset_receivable']
 
         self.env.cr.execute("""
             SELECT a.id
             FROM account_account a
-            WHERE a.internal_type IN %s
+            WHERE a.account_type IN %s
             AND NOT a.deprecated""", (
             tuple(data['computed']['ACCOUNT_TYPE']),))
         data['computed']['account_ids'] = [a for (a,) in

@@ -135,7 +135,7 @@ odoo.define('om_dynamic_reports.DynamicReports', function (require) {
                 self.company_ids = result;
             });
 
-            return $.when($, report_def, config_def, company_def);
+            return Promise.all([this._super.apply(this, arguments), report_def, config_def, company_def]);
         },
         start: function () {
             var self = this;
@@ -300,6 +300,7 @@ odoo.define('om_dynamic_reports.DynamicReports', function (require) {
                 active_id = this.report_lines[line_id].active_id;
                 active_id = active_id.split('_')[1];
                 args_list = [parseInt(active_id), parseInt(level), self.report_data.debit_credit];
+                kwargs = {context: this.report_data.used_context};
             }
             else if (report_id == 'partner_ledger') {
                 model = 'report.accounting_pdf_reports.report_partnerledger';
@@ -863,7 +864,7 @@ odoo.define('om_dynamic_reports.DynamicReports', function (require) {
 					ldate: report_lines[i].code + " " + report_lines[i].name,
 					debit: report_lines[i].debit,
 					credit: report_lines[i].credit,
-					balance: report_lines[i].balance,
+					balance: report_lines[i].debit - report_lines[i].credit,
 					has_child_lines: report_lines[i].has_child_lines
 				};
 
@@ -1371,12 +1372,15 @@ odoo.define('om_dynamic_reports.DynamicReports', function (require) {
         },
         buildIcon: function (parent, r_line) {
             var res = "";
-            if (parent != null && this.report_line_ids[parent] != null) {
-                res = "<i class='fa fa-caret-down'/>";
-            }
-            else if (parent != null && r_line.has_child_lines) {
-                res = "<i class='fa fa-caret-right'/>";
-            }
+            var report_id = this.report_data.account_report_id[0];
+            if (report_id != 'tax_report') {
+                if (parent != null && this.report_line_ids[parent] != null) {
+                    res = "<i class='fa fa-caret-down'/>";
+                }
+                else if (parent != null && r_line.has_child_lines) {
+                    res = "<i class='fa fa-caret-right'/>";
+                }
+             }
             return res;
         },
         build_row_class: function (r_line) {

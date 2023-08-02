@@ -15,6 +15,18 @@
                             <strong>Journals:</strong>
                               <p t-esc="', '.join([ lt or '' for lt in print_journal ])"/>
                         </div>
+                        <t groups="analytic.group_analytic_accounting">
+                            <t t-if="analytic_account_ids">
+                                <div class="col-4">
+                                    <strong>Analytic Accounts:</strong>
+                                      <p t-esc="', '.join([aa.name or '' for aa in analytic_account_ids ])"/>
+                                </div>
+                            </t>
+                        </t>
+<!--                        <div class="col-4">-->
+<!--                            <strong>Accounts:</strong>-->
+<!--                              <p t-esc="', '.join([ ac.name or '' for ac in accounts])"/>-->
+<!--                        </div>-->
                         <div class="col-4">
                             <strong>Display Account</strong>
                             <p>
@@ -49,6 +61,9 @@
                                 <th>Partner</th>
                                 <th>Ref</th>
                                 <th>Move</th>
+                                <t groups="analytic.group_analytic_accounting">
+                                    <th>Analytic Account</th>
+                                </t>
                                 <th>Entry Label</th>
                                 <th>Debit</th>
                                 <th>Credit</th>
@@ -64,13 +79,16 @@
                                         <span t-esc="account['code']"/>
                                         <span t-esc="account['name']"/>
                                     </td>
-                                    <td class="text-right">
+                                    <t groups="analytic.group_analytic_accounting">
+                                        <td></td>
+                                    </t>
+                                    <td class="text-end">
                                         <span t-esc="account['debit']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         <span t-esc="account['credit']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         <span t-esc="account['balance']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                     </td>
                                     <td groups="base.group_multi_currency"/>
@@ -81,17 +99,20 @@
                                     <td><span t-esc="line['partner_name']"/></td>
                                     <td><span t-if="line['lref']" t-esc="line['lref']"/></td>
                                     <td><span t-esc="line['move_name']"/></td>
+                                    <t groups="analytic.group_analytic_accounting">
+                                        <td><span t-esc="line['analytic_account_id']"/></td>
+                                    </t>
                                     <td><span t-esc="line['lname']"/></td>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         <span t-esc="line['debit']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         <span t-esc="line['credit']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         <span t-esc="line['balance']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                     </td>
-                                    <td class="text-right" groups="base.group_multi_currency">
+                                    <td class="text-end" groups="base.group_multi_currency">
                                         <span t-esc="line['amount_currency'] if line['amount_currency'] and line['amount_currency'] > 0.00 else ''"/>
                                         <span t-esc="line['currency_code'] if line['amount_currency'] and line['amount_currency'] > 0.00 else ''"/>
                                     </td>
