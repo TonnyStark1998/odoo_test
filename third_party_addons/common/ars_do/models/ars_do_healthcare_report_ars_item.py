@@ -28,7 +28,9 @@ class ArsDoHealthcareReportArsItem(models.Model):
                                 currency_field='currency_id',
                                 required=True)
     amount_paid = fields.Monetary(string='Amount Paid',
-                                    currency_field='currency_id')
+                                    currency_field='currency_id',
+                                    compute='_compute_amount_paid',
+                                    store=True)
     amount_due = fields.Monetary(string='Amount Due',
                                     compute='_compute_amount_due',
                                     currency_field='currency_id',
@@ -59,3 +61,11 @@ class ArsDoHealthcareReportArsItem(models.Model):
     def _compute_amount_due(self):
         for item in self:
             item.amount_due = item.amount - item.amount_paid
+
+    @api.depends('payment_ids')
+    def _compute_amount_paid(self):
+        for item in self:
+            amount_paid = 0.0
+            if len(item.payment_ids) > 0:
+                amount_paid = item.amount
+            item.amount_paid = amount_paid
