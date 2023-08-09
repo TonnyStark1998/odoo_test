@@ -81,7 +81,7 @@ class BillingDoTaxReportItemCommon(models.AbstractModel):
         
         return currency._convert(amount, 
                                     self.env['res.currency']
-                                        .search([('name', '=', 'RD$')]), 
+                                        .search([('name', '=', 'DOP')]), 
                                     company, 
                                     date, 
                                     True
