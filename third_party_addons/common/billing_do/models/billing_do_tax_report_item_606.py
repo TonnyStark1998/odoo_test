@@ -127,20 +127,20 @@ class BillingDoTaxReportItem606(models.Model):
                     elif self._is_dop_currency(move_line.company_currency_id):
                         held_amount = move_line.balance
                     else:
-                        held_amount = self._convert_amount_to_dop(move_line.currency_id,
-                                                                    move_line.amount_currency,
-                                                                    move.invoice_date,
-                                                                    move.company_id
-                                                                )
+                        held_amount = \
+                            self._convert_amount_to_dop(move_line.currency_id,
+                                                        move_line.amount_currency,
+                                                        move.invoice_date,
+                                                        move.company_id)
                 else:
                     if self._is_dop_currency(move_line.company_currency_id):
                         held_amount = move_line.balance
                     else:
-                        held_amount = self._convert_amount_to_dop(move_line.company_currency_id,
-                                                                    move_line.balance,
-                                                                    move.invoice_date,
-                                                                    move.company_id
-                                                                )
+                        held_amount = \
+                            self._convert_amount_to_dop(move_line.company_currency_id,
+                                                        move_line.balance,
+                                                        move.invoice_date,
+                                                        move.company_id)
 
                 if move_line.account_id.withholding_tax_type in ["RET-ITBIS-606"]:
                     tax_report_item['held_amount_itbis'] += abs(held_amount)
@@ -151,16 +151,17 @@ class BillingDoTaxReportItem606(models.Model):
                 if not move_line.exclude_from_invoice_tab:
 
                     # Calculate the consumable and services amounts
-                    unit_price = self._convert_amount_to_dop(currency,
-                                                                move_line.price_subtotal,
-                                                                move.invoice_date,
-                                                                move.company_id,
-                                                            )
+                    if move_line.move_id.id == move.id:
+                        unit_price = self._convert_amount_to_dop(currency,
+                                                                    move_line.price_subtotal,
+                                                                    move.invoice_date,
+                                                                    move.company_id,
+                                                                )
 
-                    if move_line.product_id.type in ['consu', 'product']:
-                        tax_report_item['consumable_amount'] += unit_price
-                    elif move_line.product_id.type in ['service']:
-                        tax_report_item['service_amount'] += unit_price
+                        if move_line.product_id.type in ['consu', 'product']:
+                            tax_report_item['consumable_amount'] += unit_price
+                        elif move_line.product_id.type in ['service']:
+                            tax_report_item['service_amount'] += unit_price
 
                 # Calculate the tax amounts
                 if move_line.tax_line_id:

@@ -76,20 +76,22 @@ class BillingDoTaxReportItem607(models.Model):
                 .update(self.generate_item(move, tax_report))
 
             # Set the invoice amount without any taxes
-            if move.amount_untaxed_signed:
-                tax_report_item['amount_untaxed_signed'] = self._convert_amount_to_dop(move.company_id.currency_id,
-                                                                                        move.amount_untaxed_signed,
-                                                                                        move.invoice_date,
-                                                                                        move.company_id
-                                                                                    )
+            tax_report_item['amount_untaxed_signed'] = 0.0
+            if move.amount_untaxed:
+                tax_report_item['amount_untaxed_signed'] = \
+                    self._convert_amount_to_dop(move.currency_id or move.company_id.currency_id,
+                                                move.amount_untaxed,
+                                                move.invoice_date,
+                                                move.company_id)
             
             # Set the amount for the taxes charge to this invoice
+            tax_report_item['amount_tax_signed'] = 0.0
             if move.amount_tax_signed:
-                tax_report_item['amount_tax_signed'] = self._convert_amount_to_dop(move.company_id.currency_id,
-                                                                                    move.amount_tax_signed,
-                                                                                    move.invoice_date,
-                                                                                    move.company_id
-                                                                                )
+                tax_report_item['amount_tax_signed'] = \
+                    self._convert_amount_to_dop(move.currency_id or move.company_id.currency_id,
+                                                move.amount_tax,
+                                                move.invoice_date,
+                                                move.company_id)
 
             # Set the income type for this move if the move has an income type value
             if move.income_type:
@@ -97,8 +99,8 @@ class BillingDoTaxReportItem607(models.Model):
 
             # Set the date for the report separating the year and month from the day of the invoice date
             if move.invoice_date:
-                tax_report_item['date_invoice'] = move.invoice_date\
-                                                        .strftime('%Y%m%d')
+                tax_report_item['date_invoice'] = \
+                    move.invoice_date.strftime('%Y%m%d')
 
             # Get all reconciled info for the move, these are the payments.
             _reconciled_values = False if not move.invoice_payments_widget \
@@ -146,12 +148,12 @@ class BillingDoTaxReportItem607(models.Model):
                                                             .search([('id', '=', _payment['account_payment_id'])])
                                                             .journal_id)
 
-                _payment_amount = self._convert_amount_to_dop(self.env['res.currency']
-                                                                    .search([('id', '=', _payment['currency_id'])]),
-                                                        _payment['amount'],
-                                                        move.invoice_date,
-                                                        move.company_id
-                                                    )
+                _payment_amount = \
+                    self._convert_amount_to_dop(self.env['res.currency']
+                                                    .search([('id', '=', _payment['currency_id'])]),
+                                                _payment['amount'],
+                                                move.invoice_date,
+                                                move.company_id)
 
                 if _payment_type in ['01']:
                     tax_report_item['amount_cash'] += _payment_amount
@@ -165,14 +167,13 @@ class BillingDoTaxReportItem607(models.Model):
                 else:
                     tax_report_item['amount_other_sale_way'] += _payment_amount
         else:
-            _payment_amount = self._convert_amount_to_dop(move.currency_id,
-                                                            move.amount_total,
-                                                            move.invoice_date,
-                                                            move.company_id
-                                                        )
+            _payment_amount = \
+                self._convert_amount_to_dop(move.currency_id or move.company_id.currency_id,
+                                            move.amount_total,
+                                            move.invoice_date,
+                                            move.company_id)
             
-            tax_report_item['amount_credit_sale'] \
-                = _payment_amount
+            tax_report_item['amount_credit_sale'] = _payment_amount
 
         return tax_report_item
 
@@ -183,12 +184,12 @@ class BillingDoTaxReportItem607(models.Model):
         }
         
         for move_line in move_lines:
-            _line_amount = self._convert_amount_to_dop(move_line.move_id.company_id.currency_id,
-                                                        move_line.credit + move_line.debit,
-                                                        move_line.move_id.invoice_date or 
-                                                            move_line.move_id.date,
-                                                        move_line.move_id.company_id
-                                                    )
+            _line_amount = \
+                self._convert_amount_to_dop(move_line.move_id.company_id.currency_id,
+                                            move_line.credit + move_line.debit,
+                                            move_line.move_id.invoice_date or 
+                                                move_line.move_id.date,
+                                            move_line.move_id.company_id)
 
             if move_line.account_id.withholding_tax_type in ["RET-ITBIS-607"]:
                 tax_report_item['held_amount_itbis'] += _line_amount

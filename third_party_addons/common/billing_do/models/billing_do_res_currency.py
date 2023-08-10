@@ -54,7 +54,7 @@ class BillingDoResCurrencyModel(models.Model):
     _inherit = 'res.currency'
 
     def is_dop_currency(self):
-        return self.name == 'RD$'
+        return self.name == 'DOP'
 
 class BillingDoResCurrencyModel(models.Model):
     _inherit = 'res.currency.rate'
