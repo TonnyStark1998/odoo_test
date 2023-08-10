@@ -244,13 +244,11 @@ class BillingDoAccountMove(models.Model):
             for move in self:
                 self._set_name_for_out_move(move)
                 self._set_ncf_date_to(move)
+                
+                if not move.posted_before:
+                    move._move_to_next_sequence_number(move.ncf_type_sequence)
 
-            if not self.posted_before:
-                self._move_to_next_sequence_number(self.ncf_type_sequence)
-
-            result = super()._post(soft)
-            log.info('[KCS] Posted Before: {}'.format(self.posted_before))
-            return result
+            return super()._post(soft)
         except exceptions.UserError:
             raise
 
