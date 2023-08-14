@@ -334,6 +334,7 @@ class BillingDoAccountMove(models.Model):
                                             str(move.sequence_number)
                                                 .rjust(6, '0'))
             else:
+                super(BillingDoAccountMove, move)._compute_name()
                 move._onchange_tax_valuable_fields()
 
     def _onchange_name_warning(self):
