@@ -111,13 +111,14 @@ class ArsDoAccountMove(models.Model):
     def _compute_tax_totals(self):
         for move in self:
             super(ArsDoAccountMove, move)._compute_tax_totals()
-            move.tax_totals.update({
-                'amount_coverage': move.amount_coverage,
-                'formatted_amount_coverage': \
-                    formatLang(self.env, \
-                        move.amount_coverage, \
-                        currency_obj=move.currency_id or move.journal_id.currency_id or move.company_id.currency_id),
-            })
+            if move.tax_totals:
+                move.tax_totals.update({
+                    'amount_coverage': move.amount_coverage,
+                    'formatted_amount_coverage': \
+                        formatLang(self.env, \
+                            move.amount_coverage, \
+                            currency_obj=move.currency_id or move.journal_id.currency_id or move.company_id.currency_id),
+                })
 
     # Contrains methods
     @api.constrains('healthcare_invoice')
