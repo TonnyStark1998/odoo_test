@@ -22,16 +22,16 @@ class BillindDoAccountPayment(models.Model):
             return 'Write-Off Label'
 
     def action_draft(self):
-        super(BillindDoAccountPayment, self).action_draft()
+        super().action_draft()
 
         move_id = self.env.context.get('move_id')
         move = self.env['account.move'].browse(move_id)\
                 if move_id\
-                else self.env['account.move'].search([('name', '=', self.communication)], limit = 1)
+                else self.env['account.move'].search([('name', '=', self.ref)], limit = 1)
         self.env['mail.message'].create({
             'subject': _('Payment reset to draft.'),
             'body': _("<p style='margin:0px; font-size:13px; font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif'>A payment ({} - {}) which was associated with this move has been reverted to draft state.</p>")
-                        .format(self.id, self.name),
+                        .format(self.id, self.ref),
             'email_from': self.env.user.login,
             'author_id': self.env.user.partner_id.id,
             'model': 'account.move',
