@@ -97,7 +97,7 @@ msgstr ""
 
 #. module: billing_do
 #: model:ir.model.fields.selection,name:billing_do.selection__billing_do_tax_report_item_606__payment_type__05
-msgid "05 -  PERMUTA"
+msgid "05 - PERMUTA"
 msgstr ""
 
 #. module: billing_do
@@ -215,7 +215,7 @@ msgstr "<strong style=\"text-transform: uppercase;\">Recibo</strong>"
 
 #. module: billing_do
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
-msgid "<strong>Amount: </strong>"
+msgid "<strong>Payment Amount: </strong>"
 msgstr "<strong>Monto: </strong>"
 
 #. module: billing_do
@@ -225,8 +225,8 @@ msgstr "<strong>Cliente: </strong>"
 
 #. module: billing_do
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template
-msgid "<strong>Date:</strong>"
-msgstr "<strong>Fecha:</strong>"
+msgid "<strong>Payment Date:</strong>"
+msgstr "<strong>Fecha de pago:</strong>"
 
 #. module: billing_do
 #: model_terms:ir.ui.view,arch_db:billing_do.billing_do_account_payment_receipt_template

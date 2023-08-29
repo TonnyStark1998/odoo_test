@@ -9,11 +9,15 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        <strong><span t-field="o.company_id.name" style="text-transform: uppercase;" /></strong>
+                                        <strong>
+                                            <span t-field="o.company_id.name" 
+                                                style="text-transform: uppercase;" />
+                                        </strong>
                                     </th>
                                     <th>
                                         <span t-if="o.name">
-                                            <strong style="text-transform: uppercase;">Receipt</strong> <span t-field="o.name" style="font-weight:normal !important;" />
+                                            <strong style="text-transform: uppercase;">Receipt</strong> 
+                                            <span t-field="o.name" style="font-weight:normal !important;" />
                                         </span>
                                     </th>
                                 </tr>
@@ -32,38 +36,48 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <span t-if="o.payment_date">
-                                            <strong>Payment Date:</strong> <span t-field="o.payment_date"/>
+                                        <span t-if="o.date">
+                                            <strong>Payment Date:</strong> 
+                                            <span t-field="o.date"/>
                                         </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <strong>Payment Method:</strong> <span t-field="o.payment_method_id.name" />
+                                        <strong>Payment Method:</strong> 
+                                        <span t-field="o.payment_method_id.name" />
                                     </td>
                                     <td>
-                                        <strong>Payment Amount: </strong> <span t-field="o.amount" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                        <strong>Payment Amount: </strong> 
+                                        <span t-field="o.amount" 
+                                            t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="row mt64" t-if="o.move_name or o.communication">
+                    <div class="row mt64" t-if="o.move_id.name or o.ref">
                         <div class="col align-self-center">
                             <div class="card">
                                 <div class="card-header">
                                     <span>Concept</span>
                                 </div>
                                 <div class="card-body">
-                                    <h5 class="card-title" t-if="o.communication"><span t-field="o.communication" /></h5>
-                                    <h5 class="card-title" t-if="not o.communication"><span t-field="o.move_name" /></h5>
+                                    <h5 class="card-title" t-if="o.ref">
+                                        <span t-field="o.ref" />
+                                    </h5>
+                                    <h5 class="card-title" t-if="not o.ref">
+                                        <span t-field="o.move_id.name" />
+                                    </h5>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row mt64">
                         <div class="col-6">
-                            <span><strong>Received by: </strong>____________________________ </span>
+                            <span>
+                                <strong>Received by: </strong>____________________________ 
+                            </span>
                         </div>
                         <div class="col-6">
                             <p class="text-right">
