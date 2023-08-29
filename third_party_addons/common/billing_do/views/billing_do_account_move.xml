@@ -107,8 +107,8 @@
                     'invisible': 
                         [('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))],
                     'required': 
-                        ['|', ('is_tax_valuable', '=', True),
-                            ('is_third_party_ncf', '=', True)]
+                        ['&amp;', ('move_type', 'not in', ['entry']), 
+                            '|', ('is_tax_valuable', '=', True), ('is_third_party_ncf', '=', True)]
                 }
                 </attribute>
             </field>
