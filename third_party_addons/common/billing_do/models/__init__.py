@@ -29,4 +29,5 @@ from . import billing_do_exceptions,\
 				billing_do_currency_rate_http_service_helper,\
 				billing_do_account_move_line,\
 				billing_do_account_payment_register,\
-                billing_do_ncf_type
+                billing_do_ncf_type,\
+                billing_do_account_move_reversal
