@@ -158,27 +158,27 @@ odoo.define('om_dynamic_reports.DynamicReports', function (require) {
         _fetchOtherReports: function () {
             return [{
                 id: 'journals_audit',
-                name: 'Journals Audit',
+                name: 'Auditoría de Libros',
                 type: 'fixed'
             }, {
                 id: 'partner_ledger',
-                name: 'Partner Ledger',
+                name: 'Libro mayor de empresa',
                 type: 'fixed'
             }, {
                 id: 'general_ledger',
-                name: 'General Ledger',
+                name: 'Libro Mayor',
                 type: 'fixed'
             }, {
                 id: 'trial_balance',
-                name: 'Trial Balance',
+                name: 'Balance de Comprobación',
                 type: 'fixed'
             }, {
                 id: 'aged_partner',
-                name: 'Aged Partner Balance',
+                name: 'Balance vencido de empresa',
                 type: 'fixed'
             }, {
                 id: 'tax_report',
-                name: 'Tax Report',
+                name: 'Reporte Impuestos',
                 type: 'fixed'
             }];
         },
