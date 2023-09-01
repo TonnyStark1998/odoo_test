@@ -38,11 +38,6 @@
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="ncf_serie"
                     invisible="true" />
-                <field name="is_tax_valuable"
-                    attrs="{'readonly': [('posted_before', '=', True)]}" />
-                <field name="is_third_party_ncf"
-                    attrs="{'invisible': [('move_type', 'in', ['out_invoice', 'out_refund', 'out_receipt'])],
-                        'readonly': [('posted_before', '=', True)]}" />
                 <field name="ncf_type_code"
                     invisible="True" />
                 <field name="ncf_type" 
@@ -112,6 +107,14 @@
                 }
                 </attribute>
             </field>
+            <xpath expr="//page[@name='other_info']/group/group[@name='accounting_info_group']/field[@name='company_id']" 
+                position="before">
+                <field name="is_tax_valuable"
+                    attrs="{'readonly': [('posted_before', '=', True)]}" />
+                <field name="is_third_party_ncf"
+                    attrs="{'invisible': [('move_type', 'in', ['out_invoice', 'out_refund', 'out_receipt'])],
+                        'readonly': [('posted_before', '=', True)]}" />
+            </xpath>
         </field>
     </record>
     <record model="ir.ui.view" id="billing_do_view_invoice_tree">
