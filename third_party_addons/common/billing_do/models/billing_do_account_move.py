@@ -82,7 +82,7 @@ class BillingDoAccountMove(models.Model):
                                      default=False)
 
     # Account Move - OnChange Field's Functions
-    @api.onchange('ncf', 'partner_id', 'security_code')
+    @api.onchange('ncf', 'partner_id', 'security_code', 'invoice_date')
     def _onchange_ncf(self):
         try:
             if self.ncf and len(self.ncf) > 1:
@@ -349,6 +349,11 @@ class BillingDoAccountMove(models.Model):
                         _('Please, first select the vendor and then enter the value for NCF field.')
                     )
 
+            if not self.invoice_date:
+                raise exceptions.UserError(
+                        _('Please, first select the invoice date and then enter the value for NCF field.')
+                    )
+
             if self.partner_id.vat:
                 ncf_exists = self.env['account.move']\
                     .search_count([
@@ -374,10 +379,17 @@ class BillingDoAccountMove(models.Model):
 
             if _trn_helper.is_valid_trn_do(ncf):
                 _trn_service_helper = self.env['billing.do.trn.http.service.helper'].sudo()
-                return _trn_service_helper.dgii_validate_ncf(self.partner_id.vat, 
+                result = _trn_service_helper.dgii_validate_ncf(self.partner_id.vat, 
                                                                 ncf,
                                                                 self.env.company.vat,
                                                                 self.security_code)
+
+                if not result[0]:
+                    if self.invoice_date > result[1]:
+                        raise exceptions.ValidationError(_("The tax receipt number {0} entered is not valid or does not belongs to the VAT {1}.")
+                                                            .format(ncf, self.partner_id.vat))
+
+                return True
 
     def __validate_vat_journal_b11(self, model):
         vat_helper = self.env['billing.do.vat.http.service.helper'].sudo()
