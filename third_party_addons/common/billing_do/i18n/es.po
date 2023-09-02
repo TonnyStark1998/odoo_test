@@ -1487,7 +1487,7 @@ msgstr ""
 #. module: billing_do
 #. odoo-python
 #: code:addons/billing_do/models/billing_do_trn_http_service_helper.py:0
-#: code:addons/billing_do/models/billing_do_trn_http_service_helper.py:0
+#: code:addons/billing_do/models/billing_do_account_move.py:0
 #, python-format
 msgid ""
 "The tax receipt number {0} entered is not valid or does not belongs to the "
@@ -1696,3 +1696,12 @@ msgstr "¡Error de usuario!"
 #, python-format
 msgid "¡Validation error!"
 msgstr "¡Error de validación!"
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#, python-format
+msgid ""
+"Please, first select the invoice date and then enter the value for NCF field."
+msgstr ""
+"Por favor, seleccione primero la fecha de la factura y luego digite el NCF."

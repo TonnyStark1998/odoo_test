@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import logging as log
-import json
+from datetime \
+    import datetime \
+    as datetime
 
 from odoo\
     import models, exceptions, _
@@ -48,9 +50,9 @@ class BillingDoTrnHttpServiceHelper(models.AbstractModel):
                 })
 
             response = self.send_request(request_uri, 
-                                            http_method=self.HTTP_METHODS['post'],
-                                            headers=headers,
-                                            data=data)
+                            http_method=self.HTTP_METHODS['post'],
+                            headers=headers,
+                            data=data)
 
             log.info("[KCS] Request (Status Code): {0}".format(response.status_code))
 
@@ -62,21 +64,14 @@ class BillingDoTrnHttpServiceHelper(models.AbstractModel):
                 
                 elif response.status_code == 404:
                     raise exceptions.ValidationError(_("The tax receipt number {0} entered is not valid or does not belongs to the VAT {1}.")
-                                                        .format(ncf,
-                                                                vat))
+                        .format(ncf,vat))
                 
                 elif response.status_code == 400:
                     raise exceptions.UserError(_("The values entered for TRN ({0}) and VAT ({1}) are invalid.")
-                                                    .format(ncf, 
-                                                            vat))
+                        .format(ncf, vat))
                 
                 elif response.status_code == 200:
-                    if not bool(response.json()['isValid']):
-                        raise exceptions.ValidationError(_("The tax receipt number {0} entered is not valid or does not belongs to the VAT {1}.")
-                                                            .format(ncf,
-                                                                    vat))
-                    else:
-                        return True
-
+                    return (bool(response.json()['isValid']),
+                            datetime.fromisoformat(response.json()['dueDate']).date())
             return False
         return None
