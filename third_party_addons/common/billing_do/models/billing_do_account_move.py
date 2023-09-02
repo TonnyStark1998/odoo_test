@@ -523,3 +523,6 @@ class BillingDoAccountMove(models.Model):
         sequence.number_next_actual = \
                 sequence.number_next + 1
         sequence._set_number_next_actual()
+
+    def _must_check_constrains_date_sequence(self):
+        return False
