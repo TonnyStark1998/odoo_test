@@ -131,50 +131,51 @@ class ArsDoAccountMove(models.Model):
     # Override methods
     def _post(self, soft=True):
         posted = super()._post(soft)
-        if self.move_type in ['out_invoice', 'out_refund'] \
-            and self.healthcare_invoice == 'healthcare_invoice'\
-            and posted:
-            invoice_id = self.id
-            invoice_date = self.invoice_date
-            healthcare_patient = self.partner_id.name
-            identity_number = self.partner_id.vat or ''
-            healthcare_provider = self.healthcare_provider.id
-            healthcare_plan = self.healthcare_plan
-            healthcare_card = self.healthcare_card.number
-            healthcare_authorization_number = self.healthcare_authorization_number
-            currency_id = self.currency_id
-            report = self._create_report()
-            
-            log.info('[KCS] Report State: {}'.format(report.state))
-            if report.state in ['sent', 'reconciling', 'reconciled']:
-                posted = False
-                return {
-                    'warning': {
-                        'title': _('Report restriction!'),
-                        '': _('Report of {} for period {}-{} has been already sent. Can\'t add more invoice to it.'
-                                    .format(report.healthcare_provider.name, report.report_month, report.report_year))
+        for move in self:
+            if move.move_type in ['out_invoice', 'out_refund'] \
+                and move.healthcare_invoice == 'healthcare_invoice'\
+                and posted:
+                invoice_id = move.id
+                invoice_date = move.invoice_date
+                healthcare_patient = move.partner_id.name
+                identity_number = move.partner_id.vat or ''
+                healthcare_provider = move.healthcare_provider.id
+                healthcare_plan = move.healthcare_plan
+                healthcare_card = move.healthcare_card.number
+                healthcare_authorization_number = move.healthcare_authorization_number
+                currency_id = move.currency_id
+                report = move._create_report()
+                
+                log.info('[KCS] Report State: {}'.format(report.state))
+                if report.state in ['sent', 'reconciling', 'reconciled']:
+                    posted = False
+                    return {
+                        'warning': {
+                            'title': _('Report restriction!'),
+                            '': _('Report of {} for period {}-{} has been already sent. Can\'t add more invoice to it.'
+                                        .format(report.healthcare_provider.name, report.report_month, report.report_year))
+                        }
                     }
-                }
 
-            for invoice_line in self.invoice_line_ids:
-                self.env['ars.do.healthcare.report.ars.item']\
-                        .create({
-                            'report_id': report.id,
-                            'invoice_id': invoice_id,
-                            'invoice_line_id': invoice_line.id,
-                            'invoice_date': invoice_date,
-                            'healthcare_patient': healthcare_patient,
-                            'identity_number': identity_number,
-                            'healthcare_provider': healthcare_provider,
-                            'healthcare_plan': healthcare_plan,
-                            'healthcare_card': healthcare_card,
-                            'healthcare_authorization_number': healthcare_authorization_number,
-                            'healthcare_procedure': invoice_line.product_id.name,
-                            'currency_id': currency_id.id,
-                            'amount': ((invoice_line.quantity * invoice_line.price_unit)
-                                        * (1 - (invoice_line.discount / 100))
-                                        * (invoice_line.coverage / 100))
-                        })
+                for invoice_line in move.invoice_line_ids:
+                    self.env['ars.do.healthcare.report.ars.item']\
+                            .create({
+                                'report_id': report.id,
+                                'invoice_id': invoice_id,
+                                'invoice_line_id': invoice_line.id,
+                                'invoice_date': invoice_date,
+                                'healthcare_patient': healthcare_patient,
+                                'identity_number': identity_number,
+                                'healthcare_provider': healthcare_provider,
+                                'healthcare_plan': healthcare_plan,
+                                'healthcare_card': healthcare_card,
+                                'healthcare_authorization_number': healthcare_authorization_number,
+                                'healthcare_procedure': invoice_line.product_id.name,
+                                'currency_id': currency_id.id,
+                                'amount': ((invoice_line.quantity * invoice_line.price_unit)
+                                            * (1 - (invoice_line.discount / 100))
+                                            * (invoice_line.coverage / 100))
+                            })
         return posted
 
     def button_draft(self):
@@ -193,22 +194,23 @@ class ArsDoAccountMove(models.Model):
                     .unlink()
 
     def write(self, values):
-        original_healthcare_authorization_number = \
-            self.healthcare_authorization_number
-        move = super().write(values)
-        if 'healthcare_authorization_number' in values\
-            and self.invoice_date:
-            report = self._get_report_or_default()
-            if not report is None:
-                invoice_id = self.id
-                self.env['ars.do.healthcare.report.ars.item']\
-                    .search([('invoice_id', '=', invoice_id), ('report_id', '=', report.id)])\
-                    .write({
-                        'healthcare_authorization_number': values.get('healthcare_authorization_number')
-                    })
-                log.info('[ARS] Healthcare Authorization Number changed: from {} to {}'
-                         .format(original_healthcare_authorization_number, values.get('healthcare_authorization_number')))
-        return move
+        for move in self:
+            original_healthcare_authorization_number = \
+                move.healthcare_authorization_number
+            if 'healthcare_authorization_number' in values\
+                and move.invoice_date:
+                report = move._get_report_or_default()
+                if not report is None:
+                    invoice_id = move.id
+                    self.env['ars.do.healthcare.report.ars.item']\
+                        .search([('invoice_id', '=', invoice_id), ('report_id', '=', report.id)])\
+                        .write({
+                            'healthcare_authorization_number': values.get('healthcare_authorization_number')
+                        })
+                    log.info('[ARS] Healthcare Authorization Number changed: from {} to {}'
+                            .format(original_healthcare_authorization_number, values.get('healthcare_authorization_number')))
+
+        return super().write(values)
 
     # Private Methods
     def _create_report(self):
