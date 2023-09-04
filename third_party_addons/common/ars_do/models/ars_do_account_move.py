@@ -193,22 +193,23 @@ class ArsDoAccountMove(models.Model):
                     .unlink()
 
     def write(self, values):
-        original_healthcare_authorization_number = \
-            self.healthcare_authorization_number
-        move = super().write(values)
-        if 'healthcare_authorization_number' in values\
-            and self.invoice_date:
-            report = self._get_report_or_default()
-            if not report is None:
-                invoice_id = self.id
-                self.env['ars.do.healthcare.report.ars.item']\
-                    .search([('invoice_id', '=', invoice_id), ('report_id', '=', report.id)])\
-                    .write({
-                        'healthcare_authorization_number': values.get('healthcare_authorization_number')
-                    })
-                log.info('[ARS] Healthcare Authorization Number changed: from {} to {}'
-                         .format(original_healthcare_authorization_number, values.get('healthcare_authorization_number')))
-        return move
+        for move in self:
+            original_healthcare_authorization_number = \
+                move.healthcare_authorization_number
+            if 'healthcare_authorization_number' in values\
+                and move.invoice_date:
+                report = move._get_report_or_default()
+                if not report is None:
+                    invoice_id = move.id
+                    self.env['ars.do.healthcare.report.ars.item']\
+                        .search([('invoice_id', '=', invoice_id), ('report_id', '=', report.id)])\
+                        .write({
+                            'healthcare_authorization_number': values.get('healthcare_authorization_number')
+                        })
+                    log.info('[ARS] Healthcare Authorization Number changed: from {} to {}'
+                            .format(original_healthcare_authorization_number, values.get('healthcare_authorization_number')))
+
+        return super().write(values)
 
     # Private Methods
     def _create_report(self):
