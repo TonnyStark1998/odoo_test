@@ -13,4 +13,5 @@ class BillingDoAccountTax(models.Model):
         ('ITBIS', 'ITBIS'),
         ('VEH', 'VEH'),
         ('Otro', 'Otro'),
+        ('Propina', 'Propina')
     ], string="Tax Type", required=True, store=True, copy=True)

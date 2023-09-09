@@ -42,16 +42,15 @@ class BillingDoTaxReportItem606(models.Model):
 
     date_payment_month = fields.Char(string='Payment Date Month')
     date_payment_day = fields.Char(string='Payment Date Day')
-    payment_type = fields.Selection(selection=[('01', '01 - EFECTIVO'),
-                                                        ('02', '02 - CHEQUES/TRANSFERENCIAS/DEPÓSITO'),
-                                                        ('03', '03 - TARJETA CRÉDITO/DÉBITO'),
-                                                        ('04', '04 - COMPRA A CREDITO'),
-                                                        ('05', '05 -  PERMUTA'),
-                                                        ('06', '06 - NOTA DE CREDITO'),
-                                                        ('07', '07 - MIXTO'),
-                                                    ],
-                                        string='Payment Type'
-                                    )
+    payment_type = \
+        fields.Selection(selection=[('01', '01 - EFECTIVO'),
+                                    ('02', '02 - CHEQUES/TRANSFERENCIAS/DEPÓSITO'),
+                                    ('03', '03 - TARJETA CRÉDITO/DÉBITO'),
+                                    ('04', '04 - COMPRA A CREDITO'),
+                                    ('05', '05 - PERMUTA'),
+                                    ('06', '06 - NOTA DE CREDITO'),
+                                    ('07', '07 - MIXTO')],
+                        string='Payment Type')
 
     tax_amount = fields.Monetary(string='Tax Amount', 
                                     default=0.0)
@@ -164,19 +163,22 @@ class BillingDoTaxReportItem606(models.Model):
                             tax_report_item['service_amount'] += unit_price
 
                 # Calculate the tax amounts
-                if move_line.tax_line_id:
-                    tax = move_line.tax_line_id.tax_group_id.name
-                    tax_amount = self._convert_amount_to_dop(currency,
-                                                                move_line.amount_currency,
-                                                                move.invoice_date,
-                                                                move.company_id
-                                                            )
+                if move_line.tax_line_id and move_line.move_id.id == move.id:
+                    tax = move_line.tax_line_id.tax_type
+                    tax_amount = \
+                        self._convert_amount_to_dop(currency,
+                            move_line.amount_currency,
+                            move.invoice_date,
+                            move.company_id)
+                    
+                    sign = move.direction_sign
+                    tax_amount *= sign
 
                     if tax == "ITBIS":
                         tax_report_item['tax_amount'] += tax_amount
                     elif tax == "ISC":
                         tax_report_item['isc_amount'] += tax_amount
-                    elif tax == "Otros Impuestos":
+                    elif tax == "Otro":
                         tax_report_item['other_taxes_amount'] += tax_amount
                     elif tax == "Propina":
                         tax_report_item['legaltip_amount'] += tax_amount
@@ -184,8 +186,11 @@ class BillingDoTaxReportItem606(models.Model):
             tax_report_item['total_amount'] = \
                         tax_report_item['consumable_amount'] + tax_report_item['service_amount']
 
-            if move.payment_state in ['paid']\
+            if move.payment_state in ['paid', 'reversed']\
                 and _payment_move_lines:
+
+                log.info('[KCS] Payment Move Lines: {}'.format(_payment_move_lines))
+
                 for _payment_move_line in _payment_move_lines:
 
                     if _payment_move_line.account_internal_type \
