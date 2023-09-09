@@ -69,8 +69,8 @@ class BillingDoTaxReportItem607(models.Model):
         moves = self._get_items(tax_report, tax_term_date)
         
         for move in moves:
-            tax_report_item = super(BillingDoTaxReportItem607, self)\
-                                    .generate_item(move, tax_report)
+            tax_report_item = \
+                super().generate_item(move, tax_report)
 
             tax_report_item\
                 .update(self.generate_item(move, tax_report))
@@ -110,12 +110,14 @@ class BillingDoTaxReportItem607(models.Model):
             _payment_move_lines = False if not _reconciled_values \
                 else self._get_payment_lines(_reconciled_values)
 
-            tax_report_item.update(self._get_held_amounts(move.line_ids if not _payment_move_lines\
-                                                          else move.line_ids + _payment_move_lines))
+            move_line_ids = move.line_ids if not _payment_move_lines \
+                else move.line_ids + _payment_move_lines
+            
+            tax_report_item.update(self._get_held_amounts(move_line_ids))
             
             tax_report_item.update(self._calculate_payments_amounts(move, _reconciled_values))
 
-            if move.payment_state in ['paid'] \
+            if move.payment_state in ['paid', 'reversed'] \
                 and _reconciled_values:
 
                 if tax_report_item['held_amount_itbis'] > 0 \
@@ -141,7 +143,7 @@ class BillingDoTaxReportItem607(models.Model):
 
         _payment_amount = 0.0
 
-        if move.payment_state in ['paid']\
+        if move.payment_state in ['paid', 'reversed']\
             and reconciled_values:
             for _payment in reconciled_values:
                 _payment_type = self._get_payment_type(self.env['account.move.line']

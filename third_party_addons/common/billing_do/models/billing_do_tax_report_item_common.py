@@ -53,11 +53,11 @@ class BillingDoTaxReportItemCommon(models.AbstractModel):
             return '07'
     
     def _get_payment_lines(self, reconciled_values):
-        move_ids = [move_line['move_id'] \
-                        for move_line in reconciled_values]
+        move_ids = \
+            [move_line['move_id'] for move_line in reconciled_values]
 
-        _payment_move_lines = self.env['account.move.line']\
-                                    .search(domain=[('move_id', 'in', move_ids)])
+        _payment_move_lines = \
+            self.env['account.move.line'].search(domain=[('move_id', 'in', move_ids)])
 
         return _payment_move_lines
 
