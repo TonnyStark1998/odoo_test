@@ -49,6 +49,8 @@ class BillingDoTaxReportItemCommon(models.AbstractModel):
             return '02'
         elif journal.type in ['credit_debit_card']:
             return '03'
+        elif journal.type in ['purchase']:
+            return '06'
         else:
             return '07'
     

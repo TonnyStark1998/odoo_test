@@ -159,13 +159,10 @@ class BillingDoTaxReportItem607(models.Model):
 
                 if _payment_type in ['01']:
                     tax_report_item['amount_cash'] += _payment_amount
-
                 elif _payment_type in ['02']:
                     tax_report_item['amount_bank'] += _payment_amount
-
                 elif _payment_type in ['03']:
                     tax_report_item['amount_credit_debit_card'] += _payment_amount
-                
                 else:
                     tax_report_item['amount_other_sale_way'] += _payment_amount
         else:

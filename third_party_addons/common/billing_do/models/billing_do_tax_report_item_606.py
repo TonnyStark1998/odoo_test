@@ -191,6 +191,8 @@ class BillingDoTaxReportItem606(models.Model):
 
                 log.info('[KCS] Payment Move Lines: {}'.format(_payment_move_lines))
 
+                _payment_types = set()
+
                 for _payment_move_line in _payment_move_lines:
 
                     if _payment_move_line.account_internal_type \
@@ -198,6 +200,10 @@ class BillingDoTaxReportItem606(models.Model):
 
                         tax_report_item['payment_type'] = \
                             self._get_payment_type(_payment_move_line.journal_id)
+                        _payment_types.add(tax_report_item['payment_type'])
+                
+                if len(_payment_types) > 1:
+                    tax_report_item['payment_type'] = '07'
 
                 if (tax_report_item['held_amount_itbis'] > 0 \
                         or tax_report_item['held_amount_isr'] > 0)\
