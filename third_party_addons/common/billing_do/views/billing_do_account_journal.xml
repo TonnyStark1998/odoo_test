@@ -18,6 +18,16 @@
                             'required': 
                                 [('type', 'in', ['purchase'])]}" />
             </field>
+            <xpath expr="//notebook/page/group/group/field[@name='default_account_id']" position="replace">
+                <field name="default_account_id" nolabel="1"
+                    attrs="{'required': ['|', '&amp;', ('id', '!=', False), 
+                            ('type', 'in', ('bank', 'cash')), 
+                            ('type', 'in', ('sale', 'purchase'))],
+                        'invisible': 
+                            [('type', 'in', (False, 'general', 'credit_debit_card'))]}"
+                    options="{'no_quick_create': True}"
+                    groups="account.group_account_readonly"/>
+            </xpath>
         </field>
     </record>
 </odoo>
