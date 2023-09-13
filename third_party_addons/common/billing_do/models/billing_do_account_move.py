@@ -6,80 +6,122 @@ import logging as log
 
 from odoo\
     import models, fields, api, exceptions, _
+from odoo.tools\
+    import index_exists, drop_index
 
 class BillingDoAccountMove(models.Model):
     _inherit = "account.move"
 
     # Account Move - New Fields
     income_type = fields.Selection(selection=[
-                                                ('01', '01 - Ingresos por Operaciones (No Financieros)'),
-                                                ('02', '02 - Ingresos Financieros'),
-                                                ('03', '03 - Ingresos Extraordinarios'),
-                                                ('04', '04 - Ingresos por Arrendamientos'),
-                                                ('05', '05 - Ingresos por Venta de Activo Depreciable'),
-                                                ('06', '06 - Otros Ingresos')
-                                            ], 
-                                    required=True, 
-                                    store=True, 
-                                    readonly=False, 
-                                    copy=False, 
-                                    tracking=True, 
-                                    default='01',
-                                    string='Income Type')
+            ('01', '01 - Ingresos por Operaciones (No Financieros)'),
+            ('02', '02 - Ingresos Financieros'),
+            ('03', '03 - Ingresos Extraordinarios'),
+            ('04', '04 - Ingresos por Arrendamientos'),
+            ('05', '05 - Ingresos por Venta de Activo Depreciable'),
+            ('06', '06 - Otros Ingresos')], 
+        required=True, 
+        store=True, 
+        readonly=False, 
+        copy=False, 
+        tracking=True, 
+        default='01',
+        string='Income Type')
 
     expense_type = fields.Selection(selection=[
-                                                ('01', '01 -GASTOS DE PERSONAL'),
-                                                ('02', '02-GASTOS POR TRABAJOS, SUMINISTROS Y SERVICIOS'),
-                                                ('03', '03-ARRENDAMIENTOS'),
-                                                ('04', '04-GASTOS DE ACTIVOS FIJO'),
-                                                ('05', '05 -GASTOS DE REPRESENTACIÓN'),
-                                                ('06', '06 -OTRAS DEDUCCIONES ADMITIDAS'),
-                                                ('07', '07 -GASTOS FINANCIEROS'),
-                                                ('08', '08 -GASTOS EXTRAORDINARIOS'),
-                                                ('09', '09 -COMPRAS Y GASTOS QUE FORMARAN PARTE DEL COSTO DE VENTA'),
-                                                ('10', '10 -ADQUISICIONES DE ACTIVOS'),
-                                                ('11', '11- GASTOS DE SEGUROS'),
-                                            ], 
-                                    required=True, 
-                                    store=True, 
-                                    readonly=False, 
-                                    copy=True, 
-                                    tracking=True, 
-                                    default='02',
-                                    string='Expense Type')
+            ('01', '01 -GASTOS DE PERSONAL'),
+            ('02', '02-GASTOS POR TRABAJOS, SUMINISTROS Y SERVICIOS'),
+            ('03', '03-ARRENDAMIENTOS'),
+            ('04', '04-GASTOS DE ACTIVOS FIJO'),
+            ('05', '05 -GASTOS DE REPRESENTACIÓN'),
+            ('06', '06 -OTRAS DEDUCCIONES ADMITIDAS'),
+            ('07', '07 -GASTOS FINANCIEROS'),
+            ('08', '08 -GASTOS EXTRAORDINARIOS'),
+            ('09', '09 -COMPRAS Y GASTOS QUE FORMARAN PARTE DEL COSTO DE VENTA'),
+            ('10', '10 -ADQUISICIONES DE ACTIVOS'),
+            ('11', '11- GASTOS DE SEGUROS')], 
+        required=True, 
+        store=True, 
+        readonly=False, 
+        copy=True, 
+        tracking=True, 
+        default='02',
+        string='Expense Type')
 
     ncf = fields.Char(string="NCF",
-                        readonly=False,
-                        copy=False, 
-                        store=True, 
-                        tracking=True, 
-                        states={'posted': [('readonly', True)]})
+        readonly=False,
+        copy=False, 
+        store=True, 
+        tracking=True, 
+        states={'posted': [('readonly', True)]})
 
-    ncf_serie = fields.Char(string='NCF Serie',
-                            default='')
+    ncf_serie = fields.Char(string='NCF Serie', default='')
 
     ncf_date_to = fields.Date(string="NCF valid to:", 
-                                readonly=True, 
-                                copy=False, 
-                                store=True, 
-                                tracking=True)
+        readonly=True, 
+        copy=False, 
+        store=True, 
+        tracking=True)
 
-    security_code = fields.Char(string='Security Code',
-                                    copy=False)
+    security_code = fields.Char(string='Security Code', copy=False)
 
     ncf_type = fields.Many2one(comodel_name='billing.do.ncf.type',
-                               string='NCF Type',
-                               domain=lambda self: self._get_ncf_type_domain())
+        string='NCF Type',
+        domain=lambda self: self._get_ncf_type_domain())
     
-    ncf_type_sequence = fields.Many2one(comodel_name='ir.sequence.date_range',
-                                        string='NCF Type Sequence Used')
+    ncf_type_sequence = fields.Many2one(comodel_name='ir.sequence.date_range', string='NCF Type Sequence Used')
     
     ncf_type_code = fields.Char(related='ncf_type.type')
 
-    is_tax_valuable = fields.Boolean(string='Is tax valuable?',
-                                     default=True)
-    is_third_party_ncf = fields.Boolean(string='Is third-party NCF?',
-                                     default=False)
+    is_tax_valuable = fields.Boolean(string='Is tax valuable?', default=True)
+
+    is_third_party_ncf = fields.Boolean(string='Is third-party NCF?', default=False)
+
+    _sql_constraints = [(
+        'unique_name', "", "Another entry with the same name already exists.",
+    )]
+
+    def _auto_init(self):
+        if index_exists(self.env.cr, 'account_move_unique_name'):
+            drop_index(self.env.cr, "account_move_unique_name", self._table)
+
+        # Make all values of `name` different (naming them `name (1)`, `name (2)`...) so that we can add the following UNIQUE INDEX
+        self.env.cr.execute("""
+            WITH duplicated_sequence AS (
+                SELECT name, journal_id, state
+                    FROM account_move
+                    WHERE state = 'posted'
+                    AND name != '/'
+                GROUP BY journal_id, name, state
+                HAVING COUNT(*) > 1
+            ),
+            to_update AS (
+                SELECT move.id,
+                        move.name,
+                        move.journal_id,
+                        move.state,
+                        move.date,
+                        row_number() OVER(PARTITION BY move.name, move.journal_id ORDER BY move.name, move.journal_id, move.date) AS row_seq
+                    FROM duplicated_sequence
+                    JOIN account_move move ON move.name = duplicated_sequence.name
+                                        AND move.journal_id = duplicated_sequence.journal_id
+                                        AND move.state = duplicated_sequence.state
+            ),
+            new_vals AS (
+                SELECT id,
+                        name || ' (' || (row_seq-1)::text || ')' AS name
+                    FROM to_update
+                    WHERE row_seq > 1
+            )
+            UPDATE account_move
+                SET name = new_vals.name
+                FROM new_vals
+                WHERE account_move.id = new_vals.id;
+        """)
+        self.env.cr.execute("""
+            CREATE UNIQUE INDEX account_move_unique_name
+            ON account_move(name, journal_id, partner_id) WHERE (state = 'posted' AND name != '/');
+        """)
 
     # Account Move - OnChange Field's Functions
     @api.onchange('ncf', 'partner_id', 'security_code', 'invoice_date')
@@ -212,14 +254,14 @@ class BillingDoAccountMove(models.Model):
             except:
                 raise
 
-    @api.constrains('name', 'state')
+    @api.constrains('name', 'state', 'journal_id')
     def _check_unique_sequence_number(self):
         moves = self.filtered(lambda move: move.state == 'posted')
 
         if not moves:
             return
         
-        self.env.flush_all()
+        self.flush_model(['name', 'journal_id', 'move_type', 'state'])
 
         # /!\ Computed stored fields are not yet inside the database.
         self._cr.execute('''
