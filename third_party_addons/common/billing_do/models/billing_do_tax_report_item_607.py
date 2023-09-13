@@ -115,7 +115,7 @@ class BillingDoTaxReportItem607(models.Model):
             
             tax_report_item.update(self._get_held_amounts(move_line_ids))
             
-            tax_report_item.update(self._calculate_payments_amounts(move, _reconciled_values))
+            tax_report_item.update(self._calculate_payments_amounts(move, _payment_move_lines))
 
             if move.payment_state in ['paid', 'reversed'] \
                 and _reconciled_values:
@@ -132,7 +132,7 @@ class BillingDoTaxReportItem607(models.Model):
         
         return len(moves)
     
-    def _calculate_payments_amounts(self, move, reconciled_values):
+    def _calculate_payments_amounts(self, move, move_line_ids):
         tax_report_item = {
             'amount_cash': 0.00,
             'amount_bank': 0.00,
@@ -144,27 +144,26 @@ class BillingDoTaxReportItem607(models.Model):
         _payment_amount = 0.0
 
         if move.payment_state in ['paid', 'reversed']\
-            and reconciled_values:
-            for _payment in reconciled_values:
-                _payment_type = self._get_payment_type(self.env['account.move.line']
-                                                            .search([('id', '=', _payment['account_payment_id'])])
-                                                            .journal_id)
+            and move_line_ids:
+            for _move_line_id in move_line_ids:
+                if _move_line_id.account_id.account_type in ['asset_receivable']:
+                    _payment_type = self._get_payment_type(_move_line_id.journal_id)
+                    _currency = self._get_move_line_currency(_move_line_id)
 
-                _payment_amount = \
-                    self._convert_amount_to_dop(self.env['res.currency']
-                                                    .search([('id', '=', _payment['currency_id'])]),
-                                                _payment['amount'],
-                                                move.invoice_date,
-                                                move.company_id)
+                    _payment_amount = \
+                        self._convert_amount_to_dop(_currency,
+                                                    _move_line_id.debit + _move_line_id.credit,
+                                                    move.invoice_date,
+                                                    move.company_id)
 
-                if _payment_type in ['01']:
-                    tax_report_item['amount_cash'] += _payment_amount
-                elif _payment_type in ['02']:
-                    tax_report_item['amount_bank'] += _payment_amount
-                elif _payment_type in ['03']:
-                    tax_report_item['amount_credit_debit_card'] += _payment_amount
-                else:
-                    tax_report_item['amount_other_sale_way'] += _payment_amount
+                    if _payment_type in ['01']:
+                        tax_report_item['amount_cash'] += _payment_amount
+                    elif _payment_type in ['02']:
+                        tax_report_item['amount_bank'] += _payment_amount
+                    elif _payment_type in ['03']:
+                        tax_report_item['amount_credit_debit_card'] += _payment_amount
+                    else:
+                        tax_report_item['amount_other_sale_way'] += _payment_amount
         else:
             _payment_amount = \
                 self._convert_amount_to_dop(move.currency_id or move.company_id.currency_id,
