@@ -18,9 +18,7 @@
         'views/account_bank_statement_import_view.xml',
         'views/account_bank_statement_view.xml',
     ],
-    'demo': [
-        'demo/partner_bank.xml',
-    ],
+    'demo': [],
     'images': ['static/description/banner.png'],
     'installable': True,
     'auto_install': False,
