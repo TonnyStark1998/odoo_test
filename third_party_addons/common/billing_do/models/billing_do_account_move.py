@@ -12,6 +12,9 @@ from odoo.tools\
 class BillingDoAccountMove(models.Model):
     _inherit = "account.move"
 
+    # Account Move - Modified Fields
+    invoice_date = fields.Date(default=lambda self: self._default_invoice_date())
+
     # Account Move - New Fields
     income_type = fields.Selection(selection=[
             ('01', '01 - Ingresos por Operaciones (No Financieros)'),
@@ -382,6 +385,14 @@ class BillingDoAccountMove(models.Model):
     def _onchange_name_warning(self):
         if not self.is_tax_valuable:
             super()._onchange_name_warning()
+
+    # Account Move - Default Value Functions
+    def _default_invoice_date(self):
+        move_type = self._context.get('default_move_type')
+        # If move_type is out_invoice, out_refund, in_invoice, in_refund or entry, set invoice_date to today
+        if move_type \
+            in ['out_invoice', 'in_invoice', 'out_refund', 'in_refund', 'entry']:
+            return date.datetime.today()
 
     # Account Move - Helper Functions
     def _validate_ncf(self, ncf):
