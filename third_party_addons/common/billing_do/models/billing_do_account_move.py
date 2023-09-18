@@ -389,8 +389,9 @@ class BillingDoAccountMove(models.Model):
     # Account Move - Default Value Functions
     def _default_invoice_date(self):
         move_type = self._context.get('default_move_type')
-        # If move_type is out_invoice or in_invoice, set invoice_date to today
-        if move_type in ['out_invoice', 'in_invoice']:
+        # If move_type is out_invoice, out_refund, in_invoice, in_refund or entry, set invoice_date to today
+        if move_type \
+            in ['out_invoice', 'in_invoice', 'out_refund', 'in_refund', 'entry']:
             return date.datetime.today()
 
     # Account Move - Helper Functions
