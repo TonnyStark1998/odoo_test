@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <odoo>
     <data>
-        <template name="Personal Template" id="INVOICE_15_document">
+        <template name="Nefrosalud Template" id="INVOICE_2_document">
             <!-- Multicompany -->
             <t t-if="invoice and 'company_id' in invoice">
                 <t t-set="company" t-value="invoice.company_id"/>

@@ -4,24 +4,22 @@
         <template id="sale_order">
             <t t-call="web.report_layout">
                 <t t-foreach="docs" t-as="sale">
-                    <t t-set="lang" t-value="sale.partner_id.lang"/>
-                    <t t-set="style" t-value="sale.style or sale.partner_id.style or res_company.style or user.env.ref('professional_templates.df_style_for_all_reports')"/>
-                    <t t-if="style.template_so.key =='professional_templates.SO_0_document'" t-call="professional_templates.SO_0_document" t-lang="lang"/>
-                    <t t-if="style.template_so.key =='professional_templates.SO_1_document'" t-call="professional_templates.SO_1_document" t-lang="lang"/>
-                    <t t-if="style.template_so.key =='professional_templates.SO_2_document'" t-call="professional_templates.SO_2_document" t-lang="lang"/>
-                    <t t-if="style.template_so.key =='professional_templates.SO_3_document'" t-call="professional_templates.SO_3_document" t-lang="lang"/>
-                    <t t-if="style.template_so.key =='professional_templates.SO_4_document'" t-call="professional_templates.SO_4_document" t-lang="lang"/>
-                    <t t-if="style.template_so.key =='professional_templates.SO_5_document'" t-call="professional_templates.SO_5_document" t-lang="lang"/>
-                    <t t-if="style.template_so.key =='professional_templates.SO_6_document'" t-call="professional_templates.SO_6_document" t-lang="lang"/>
-                    <t t-if="style.template_so.key =='professional_templates.SO_7_document'" t-call="professional_templates.SO_7_document" t-lang="lang"/>
-                    <t t-if="style.template_so.key =='professional_templates.SO_8_document'" t-call="professional_templates.SO_8_document" t-lang="lang"/>
-                    <t t-if="style.template_so.key =='professional_templates.SO_9_document'" t-call="professional_templates.SO_9_document" t-lang="lang"/>
-                    <t t-if="style.template_so.key =='professional_templates.SO_10_document'" t-call="professional_templates.SO_10_document" t-lang="lang"/>
-                    <t t-if="style.template_so.key =='professional_templates.SO_11_document'" t-call="professional_templates.SO_11_document" t-lang="lang"/>
-                    <t t-if="style.template_so.key =='professional_templates.SO_13_document'" t-call="professional_templates.SO_13_document" t-lang="lang"/>
-                    <t t-if="style.template_so.key =='professional_templates.SO_14_document'" t-call="professional_templates.SO_14_document" t-lang="lang"/>
-                    <t t-if="style.template_so.key =='professional_templates.SO_15_document'" t-call="professional_templates.SO_15_document" t-lang="lang"/>
-                    <t t-if="not style" t-call="sale.report_saleorder_document" t-lang="sale.partner_id.lang"/>
+                    <t t-set="lang" 
+                        t-value="sale.partner_id.lang"/>
+                    <t t-set="style" 
+                        t-value="sale.style 
+                            or sale.partner_id.style 
+                            or res_company.style 
+                            or user.env.ref('professional_templates.df_style_for_all_reports')"/>
+                    <t t-if="style.template_so.key =='professional_templates.SO_0_document'" 
+                        t-call="professional_templates.SO_0_document" 
+                        t-lang="lang"/>
+                    <t t-if="style.template_so.key =='professional_templates.SO_1_document'" 
+                        t-call="professional_templates.SO_1_document" 
+                        t-lang="lang"/>
+                    <t t-if="not style" 
+                        t-call="sale.report_saleorder_document" 
+                        t-lang="sale.partner_id.lang"/>
                 </t>
             </t>
         </template>
@@ -30,23 +28,20 @@
             <t t-set="is_pro_forma" t-value="True"/>
                 <t t-call="web.report_layout">
                     <t t-foreach="docs" t-as="sale">
-                        <t t-set="style" t-value="sale.style or sale.partner_id.style or res_company.style or user.env.ref('professional_templates.df_style_for_all_reports')"/>
-                        <t t-if="style.template_so.key == 'professional_templates.SO_0_document'" t-call="professional_templates.SO_0_document" t-lang="doc.partner_id.lang"/>
-                        <t t-if="style.template_so.key == 'professional_templates.SO_1_document'" t-call="professional_templates.SO_1_document" t-lang="doc.partner_id.lang"/>
-                        <t t-if="style.template_so.key == 'professional_templates.SO_2_document'" t-call="professional_templates.SO_2_document" t-lang="doc.partner_id.lang"/>
-                        <t t-if="style.template_so.key == 'professional_templates.SO_3_document'" t-call="professional_templates.SO_3_document" t-lang="doc.partner_id.lang"/>
-                        <t t-if="style.template_so.key == 'professional_templates.SO_4_document'" t-call="professional_templates.SO_4_document" t-lang="doc.partner_id.lang"/>
-                        <t t-if="style.template_so.key == 'professional_templates.SO_5_document'" t-call="professional_templates.SO_5_document" t-lang="doc.partner_id.lang"/>
-                        <t t-if="style.template_so.key == 'professional_templates.SO_6_document'" t-call="professional_templates.SO_6_document" t-lang="doc.partner_id.lang"/>
-                        <t t-if="style.template_so.key == 'professional_templates.SO_7_document'" t-call="professional_templates.SO_7_document" t-lang="doc.partner_id.lang"/>
-                        <t t-if="style.template_so.key == 'professional_templates.SO_8_document'" t-call="professional_templates.SO_8_document" t-lang="doc.partner_id.lang"/>
-                        <t t-if="style.template_so.key == 'professional_templates.SO_9_document'" t-call="professional_templates.SO_9_document" t-lang="doc.partner_id.lang"/>
-                        <t t-if="style.template_so.key == 'professional_templates.SO_10_document'" t-call="professional_templates.SO_10_document" t-lang="doc.partner_id.lang"/>
-                        <t t-if="style.template_so.key == 'professional_templates.SO_11_document'" t-call="professional_templates.SO_11_document" t-lang="doc.partner_id.lang"/>
-                        <t t-if="style.template_so.key == 'professional_templates.SO_13_document'" t-call="professional_templates.SO_13_document" t-lang="doc.partner_id.lang"/>
-                        <t t-if="style.template_so.key == 'professional_templates.SO_14_document'" t-call="professional_templates.SO_14_document" t-lang="doc.partner_id.lang"/>
-                        <t t-if="style.template_so.key =='professional_templates.SO_15_document'" t-call="professional_templates.SO_15_document" t-lang="lang"/>
-                        <t t-if="not style" t-call="sale.report_saleorder_document" t-lang="sale.partner_id.lang"/>
+                        <t t-set="style" 
+                            t-value="sale.style 
+                                or sale.partner_id.style 
+                                or res_company.style 
+                                or user.env.ref('professional_templates.df_style_for_all_reports')"/>
+                        <t t-if="style.template_so.key == 'professional_templates.SO_0_document'" 
+                            t-call="professional_templates.SO_0_document" 
+                            t-lang="doc.partner_id.lang"/>
+                        <t t-if="style.template_so.key == 'professional_templates.SO_1_document'" 
+                            t-call="professional_templates.SO_1_document" 
+                            t-lang="doc.partner_id.lang"/>
+                        <t t-if="not style" 
+                            t-call="sale.report_saleorder_document" 
+                            t-lang="sale.partner_id.lang"/>
                     </t>
                 </t>
             </template>

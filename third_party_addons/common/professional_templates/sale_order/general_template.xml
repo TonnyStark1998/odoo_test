@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="SO_15_document" name="Personal Template">
+        <template id="SO_1_document" name="General Template">
             <!-- multi company configurations -->
             <t t-if="sale and 'company_id' in sale">
                 <t t-set="company" t-value="sale.company_id"></t>
@@ -11,7 +11,8 @@
             </t>
             <!-- company header -->
             <t t-if="style.header">
-                <div t-attf-class="container header col o_company_#{company.id}_layout" t-att-style="report_header_style">
+                <div t-attf-class="container header col o_company_#{company.id}_layout" 
+                    t-att-style="report_header_style">
                     <div class="row mb-2">
                         <div class="col-6 mt-2 mb-2" style="padding-left:0;">
                             <img t-if="company.logo" 
