@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="PO_15_document" name="Personal Template">
+        <template id="PO_1_document" name="General Template">
             <!-- Multicompany -->
             <t t-if="purchase and 'company_id' in purchase">
                 <t t-set="company" t-value="purchase.company_id"/>
