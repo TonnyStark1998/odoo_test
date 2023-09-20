@@ -39,25 +39,6 @@
                                         style="max-width:180px !important;" />
                                 </div>
                             </div>
-                            <div class="row mt-2">
-                                <div t-if="company.vat" class="col">
-                                    <h6>
-                                        <strong>
-                                            RNC: <span t-field="company.vat"/>
-                                        </strong>
-                                    </h6>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div t-if="invoice.invoice_date" class="col">
-                                    <h6>
-                                        <strong>
-                                            Fecha:
-                                            <span t-field="invoice.invoice_date"/>
-                                        </strong>
-                                    </h6>
-                                </div>
-                            </div>
                         </div>
                         <div t-if="company.twitter or company.facebook or company.youtube"
                             t-attf-style="background-color: {{style.theme_color}};
@@ -91,6 +72,10 @@
                             <div t-if="company.website">
                                 <span class="fa fa-globe fa-lg"/> 
                                 <span t-field="company.website"/>
+                            </div>
+                            <div t-if="company.vat" class="col">
+                                <span class="fa fa-building fa-lg"/>
+                                RNC: <span t-field="company.vat"/>
                             </div>
                         </div>
                     </div>
@@ -157,17 +142,26 @@
                         </div>
                         <div class="col-6 ms-1 p-1 mt-3 mb-3"
                             t-attf-style="border:2px solid {{style.theme_color}}; color:#222;">
-                            <t t-if="invoice.ncf_date_to">
-                                <t t-set="ncf_date_due" t-value="invoice.ncf_date_to"/>
-                            </t>
-                            <t t-if="not invoice.ncf_date_to">
-                                <t t-set="ncf_date_due" t-value="datetime.date(datetime.date.today().year, 12, 31)"/>
+                            <t t-if="'ncf_date_to' in invoice">
+                                <t t-if="invoice.ncf_date_to">
+                                    <t t-set="ncf_date_due" t-value="invoice.ncf_date_to"/>
+                                </t>
+                                <t t-if="not invoice.ncf_date_to">
+                                    <t t-set="ncf_date_due" t-value="datetime.date(datetime.date.today().year, 12, 31)"/>
+                                </t>
                             </t>
                             <h5>
                                 <strong>
-                                    <span t-if="invoice.move_type == 'out_invoice' and (invoice.state == 'posted' or invoice.payment_state == 'paid')"
-                                        t-field="invoice.ncf_type.display_name">
-                                    </span>
+                                    <t t-if="'ncf_type' in invoice">
+                                        <span t-if="invoice.move_type == 'out_invoice' and (invoice.state == 'posted' or invoice.payment_state == 'paid')"
+                                            t-field="invoice.ncf_type.display_name">
+                                        </span>
+                                    </t>
+                                    <t t-else="">
+                                        <span t-if="invoice.move_type == 'out_invoice' and (invoice.state == 'posted' or invoice.payment_state == 'paid')">
+                                            FACTURA
+                                        </span>
+                                    </t>
                                     <span t-if="invoice.move_type == 'out_invoice' and invoice.state == 'proforma2'">PRO-FORMA</span>
                                     <span t-if="invoice.move_type == 'out_invoice' and invoice.state == 'draft'">Factura Borrador</span>
                                     <span t-if="invoice.move_type == 'out_invoice' and invoice.state == 'cancel'">Factura Cancelada</span>
@@ -178,15 +172,22 @@
                             </h5>
                             <p>
                                 <strong>
-                                    <span t-field="invoice.name" 
-                                        t-if="invoice.move_type in ['out_invoice', 'out_refund', 'enrty'] 
-                                            or (invoice.move_type in ['in_invoice', 'in_refund'] 
-                                            and invoice.ncf_type_code in ['B11', 'B13'])" />
-                                    <span t-field="invoice.ncf" 
-                                        t-if="invoice.move_type in ['in_invoice', 'in_refund'] 
-                                            and invoice.ncf_type_code not in ['B11', 'B13', 'B17']" />
+                                    <t t-if="'ncf_type_code' in invoice">
+                                        <span t-field="invoice.name" 
+                                            t-if="invoice.move_type in ['out_invoice', 'out_refund', 'enrty'] 
+                                                or (invoice.move_type in ['in_invoice', 'in_refund'] 
+                                                and invoice.ncf_type_code in ['B11', 'B13'])" />
+                                    </t>
+                                    <t t-if="'ncf' in invoice and 'ncf_type_code' in invoice">
+                                        <span t-field="invoice.ncf" 
+                                            t-if="invoice.move_type in ['in_invoice', 'in_refund'] 
+                                                and invoice.ncf_type_code not in ['B11', 'B13', 'B17']" />
+                                    </t>
                                 </strong>
                             </p>
+                            <div t-if="invoice.invoice_date">
+                                Fecha: <span t-field="invoice.invoice_date"/>
+                            </div>
                             <div t-if="ncf_date_due">
                                 Vencimiento secuencia:
                                 <span t-esc="ncf_date_due.strftime('%d/%m/%Y')"/>
