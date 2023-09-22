@@ -204,45 +204,7 @@
                 <t t-call="professional_templates.invoice_lines" t-lang="lang"/>
                 <!--    End of INVOICE LINES    -->
                 <!--    Start of TOTALS -->
-                <div class="container mt-2"
-                     t-attf-style="padding-left:0px; padding-right:0px;font-size:12px !important;">
-                    <div class="row"
-                         style="padding-left:0px; padding-right:0px; page-break-inside: avoid !important;">
-                        <div class=" offset-7 col-5">
-                            <table class="table table-sm" t-attf-style="color:{{style.text_color}};">
-                                <tbody>
-                                    <tr t-attf-style="border-top: 1px solid {{style.text_color}};">
-                                        <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
-                                            <strong>Subtotal</strong>
-                                        </td>
-                                        <td class="text-end"
-                                            t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
-                                            <span t-field="invoice.amount_untaxed"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>ITBIS</td>
-                                        <td class="text-end">
-                                            <span t-field="invoice.amount_tax"/>
-                                        </td>
-                                    </tr>
-                                    <tr t-attf-style="border-bottom: 1px solid {{style.text_color}};">
-                                        <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
-                                            <strong>Total</strong>
-                                        </td>
-                                        <td class="text-end"
-                                            t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
-                                            <strong>
-                                                <span style="font-weight:bold; text-decoration:underline;"
-                                                    t-field="invoice.amount_total"/>
-                                            </strong>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                <t t-call="professional_templates.invoice_totals" t-lang="lang"/>
                 <!--    Start of PAYMENTS   -->
                 <t t-if="print_with_payments">
                     <t t-if="invoice.payment_state != 'invoicing_legacy'">

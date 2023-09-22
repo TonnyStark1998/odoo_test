@@ -70,6 +70,7 @@
         "reports/delivery_reports.xml",
         "reports/stock_picking_report.xml",
         "invoice/invoice_lines.xml",
+        "invoice/invoice_totals.xml",
         "invoice/switch_templates.xml",
         "invoice/odoo_template.xml",
         "invoice/general_template.xml",

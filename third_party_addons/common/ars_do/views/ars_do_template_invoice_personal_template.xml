@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="ars_do_invoice_personal_template" inherit_id="professional_templates.INVOICE_15_document">
+        <template id="ars_do_invoice_totals" inherit_id="professional_templates.invoice_totals">
             <xpath expr="//strong[contains(., 'Subtotal')]/../.." position="after">
                 <tr t-if="invoice.amount_coverage &#62; 0"
                     t-attf-style="border-top: 1px solid {{style.text_color}};">
