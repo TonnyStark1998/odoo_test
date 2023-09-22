@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="invoice_totals" name="Invoice Totals">
+            <div class="container mt-2"
+                t-attf-style="padding-left:0px; padding-right:0px;font-size:12px !important;">
+                <div class="row"
+                        style="padding-left:0px; padding-right:0px; page-break-inside: avoid !important;">
+                    <div class=" offset-7 col-5">
+                        <table class="table table-sm" t-attf-style="color:{{style.text_color}};">
+                            <tbody>
+                                <tr t-attf-style="border-top: 1px solid {{style.text_color}};">
+                                    <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
+                                        <strong>Subtotal</strong>
+                                    </td>
+                                    <td class="text-end"
+                                        t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
+                                        <span t-field="invoice.amount_untaxed"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>ITBIS</td>
+                                    <td class="text-end">
+                                        <span t-field="invoice.amount_tax"/>
+                                    </td>
+                                </tr>
+                                <tr t-attf-style="border-bottom: 1px solid {{style.text_color}};">
+                                    <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
+                                        <strong>Total</strong>
+                                    </td>
+                                    <td class="text-end"
+                                        t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
+                                        <strong>
+                                            <span style="font-weight:bold; text-decoration:underline;"
+                                                t-field="invoice.amount_total"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>
