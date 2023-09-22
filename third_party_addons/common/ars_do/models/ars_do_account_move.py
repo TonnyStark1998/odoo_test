@@ -241,7 +241,6 @@ class ArsDoAccountMove(models.Model):
             if not report:
                 return None
             return report
-        
 
     def _calculate_amount_coverage(self, invoice_line_ids):
         amount_coverage = 0.0
