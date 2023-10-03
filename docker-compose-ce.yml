@@ -21,6 +21,10 @@ services:
       - postgresql_password
     extra_hosts:
       - "odoo-host:host-gateway"
+    entrypoint:
+      - /entrypoint.sh
+      - -u
+      - billing_do, billing_do_ce, kcs_medical_app, ars_do, professional_templates
   odoo-db:
     image: postgres:13
     ports:

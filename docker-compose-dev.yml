@@ -24,7 +24,9 @@ services:
     entrypoint:
       - /entrypoint.sh
       - --init
-      - web_environment_ribbon,billing_do_ee
+      - web_environment_ribbon, billing_do, billing_do_ee, professional_templates
+      - --update
+      - billing_do, billing_do_ee, kcs_medical_app, ars_do, professional_templates
   odoo-db:
     image: postgres:13
     ports:
