@@ -10,7 +10,7 @@ services:
       - type: bind
         source: /var/data/odoo/${ENV_DATABASE_NAME}/odoo
         target: /var/data/odoo
-      - ./conf-dev-ce:/etc/odoo
+      - ./conf-ce:/etc/odoo
       - ./third_party_addons:/mnt/extra-addons
     environment:
       - HOST=odoo-db
@@ -23,7 +23,7 @@ services:
     entrypoint:
       - /entrypoint.sh
       - -u
-      - billing_do, kcs_medical_app
+      - billing_do, billing_do_ce, kcs_medical_app, ars_do, professional_templates
   odoo-db:
     image: postgres:13
     ports:
