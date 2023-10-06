@@ -7,11 +7,20 @@
         <field name="priority">1</field>
         <field name="arch" type="xml">
             <form string="Upload Your Statements">
-                <h2>You can upload your statement using:</h2>
-                <ul id="statement_format">
-
-                </ul>
+                <h2>
+                    You can upload your statement using:
+                    <field name="statement_formats"
+                        nolabel="True"
+                        readonly="True"
+                        class="oe_inline" />
+                </h2>
                 <field name="attachment_ids" widget="many2many_binary" colspan="2" string="Select Files" nolabel="1"/>
+                <br />
+                <br />
+                <h6>
+                    <strong>NOTE:</strong>
+                    Name and order of the columns must be the following: Date, Label, Reference, Partner, Amount, Currency
+                </h6>
                 <footer>
                     <button name="import_file" string="Upload" type="object" class="btn-primary"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>

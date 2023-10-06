@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, api, _
-
+from odoo \
+    import models, _
+from . \
+    import account_bank_statement_import
 
 class AccountJournal(models.Model):
     _inherit = "account.journal"
