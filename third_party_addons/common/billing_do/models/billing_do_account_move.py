@@ -85,6 +85,8 @@ class BillingDoAccountMove(models.Model):
     )]
 
     def _auto_init(self):
+        super()._auto_init()
+
         if index_exists(self.env.cr, 'account_move_unique_name'):
             drop_index(self.env.cr, "account_move_unique_name", self._table)
 
