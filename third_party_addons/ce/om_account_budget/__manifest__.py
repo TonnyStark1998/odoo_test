@@ -11,7 +11,7 @@
     'sequence': 10,
     'website': 'https://www.odoomates.tech',
     'depends': ['account', 
-                'base_account_budget'],
+                'base_accounting_kit'],
     'license': 'LGPL-3',
     'data': [
         'security/ir.model.access.csv',
