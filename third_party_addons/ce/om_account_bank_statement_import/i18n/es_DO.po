@@ -335,3 +335,12 @@ msgid ""
 msgstr ""
 "<strong>NOTA:</strong>\n"
 "                    El orden y nombre de las columnas debe ser el siguiente: Date, Label, Reference, Partner, Amount, Currency"
+
+#. module: om_account_bank_statement_import
+#: model_terms:ir.ui.view,arch_db:om_account_bank_statement_import.om_account_bank_statement_import_view
+msgid ""
+"If you are not sure about how to format the file to upload the bank statements, \n"
+"                    please feel free to download a sample:"
+msgstr ""
+"Si no está seguro sobre el formato del archivo con los extractos bancarios que debe cargar,\n"
+"                    sienta la libertad de descargar el formato que guste como ejemplo:"

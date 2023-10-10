@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="om_account_bank_statement_import_sample_file_csv" model="ir.attachment">
+        <field name="name">EjemploArchivo_FormatoCSV.csv</field>
+        <field name="datas" 
+            type="base64" 
+            file="om_account_bank_statement_import/data/sample_file_csv_format.csv"></field>
+        <field name="public">1</field>
+        <field name="mimetype">text/csv</field>
+    </record>
+    <record id="om_account_bank_statement_import_sample_file_xlsx" model="ir.attachment">
+        <field name="name">EjemploArchivo_FormatoXLSX.xlsx</field>
+        <field name="datas" 
+            type="base64" 
+            file="om_account_bank_statement_import/data/sample_file_xlsx_format.xlsx"></field>
+        <field name="public">1</field>
+        <field name="mimetype">text/xlsx</field>
+    </record>
+</odoo>
