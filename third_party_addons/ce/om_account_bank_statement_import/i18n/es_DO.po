@@ -344,3 +344,13 @@ msgid ""
 msgstr ""
 "Si no está seguro sobre el formato del archivo con los extractos bancarios que debe cargar,\n"
 "                    sienta la libertad de descargar el formato que guste como ejemplo:"
+
+#. module: om_account_bank_statement_import
+#: model_terms:ir.ui.view,arch_db:om_account_bank_statement_import.om_account_bank_statement_import_view
+msgid "Download CSV"
+msgstr "Descargar Formato CSV"
+
+#. module: om_account_bank_statement_import
+#: model_terms:ir.ui.view,arch_db:om_account_bank_statement_import.om_account_bank_statement_import_view
+msgid "Download XLSX"
+msgstr "Descargar Formato Excel"
