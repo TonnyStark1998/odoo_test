@@ -13,6 +13,7 @@
     'description': """Generic Wizard to Import Bank Statements In Odoo 16 Community Edition.
 (This module does include any CSV and XLSX type import format.)""",
     'data': [
+        'data/account_bank_statement_sample_files.xml',
         'security/ir.model.access.csv',
         'wizard/journal_creation.xml',
         'views/account_bank_statement_import_view.xml',

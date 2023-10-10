@@ -192,3 +192,21 @@ class AccountBankStatementImport(models.TransientModel):
             if file_name_splitted[1]:
                 return file_name_splitted[1].replace('.', '')
         return ''
+
+    def get_sample_file_csv(self):
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/web/content?model=ir.attachment'
+                '&download=true'\
+                '&id={}'.format(str(self.env.ref('om_account_bank_statement_import.om_account_bank_statement_import_sample_file_csv').id)),
+            'target': 'self',
+        }
+
+    def get_sample_file_xlsx(self):
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/web/content?model=ir.attachment'
+                '&download=true'\
+                '&id={}'.format(str(self.env.ref('om_account_bank_statement_import.om_account_bank_statement_import_sample_file_xlsx').id)),
+            'target': 'self',
+        }
