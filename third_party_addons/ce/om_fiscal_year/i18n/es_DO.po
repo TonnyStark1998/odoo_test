@@ -199,7 +199,7 @@ msgstr "Bloquea una fecha para todos los usuarios"
 #: model:ir.ui.menu,name:om_fiscal_year.menu_action_change_lock_date
 #, fuzzy
 msgid "Lock Dates"
-msgstr "Fechas bloqueadas"
+msgstr "Bloqueo de Período Fiscal"
 
 #. module: om_fiscal_year
 #: model:ir.actions.act_window,name:om_fiscal_year.action_view_change_lock_date

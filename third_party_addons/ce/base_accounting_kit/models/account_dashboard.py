@@ -8,6 +8,7 @@ from dateutil.relativedelta import relativedelta
 
 from odoo import models, api
 from odoo.http import request
+import logging as log
 
 
 class DashBoard(models.Model):
@@ -628,64 +629,61 @@ class DashBoard(models.Model):
         record_refund = {}
         company_id = self.get_current_company_value()
         states_arg = ""
+
+        _select = '''SELECT res_partner.name AS customers, 
+                        account_move.commercial_partner_id AS parent,
+                        account_move.currency_id AS currency_id, 
+                        CASE WHEN currency_id = (SELECT id FROM res_currency WHERE name = 'DOP') THEN
+                            sum(account_move.amount_total) 
+                        ELSE
+                            sum(account_move.amount_total_signed)
+                        END AS amount 
+                    FROM account_move, res_partner'''
+        _where = '''WHERE account_move.commercial_partner_id = res_partner.id 
+                    AND account_move.company_id in %s 
+                    AND %s'''
+        _group_by = '''group by parent, customers, currency_id'''
+        _order_by = '''order by amount desc 
+                        limit 10'''
+
         if post[0] != 'posted':
             states_arg = """ account_move.state in ('posted', 'draft')"""
         else:
             states_arg = """ account_move.state = 'posted'"""
+
+        _where = _where % (tuple(company_id), states_arg)
+        log.info('[KCS] SELECT: {}'.format(_select))
+        log.info('[KCS] WHERE: {}'.format(_where))
+        log.info('[KCS] GROUP BY: {}'.format(_group_by))
+        log.info('[KCS] ORDER BY: {}'.format(_order_by))
         if post[1] == 'this_month':
-            self._cr.execute((''' select res_partner.name as customers, account_move.commercial_partner_id as parent, 
-                                    sum(account_move.amount_total) as amount from account_move, res_partner
-                                    where account_move.commercial_partner_id = res_partner.id
-                                    AND account_move.company_id in %s 
-                                    AND account_move.move_type = 'out_invoice' 
-                                    AND %s   
-                                    AND Extract(month FROM account_move.invoice_date) = Extract(month FROM DATE(NOW()))
-                                    AND Extract(YEAR FROM account_move.invoice_date) = Extract(YEAR FROM DATE(NOW()))                      
-                                    group by parent, customers
-                                    order by amount desc 
-                                    limit 10
-                                    ''') % (tuple(company_id), states_arg))
+            self._cr.execute(('''%s %s 
+                                AND account_move.move_type = 'out_invoice'
+                                AND Extract(month FROM account_move.invoice_date) = Extract(month FROM DATE(NOW()))
+                                AND Extract(YEAR FROM account_move.invoice_date) = Extract(YEAR FROM DATE(NOW())) 
+                                %s %s''') % (_select, _where, _group_by, _order_by))
             record_invoice = self._cr.dictfetchall()
-            self._cr.execute((''' select res_partner.name as customers, account_move.commercial_partner_id as parent, 
-                                    sum(account_move.amount_total) as amount from account_move, res_partner
-                                    where account_move.commercial_partner_id = res_partner.id
-                                    AND account_move.company_id in %s
-                                    AND account_move.move_type = 'out_refund' 
-                                    AND %s      
-                                    AND Extract(month FROM account_move.invoice_date) = Extract(month FROM DATE(NOW()))
-                                    AND Extract(YEAR FROM account_move.invoice_date) = Extract(YEAR FROM DATE(NOW()))                   
-                                    group by parent, customers
-                                    order by amount desc 
-                                    limit 10
-                                    ''') % (tuple(company_id), states_arg))
+            self._cr.execute(('''%s %s 
+                                AND account_move.move_type = 'out_refund'
+                                AND Extract(month FROM account_move.invoice_date) = Extract(month FROM DATE(NOW()))
+                                AND Extract(YEAR FROM account_move.invoice_date) = Extract(YEAR FROM DATE(NOW())) 
+                                %s %s''') % (_select, _where, _group_by, _order_by))
             record_refund = self._cr.dictfetchall()
         else:
             one_month_ago = (datetime.now() - relativedelta(months=1)).month
-            self._cr.execute((''' select res_partner.name as customers, account_move.commercial_partner_id as parent, 
-                                            sum(account_move.amount_total) as amount from account_move, res_partner
-                                            where account_move.commercial_partner_id = res_partner.id
-                                            AND account_move.company_id in %s
-                                            AND account_move.move_type = 'out_invoice' 
-                                            AND %s            
-                                            AND Extract(month FROM account_move.invoice_date) = ''' + str(
-                one_month_ago) + '''
-                                            group by parent, customers
-                                            order by amount desc 
-                                            limit 10
-                                            ''') % (tuple(company_id), states_arg))
+            self._cr.execute(('''%s %s 
+                                AND account_move.move_type = 'out_invoice'
+                                AND Extract(month FROM account_move.invoice_date) = '''
+                              + str(one_month_ago) + '''
+                                AND Extract(YEAR FROM account_move.invoice_date) = Extract(YEAR FROM DATE(NOW())) 
+                                %s %s''') % (_select, _where, _group_by, _order_by))
             record_invoice = self._cr.dictfetchall()
-            self._cr.execute((''' select res_partner.name as customers, account_move.commercial_partner_id as parent, 
-                                            sum(account_move.amount_total) as amount from account_move, res_partner
-                                            where account_move.commercial_partner_id = res_partner.id
-                                            AND account_move.company_id in %s 
-                                            AND account_move.move_type = 'out_refund' 
-                                            AND %s       
-                                            AND Extract(month FROM account_move.invoice_date) = ''' + str(
-                one_month_ago) + '''                  
-                                            group by parent, customers
-                                            order by amount desc 
-                                            limit 10
-                                            ''') % (tuple(company_id), states_arg))
+            self._cr.execute(('''%s %s 
+                                AND account_move.move_type = 'out_refund'
+                                AND Extract(month FROM account_move.invoice_date) = '''
+                              + str(one_month_ago) + '''
+                                AND Extract(YEAR FROM account_move.invoice_date) = Extract(YEAR FROM DATE(NOW())) 
+                                %s %s''') % (_select, _where, _group_by, _order_by))
             record_refund = self._cr.dictfetchall()
         summed = []
         for out_sum in record_invoice:

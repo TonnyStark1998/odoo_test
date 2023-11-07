@@ -49,10 +49,16 @@ class ReportFollowup(models.AbstractModel):
         lines_per_currency = defaultdict(list)
         total = 0
         for line in moveline_ids:
-            currency = line.currency_id or line.company_id.currency_id
-            balance = line.debit - line.credit
-            if currency != line.company_id.currency_id:
-                balance = line.amount_currency
+            currency_dop = self.env['res.currency']\
+                .search([('name', '=', 'DOP')])
+            
+            balance = 0.0
+            if line.company_id.currency_id.id == currency_dop.id:
+                balance = line.balance
+            else:
+                balance = line.company_id.currency_id.\
+                    _convert(line.balance, currency_dop, line.company_id, line.date)
+            
             line_data = {
                 'name': line.move_id.name,
                 'ref': line.ref,
@@ -60,10 +66,10 @@ class ReportFollowup(models.AbstractModel):
                 'date_maturity': format_date(self.env, line.date_maturity),
                 'balance': balance,
                 'blocked': line.blocked,
-                'currency_id': currency,
+                'currency_id': currency_dop,
             }
             total = total + line_data['balance']
-            lines_per_currency[currency].append(line_data)
+            lines_per_currency[currency_dop].append(line_data)
 
         return [{'total': total, 'line': lines, 'currency': currency} for
                 currency, lines in

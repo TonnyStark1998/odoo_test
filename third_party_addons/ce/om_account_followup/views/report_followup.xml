@@ -18,7 +18,7 @@
                                 Document: Customer account statement
                                 <br/>
                                 Date:
-                                <span t-esc="data['date']"/>
+                                <span t-out="data['date']"/>
                                 <br/>
                                 Customer ref:
                                 <span t-field="o.partner_id.ref"/>
@@ -43,29 +43,33 @@
                                         <tr t-foreach="cur_lines['line']"
                                             t-as="line">
                                             <td>
-                                                <span t-esc="line['date']"/>
+                                                <span t-out="line['date']"/>
                                             </td>
                                             <td>
-                                                <span t-esc="line['name']"/>
+                                                <span t-out="line['name']"/>
                                             </td>
                                             <td>
-                                                <span t-esc="line['ref']"/>
+                                                <span t-out="line['ref']"/>
                                             </td>
                                             <td class="text-center">
-                                                <span t-esc="line['date_maturity']"/>
+                                                <span t-out="line['date_maturity']"/>
                                             </td>
                                             <td class="text-end">
-                                                <span t-esc="line['balance']"/>
+                                                <span t-out="int(line['balance'])"
+                                                    t-options="{'widget': 'monetary',
+                                                        'display_currency': line['currency_id']}" />
                                             </td>
                                             <td>
-                                                <span t-esc="line['blocked'] and 'X' or ''"/>
+                                                <span t-out="line['blocked'] and 'X' or ''"/>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
 
                                 <p>Total:
-                                    <span t-esc="cur_lines['total']"/>
+                                    <span t-out="cur_lines['total']"
+                                        t-options="{'widget': 'monetary',
+                                            'display_currency': line['currency_id']}"/>
                                 </p>
                             </t>
                         </div>

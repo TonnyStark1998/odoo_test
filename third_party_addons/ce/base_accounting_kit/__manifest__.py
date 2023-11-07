@@ -106,7 +106,6 @@
         'report/multiple_invoice_layouts.xml',
         'report/multiple_invoice_report.xml',
         'views/recurring_payments_view.xml',
-        'wizard/account_lock_date.xml',
         'views/account_payment_view.xml',
         'data/account_pdc_data.xml'
     ],
