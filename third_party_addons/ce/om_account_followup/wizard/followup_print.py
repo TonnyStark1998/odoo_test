@@ -3,7 +3,7 @@
 import datetime
 import time
 from odoo import api, fields, models, _
-
+import logging as log
 
 class FollowupPrint(models.TransientModel):
     _name = 'followup.print'
@@ -211,15 +211,12 @@ class FollowupPrint(models.TransientModel):
                 continue
             stat_line_id = partner_id * 10000 + company_id
             if date_maturity:
-                date_maturity = fields.Date.to_string(date_maturity)
-                if date_maturity <= fups[followup_line_id][0].strftime(
-                        '%Y-%m-%d'):
+                if date_maturity <= fups[followup_line_id][0]:
                     if stat_line_id not in partner_list:
                         partner_list.append(stat_line_id)
                     to_update[str(id)] = {'level': fups[followup_line_id][1],
                                           'partner_id': stat_line_id}
-            elif date and date <= fups[followup_line_id][0].strftime(
-                    '%Y-%m-%d'):
+            elif date and date <= fups[followup_line_id][0]:
                 if stat_line_id not in partner_list:
                     partner_list.append(stat_line_id)
                 to_update[str(id)] = {'level': fups[followup_line_id][1],
