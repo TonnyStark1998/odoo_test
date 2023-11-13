@@ -48,6 +48,7 @@
         'views/billing_do_account_move_line.xml',
         'views/billing_do_ncf_types.xml',
         'views/billing_do_ir_sequence_views.xml',
+        'security/security.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

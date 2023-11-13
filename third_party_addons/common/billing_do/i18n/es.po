@@ -1705,3 +1705,19 @@ msgid ""
 "Please, first select the invoice date and then enter the value for NCF field."
 msgstr ""
 "Por favor, seleccione primero la fecha de la factura y luego digite el NCF."
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_mrp_production.py:0
+#, python-format
+msgid "In order to mark the Production Order as Done, you must attach at least one file."
+msgstr "Para poder marcar una Orden de Producción como Hecha, debe adjuntar al menos un (1) archivo."
+
+#######################
+#   Security Groups   #
+#######################
+
+#. module: ars_do
+#: model:res.groups,name:billing_do.enforce_mrp_production_attachments
+msgid "Enforce attachments on MRP Production orders"
+msgstr "Prevenir la creación de órdenes de producción sin adjuntos"
