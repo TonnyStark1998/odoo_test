@@ -48,7 +48,7 @@ fi
 docker container stop $ODOO_CONTAINER_ID
 
 # Prevent all connections to $DATABASE_NAME so we can drop it.
-docker container exec $DB_CONTAINER_ID psql -U $DATABASE_USER -d postgres -c "ALTER DATABASE $DATABASE_NAME allow_connections = false;"
+docker container exec $DB_CONTAINER_ID psql -U $DATABASE_USER -d postgres -c "ALTER DATABASE \"$DATABASE_NAME\" allow_connections = false;"
 
 # Stop and start the Postgres container to close all user connections
 docker container stop $DB_CONTAINER_ID
@@ -58,10 +58,10 @@ docker container start $DB_CONTAINER_ID
 sleep 15s
 
 # Drop the database
-docker container exec $DB_CONTAINER_ID psql -U $DATABASE_USER -d postgres -c "DROP DATABASE $DATABASE_NAME;"
+docker container exec $DB_CONTAINER_ID psql -U $DATABASE_USER -d postgres -c "DROP DATABASE \"$DATABASE_NAME\";"
 
 # Create the empty database
-docker container exec $DB_CONTAINER_ID psql -U $DATABASE_USER -d postgres -c "CREATE DATABASE $DATABASE_NAME WITH TEMPLATE template0 OWNER $DATABASE_USER;"
+docker container exec $DB_CONTAINER_ID psql -U $DATABASE_USER -d postgres -c "CREATE DATABASE \"$DATABASE_NAME\" WITH TEMPLATE template0 OWNER $DATABASE_USER;"
 
 # Allow some seconds to see if other processes has not failed
 sleep 15s
