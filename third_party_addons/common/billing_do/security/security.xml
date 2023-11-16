@@ -1,0 +1,5 @@
+<odoo>
+    <record id="enforce_mrp_production_attachments" model="res.groups">
+        <field name="name">Enforce attachments on MRP Production orders</field>
+    </record>
+</odoo>
