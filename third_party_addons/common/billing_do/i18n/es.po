@@ -1713,6 +1713,16 @@ msgstr ""
 msgid "In order to mark the Production Order as Done, you must attach at least one file."
 msgstr "Para poder marcar una Orden de Producción como Hecha, debe adjuntar al menos un (1) archivo."
 
+
+#. module: billing_do
+#. odoo-python
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#: code:addons/billing_do/models/billing_do_account_move.py:0
+#, python-format
+msgid "Tax Receipts switch is off."
+msgstr "La Validación para NCF está desactivada."
+
 #######################
 #   Security Groups   #
 #######################
