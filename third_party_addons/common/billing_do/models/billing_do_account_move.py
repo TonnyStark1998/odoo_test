@@ -433,18 +433,26 @@ class BillingDoAccountMove(models.Model):
             _trn_helper.is_trn_from_journal_which_use_sequence(ncf)
 
             if _trn_helper.is_valid_trn_do(ncf):
-                _trn_service_helper = self.env['billing.do.trn.http.service.helper'].sudo()
-                result = _trn_service_helper.dgii_validate_ncf(self.partner_id.vat, 
-                                                                ncf,
-                                                                self.env.company.vat,
-                                                                self.security_code)
+                try:
+                    _trn_service_helper = self.env['billing.do.trn.http.service.helper'].sudo()
+                    result = _trn_service_helper.dgii_validate_ncf(self.partner_id.vat, 
+                                                                    ncf,
+                                                                    self.env.company.vat,
+                                                                    self.security_code)
 
-                if not result[0]:
-                    if self.invoice_date > result[1]:
-                        raise exceptions.ValidationError(_("The tax receipt number {0} entered is not valid or does not belongs to the VAT {1}.")
-                                                            .format(ncf, self.partner_id.vat))
+                    if not result[0]:
+                        if self.invoice_date > result[1]:
+                            raise exceptions.ValidationError(_("The tax receipt number {0} entered is not valid or does not belongs to the VAT {1}.")
+                                                                .format(ncf, self.partner_id.vat))
 
-                return True
+                    return True
+                except exceptions.ValidationError as ve:
+                    raise
+                except exceptions.UserError as ue:
+                    # Method dgii_validate_ncf from model billing.do.trn.http.service.helper raise a UserError exception
+                    # if the switch is off for validating the NCF so, in this case, all NCF are valid.
+                    log.warning('[KCS][account.move][_validate_ncf] {}'.format(ue.args[0]))
+                    return True
 
     def __validate_vat_journal_b11(self, model):
         vat_helper = self.env['billing.do.vat.http.service.helper'].sudo()
