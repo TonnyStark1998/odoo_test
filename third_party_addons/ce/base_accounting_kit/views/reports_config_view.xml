@@ -24,11 +24,11 @@
                                        attrs="{'invisible': [('type','not in',['accounts','account_type'])]}"/>
                                 <field name="account_report_id"
                                        attrs="{'invisible': [('type', '!=', 'account_report')]}"/>
-                            </group>
-                            <field name="account_ids"
+                                <field name="account_ids"
                                    attrs="{'invisible': [('type', '!=', 'accounts')]}"/>
-                            <field name="account_type_ids"
+                                <field name="account_type_ids"
                                    attrs="{'invisible': [('type', '!=', 'account_type')]}"/>
+                            </group>
                         </page>
                     </notebook>
                 </form>
