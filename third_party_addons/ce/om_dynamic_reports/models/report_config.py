@@ -328,7 +328,7 @@ class ReportFinancialExt(models.AbstractModel):
             elif report.type == 'account_type':
                 # it's the sum the leaf accounts with such an account type
                 accounts = self.env['account.account'].search(
-                    [('account_type', 'in', report.account_type_ids.mapped('type'))])
+                    [('account_type', '=', report.account_type_ids)])
                 res[report.id]['account'] = self._compute_account_balance(
                     accounts)
                 # res[report.id]['journal_items'] = self._compute_journal_items(
