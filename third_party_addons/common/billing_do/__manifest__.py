@@ -18,7 +18,8 @@
                 'purchase', 
                 'crm', 
                 'stock', 
-                'l10n_do'],
+                'l10n_do',
+                'mrp'],
     # always loaded
     'data': [
         'security/ir.model.access.csv',
