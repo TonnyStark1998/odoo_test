@@ -365,8 +365,8 @@ msgstr "Tipo de cuenta"
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_financial_report__account_type_ids
-msgid "Account Types"
-msgstr "Tipos de cuenta"
+msgid "Account Type"
+msgstr "Tipo de cuenta"
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_account_asset_category__account_depreciation_id
@@ -4207,3 +4207,93 @@ msgstr "entradas no conciliadas"
 #, python-format
 msgid "vendor bills"
 msgstr "facturas del proveedor"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__asset_receivable
+msgid "Receivable"
+msgstr "Por cobrar"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__asset_cash
+msgid "Bank and Cash"
+msgstr "Banco y efectivo"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__asset_current
+msgid "Current Assets"
+msgstr "Activos Circulantes"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__asset_non_current
+msgid "Non-current Assets"
+msgstr "Activos no-circulantes"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__asset_prepayments
+msgid "Prepayments"
+msgstr "Pre-pagos"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__asset_fixed
+msgid "Fixed Assets"
+msgstr "Activos Fijos"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__liability_payable
+msgid "Payable"
+msgstr "Por pagar"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__liability_credit_card
+msgid "Credit Card"
+msgstr "Tarjeta de Crédito"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__liability_current
+msgid "Current Liabilities"
+msgstr "Pasivos Circulantes"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__liability_non_current
+msgid "Non-current Liabilities"
+msgstr "Pasivos no-circulantes"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__equity
+msgid "Equity"
+msgstr "Capital"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__equity_unaffected
+msgid "Current Year Earnings"
+msgstr "Ganancias del año actual"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__income
+msgid "Income"
+msgstr "Ingreso"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__income_other
+msgid "Other Income"
+msgstr "Otro Ingreso"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__expense
+msgid "Expenses"
+msgstr "Gastos"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__expense_depreciation
+msgid "Depreciation"
+msgstr "Depreciación"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__expense_direct_cost
+msgid "Cost of Revenue"
+msgstr "Costo de ingresos"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__off_balance
+msgid "Off-Balance Sheet"
+msgstr "Hoja fuera de balance"
