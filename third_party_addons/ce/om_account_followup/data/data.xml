@@ -2,7 +2,7 @@
 <odoo>
     <record id="email_template_om_account_followup_level0" model="mail.template">
         <field name="name">First polite payment follow-up reminder email</field>
-        <field name="email_from">{{object.env.user.emai}}</field>
+        <field name="email_from">{{object.env.user.email}}</field>
         <field name="subject">Payment Reminder from {{object.env.user.company_id.name}}.</field>
         <field name="email_to">{{object.email}}</field>
         <field name="lang">{{object.lang}}</field>
