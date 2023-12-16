@@ -3319,7 +3319,7 @@ msgstr "Secuencia"
 #. module: base_accounting_kit
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.view_account_asset_asset_form
 msgid "Set to Draft"
-msgstr "Establecer a borrador"
+msgstr "Restablecer a borrador"
 
 #. module: base_accounting_kit
 #. openerp-web
@@ -3600,12 +3600,8 @@ msgstr "Se superó el <strong> límite de advertencia </strong> de este cliente.
 #: code:addons/base_accounting_kit/models/account_asset.py:0
 #: code:addons/language_translation/base_accounting_kit/models/account_asset.py:0
 #, python-format
-msgid ""
-"This depreciation is already linked to a journal entry! Please post or "
-"delete it."
-msgstr ""
-"Esta depreciación ya está vinculada a una entrada de diario! Por favor publiquela o "
-"eliminela."
+msgid "This depreciation is already linked to a journal entry! Please post or delete it."
+msgstr "Esta depreciación ya está vinculada a una entrada de diario. Por favor publiquela o elimínela."
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_cash_flow_report__label_filter
