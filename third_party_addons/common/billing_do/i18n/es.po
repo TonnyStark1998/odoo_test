@@ -1713,7 +1713,6 @@ msgstr ""
 msgid "In order to mark the Production Order as Done, you must attach at least one file."
 msgstr "Para poder marcar una Orden de Producción como Hecha, debe adjuntar al menos un (1) archivo."
 
-
 #. module: billing_do
 #. odoo-python
 #: code:addons/billing_do/models/billing_do_account_move.py:0
@@ -1723,6 +1722,16 @@ msgstr "Para poder marcar una Orden de Producción como Hecha, debe adjuntar al 
 msgid "Tax Receipts switch is off."
 msgstr "La Validación para NCF está desactivada."
 
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_move_line_tree_readonly_fields
+msgid "Price"
+msgstr "Precio"
+
+#. module: billing_do
+#: model_terms:ir.ui.view,arch_db:billing_do.billing_do_view_move_line_tree_readonly_fields
+msgid "Disc.%"
+msgstr "Desc.%"
+
 #######################
 #   Security Groups   #
 #######################
@@ -1731,3 +1740,13 @@ msgstr "La Validación para NCF está desactivada."
 #: model:res.groups,name:billing_do.enforce_mrp_production_attachments
 msgid "Enforce attachments on MRP Production orders"
 msgstr "Prevenir la creación de órdenes de producción sin adjuntos"
+
+#. module: ars_do
+#: model:res.groups,name:billing_do.allow_editing_discount_field_in_sales_and_invoice
+msgid "Allow user to edit the discount field on Sales &amp; Invoices lines"
+msgstr "Permitir al usuario editar el campo descuento en las líneas de facturas y pedidos ventas"
+
+#. module: ars_do
+#: model:res.groups,name:billing_do.allow_editing_price_field_in_sales_and_invoice
+msgid "Allow user to edit the price field on Sales &amp; Invoices lines"
+msgstr "Permitir al usuario editar el campo precio en las líneas de facturas y pedidos ventas"
