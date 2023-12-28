@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view"
+            id="billing_do_view_order_lines_form_readonly_fields">
+        <field name="name">billing.do.sale.order.lines.form.discount.readonly</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']//tree//field[@name='discount']" 
+                    position="replace">
+                <field name="discount" 
+                    string="Disc.%" 
+                    groups="!billing_do.allow_editing_discount_field_in_sales_and_invoice" 
+                    optional="show" 
+                    widget="sol_discount"
+                    readonly="true" />
+                <field name="discount" 
+                    string="Disc.%" 
+                    groups="billing_do.allow_editing_discount_field_in_sales_and_invoice" 
+                    optional="show" 
+                    widget="sol_discount"
+                    readonly="false" />
+            </xpath>
+            <xpath expr="//field[@name='order_line']//tree//field[@name='price_unit']" position="replace">
+                <field name="price_unit"
+                    readonly="true"
+                    groups="!billing_do.allow_editing_price_field_in_sales_and_invoice" />
+                <field name="price_unit"
+                    attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"
+                    groups="billing_do.allow_editing_price_field_in_sales_and_invoice" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

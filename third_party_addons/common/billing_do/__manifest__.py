@@ -32,6 +32,7 @@
         'views/billing_do_account_tax.xml',
         'views/billing_do_account_account.xml',
         'views/billing_do_sale_views.xml',
+        'views/billing_do_sale_order_line_views.xml',
         'views/billing_do_purchase_views.xml',
         'views/billing_do_account_payment_views.xml',
         'views/billing_do_account_payment_reports.xml',
