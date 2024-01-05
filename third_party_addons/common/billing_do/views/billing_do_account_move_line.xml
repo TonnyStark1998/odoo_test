@@ -26,4 +26,36 @@
             </xpath>
         </field>
     </record>
+
+    <record model="ir.ui.view" id="billing_do_view_move_line_tree_readonly_fields">
+        <field name="name">billing.do.account.move.line.tree</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='discount']"
+                    position="replace">
+                <field name="discount" 
+                    string="Disc.%" 
+                    optional="hide"
+                    readonly="true"
+                    groups="!billing_do.allow_editing_discount_field_in_sales_and_invoice" />
+                <field name="discount" 
+                    string="Disc.%" 
+                    optional="hide"
+                    readonly="false"
+                    groups="billing_do.allow_editing_discount_field_in_sales_and_invoice" />
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='price_unit']"
+                    position="replace">
+                <field name="price_unit" 
+                    string="Price"
+                    readonly="true"
+                    groups="!billing_do.allow_editing_price_field_in_sales_and_invoice" />
+                <field name="price_unit" 
+                    string="Price"
+                    readonly="false"
+                    groups="billing_do.allow_editing_price_field_in_sales_and_invoice" />
+            </xpath>
+        </field>
+    </record>
 </odoo>
