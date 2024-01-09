@@ -41,6 +41,7 @@
         'views/billing_do_tax_report_item_607.xml',
         'views/billing_do_res_currency.xml',
         'views/billing_do_trn_type_views.xml',
+        'views/billing_do_product_views.xml',
         'report/billing_do_account_payment_templates.xml',
         'data/default_tax_report_types.xml',
         'data/default_trn_types.xml',
