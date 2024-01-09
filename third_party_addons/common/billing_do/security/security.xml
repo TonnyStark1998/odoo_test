@@ -2,4 +2,10 @@
     <record id="enforce_mrp_production_attachments" model="res.groups">
         <field name="name">Enforce attachments on MRP Production orders</field>
     </record>
+    <record id="allow_editing_discount_field_in_sales_and_invoice" model="res.groups">
+        <field name="name">Allow user to edit the discount field on Sales &amp; Invoices lines</field>
+    </record>
+    <record id="allow_editing_price_field_in_sales_and_invoice" model="res.groups">
+        <field name="name">Allow user to edit the price field on Sales &amp; Invoices lines</field>
+    </record>
 </odoo>
