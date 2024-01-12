@@ -291,7 +291,10 @@ class BillingDoAccountMove(models.Model):
             for move in self:
                 self._set_name_for_out_move(move)
                 self._set_ncf_date_to(move)
-                
+
+                if move._exists_unique_name_tax_valuable_invoice():
+                    move._compute_name_tax_valuable_invoice()
+
                 if not move.posted_before:
                     move._move_to_next_sequence_number(move.ncf_type_sequence)
 
@@ -588,4 +591,29 @@ class BillingDoAccountMove(models.Model):
         sequence._set_number_next_actual()
 
     def _must_check_constrains_date_sequence(self):
+        return False
+    
+    def _exists_unique_name_tax_valuable_invoice(self):
+        if self.move_type in ['in_invoice', 'in_refund', 'in_receipt']:
+            if not self.is_third_party_ncf:
+                return False
+        elif not self.is_tax_valuable:
+            return False
+        
+        log.info('[KCS] Name: {}'.format(self.id))
+        log.info('[KCS] Id: {}'.format(self.name))
+
+        name_exists = \
+            self.env['account.move']\
+            .search_count([
+                ('id', '!=', self.id if self.id else 0),
+                ('name', '=', self.name),
+                ('state', '=', 'posted')
+            ])
+        
+        log.info('[KCS] Name Exists: {}'.format(name_exists))
+
+        if name_exists > 0:
+            return True
+
         return False
