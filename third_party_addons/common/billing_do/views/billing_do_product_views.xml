@@ -1,24 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record model="ir.ui.view" id="billing_do_product_template_form_view">
-        <field name="name">billing.do.product.template.common.form</field>
+    <record model="ir.ui.view" id="billing_do_product_template_only_form_view">
+        <field name="name">billing.do.product.template.product.form</field>
         <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
         <field name="arch" type="xml">
             <xpath expr="//notebook//page//group//group//field[@name='list_price']" 
                     position="replace">
-                <field name="list_price" 
-                    class="oe_inline"
-                    widget='monetary'
-                    options="{'currency_field': 'currency_id', 'field_digits': True}"
-                    readonly="true"
-                    groups="!billing_do.allow_editing_price_field_in_sales_and_invoice" />
-                <field name="list_price" 
-                    class="oe_inline"
-                    widget='monetary'
-                    options="{'currency_field': 'currency_id', 'field_digits': True}"
-                    readonly="false"
-                    groups="billing_do.allow_editing_price_field_in_sales_and_invoice" />
+                <t groups="!billing_do.allow_editing_price_field_in_sales_and_invoice">
+                    <field name="list_price" 
+                        class="oe_inline"
+                        widget='monetary'
+                        options="{'currency_field': 'currency_id', 'field_digits': True}"
+                        readonly="true" />
+                </t>
+                <t groups="billing_do.allow_editing_price_field_in_sales_and_invoice">
+                    <field name="list_price" 
+                        class="oe_inline"
+                        widget='monetary'
+                        options="{'currency_field': 'currency_id', 'field_digits': True}"
+                        readonly="false" />
+                </t>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="billing_do_product_normal_form_view">
+        <field name="name">billing.do.product.product.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lst_price']" 
+                    position="replace">
+                <t groups="!billing_do.allow_editing_price_field_in_sales_and_invoice">
+                    <field name="lst_price" 
+                        class="oe_inline" 
+                        widget='monetary' 
+                        options="{'currency_field': 'currency_id', 'field_digits': True}"
+                        readonly="true" />
+                </t>
+                <t groups="billing_do.allow_editing_price_field_in_sales_and_invoice">
+                    <field name="lst_price" 
+                        class="oe_inline" 
+                        widget='monetary' 
+                        options="{'currency_field': 'currency_id', 'field_digits': True}"
+                        readonly="false" />
+                </t>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="billing_do_product_variant_easy_edit_view">
+        <field name="name">billing.do.product.product.view.form.easy</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_variant_easy_edit_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='pricing']//field[@name='lst_price']" 
+                    position="replace">
+                <t groups="!billing_do.allow_editing_price_field_in_sales_and_invoice">
+                    <field name="lst_price" 
+                        class="oe_inline" 
+                        widget='monetary' 
+                        options="{'currency_field': 'currency_id', 'field_digits': True}" 
+                        readonly="true" />
+                </t>
+                <t groups="billing_do.allow_editing_price_field_in_sales_and_invoice">
+                    <field name="lst_price" 
+                        class="oe_inline" 
+                        widget='monetary' 
+                        options="{'currency_field': 'currency_id', 'field_digits': True}" 
+                        attrs="{'readonly': [('product_variant_count', '&gt;', 1)]}" />
+                </t>
             </xpath>
         </field>
     </record>
