@@ -87,8 +87,11 @@ class AccountReconcileAbstract(models.AbstractModel):
                 {
                     "id": False,
                     "counterpart_line_id": (
-                        line.matched_debit_ids.mapped("debit_move_id")
-                        | line.matched_credit_ids.mapped("credit_move_id")
+                        line.matched_debit_ids
+                            .filtered_domain([('exchange_move_id', '!=', False)])
+                            .mapped("debit_move_id")
+                        | line.matched_credit_ids
+                            .mapped("credit_move_id")
                     ).id,
                 }
             )

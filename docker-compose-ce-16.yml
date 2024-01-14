@@ -24,7 +24,7 @@ services:
     entrypoint:
       - /entrypoint.sh
       - -u
-      - billing_do, billing_do_ce, kcs_medical_app, ars_do, professional_templates
+      - billing_do, billing_do_ce, kcs_medical_app, ars_do, professional_templates, account_reconcile_oca
   odoo-db:
     image: postgres:13
     ports:
