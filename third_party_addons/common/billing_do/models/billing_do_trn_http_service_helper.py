@@ -76,5 +76,5 @@ class BillingDoTrnHttpServiceHelper(models.AbstractModel):
 
                     return (bool(response.json()['isValid']),
                             datetime.fromisoformat(response.json()['dueDate']).date())
-            return False
+            return (False,datetime.min)
         raise exceptions.UserError(_('Tax Receipts switch is off.'))
