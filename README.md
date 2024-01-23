@@ -3,4 +3,4 @@
 ## Description
 Add and implement the required functionalities and features for supporting the invoicing process in the Dominican Republic.
 ## License
-(c) All right reserved 2020-2021. Koala Creative Software & Accounterprise.
+(c) All right reserved 2020-2024. Accounterprise SRL.
