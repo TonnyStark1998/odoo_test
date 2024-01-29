@@ -3,36 +3,76 @@ kind: Namespace
 metadata:
   name: odoo-dev
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: azure-file-credentials
+  namespace: odoo-dev
+type: Opaque
+stringData:
+  azurestorageaccountname: kubernetessa
+  azurestorageaccountkey: 5NF23Auu5yjuSe1hezZjUuXF4rlnraQTn7ukHaXNC7nPQtr0RX/nJ0rKGBoMFf/Q5l6a3pISOp45+AStJ1BZJg==
+---
+#################################
+#            Storage            #
+#################################
+# apiVersion: storage.k8s.io/v1
+# kind: StorageClass
+# metadata:
+#   name: azurefile-csi-retain
+# provisioner: file.csi.azure.com
+# parameters:
+#   subscriptionID: 0ccb7c41-ce07-4abe-92a4-84acb41d5d6f  # optional, only set this when storage account is not in the same subscription as agent node
+#   resourceGroup: kubernetes-test  # optional, only set this when storage account is not in the same resource group as agent node
+#   storageAccount: kubernetessa
+#   shareName: kubernetes-fs
+#   csi.storage.k8s.io/provisioner-secret-name: azure-file-credentials
+#   csi.storage.k8s.io/provisioner-secret-namespace: odoo-dev
+#   csi.storage.k8s.io/node-stage-secret-name: azure-file-credentials
+#   csi.storage.k8s.io/node-stage-secret-namespace: odoo-dev
+#   csi.storage.k8s.io/controller-expand-secret-name: azure-file-credentials
+#   csi.storage.k8s.io/controller-expand-secret-namespace: odoo-dev
+# reclaimPolicy: Retain
+# volumeBindingMode: Immediate
+# mountOptions:
+#   - mfsymlinks
+#   - cache=strict  # https://linux.die.net/man/8/mount.cifs
+#   - nosharesock  # reduce probability of reconnect race
+#   - actimeo=30  # reduce latency for metadata-heavy workload
+# ---
 #################################
 #           Postgres            #
 #################################
 apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: postgres-configmap
-  namespace: odoo-dev
-data:
-  POSTGRES_USER: "usr_odoo"
-  PORTGRES_PASSWORD: "Q37zfHgsswMnYQnKPZG4XQ5p"
----
-apiVersion: v1
 kind: PersistentVolume
 metadata:
+  annotations:
+    pv.kubernetes.io/provisioned-by: file.csi.azure.com
   name: postgres-data-pv
   namespace: odoo-dev
 spec:
   capacity:
-    storage: 5Gi
+    storage: 2Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: azurefile
+  storageClassName: azurefile-csi
+  csi:
+    driver: file.csi.azure.com
+    volumeHandle: >-
+      kubernetes-test#kubernetessa#postgres-data-fs###odoo-dev
+    volumeAttributes:
+      storageAccount: kubernetessa
+      shareName: postgres-data-fs
+    nodeStageSecretRef:
+      name: azure-file-credentials
+      namespace: odoo-dev
   mountOptions:
-    - hard
-    - nfsvers=4.1
-  nfs:
-    path: /mnt/postgres-data-pv
-    server: 172.17.0.2
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - nobrl
+  volumeMode: Filesystem
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -40,12 +80,14 @@ metadata:
   name: postgres-data-pvc
   namespace: odoo-dev
 spec:
-  resources:
-    requests:
-      storage: 5Gi
   accessModes:
     - ReadWriteMany
-
+  resources:
+    requests:
+      storage: 2Gi
+  volumeName: postgres-data-pv
+  storageClassName: azurefile-csi
+  volumeMode: Filesystem
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -67,20 +109,25 @@ spec:
         image: postgres:16
         resources:
           limits:
-            memory: "512Mi"
-            cpu: "300m"
+            memory: "256Mi"
+            cpu: "100m"
         ports:
         - containerPort: 5432
-        envFrom:
-        - configMapRef:
-            name: postgres-configmap
+        env:
+          - name: POSTGRES_USER
+            value: usr_odoo
+          - name: POSTGRES_PASSWORD
+            value: Q37zfHgsswMnYQnKPZG4XQ5p
+          - name: PGDATA
+            value: /var/lib/postgresql/accounterprise-ce/data
         volumeMounts:
-          - name: postgres-data
-            mountPath: /var/lib/postgresql/data
+        - mountPath: "/var/lib/postgresql"
+          name: postgres-data-v
+          readOnly: false
       volumes:
-        - name: postgres-data
-          persistentVolumeClaim:
-            claimName: postgres-data-pvc
+      - name: postgres-data-v
+        persistentVolumeClaim:
+          claimName: postgres-data-pvc
 ---
 apiVersion: v1
 kind: Service
@@ -97,38 +144,44 @@ spec:
   - port: 15401
     targetPort: 5432
 ---
-
 #################################
 #             Odoo              #
 #################################
 apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: odoo-configmap
-data:
-  HOST: "postgres-service"
-  PORT: "15401"
-  USER: "usr_odoo"
-  PASSWORD: "Q37zfHgsswMnYQnKPZG4XQ5p"
----
-apiVersion: v1
 kind: PersistentVolume
 metadata:
+  annotations:
+    pv.kubernetes.io/provisioned-by: file.csi.azure.com
   name: odoo-data-pv
   namespace: odoo-dev
 spec:
   capacity:
-    storage: 2Gi
+    storage: 5Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: azurefile
+  storageClassName: azurefile-csi
+  csi:
+    driver: file.csi.azure.com
+    volumeHandle: >-
+      kubernetes-test#kubernetessa#odoo-data-fs###odoo-dev
+    volumeAttributes:
+      storageAccount: kubernetessa
+      shareName: odoo-data-fs
+      folderName: accounterprise-ce
+    nodeStageSecretRef:
+      name: azure-file-credentials
+      namespace: odoo-dev
   mountOptions:
-    - hard
-    - nfsvers=4.1
-  nfs:
-    path: /mnt/odoo-data-pv
-    server: 172.17.0.2
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - nobrl
+  volumeMode: Filesystem
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -136,11 +189,14 @@ metadata:
   name: odoo-data-pvc
   namespace: odoo-dev
 spec:
-  resources:
-    requests:
-      storage: 2Gi
   accessModes:
     - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  volumeName: odoo-data-pv
+  storageClassName: azurefile-csi
+  volumeMode: Filesystem
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -161,18 +217,25 @@ spec:
         image: odoo:16.0
         resources:
           limits:
-            memory: "256Mi"
+            memory: "512Mi"
             cpu: "200m"
         ports:
         - containerPort: 8069
-        envFrom:
-        - configMapRef:
-            name: odoo-configmap
+        env:
+          - name: HOST
+            value: postgres-service
+          - name: PORT
+            value: "15401"
+          - name: USER
+            value: usr_odoo
+          - name: PASSWORD
+            value: Q37zfHgsswMnYQnKPZG4XQ5p
         volumeMounts:
-          - name: odoo-data
-            mountPath: /var/lib/odoo
+          - mountPath: "/var/lib/odoo"
+            name: odoo-data-v
+            readOnly: false
       volumes:
-        - name: odoo-data
+        - name: odoo-data-v
           persistentVolumeClaim:
             claimName: odoo-data-pvc
 ---
