@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.actions.act_window" id="action_ars_do_healthcare_report_ars">
+        <field name="name">ARS Reports</field>
+        <field name="res_model">ars.do.healthcare.report.ars</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" 
+                ref="ars_do_healthcare_report_ars_view_tree" />
+        <field name="search_view_id"
+                ref="ars_do_healthcare_report_ars_view_search" />
+    </record>
+
+    <!-- Menu items -->
+    <menuitem id="menu_ars_do_healthcare_reports"
+                name="Reports" 
+                parent="main_menu_ars_do" 
+                sequence="4"
+                groups="-account.group_account_user,account.group_account_invoice" />
+
+    <menuitem id="menu_ars_do_healthcare_report_ars"
+                name="ARS" 
+                parent="menu_ars_do_healthcare_reports" 
+                action="action_ars_do_healthcare_report_ars" 
+                sequence="1"
+                groups="-account.group_account_user,account.group_account_invoice" />
+</odoo>

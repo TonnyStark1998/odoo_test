@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="ars_do_invoice_lines" inherit_id="professional_templates.invoice_lines">
+            <xpath expr="//t[@*='display_discount']" position="after">
+                <t t-set="display_coverage"
+                    t-value="any([l.coverage for l in o.invoice_line_ids])"/>
+            </xpath>
+            <xpath expr="//th[contains(., 'Unitario')]" position="after">
+                <th class="text-right"
+                    t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;"
+                    t-if="display_coverage">
+                    Cobertura
+                </th>
+            </xpath>
+            <xpath expr="//td//span[@*='l.price_unit']/.." position="after">
+                <td t-if="display_coverage" 
+                    t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                    <span t-field="l.coverage" />
+                    <span> %</span>
+                </td>
+            </xpath>
+        </template>
+    </data>
+</odoo>
