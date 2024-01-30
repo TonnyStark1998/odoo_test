@@ -19,6 +19,8 @@ if __name__ == '__main__':
 
     # If the SLEEP_TIME environment variable was not set, then use 30 as default.
     default_sleep_time = sleep_time if sleep_time else 30
+    # If the MAX_RETRIES environment variable was not set, then use 3 as default.
+    max_retries = max_retries if max_retries else 3
 
     while count_retries < max_retries:
         try:
@@ -38,12 +40,12 @@ if __name__ == '__main__':
             connection_successful = True
 
             '''
-            Check if the database set in the DATABASE_NAME environment varible is created or not.
+            Check if the database set in the DATABASE_NAME environment variable is created or not.
             '''
-            select_cursor = connection.cursor()
-            select_cursor.execute('SELECT datname FROM pg_database WHERE datname = %s', (db_name,))
+            test_db_cursor = connection.cursor()
+            test_db_cursor.execute('SELECT datname FROM pg_database WHERE datname = %s', (db_name,))
             os.environ['ODOO_DATABASE_STATE'] = 'old'
-            if select_cursor.rowcount > 0:
+            if test_db_cursor.rowcount > 0:
                 '''
                 Set the ODOO_DATABASE_STATE to the value new to indicate that this database does not exist.
                 '''
