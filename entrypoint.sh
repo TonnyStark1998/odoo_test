@@ -27,6 +27,12 @@ fi
 # Test the database settings to check all is good. See the file below to understand what is being checked.
 test_database_settings.py
 
+# Chech if the previous command to test eh database existency failed.
+if [[ "$?" != "0" ]]; then
+    echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Database settings testing failed."
+    exit -2
+fi
+
 echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Database settings testing was successful."
 
 # Initial values to run the Odoo daemon which are common to all editions and versions.
@@ -42,6 +48,7 @@ if [[ -n $ODOO_DATABASE_STATE
     ODOO_ARGS=$ODOO_ARGS + " --init ${ODOO_INITIAL_MODULES}"
 
     echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Initial modules set to install on a new database."
+    echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] All these ${ODOO_INITIAL_MODULES,,} will be installed."
 fi
 
 # Run the Odoo daemon with the required arguments.
