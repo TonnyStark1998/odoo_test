@@ -8,23 +8,6 @@ if [[ -z ${DATABASE_NAME} ]]; then
     exit -1
 fi
 
-# Replace all the values about the parameters for connecting to the database specified in the file
-#   set in the environment varible ODOO_CONFIG_FILE with the ones specific for this environment.
-sed -ie "s/^db_host.*/db_host = $HOST/" $ODOO_CONFIG_FILE
-sed -ie "s/^db_port.*/db_port = $PORT/" $ODOO_CONFIG_FILE
-sed -ie "s/^db_user.*/db_user = $USER/" $ODOO_CONFIG_FILE
-sed -ie "s/^db_password.*/db_password = $PASSWORD/" $ODOO_CONFIG_FILE
-sed -ie "s/^db_name.*/db_name = $DATABASE_NAME/" $ODOO_CONFIG_FILE
-
-echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Odoo configuration file updated successfully."
-
-# Check if the Odoo edition is CE for this environment, in this case the addons_path configuration must be changed
-#   to reflect the correct path for the Community Edition.
-if [[ "${ODOO_EDITION,,}" == "ce" ]]; then
-    sed -ie "s/^addons_path.*/addons_path = \/mnt\/extra-addons\/common,\/mnt\/extra-addons\/ce/" $ODOO_CONFIG_FILE
-    echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Addons Paths for Odoo Community Edition updated successfully."
-fi
-
 # Test the database settings to check all is good. See the file below to understand what is being checked.
 test_database_settings.py
 
