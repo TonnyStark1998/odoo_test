@@ -17,16 +17,20 @@ ENV DATABASE_NAME=
 ENV ODOO_CONFIG_FILE=/etc/odoo/odoo.conf
 ENV ODOO_INITIAL_MODULES=
 
+COPY odoo-entrypoint.sh /
+COPY remove_modules_on_odoo_version.sh /
+COPY test_database_settings.py /usr/local/bin/test_database_settings.py
+COPY third_party_addons/ /mnt/extra-addons
+COPY odoo.conf /etc/odoo/
+
 USER root
 
-COPY ./entrypoint.sh /
-COPY ./test_database_settings.py /usr/local/bin/test_database_settings.py
-COPY ./third_party_addons/ /mnt/extra-addons
-COPY ./odoo.conf /etc/odoo/
-
 RUN [ "chmod", "-R", "777", "/etc/odoo" ]
+RUN /remove_modules_on_odoo_version.sh ${ODOO_VERSION:-13.0}
 
 EXPOSE 8069 8072
 VOLUME [ "/var/lib/odoo" ]
 
-ENTRYPOINT [ "./entrypoint.sh" ]
+USER odoo
+
+ENTRYPOINT [ "/bin/bash", "odoo-entrypoint.sh" ]

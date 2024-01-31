@@ -11,7 +11,7 @@ if __name__ == '__main__':
     db_password = os.environ.get('PASSWORD') # Get the password to use from the environment when connecting to the database server
     db_name = os.environ.get('DATABASE_NAME') # Get the database name to use from the environment when creating this client environment
     default_db_name = 'postgres' # Set the default database to connect to when testing the connection to the server
-    max_retries = int(os.environ.get('MAX_RETRIES')) # Get the max number of tries we must do before failing the connection test
+    max_retries = os.environ.get('MAX_RETRIES') # Get the max number of tries we must do before failing the connection test
     sleep_time = os.environ.get('SLEEP_TIME') # Get the number of seconds to wait between each retry
 
     connection_successful = False
@@ -20,7 +20,7 @@ if __name__ == '__main__':
     # If the SLEEP_TIME environment variable was not set, then use 30 as default.
     default_sleep_time = sleep_time if sleep_time else 30
     # If the MAX_RETRIES environment variable was not set, then use 3 as default.
-    max_retries = max_retries if max_retries else 3
+    max_retries = int(max_retries) if max_retries else 3
 
     while count_retries < max_retries:
         try:
@@ -56,7 +56,7 @@ if __name__ == '__main__':
                 count_retries, 
                 db_name))
             for arg in e.args:
-                print('[{}][test_database_settings.py]Exception: {}'.format(arg, datetime.datetime.now()))
+                print('[{}][test_database_settings.py] Exception: {}'.format(datetime.datetime.now(), arg))
             connection_successful = False
         else:
             connection.close()

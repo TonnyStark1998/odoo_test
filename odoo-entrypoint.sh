@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Check if the DATABASE_NAME environment variable was set, if not this must fail the start of the container.
 if [[ -z ${DATABASE_NAME} ]]; then
     echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Database name was not specified. Use the environment variable $DATABASE_NAME to specify the name of the database to use for this container."
@@ -20,7 +22,6 @@ echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Odoo configuration file u
 #   to reflect the correct path for the Community Edition.
 if [[ "${ODOO_EDITION,,}" == "ce" ]]; then
     sed -ie "s/^addons_path.*/addons_path = \/mnt\/extra-addons\/common,\/mnt\/extra-addons\/ce/" $ODOO_CONFIG_FILE
-
     echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Addons Paths for Odoo Community Edition updated successfully."
 fi
 
@@ -52,4 +53,5 @@ if [[ -n $ODOO_DATABASE_STATE
 fi
 
 # Run the Odoo daemon with the required arguments.
+# TODO: Allow the container to run another command passed by the command line.
 exec odoo $ODOO_ARGS
