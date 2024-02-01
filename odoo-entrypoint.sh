@@ -22,6 +22,12 @@ echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Database settings testing
 # Initial values to run the Odoo daemon which are common to all editions and versions.
 ODOO_ARGS="--config $ODOO_CONFIG_FILE --update all"
 
+# Set the addons paths based on the ODOO_VERSION and ODOO_EDITION
+if [[ -n "$USE_DEFAULT_ADDONS_PATH" 
+        && "${USE_DEFAULT_ADDONS_PATH,,}" == "y"]]; then
+    ODOO_ARGS=$ODOO_ARGS + " --addons-path /mnt/extra-addons/${ODOO_VERSION}/common, /mnt/extra-addons/${ODOO_VERSION}/${ODOO_EDITION}"
+fi
+
 # Check whether this is a new database created from scratch or is an old one.
 #   If it is a new database we need to install the basic modules to get Odoo up & running.
 #   The variable ODOO_DATABASE_STATE is set in the test_database_settings.py Python scripts.
