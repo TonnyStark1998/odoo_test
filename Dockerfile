@@ -1,6 +1,6 @@
 ARG ODOO_VERSION
 
-FROM odoo:${ODOO_VERSION:-16.0}
+FROM odoo:${ODOO_VERSION}
 MAINTAINER "Samuel Luciano <sluciano@accounterprise.com>"
 
 LABEL com.accounterprise.owner="Accounterprise SRL <contabilidad@accounterprise.com>"
