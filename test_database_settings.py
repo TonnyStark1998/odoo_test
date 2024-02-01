@@ -44,14 +44,15 @@ if __name__ == '__main__':
             '''
             test_db_cursor = connection.cursor()
             test_db_cursor.execute('SELECT datname FROM pg_database WHERE datname = %s', (db_name,))
-            os.environ['ODOO_DATABASE_STATE'] = 'old'
+            os.environ['ODOO_DATABASE_STATE'] = 'new'
             if test_db_cursor.rowcount > 0:
                 '''
                 Set the ODOO_DATABASE_STATE to the value new to indicate that this database does not exist.
                 '''
-                os.environ['ODOO_DATABASE_STATE'] = 'new'
+                os.environ['ODOO_DATABASE_STATE'] = 'old'
 
-            print('[{}][test_database_settings.py] This is a/an {} database.'.format(datetime.datetime.now(), 
+            print('[{}][test_database_settings.py] Database name: {}. This is a/an {} database.'.format(datetime.datetime.now(), 
+                db_name,
                 os.environ.get('ODOO_DATABASE_STATE')))
 
         except Exception as e:
