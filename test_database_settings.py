@@ -51,6 +51,9 @@ if __name__ == '__main__':
                 '''
                 os.environ['ODOO_DATABASE_STATE'] = 'new'
 
+            print('[{}][test_database_settings.py] This is a/an {} database.'.format(datetime.datetime.now(), 
+                os.environ.get('ODOO_DATABASE_STATE')))
+
         except Exception as e:
             print('[{}][test_database_settings.py] #{} unsuccessful.'.format(datetime.datetime.now(), 
                 count_retries, 

@@ -16,6 +16,9 @@ ENV ODOO_ENVIRONMENT=dev
 ENV DATABASE_NAME=
 ENV ODOO_CONFIG_FILE=/etc/odoo/odoo.conf
 ENV ODOO_INITIAL_MODULES=
+ENV USE_DEFAULT_ADDONS_PATH=y
+ENV MAX_RETRIES=
+ENV SLEEP_TIME=
 
 COPY odoo-entrypoint.sh /
 COPY remove_modules_on_odoo_version.sh /
@@ -26,7 +29,7 @@ COPY odoo.conf /etc/odoo/
 USER root
 
 RUN [ "chmod", "-R", "777", "/etc/odoo" ]
-RUN /remove_modules_on_odoo_version.sh ${ODOO_VERSION:-13.0}
+RUN /remove_modules_on_odoo_version.sh ${ODOO_VERSION}
 
 EXPOSE 8069 8072
 VOLUME [ "/var/lib/odoo" ]
