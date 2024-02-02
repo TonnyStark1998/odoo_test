@@ -13,6 +13,7 @@ if __name__ == '__main__':
     default_db_name = 'postgres' # Set the default database to connect to when testing the connection to the server
     max_retries = os.environ.get('MAX_RETRIES') # Get the max number of tries we must do before failing the connection test
     sleep_time = os.environ.get('SLEEP_TIME') # Get the number of seconds to wait between each retry
+    odoo_database_state = 'new'
 
     connection_successful = False
     count_retries = 0
@@ -44,16 +45,15 @@ if __name__ == '__main__':
             '''
             test_db_cursor = connection.cursor()
             test_db_cursor.execute('SELECT datname FROM pg_database WHERE datname = %s', (db_name,))
-            os.environ['ODOO_DATABASE_STATE'] = 'new'
             if test_db_cursor.rowcount > 0:
                 '''
                 Set the ODOO_DATABASE_STATE to the value new to indicate that this database does not exist.
                 '''
-                os.environ['ODOO_DATABASE_STATE'] = 'old'
+                odoo_database_state = 'old'
 
             print('[{}][test_database_settings.py] Database name: {}. This is a/an {} database.'.format(datetime.datetime.now(), 
                 db_name,
-                os.environ.get('ODOO_DATABASE_STATE')))
+                odoo_database_state))
 
         except Exception as e:
             print('[{}][test_database_settings.py] #{} unsuccessful.'.format(datetime.datetime.now(), 
@@ -65,7 +65,7 @@ if __name__ == '__main__':
         else:
             connection.close()
 
-        # If the connection ha been successful, then stop the retries.
+        # If the connection has been successful, then stop the retries.
         if connection_successful:
             break
 
@@ -76,4 +76,5 @@ if __name__ == '__main__':
 if not connection_successful:
     quit(-1)
 
+print(odoo_database_state)
 quit(0)

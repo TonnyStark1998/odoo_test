@@ -9,7 +9,7 @@ if [[ -z ${DATABASE_NAME} ]]; then
 fi
 
 # Test the database settings to check all is good. See the file below to understand what is being checked.
-test_database_settings.py
+ODOO_DATABASE_STATE=$(test_database_settings.py)
 
 # Chech if the previous command to test eh database existency failed.
 if [[ "$?" != "0" ]]; then
@@ -20,22 +20,24 @@ fi
 echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Database settings testing was successful."
 
 # Initial values to run the Odoo daemon which are common to all editions and versions.
-ODOO_ARGS="--config $ODOO_CONFIG_FILE --update all"
+ODOO_ARGS="--config=$ODOO_CONFIG_FILE --update=all"
 
 # Set the addons paths based on the ODOO_VERSION and ODOO_EDITION
-if [[ -n "$USE_DEFAULT_ADDONS_PATH" 
-        && "${USE_DEFAULT_ADDONS_PATH,,}" == "y"]]; then
-    ODOO_ARGS=$ODOO_ARGS + " --addons-path /mnt/extra-addons/${ODOO_VERSION}/common, /mnt/extra-addons/${ODOO_VERSION}/${ODOO_EDITION}"
+if [[ -n $USE_DEFAULT_ADDONS_PATH 
+        && "${USE_DEFAULT_ADDONS_PATH,,}" == "y" ]]; then
+    ODOO_ARGS="$ODOO_ARGS --addons-path=/mnt/extra-addons/${ODOO_VERSION}/common,/mnt/extra-addons/${ODOO_VERSION}/${ODOO_EDITION}"
 fi
 
 # Check whether this is a new database created from scratch or is an old one.
 #   If it is a new database we need to install the basic modules to get Odoo up & running.
 #   The variable ODOO_DATABASE_STATE is set in the test_database_settings.py Python scripts.
 #   See the script file for more details.
+echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Database state: $ODOO_DATABASE_STATE."
+echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Initial modules: $ODOO_INITIAL_MODULES."
 if [[ -n $ODOO_DATABASE_STATE 
         && "${ODOO_DATABASE_STATE,,}" == "new" 
         && -n $ODOO_INITIAL_MODULES ]]; then
-    ODOO_ARGS=$ODOO_ARGS + " --init ${ODOO_INITIAL_MODULES}"
+    ODOO_ARGS="$ODOO_ARGS --init ${ODOO_INITIAL_MODULES}"
 
     echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Initial modules set to install on a new database."
     echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] All these ${ODOO_INITIAL_MODULES,,} will be installed."
