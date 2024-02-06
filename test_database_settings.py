@@ -19,7 +19,7 @@ if __name__ == '__main__':
     count_retries = 0
 
     # If the SLEEP_TIME environment variable was not set, then use 30 as default.
-    default_sleep_time = sleep_time if sleep_time else 30
+    default_sleep_time = float(sleep_time) if sleep_time else 30
     # If the MAX_RETRIES environment variable was not set, then use 3 as default.
     max_retries = int(max_retries) if max_retries else 3
 
@@ -76,5 +76,5 @@ if __name__ == '__main__':
 if not connection_successful:
     quit(-1)
 
-print(odoo_database_state)
+print(odoo_database_state, end='')
 quit(0)
