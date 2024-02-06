@@ -11,7 +11,7 @@ fi
 # Test the database settings to check all is good. See the file below to understand what is being checked.
 ODOO_DATABASE_STATE=$(test_database_settings.py)
 
-# Chech if the previous command to test eh database existency failed.
+# Chech if the previous command to test the database existency failed.
 if [[ "$?" != "0" ]]; then
     echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Database settings testing failed."
     exit -2
@@ -34,9 +34,9 @@ fi
 #   See the script file for more details.
 echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Database state: $ODOO_DATABASE_STATE."
 echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Initial modules: $ODOO_INITIAL_MODULES."
-if [[ -n $ODOO_DATABASE_STATE 
+if [[ -n "$ODOO_DATABASE_STATE" 
         && "${ODOO_DATABASE_STATE,,}" == "new" 
-        && -n $ODOO_INITIAL_MODULES ]]; then
+        && -n "$ODOO_INITIAL_MODULES" ]]; then
     ODOO_ARGS="$ODOO_ARGS --init ${ODOO_INITIAL_MODULES}"
 
     echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Initial modules set to install on a new database."
