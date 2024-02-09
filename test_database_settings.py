@@ -82,6 +82,6 @@ if not connection_successful:
                   .format(datetime.datetime.now()))
     exit(-1)
 
-file_odoo_database_state = open("/var/lib/odoo/odoo_database_state", "x")
+file_odoo_database_state = open("/var/lib/odoo/odoo_database_state", "w")
 print(odoo_database_state, file=file_odoo_database_state, flush=True)
 file_odoo_database_state.close()
