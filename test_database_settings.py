@@ -67,14 +67,21 @@ if __name__ == '__main__':
 
         # If the connection has been successful, then stop the retries.
         if connection_successful:
+            print('[{}][test_database_settings.py] Database settings testing was successful.'
+                  .format(datetime.datetime.now()))
             break
 
         # If this is the las retry, don't wait.
         if count_retries != (max_retries - 1):
+            print('[{}][test_database_settings.py] Waiting {} seconds to retry.'
+                  .format(datetime.datetime.now(), default_sleep_time))
             time.sleep(default_sleep_time)
 
 if not connection_successful:
-    quit(-1)
+    print('[{}][test_database_settings.py] Database settings testing failed.'
+                  .format(datetime.datetime.now()))
+    exit(-1)
 
-print(odoo_database_state, end='')
-quit(0)
+file_odoo_database_state = open("/var/lib/odoo/odoo_database_state", "x")
+print(odoo_database_state, file=file_odoo_database_state, flush=True)
+file_odoo_database_state.close()

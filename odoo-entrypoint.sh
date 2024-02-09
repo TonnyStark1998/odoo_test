@@ -9,15 +9,8 @@ if [[ -z ${DATABASE_NAME} ]]; then
 fi
 
 # Test the database settings to check all is good. See the file below to understand what is being checked.
-ODOO_DATABASE_STATE=$(test_database_settings.py)
-
-# Chech if the previous command to test the database existency failed.
-if [[ "$?" != "0" ]]; then
-    echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Database settings testing failed."
-    exit -2
-fi
-
-echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Database settings testing was successful."
+test_database_settings.py
+ODOO_DATABASE_STATE=$(cat /var/lib/odoo/odoo_database_state)
 
 # Initial values to run the Odoo daemon which are common to all editions and versions.
 ODOO_ARGS="--config=$ODOO_CONFIG_FILE --update=all"
