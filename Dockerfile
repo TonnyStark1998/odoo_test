@@ -24,7 +24,7 @@ COPY odoo-entrypoint.sh /
 COPY remove_modules_on_odoo_version.sh /
 COPY test_database_settings.py /usr/local/bin/test_database_settings.py
 COPY third_party_addons/ /mnt/extra-addons
-COPY odoo.conf /etc/odoo/
+COPY conf/odoo.conf /etc/odoo/
 
 USER root
 
