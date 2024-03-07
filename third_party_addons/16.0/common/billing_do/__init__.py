@@ -2,6 +2,7 @@
 
 from . import controllers
 from . import models
+from odoo import api, SUPERUSER_ID
 
 import logging
 
@@ -35,6 +36,26 @@ def _update_account_account_withholding_type(cr):
     cr.execute('UPDATE account_account SET withholding_tax_type = \'RET-ITBIS-607\' WHERE id = 38;')
     logging.info('[KCS] [Billing DO] Post init hook: Updated the Withholding type to some Accounts.')
 
+def _activate_dop_currency(env):
+    env['res.currency'].search(['name', 'in', ['USD']])\
+        .write({'active': True})
+    logging.info('[KCS] [Billing DO] Post init hook: Activated the USD currency.')
+
+def _fire_load_currency_cron_job(env):
+    env['billing.do.res.currency'].sudo().load_today_currency_rates()
+    logging.info('[KCS] [Billing DO] Post init hook: Updated all the currencies with the current exchange rate.')
+
+def _update_default_user_login_info(env):
+    current_user = env['res.users'].search(['login', '=', 'admin'])
+    env['res.partner'].search(['id', '=', current_user.partner_id])\
+        .write({'name': 'Henry Medina'})
+    current_user.write({'login': 'hmedina@accounterprise.com'})
+    logging.info('[KCS] [Billing DO] Post init hook: Admin user info updated.')
+
 def _billing_do_post_init(cr, registry):
+    env = api.Environment(cr, SUPERUSER_ID, {})
     _update_account_account_withholding_type(cr)
     _update_account_tax_tax_type(cr)
+    _activate_dop_currency(env)
+    _fire_load_currency_cron_job(env)
+    _update_default_user_login_info(env)
