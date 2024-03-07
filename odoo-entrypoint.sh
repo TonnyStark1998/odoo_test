@@ -13,7 +13,7 @@ test_database_settings.py
 ODOO_DATABASE_STATE=$(cat /var/lib/odoo/odoo_database_state)
 
 # Initial values to run the Odoo daemon which are common to all editions and versions.
-ODOO_ARGS="--config=$ODOO_CONFIG_FILE --update=all"
+ODOO_ARGS="--config=$ODOO_CONFIG_FILE --load-language=es_DO "
 
 # Set the addons paths based on the ODOO_VERSION and ODOO_EDITION
 if [[ -n $USE_DEFAULT_ADDONS_PATH 
@@ -30,9 +30,9 @@ echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Initial modules: $ODOO_IN
 if [[ -n "$ODOO_DATABASE_STATE" 
         && "${ODOO_DATABASE_STATE,,}" == "new" 
         && -n "$ODOO_INITIAL_MODULES" ]]; then
-    ODOO_ARGS="$ODOO_ARGS --init ${ODOO_INITIAL_MODULES}"
+    ODOO_ARGS="$ODOO_ARGS --init ${ODOO_INITIAL_MODULES} --update ${ODOO_INITIAL_MODULES}"
 
-    echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Initial modules set to install on a new database."
+    echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Initial modules set to install/update on a new database."
     echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] All these ${ODOO_INITIAL_MODULES,,} will be installed."
 fi
 

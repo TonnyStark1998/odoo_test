@@ -58,5 +58,6 @@
     ],
     'installable': True,
     'application': True,
+    'post_init_hook': '_billing_do_post_init',
     'auto_install': False,
 }
