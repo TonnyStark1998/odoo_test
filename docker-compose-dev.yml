@@ -1,18 +1,17 @@
 version: '3.1'
 services:
   odoo-ee:
-    image: odoo:13.0
+    image: odoo:16.0
     depends_on:
       - odoo-db
     ports:
       - "${ENV_HOST_PORT}:8069"
     volumes:
       - type: bind
-        source: /var/data/${ENV_DATABASE_NAME}/odoo
+        source: /c/repos/data/${ENV_DATABASE_NAME}/odoo
         target: /var/data/odoo
-      - ./conf-dev:/etc/odoo
+      - ./conf:/etc/odoo
       - ./third_party_addons:/mnt/extra-addons
-      - /opt/odoo/enterprise:/opt/odoo/enterprise
     environment:
       - HOST=odoo-db
       - USER=usr_odoo
@@ -24,9 +23,9 @@ services:
     entrypoint:
       - /entrypoint.sh
       - --init
-      - web_environment_ribbon, billing_do, billing_do_ee, professional_templates
+      - billing_do, billing_do_ce, professional_templates
       - --update
-      - billing_do, billing_do_ee, kcs_medical_app, ars_do, professional_templates
+      - billing_do, billing_do_ce, kcs_medical_app, ars_do, professional_templates
   odoo-db:
     image: postgres:13
     ports:
@@ -38,10 +37,10 @@ services:
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - type: bind
-        source: /var/data/${ENV_DATABASE_NAME}/pgdata
+        source: /c/repos/data/${ENV_DATABASE_NAME}/pgdata
         target: /var/lib/postgresql/data/pgdata
       - type: bind
-        source: /var/data/production-backups/${ENV_DATABASE_NAME}/
+        source: /c/repos/data/production-backups/${ENV_DATABASE_NAME}/
         target: /var/data/backups
     secrets:
       - postgresql_password
