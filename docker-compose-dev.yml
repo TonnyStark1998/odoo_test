@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   odoo-ee:
-    image: accounterprise.azurecr.io/odoo-acp:16.0-latest
+    image: accounterprise.azurecr.io/odoo-acp:13.0-latest
     depends_on:
       - odoo-db
     ports:
