@@ -15,20 +15,23 @@ services:
       # - /opt/odoo/enterprise:/opt/odoo/enterprise
     environment:
       - HOST=odoo-db
+      - PORT=5432
       - USER=usr_odoo
-      - PASSWORD_FILE=/run/secrets/postgresql_password
+      - PASSWORD=Q37zfHgsswMnYQnKPZG4XQ5p
+      - DATABASE_NAME=${ENV_DATABASE_NAME}
+      - ODOO_INITIAL_MODULES=base,billing_do,billing_do_ce,professional_templates,account_statement_base,accounting_pdf_reports,account_oca_reconcile,base_account_budget,base_accounting_kit,gsk_automatic_mail_server,om_account_bank_statement_import,om_account_daily_reports,om_account_followup,om_dynamic_reports,om_fiscal_year,om_recurring_payment
     secrets:
       - postgresql_password
     extra_hosts:
       - "odoo-host:host-gateway"
     entrypoint:
-      - /entrypoint.sh
+      - /odoo-entrypoint.sh
       - --init
-      - web_environment_ribbon, billing_do, billing_do_ce, professional_templates
+      - billing_do, billing_do_ce, professional_templates
       - --update
-      - billing_do, billing_do_ee, kcs_medical_app, ars_do, professional_templates
+      - billing_do, billing_do_ce, kcs_medical_app, ars_do, professional_templates
   odoo-db:
-    image: postgres:13
+    image: postgres:16
     ports:
       - "${ENV_DATABASE_PORT}:5432"
     environment:

@@ -22,6 +22,7 @@
                 'mrp'],
     # always loaded
     'data': [
+        'security/security.xml',
         'security/ir.model.access.csv',
         'security/billing_do_stock_quant_rule.xml',
         'views/billing_do_account_journal.xml',
@@ -51,12 +52,12 @@
         'views/billing_do_account_move_line.xml',
         'views/billing_do_ncf_types.xml',
         'views/billing_do_ir_sequence_views.xml',
-        'security/security.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
     ],
     'installable': True,
     'application': True,
+    'post_init_hook': '_billing_do_post_init',
     'auto_install': False,
 }
