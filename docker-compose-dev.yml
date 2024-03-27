@@ -1,17 +1,18 @@
 version: '3.1'
 services:
   odoo-ee:
-    image: accounterprise.azurecr.io/odoo-acp:13.0-latest
+    image: odoo:16.0
     depends_on:
       - odoo-db
     ports:
       - "${ENV_HOST_PORT}:8069"
     volumes:
       - type: bind
-        source: /c/repos/data/${ENV_DATABASE_NAME}/odoo
+        source: /c/repos/data/odoo/${ENV_DATABASE_NAME}/odoo
         target: /var/data/odoo
       - ./conf:/etc/odoo
       - ./third_party_addons:/mnt/extra-addons
+      # - /opt/odoo/enterprise:/opt/odoo/enterprise
     environment:
       - HOST=odoo-db
       - PORT=5432
@@ -40,7 +41,7 @@ services:
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - type: bind
-        source: /c/repos/data/${ENV_DATABASE_NAME}/pgdata
+        source: /c/repos/data/odoo/${ENV_DATABASE_NAME}/pgdata
         target: /var/lib/postgresql/data/pgdata
       - type: bind
         source: /c/repos/data/production-backups/${ENV_DATABASE_NAME}/
