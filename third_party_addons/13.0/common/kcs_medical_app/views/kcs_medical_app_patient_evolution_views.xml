@@ -1,0 +1,33 @@
+<odoo>
+    <record model="ir.ui.view" id="kcs_medical_app_patient_evolutions_view_form">
+        <field name="name">kcs.medical.app.patient.evolutions.form</field>
+        <field name="model">kcs.medical.app.patient.evolution</field>
+        <field name="arch" type="xml">
+            <form string="Evolutions">
+                <sheet>
+                    <group colspan="2">
+                        <group colspan="2">
+                            <field name="patient_id" readonly="1" />
+                            <field name="user_who_recorded_id" />
+                            <field name="date_recorded" />
+                            <field name="evolution_type" readonly="1" />
+                            <field name="procedure_type" readonly="1" attrs="{'invisible': [('evolution_type', 'in', ['stetic_surgery', 'dermatology'])], 'required': [('evolution_type', 'in', ['plastic_surgery'])]}" />
+                            <field name="process_number" readonly="1" attrs="{'invisible': [('evolution_type', 'in', ['stetic_surgery', 'dermatology'])]}" />
+                            <!-- <field name="procedure_ids" widget="many2many_tags" options="{'no_create': True}" />
+                            <field name="budget_product_ids" widget="many2many_tags" options="{'no_create': True}" /> -->
+                            <newline />
+                            <field name="doctor_notes" />
+                            <newline />
+                            <field name="description" />
+                            <field name="next_date" attrs="{'invisible': [('procedure_type', 'in', ['pre_surgery'])], 'required': ['&amp;', ('evolution_type', 'in', ['plastic_surgery', 'stetic_surgery', 'dermatology']), ('procedure_type', 'in', ['post_surgery'])]}" />
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button special="save" string="Save" class="btn btn-primary" />
+                    <button special="cancel" string="Cancel" class="btn btn-secondary" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

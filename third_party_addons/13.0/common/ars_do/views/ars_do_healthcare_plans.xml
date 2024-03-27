@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="ars_do_healthcare_plan_view_form">
+        <field name="name">ars.do.healthcare.provider.view.form</field>
+        <field name="model">ars.do.healthcare.plan</field>
+        <field name="arch" type="xml">
+            <form string="Adding a new plan">
+                <group>
+                    <group>
+                        <field name="name" />
+                    </group>
+                    <group>
+                        <field name="default_coverage" />
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="ars_do_healthcare_plan_view_tree">
+        <field name="name">ars.do.healthcare.provider.view.tree</field>
+        <field name="model">ars.do.healthcare.plan</field>
+        <field name="arch" type="xml">
+            <tree default_order="name asc">
+                <field name="name" />
+                <field name="default_coverage" />
+                <control>
+                    <create string="Add a plan"
+                            context="{'default_healthcare_provider': id}" />
+                </control>
+            </tree>
+        </field>
+    </record>
+</odoo>

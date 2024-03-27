@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="invoice_totals">
+            <div class="col-12 clearfix"
+                t-attf-style="padding-left:0px; padding-right:0px;font-size:12px !important;">
+                <div class="col-5 pull-right"
+                        style="padding-left:0px; padding-right:0px; page-break-inside: avoid !important;">
+                    <table class="table table-sm" t-attf-style="color:{{o.style.text_color}};">
+                        <tbody>
+                            <tr t-attf-style="border-top: 1px solid {{o.style.text_color}};">
+                                <td t-attf-style="border-top: 1px solid {{o.style.text_color}} !important;">
+                                    <strong>Subtotal</strong>
+                                </td>
+                                <td class="text-right"
+                                    t-attf-style="border-top: 1px solid {{o.style.text_color}} !important;">
+                                    <span t-field="o.amount_untaxed"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ITBIS</td>
+                                <td class="text-right">
+                                    <span t-field="o.amount_tax"/>
+                                </td>
+                            </tr>
+                            <tr t-attf-style="border-bottom: 1px solid {{o.style.text_color}};">
+                                <td t-attf-style="border-top: 1px solid {{o.style.text_color}} !important;">
+                                    <strong>Total</strong>
+                                </td>
+                                <td class="text-right"
+                                    t-attf-style="border-top: 1px solid {{o.style.text_color}} !important;">
+                                    <strong>
+                                        <span style="font-weight:bold; text-decoration:underline;"
+                                                t-field="o.amount_total"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

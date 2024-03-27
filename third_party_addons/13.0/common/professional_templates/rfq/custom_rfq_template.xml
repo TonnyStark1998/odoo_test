@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="RFQ_13_document" 
+            name="Personal Template" 
+            inherit_id="professional_templates.PO_1_document" 
+            primary="True">
+        </template>
+    </data>
+</odoo>

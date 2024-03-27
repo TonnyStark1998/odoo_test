@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="ars_do_invoice_totals" inherit_id="professional_templates.invoice_totals">
+            <xpath expr="//strong[contains(., 'Subtotal')]/../.." position="after">
+                <t t-if="'amount_coverage' in o">
+                    <tr t-if="o.amount_coverage &#62; 0"
+                        t-attf-style="border-top: 1px solid {{style.text_color}};">
+                        <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
+                            Cobertura del Seguro
+                        </td>
+                        <td class="text-right"
+                            t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
+                            <span t-field="o.amount_coverage"/>
+                        </td>
+                    </tr>
+                </t>
+            </xpath>
+        </template>
+    </data>
+</odoo>

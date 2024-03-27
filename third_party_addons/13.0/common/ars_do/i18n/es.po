@@ -1,0 +1,843 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ars_do
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0-20221005\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-28 22:14+0000\n"
+"PO-Revision-Date: 2023-02-28 22:14+0000\n"
+"Last-Translator: Samuel Luciano\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_medical_record__saline__0_9
+msgid "0.9%"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_report_ars__report_month__01
+msgid "01 - January"
+msgstr "01 - Enero"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_report_ars__report_month__02
+msgid "02 - February"
+msgstr "02 - Febrero"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_report_ars__report_month__03
+msgid "03 - March"
+msgstr "03 - Marzo"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_report_ars__report_month__04
+msgid "04 - April"
+msgstr "04 - Abril"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_report_ars__report_month__05
+msgid "05 - May"
+msgstr "05 - Mayo"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_report_ars__report_month__06
+msgid "06 - June"
+msgstr "06 - Junio"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_report_ars__report_month__07
+msgid "07 - July"
+msgstr "07 - Julio"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_report_ars__report_month__08
+msgid "08 - August"
+msgstr "08 - Agosto"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_report_ars__report_month__09
+msgid "09 - September"
+msgstr "09 - Septiembre"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_medical_record__fdp__1_weekly
+msgid "1 weekly"
+msgstr "1 semana"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_report_ars__report_month__10
+msgid "10 - October"
+msgstr "10 - Octubre"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_report_ars__report_month__11
+msgid "11 - November"
+msgstr "11 - Noviembre"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_report_ars__report_month__12
+msgid "12 - December"
+msgstr "12 - Diciembre"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_medical_record__fdp__2_weekly
+msgid "2 weekly"
+msgstr "2 semanas"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_medical_record__fdp__3_weekly
+msgid "3 weekly"
+msgstr "3 semanas"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_common_view_kanban
+msgid "<span>Cards Count:</span>"
+msgstr "<span>Cantidad de seguros:</span>"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_common_view_kanban
+msgid "<span>Plans Count: </span>"
+msgstr "<span>Cantidad de planes: </span>"
+
+#. module: ars_do
+#: model:ir.ui.menu,name:ars_do.main_menu_ars_do
+msgid "ARS Healthcare"
+msgstr "Seguros Médicos (ARS)"
+
+#. module: ars_do
+#: model:ir.actions.act_window,name:ars_do.action_ars_do_healthcare_report_ars
+msgid "ARS Reports"
+msgstr "Reporte ARS"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_card_view_tree
+msgid "Add a card"
+msgstr "Agregar seguro médico"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_view_form
+msgid "Add a new report"
+msgstr "Agregar nuevo report"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_plan_view_tree
+msgid "Add a plan"
+msgstr "Agregar nuevo plan"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_medical_record_view_tree
+msgid "Add a record"
+msgstr "Agregar registro médico"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_card_view_form
+msgid "Adding a new card"
+msgstr "Agregando un nuevo seguro médico"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_medical_record_view_form
+msgid "Adding a new medical record"
+msgstr "Agregando un nuevo record médico"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_plan_view_form
+msgid "Adding a new plan"
+msgstr "Agregando un nuevo plan de seguros"
+
+#. module: ars_do
+#: model:ir.ui.menu,name:ars_do.menu_ars_do_healthcare_patient_form
+msgid "Admission Form"
+msgstr "Formulario de ingreso"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__amount
+msgid "Amount"
+msgstr "Monto Facturado"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__amount_due
+msgid "Amount Due"
+msgstr "Monto Adeudado"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__amount_paid
+msgid "Amount Paid"
+msgstr "Monto Pagado"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_view_form
+msgid "Are you sure you want to mark this report as reconciled?"
+msgstr "¿Está seguro que desea marcar este reporte como conciliado?"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__healthcare_authorization_number
+msgid "Authorization Number"
+msgstr "Número de autorización"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__bfr
+msgid "BFR"
+msgstr "La Bomba"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__blood_pressure
+msgid "Blood Pressure"
+msgstr "Presión Arterial"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__blood_pressure_high
+msgid "Blood Pressure High"
+msgstr "Presión Arterial Alta"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__blood_pressure_low
+msgid "Blood Pressure Low"
+msgstr "Presión Arterial Bajo"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__healthcare_card
+msgid "Card"
+msgstr "Seguro Médico"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_card__number
+msgid "Card Number"
+msgstr "Número de Seguro Médico"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_medical_record__channel__catheter
+msgid "Catheter"
+msgstr "Catéter"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__channel
+msgid "Channel"
+msgstr "Acceso"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_account_move_line__coverage
+msgid "Coverage (%)"
+msgstr "Cobertura (%)"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_card__create_uid
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__create_uid
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_plan__create_uid
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars__create_uid
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_card__create_date
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__create_date
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_plan__create_date
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars__create_date
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__create_date
+msgid "Created on"
+msgstr "Creando en"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__date
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__invoice_date
+msgid "Date"
+msgstr "Fecha"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_plan__default_coverage
+msgid "Default Coverage"
+msgstr "Porcentaje de cobertura"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_card__default_card
+msgid "Default Healthcare Cards?"
+msgstr "Seguro Médico por defecto?"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_card__display_name
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__display_name
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_plan__display_name
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars__display_name
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__display_name
+msgid "Display Name"
+msgstr "Nombre"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_view_form
+msgid ""
+"Do you confirm that this report was already sent to the provider? Once the "
+"report is sent, you won't be able to add more invoices."
+msgstr ""
+"¿Confirma que envío este reporte a la ARS? Una vez el "
+"reporte es marcado como enviado, no se podrán agregar mas facturas a este."
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_report_ars__state__draft
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_card__expiry_date
+msgid "Expiry Date"
+msgstr "Fecha de expiración"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__fdp
+msgid "FDP"
+msgstr "Volumen del paciente"
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_healthcare_patient_medical_record.py:0
+#, python-format
+msgid "Field {} can't have a value equal or below to 0."
+msgstr "El valor del campo {} no puede ser menor o igual que 0."
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__fldrmvd
+msgid "Filter Number"
+msgstr "Número de filtro"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_view_search
+msgid "Filter Report ARS"
+msgstr "Filtros de reporte de ARS"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_view_search
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_account_move__healthcare_authorization_number
+msgid "Healthcare Authorization Number"
+msgstr "Número de autorización del seguro"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_account_move__healthcare_card
+msgid "Healthcare Card"
+msgstr "Seguro Médico"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_plan__healthcare_cards
+#: model:ir.model.fields,field_description:ars_do.field_kcs_medical_app_patient__healthcare_cards
+#: model:ir.model.fields,field_description:ars_do.field_res_partner__healthcare_cards
+#: model:ir.model.fields,field_description:ars_do.field_res_users__healthcare_cards
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_common_view_form
+msgid "Healthcare Cards"
+msgstr "Seguros Médicos"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_kcs_medical_app_patient__healthcare_cards_count
+#: model:ir.model.fields,field_description:ars_do.field_res_partner__healthcare_cards_count
+#: model:ir.model.fields,field_description:ars_do.field_res_users__healthcare_cards_count
+msgid "Healthcare Cards Count"
+msgstr "Cantidad de Seguros Médicos"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_account_move__healthcare_invoice
+#: model:ir.model.fields,field_description:ars_do.field_account_move_line__healthcare_invoice
+msgid "Healthcare Invoice"
+msgstr "Tipo de Factura de Seguro Médico"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_card__healthcare_patient
+msgid "Healthcare Patient"
+msgstr "Paciente"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_account_move__healthcare_plan
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_card__healthcare_plan
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_plan__name
+msgid "Healthcare Plan"
+msgstr "Plan"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_kcs_medical_app_patient__healthcare_plans
+#: model:ir.model.fields,field_description:ars_do.field_res_partner__healthcare_plans
+#: model:ir.model.fields,field_description:ars_do.field_res_users__healthcare_plans
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_common_view_form
+msgid "Healthcare Plans"
+msgstr "Planes"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_kcs_medical_app_patient__healthcare_plans_count
+#: model:ir.model.fields,field_description:ars_do.field_res_partner__healthcare_plans_count
+#: model:ir.model.fields,field_description:ars_do.field_res_users__healthcare_plans_count
+msgid "Healthcare Plans Count"
+msgstr "Cantidad de planes"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_account_move__healthcare_provider
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_card__healthcare_provider
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_plan__healthcare_provider
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars__healthcare_provider
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__healthcare_provider
+msgid "Healthcare Provider"
+msgstr "ARS"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_view_search
+msgid "Healthcare Provider (ARS)"
+msgstr "Proveedor de Seguro Médico (ARS)"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__heparin
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__heparin_display_value
+msgid "Heparin"
+msgstr "Heparina"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__identity_number
+msgid "Identity Number"
+msgstr "Número de identificación"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__account_move__healthcare_invoice__healthcare_invoice
+msgid "Insurance"
+msgstr "Seguro"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_kcs_medical_app_patient__is_ars
+#: model:ir.model.fields,field_description:ars_do.field_res_partner__is_ars
+#: model:ir.model.fields,field_description:ars_do.field_res_users__is_ars
+msgid "Is ARS?"
+msgstr "¿Es una ARS?"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_kcs_medical_app_patient__is_patient
+#: model:ir.model.fields,field_description:ars_do.field_res_partner__is_patient
+#: model:ir.model.fields,field_description:ars_do.field_res_users__is_patient
+msgid "Is Patient?"
+msgstr "¿Es un paciente?"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_product_product__is_medicine
+msgid "Is a medicine?"
+msgstr "¿Es un medicamento?"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__ktv
+msgid "KTV"
+msgstr "Efectividad de la Diálisis"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_card____last_update
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record____last_update
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_plan____last_update
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars____last_update
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item____last_update
+msgid "Last Modified on"
+msgstr "Última Modificación en"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_card__write_uid
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__write_uid
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_plan__write_uid
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars__write_uid
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__write_uid
+msgid "Last Updated by"
+msgstr "Última Modificación por"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_card__write_date
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__write_date
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_plan__write_date
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars__write_date
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__write_date
+msgid "Last Updated on"
+msgstr "Última Actualización en"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_view_form
+msgid "Mark as reconciled"
+msgstr "Marcar como conciliado"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_view_form
+msgid "Mark as sent"
+msgstr "Marcar como enviado"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_kcs_medical_app_patient__medical_records
+#: model:ir.model.fields,field_description:ars_do.field_res_partner__medical_records
+#: model:ir.model.fields,field_description:ars_do.field_res_users__medical_records
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_common_view_form
+msgid "Medical Records"
+msgstr "Record Médicos"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__medicines
+#: model:ir.ui.menu,name:ars_do.menu_ars_do_healthcare_medicines
+msgid "Medicines"
+msgstr "Medicinas"
+
+#. module: ars_do
+#: model:ir.model,name:ars_do.model_account_move
+msgid "Model representing a Account Move."
+msgstr "Modelo que representa una Factura."
+
+#. module: ars_do
+#: model:ir.model,name:ars_do.model_ars_do_healthcare_card
+msgid "Model representing a Healthcare Card."
+msgstr "Modelo que representa un Seguro Médico."
+
+#. module: ars_do
+#: model:ir.model,name:ars_do.model_ars_do_healthcare_medical_record
+msgid "Model representing a Healthcare Medical Record."
+msgstr "Modelo que representa un Recod Médico."
+
+#. module: ars_do
+#: model:ir.model,name:ars_do.model_product_product
+msgid "Model representing a Healthcare Medicine."
+msgstr "Modelo que representa un medicamento."
+
+#. module: ars_do
+#: model:ir.model,name:ars_do.model_ars_do_healthcare_plan
+msgid "Model representing a Healthcare Plan."
+msgstr "Modelo que representa un Plan de Seguro Médico."
+
+#. module: ars_do
+#: model:ir.model,name:ars_do.model_ars_do_healthcare_report_ars_item
+msgid "Model representing a Healthcare Report Item for ARS."
+msgstr "Modelo que representa un ítem en el reporte de la ARS."
+
+#. module: ars_do
+#: model:ir.model,name:ars_do.model_ars_do_healthcare_report_ars
+msgid "Model representing a Healthcare Report for ARS."
+msgstr "Modelo que representa un reporte de la ARS."
+
+#. module: ars_do
+#: model:ir.model,name:ars_do.model_account_move_line
+msgid "Model representing a Invoice Line."
+msgstr "Modelo que representa una Línea de Factura."
+
+#. module: ars_do
+#: model:ir.model,name:ars_do.model_res_partner
+msgid "Model representing the Healthcare Provider."
+msgstr "Modelo que representa un Proveedor de Seguro (ARS)."
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars__report_month
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_view_search
+msgid "Month"
+msgstr "Mes"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__invoice_id
+msgid "Move Id"
+msgstr "Id de factura"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__invoice_line_id
+msgid "Move Line Id"
+msgstr "Id de línea de factura"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__notes
+msgid "Notes"
+msgstr "Notas"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__ptm
+msgid "PTM"
+msgstr "BPV/LP"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__healthcare_patient
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__healthcare_patient
+msgid "Patient"
+msgstr "Paciente"
+
+#. module: ars_do
+#: model:ir.actions.act_window,name:ars_do.action_ars_do_healthcare_medicines_kanban
+#: model:ir.actions.act_window,name:ars_do.action_ars_do_healthcare_patients_kanban
+#: model:ir.ui.menu,name:ars_do.menu_ars_do_healthcare_patients
+msgid "Patients"
+msgstr "Pacientes"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__payment_ids
+msgid "Payments Associated"
+msgstr "Referencia de pagos"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__account_move__healthcare_invoice__not_healthcare_invoice
+msgid "Private"
+msgstr "Privado"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__healthcare_procedure
+msgid "Procedure"
+msgstr "Procedimiento"
+
+#. module: ars_do
+#: model:ir.actions.act_window,name:ars_do.action_ars_do_healthcare_providers_kanban
+#: model:ir.ui.menu,name:ars_do.menu_ars_do_healthcare_providers
+msgid "Providers"
+msgstr "Proveedores de Seguro Médicos"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_view_form
+msgid "Reconcile"
+msgstr "Conciliar"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_report_ars__state__reconciled
+msgid "Reconciled"
+msgstr "Conciliado"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_report_ars__state__reconciling
+msgid "Reconciling"
+msgstr "Conciliando"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__report_id
+msgid "Report Id"
+msgstr "Id de reporte"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars__report_items
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_view_form
+msgid "Report Items"
+msgstr "Ítems de reporte"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars__report_items_count
+msgid "Report Items Count"
+msgstr "Cantidad de ítems del reporte"
+
+#. module: ars_do
+#: model:ir.ui.menu,name:ars_do.menu_ars_do_healthcare_reports
+msgid "Reports"
+msgstr "Reportes"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__saline
+msgid "Saline"
+msgstr "Saline (M)"
+
+#. module: ars_do
+#: model:ir.model.fields.selection,name:ars_do.selection__ars_do_healthcare_report_ars__state__sent
+msgid "Sent"
+msgstr "Enviado"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars__state
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars_item__report_state
+msgid "State"
+msgstr "Estado"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__temperature
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__temperature_display_value
+msgid "Temperature"
+msgstr "Temperatura"
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_healthcare_card.py:0
+#, python-format
+msgid ""
+"There is already a default card for this patient. Deactivate it first before"
+" marking another one as default."
+msgstr ""
+"Ya existe un Seguro Médico por defecto para este paciente. Desactive primero el actual antes de"
+" marcar otro."
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_account_move_line.py:0
+#, python-format
+msgid ""
+"This invoice is not a healthcare invoice, you can't apply any coverage "
+"value."
+msgstr ""
+"Esta no es una factura de seguro médico, no debe colocar ningún valor en el campo "
+"cobertura."
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_healthcare_report_ars.py:0
+#, python-format
+msgid ""
+"This report can't be reconciled since the total of the Amount Paid is "
+"greater than the total of the Amount."
+msgstr ""
+"Este reporte no puede ser conciliado ya que el total del campo Monto Pagado es"
+" mayor que el Monto Facturado."
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__time
+msgid "Time"
+msgstr "Hora o tiempo de diálisis"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__ufr
+msgid "UFR"
+msgstr "Kilos que se le ponen al paciente"
+
+#. module: ars_do
+#: model:product.product,uom_name:ars_do.medicine_1
+#: model:product.product,uom_name:ars_do.medicine_2
+#: model:product.product,uom_name:ars_do.medicine_3
+#: model:product.product,uom_name:ars_do.medicine_4
+#: model:product.product,uom_name:ars_do.medicine_5
+#: model:product.product,uom_name:ars_do.medicine_6
+#: model:product.template,uom_name:ars_do.medicine_1_product_template
+#: model:product.template,uom_name:ars_do.medicine_2_product_template
+#: model:product.template,uom_name:ars_do.medicine_3_product_template
+#: model:product.template,uom_name:ars_do.medicine_4_product_template
+#: model:product.template,uom_name:ars_do.medicine_5_product_template
+#: model:product.template,uom_name:ars_do.medicine_6_product_template
+msgid "Units"
+msgstr "Unidades"
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_account_move.py:0
+#: code:addons/ars_do/models/ars_do_account_move_line.py:0
+#: code:addons/ars_do/models/ars_do_healthcare_card.py:0
+#, python-format
+msgid "User error!"
+msgstr "Error de usuario"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_view_form
+msgid "View reconciled"
+msgstr "Ver conciliación"
+
+#. module: ars_do
+#: model:product.product,name:ars_do.medicine_5
+#: model:product.template,name:ars_do.medicine_5_product_template
+msgid "Vitamina C"
+msgstr ""
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__weight
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_medical_record__weight_display_value
+msgid "Weight"
+msgstr "Peso"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_ars_do_healthcare_report_ars__report_year
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_view_search
+msgid "Year"
+msgstr "Año"
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_healthcare_report_ars.py:0
+#, python-format
+msgid "Year field must be either this year or the year before."
+msgstr "El valor del campo año debe ser igual a este año o el anterior."
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_account_move.py:0
+#, python-format
+msgid "You can't more invoice to the ARS report for this month."
+msgstr "No se pueden agregar mas facturas al reporte de ARS de este mes."
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_account_move.py:0
+#, python-format
+msgid ""
+"You must indicate if this is a Healthcare or Regular invoice before "
+"selecting the Customer."
+msgstr ""
+"Debe especificar si esta factura es de Seguro o Privado antes de "
+"seleccionar al cliente."
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_account_move.py:0
+#, python-format
+msgid "You must indicate if this is a Healthcare or Regular invoice."
+msgstr "Debe especificar si esta factura es de Seguro o Privado."
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_healthcare_patient_medical_record.py:0
+#, python-format
+msgid "You must specify a value for Channel field."
+msgstr "Debe especificar un valor para el campo 'Acceso'."
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_healthcare_patient_medical_record.py:0
+#, python-format
+msgid "You must specify a value for FDP field."
+msgstr "Debe especificar un valor para el campo 'Volumen del paciente'."
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_healthcare_patient_medical_record.py:0
+#, python-format
+msgid "You must specify a value for Saline field."
+msgstr "Debe especificar un valor para el campo 'Saline (M)'."
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_view_form
+msgid "View downloadable version"
+msgstr "Visualizar versión descargable"
+
+#. module: ars_do
+#: model:ir.model.fields,field_description:ars_do.field_account_move__created_from_sale
+msgid "Created from sale"
+msgstr "Creada desde Ventas"
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_account_move.py:0
+#, python-format
+msgid ""
+"Report of {} for period {}-{} has been already sent. Can't add more invoice "
+"to it."
+msgstr ""
+"Reporte de {} para el perído {}-{} ha sido enviado. No puede agregar mas facturas "
+"a este."
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_account_move.py:0
+#, python-format
+msgid "Report restriction!"
+msgstr "Error de restricción en reporte!"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_item_reconcile_noneditable_view_tree
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_item_reconcile_view_tree
+msgid "Total Amount"
+msgstr "Total Facturado"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_item_reconcile_noneditable_view_tree
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_item_reconcile_view_tree
+msgid "Total Due"
+msgstr "Total Adeudado"
+
+#. module: ars_do
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_item_reconcile_noneditable_view_tree
+#: model_terms:ir.ui.view,arch_db:ars_do.ars_do_healthcare_report_ars_item_reconcile_view_tree
+msgid "Total Paid"
+msgstr "Total Pagado"
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_sale_order.py:0
+#, python-format
+msgid ""
+"You must indicate if this is a Healthcare or Regular sale before selecting "
+"the Customer."
+msgstr ""
+"Debe especificar si esta venta es con Seguro o Privada antes de seleccionar"
+" al cliente."
+
+#. module: ars_do
+#: code:addons/ars_do/models/ars_do_sale_order.py:0
+#, python-format
+msgid "You must indicate if this is a Healthcare or Regular sale."
+msgstr "Debe especificar si esta venta es con Seguro o Privado."

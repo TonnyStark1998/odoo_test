@@ -1,0 +1,87 @@
+<odoo>
+    <data>
+        <template id="billing_do_account_payment_receipt_template">
+            <t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context(lang=lang)"/>
+                <div class="page">
+                    <div class="row">
+                        <table class="table mt64">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <strong><span t-field="o.company_id.name" style="text-transform: uppercase;" /></strong>
+                                    </th>
+                                    <th>
+                                        <span t-if="o.name">
+                                            <strong style="text-transform: uppercase;">Receipt</strong> <span t-field="o.name" style="font-weight:normal !important;" />
+                                        </span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span t-if="o.partner_type">
+                                            <t t-if="o.partner_type == 'customer'">
+                                                <strong>Customer: </strong>
+                                            </t>
+                                            <t t-if="o.partner_type == 'supplier'">
+                                                <strong>Vendor: </strong>
+                                            </t>
+                                            <span t-field="o.partner_id"/>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span t-if="o.payment_date">
+                                            <strong>Payment Date:</strong> <span t-field="o.payment_date"/>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Payment Method:</strong> <span t-field="o.payment_method_id.name" />
+                                    </td>
+                                    <td>
+                                        <strong>Payment Amount: </strong> <span t-field="o.amount" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row mt64" t-if="o.move_name or o.communication">
+                        <div class="col align-self-center">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span>Concept</span>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title" t-if="o.communication"><span t-field="o.communication" /></h5>
+                                    <h5 class="card-title" t-if="not o.communication"><span t-field="o.move_name" /></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt64">
+                        <div class="col-6">
+                            <span><strong>Received by: </strong>____________________________ </span>
+                        </div>
+                        <div class="col-6">
+                            <p class="text-right">
+                                <span><strong>Created by: </strong></span>
+                                <span t-field="o.create_uid" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+        <template id="billing_do_account_payment_receipt">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.partner_id.company_id.partner_id.lang"/>
+                    <t t-call="billing_do.billing_do_account_payment_receipt_template" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
