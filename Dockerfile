@@ -1,4 +1,6 @@
 ARG ODOO_VERSION
+ARG ODOO_EDITION
+ARG ODOO_ENVIRONMENT
 
 FROM odoo:${ODOO_VERSION:-16.0}
 MAINTAINER "Samuel Luciano <sluciano@accounterprise.com>"
@@ -11,8 +13,8 @@ LABEL com.accounterprise.owner="Accounterprise SRL <contabilidad@accounterprise.
         a las leyes fiscales de la República Dominicana.\
         (c) 2024 Copyright. Todos los derechos reservados."
 
-ENV ODOO_EDITION=ce \
-    ODOO_ENVIRONMENT=dev \
+ENV ODOO_EDITION=${ODOO_EDITION:-ce} \
+    ODOO_ENVIRONMENT=${ODOO_ENVIRONMENT:-dev} \
     DATABASE_NAME= \
     ODOO_CONFIG_FILE=/etc/odoo/odoo.conf\
     ODOO_INITIAL_MODULES= \
