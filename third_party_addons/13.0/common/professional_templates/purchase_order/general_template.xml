@@ -169,18 +169,6 @@
                 <!-- start of purchase order lines -->
                 <br/>
                 <t t-call="professional_templates.purchase_order_lines"/>
-                <br />
-                <!-- end of purchase order lines -->
-                <span class="col-12 mt-5 pull-right">
-                    <div class="row">
-                        <div class="col-6 text-left">
-                            <strong>Solicitado por:</strong> ________________________
-                        </div>
-                        <div class="col-6 text-right">
-                            <strong>Aprobado por:</strong> ________________________
-                        </div>
-                    </div>
-                </span>
             </div>
             <!-- end of page -->
             <!--start of footer-->
