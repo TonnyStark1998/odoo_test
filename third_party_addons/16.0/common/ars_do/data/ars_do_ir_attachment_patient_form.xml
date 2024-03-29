@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ars_do_patient_form" model="ir.attachment">
+        <field name="name">FORMULARIO DE INGRESO DEL PACIENTE.pdf</field>
+        <field name="datas" type="base64" file="ars_do/data/ars_do_patient_form.pdf"></field>
+        <field name="public">1</field>
+        <field name="mimetype">text/pdf</field>
+    </record>
+</odoo>

@@ -1,0 +1,643 @@
+<odoo>
+    <record model="ir.ui.view" id="kcs_medical_app_patients_view_form">
+        <field name="name">kcs.medical.app.patients.form</field>
+        <field name="model">kcs.medical.app.patient</field>
+        <field name="arch" type="xml">
+            <form string="Patients">
+                <field name="state" invisible="1" />
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,registered,evolutioned"/>
+                </header>
+                <sheet>
+                    <group colspan="2">
+                        <group colspan="1">
+                            <div>
+                                <h1 class="oe_title oe_left" attrs="{'invisible': [('state', 'not in', ['draft'])]}">
+                                    <span>New patient</span>
+                                </h1>
+                                <h2 attrs="{'invisible': [('state', 'in', ['draft'])]}">
+                                    <field name="partner_id" required="0" readonly="1" style="font-weight:bold !important;" />
+                                    <!-- <field name="name" readonly="1" style="font-weight:bold !important;" /> -->
+                                    <br />
+                                    <field name="national_identity_number" readonly="1" attrs="{'invisible': [('state', 'in', ['draft'])]}" />
+                                </h2>
+                            </div>
+                        </group>
+                        <group colspan="1">
+                            <field name="image_profile" widget="image" class="oe_avatar" nolabel="1" />
+                        </group>
+                    </group>
+                    <group col="2">
+                        <!-- Personal -->
+                        <group colspan="1">
+                            <field name="partner_id" invisible="1" readonly="1" required="0" nolabel="1" colspan="2" />
+                            <label for="national_identity_number" style="font-weight:normal !important;" attrs="{'invisible': [('state', 'not in', ['draft'])]}" />
+                            <field name="national_identity_number" attrs="{'invisible': [('state', 'not in', ['draft'])], 'readonly': [('state', 'not in', ['draft'])]}" nolabel="1" />
+                            <label for="name" style="font-weight:normal !important;" attrs="{'invisible': [('state', 'not in', ['draft'])]}" />
+                            <field name="name" required="0" attrs="{'invisible': [('state', 'not in', ['draft'])]}" nolabel="1" />
+                            <label for="mobile" style="font-weight: normal !important;" />
+                            <field name="mobile" required="0" nolabel="1" />
+                            <label for="email" style="font-weight: normal !important;" />
+                            <field name="email" required="0" nolabel="1" />
+                            <label for="genre" style="font-weight:normal !important;" />
+                            <field name="genre" nolabel="1" />
+                            <label for="birthdate" style="font-weight:normal !important;" />
+                            <field name="birthdate" nolabel="1" />
+                            <label for="age" style="font-weight:normal !important;" />
+                            <field name="age" nolabel="1" />
+                            <label for="blood_type_id" style="font-weight:normal !important;" />
+                            <field name="blood_type_id" widget="selection"  options="{'no_create': True}" nolabel="1" />
+                        </group>
+                        <!-- Labor -->
+                        <group colspan="1">
+                            <!-- Contact -->
+                            <label for="street" string="Address" style="font-weight: normal !important;" />
+                            <field name="street" nolabel="1" />
+                            <label for="street" style="font-weight: normal !important;" invisible="1" />
+                            <field name="street2" nolabel="1" />
+                            <label for="city" style="font-weight: normal !important;" />
+                            <field name="city" nolabel="1" />
+                            <label for="country_id" style="font-weight: normal !important;" />
+                            <field name="country_id" options="{'no_create': True}" nolabel="1" />
+                            <label for="phone" style="font-weight: normal !important;" />
+                            <field name="phone" nolabel="1" />
+                            <label for="relative_name" style="font-weight:normal !important;" />
+                            <field name="relative_name" nolabel="1" />
+                            <label for="relative_phone" style="font-weight:normal !important;" />
+                            <field name="relative_phone" nolabel="1" />
+                            <label for="relative_relation" style="font-weight:normal !important;" />
+                            <field name="relative_relation" nolabel="1" />
+                            <label for="recommended_by" style="font-weight:normal !important;" />
+                            <field name="recommended_by" nolabel="1" />
+                            <!-- Other -->
+                            <separator colspan="2" />
+                            <label for="function" string="Occupation" style="font-weight: normal !important;" />
+                            <field name="function" nolabel="1" />
+                        </group>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Medical Antecedents">
+                            <group col="2">
+                                <group colspan="1" string="Antecedents Details">
+                                    <group colspan="2">
+                                        <span colspan="2" style="font-weight: bold;">Choose if suffered or has suffered one of the diseases or medical conditions listed in the field below</span>
+                                    </group>
+                                    <group colspan="2">
+                                        <label for="disease_ids" style="font-weight: normal !important;" />
+                                        <field name="disease_ids" widget="many2many_tags" options="{'no_create': True}" nolabel="1" />
+                                    </group>
+                                    <group colspan="2">
+                                        <label for="virus_ids" style="font-weight: normal !important;"  />
+                                        <field name="virus_ids" widget="many2many_tags" options="{'no_create': True}" nolabel="1" />
+                                    </group>
+                                    <group colspan="2">
+                                        <div>
+                                            <label for="allergy_ids" />
+                                            <field name="allergy_ids" widget="many2many_tags" options="{'no_create': True}" nolabel="1" />
+                                            <newline />
+                                            <label for="medical_history_allergies_notes" style="display: block;" />
+                                            <field name="medical_history_allergies_notes" nolabel="1" style="display: block;" />
+                                        </div>
+                                    </group>
+                                </group>
+                                <group colspan="1" string="Given Births (specify quantities)">
+                                    <group colspan="2">
+                                        <label for="has_given_birth" style="font-weight: normal !important;" />
+                                        <field name="has_given_birth" nolabel="1" />
+                                        <label for="count_given_birth" attrs="{'invisible':[('has_given_birth', '!=', True)]}" style="font-weight: normal !important;" />
+                                        <field name="count_given_birth" attrs="{'invisible':[('has_given_birth', '!=', True)]}" nolabel="1" />
+                                        <label for="last_date_given_birth" attrs="{'invisible':[('has_given_birth', '!=', True)]}" style="font-weight: normal !important;" />
+                                        <field name="last_date_given_birth" attrs="{'invisible':[('has_given_birth', '!=', True)]}" nolabel="1" />
+                                    </group>
+                                    <group colspan="2">
+                                        <label for="has_given_birth_by_cesarean" style="font-weight: normal !important;" />
+                                        <field name="has_given_birth_by_cesarean" nolabel="1" />
+                                        <label for="count_given_birth_by_cesarean" attrs="{'invisible':[('has_given_birth_by_cesarean', '!=', True)]}" style="font-weight: normal !important;" />
+                                        <field name="count_given_birth_by_cesarean" attrs="{'invisible':[('has_given_birth_by_cesarean', '!=', True)]}" nolabel="1" />
+                                        <label for="last_date_given_birth_by_cesarean" attrs="{'invisible':[('has_given_birth_by_cesarean', '!=', True)]}" style="font-weight: normal !important;" />
+                                        <field name="last_date_given_birth_by_cesarean" attrs="{'invisible':[('has_given_birth_by_cesarean', '!=', True)]}" nolabel="1" />
+                                    </group>
+                                    <group colspan="2">
+                                        <label for="has_aborted" style="font-weight: normal !important;" />
+                                        <field name="has_aborted" nolabel="1" />
+                                        <newline />
+                                        <label for="count_aborted" attrs="{'invisible':[('has_aborted', '!=', True)]}" style="font-weight: normal !important;" />
+                                        <field name="count_aborted" attrs="{'invisible':[('has_aborted', '!=', True)]}" nolabel="1" />
+                                    </group>
+                                    <group colspan="2">
+                                        <label for="drink_alcohol" style="font-weight: normal !important;" />
+                                        <field name="drink_alcohol" nolabel="1" />
+                                        <label for="drink_alcohol_frequency" style="font-weight: normal !important;" attrs="{'invisible': [('drink_alcohol', '=', False)]}" />
+                                        <field name="drink_alcohol_frequency" nolabel="1" attrs="{'invisible': [('drink_alcohol', '=', False)]}" />
+                                        <newline />
+                                        <label for="smoke" style="font-weight: normal !important;" />
+                                        <field name="smoke" nolabel="1" />
+                                        <newline />
+                                        <label for="smoke_frequency" style="font-weight: normal !important;" attrs="{'invisible': [('smoke', '=', False)]}" />
+                                        <field name="smoke_frequency" nolabel="1" attrs="{'invisible': [('smoke', '=', False)]}" />
+                                        <newline />
+                                        <span class="oe_inline" attrs="{'invisible': [('smoke', '=', False)]}">How long have you been smoking?</span>
+                                        <div attrs="{'invisible': [('smoke', '=', False)]}">
+                                            <field name="smoke_since_years" class="oe_inline" nolabel="1" style="width:13% !important;text-align:center !important;" />
+                                            <span class="oe_inline"> years / </span>
+                                            <field name="smoke_since_months" class="oe_inline" nolabel="1" style="width:13% !important;text-align:center !important;" />
+                                            <span class="oe_inline"> months</span>
+                                        </div>
+                                        <newline />
+                                        <label for="smoked" style="font-weight: normal !important;" />
+                                        <field name="smoked" nolabel="1" />
+                                        <newline />
+                                        <label for="smoked_frequency" style="font-weight: normal !important;" attrs="{'invisible': [('smoked', '=', False)]}" />
+                                        <field name="smoked_frequency" nolabel="1" attrs="{'invisible': [('smoked', '=', False)]}" />
+                                        <newline />
+                                        <span class="oe_inline" attrs="{'invisible': [('smoked', '=', False)]}">For how long did you smoke?</span>
+                                        <div attrs="{'invisible': [('smoked', '=', False)]}">
+                                            <field name="smoked_length_years" class="oe_inline" nolabel="1" style="width:13% !important;text-align:center !important;" />
+                                            <span class="oe_inline"> years / </span>
+                                            <field name="smoked_length_months" class="oe_inline" nolabel="1" style="width:13% !important;text-align:center !important;" />
+                                            <span class="oe_inline"> months</span>
+                                        </div>
+                                        <newline />
+                                        <span class="oe_inline" attrs="{'invisible': [('smoked', '=', False)]}">How long did you quit smoking?</span>
+                                        <div attrs="{'invisible': [('smoked', '=', False)]}">
+                                            <field name="smoked_stopped_since_years" class="oe_inline" nolabel="1" style="width:13% !important;text-align:center !important;" />
+                                            <span class="oe_inline"> years / </span>
+                                            <field name="smoked_stopped_since_months" class="oe_inline" nolabel="1" style="width:13% !important;text-align:center !important;" />
+                                            <span class="oe_inline"> months</span>
+                                        </div>
+                                        <newline />
+                                        <label for="has_tested_postitive_to_covid" 
+                                                style="font-weight: normal !important;" />
+                                        <field name="has_tested_postitive_to_covid" 
+                                                nolabel="1" />
+                                        <label for="date_tested_positive_to_covid" 
+                                                style="font-weight: normal !important;" 
+                                                attrs="{'invisible': [('has_tested_postitive_to_covid', '=', False)]}" />
+                                        <field name="date_tested_positive_to_covid" 
+                                                nolabel="1" 
+                                                attrs="{'invisible': [('has_tested_postitive_to_covid', '=', False)],
+                                                        'required': [('has_tested_postitive_to_covid', '=', True)]}" />
+                                        <label for="has_been_in_hospital_for_covid" 
+                                                style="font-weight: normal !important;" 
+                                                attrs="{'invisible': [('has_tested_postitive_to_covid', '=', False)]}" />
+                                        <field name="has_been_in_hospital_for_covid" 
+                                                nolabel="1" 
+                                                attrs="{'invisible': [('has_tested_postitive_to_covid', '=', False)]}" />
+                                    </group>
+                                </group>
+                            </group>
+                            <group colspan="2">
+                                <div>
+                                    <label for="medicines_in_use" />
+                                    <field name="medicines_in_use" nolabel="1" style="display: block;" />
+                                </div>
+                            </group>
+                            <group colspan="2">
+                                <div>
+                                    <label for="medical_history_notes" />
+                                    <field name="medical_history_notes" nolabel="1" style="display: block;" />
+                                </div>
+                            </group>
+                        </page>
+                        <page string="Previous Surgeries">
+                            <group colspan="2">
+                                <div>
+                                    <label for="general_surgeries" />
+                                    <field name="general_surgeries" nolabel="1" style="display: block;" />
+                                </div>
+                            </group>
+                            <group colspan="2">
+                                <div>
+                                    <label for="stetic_surgeries" />
+                                    <field name="stetic_surgeries" nolabel="1" style="display: block;" />
+                                </div>
+                            </group>
+                        </page>
+                        <page string="Relatives History">
+                            <group colspan="2">
+                                <span colspan="2" style="font-weight: bold;">Fill the information of relative's (father, mother, siblings and sons) medical antecedents (diseases)</span>
+                            </group>
+                            <group colspan="2">
+                                <div>
+                                    <label for="family_medical_history_father" />
+                                    <field name="family_medical_history_father" nolabel="1" style="display: block;" />
+                                </div>
+                            </group>
+                            <group colspan="2">
+                                <div>
+                                    <label for="family_medical_history_mother" />
+                                    <field name="family_medical_history_mother" nolabel="1" style="display: block;" />
+                                </div>
+                            </group>
+                            <group colspan="2">
+                                <div>
+                                    <label for="family_medical_history_siblings" />
+                                    <field name="family_medical_history_siblings" nolabel="1" style="display: block;" />
+                                </div>
+                            </group>
+                            <group colspan="2">
+                                <div>
+                                    <label for="family_medical_history_children" />
+                                    <field name="family_medical_history_children" nolabel="1" style="display: block;" />
+                                </div>
+                            </group>
+                        </page>
+                        <page string="Appointment Reason">
+                            <group colspan="2">
+                                <group colspan="1">
+                                    <label for="appointment_reason" style="font-weight: normal;" />
+                                    <field name="appointment_reason" nolabel="1" style="display: block;" />
+                                    <label for="appointment_date" style="font-weight: normal;" />
+                                    <field name="appointment_date" nolabel="1" />
+                                </group>
+                                <group colspan="1">
+                                    <label for="appointment_body_parts_ids" style="font-weight: normal;" />
+                                    <field name="appointment_body_parts_ids" widget="many2many_tags" options="{'no_create': True}" nolabel="1" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Physical Exam">
+                            <group colspan="2">
+                                <group colspan="1">
+                                    <label for="heart_rate" style="font-weight: normal;" />
+                                    <field name="heart_rate" nolabel="1" />
+                                    <newline />
+                                    <label for="blood_pressure_high" style="font-weight: normal;" />
+                                    <div>
+                                        <field name="blood_pressure_high" nolabel="1" class="oe_inline" style="width:10% !important;text-align:center !important;" />
+                                        <span class="oe_inline">/</span>
+                                        <field name="blood_pressure_low" nolabel="1" class="oe_inline" style="width:10% !important;text-align:center !important;" />
+                                    </div>
+                                    <newline />
+                                    <label for="weight_measure" style="font-weight: normal;" />
+                                    <field name="weight_measure" nolabel="1" />
+                                    <newline />
+                                    <label for="height_measure_feet" style="font-weight: normal;" />
+                                    <div>
+                                        <field name="height_measure_feet" nolabel="1" class="oe_inline" style="width:10% !important;text-align:center !important;" />
+                                        <span class="oe_inline"> feet / </span>
+                                        <field name="height_measure_inches" nolabel="1" class="oe_inline" style="width:10% !important;text-align:center !important;" />
+                                        <span class="oe_inline"> inches</span>
+                                    </div>
+                                </group>
+                                <group colspan="1">
+                                    <label for="imc_value" style="font-weight: normal;" />
+                                    <field name="imc_value" nolabel="1" readonly="1" />
+                                    <newline colspan="2" />
+                                    <label for="so2_value" style="font-weight: normal;" />
+                                    <field name="so2_value" nolabel="1" />
+                                </group>
+                            </group>
+                            <group colspan="2">
+                                <div>
+                                    <label for="physical_exam_notes" />
+                                    <field name="physical_exam_notes" nolabel="1" style="display: block;" />
+                                </div>
+                            </group>
+                        </page>
+                        <page string="Stetic Medicine" attrs="{'invisible': [('state', 'not in', ['registered', 'evolutioned'])]}">
+                            <group colspan="2">
+                                <div>
+                                    <label for="stetic_medicine_comment_medical" />
+                                    <field name="stetic_medicine_comment_medical" nolabel="1" style="display: block;" />
+                                </div>
+                            </group>
+                            <group colspan="2">
+                                <div>
+                                    <label for="stetic_medicine_comment_administrative" />
+                                    <field name="stetic_medicine_comment_administrative" nolabel="1" style="display: block;" />
+                                </div>
+                            </group>
+                            <group colspan="2">
+                                <group colspan="1">
+                                    <h2 style="font-weight: bold;">Evolution Details</h2>
+                                </group>
+                                <group colspan="1">
+                                    <button name="add_new_evolution_stetic_medicine" type="object" string="Add evolution" style="float: right;" />
+                                </group>
+                            </group>
+                            <group colspan="2">
+                                <field name="evolution_ids_stetic_medicine" nolabel="1" readonly="1">
+                                    <tree default_order="date_recorded desc">
+                                        <field name="evolution_type" invisible="1" />
+                                        <field name="doctor_notes" />
+                                        <field name="date_recorded" />
+                                        <field name="user_who_recorded_id" />
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page string="Dermatology" attrs="{'invisible': [('state', 'not in', ['registered', 'evolutioned'])]}">
+                            <group colspan="2">
+                                <div>
+                                    <label for="dermatology_comment_medical" />
+                                    <field name="dermatology_comment_medical" nolabel="1" style="display: block;" />
+                                </div>
+                            </group>
+                            <group colspan="2">
+                                <div>
+                                    <label for="dermatology_comment_administrative" />
+                                    <field name="dermatology_comment_administrative" nolabel="1" style="display: block;" />
+                                </div>
+                            </group>
+                            <group colspan="2">
+                                <group colspan="1">
+                                    <h2 style="font-weight: bold;">Evolution Details</h2>
+                                </group>
+                                <group colspan="1">
+                                    <button name="add_new_evolution_dermatology" type="object" string="Add evolution" style="float: right;" />
+                                </group>
+                            </group>
+                            <group colspan="2">
+                                <field name="dermatology_evolution_ids" nolabel="1" readonly="1">
+                                    <tree default_order="date_recorded desc">
+                                        <field name="evolution_type" invisible="1" />
+                                        <field name="doctor_notes" />
+                                        <field name="date_recorded" />
+                                        <field name="user_who_recorded_id" />
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page string="Plastic Surgery" attrs="{'invisible': [('state', 'not in', ['registered', 'evolutioned'])]}">
+                            <group colspan="2">
+                                <div>
+                                    <label for="plastic_surgery_comment_medical" />
+                                    <field name="plastic_surgery_comment_medical" nolabel="1" style="display: block;border-bottom:1px solid #bbb;" />
+                                </div>
+                            </group>
+                            <group colspan="2">
+                                <div>
+                                    <label for="plastic_surgery_comment_administrative" />
+                                    <field name="plastic_surgery_comment_administrative" nolabel="1" style="display: block;border-bottom:1px solid #bbb;" />
+                                </div>
+                            </group>
+                            <!-- Process 1 -->
+                            <group colspan="2">
+                                <h2 style="font-weight: bold;">Process 1</h2>
+                            </group>
+                            <group colspan="2">
+                                <group colspan="1">
+                                    <h3 style="font-weight: bold;">Pre-surgery 1</h3>
+                                </group>
+                                <group colspan="1">
+                                    <button name="add_new_evolution_plastic_surgery_pre_surgery_process_1" type="object" string="Process 1 - Add" style="float: right;" />
+                                </group>
+                            </group>
+                            <group colspan="2">
+                                <field name="evolution_ids_plastic_surgery_pre_surgery_process_1" nolabel="1" readonly="1">
+                                    <tree default_order="date_recorded desc">
+                                        <field name="evolution_type" invisible="1" />
+                                        <field name="doctor_notes" />
+                                        <field name="date_recorded" />
+                                        <field name="user_who_recorded_id" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <group colspan="2">
+                                <group colspan="1">
+                                    <h3 style="font-weight: bold;">Post-surgery 1</h3>
+                                </group>
+                                <group colspan="1">
+                                    <button name="add_new_evolution_plastic_surgery_post_surgery_process_1" type="object" string="Process 1 - Add" style="float: right;" />
+                                </group>
+                            </group>
+                            <!-- <group colspan="2">
+                                <field name="evolution_ids_plastic_surgery_procedure_ids_process_1" style="float: right;" widget="many2many_tags" options="{'no_create': True}" />
+                            </group> -->
+                            <group colspan="2">
+                                <field name="evolution_ids_plastic_surgery_post_surgery_process_1" nolabel="1" readonly="1">
+                                    <tree default_order="date_recorded desc">
+                                        <field name="evolution_type" invisible="1" />
+                                        <field name="procedure_type" invisible="1" />
+                                        <field name="doctor_notes" />
+                                        <field name="date_recorded" />
+                                        <field name="user_who_recorded_id" />
+                                        <field name="next_date" width="1" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <!-- Process 2 -->
+                            <group colspan="2">
+                                <h2 style="font-weight: bold;">Process 2</h2>
+                            </group>
+                            <group colspan="2">
+                                <group colspan="1">
+                                    <h3 style="font-weight: bold;">Pre-surgery 2</h3>
+                                </group>
+                                <group colspan="1">
+                                    <button name="add_new_evolution_plastic_surgery_pre_surgery_process_2" type="object" string="Process 2 - Add" style="float: right;" />
+                                </group>
+                            </group>
+                            <group colspan="2">
+                                <field name="evolution_ids_plastic_surgery_pre_surgery_process_2" nolabel="1" readonly="1">
+                                    <tree default_order="date_recorded desc">
+                                        <field name="evolution_type" invisible="1" />
+                                        <field name="doctor_notes" />
+                                        <field name="date_recorded" />
+                                        <field name="user_who_recorded_id" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <group colspan="2">
+                                <group colspan="1">
+                                    <h3 style="font-weight: bold;">Post-surgery 2</h3>
+                                </group>
+                                <group colspan="1">
+                                    <button name="add_new_evolution_plastic_surgery_post_surgery_process_2" type="object" string="Process 2 - Add" style="float: right;" />
+                                </group>
+                            </group>
+                            <!-- <group colspan="2">
+                                <field name="evolution_ids_plastic_surgery_procedure_ids_process_2" style="float: right;" widget="many2many_tags" options="{'no_create': True}" />
+                            </group> -->
+                            <group colspan="2">
+                                <field name="evolution_ids_plastic_surgery_post_surgery_process_2" nolabel="1" readonly="1">
+                                    <tree default_order="date_recorded desc">
+                                        <field name="evolution_type" invisible="1" />
+                                        <field name="procedure_type" invisible="1" />
+                                        <field name="doctor_notes" />
+                                        <field name="date_recorded" />
+                                        <field name="user_who_recorded_id" />
+                                        <field name="next_date" width="1" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <!-- Process 3 -->
+                            <group colspan="2">
+                                <h2 style="font-weight: bold;">Process 3</h2>
+                            </group>
+                            <group colspan="2">
+                                <group colspan="1">
+                                    <h3 style="font-weight: bold;">Pre-surgery 3</h3>
+                                </group>
+                                <group colspan="1">
+                                    <button name="add_new_evolution_plastic_surgery_pre_surgery_process_3" type="object" string="Process 3 - Add" style="float: right;" />
+                                </group>
+                            </group>
+                            <group colspan="2">
+                                <field name="evolution_ids_plastic_surgery_pre_surgery_process_3" nolabel="1" readonly="1">
+                                    <tree default_order="date_recorded desc">
+                                        <field name="evolution_type" invisible="1" />
+                                        <field name="doctor_notes" />
+                                        <field name="date_recorded" />
+                                        <field name="user_who_recorded_id" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <group colspan="2">
+                                <group colspan="1">
+                                    <h3 style="font-weight: bold;">Post-surgery 3</h3>
+                                </group>
+                                <group colspan="1">
+                                    <button name="add_new_evolution_plastic_surgery_post_surgery_process_3" type="object" string="Process 3 - Add" style="float: right;" />
+                                </group>
+                            </group>
+                            <!-- <group colspan="2">
+                                <field name="evolution_ids_plastic_surgery_procedure_ids_process_3" style="float: right;" widget="many2many_tags" options="{'no_create': True}" />
+                            </group> -->
+                            <group colspan="2">
+                                <field name="evolution_ids_plastic_surgery_post_surgery_process_3" nolabel="1" readonly="1">
+                                    <tree default_order="date_recorded desc">
+                                        <field name="evolution_type" invisible="1" />
+                                        <field name="procedure_type" invisible="1" />
+                                        <field name="doctor_notes" />
+                                        <field name="date_recorded" />
+                                        <field name="user_who_recorded_id" />
+                                        <field name="next_date" width="1" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <!-- Process 4 -->
+                            <group colspan="2">
+                                <h2 style="font-weight: bold;">Process 4</h2>
+                            </group>
+                            <group colspan="2">
+                                <group colspan="1">
+                                    <h3 style="font-weight: bold;">Pre-surgery 4</h3>
+                                </group>
+                                <group colspan="1">
+                                    <button name="add_new_evolution_plastic_surgery_pre_surgery_process_4" type="object" string="Process 4 - Add" style="float: right;" />
+                                </group>
+                            </group>
+                            <group colspan="2">
+                                <field name="evolution_ids_plastic_surgery_pre_surgery_process_4" nolabel="1" readonly="1">
+                                    <tree default_order="date_recorded desc">
+                                        <field name="evolution_type" invisible="1" />
+                                        <field name="doctor_notes" />
+                                        <field name="date_recorded" />
+                                        <field name="user_who_recorded_id" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <group colspan="2">
+                                <group colspan="1">
+                                    <h3 style="font-weight: bold;">Post-surgery 4</h3>
+                                </group>
+                                <group colspan="1">
+                                    <button name="add_new_evolution_plastic_surgery_post_surgery_process_4" type="object" string="Process 4 - Add" style="float: right;" />
+                                </group>
+                            </group>
+                            <!-- <group colspan="2">
+                                <field name="evolution_ids_plastic_surgery_procedure_ids_process_4" style="float: right;" widget="many2many_tags" options="{'no_create': True}" />
+                            </group> -->
+                            <group colspan="2">
+                                <field name="evolution_ids_plastic_surgery_post_surgery_process_4" nolabel="1" readonly="1">
+                                    <tree default_order="date_recorded desc">
+                                        <field name="evolution_type" invisible="1" />
+                                        <field name="procedure_type" invisible="1" />
+                                        <field name="doctor_notes" />
+                                        <field name="date_recorded" />
+                                        <field name="user_who_recorded_id" />
+                                        <field name="next_date" width="1" />
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page string="Stetic Medicine - Patient Images">
+                            <group colspan="2">
+                                <field name="stetic_medicine_patient_images" nolabel="1" widget="many2many_binary" colspan="2" />
+                            </group>
+                        </page>
+                        <page string="Dermatology - Patient Images">
+                            <group colspan="2">
+                                <field name="dermatology_patient_images" nolabel="1" widget="many2many_binary" colspan="2" />
+                            </group>
+                        </page>
+                        <page string="Plastic Surgery - Patient Images">
+                            <group colspan="2">
+                                <h5 style="font-weight: bold;">Process 1</h5>
+                                <newline />
+                                <field name="plastic_surgery_process_1_patient_images" nolabel="1" widget="many2many_binary" colspan="2" />
+                            </group>
+                            <group colspan="2">
+                                <h5 style="font-weight: bold;">Process 2</h5>
+                                <newline />
+                                <field name="plastic_surgery_process_2_patient_images" nolabel="1" widget="many2many_binary" colspan="2" />
+                            </group>
+                            <group colspan="2">
+                                <h5 style="font-weight: bold;">Process 3</h5>
+                                <newline />
+                                <field name="plastic_surgery_process_3_patient_images" nolabel="1" widget="many2many_binary" colspan="2" />
+                            </group>
+                            <group colspan="2">
+                                <h5 style="font-weight: bold;">Process 4</h5>
+                                <newline />
+                                <field name="plastic_surgery_process_4_patient_images" nolabel="1" widget="many2many_binary" colspan="2" />
+                            </group>
+                        </page>
+                        <page name="evolutions_history" string="Evolutions History">
+                            <group colspan="2">
+                                <field name="evolution_history_budget_procedures" readonly="1" required="0" />
+                                <field name="evolution_history_budget_plastic_comments" readonly="1" required="0" />
+                                <field name="evolution_history_budget_stetic_comments" readonly="1" required="0" />
+                            </group>
+                            <group colspan="2">
+                                <field name="evolution_history_ids" nolabel="1" readonly="1">
+                                    <tree default_order="date_recorded desc">
+                                        <field name="description" />
+                                        <field name="date_recorded" />
+                                        <field name="user_who_recorded" />
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="kcs_medical_app_patients_view_tree">
+        <field name="name">kcs.medical.app.patients.tree</field>
+        <field name="model">kcs.medical.app.patient</field>
+        <field name="arch" type="xml">
+            <tree default_order="name desc" decoration-danger="state == 'registered'">
+                <field name="state" invisible="1" />
+                <field name="name" />
+                <field name="appointment_reason" />
+                <field name="birthdate" />
+                <field name="age" />
+                <field name="function" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="kcs_medical_app_search_default_fields">
+        <field name="name">kcs.medical.app.patient.search</field>
+        <field name="model">kcs.medical.app.patient</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="national_identity_number" />
+                <field name="appointment_reason"/>
+            </search>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_kcs_medical_app_patients">
+        <field name="name">Patients</field>
+        <field name="res_model">kcs.medical.app.patient</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="kcs_medical_app_patients_view_tree" />
+    </record>
+    <menuitem id="main_menu_kcs_medical_app_history" name="Medical History" sequence="1" web_icon="kcs_medical_app,static/description/icon.png" />
+    <menuitem id="main_menu_kcs_medical_app_selectable_lists" parent="main_menu_kcs_medical_app_history" name="Values Lists" sequence="2" />
+    <menuitem id="menu_kcs_medical_app_patients" name="Patients" parent="main_menu_kcs_medical_app_history" action="action_kcs_medical_app_patients" sequence="1" />
+</odoo>

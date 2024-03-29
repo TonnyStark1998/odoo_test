@@ -1,0 +1,8 @@
+<odoo>
+    <data>
+        <record id="account.action_report_payment_receipt" model="ir.actions.report">
+            <field name="name">billing_do.billing_do_account_payment_receipt</field>
+            <field name="report_name">billing_do.billing_do_account_payment_receipt</field>
+        </record>
+    </data>
+</odoo>

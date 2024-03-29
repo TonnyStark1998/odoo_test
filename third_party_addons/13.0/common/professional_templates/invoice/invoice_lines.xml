@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="invoice_lines">
+            <div class="col-12 mt8 mb9"
+                t-attf-style="padding-left:0px; 
+                            padding-right:0px;
+                            font-size:12px !important;"
+                t-if="o.invoice_line_ids">
+
+                <!-- Is there a discount on at least one line? -->
+                <t t-set="display_discount"
+                    t-value="any([l.discount for l in o.invoice_line_ids])"/>
+
+                <table class="table table-condensed" 
+                    t-attf-style="color:{{o.style.text_color}};">
+
+                    <thead t-attf-style="background-color:{{o.style.theme_color}};
+                        page-break-inside: avoid;
+                        color:{{o.style.theme_txt_color}};">
+
+                        <tr t-attf-style="page-break-inside: avoid !important;
+                            border-bottom: 1px solid {{o.style.text_color}} !important;">
+
+                            <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                No.
+                            </th>
+                            <th class="text-right"
+                                t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                Cantidad
+                            </th>
+                            <th t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                Descripción
+                            </th>
+                            <th class="text-right"
+                                t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                Precio Unitario
+                            </th>
+                            <th class="text-right"
+                                t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;"
+                                t-if="display_discount">
+                                Descuento
+                            </th>
+                            <th class="text-right"
+                                t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                Impuestos
+                            </th>
+                            <th class="text-right"
+                                t-attf-style="border-bottom: 1px solid {{o.style.text_color}} !important;">
+                                Monto
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="line_number" 
+                            t-value="0" />
+                        <t t-set="line_number_section" 
+                            t-value="1" />
+
+                        <t t-foreach="o.invoice_line_ids.sorted(key=lambda line: line.sequence)" t-as="l">
+                            <t t-if="l.display_type not in ['line_section', 'line_note']" 
+                                t-set="line_number" 
+                                t-value="line_number + 1" />
+                            <t t-if="l.display_type in ['line_section']" 
+                                t-set="line_number_section" 
+                                t-value="1" />
+                            <t t-if="l.display_type not in ['line_section']" 
+                                t-set="line_number_section" 
+                                t-value="line_number_section + 1" />
+
+                            <tr t-if="l.display_type in ['line_section']"
+                                t-attf-style="background-color:#bdbdbd !important;
+                                                color:#ffffff !important;
+                                                page-break-inside: avoid !important;">
+                                <td colspan="7">
+                                    <span t-field="l.name"/>
+                                </td>
+                            </tr>
+
+                            <tr t-if="l.display_type in ['line_note']"
+                                t-attf-style="background-color:#f4f3f3;
+                                                color: #555555;
+                                                font-size: 9px;
+                                                font-style: italic;
+                                                page-break-inside: avoid !important;">
+                                <td colspan="7"
+                                    class="text-center">
+                                    <span t-field="l.name"/>
+                                </td>
+                            </tr>
+
+                            <tr t-if="l.display_type not in ['line_section' , 'line_note']"
+                                t-attf-style="background-color:{{o.style.odd if line_number_section % 2 != 0 else o.style.even}};
+                                                page-break-inside: avoid !important;">
+                                <td>
+                                    <span t-esc="line_number"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-esc="int(l.quantity)"/>
+                                    <br />
+                                    <span t-field="l.product_uom_id" />
+                                </td>
+                                <td>
+                                    <span t-field="l.name"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="l.price_unit"/>
+                                </td>
+                                <td class="text-right"
+                                    t-if="display_discount">
+                                    <span t-field="l.discount"
+                                                t-if="l.discount > 0" />
+                                    <span t-if="l.discount > 0"> %</span>
+                                </td>
+                                <td class="text-right">
+                                    <span t-esc="', '.join(map(lambda x: (x.name), l.tax_ids))" />
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="l.price_subtotal"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+    </data>
+</odoo>

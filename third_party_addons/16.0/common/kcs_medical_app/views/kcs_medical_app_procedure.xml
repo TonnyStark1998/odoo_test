@@ -1,0 +1,31 @@
+<odoo>
+    <record model="ir.ui.view" id="kcs_medical_app_procedure_view_tree">
+        <field name="name">kcs.medical.app.patient.procedure.tree</field>
+        <field name="model">kcs.medical.app.patient.procedure</field>
+        <field name="arch" type="xml">
+            <tree default_order="name desc">
+                <field name="name" />
+                <field name="active" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="kcs_medical_app_procedure_view_form">
+        <field name="name">kcs.medical.app.patient.procedure.form</field>
+        <field name="model">kcs.medical.app.patient.procedure</field>
+        <field name="arch" type="xml">
+            <form string="Procedures">
+                <group col="2">
+                    <field name="name" />
+                    <field name="active" />
+                </group>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_kcs_medical_app_procedure">
+        <field name="name">Procedure</field>
+        <field name="res_model">kcs.medical.app.patient.procedure</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="kcs_medical_app_procedure_view_tree" />
+    </record>
+    <!-- <menuitem id="menu_kcs_medical_app_procedure" name="Procedures" parent="main_menu_kcs_medical_app_selectable_lists" action="action_kcs_medical_app_procedure" sequence="5" /> -->
+</odoo>

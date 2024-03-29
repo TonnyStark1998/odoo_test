@@ -1,0 +1,11 @@
+<odoo>
+    <record id="kcs_medical_app_group_managers" model="res.groups">
+        <field name="name">KCS Medical App / Managers</field>
+    </record>
+    <record id="kcs_medical_app_group_patients" model="res.groups">
+        <field name="name">KCS Medical App / Patients</field>
+    </record>
+    <record id="kcs_medical_app_group_doctors" model="res.groups">
+        <field name="name">KCS Medical App / Doctors</field>
+    </record>
+</odoo>

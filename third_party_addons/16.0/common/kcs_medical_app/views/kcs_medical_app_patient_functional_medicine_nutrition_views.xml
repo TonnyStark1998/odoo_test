@@ -1,0 +1,109 @@
+<odoo>
+    <record model="ir.ui.view" id="kcs_medical_app_patients_functional_medicine_nutrition_view_form">
+        <field name="name">kcs.medical.app.patients.functional.medicine.nutrition.form</field>
+        <field name="model">kcs.medical.app.patient</field>
+        <field name="inherit_id" ref="kcs_medical_app.kcs_medical_app_patients_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='evolutions_history']" position="after">
+                <page string="Functional Medicine/Nutrition">
+                    <group col="2">
+                        <group colspan="1" string="Physical Activities">
+                            <group colspan="2">
+                                <label for="physical_activity" style="font-weight: normal !important;" />
+                                <field name="physical_activity" nolabel="1" />
+                            </group>
+                            <group colspan="2" attrs="{'invisible': [('physical_activity', '=', 'no')]}">
+                                <label for="physical_activity_which" style="font-weight: normal !important;" />
+                                <field name="physical_activity_which" nolabel="1" />
+                            </group>
+                            <group colspan="2" attrs="{'invisible': [('physical_activity', '=', 'no')]}">
+                                <label for="physical_activity_frequency" style="font-weight: normal !important;" />
+                                <field name="physical_activity_frequency" nolabel="1" />
+                            </group>
+                            <group colspan="2" attrs="{'invisible': [('physical_activity', '=', 'no')]}">
+                                <label for="physical_activity_time" style="font-weight: normal !important;" />
+                                <field name="physical_activity_time" nolabel="1" />
+                            </group>
+                        </group>
+                        <group colspan="1" string="Sleep">
+                            <group colspan="2">
+                                <label for="sleep_range" style="font-weight: normal !important;" />
+                                <field name="sleep_range" nolabel="1" />
+                            </group>
+                            <group colspan="2">
+                                <label for="sleep_hours_amount" style="font-weight: normal !important;" />
+                                <field name="sleep_hours_amount" nolabel="1" />
+                            </group>
+                            <group colspan="2">
+                                <label for="sleep_wake_up_tired" style="font-weight: normal !important;" />
+                                <field name="sleep_wake_up_tired" nolabel="1" />
+                            </group>
+                            <group colspan="2">
+                                <label for="sleep_insomnia" style="font-weight: normal !important;" />
+                                <field name="sleep_insomnia" nolabel="1" />
+                            </group>
+                            <group colspan="2" attrs="{'invisible': [('sleep_insomnia', '=', 'no')]}">
+                                <label for="sleep_insomnia_type" style="font-weight: normal !important;" />
+                                <field name="sleep_insomnia_type" nolabel="1" />
+                            </group>
+                        </group>
+                    </group>
+                    <group col="2">
+                        <group colspan="1" string="Defecation">
+                            <group colspan="2">
+                                <label for="defecation_consistency" style="font-weight: normal !important;" />
+                                <field name="defecation_consistency" nolabel="1" />
+                            </group>
+                            <group colspan="2">
+                                <label for="defecation_see_food_residuals" style="font-weight: normal !important;" />
+                                <field name="defecation_see_food_residuals" nolabel="1" />
+                            </group>
+                        </group>
+                        <group colspan="1" string="Water Consumption">
+                            <group colspan="2">
+                                <label for="water_consumption" style="font-weight: normal !important;" />
+                                <field name="water_consumption" nolabel="1" />
+                            </group>
+                        </group>
+                    </group>
+                    <group col="2">
+                        <group colspan="1" string="Menstrual Period" attrs="{'invisible': [('genre', '!=', 'female')]}">
+                            <group colspan="2">
+                                <label for="menstrual_period_last_date" style="font-weight: normal !important;" />
+                                <field name="menstrual_period_last_date" nolabel="1" />
+                            </group>
+                            <group colspan="2">
+                                <label for="menstrual_period_is_regular" style="font-weight: normal !important;" />
+                                <field name="menstrual_period_is_regular" nolabel="1" />
+                            </group>
+                            <group colspan="2">
+                                <label for="menstrual_period_needs_painkiller" style="font-weight: normal !important;" />
+                                <field name="menstrual_period_needs_painkiller" nolabel="1" />
+                            </group>
+                            <group colspan="2">
+                                <label for="menstrual_period_is_voluminous" style="font-weight: normal !important;" />
+                                <field name="menstrual_period_is_voluminous" nolabel="1" />
+                            </group>
+                        </group>
+                        <group colspan="1" string="Nourishment">
+                            <group colspan="2">
+                                <label for="foods_not_eat" style="font-weight: normal !important;" />
+                            </group>
+                            <group colspan="2">
+                                <field name="foods_not_eat" nolabel="1" />
+                            </group>
+                        </group>
+                        <group colspan="2">
+                            <group colspan="2">
+                                <label for="nutrition_notes" style="font-weight: normal !important;" />
+                            </group>
+                            <group colspan="2">
+                                <field name="nutrition_notes" nolabel="1" />
+                            </group>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

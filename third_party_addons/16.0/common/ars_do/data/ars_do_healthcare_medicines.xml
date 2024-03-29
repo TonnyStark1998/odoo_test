@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="medicine_category_1" model="product.category">
+        <field name="parent_id" ref="product.product_category_all"/>
+        <field name="name">Medicine</field>
+    </record>
+
+    <record id="medicine_1" model="product.product">
+        <field name="name">Complejo B</field>
+        <field name="is_medicine">1</field>
+        <field name="list_price">0.0</field>
+        <field name="standard_price">0.0</field>
+        <field name="type">consu</field>
+        <field name="categ_id" ref="ars_do.medicine_category_1"/>
+    </record>
+    <record id="medicine_2" model="product.product">
+        <field name="name">Eritropoyetina 4 mil</field>
+        <field name="is_medicine">1</field>
+        <field name="list_price">0.0</field>
+        <field name="standard_price">0.0</field>
+        <field name="type">consu</field>
+        <field name="categ_id" ref="ars_do.medicine_category_1"/>
+    </record>
+    <record id="medicine_3" model="product.product">
+        <field name="name">Eritropoyetina 10 mil</field>
+        <field name="is_medicine">1</field>
+        <field name="list_price">0.0</field>
+        <field name="standard_price">0.0</field>
+        <field name="type">consu</field>
+        <field name="categ_id" ref="ars_do.medicine_category_1"/>
+    </record>
+    <record id="medicine_4" model="product.product">
+        <field name="name">Hierro</field>
+        <field name="is_medicine">1</field>
+        <field name="list_price">0.0</field>
+        <field name="standard_price">0.0</field>
+        <field name="type">consu</field>
+        <field name="categ_id" ref="ars_do.medicine_category_1"/>
+    </record>
+    <record id="medicine_5" model="product.product">
+        <field name="name">Vitamina C</field>
+        <field name="is_medicine">1</field>
+        <field name="list_price">0.0</field>
+        <field name="standard_price">0.0</field>
+        <field name="type">consu</field>
+        <field name="categ_id" ref="ars_do.medicine_category_1"/>
+    </record>
+    <record id="medicine_6" model="product.product">
+        <field name="name">Vancomicina</field>
+        <field name="is_medicine">1</field>
+        <field name="list_price">0.0</field>
+        <field name="standard_price">0.0</field>
+        <field name="type">consu</field>
+        <field name="categ_id" ref="ars_do.medicine_category_1"/>
+    </record>
+</odoo>

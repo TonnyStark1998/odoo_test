@@ -1,0 +1,31 @@
+<odoo>
+    <record model="ir.ui.view" id="kcs_medical_app_virus_view_tree">
+        <field name="name">kcs.medical.app.patient.virus.tree</field>
+        <field name="model">kcs.medical.app.patient.virus</field>
+        <field name="arch" type="xml">
+            <tree default_order="name desc">
+                <field name="name" />
+                <field name="active" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="kcs_medical_app_virus_view_form">
+        <field name="name">kcs.medical.app.patient.virus.form</field>
+        <field name="model">kcs.medical.app.patient.virus</field>
+        <field name="arch" type="xml">
+            <form string="Viruses">
+                <group col="2">
+                    <field name="name" />
+                    <field name="active" />
+                </group>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_kcs_medical_app_virus">
+        <field name="name">Viruses</field>
+        <field name="res_model">kcs.medical.app.patient.virus</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="kcs_medical_app_virus_view_tree" />
+    </record>
+    <menuitem id="menu_kcs_medical_app_virus" name="Viruses" parent="main_menu_kcs_medical_app_selectable_lists" action="action_kcs_medical_app_virus" sequence="8" />
+</odoo>
