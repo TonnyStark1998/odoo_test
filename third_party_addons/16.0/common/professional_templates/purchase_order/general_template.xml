@@ -166,18 +166,6 @@
                     </div>
                 </div>
                 <!-- end of order data-->
-                <div class="row">
-                    <div class="col-12 mt-4 text-center">
-                        <div class="row">
-                            <div class="col-6">
-                                <strong>Solicitado por:</strong> ________________________
-                            </div>
-                            <div class="col-6">
-                                <strong>Aprobado por:</strong> ________________________
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <!-- end of page -->
             <!--start of footer-->
