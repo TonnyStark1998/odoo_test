@@ -64,6 +64,7 @@
         "views/report_style_views.xml",
         "views/ir_actions_report_xml.xml",
         "views/account_journal_views.xml",
+        "reports/report_paperformat.xml",
         "reports/invoice_reports.xml",
         "reports/sale_order_reports.xml",
         "reports/purchase_order_reports.xml",
