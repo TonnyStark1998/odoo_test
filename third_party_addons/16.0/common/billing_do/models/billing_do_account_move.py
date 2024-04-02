@@ -15,6 +15,8 @@ class BillingDoAccountMove(models.Model):
     # Account Move - Modified Fields
     invoice_date = fields.Date(default=lambda self: self._default_invoice_date())
 
+    journal_id = fields.Many2one(change_default=True)
+
     # Account Move - New Fields
     income_type = fields.Selection(selection=[
             ('01', '01 - Ingresos por Operaciones (No Financieros)'),
