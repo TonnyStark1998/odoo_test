@@ -176,6 +176,12 @@ class TemplateSettings(models.Model):
         help="This field holds the image used as footer logo for the reports,\
                         if non is uploaded and footer logo is enabled then the company logo will be used",
     )
+    company_stamp = fields.Binary(
+        "Company Stamp",
+        attachment=True,
+        help="This field holds the image used as the company stamp for the reports.\
+            It is controlled by the 'Show Company Stamp' settings.",
+    )
     odd = fields.Char(
         "Odd parity Color",
         size=7,
@@ -266,6 +272,11 @@ class TemplateSettings(models.Model):
         "Enable footer logo",
         default=True,
         help="Check this box to display footer logo in the reports",
+    )
+    show_company_stamp = fields.Boolean(
+        "Show Company Stamp",
+        default=False,
+        help="Check this box to display the Compny Stamp on Reports.",
     )
     transparent = fields.Boolean(
         "Background transparent",
