@@ -6,7 +6,13 @@
                 t-attf-style="padding-left:0px; padding-right:0px;font-size:12px !important;">
                 <div class="row"
                         style="padding-left:0px; padding-right:0px; page-break-inside: avoid !important;">
-                    <div class=" offset-7 col-5">
+                    <div class="mt-2 col-5 text-end" t-if="style.show_company_stamp and style.company_stamp">
+                        <img t-att-src="image_data_uri(style.company_stamp)" 
+                            t-attf-style="max-width: 150px !important;"
+                            class="opacity-50"
+                            alt="Company Stamp" />
+                    </div>
+                    <div t-attf-class="{{  'col-6 offset-1' if style.show_company_stamp and style.company_stamp else 'col-5 offset-7' }}">
                         <table class="table table-sm" t-attf-style="color:{{style.text_color}};">
                             <tbody>
                                 <tr t-attf-style="border-top: 1px solid {{style.text_color}};">
