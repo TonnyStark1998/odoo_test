@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<data>
-		<template id="PAYMENT_0_document" name="Odoo Template">
-			<t t-call="account.report_payment_receipt_document" t-lang="lang"/>
-		</template>
-	</data>
+    <data>
+        <template id="PAYMENT_0_document" name="Odoo Template" inherit_id="account.report_payment_receipt_document">
+            <xpath expr="//table" position="after">
+                <div class="row">
+                    <div class="mt-3 col-12 text-center">
+                        <img t-att-src="image_data_uri(style.company_stamp)" 
+                            t-attf-style="max-width: 150px !important;"
+                            class="opacity-50"
+                            alt="Company Stamp" />
+                    </div>
+                </div>
+            </xpath>
+        </template>
+    </data>
 </odoo>
-
