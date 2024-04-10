@@ -9,94 +9,298 @@
             <t t-if="not o or not 'company_id' in o">
                 <t t-set="company" t-value="res_company"></t>
             </t>
-            <div class="header" t-attf-style="background-color:{{style.theme_color}};color:{{style.theme_txt_color}} !important;font-size:{{int(style.header_font)}}px !important;font-family:{{style.font_family}} !important;">
-                <div class="row mb-2 p-2" >
+            <!-- Start of Header -->
+            <div class="container header col" 
+                t-attf-style="padding-bottom:0px;
+                    padding-left:0px; 
+                    padding-right:0px; 
+                    color:{{style.text_color}} !important;
+                    font-size:{{int(style.header_font)}}px !important;
+                    font-family:{{style.font_family}} !important;">
+                <div class="row">
                     <t t-if="style.header">
-                        <div class="col-5 px-0">
-                            <address t-field="company.partner_id"  t-options='{"widget": "contact", "fields": ["address", "name", "email", "phone", "webiste"], "no_marker": False}'/>
+                        <div class="col-7 mt-2 mb-5" style="padding-left:0px;">
+                            <img t-if="style.logo" 
+                                    t-att-src="image_data_uri(style.logo)" 
+                                    t-attf-style="max-width: 200px !important;"
+                                    alt="Company Logo"/>
+                            <img t-if="company.logo" 
+                                    t-att-src="image_data_uri(company.logo)"
+                                    t-attf-style="max-width: 200px !important;" 
+                                    alt="Company Logo"/>
                         </div>
-                        <div class="col-7 px-0 text-end">
-                            <span t-if="style.logo">
-                                <img t-if="style.logo" t-att-src="image_data_uri(style.logo)" alt="Logo"/>
-                            </span>
-                            <span t-if="not style.logo and company.logo">
-                                <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
-                            </span>
-                            <div t-if="company.twitter or company.facebook or company.facebook" t-attf-style="background-color:{{style.theme_color}}; width:auto; float:right; padding-left:15px; color:{{style.theme_txt_color}}; padding-right:15px; padding-top:4px; padding-bottom:2px;" class="float-right mb8">
-                                <span t-if="company.twitter" style="padding-left:0px;" class="fa fa-twitter-square "/>&#160;<span t-field="company.twitter"/>
-                                <span t-if="company.facebook" style="padding-left:13px;" class="fa fa-facebook-square "/>&#160;<span t-field="company.facebook"/>
-                                <span t-if="company.youtube" style="padding-left:13px;" class="fa fa-youtube-square "/>&#160;<span t-field="company.youtube" />
+                        <div class="col-5 mb-5"
+                            t-attf-style="font-size:{{int(style.header_font)}}px !important;
+                                padding-bottom:2px;
+                                padding-right:0px;">
+                            <h1 t-attf-style="color:{{style.text_color}}">
+                                <span t-field="o.name"/>
+                            </h1>
+                            <div>
+                                <span t-if="o.company_id.street" 
+                                    class="fa fa-map-marker fa-lg"/>
+                                <span t-if="o.company_id.street" 
+                                    t-field="o.company_id.street"/>
+                                <span t-if="o.company_id.street and o.company_id.street2 ">,</span>
+                                <span t-if="o.company_id.street2" 
+                                    t-field="o.company_id.street2"/>
+                                <span t-if="o.company_id.zip and o.company_id.street or o.company_id.street2 ">,
+                                </span>
+                                <span t-if="o.company_id.zip">
+                                    ZIP:
+                                    <span t-field="o.company_id.zip"/>
+                                </span>
+                                <span t-if="o.company_id.zip and o.company_id.city">,</span>
+                                <span t-if="o.company_id.city or o.company_id.country_id"
+                                    t-field="o.company_id.city"/>
+                                <span t-if="o.company_id.country_id and o.company_id.city ">,</span>
+                                <span t-field="o.company_id.country_id"/>
+                            </div>
+                            <div t-if="o.company_id.phone">
+                                <span class="fa fa-phone-square fa-lg"/>
+                                <span t-field="o.company_id.phone"/>
+                            </div>
+                            <div t-if="o.company_id.email">
+                                <span class="fa fa-envelope-square fa-lg"/>
+                                <span t-field="o.company_id.email"/>
+                            </div>
+                            <div t-if="o.company_id.website">
+                                <span class="fa fa-globe fa-lg"/>
+                                <span t-field="o.company_id.website"/>
+                            </div>
+                            <div t-if="o.company_id.vat">
+                                <span class="fa fa-building fa-lg"/>
+                                RNC:
+                                <span t-field="o.company_id.vat"/>
+                            </div>
+                            <div>
+                                <span t-field="o.name" t-options="{'widget': 'barcode',
+                                    'width': 600, 
+                                    'height': 100, 
+                                    'img_style': 'width:150px;height:50px;'}" />
                             </div>
                         </div>
                     </t>
                 </div>
-            </div> <!--end of Header-->
-            <!-- START OF PAGE -->
-            <div class="article page" t-attf-data-oe-model="stock.picking" t-attf-data-oe-id="{{o.id}}" t-attf-style="color:{{style.text_color}} !important;font-size:{{int(style.body_font)}}px !important;font-family:{{style.font_family}} !important;">
-                <div class="row mb-2">
-                    <div class="col-auto">
-                        <h4 t-field="o.name"/>
+            </div>
+            <!-- End of Header -->
+            <!-- Start of Page -->
+            <div class="article page" 
+                t-attf-data-oe-model="stock.picking" 
+                t-attf-data-oe-id="{{o.id}}" 
+                t-attf-style="color:{{style.text_color}} !important;">
+                <div class="row mt-2">
+                    <div class="col-12 mt-1 p-1" t-attf-style="white-space:pre-line;
+                        color:#{style.wm_color};
+                        left:#{style.leftpadding}mm;
+                        top:#{style.toppadding}mm;
+                        font-size:#{style.fontsize}px;
+                        opacity:#{style.opacity};
+                        z-index:-99; 
+                        -webkit-transform:rotate(-#{style.rotate}deg);
+                        position:fixed;">
+                        <t t-esc="style.wm_eval(o, time, user, res_company)"/>
                     </div>
-                    <div class="col-auto text-end" name="right_box">
-                        <div t-field="o.name" t-options="{'widget': 'barcode', 'width': 600, 'height': 100, 'img_style': 'width:300px;height:50px;'}"/>
-                    </div>
-                </div>
-                <div class="col-12" t-attf-style="white-space:pre-line;color:#{style.wm_color};left:#{style.leftpadding}mm; top:#{style.toppadding}mm;font-size:#{style.fontsize}px; opacity:#{style.opacity};z-index:-99; -webkit-transform:rotate(-#{style.rotate}deg);position:fixed;"><t t-esc="style.wm_eval(o, time, user, res_company)"/></div>
-                <div class="row mb-2 p-2">
-                    <div class="col-6">
-                        <div name="vendor_address" t-if="o.picking_type_id.code=='incoming' and o.partner_id">
-                            <span><strong>Vendor Address:</strong></span>
+                    <div class="col-6 mt-1">
+                        <div name="vendor_address" t-if="o.picking_type_id.code=='incoming' and o.partner_id"
+                            t-attf-style="background-color:{{style.theme_color}};
+                                padding:5px;
+                                color:{{style.theme_txt_color}};">
+                            <span>
+                                <strong>Vendor Address:</strong>
+                            </span>
                         </div>
-                        <div name="warehouse_address" t-if="o.picking_type_id.code=='internal' and o.partner_id">
-                            <span><strong>Warehouse Address:</strong></span>
+                        <div name="warehouse_address" t-if="o.picking_type_id.code=='internal' and o.partner_id"
+                            t-attf-style="background-color:{{style.theme_color}};
+                                padding:5px;
+                                color:{{style.theme_txt_color}};">
+                            <span>
+                                <strong>Warehouse Address:</strong>
+                            </span>
                         </div>
-                        <div name="customer_address" t-if="o.picking_type_id.code=='outgoing' and o.partner_id">
-                            <span><strong>Customer Address:</strong></span>
+                        <div name="customer_address" t-if="o.picking_type_id.code=='outgoing' and o.partner_id"
+                            t-attf-style="background-color:{{style.theme_color}};
+                                padding:5px;
+                                color:{{style.theme_txt_color}};">
+                            <span>
+                                <strong>Customer Address:</strong>
+                            </span>
                         </div>
                         <div t-if="o.partner_id" name="partner_header">
-                            <div t-field="o.partner_id"
-                                t-options='{"widget": "contact", "fields": ["address", "name", "phone", "vat"], "no_marker": True, "phone_icons": True}'/>
+                            <h5 t-if="o.partner_id"
+                                t-attf-style="color:{{style.cust_color}}; margin-top:2px; margin-bottom:5px; margin-left:0px;">
+                                <span t-if="o.partner_id.title" 
+                                    t-field="o.partner_id.title"/>
+                                <span t-field="o.partner_id"/>
+                            </h5>
+                            <div t-if="o.partner_id.vat">
+                                <span class="fa fa-building fa-lg"/>
+                                RNC:
+                                <span t-field="o.partner_id.vat"/>
+                            </div>
+                            <div>
+                                <span t-if="o.partner_id.street" class="fa fa-map-marker fa-lg"/>
+                                <span t-if="o.partner_id.street" t-field="o.partner_id.street"/>
+                                <span t-if="o.partner_id.street and o.partner_id.street2 ">,</span>
+                                <span t-if="o.partner_id.street2" t-field="o.partner_id.street2"/>
+                                <span t-if="o.partner_id.zip and o.partner_id.street or o.partner_id.street2 ">,</span>
+                                <span t-if="o.partner_id.zip">
+                                    ZIP:
+                                    <span t-field="o.partner_id.zip"/>
+                                </span>
+                                <span t-if="o.partner_id.zip and o.partner_id.city">,</span>
+                                <span t-if="o.partner_id.city or o.partner_id.country_id" t-field="o.partner_id.city"/>
+                                <span t-if="o.partner_id.country_id and o.partner_id.city ">,</span>
+                                <span t-field="o.partner_id.country_id"/>
+                            </div>
+                            <div t-if="o.partner_id.phone or o.partner_id.mobile">
+                                <span class="fa fa-phone-square fa-lg"/>
+                                <span t-field="o.partner_id.phone"/>
+                                <span t-if="o.partner_id.mobile and o.partner_id.phone ">,</span>
+                                <span t-field="o.partner_id.mobile"/>
+                            </div>
+                            <div t-if="o.partner_id.email">
+                                <span class="fa fa-envelope-square fa-lg"/>
+                                <span t-field="o.partner_id.email"/>
+                            </div>
+                            <div t-if="o.partner_id.website">
+                                <span class="fa fa-globe fa-lg"/>
+                                <span t-field="o.partner_id.website"/>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-6  d-flex justify-content-end">
-                        <div name="outgoing_delivery_address"
-                            t-if="o.should_print_delivery_address()">
-                        <span><strong>Delivery Address:</strong></span>
-                        <div t-field="o.move_ids[0].partner_id"
-                            t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                    <div class="col-6 mt-1">
+                        <div name="outgoing_delivery_address" t-if="o.should_print_delivery_address()">
+                            <span>
+                                <strong>Delivery Address:</strong>
+                            </span>
+                            <h5 t-if="o.move_ids[0].partner_id"
+                                t-attf-style="color:{{style.cust_color}}; margin-top:2px; margin-bottom:5px; margin-left:0px;">
+                                <span t-if="o.move_ids[0].partner_id.title" 
+                                    t-field="o.move_ids[0].partner_id.title"/>
+                                <span t-field="o.move_ids[0].partner_id"/>
+                            </h5>
+                            <div t-if="o.move_ids[0].partner_id.vat">
+                                <span class="fa fa-building fa-lg"/>
+                                RNC:
+                                <span t-field="o.move_ids[0].partner_id.vat"/>
+                            </div>
+                            <div>
+                                <span t-if="o.move_ids[0].partner_id.street" class="fa fa-map-marker fa-lg"/>
+                                <span t-if="o.move_ids[0].partner_id.street" t-field="o.move_ids[0].partner_id.street"/>
+                                <span t-if="o.move_ids[0].partner_id.street and o.move_ids[0].partner_id.street2 ">,</span>
+                                <span t-if="o.move_ids[0].partner_id.street2" t-field="o.move_ids[0].partner_id.street2"/>
+                                <span t-if="o.move_ids[0].partner_id.zip and o.move_ids[0].partner_id.street or o.move_ids[0].partner_id.street2 ">,</span>
+                                <span t-if="o.move_ids[0].partner_id.zip">
+                                    ZIP:
+                                    <span t-field="o.move_ids[0].partner_id.zip"/>
+                                </span>
+                                <span t-if="o.move_ids[0].partner_id.zip and o.move_ids[0].partner_id.city">,</span>
+                                <span t-if="o.move_ids[0].partner_id.city or o.move_ids[0].partner_id.country_id" t-field="o.move_ids[0].partner_id.city"/>
+                                <span t-if="o.move_ids[0].partner_id.country_id and o.move_ids[0].partner_id.city ">,</span>
+                                <span t-field="o.move_ids[0].partner_id.country_id"/>
+                            </div>
+                            <div t-if="o.move_ids[0].partner_id.phone or o.move_ids[0].partner_id.mobile">
+                                <span class="fa fa-phone-square fa-lg"/>
+                                <span t-field="o.move_ids[0].partner_id.phone"/>
+                                <span t-if="o.move_ids[0].partner_id.mobile and o.move_ids[0].partner_id.phone ">,</span>
+                                <span t-field="o.move_ids[0].partner_id.mobile"/>
+                            </div>
+                            <div t-if="o.move_ids[0].partner_id.email">
+                                <span class="fa fa-envelope-square fa-lg"/>
+                                <span t-field="o.move_ids[0].partner_id.email"/>
+                            </div>
+                            <div name="outgoing_warehouse_address" t-if="o.picking_type_id.code != 'internal' and o.picking_type_id.warehouse_id.partner_id">
+                                <span>
+                                    <strong>Warehouse Address:</strong>
+                                </span>
+                                <h5 t-if="o.picking_type_id.warehouse_id.partner_id"
+                                    t-attf-style="color:{{style.cust_color}}; margin-top:2px; margin-bottom:5px; margin-left:0px;">
+                                    <span t-if="o.picking_type_id.warehouse_id.partner_id.title" 
+                                        t-field="o.picking_type_id.warehouse_id.partner_id.title"/>
+                                    <span t-field="o.picking_type_id.warehouse_id.partner_id"/>
+                                </h5>
+                                <div t-if="o.picking_type_id.warehouse_id.partner_id.vat">
+                                    <span class="fa fa-building fa-lg"/>
+                                        RNC:
+                                    <span t-field="o.picking_type_id.warehouse_id.partner_id.vat"/>
+                                </div>
+                                <div>
+                                    <span t-if="o.picking_type_id.warehouse_id.partner_id.street" class="fa fa-map-marker fa-lg"/>
+                                    <span t-if="o.picking_type_id.warehouse_id.partner_id.street" t-field="o.picking_type_id.warehouse_id.partner_id.street"/>
+                                    <span t-if="o.picking_type_id.warehouse_id.partner_id.street and o.picking_type_id.warehouse_id.partner_id.street2 ">,</span>
+                                    <span t-if="o.picking_type_id.warehouse_id.partner_id.street2" t-field="o.picking_type_id.warehouse_id.partner_id.street2"/>
+                                    <span t-if="o.picking_type_id.warehouse_id.partner_id.zip and o.picking_type_id.warehouse_id.partner_id.street or o.picking_type_id.warehouse_id.partner_id.street2 ">,</span>
+                                    <span t-if="o.picking_type_id.warehouse_id.partner_id.zip">
+                                            ZIP:
+                                        <span t-field="o.picking_type_id.warehouse_id.partner_id.zip"/>
+                                        </span>
+                                    <span t-if="o.picking_type_id.warehouse_id.partner_id.zip and o.picking_type_id.warehouse_id.partner_id.city">,</span>
+                                    <span t-if="o.picking_type_id.warehouse_id.partner_id.city or o.picking_type_id.warehouse_id.partner_id.country_id" t-field="o.picking_type_id.warehouse_id.partner_id.city"/>
+                                    <span t-if="o.picking_type_id.warehouse_id.partner_id.country_id and o.picking_type_id.warehouse_id.partner_id.city ">,</span>
+                                    <span t-field="o.picking_type_id.warehouse_id.partner_id.country_id"/>
+                                </div>
+                                <div t-if="o.picking_type_id.warehouse_id.partner_id.phone or o.picking_type_id.warehouse_id.partner_id.mobile">
+                                    <span class="fa fa-phone-square fa-lg"/>
+                                    <span t-field="o.picking_type_id.warehouse_id.partner_id.phone"/>
+                                    <span t-if="o.picking_type_id.warehouse_id.partner_id.mobile and o.picking_type_id.warehouse_id.partner_id.phone ">,</span>
+                                    <span t-field="o.picking_type_id.warehouse_id.partner_id.mobile"/>
+                                </div>
+                                <div t-if="o.picking_type_id.warehouse_id.partner_id.email">
+                                    <span class="fa fa-envelope-square fa-lg"/>
+                                    <span t-field="o.picking_type_id.warehouse_id.partner_id.email"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div name="outgoing_warehouse_address"
-                        t-elif="o.picking_type_id.code != 'internal' and o.picking_type_id.warehouse_id.partner_id">
-                    <span><strong>Warehouse Address:</strong></span>
-                    <div t-field="o.picking_type_id.warehouse_id.partner_id"
-                        t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                    <div name="div_sched_date" t-if="o.scheduled_date">
+                        <strong>Scheduled Date: </strong>
+                        <span t-field="o.scheduled_date"/>
+                    </div>
+                    <div name="div_origin" t-if="o.origin">
+                        <strong>Order: </strong>
+                        <span t-field="o.origin" />
+                    </div>
+                    <div name="div_state" t-if="o.state">
+                        <strong>Status: </strong>
+                        <span t-field="o.state" />
+                    </div>
+                </div>
+                <!-- Start of Data -->
+                <div class="row">
+                    <div class="col-12 mt-4 pt-3">
+                        <t t-call="professional_templates.picking_lines"/>
+                    </div>
+                </div>
+                <!-- End of Data -->
+            </div>
+            <!--End of Page -->
+            <!-- Start of Footer -->
+            <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+                <div class="text-center" style="border-top: 1px solid black;">
+                    <ul class="list-inline mb-2">
+                        <li t-if="company.phone" class="list-inline-item d-inline">
+                            <span class="fa fa-phone"/>
+                            <span class="o_force_ltr" t-field="company.phone"/>
+                        </li>
+                        <li t-if="company.email" class="list-inline-item d-inline">
+                            <span class="fa fa-envelope"/>
+                            <span class="o_force_ltr" t-field="company.email"/>
+                        </li>
+                        <li t-if="company.website" class="list-inline-item d-inline">
+                            <span class="fa fa-globe"/>
+                            <span class="o_force_ltr" t-field="company.website"/>
+                        </li>
+                    </ul>
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Página:
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row mb-2 p-2 text-nowrap">
-            <div  name="div_sched_date" t-if="o.scheduled_date" class="col-auto col-3 mw-100 mb-2">
-                <strong>Scheduled Date: </strong>
-                <span t-field="o.scheduled_date"/>
-            </div>
-            <div  name="div_origin" t-if="o.origin" class="col-auto col-3 mw-100 mb-2">
-                <strong>Order: </strong>
-                <span t-field="o.origin"/>
-            </div>
-            <div  name="div_state" t-if="o.state" class="col-auto col-3 mw-100 mb-2">
-                <strong>Status: </strong>
-                <span t-field="o.state"/>
-            </div>
-        </div>
-        <!-- DATA-->
-        <t t-call="professional_templates.picking_lines"/>
-            <!--/DATA-->
-    </div><!--End of PAGE-->
-    <!--FOOTER -->
-    <div class="footer" t-attf-style="font-size:{{style.footer_font}}px !important;font-family:{{style.font_family}} !important;">
-        <t t-call="professional_templates.company_footer"/>
-    </div>
-    <!--/FOOTER-->
-
-</template>
+            <!-- End of Footer -->
+        </template>
     </data>
 </odoo>

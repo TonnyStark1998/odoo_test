@@ -95,9 +95,8 @@
                             </tr>
 
                             <tr t-if="line.display_type not in ['line_section' , 'line_note']"
-                                t-attf-style="background-color:{{style.odd if line_number_section % 2 != 0
-                                                                            else style.even}};
-                                                page-break-inside: avoid !important;">
+                                t-attf-style="page-break-inside: avoid !important;
+                                    background-color:{{style.odd if line_number_section % 2 != 0 else style.even}};">
                                 <td>
                                     <span t-esc="line_number"/>
                                 </td>
