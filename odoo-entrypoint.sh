@@ -21,6 +21,12 @@ if [[ -n $USE_DEFAULT_ADDONS_PATH
     ODOO_ARGS="$ODOO_ARGS --addons-path=/mnt/extra-addons/${ODOO_VERSION}/common,/mnt/extra-addons/${ODOO_VERSION}/${ODOO_EDITION}"
 fi
 
+# Check if there are specific modules for this client
+if [[ -e /mnt/extra-addons/$ODOO_VERSION/client-specific/$DATABASE_NAME 
+    && -d /mnt/extra-addons/$ODOO_VERSION/client-specific/$DATABASE_NAME ]]; then
+    ODOO_ARGS="$ODOO_ARGS,/mnt/extra-addons/${ODOO_VERSION}/client-specific/${DATABASE_NAME}"
+fi
+
 # Check whether this is a new database created from scratch or is an old one.
 #   If it is a new database we need to install the basic modules to get Odoo up & running.
 #   The variable ODOO_DATABASE_STATE is set in the test_database_settings.py Python scripts.
