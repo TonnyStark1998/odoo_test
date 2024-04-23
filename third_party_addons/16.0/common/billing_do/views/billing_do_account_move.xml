@@ -121,6 +121,15 @@
                     attrs="{'invisible': [('move_type', 'in', ['out_invoice', 'out_refund', 'out_receipt'])],
                         'readonly': [('posted_before', '=', True)]}" />
             </xpath>
+            <xpath expr="//button[@name='button_draft']" position="replace">
+                <field name="has_stock_valuation_layer_ids" invisible="1" />
+                <button name="button_draft" string="Reset to Draft" type="object" groups="account.group_account_invoice"
+                    attrs="{'invisible' : ['|', ('has_stock_valuation_layer_ids', '=', False), ('state', 'in', ['draft'])]}" 
+                    data-hotkey="q"
+                    confirm="Poner en borrador una factura asociada a productos almacenable, debe asegurarse de modificar/crear los asientos contables de la valoración en caso de haber existido variación entre los precios de la orden de compra y la factura." />
+                <button name="button_draft" string="Reset to Draft" type="object" groups="account.group_account_invoice"
+                    attrs="{'invisible' : [('show_reset_to_draft_button', '=', False)]}" data-hotkey="q" />
+            </xpath>
         </field>
     </record>
     <record model="ir.ui.view" id="billing_do_view_invoice_tree">
