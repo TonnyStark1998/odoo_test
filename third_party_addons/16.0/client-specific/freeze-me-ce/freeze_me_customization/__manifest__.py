@@ -27,6 +27,7 @@
         # 'security/security.xml',
         # 'security/ir.model.access.csv',
         'views/fm_customization_stock_views.xml',
+        'views/fm_customization_stock_templates.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
