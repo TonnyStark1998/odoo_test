@@ -71,6 +71,12 @@
                 <label for="journal_id" position="move" />
                 <div name="journal_div" position="move" />
             </xpath>
+            <label for="journal_id" position="attributes">
+                <attribute name="groups">account.group_account_invoice</attribute>
+            </label>
+            <div name="journal_div" position="attributes">
+                <attribute name="groups">account.group_account_invoice</attribute>
+            </div>
             <xpath expr="//field[@name='invoice_payment_term_id']/.." position="after">
                 <field name="invoice_user_id" />
                 <field name="company_id" />
