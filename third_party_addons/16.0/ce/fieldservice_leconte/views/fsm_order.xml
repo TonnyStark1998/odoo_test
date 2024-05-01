@@ -1,0 +1,29 @@
+
+<odoo>
+    <record id="fsm_order_form_view_leconte" model="ir.ui.view">
+        <field name="name">fsm.order.leconte.form</field>
+        <field name="model">fsm.order</field>
+        <field name="inherit_id" ref="fieldservice.fsm_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <field name="active_alert" invisible="1"/>
+                <div class="text-center alert alert-warning" role="alert" attrs="{'invisible':[('active_alert','=',False)]}">
+                    <span class="font-weight-bold"><field name="delay_alert"/></span>
+                </div>
+            </xpath>
+            <field name="person_id" position="after">
+                <field name="order_number"/>
+                <field name="description_product"/>
+                <field name="amount_km"/>
+                <field name="btu"/>
+            </field>
+            <field name="priority" position="after">
+                <field name="brand_id"/>
+                <field name="type_equipment_id"/>
+                <field name="execution_time" widget="timesheet_uom"/>
+                <field name="stars_date"/>
+                <field name="acquisition_date"/>
+            </field>
+        </field>
+    </record>
+</odoo>
