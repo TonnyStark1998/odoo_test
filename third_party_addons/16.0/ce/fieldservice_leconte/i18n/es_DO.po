@@ -1,0 +1,177 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* fieldservice_leconte
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-16 20:51+0000\n"
+"PO-Revision-Date: 2024-04-16 16:55-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_DO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_order__acquisition_date
+msgid "Acquisition Date"
+msgstr "Fecha de adquisición de equipo"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_order__active_alert
+msgid "Active Alert"
+msgstr "Activar alerta"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_order__amount_km
+msgid "Amount Km"
+msgstr "Cantidad de KM"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_order__brand_id
+msgid "Brand"
+msgstr "Marca"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_order__btu
+msgid "Btu"
+msgstr "BTU"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_brand__create_uid
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_equipment_leconte__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_brand__create_date
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_equipment_leconte__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_order__delay_alert
+msgid "Delay Alert"
+msgstr "Alerta de retraso"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_order__description_product
+msgid "Description Product"
+msgstr "Descripción del producto"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_brand__display_name
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_equipment_leconte__display_name
+msgid "Display Name"
+msgstr "Mostrar Nombre"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_order__execution_time
+msgid "Execution Time"
+msgstr "Tiempo de ejecución"
+
+#. module: fieldservice_leconte
+#: model:res.groups,name:fieldservice_leconte.group_fsm_move_back_stage
+msgid "Field Service - Go Back in Stage"
+msgstr "Servicio de campo: Retroceder en etapas"
+
+#. module: fieldservice_leconte
+#: model:res.groups,name:fieldservice_leconte.group_fsm_move_stage
+msgid "Field Service - Move Stage "
+msgstr "Servicio de campo: Mover entre etapas"
+
+#. module: fieldservice_leconte
+#: model:ir.model,name:fieldservice_leconte.model_fsm_order
+msgid "Field Service Order"
+msgstr "Pedido de Servicio de Campo"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_brand__id
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_equipment_leconte__id
+msgid "ID"
+msgstr "ID"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_brand____last_update
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_equipment_leconte____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_brand__write_uid
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_equipment_leconte__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_brand__write_date
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_equipment_leconte__write_date
+msgid "Last Updated on"
+msgstr "Ultima actualización en"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_brand__name
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_equipment_leconte__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_order__number_days_open
+msgid "Number Days Open"
+msgstr "Cantidad de días abierta"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_order__order_number
+msgid "Order Number"
+msgstr "Número de caso"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_order__stars_date
+msgid "Stars Date"
+msgstr "Fecha de Inicio"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_order__today
+msgid "Today"
+msgstr "Hoy"
+
+#. module: fieldservice_leconte
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_order__type_equipment_id
+msgid "Type Equipment"
+msgstr "Tipo de equipo"
+
+#. module: fieldservice_leconte
+#. odoo-python
+#: code:addons/fieldservice_leconte/models/fsm_order.py:0
+#, python-format
+msgid "Warning: there is a delay in the work order!"
+msgstr "Advertencia: ¡Hay un retraso en la orden de trabajo!"
+
+#. module: fieldservice_leconte
+#. odoo-python
+#: code:addons/fieldservice_leconte/models/fsm_order.py:0
+#, python-format
+msgid "You do not have permission to go back in stage."
+msgstr "No tienes permiso para retroceder en las etapas."
+
+#. module: fieldservice_leconte
+#. odoo-python
+#: code:addons/fieldservice_leconte/models/fsm_order.py:0
+#, python-format
+msgid "You do not have permission to move stages."
+msgstr "No tienes permiso para mover entre etapas."
+
+#. module: fieldservice_leconte
+#: model:ir.model,name:fieldservice_leconte.model_fsm_brand
+msgid "fsm.brand"
+msgstr ""
+
+#. module: fieldservice_leconte
+#: model:ir.model,name:fieldservice_leconte.model_fsm_equipment_leconte
+msgid "fsm.equipment.leconte"
+msgstr ""
