@@ -82,6 +82,11 @@ class BillingDoAccountMove(models.Model):
 
     is_third_party_ncf = fields.Boolean(string='Is third-party NCF?', default=False)
 
+    has_stock_valuation_layer_ids = fields.Boolean(string='Has Stock Valuation Layers?',
+        compute='_compute_show_reset_to_draft_button',
+        store=True,
+        default=False)
+    
     _sql_constraints = [(
         'unique_name', "", "Another entry with the same name already exists.",
     )]
@@ -392,6 +397,12 @@ class BillingDoAccountMove(models.Model):
     def _onchange_name_warning(self):
         if not self.is_tax_valuable:
             super()._onchange_name_warning()
+
+    def _compute_show_reset_to_draft_button(self):
+        super()._compute_show_reset_to_draft_button()
+        for move in self:
+            if move.sudo().line_ids.stock_valuation_layer_ids:
+                move.has_stock_valuation_layer_ids = True
 
     # Account Move - Default Value Functions
     def _default_invoice_date(self):
