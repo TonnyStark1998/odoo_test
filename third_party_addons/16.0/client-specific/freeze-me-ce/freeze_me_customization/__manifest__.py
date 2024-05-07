@@ -26,6 +26,7 @@
     'data': [
         # 'security/security.xml',
         # 'security/ir.model.access.csv',
+        'data/fm_website_data.xml',
         'views/fm_customization_stock_views.xml',
         'views/fm_customization_stock_templates.xml',
     ],
