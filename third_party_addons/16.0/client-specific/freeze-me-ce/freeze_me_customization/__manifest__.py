@@ -7,8 +7,8 @@
     'description': """
         Integra reportes y portales para la empresa Freeze Me.
     """,
-    'author': "Koala Creative Software SRL",
-    'website': "http://www.koalacreativesoftware.com",
+    'author': "Accounterprise SRL",
+    'website': "http://www.accounterprise.com",
     'category': 'Accounting/Accounting',
     'version': '1.0',
     'depends': ['base', 
@@ -35,5 +35,6 @@
     ],
     'installable': True,
     'application': True,
+    'post_init_hook': '_freeze_me_post_init',
     'auto_install': False,
 }

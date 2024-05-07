@@ -16,7 +16,9 @@ class FreezeMeCustomizationMainController(http.Controller):
         company_products = set(env['stock.picking']\
             .sudo()\
             .with_company(env.company)\
-            .search([('partner_id', '=', current_partner.id if current_partner else -1), ('state', 'in', ['done'])])\
+            .search([('state', 'in', ['done']),
+                     '|', ('partner_id', '=', current_partner.id if current_partner else -1),
+                        ('owner_id', '=',  current_partner.id if current_partner else -1)])\
             .move_ids.mapped('product_id'))
 
         # Render page

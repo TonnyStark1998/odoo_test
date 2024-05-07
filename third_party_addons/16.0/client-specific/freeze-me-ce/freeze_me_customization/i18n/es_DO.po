@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0-20240229\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-16 21:58+0000\n"
-"PO-Revision-Date: 2024-04-16 21:58+0000\n"
+"POT-Creation-Date: 2024-05-07 23:28+0000\n"
+"PO-Revision-Date: 2024-05-07 23:28+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -25,13 +25,14 @@ msgstr ""
 
 #. module: freeze_me_customization
 #: model:ir.model.fields,field_description:freeze_me_customization.field_stock_location__availability
+#: model_terms:ir.ui.view,arch_db:freeze_me_customization.stock_products_availability
 msgid "Availability"
-msgstr "Disponibilidad"
+msgstr "Cantidad Disponible"
 
 #. module: freeze_me_customization
 #: model:ir.model.fields,field_description:freeze_me_customization.field_stock_location__availability_date
 msgid "Availability Date"
-msgstr "Fecha Desocupación"
+msgstr "Fecha de disponibilidad"
 
 #. module: freeze_me_customization
 #: model:ir.model.fields.selection,name:freeze_me_customization.selection__stock_location__availability__desocupado
@@ -42,7 +43,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:freeze_me_customization.action_fm_customization_stock_location_list
 #: model:ir.ui.menu,name:freeze_me_customization.menu_fm_customization_stock_location_list
 msgid "Locations Availability"
-msgstr "Disponibilidad de Ubicaciones"
+msgstr "Ubicaciones Disponibles"
 
 #. module: freeze_me_customization
 #: model:ir.model.fields.selection,name:freeze_me_customization.selection__stock_location__availability__ocupado
@@ -50,11 +51,36 @@ msgid "Ocupado"
 msgstr ""
 
 #. module: freeze_me_customization
-#: model:ir.model.fields,field_description:freeze_me_customization.field_stock_location__picking_ids
-msgid "Pickings"
+#: model:ir.model.fields,field_description:freeze_me_customization.field_stock_location__picking_location_ids
+msgid "Pickings Locations"
 msgstr ""
+
+#. module: freeze_me_customization
+#: model:ir.model.fields,field_description:freeze_me_customization.field_stock_location__picking_location_dest_ids
+msgid "Pickings Locations Dest"
+msgstr ""
+
+#. module: freeze_me_customization
+#: model_terms:ir.ui.view,arch_db:freeze_me_customization.stock_products_availability
+msgid "Product"
+msgstr "Producto"
 
 #. module: freeze_me_customization
 #: model:ir.model.fields,field_description:freeze_me_customization.field_stock_location__reserved_date
 msgid "Reserved Date"
-msgstr "Fecha Reservada"
+msgstr "Fecha de reservación"
+
+#. module: freeze_me_customization
+#: model:website.menu,name:freeze_me_customization.menu_home
+msgid "Stock Products Availability"
+msgstr "Disponibilidad de productos"
+
+#. module: freeze_me_customization
+#: model_terms:ir.ui.view,arch_db:freeze_me_customization.stock_products_availability
+msgid "Stock Products Availability:"
+msgstr "Disponibilidad de productos:"
+
+#. module: freeze_me_customization
+#: model_terms:ir.ui.view,arch_db:freeze_me_customization.stock_products_availability
+msgid "This partner does not have any product available."
+msgstr "Este cliente no posee ningún producto disponible."
