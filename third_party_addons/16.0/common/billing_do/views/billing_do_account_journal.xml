@@ -28,6 +28,7 @@
                     options="{'no_quick_create': True}"
                     groups="account.group_account_readonly"/>
             </xpath>
+            <field name="restrict_mode_hash_table" position="replace" />
         </field>
     </record>
 </odoo>

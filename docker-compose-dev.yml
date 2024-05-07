@@ -42,7 +42,7 @@ services:
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - type: bind
-        source: /c/repos/data/odoo/${DATABASE_NAME}/pgdata
+        source: /c/repos/data/odoo/portafolio-do-ce/pgdata
         target: /var/lib/postgresql/data/pgdata
       - type: bind
         source: /c/repos/data/production-backups/${DATABASE_NAME}/
