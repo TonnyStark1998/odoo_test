@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_leconte_leconte_brand,leconte.leconte.brand,model_fsm_brand,,1,1,1,1
+access_leconte_leconte_equipment,leconte.leconte.equipment,model_fsm_equipment_leconte,,1,1,1,1
