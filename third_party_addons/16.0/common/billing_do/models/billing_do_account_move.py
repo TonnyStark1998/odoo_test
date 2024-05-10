@@ -7,7 +7,7 @@ import logging as log
 from odoo\
     import models, fields, api, exceptions, _
 from odoo.tools\
-    import index_exists, drop_index
+    import index_exists, drop_index, format_date
 
 class BillingDoAccountMove(models.Model):
     _inherit = "account.move"
@@ -397,6 +397,47 @@ class BillingDoAccountMove(models.Model):
     def _onchange_name_warning(self):
         if not self.is_tax_valuable:
             super()._onchange_name_warning()
+    
+    # Account Move - Automated Actions
+    def lock_moves_date(self):
+        try:
+            yesterday = date.datetime.now() - date.timedelta(days=1)
+            yesterday = yesterday.strftime('%Y-%m-%d')
+
+            # Moves in draft
+            draft_moves = self.env['account.move'].search([
+                ('state', '=', 'draft'),
+                ('date', '<=', yesterday)])
+            
+            if draft_moves:
+                for entry in draft_moves:
+                    entry.write({"state": "cancel"})
+                
+                log.info('Account move drafts: {} have been cancelled'.format(draft_moves.ids))
+            
+            # Cancel draf and posted moves from not reconciled bank statements
+            draft_unreconciled_statement_lines = self.env['account.bank.statement.line'].search([
+                ('is_reconciled', '=', False),
+                ('date', '<=', yesterday),
+                ('move_id.state', 'in', ('draft', 'posted')),
+            ])
+
+            if draft_unreconciled_statement_lines:
+                for line in draft_unreconciled_statement_lines:
+                   line.write({"move_id.state": "cancel"})
+                   
+                log.info('Draft and posted moves from not reconciled bank statements:\
+                          {} have been cancelled'.format(draft_unreconciled_statement_lines.ids))
+
+            # Update lock dates
+            self.env.user.company_id.write({
+            'period_lock_date': yesterday,
+            'fiscalyear_lock_date': yesterday,
+            'tax_lock_date': yesterday,
+        })
+
+        except Exception as ex: 
+            log.error('Exception thrown while updating account moves lock date: {}'.format(ex))
 
     def _compute_show_reset_to_draft_button(self):
         super()._compute_show_reset_to_draft_button()
