@@ -3,7 +3,7 @@
         Views 
     -->
     <record id="fm_customization_view_stock_location_tree" model="ir.ui.view">
-        <field name="name">billing.do.view.trn.type.form</field>
+        <field name="name">fm.customization.view.stock.location.tree</field>
         <field name="model">stock.location</field>
         <field name="arch" type="xml">
             <tree>
