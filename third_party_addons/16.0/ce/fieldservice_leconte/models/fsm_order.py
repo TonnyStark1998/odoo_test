@@ -213,7 +213,6 @@ class FSMOrder(models.Model):
         action["res_id"] = self.order_id.id
         return action
 
-
 class Brand(models.Model):
     _name = "fsm.brand"
 

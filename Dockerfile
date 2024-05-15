@@ -33,6 +33,7 @@ USER root
 
 RUN [ "chmod", "-R", "777", "/etc/odoo" ]
 RUN /remove_modules_on_odoo_version.sh ${ODOO_VERSION}
+RUN [ "pip3", "install", "python-barcode" ]
 
 EXPOSE 8069 8072
 VOLUME [ "/var/lib/odoo" ]
