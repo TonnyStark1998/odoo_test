@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ir_cron_get_date_today" model="ir.cron">
+            <field name="name">Execute Deley Alert</field>
+            <field name="model_id" ref="model_fsm_order"/>
+            <field name="state">code</field>
+            <field name="code">model._compute_delay_alert()</field>
+            <field name="nextcall" eval="(DateTime.now() + relativedelta(hour=4, minute=0, second=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="interval_number">1</field>  
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+        <record id="ir_cron_duplicate_order" model="ir.cron">
+            <field name="name">Duplicate Order</field>
+            <field name="model_id" ref="model_fsm_order"/>
+            <field name="state">code</field>
+            <field name="code">model._duplicate_order()</field>
+            <field name="nextcall" eval="(DateTime.now() + relativedelta(hour=4, minute=0, second=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="interval_number">1</field>  
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</odoo>

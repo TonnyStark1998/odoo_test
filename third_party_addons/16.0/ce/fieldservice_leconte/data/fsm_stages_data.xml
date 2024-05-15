@@ -1,0 +1,19 @@
+<odoo>
+    <record id="stage_not_contacted" model="fsm.stage">
+        <field name="name">No Contactado</field>
+        <field name="sequence">1</field>
+        <field name="is_default">True</field>
+    </record>
+    <record id="stage_contacted" model="fsm.stage">
+        <field name="name">Contactado</field>
+        <field name="sequence">2</field>
+    </record>
+        <record id="stage_coordinacion" model="fsm.stage">
+        <field name="name">En Coordinación</field>
+        <field name="sequence">3</field>
+    </record>
+    <record id="stage_instalation" model="fsm.stage">
+        <field name="name">Instalación</field>
+        <field name="sequence">4</field>
+    </record>
+</odoo>
