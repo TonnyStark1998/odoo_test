@@ -1,0 +1,39 @@
+<odoo>
+    <record id="fsm_equipment_leconte_form_view" model="ir.ui.view">
+        <field name="name">fsm.equipment.form.view</field>
+        <field name="model">fsm.equipment.leconte</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <h2>
+                        <field name="name"/>
+                    </h2>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="fsm_equipment_leconte_tree_view" model="ir.ui.view">
+        <field name="name">fsm.equipment.leconte.tree.view</field>
+        <field name="model">fsm.equipment.leconte</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_fsm_equipment" model="ir.actions.act_window">
+        <field name="name">Type equipment</field>
+        <field name="res_model">fsm.equipment.leconte</field>
+        <field name="view_id" ref="fsm_equipment_leconte_tree_view"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="fsm_equipment_menu"
+        name="Type equipment"
+        action="action_fsm_equipment"
+        parent="fieldservice.menu_fsm_config_order"
+        sequence="50"/>
+</odoo>
