@@ -304,10 +304,31 @@ class BillingDoAccountMove(models.Model):
 
                 if not move.posted_before:
                     move._move_to_next_sequence_number(move.ncf_type_sequence)
+                
+                affects_tax_report = move._affect_tax_report()
+                lock_dates = move._get_violated_lock_dates(move.date, affects_tax_report, move.invoice_date)
+
+                if lock_dates:
+                    move.date = move._get_accounting_date(move.invoice_date or move.date, affects_tax_report)
 
             return super()._post(soft)
         except exceptions.UserError:
             raise
+    
+    def _get_violated_lock_dates(self, invoice_date, has_tax, accounting_date = None):
+        locks = []
+        user_lock_date = self.company_id._get_user_fiscal_lock_date()
+
+        if invoice_date and user_lock_date and invoice_date <= user_lock_date or accounting_date and accounting_date <= user_lock_date:
+            locks.append((user_lock_date, _('user')))
+
+        tax_lock_date = self.company_id.tax_lock_date
+
+        if invoice_date and tax_lock_date and has_tax and invoice_date <= tax_lock_date:
+            locks.append((tax_lock_date, _('tax')))
+
+        locks.sort()
+        return locks
 
     def action_duplicate(self):
         self.ensure_one()
