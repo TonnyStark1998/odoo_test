@@ -1,0 +1,12 @@
+<odoo>
+    <record id="project_task_type_form_leconte" model="ir.ui.view">
+        <field name="name">project.task.type.form.leconte</field>
+        <field name="model">project.task.type</field>
+        <field name="inherit_id" ref="project.task_type_edit"/>
+        <field name="arch" type="xml">
+            <field name="sequence" position="after">
+                <field name="fsm_stage_id"/>
+            </field>
+        </field>
+    </record>
+</odoo>

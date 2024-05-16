@@ -1,0 +1,39 @@
+<odoo>
+    <record id="fsm_brand_form_view" model="ir.ui.view">
+        <field name="name">fsm.brand.form.view</field>
+        <field name="model">fsm.brand</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <h2>
+                        <field name="name"/>
+                    </h2>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="fsm_brand_tree_view" model="ir.ui.view">
+        <field name="name">fsm.brand.form.view</field>
+        <field name="model">fsm.brand</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>    
+        </field>
+    </record>
+
+    <record id="action_fsm_brand" model="ir.actions.act_window">
+        <field name="name">Brand</field>
+        <field name="res_model">fsm.brand</field>
+        <field name="view_id" ref="fsm_brand_tree_view"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="fsm_brand_menu"
+        name="Brand"
+        action="action_fsm_brand"
+        parent="fieldservice.menu_fsm_config_order"
+        sequence="40"/>
+</odoo>
