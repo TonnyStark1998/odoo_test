@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Cron Jobs -->
+        <record id="billing_do_change_lock_date_cron" model="ir.cron">
+            <field name="name">Products Expiration: Send Alerts</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall">true</field>
+            <field name="model_id" 
+                    ref="model_freeze_me_customization_stock_product_expiration_alert" />
+            <field name="code">model.send_product_expiration_alerts()</field>
+            <field name="nextcall" 
+                    eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 00:00:00')" />
+        </record>
+
+        <!-- Email Templates -->
+       <record id="email_template_thirty_days_alert" model="mail.template">
+           <field name="name">Products Expiration Alert: 30 days</field>
+           <field name="model_id" ref="freeze_me_customization.model_freeze_me_customization_stock_product_expiration_alert"/>
+           <field name="email_from">facturacion@accounterprise.com</field>
+           <field name="email_to">sa.lassis@gmail.com</field>
+           <field name="subject">[Freeze Me] Products Expiration Alert: 30 days.</field>
+           <field name="body_html">
+               <p>
+                Dear<t t-out="object.owner.name"/>,
+                   <br/>
+                   <br/>
+                   The following products are expiring in 30 days from now:
+                   <br/>
+                   <t t-out="object.products" />
+               </p>
+               Regards,
+               <br/>
+               <t t-out="object.company_id.name"/>
+           </field>
+       </record>
+    </data>
+</odoo>

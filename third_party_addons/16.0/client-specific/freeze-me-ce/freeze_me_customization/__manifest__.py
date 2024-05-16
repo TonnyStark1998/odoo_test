@@ -32,6 +32,7 @@
         'views/fm_customization_stock_views.xml',
         'views/fm_customization_stock_templates.xml',
         'views/fm_customization_stock_picking_bulk_views.xml',
+        'views/fm_customization_stock_product_expiration_alert_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
