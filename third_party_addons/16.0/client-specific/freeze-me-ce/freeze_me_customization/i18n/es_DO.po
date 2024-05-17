@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0-20240229\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-17 13:57+0000\n"
-"PO-Revision-Date: 2024-05-17 13:57+0000\n"
+"POT-Creation-Date: 2024-05-17 16:32+0000\n"
+"PO-Revision-Date: 2024-05-17 16:32+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgid ""
 "\n"
 "        Agrega ciertas modificaciones al modelo original de la información requerida por la empresa Freeze Me.\n"
 "    "
-msgstr "Movimiento de existencias"
+msgstr "Movimiento de inventario"
 
 #. module: freeze_me_customization
 #: model:ir.model,name:freeze_me_customization.model_stock_location
@@ -201,6 +201,12 @@ msgid "ID"
 msgstr ""
 
 #. module: freeze_me_customization
+#: model:ir.actions.act_window,name:freeze_me_customization.action_stock_picking_kanban
+#: model:ir.ui.menu,name:freeze_me_customization.menu_stock_picking_kanban
+msgid "Stock Pickings by State"
+msgstr "Transferencias por estado"
+
+#. module: freeze_me_customization
 #: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_picking_bulk____last_update
 #: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_product_expiration_alert____last_update
 msgid "Last Modified on"
@@ -291,13 +297,18 @@ msgid ""
 "Scheduled time for the first part of the shipment to be processed. Setting "
 "manually a value here would set it as expected date for all the stock moves."
 msgstr ""
-"Fecha de entrega para la primera parte de procesamiento del cargamento. Configurar "
-"manualmente un valor aquí sería colocado como la fecha esperada para todos los movimientos de inventario."
+"Fecha de entrega para la primera parte de procesamiento del cargamento. "
+"Configurar manualmente un valor aquí sería colocado como la fecha esperada "
+"para todos los movimientos de inventario."
 
 #. module: freeze_me_customization
 #: model:mail.template,description:freeze_me_customization.email_template_products_expiration_days_left_alert
-msgid "Sent to users who owns any products and which expiration date is within 15, 20 or 30 days."
-msgstr "Enviado a los usuarios que son duenos de alguno producto y cuya fecha de expiración se encuentra dentro de 15, 20 o 30 días."
+msgid ""
+"Sent to users who owns any products and which expiration date is within 15, "
+"20 or 30 days."
+msgstr ""
+"Enviado a los usuarios que son duenos de alguno producto y cuya fecha de "
+"expiración se encuentra dentro de 15, 20 o 30 días."
 
 #. module: freeze_me_customization
 #: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_picking_bulk__state
@@ -347,8 +358,9 @@ msgid ""
 "The requested operation cannot be processed because of a programming error "
 "setting the `product_qty` field instead of the `product_uom_qty`."
 msgstr ""
-"La operación requerida no puede ser procesada debido a un error de programación "
-"colocando un valor al campo `product_qty` en vez de al campo `product_uom_qty`."
+"La operación requerida no puede ser procesada debido a un error de "
+"programación colocando un valor al campo `product_qty` en vez de al campo "
+"`product_uom_qty`."
 
 #. module: freeze_me_customization
 #: model_terms:ir.ui.view,arch_db:freeze_me_customization.stock_products_availability

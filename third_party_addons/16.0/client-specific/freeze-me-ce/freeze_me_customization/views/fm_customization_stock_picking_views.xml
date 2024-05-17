@@ -167,4 +167,58 @@
            </form>
         </field>
     </record>
+
+    <!-- Define Kanban View for Stock Picking -->
+    <record model="ir.ui.view" id="fm_customization_view_stock_picking_kanban">
+        <field name="name">stock.picking.incoming.kanban</field>
+        <field name="model">stock.picking</field>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <kanban default_group_by="state">
+                <field name="state" />
+                <field name="move_line_ids" />
+                <field name="location_dest_id" />
+                <field name="owner_id" />
+                <field name="date_done" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                            <div class="row">
+                                <div class="col-12">
+                                    <strong>
+                                        <field name="move_line_ids" widget="many2many_tags" />
+                                    </strong>
+                                </div>
+                                <div class="col-12">
+                                    <field name="location_dest_id" />
+                                </div>
+                                <div class="col-6">
+                                    <field name="owner_id" widget="many2one_avatar_user" />
+                                    <field name="partner_id" widget="many2one_avatar_user" />
+                                </div>
+                                <div class="col-6">
+                                    <field name="date_done" />
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Define Kanban Action -->
+    <record id="action_stock_picking_kanban" model="ir.actions.act_window">
+        <field name="name">Stock Pickings by State</field>
+        <field name="res_model">stock.picking</field>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="fm_customization_view_stock_picking_kanban"/>
+        <field name="domain">[]</field>
+    </record>
+
+    <!-- Define Menu Item for Kanban View -->
+    <menuitem id="menu_stock_picking_kanban" 
+        name="Stock Pickings by State" 
+        parent="stock.menu_stock_warehouse_mgmt" 
+        action="action_stock_picking_kanban" />
 </odoo>
