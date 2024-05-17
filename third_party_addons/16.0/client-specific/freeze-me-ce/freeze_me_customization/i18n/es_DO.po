@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0-20240229\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-07 23:28+0000\n"
-"PO-Revision-Date: 2024-05-07 23:28+0000\n"
+"POT-Creation-Date: 2024-05-17 13:57+0000\n"
+"PO-Revision-Date: 2024-05-17 13:57+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,12 +16,93 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: freeze_me_customization
+#: model:ir.model,name:freeze_me_customization.model_stock_move
+#: model:ir.model,name:freeze_me_customization.model_stock_picking
+msgid ""
+"\n"
+"        Agrega ciertas modificaciones al modelo original de la información requerida por la empresa Freeze Me.\n"
+"    "
+msgstr "Movimiento de existencias"
+
+#. module: freeze_me_customization
 #: model:ir.model,name:freeze_me_customization.model_stock_location
 msgid ""
 "\n"
 "        Agrega los campos requeridos para el despliege de la información requerida por la empresa Freeze Me.\n"
 "    "
+msgstr "Ubicaciones de inventario"
+
+#. module: freeze_me_customization
+#: model:ir.model,name:freeze_me_customization.model_freeze_me_customization_stock_picking_bulk
+msgid ""
+"\n"
+"        Permite la creación de transferencias internas por lote según lo requerido por la empresa Freeze Me.\n"
+"    "
 msgstr ""
+
+#. module: freeze_me_customization
+#: model:mail.template,body_html:freeze_me_customization.email_template_products_expiration_days_left_alert
+msgid ""
+"<h2>\n"
+"                    <strong>Products in our stock about to expire in <t t-out=\"ctx['days_left']\"></t> day(s).</strong>\n"
+"                </h2>\n"
+"                <p>Dear <t t-out=\"ctx['owner_name']\"></t>,</p>\n"
+"                <p>Please note that the following products currently in one of our warehouses <strong>is about to expire in <t t-out=\"ctx['days_left']\"></t> day(s)</strong>:</p>\n"
+"                <table style=\"width:50%;\">\n"
+"                    <thead>\n"
+"                        <tr>\n"
+"                            <th style=\"border:1px solid;text-align:left;width:40%;\">Product</th>\n"
+"                            <th style=\"border:1px solid;width:15%;\">Lot/Serial</th>\n"
+"                            <th style=\"border:1px solid;width:20%;\">Expiration Date</th>\n"
+"                            <th style=\"border:1px solid;text-align:right;width:15%;\">Quantity</th>\n"
+"                        </tr>\n"
+"                    </thead>\n"
+"                    <tbody>\n"
+"                        <t t-raw=\"ctx['products']\"></t>\n"
+"                    </tbody>\n"
+"                </table>\n"
+"                <p>If you need any further assistance, please do not hesitate in contacting us.</p>\n"
+"                <p>Regards.</p>\n"
+"                <p>Freeze Me Team</p>\n"
+"            "
+msgstr ""
+"<h2>\n"
+"                    <strong>Producto(s) en nuestro inventario próximo(s) a expirar en <t t-out=\"ctx['days_left']\"></t> día(s).</strong>\n"
+"                </h2>\n"
+"                <p>Estimado <t t-out=\"ctx['owner_name']\"></t>,</p>\n"
+"                <p>Por favor tome en cuenta que el/los siguiente(s) producto(s) actualmente en uno de nuestros almacenes <strong>está(n) próximo a expirar en <t t-out=\"ctx['days_left']\"></t> día(s)</strong>:</p>\n"
+"                <table style=\"width:50%;\">\n"
+"                    <thead>\n"
+"                        <tr>\n"
+"                            <th style=\"border:1px solid;text-align:left;width:40%;\">Producto</th>\n"
+"                            <th style=\"border:1px solid;width:15%;\">Lote/Serial</th>\n"
+"                            <th style=\"border:1px solid;width:20%;\">Fecha Expiración</th>\n"
+"                            <th style=\"border:1px solid;text-align:right;width:15%;\">Cantidad</th>\n"
+"                        </tr>\n"
+"                    </thead>\n"
+"                    <tbody>\n"
+"                        <t t-raw=\"ctx['products']\"></t>\n"
+"                    </tbody>\n"
+"                </table>\n"
+"                <p>Si necesita alguna asistencia adicional, por favor no dude en contactarnos.</p>\n"
+"                <p>Saludos.</p>\n"
+"                <p>Equipo de Freeze Me</p>\n"
+"            "
+
+#. module: freeze_me_customization
+#: model_terms:ir.ui.view,arch_db:freeze_me_customization.fm_customization_view_stock_picking_bulk_stock_picking_form
+msgid "Add a Product"
+msgstr "Añadir un producto"
+
+#. module: freeze_me_customization
+#: model_terms:ir.ui.view,arch_db:freeze_me_customization.fm_customization_view_stock_picking_bulk_form
+msgid "Add a new transfer"
+msgstr "Añadir una nueva transferencia"
+
+#. module: freeze_me_customization
+#: model_terms:ir.ui.view,arch_db:freeze_me_customization.fm_customization_view_stock_picking_bulk_stock_picking_form
+msgid "Assign Serial Numbers"
+msgstr "Asignar Número de Serie"
 
 #. module: freeze_me_customization
 #: model:ir.model.fields,field_description:freeze_me_customization.field_stock_location__availability
@@ -35,8 +116,106 @@ msgid "Availability Date"
 msgstr "Fecha de disponibilidad"
 
 #. module: freeze_me_customization
+#: model:ir.model.fields,field_description:freeze_me_customization.field_stock_move__bulk_creation
+msgid "Bulk Creation"
+msgstr "Creación Masiva"
+
+#. module: freeze_me_customization
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_picking_bulk__name
+msgid "Bulk Number"
+msgstr "Número de Creación Masiva"
+
+#. module: freeze_me_customization
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_picking_bulk__partner_id
+#: model:ir.model.fields,field_description:freeze_me_customization.field_stock_picking__partner_id
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: freeze_me_customization
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_picking_bulk__create_uid
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_product_expiration_alert__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: freeze_me_customization
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_picking_bulk__create_date
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_product_expiration_alert__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: freeze_me_customization
+#: model_terms:ir.ui.view,arch_db:freeze_me_customization.fm_customization_view_stock_picking_bulk_stock_picking_form
+msgid "Demand"
+msgstr "Demanda"
+
+#. module: freeze_me_customization
+#: model_terms:ir.ui.view,arch_db:freeze_me_customization.fm_customization_view_stock_picking_bulk_stock_picking_form
+msgid "Description"
+msgstr "Descripción"
+
+#. module: freeze_me_customization
 #: model:ir.model.fields.selection,name:freeze_me_customization.selection__stock_location__availability__desocupado
 msgid "Desocupado"
+msgstr ""
+
+#. module: freeze_me_customization
+#: model_terms:ir.ui.view,arch_db:freeze_me_customization.fm_customization_view_stock_picking_bulk_stock_picking_form
+msgid "Details"
+msgstr "Detalles"
+
+#. module: freeze_me_customization
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_picking_bulk__display_name
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_product_expiration_alert__display_name
+msgid "Display Name"
+msgstr "Nombre a desplegar"
+
+#. module: freeze_me_customization
+#: model_terms:ir.ui.view,arch_db:freeze_me_customization.fm_customization_view_stock_picking_bulk_stock_picking_form
+msgid "Done"
+msgstr "Hecho"
+
+#. module: freeze_me_customization
+#: model:ir.model.fields.selection,name:freeze_me_customization.selection__freeze_me_customization_stock_picking_bulk__state__draft
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: freeze_me_customization
+#: model_terms:ir.ui.view,arch_db:freeze_me_customization.fm_customization_view_stock_picking_bulk_stock_picking_form
+msgid "Forecast Report"
+msgstr "Reporte de Pronóstico"
+
+#. module: freeze_me_customization
+#: model_terms:ir.ui.view,arch_db:freeze_me_customization.fm_customization_view_stock_picking_bulk_form
+msgid "Generate"
+msgstr "Generar"
+
+#. module: freeze_me_customization
+#: model:ir.model.fields.selection,name:freeze_me_customization.selection__freeze_me_customization_stock_picking_bulk__state__generated
+msgid "Generated"
+msgstr "Generado"
+
+#. module: freeze_me_customization
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_picking_bulk__id
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_product_expiration_alert__id
+msgid "ID"
+msgstr ""
+
+#. module: freeze_me_customization
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_picking_bulk____last_update
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_product_expiration_alert____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: freeze_me_customization
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_picking_bulk__write_uid
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_product_expiration_alert__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: freeze_me_customization
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_picking_bulk__write_date
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_product_expiration_alert__write_date
+msgid "Last Updated on"
 msgstr ""
 
 #. module: freeze_me_customization
@@ -51,14 +230,19 @@ msgid "Ocupado"
 msgstr ""
 
 #. module: freeze_me_customization
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_picking_bulk__picking_type_id
+msgid "Operation Type"
+msgstr "Tipo de Operación"
+
+#. module: freeze_me_customization
 #: model:ir.model.fields,field_description:freeze_me_customization.field_stock_location__picking_location_ids
 msgid "Pickings Locations"
-msgstr ""
+msgstr "Ubicaciones de Transferencias"
 
 #. module: freeze_me_customization
 #: model:ir.model.fields,field_description:freeze_me_customization.field_stock_location__picking_location_dest_ids
 msgid "Pickings Locations Dest"
-msgstr ""
+msgstr "Ubicaciones de Transferencias de Destino"
 
 #. module: freeze_me_customization
 #: model_terms:ir.ui.view,arch_db:freeze_me_customization.stock_products_availability
@@ -66,9 +250,79 @@ msgid "Product"
 msgstr "Producto"
 
 #. module: freeze_me_customization
+#: model:mail.template,subject:freeze_me_customization.email_template_products_expiration_days_left_alert
+msgid "Products Expiration Alert: {{ctx['days_left']}} days."
+msgstr "Alerta de Expiración de Productos: {{ctx['days_left']}} día(s)."
+
+#. module: freeze_me_customization
+#: model:mail.template,name:freeze_me_customization.email_template_products_expiration_days_left_alert
+msgid "Products Expiration Days Left Alert"
+msgstr "Alerta de Productos de Días Restantes para Expirar"
+
+#. module: freeze_me_customization
+#: model:ir.actions.server,name:freeze_me_customization.freeze_me_customization_products_expiration_send_alert_cron_ir_actions_server
+#: model:ir.cron,cron_name:freeze_me_customization.freeze_me_customization_products_expiration_send_alert_cron
+msgid "Products Expiration: Send Alerts"
+msgstr "Expiración de Productos: Envío de alertas"
+
+#. module: freeze_me_customization
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_product_expiration_alert__prueba
+msgid "Prueba"
+msgstr ""
+
+#. module: freeze_me_customization
+#: model_terms:ir.ui.view,arch_db:freeze_me_customization.fm_customization_view_stock_picking_bulk_stock_picking_form
+msgid "Reserved"
+msgstr "Reservado"
+
+#. module: freeze_me_customization
 #: model:ir.model.fields,field_description:freeze_me_customization.field_stock_location__reserved_date
 msgid "Reserved Date"
 msgstr "Fecha de reservación"
+
+#. module: freeze_me_customization
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_picking_bulk__scheduled_date
+msgid "Scheduled Date"
+msgstr "Fecha de entrega"
+
+#. module: freeze_me_customization
+#: model:ir.model.fields,help:freeze_me_customization.field_freeze_me_customization_stock_picking_bulk__scheduled_date
+msgid ""
+"Scheduled time for the first part of the shipment to be processed. Setting "
+"manually a value here would set it as expected date for all the stock moves."
+msgstr ""
+"Fecha de entrega para la primera parte de procesamiento del cargamento. Configurar "
+"manualmente un valor aquí sería colocado como la fecha esperada para todos los movimientos de inventario."
+
+#. module: freeze_me_customization
+#: model:mail.template,description:freeze_me_customization.email_template_products_expiration_days_left_alert
+msgid "Sent to users who owns any products and which expiration date is within 15, 20 or 30 days."
+msgstr "Enviado a los usuarios que son duenos de alguno producto y cuya fecha de expiración se encuentra dentro de 15, 20 o 30 días."
+
+#. module: freeze_me_customization
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_picking_bulk__state
+msgid "State"
+msgstr "Estado"
+
+#. module: freeze_me_customization
+#: model_terms:ir.ui.view,arch_db:freeze_me_customization.fm_customization_view_stock_picking_bulk_stock_picking_form
+msgid "Stock Moves"
+msgstr "Movimientos de inventario"
+
+#. module: freeze_me_customization
+#: model:ir.model.fields,field_description:freeze_me_customization.field_stock_picking__stock_picking_bulk_id
+msgid "Stock Picking Bulk Id"
+msgstr "ID de Transferencias Masivas"
+
+#. module: freeze_me_customization
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_picking_bulk__stock_picking_ids
+msgid "Stock Pickings"
+msgstr "Transferencias Internas"
+
+#. module: freeze_me_customization
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_picking_bulk__stock_pickings_count
+msgid "Stock Pickings Count"
+msgstr "Cantidad de Transferencias"
 
 #. module: freeze_me_customization
 #: model:website.menu,name:freeze_me_customization.menu_home
@@ -81,6 +335,33 @@ msgid "Stock Products Availability:"
 msgstr "Disponibilidad de productos:"
 
 #. module: freeze_me_customization
+#: model:ir.model,name:freeze_me_customization.model_freeze_me_customization_stock_product_expiration_alert
+msgid "Stock Products Expiration Alerts"
+msgstr "Alerta de Expiración de Productos de Inventario"
+
+#. module: freeze_me_customization
+#. odoo-python
+#: code:addons/freeze_me_customization/models/fm_customization_stock_move.py:0
+#, python-format
+msgid ""
+"The requested operation cannot be processed because of a programming error "
+"setting the `product_qty` field instead of the `product_uom_qty`."
+msgstr ""
+"La operación requerida no puede ser procesada debido a un error de programación "
+"colocando un valor al campo `product_qty` en vez de al campo `product_uom_qty`."
+
+#. module: freeze_me_customization
 #: model_terms:ir.ui.view,arch_db:freeze_me_customization.stock_products_availability
 msgid "This partner does not have any product available."
 msgstr "Este cliente no posee ningún producto disponible."
+
+#. module: freeze_me_customization
+#: model:ir.actions.act_window,name:freeze_me_customization.action_fm_customization_stock_picking_bulk
+#: model:ir.ui.menu,name:freeze_me_customization.main_menu_fm_customization_stock_picking_bulk
+msgid "Transfers Bulk"
+msgstr "Transferencias masivas"
+
+#. module: freeze_me_customization
+#: model_terms:ir.ui.view,arch_db:freeze_me_customization.fm_customization_view_stock_picking_bulk_stock_picking_form
+msgid "Unit of Measure"
+msgstr "Unidad de Medida"

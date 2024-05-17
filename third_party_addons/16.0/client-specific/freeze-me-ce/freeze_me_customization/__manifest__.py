@@ -28,6 +28,7 @@
         'security/ir.model.access.csv',
         'data/fm_website_data.xml',
         'data/default_fm_customization_stock_picking_bulk.xml',
+        'data/fm_customization_products_expiration_send_alerts_email_templates.xml',
         'views/fm_customization_stock_picking_views.xml',
         'views/fm_customization_stock_views.xml',
         'views/fm_customization_stock_templates.xml',
