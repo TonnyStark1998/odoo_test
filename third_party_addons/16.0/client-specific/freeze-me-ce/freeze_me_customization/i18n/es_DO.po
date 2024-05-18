@@ -377,3 +377,8 @@ msgstr "Transferencias masivas"
 #: model_terms:ir.ui.view,arch_db:freeze_me_customization.fm_customization_view_stock_picking_bulk_stock_picking_form
 msgid "Unit of Measure"
 msgstr "Unidad de Medida"
+
+#. module: freeze_me_customization
+#: model:ir.model.fields,field_description:freeze_me_customization.field_stock_picking__kanban_state
+msgid "Kanban State"
+msgstr "Estado Kanban"

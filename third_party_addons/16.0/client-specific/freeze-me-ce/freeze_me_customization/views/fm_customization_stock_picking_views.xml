@@ -174,12 +174,13 @@
         <field name="model">stock.picking</field>
         <field name="priority" eval="1" />
         <field name="arch" type="xml">
-            <kanban default_group_by="state">
+            <kanban default_group_by="kanban_state">
                 <field name="state" />
                 <field name="move_line_ids" />
                 <field name="location_dest_id" />
                 <field name="owner_id" />
                 <field name="date_done" />
+                <field name="kanban_state" />
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_card oe_kanban_global_click">

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import logging as log
+import logging
 
 from odoo\
     import models, fields, api
@@ -16,6 +16,8 @@ class FreezeMeCustomizationStockPicking(models.Model):
     stock_picking_bulk_id = fields.Many2one('freeze.me.customization.stock.picking.bulk', 
         string='Stock Picking Bulk Id', 
         ondelete='restrict')
+    
+    kanban_state = fields.Char(string='Kanban State')
 
     @api.onchange('partner_id')
     def _onchange_partner_id(self):
