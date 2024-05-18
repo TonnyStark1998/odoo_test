@@ -17,7 +17,8 @@ class FreezeMeCustomizationStockPicking(models.Model):
         string='Stock Picking Bulk Id', 
         ondelete='restrict')
     
-    kanban_state = fields.Char(string='Kanban State')
+    kanban_state = fields.Char(string='Kanban State',
+        default='draft')
 
     @api.onchange('partner_id')
     def _onchange_partner_id(self):
