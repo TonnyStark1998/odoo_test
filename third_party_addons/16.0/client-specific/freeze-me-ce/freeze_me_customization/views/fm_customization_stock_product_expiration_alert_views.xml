@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Cron Jobs -->
+        <record id="freeze_me_customization_products_expiration_send_alert_cron" model="ir.cron">
+            <field name="name">Products Expiration: Send Alerts</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall">true</field>
+            <field name="model_id" 
+                    ref="model_freeze_me_customization_stock_product_expiration_alert" />
+            <field name="code">model.send_product_expiration_alerts()</field>
+            <field name="nextcall" 
+                    eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 01:00:00')" />
+        </record>
+    </data>
+</odoo>

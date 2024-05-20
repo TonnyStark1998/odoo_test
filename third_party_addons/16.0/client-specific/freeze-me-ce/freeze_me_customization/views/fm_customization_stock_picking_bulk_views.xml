@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Views -->
+    <record model="ir.ui.view" id="fm_customization_view_stock_picking_bulk_tree">
+        <field name="name">fm.customization.view.stock.picking.tree</field>
+        <field name="model">freeze.me.customization.stock.picking.bulk</field>
+        <field name="arch" type="xml">
+           <tree default_order="create_date desc">
+                <field name="name" />
+                <field name="state" />
+                <field name="stock_pickings_count" />
+                <field name="create_date" />
+           </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="fm_customization_view_stock_picking_bulk_form">
+        <field name="name">fm.customization.view.stock.picking.form</field>
+        <field name="model">freeze.me.customization.stock.picking.bulk</field>
+        <field name="arch" type="xml">
+           <form>
+                <header>
+                    <field name="state" 
+                        widget="statusbar" 
+                        statusbar_visible="draft,generated" />
+                    <button string="Generate"
+                            name="action_freeze_me_customization_stock_picking_bulk_generate"
+                            type="object"
+                            states="draft"
+                            class="btn btn-primary" />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1" />
+                        </group>
+                        <group>
+                            <field name="picking_type_id" />
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="partner_id" 
+                                attrs="{'readonly': [('state', 'in', 'generated')],
+                                    'required': True}" />
+                        </group>
+                        <group>
+                            <field name="scheduled_date" attrs="{'readonly': [('state', 'in', 'generated')]}" />
+                        </group>
+                    </group>
+                    <group>
+                        <label for="stock_picking_ids" colspan="2" />
+                    </group>
+                    <group>
+                        <field name="stock_picking_ids" 
+                            context="{'form_view_ref': 'freeze_me_customization.fm_customization_view_stock_picking_bulk_stock_picking_form',
+                                'default_partner_id': partner_id,
+                                'default_scheduled_date': scheduled_date,
+                                'default_picking_type_id': picking_type_id}"
+                            colspan="2"
+                            nolabel="1"
+                            attrs="{'readonly': [('state', 'in', 'generated')]}">
+                            <tree>
+                                <control>
+                                    <create string="Add a new transfer" />
+                                </control>
+                                <field name="partner_id" />
+                                <field name="location_id" />
+                                <field name="location_dest_id" />
+                                <field name="state" />
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+           </form>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record model="ir.actions.act_window" id="action_fm_customization_stock_picking_bulk">
+        <field name="name">Transfers Bulk</field>
+        <field name="res_model">freeze.me.customization.stock.picking.bulk</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="fm_customization_view_stock_picking_bulk_tree" />
+    </record>
+
+    <!-- Menu items -->
+    <menuitem id="main_menu_fm_customization_stock_picking_bulk" 
+        name="Transfers Bulk" 
+        sequence="21"
+        parent="stock.menu_stock_warehouse_mgmt"
+        action="action_fm_customization_stock_picking_bulk" />
+</odoo>
