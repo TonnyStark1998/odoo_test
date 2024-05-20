@@ -1,14 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* fieldservice_leconte
 # 	* fieldservice
+# 	* fieldservice_leconte
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-02 14:40+0000\n"
-"PO-Revision-Date: 2024-05-02 10:47-0400\n"
+"POT-Creation-Date: 2024-05-14 17:09+0000\n"
+"PO-Revision-Date: 2024-05-14 13:11-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_DO\n"
@@ -453,7 +453,9 @@ msgid "Branch Manager"
 msgstr "Gerente de Sucursal"
 
 #. module: fieldservice_leconte
+#: model:ir.actions.act_window,name:fieldservice_leconte.action_fsm_brand
 #: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_order__brand_id
+#: model:ir.ui.menu,name:fieldservice_leconte.fsm_brand_menu
 msgid "Brand"
 msgstr "Marca"
 
@@ -779,6 +781,11 @@ msgstr "Código del país"
 msgid "Create FSM Orders from Opportunities."
 msgstr "Crear Pedidos FSM a partir de Oportunidades."
 
+#. module: fieldservice_leconte
+#: model_terms:ir.ui.view,arch_db:fieldservice_leconte.fsm_order_form_view_leconte
+msgid "Create Quotation"
+msgstr "Crear Cotización"
+
 #. module: fieldservice
 #: model_terms:ir.actions.act_window,help:fieldservice.action_fsm_customer
 msgid "Create a Customer."
@@ -836,7 +843,7 @@ msgstr ""
 "servicio.\n"
 "……………………Seguimiento de costos e ingresos."
 
-#. modules: fieldservice_leconte, fieldservice
+#. modules: fieldservice, fieldservice_leconte
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_category__create_uid
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_equipment__create_uid
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_location__create_uid
@@ -855,7 +862,7 @@ msgstr ""
 msgid "Created by"
 msgstr "Creado por"
 
-#. modules: fieldservice_leconte, fieldservice
+#. modules: fieldservice, fieldservice_leconte
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_category__create_date
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_equipment__create_date
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_location__create_date
@@ -973,7 +980,7 @@ msgstr "Direcciones"
 msgid "Dispatcher"
 msgstr "Despachador"
 
-#. modules: fieldservice_leconte, fieldservice
+#. modules: fieldservice, fieldservice_leconte
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_category__display_name
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_equipment__display_name
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_location__display_name
@@ -1437,7 +1444,7 @@ msgstr "Horas de margen para los pedidos FS de menor prioridad"
 msgid "Hours of Buffer for Medium Priority FS Orders"
 msgstr "Horas de reserva para Órdenes FS de prioridad media"
 
-#. modules: fieldservice_leconte, fieldservice
+#. modules: fieldservice, fieldservice_leconte
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_category__id
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_equipment__id
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_location__id
@@ -1638,7 +1645,7 @@ msgstr "Puesto de Trabajo"
 msgid "Language"
 msgstr "Idioma"
 
-#. modules: fieldservice_leconte, fieldservice
+#. modules: fieldservice, fieldservice_leconte
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_category____last_update
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_equipment____last_update
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_location____last_update
@@ -1657,7 +1664,7 @@ msgstr "Idioma"
 msgid "Last Modified on"
 msgstr "Última Modificación en"
 
-#. modules: fieldservice_leconte, fieldservice
+#. modules: fieldservice, fieldservice_leconte
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_category__write_uid
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_equipment__write_uid
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_location__write_uid
@@ -1676,7 +1683,7 @@ msgstr "Última Modificación en"
 msgid "Last Updated by"
 msgstr "Última Actualización por"
 
-#. modules: fieldservice_leconte, fieldservice
+#. modules: fieldservice, fieldservice_leconte
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_category__write_date
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_equipment__write_date
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_location__write_date
@@ -2145,7 +2152,7 @@ msgstr "fecha límite de mi actividad"
 msgid "My Orders"
 msgstr "Mis Órdenes"
 
-#. modules: fieldservice_leconte, fieldservice
+#. modules: fieldservice, fieldservice_leconte
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_category__name
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_equipment__name
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_location__name
@@ -2282,12 +2289,13 @@ msgstr "Horas de Oficina"
 msgid "Operations"
 msgstr "Operaciones"
 
-#. module: fieldservice
+#. modules: fieldservice, fieldservice_leconte
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_order__display_name
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_order__order_id
 #: model:ir.model.fields.selection,name:fieldservice.selection__fsm_stage__stage_type__order
 #: model_terms:ir.ui.view,arch_db:fieldservice.fsm_order_form
 msgid "Order"
-msgstr "Orden"
+msgstr "Cotización"
 
 #. module: fieldservice
 #: model:mail.message.subtype,name:fieldservice.mt_order_assigned
@@ -2564,6 +2572,11 @@ msgstr "Prioridad 3"
 msgid "Priority Management Explanation"
 msgstr "Explicación de Gestión Prioritaria"
 
+#. module: fieldservice_leconte
+#: model:ir.model,name:fieldservice_leconte.model_product_template
+msgid "Product"
+msgstr "Producto"
+
 #. module: fieldservice
 #: model_terms:ir.ui.view,arch_db:fieldservice.res_config_settings_view_form
 msgid "Project and Tasks"
@@ -2583,6 +2596,11 @@ msgstr "Cuatrimestral"
 #: model:ir.model.fields.selection,name:fieldservice_leconte.selection__fsm_order__order_recurrence__quarterly
 msgid "Quarterly"
 msgstr "Trimestral"
+
+#. module: fieldservice_leconte
+#: model_terms:ir.ui.view,arch_db:fieldservice_leconte.fsm_order_form_view_leconte
+msgid "Quotation"
+msgstr "Cotización"
 
 #. module: fieldservice
 #: model:ir.model.fields,field_description:fieldservice.field_fsm_wizard__fsm_record_type
@@ -3155,7 +3173,15 @@ msgstr "Tipo"
 
 #. module: fieldservice_leconte
 #: model:ir.model.fields,field_description:fieldservice_leconte.field_fsm_order__type_equipment_id
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_product_product__type_equipment_id
+#: model:ir.model.fields,field_description:fieldservice_leconte.field_product_template__type_equipment_id
 msgid "Type Equipment"
+msgstr "Tipo de equipo"
+
+#. module: fieldservice_leconte
+#: model:ir.actions.act_window,name:fieldservice_leconte.action_fsm_equipment
+#: model:ir.ui.menu,name:fieldservice_leconte.fsm_equipment_menu
+msgid "Type equipment"
 msgstr "Tipo de equipo"
 
 #. module: fieldservice

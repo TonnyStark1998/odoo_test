@@ -1,6 +1,6 @@
 from odoo import fields, models, api, _
 import datetime
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 from dateutil.relativedelta import relativedelta
 
 class FSMOrder(models.Model):
@@ -20,6 +20,7 @@ class FSMOrder(models.Model):
     number_days_open = fields.Integer(compute='_compute_number_days_open',store=True)
     active_recurrence = fields.Boolean()
     execution_date = fields.Date(compute='_compute_order_recurrence')
+    order_id = fields.Many2one('sale.order')
     order_recurrence = fields.Selection([
         ('monthly', 'Monthly'),
         ('quarterly', 'Quarterly'),
@@ -181,6 +182,36 @@ class FSMOrder(models.Model):
                         'active_recurrence': False,
                         'order_recurrence': None
                     })
+
+    def action_create_quotation(self):
+        sale_order = self.env['sale.order']
+        product = self.env['product.template']
+        customer_id = self.project_id.partner_id.id
+        type = self.type.name
+        number = self.order_number
+        product_id = product.search([
+            ('type_equipment_id', '=', self.type_equipment_id.id)
+        ], limit=1)
+
+        if not self.project_id:
+            raise ValidationError(_("There is no assigned project"))
+        if not customer_id:
+            raise ValidationError(_("The project does not have an assigned client"))
+        
+        order = sale_order.create({
+            'partner_id': customer_id,
+            'order_line':[(0, 0, {
+                'product_id': product_id.id,
+                'name': f"{type} - {number}"
+            })]
+        })
+        self.order_id = order.id
+        
+    def action_view_quotations(self):
+        action = self.env.ref('sale.action_quotations').read()[0]
+        action["views"] = [(self.env.ref("sale.view_order_form").id, "form")]
+        action["res_id"] = self.order_id.id
+        return action
 
 class Brand(models.Model):
     _name = "fsm.brand"
