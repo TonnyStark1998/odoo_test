@@ -1,7 +1,7 @@
 HOST_PORT=19801
 LONGPOLLING_PORT=20801
-DATABASE_NAME=soleura-ce
+DATABASE_NAME=freeze-me-ce
 DATABASE_PORT=15401
 ODOO_VERSION=16.0
 POSTGRES_VERSION=13
-ADDONS_PATH=/mnt/extra-addons/${ODOO_VERSION}/common,/mnt/extra-addons/${ODOO_VERSION}/ce
+ADDONS_PATH=/mnt/extra-addons/${ODOO_VERSION}/common,/mnt/extra-addons/${ODOO_VERSION}/ce,/mnt/extra-addons/${ODOO_VERSION}/client-specific/${DATABASE_NAME}
