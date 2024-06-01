@@ -32,3 +32,5 @@ from . import billing_do_exceptions,\
                 billing_do_ncf_type,\
                 billing_do_account_move_reversal,\
                 billing_do_mrp_production
+from . import purchase_order
+from . import stock_rule
