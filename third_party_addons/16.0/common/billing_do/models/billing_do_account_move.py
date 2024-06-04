@@ -420,9 +420,9 @@ class BillingDoAccountMove(models.Model):
             super()._onchange_name_warning()
     
     # Account Move - Automated Actions
-    def lock_moves_date(self):
+    def lock_moves_date(self, days):
         try:
-            yesterday = date.datetime.now() - date.timedelta(days=1)
+            yesterday = date.datetime.now() - date.timedelta(days=days)
             yesterday = yesterday.strftime('%Y-%m-%d')
 
             # Moves in draft
@@ -436,26 +436,26 @@ class BillingDoAccountMove(models.Model):
                 
                 log.info('Account move drafts: {} have been cancelled'.format(draft_moves.ids))
             
-            # Cancel draf and posted moves from not reconciled bank statements
+            # Cancel draft and posted moves from not reconciled bank statements
             draft_unreconciled_statement_lines = self.env['account.bank.statement.line'].search([
                 ('is_reconciled', '=', False),
-                ('date', '<=', yesterday),
-                ('move_id.state', 'in', ('draft', 'posted')),
+                ('date', '<=', yesterday)
             ])
 
             if draft_unreconciled_statement_lines:
                 for line in draft_unreconciled_statement_lines:
-                   line.write({"move_id.state": "cancel"})
-                   
+                    if line.move_id and line.move_id.state in ['draft', 'posted']:
+                        line.move_id.button_cancel()
+
                 log.info('Draft and posted moves from not reconciled bank statements:\
                           {} have been cancelled'.format(draft_unreconciled_statement_lines.ids))
 
             # Update lock dates
             self.env.user.company_id.write({
-            'period_lock_date': yesterday,
-            'fiscalyear_lock_date': yesterday,
-            'tax_lock_date': yesterday,
-        })
+                'period_lock_date': yesterday,
+                'fiscalyear_lock_date': yesterday,
+                'tax_lock_date': yesterday,
+            })
 
         except Exception as ex: 
             log.error('Exception thrown while updating account moves lock date: {}'.format(ex))
