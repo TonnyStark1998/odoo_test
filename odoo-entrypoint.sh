@@ -13,12 +13,18 @@ test_database_settings.py
 ODOO_DATABASE_STATE=$(cat /var/lib/odoo/odoo_database_state)
 
 # Initial values to run the Odoo daemon which are common to all editions and versions.
-ODOO_ARGS="--config=$ODOO_CONFIG_FILE --load-language=es_DO "
+ODOO_ARGS="--config=$ODOO_CONFIG_FILE "
 
 # Set the addons paths based on the ODOO_VERSION and ODOO_EDITION
 if [[ -n $USE_DEFAULT_ADDONS_PATH 
         && "${USE_DEFAULT_ADDONS_PATH,,}" == "y" ]]; then
     ODOO_ARGS="$ODOO_ARGS --addons-path=/mnt/extra-addons/${ODOO_VERSION}/common,/mnt/extra-addons/${ODOO_VERSION}/${ODOO_EDITION}"
+fi
+
+# Check if there are specific modules for this client
+if [[ -e /mnt/extra-addons/$ODOO_VERSION/client-specific/$DATABASE_NAME 
+    && -d /mnt/extra-addons/$ODOO_VERSION/client-specific/$DATABASE_NAME ]]; then
+    ODOO_ARGS="$ODOO_ARGS,/mnt/extra-addons/${ODOO_VERSION}/client-specific/${DATABASE_NAME}"
 fi
 
 # Check whether this is a new database created from scratch or is an old one.
@@ -28,12 +34,20 @@ fi
 echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Database state: $ODOO_DATABASE_STATE."
 echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Initial modules: $ODOO_INITIAL_MODULES."
 if [[ -n "$ODOO_DATABASE_STATE" 
-        && "${ODOO_DATABASE_STATE,,}" == "new" 
-        && -n "$ODOO_INITIAL_MODULES" ]]; then
-    ODOO_ARGS="$ODOO_ARGS --init ${ODOO_INITIAL_MODULES} --update ${ODOO_INITIAL_MODULES}"
+    && "${ODOO_DATABASE_STATE,,}" == "new" ]]; then
+    ODOO_ARGS="$ODOO_ARGS --load-language=es_DO "
+    if [[ -n "$ODOO_INITIAL_MODULES" ]]; then
+        ODOO_ARGS="$ODOO_ARGS --init ${ODOO_INITIAL_MODULES}"
 
-    echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Initial modules set to install/update on a new database."
-    echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] All these ${ODOO_INITIAL_MODULES,,} will be installed."
+        echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] Initial modules set to install/update on a new database."
+        echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] All these ${ODOO_INITIAL_MODULES,,} will be installed."
+    fi
+fi
+
+if [[ -n "$ODOO_UPDATE_MODULES" ]]; then
+    ODOO_ARGS="$ODOO_ARGS --update ${ODOO_UPDATE_MODULES}"
+
+    echo "[$(date '+%Y-%m-%d %H:%M:%S.%N')][entrypoint.sh] All these ${ODOO_UPDATE_MODULES,,} will be updated."
 fi
 
 # Run the Odoo daemon with the required arguments.

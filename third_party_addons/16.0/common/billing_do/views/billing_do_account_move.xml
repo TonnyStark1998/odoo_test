@@ -71,6 +71,12 @@
                 <label for="journal_id" position="move" />
                 <div name="journal_div" position="move" />
             </xpath>
+            <label for="journal_id" position="attributes">
+                <attribute name="groups">account.group_account_invoice</attribute>
+            </label>
+            <div name="journal_div" position="attributes">
+                <attribute name="groups">account.group_account_invoice</attribute>
+            </div>
             <xpath expr="//field[@name='invoice_payment_term_id']/.." position="after">
                 <field name="invoice_user_id" />
                 <field name="company_id" />
@@ -114,6 +120,15 @@
                 <field name="is_third_party_ncf"
                     attrs="{'invisible': [('move_type', 'in', ['out_invoice', 'out_refund', 'out_receipt'])],
                         'readonly': [('posted_before', '=', True)]}" />
+            </xpath>
+            <xpath expr="//button[@name='button_draft']" position="replace">
+                <field name="has_stock_valuation_layer_ids" invisible="1" />
+                <button name="button_draft" string="Reset to Draft" type="object" groups="account.group_account_invoice"
+                    attrs="{'invisible' : ['|', ('has_stock_valuation_layer_ids', '=', False), ('state', 'in', ['draft'])]}" 
+                    data-hotkey="q"
+                    confirm="Poner en borrador una factura asociada a productos almacenable, debe asegurarse de modificar/crear los asientos contables de la valoración en caso de haber existido variación entre los precios de la orden de compra y la factura." />
+                <button name="button_draft" string="Reset to Draft" type="object" groups="account.group_account_invoice"
+                    attrs="{'invisible' : [('show_reset_to_draft_button', '=', False)]}" data-hotkey="q" />
             </xpath>
         </field>
     </record>
@@ -198,6 +213,18 @@
                                             ('invoice_date', '&lt;=', datetime.datetime.now().strftime('%Y-%m-%d 23:59:59'))]" />
             </filter>
         </field>
+    </record>
+    <record id="billing_do_change_lock_date_cron" model="ir.cron">
+        <field name="name">Account Move: Lock Date</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall">true</field>
+        <field name="model_id" 
+                ref="model_account_move" />
+        <field name="code">model.lock_moves_date()</field>
+        <field name="nextcall" 
+                eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 00:00:00')" />
     </record>
 
     <!-- Inherited Actions -->

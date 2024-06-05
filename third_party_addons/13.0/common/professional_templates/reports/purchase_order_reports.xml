@@ -8,7 +8,7 @@
             report_type="qweb-pdf"
             name="professional_templates.purchase_order"
             file="professional_templates.purchase_order"
-            paperformat_id="professional_templates.paperformat_header_spacing_adapted"
+            paperformat="professional_templates.paperformat_header_spacing_adapted"
       />
     </data>
 </odoo>

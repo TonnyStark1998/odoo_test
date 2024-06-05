@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="stock_products_availability" name="Stock Products Availability">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h3>Stock Products Availability: <t t-if="partner_name" t-esc="partner_name" /></h3>
+                    </div>
+                    <div class="col-12" t-if="products">
+                        <table class="col-12 table table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Availability</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="products" t-as="product">
+                                    <tr t-if="product.qty_available and product.qty_available > 0">
+                                        <td><t t-esc="product.name" /></td>
+                                        <td>
+                                            <t t-esc="product.qty_available" />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-12" t-else="">
+                        <div class="alert alert-danger" role="alert">
+                            This partner does not have any product available.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

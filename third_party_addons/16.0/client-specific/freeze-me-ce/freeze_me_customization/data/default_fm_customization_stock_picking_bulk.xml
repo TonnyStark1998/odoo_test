@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Sequences for stock.picking.bulk -->
+        <record id="sequence_stock_picking_bulk" model="ir.sequence">
+            <field name="name">Stock Picking Bulk</field>
+            <field name="code">stock.picking.bulk</field>
+            <field name="prefix">Stock Picking Bulk/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>
