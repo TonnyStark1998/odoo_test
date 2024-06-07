@@ -417,7 +417,7 @@ class ReportFinancialExt(models.AbstractModel):
                         'balance': value['balance'] * float(
                             report.sign) or 0.0,
                         'type': 'account',
-                        'level': report.display_detail == 'detail_with_hierarchy' and 4,
+                        'level': report.display_detail == 'detail_with_hierarchy' and 4 or 1,
                         'account_type': account.account_type,
                         'parent': 'report_' + str(report.id),
                         'active_id': 'account_' + str(account_id),
