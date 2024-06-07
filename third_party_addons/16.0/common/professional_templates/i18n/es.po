@@ -2774,18 +2774,18 @@ msgstr ""
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.picking_lines
-msgid "<i class=\"fa fa-arrow-left\"/> To"
-msgstr "<i class=\"fa fa-arrow-left\"/> Para"
+msgid "To"
+msgstr "Para"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.picking_lines
-msgid "<i class=\"fa fa-arrow-right\"/> From"
-msgstr "<i class=\"fa fa-arrow-right\"/> Desde"
+msgid "From"
+msgstr "Desde"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.picking_lines
-msgid "<i class=\"fa fa-barcode\"/> Product Barcode"
-msgstr "<i class=\"fa fa-barcode\"/> Código de barra del producto"
+msgid "Product Barcode"
+msgstr "Código de barra del producto"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.purchase_lines
@@ -2802,8 +2802,8 @@ msgstr "<i class=\"fa fa-calendar\"/> Fecha Estimada"
 #: model_terms:ir.ui.view,arch_db:professional_templates.invoice_lines
 #: model_terms:ir.ui.view,arch_db:professional_templates.order_lines
 #: model_terms:ir.ui.view,arch_db:professional_templates.picking_lines
-msgid "<i class=\"fa fa-camera\"/> Image"
-msgstr "<i class=\"fa fa-camera\"/> Imagen"
+msgid "Image"
+msgstr "Imagen"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.company_footer
@@ -2826,8 +2826,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:professional_templates.picking_lines
 #: model_terms:ir.ui.view,arch_db:professional_templates.purchase_lines
 #: model_terms:ir.ui.view,arch_db:professional_templates.rfq_lines
-msgid "<i class=\"fa fa-list-ol\"/> Item"
-msgstr "<i class=\"fa fa-list-ol\"/> Artículo"
+msgid "Item"
+msgstr "Artículo"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.invoice_lines
@@ -2874,8 +2874,8 @@ msgstr "<i class=\"fa fa-pencil-square\"/> Impuestos"
 #: model_terms:ir.ui.view,arch_db:professional_templates.picking_lines
 #: model_terms:ir.ui.view,arch_db:professional_templates.purchase_lines
 #: model_terms:ir.ui.view,arch_db:professional_templates.rfq_lines
-msgid "<i class=\"fa fa-sort-amount-asc\"/> Quantity"
-msgstr "<i class=\"fa fa-sort-amount-asc\"/> Cantidad"
+msgid "Quantity"
+msgstr "Cantidad"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.delivery_lines
@@ -2884,8 +2884,8 @@ msgstr "<i class=\"fa fa-tag\"/> No. de Serie/Lote"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.picking_lines
-msgid "<i class=\"fa fa-tag\"/> Lot/Serial Number"
-msgstr "<i class=\"fa fa-tag\"/> Número de Serie/Lote"
+msgid "Lot/Serial Number"
+msgstr "Número de Serie/Lote"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.invoice_lines
@@ -2904,14 +2904,14 @@ msgstr "<i class=\"fa fa-th-large\"/> Descripción"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.picking_lines
-msgid "<i class=\"fa fa-th-large\"/> Package"
-msgstr "<i class=\"fa fa-th-large\"/> Paquete"
+msgid "Package"
+msgstr "Paquete"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.delivery_lines
 #: model_terms:ir.ui.view,arch_db:professional_templates.picking_lines
-msgid "<i class=\"fa fa-th-large\"/> Product"
-msgstr "<i class=\"fa fa-th-large\"/> Producto"
+msgid "Product"
+msgstr "Producto"
 
 #. module: professional_templates
 #: model_terms:ir.ui.view,arch_db:professional_templates.invoice_lines
@@ -5376,3 +5376,8 @@ msgid ""
 "Your watermark pdf does not contain a page or is not a standard PDF document"
 msgstr ""
 "Su PDF de marca de agua no contiene ninguna página o no es un formato estándar de PDF."
+
+#. module: professional_templates
+#: model:ir.actions.report,name:stock.action_report_picking
+msgid "Picking Operations"
+msgstr "Conduces con códigos de barra"
