@@ -6,14 +6,13 @@
             <field name="model">stock.picking</field>
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
-		 <xpath expr="//field[@name='origin']" position="after">
-			<field name="dn_style"/>
-		 </xpath>
-	    </field>
-	</record>
-<record id="stock.report_delivery_document" model="ir.ui.view">
-  <field name="name">Odoo Template</field>
-</record>
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="dn_style"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="stock.report_delivery_document" model="ir.ui.view">
+            <field name="name">Odoo Template</field>
+        </record>
     </data>
 </odoo>
-
