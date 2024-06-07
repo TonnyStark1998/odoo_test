@@ -25,6 +25,7 @@
         'security/security.xml',
         'security/ir.model.access.csv',
         'security/billing_do_stock_quant_rule.xml',
+        "data/mail_template_data.xml",
         'views/billing_do_account_journal.xml',
         'views/billing_do_account_move.xml',
         'views/billing_do_res_partner.xml',

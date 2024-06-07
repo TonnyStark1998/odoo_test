@@ -10,7 +10,7 @@ class BillingDoStockWarehouse(models.Model):
     @api.model
     def create(self, vals):
         self.env['res.partner'].browse(vals['partner_id']).write({
-            'company_id': vals['company_id']
+            'company_id': self.env.company.id
         })
         warehouse = super(BillingDoStockWarehouse, self).create(vals)
         return warehouse

@@ -304,10 +304,31 @@ class BillingDoAccountMove(models.Model):
 
                 if not move.posted_before:
                     move._move_to_next_sequence_number(move.ncf_type_sequence)
+                
+                affects_tax_report = move._affect_tax_report()
+                lock_dates = move._get_violated_lock_dates(move.date, affects_tax_report, move.invoice_date)
+
+                if lock_dates:
+                    move.date = move._get_accounting_date(move.invoice_date or move.date, affects_tax_report)
 
             return super()._post(soft)
         except exceptions.UserError:
             raise
+    
+    def _get_violated_lock_dates(self, invoice_date, has_tax, accounting_date = None):
+        locks = []
+        user_lock_date = self.company_id._get_user_fiscal_lock_date()
+
+        if invoice_date and user_lock_date and invoice_date <= user_lock_date or accounting_date and accounting_date <= user_lock_date:
+            locks.append((user_lock_date, _('user')))
+
+        tax_lock_date = self.company_id.tax_lock_date
+
+        if invoice_date and tax_lock_date and has_tax and invoice_date <= tax_lock_date:
+            locks.append((tax_lock_date, _('tax')))
+
+        locks.sort()
+        return locks
 
     def action_duplicate(self):
         self.ensure_one()
@@ -399,9 +420,9 @@ class BillingDoAccountMove(models.Model):
             super()._onchange_name_warning()
     
     # Account Move - Automated Actions
-    def lock_moves_date(self):
+    def lock_moves_date(self, days):
         try:
-            yesterday = date.datetime.now() - date.timedelta(days=1)
+            yesterday = date.datetime.now() - date.timedelta(days=days)
             yesterday = yesterday.strftime('%Y-%m-%d')
 
             # Moves in draft
@@ -415,26 +436,26 @@ class BillingDoAccountMove(models.Model):
                 
                 log.info('Account move drafts: {} have been cancelled'.format(draft_moves.ids))
             
-            # Cancel draf and posted moves from not reconciled bank statements
+            # Cancel draft and posted moves from not reconciled bank statements
             draft_unreconciled_statement_lines = self.env['account.bank.statement.line'].search([
                 ('is_reconciled', '=', False),
-                ('date', '<=', yesterday),
-                ('move_id.state', 'in', ('draft', 'posted')),
+                ('date', '<=', yesterday)
             ])
 
             if draft_unreconciled_statement_lines:
                 for line in draft_unreconciled_statement_lines:
-                   line.write({"move_id.state": "cancel"})
-                   
+                    if line.move_id and line.move_id.state in ['draft', 'posted']:
+                        line.move_id.button_cancel()
+
                 log.info('Draft and posted moves from not reconciled bank statements:\
                           {} have been cancelled'.format(draft_unreconciled_statement_lines.ids))
 
             # Update lock dates
             self.env.user.company_id.write({
-            'period_lock_date': yesterday,
-            'fiscalyear_lock_date': yesterday,
-            'tax_lock_date': yesterday,
-        })
+                'period_lock_date': yesterday,
+                'fiscalyear_lock_date': yesterday,
+                'tax_lock_date': yesterday,
+            })
 
         except Exception as ex: 
             log.error('Exception thrown while updating account moves lock date: {}'.format(ex))
