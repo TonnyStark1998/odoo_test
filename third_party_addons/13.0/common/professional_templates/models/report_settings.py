@@ -302,7 +302,7 @@ class TemplateSettings(models.Model):
 # watermark: a string/text variable that will hold the watermark expression evaluated. Your watermark expression has to be set in the variable 'watermark'
 #--------------------------------------------------
 # IMPORTANT NOTE: Returned value have to be set in the variable 'watermark' as shown below.
-watermark = doc.name
+# watermark = doc.name
 ''',
         help=
         "Put a python expression/code which when evaluated, will result in some \
