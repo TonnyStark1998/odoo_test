@@ -1750,3 +1750,21 @@ msgstr "Permitir al usuario editar el campo descuento en las líneas de facturas
 #: model:res.groups,name:billing_do.allow_editing_price_field_in_sales_and_invoice
 msgid "Allow user to edit the price field on Sales &amp; Invoices lines"
 msgstr "Permitir al usuario editar el campo precio en las líneas de facturas y pedidos ventas"
+
+#. module: billing_do
+#: model:ir.actions.server,name:billing_do.billing_do_1_day_change_lock_date_cron_ir_actions_server
+#: model:ir.cron,cron_name:billing_do.billing_do_1_day_change_lock_date_cron
+msgid "Account Move: 1-day Lock Date"
+msgstr "Facturación: 1-día período de bloqueo"
+
+#. module: billing_do
+#: model:ir.actions.server,name:billing_do.billing_do_2_day_change_lock_date_cron_ir_actions_server
+#: model:ir.cron,cron_name:billing_do.billing_do_2_day_change_lock_date_cron
+msgid "Account Move: 2-day Lock Date"
+msgstr "Facturación: 2-día período de bloqueo"
+
+#. module: billing_do
+#: model:ir.actions.server,name:billing_do.billing_do_monday_change_lock_date_cron_ir_actions_server
+#: model:ir.cron,cron_name:billing_do.billing_do_monday_change_lock_date_cron
+msgid "Account Move: Monday Lock Date"
+msgstr "Facturación: Todos los lunes período de bloqueo"

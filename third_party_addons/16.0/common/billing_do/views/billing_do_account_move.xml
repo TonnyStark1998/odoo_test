@@ -214,17 +214,45 @@
             </filter>
         </field>
     </record>
-    <record id="billing_do_change_lock_date_cron" model="ir.cron">
-        <field name="name">Account Move: Lock Date</field>
+
+    <record id="billing_do_1_day_change_lock_date_cron" model="ir.cron">
+        <field name="name">Account Move: 1-day Lock Date</field>
         <field name="interval_number">1</field>
         <field name="interval_type">days</field>
         <field name="numbercall">-1</field>
         <field name="doall">true</field>
         <field name="model_id" 
                 ref="model_account_move" />
-        <field name="code">model.lock_moves_date()</field>
+        <field name="code">model.lock_moves_date(1)</field>
         <field name="nextcall" 
                 eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 00:00:00')" />
+    </record>
+
+    <record id="billing_do_2_day_change_lock_date_cron" model="ir.cron">
+        <field name="name">Account Move: 2-day Lock Date</field>
+        <field name="active">false</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall">true</field>
+        <field name="model_id" 
+                ref="model_account_move" />
+        <field name="code">model.lock_moves_date(2)</field>
+        <field name="nextcall" 
+                eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 00:00:00')" />
+    </record>
+
+    <record id="billing_do_monday_change_lock_date_cron" model="ir.cron">
+        <field name="name">Account Move: Monday Lock Date</field>
+        <field name="interval_number">7</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall">true</field>
+        <field name="model_id" 
+                ref="model_account_move" />
+        <field name="code">model.lock_moves_date(4)</field>
+        <field name="nextcall" 
+                eval="(DateTime.now() + timedelta(days=(7 - DateTime.now().weekday()) + 1)).strftime('%Y-%m-%d 00:00:00')" />
     </record>
 
     <!-- Inherited Actions -->
