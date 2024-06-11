@@ -12,15 +12,15 @@
                             <thead>
                                 <tr>
                                     <th>Product</th>
-                                    <th>Availability</th>
+                                    <th class="text-end">Availability</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <t t-foreach="products" t-as="product">
                                     <tr t-if="product.qty_available and product.qty_available > 0">
                                         <td><t t-esc="product.name" /></td>
-                                        <td>
-                                            <t t-esc="product.qty_available" />
+                                        <td class="text-end">
+                                            <t t-esc="'{0:,.2f}'.format(int(product.qty_available))" />
                                         </td>
                                     </tr>
                                 </t>
