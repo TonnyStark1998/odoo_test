@@ -15,8 +15,7 @@
                     padding-left:0px; 
                     padding-right:0px; 
                     color:{{style.text_color}} !important;
-                    font-size:{{int(style.header_font)}}px !important;
-                    font-family:{{style.font_family}} !important;">
+                    font-size:{{int(style.header_font)}}px !important;">
                 <div class="row" t-if="style.header">
                     <div class="col-7 mt-2 mb-5" style="padding-left:0px;">
                         <img t-if="style.logo" 
@@ -82,7 +81,7 @@
                 t-attf-style="color:{{style.text_color}} !important;
                     font-size:{{int(style.body_font)}}px !important;
                     font-family:{{style.font_family}} !important;">
-                <div class="row mt-2">
+                <div class="row">
                     <div class="col-12" t-attf-style="white-space:pre-line;
                             color:#{style.wm_color};
                             left:#{style.leftpadding}mm; 
@@ -94,7 +93,7 @@
                             position:fixed;">
                         <t t-esc="style.wm_eval(o, time, user, res_company)"/>
                     </div>
-                    <div class="col-6 mt-1">
+                    <div class="col-6 mt-5 mb-2">
                         <div name="vendor_address" 
                             t-if="o.picking_type_id.code=='incoming' and partner"
                             t-attf-style="background-color:{{style.theme_color}};
@@ -166,7 +165,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6  ms-1 p-1 mt-1"
+                    <div class="col-6  ms-1 p-1 mt-5 mb-2"
                         t-attf-style="border:2px solid {{style.theme_color}}; color:#222;color:{{style.text_color}};">
                         <div name="div_picking_type" t-if="o.picking_type_id">
                             <h2>

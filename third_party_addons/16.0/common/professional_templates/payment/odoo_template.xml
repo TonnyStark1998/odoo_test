@@ -3,14 +3,9 @@
     <data>
         <template id="PAYMENT_0_document" name="Odoo Template" inherit_id="account.report_payment_receipt_document">
             <xpath expr="//table" position="after">
-                <div class="row">
-                    <div class="mt-3 col-12 text-center">
-                        <img t-att-src="image_data_uri(style.company_stamp)" 
-                            t-attf-style="max-width: 150px !important;"
-                            class="opacity-50"
-                            alt="Company Stamp" />
-                    </div>
-                </div>
+                <!-- Start of Company Stamp -->
+                <t t-call="professional_templates.company_stamp" t-lang="lang"/>
+                <!-- End of Company Stamp -->
             </xpath>
         </template>
     </data>

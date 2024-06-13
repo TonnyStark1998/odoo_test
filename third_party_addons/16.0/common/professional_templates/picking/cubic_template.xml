@@ -15,8 +15,7 @@
                     padding-left:0px; 
                     padding-right:0px; 
                     color:{{style.text_color}} !important;
-                    font-size:{{int(style.header_font)}}px !important;
-                    font-family:{{style.font_family}} !important;">
+                    font-size:{{int(style.header_font)}}px !important;">
                 <div class="row" t-if="style.header">
                     <div class="col-7 mt-2 mb-5" style="padding-left:0px;">
                         <img t-if="style.logo" 
@@ -81,8 +80,8 @@
                 t-attf-data-oe-model="stock.picking" 
                 t-attf-data-oe-id="{{o.id}}" 
                 t-attf-style="color:{{style.text_color}} !important;">
-                <div class="row mt-2">
-                    <div class="col-12 mt-1 p-1" t-attf-style="white-space:pre-line;
+                <div class="row">
+                    <div class="col-12 mt-5 mb-2" t-attf-style="white-space:pre-line;
                         color:#{style.wm_color};
                         left:#{style.leftpadding}mm;
                         top:#{style.toppadding}mm;
@@ -93,7 +92,7 @@
                         position:fixed;">
                         <t t-esc="style.wm_eval(o, time, user, res_company)"/>
                     </div>
-                    <div class="col-6 mt-1" t-if="o.picking_type_id.code=='incoming' and o.partner_id">
+                    <div class="col-6 mt-5 mb-2" t-if="o.picking_type_id.code=='incoming' and o.partner_id">
                         <div name="vendor_address"
                             t-attf-style="background-color:{{style.theme_color}};
                                 padding:5px;
@@ -161,7 +160,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 mt-1" t-if="o.should_print_delivery_address()">
+                    <div class="col-6 mt-5 mb-2" t-if="o.should_print_delivery_address()">
                         <div name="outgoing_delivery_address">
                             <span>
                                 <strong>Delivery Address:</strong>
@@ -202,7 +201,9 @@
                                 <span class="fa fa-envelope-square fa-lg"/>
                                 <span t-field="o.move_ids[0].partner_id.email"/>
                             </div>
-                            <div name="outgoing_warehouse_address" t-if="o.picking_type_id.code != 'internal' and o.picking_type_id.warehouse_id.partner_id">
+                            <div name="outgoing_warehouse_address" 
+                                t-if="o.picking_type_id.code != 'internal' and o.picking_type_id.warehouse_id.partner_id"
+                                class="mt-2">
                                 <span>
                                     <strong>Warehouse Address:</strong>
                                 </span>
@@ -245,7 +246,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 ms-1 p-1 mt-1"
+                    <div class="col-6 ms-1 p-1 mt-5 mb-2"
                         t-attf-style="border:2px solid {{style.theme_color}}; color:#222;color:{{style.text_color}};">
                         <div name="div_picking_type" t-if="o.picking_type_id">
                             <h2>

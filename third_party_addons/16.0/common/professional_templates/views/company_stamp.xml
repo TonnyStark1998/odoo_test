@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="company_stamp" name="Company Stamp">
+            <div class="mt-2 col-5 text-end" style="border:0px !important;" t-if="style.show_company_stamp and style.company_stamp">
+                <img t-att-src="image_data_uri(style.company_stamp)" 
+                    t-attf-style="max-width: 150px !important;border:0px !important;"
+                    alt="Company Stamp" />
+            </div>
+        </template>
+    </data>
+</odoo>
