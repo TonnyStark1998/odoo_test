@@ -56,6 +56,7 @@
         "views/res_config_view.xml",
         "views/res_partner.xml",
         "views/company_footer.xml",
+        "views/company_stamp.xml",
         "views/company_address.xml",
         "views/company_address_noname.xml",
         "views/category.xml",

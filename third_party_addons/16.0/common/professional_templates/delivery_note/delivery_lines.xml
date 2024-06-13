@@ -176,12 +176,9 @@
                     </tbody>
                 </table>
             </t>
-            <div class="mt-2 col-12 text-center" t-if="style.show_company_stamp and style.company_stamp">
-                <img t-att-src="image_data_uri(style.company_stamp)" 
-                    t-attf-style="max-width: 150px !important;"
-                    class="opacity-50"
-                    alt="Company Stamp" />
-            </div>
+            <!-- Start of Company Stamp -->
+            <t t-call="professional_templates.company_stamp" t-lang="lang"/>
+            <!-- End of Company Stamp -->
             <div t-if="o.signature" class="mt-2 ml-4 mr-2" name="signature">
                 <div class="offset-8">
                     <strong>Signature</strong>
