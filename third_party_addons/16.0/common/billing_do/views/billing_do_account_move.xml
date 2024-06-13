@@ -225,7 +225,7 @@
                 ref="model_account_move" />
         <field name="code">model.lock_moves_date(1)</field>
         <field name="nextcall" 
-                eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 00:00:00')" />
+                eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 04:30:00')" />
     </record>
 
     <record id="billing_do_2_day_change_lock_date_cron" model="ir.cron">
@@ -239,7 +239,7 @@
                 ref="model_account_move" />
         <field name="code">model.lock_moves_date(2)</field>
         <field name="nextcall" 
-                eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 00:00:00')" />
+                eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 04:30:00')" />
     </record>
 
     <record id="billing_do_monday_change_lock_date_cron" model="ir.cron">
@@ -252,7 +252,7 @@
                 ref="model_account_move" />
         <field name="code">model.lock_moves_date(4)</field>
         <field name="nextcall" 
-                eval="(DateTime.now() + timedelta(days=(7 - DateTime.now().weekday()) + 1)).strftime('%Y-%m-%d 00:00:00')" />
+                eval="((DateTime.utcnow() - timedelta(hours=4)) + timedelta(days=(7 - (DateTime.utcnow() - timedelta(hours=4)).weekday()))).strftime('%Y-%m-%d 05:00:00')" />
     </record>
 
     <!-- Inherited Actions -->
