@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <record id="report_pl" model="mis.report">
+        <field name="name">Pérdidas y Ganancias</field>
+        <field name="style_id" ref="mis_style_default" />
+    </record>
+</odoo>
