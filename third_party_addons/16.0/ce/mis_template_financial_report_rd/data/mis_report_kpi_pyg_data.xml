@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <record id="kpi_pl_inc" model="mis.report.kpi">
+        <field name="name">INC</field>
+        <field name="description">Ingresos</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">10</field>
+        <field name="report_id" ref="report_pl" />
+        <field name="style_id" ref="mis_style_header" />
+        <field name="auto_expand_accounts" eval="False" />
+        <field name="expression">OPINC + OIN</field>
+    </record>
+    <record id="kpi_pl_opinc" model="mis.report.kpi">
+        <field name="name">OPINC</field>
+        <field name="description">Ingresos operativos</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">20</field>
+        <field name="report_id" ref="report_pl" />
+        <field name="style_id" ref="mis_style_header_l1" />
+        <field name="auto_expand_accounts" eval="True" />
+        <field name="auto_expand_accounts_style_id" ref="mis_style_details_l2" />
+        <field name="expression">-balp[('account_type', '=', 'income')][]</field>
+    </record>
+    <record id="kpi_pl_cos" model="mis.report.kpi">
+        <field name="name">COS</field>
+        <field name="description">Costos directos de las ventas</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">30</field>
+        <field name="report_id" ref="report_pl" />
+        <field name="style_id" ref="mis_style_header_l1" />
+        <field name="auto_expand_accounts" eval="True" />
+        <field name="auto_expand_accounts_style_id" ref="mis_style_details_l2" />
+        <field name="expression">balp[('account_type', '=', 'expense_direct_cost')][]</field>
+    </record>
+    <record id="kpi_pl_grp" model="mis.report.kpi">
+        <field name="name">GRP</field>
+        <field name="description">Ganancias brutas</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">40</field>
+        <field name="report_id" ref="report_pl" />
+        <field name="style_id" ref="mis_style_header_l1" />
+        <field name="auto_expand_accounts" eval="True" />
+        <field name="auto_expand_accounts_style_id" ref="mis_style_details_l2" />
+        <field name="expression">OPINC - COS</field>
+    </record>
+    <record id="kpi_pl_oin" model="mis.report.kpi">
+        <field name="name">OIN</field>
+        <field name="description">Otros Ingresos</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">50</field>
+        <field name="report_id" ref="report_pl" />
+        <field name="style_id" ref="mis_style_header_l1" />
+        <field name="auto_expand_accounts" eval="True" />
+        <field name="auto_expand_accounts_style_id" ref="mis_style_details_l2" />
+        <field name="expression">-balp[('account_type', '=', 'income_other')][]</field>
+    </record>
+    <record id="kpi_pl_lex" model="mis.report.kpi">
+        <field name="name">LEX</field>
+        <field name="description">Gastos, amortizaciones y depreciaciones</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">60</field>
+        <field name="report_id" ref="report_pl" />
+        <field name="style_id" ref="mis_style_header" />
+        <field name="auto_expand_accounts" eval="False" />
+        <field name="expression">EXP + DEP</field>
+    </record>
+    <record id="kpi_pl_exp" model="mis.report.kpi">
+        <field name="name">EXP</field>
+        <field name="description">Gastos</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">70</field>
+        <field name="report_id" ref="report_pl" />
+        <field name="style_id" ref="mis_style_header_l1" />
+        <field name="auto_expand_accounts" eval="True" />
+        <field name="auto_expand_accounts_style_id" ref="mis_style_details_l2" />
+        <field name="expression">balp[('account_type', '=', 'expense')][]</field>
+    </record>
+    <record id="kpi_pl_dep" model="mis.report.kpi">
+        <field name="name">DEP</field>
+        <field name="description">Amortizaciones y Depreciaciones</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">80</field>
+        <field name="report_id" ref="report_pl" />
+        <field name="style_id" ref="mis_style_header_l1" />
+        <field name="auto_expand_accounts" eval="True" />
+        <field name="auto_expand_accounts_style_id" ref="mis_style_details_l2" />
+        <field name="expression">balp[('account_type', '=', 'expense_depreciation')][]</field>
+    </record>
+    <record id="kpi_pl_nep" model="mis.report.kpi">
+        <field name="name">NEP</field>
+        <field name="description">Ganancia/Pérdida</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">90</field>
+        <field name="report_id" ref="report_pl" />
+        <field name="style_id" ref="mis_style_total" />
+        <field name="auto_expand_accounts" eval="False" />
+        <field name="expression">OPINC + OIN - COS - EXP - DEP</field>
+    </record>
+</odoo>
