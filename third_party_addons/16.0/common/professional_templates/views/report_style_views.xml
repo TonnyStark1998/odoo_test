@@ -29,26 +29,18 @@
             <form string="Report Styles">
                 <sheet>
                     <div class="text-center pull-right ml8" style="display:inline-grid"
-                        attrs="{'invisible': [('show_company_stamp', '=', False)]}">
+                        attrs="{'invisible': [('show_company_stamp', '=', False)], 'required': [('show_company_stamp', '=', True)]}">
                         <strong>Company Stamp</strong>
-                        <field name="company_stamp"
-                            attrs="{'required': [('show_company_stamp', '=', True)]}"
-                            class="oe_avatar" 
-                            widget="image"/>
+                        <field name="company_stamp" class="oe_avatar"  widget="image"/>
                     </div>
                     <div class="text-center pull-right ml8" style="display:inline-grid"
-                        attrs="{'invisible': ['|', ('show_footer_logo', '=', False), ('footer', '=', False)]}">
+                        attrs="{'invisible': ['|',('show_footer_logo', '=', False),('footer', '=', False)], 'required': [('show_footer_logo', '=', True)]}">
                         <strong>Footer Logo</strong>
-                        <field name="footer_logo" 
-                            attrs="{'required': [('footer', '=', True), ('show_footer_logo', '=', True)]}"
-                            class="oe_avatar" 
-                            widget="image"/>
+                        <field name="footer_logo" class="oe_avatar"  widget="image"/>
                     </div>
                     <div class="text-center pull-right mr8" style="display:inline-grid">
                         <strong>Main Logo</strong>
-                        <field name="logo" 
-                            class="oe_avatar" 
-                            widget="image" />
+                        <field name="logo" class="oe_avatar"  widget="image" />
                     </div>
                     <div>
                         <h1>
@@ -108,10 +100,9 @@
                             <pre>
                                 <field name="watermark"/>
                             </pre>
-                            <div class="text-muted mt16" style="white-space:normal;" 
-                                attrs="{'invisible': [('show_footer_logo', '=', False)], 'required': [('show_footer_logo', '=', True)]}">
+                            <div class="text-muted mt16" style="white-space:normal;" attrs="{'invisible': [('show_footer_logo', '=', False)], 'required': [('show_footer_logo', '=', True)]}">
                                 <span class="label label-info orders_label_text_align">
-                                    <span class="fa fa-info-circle"/>NOTE</span>
+                                    <span class="fa fa-info-circle"/> NOTE</span>
                                 To upload your watermark design in PDF format for each report, go to
                                 <code>Settings
                                     <span class="fa fa-long-arrow-right"/> Technical
