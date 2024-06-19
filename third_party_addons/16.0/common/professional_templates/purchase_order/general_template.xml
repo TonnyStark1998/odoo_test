@@ -29,7 +29,9 @@
                                     alt="Company Logo"/>
                         </div>
                         <div class="col-5 mb-5"
-                            t-attf-style="font-size:{{int(style.header_font)}}px !important; padding-bottom:2px;padding-right:0px;">
+                            t-attf-style="font-size:{{int(style.header_font)}}px !important;
+                                padding-bottom:2px;
+                                padding-right:0px;">
                             <h1 t-attf-style="color:{{style.text_color}}">
                                 <span t-field="purchase.name"/>
                             </h1>
@@ -130,8 +132,9 @@
                             <span t-field="purchase.partner_id.website"/>
                         </div>
                     </div>
-                    <div class="col-6 mt-5 ms-1 mb-3"
-                     t-attf-style="background-color:{{style.theme_color}}; padding:10px; color:{{style.theme_txt_color}};">
+                    <div class="col-6 mt-5 ms-1 mb-3" t-attf-style="background-color:{{style.theme_color}};
+                        padding:10px;
+                        color:{{style.theme_txt_color}};">
                         <div class="row">
                             <div class="col ps-2">
                                 <h5>

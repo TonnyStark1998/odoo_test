@@ -13,6 +13,7 @@
                 <t t-if="style.header">
                     <div class="row mb-2">
                         <div class="col-5">
+                            <h1>Delivery</h1>
                             <address t-field="company.partner_id" t-options='{"widget": "contact", "fields": ["name", "address", "phone",  "email", "website"], "no_marker": false}'/>
                         </div>
                         <div class="col-7 text-end">

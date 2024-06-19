@@ -113,7 +113,8 @@
                                 <code>Advanced Properties</code> where you can upload your PDF. The PDF will form the background of your report as shown in example below.
                             </div>
                             <div class="text-center mt16">
-                                <img alt="Watermark Example" style="display:inline-block;" width="50%" src="/professional_templates/static/description/wm.png"/>
+                                <img alt="Watermark Example" style="display:inline-block;" width="50%" 
+                                    src="/professional_templates/static/description/wm.png" />
                             </div>
                         </page>
                     </notebook>
