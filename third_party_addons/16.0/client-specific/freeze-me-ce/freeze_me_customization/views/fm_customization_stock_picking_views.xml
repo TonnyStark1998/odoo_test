@@ -208,6 +208,21 @@
         </field>
     </record>
 
+    <record model="ir.ui.view" id="fm_customization_view_stock_picking_products_availability_tree">
+        <field name="name">stock.picking.products.availability.tree</field>
+        <field name="model">product.product</field>
+        <field name="arch" type="xml">
+            <tree create="false"
+                edit="false"
+                delete="false"
+                import="false"
+                export_xlsx="false">
+                <field name="name" />
+                <field name="qty_available" string="Quantity On Hand" />
+            </tree>
+        </field>
+    </record>
+
     <!-- Define Kanban Action -->
     <record id="action_stock_picking_kanban" model="ir.actions.act_window">
         <field name="name">Stock Pickings by State</field>
@@ -217,9 +232,22 @@
         <field name="domain">[]</field>
     </record>
 
+    <record id="action_stock_picking_products_availability_tree" model="ir.actions.server">
+        <field name="name">Disponibilidad de productos</field>
+        <field name="model_id" ref="model_stock_picking"/>
+        <field name="state">code</field>
+        <field name="code">action =  env.get('stock.picking').action_get_products_by_company()</field>
+    </record>
+
     <!-- Define Menu Item for Kanban View -->
     <menuitem id="menu_stock_picking_kanban" 
         name="Stock Pickings by State" 
         parent="stock.menu_stock_warehouse_mgmt" 
         action="action_stock_picking_kanban" />
+
+    <menuitem id="menu_stock_picking_products_availability_tree" 
+        name="Products Availability" 
+        parent="stock.menu_warehouse_report" 
+        action="action_stock_picking_products_availability_tree"
+        sequence="300" />
 </odoo>
