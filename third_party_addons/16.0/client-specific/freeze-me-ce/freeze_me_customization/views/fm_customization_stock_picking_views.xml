@@ -11,9 +11,9 @@
             </xpath>
             <xpath expr="//field[@name='owner_id']" position="attributes">
                 <attribute name="attrs">
-                    {'readonly': [('picking_type_code', 'in', ['incoming'])],
-                     'force_save': [('picking_type_code', 'in', ['incoming'])]}
+                    {'readonly': [('picking_type_code', 'in', ['incoming'])]}
                 </attribute>
+                <attribute name="force_save">1</attribute>
             </xpath>
         </field>
     </record>
