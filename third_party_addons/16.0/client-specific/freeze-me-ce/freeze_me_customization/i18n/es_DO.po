@@ -386,8 +386,8 @@ msgstr "Estado Kanban"
 #. module: freeze_me_customization
 #. odoo-python
 #: code:addons/freeze_me_customization/models/fm_customization_stock_quant.py:0
-#: model:ir.ui.menu,name:freeze_me_customization.menu_stock_picking_quant_availability_tree
-#: model:ir.actions.server,name:freeze_me_customization.action_stock_quant_products_availability_tree
+#: model:ir.ui.menu,name:freeze_me_customization.menu_stock_quant_availability_tree
+#: model:ir.actions.act_window,name:freeze_me_customization.action_stock_quant_products_availability_tree
 #, python-format
 msgid "Products Availability"
 msgstr "Disponibilidad de productos"
@@ -401,3 +401,8 @@ msgstr "Cantidad Disponible"
 #: model_terms:ir.ui.view,arch_db:freeze_me_customization.fm_customization_view_stock_quant_products_availability_tree
 msgid "Owner"
 msgstr "Propietario"
+
+#. module: freeze_me_customization
+#: model:ir.model.fields,field_description:freeze_me_customization.field_freeze_me_customization_stock_quant__product_name
+msgid "Product Name"
+msgstr "Producto"

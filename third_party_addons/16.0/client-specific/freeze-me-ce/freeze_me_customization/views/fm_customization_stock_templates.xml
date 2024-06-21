@@ -17,10 +17,10 @@
                             </thead>
                             <tbody>
                                 <t t-foreach="products" t-as="product">
-                                    <tr t-if="product.qty_available and product.qty_available > 0">
-                                        <td><t t-esc="product.name" /></td>
+                                    <tr t-if="product.available_quantity and product.available_quantity > 0">
+                                        <td><t t-esc="product.product_name" /></td>
                                         <td class="text-end">
-                                            <t t-esc="'{0:,.2f}'.format(int(product.qty_available))" />
+                                            <t t-esc="'{0:,.2f}'.format(int(product.available_quantity))" />
                                         </td>
                                     </tr>
                                 </t>

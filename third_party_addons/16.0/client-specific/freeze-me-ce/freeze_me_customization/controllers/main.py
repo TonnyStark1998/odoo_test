@@ -11,13 +11,10 @@ class FreezeMeCustomizationMainController(http.Controller):
         env = request.env(context=dict(request.env.context, show_address=True, no_tag_br=True))
         current_partner = env.user.partner_id.parent_id
 
-        company_products = set(env['stock.picking']\
+        company_products = set(env['stock.quant']\
             .sudo()\
             .with_company(env.company)\
-            .search([('state', 'in', ['done']),
-                     '|', ('partner_id', '=', current_partner.id if current_partner else -1),
-                        ('owner_id', '=',  current_partner.id if current_partner else -1)])\
-            .move_ids.mapped('product_id'))
+            .search([('owner_id', '=',  current_partner.id if current_partner else -1)]))
 
         # Render page
         return request.render('freeze_me_customization.stock_products_availability', 
