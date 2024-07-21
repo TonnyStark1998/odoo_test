@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <!-- ACTIVO -->
+    <record id="kpi_bs_ta" model="mis.report.kpi">
+        <field name="name">TA</field>
+        <field name="description">ACTIVOS</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">1</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_template_financial_report_rd.mis_style_header" />
+        <field name="auto_expand_accounts" eval="False" />
+        <field name="expression">CA + FA + PNCA</field>
+    </record>
+    <record id="kpi_bs_ca" model="mis.report.kpi">
+        <field name="name">CA</field>
+        <field name="description">Activo Circulante</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">5</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_template_financial_report_rd.mis_style_header_l1" />
+        <field name="auto_expand_accounts" eval="False" />
+        <field name="expression">BA + REC + CAS+ PRE</field>
+    </record>
+    <record id="kpi_bs_ba" model="mis.report.kpi">
+        <field name="name">BA</field>
+        <field name="description">Cuentas Bancarias y efectivos</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">10</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_style_header_l2" />
+        <field name="auto_expand_accounts" eval="True" />
+        <field name="auto_expand_accounts_style_id" ref="mis_style_details_l3" />
+        <field name="expression">bale[('account_type', '=', 'asset_cash')][]</field>
+    </record>
+    <record id="kpi_bs_rec" model="mis.report.kpi">
+        <field name="name">REC</field>
+        <field name="description">Pendientes de Cobro</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">15</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_style_header_l2" />
+        <field name="auto_expand_accounts" eval="True" />
+        <field name="auto_expand_accounts_style_id" ref="mis_style_details_l3" />
+        <field name="expression">bale[('account_type', '=', 'asset_receivable'), ('non_trade', '=', False)][]</field>
+    </record>
+    <record id="kpi_bs_cas" model="mis.report.kpi">
+        <field name="name">CAS</field>
+        <field name="description">Activo Circulante</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">20</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_style_header_l2" />
+        <field name="auto_expand_accounts" eval="True" />
+        <field name="auto_expand_accounts_style_id" ref="mis_style_details_l3" />
+        <field name="expression">bale['|', ('account_type', '=', 'asset_current'), '&amp;', ('account_type', '=', 'asset_receivable'), ('non_trade', '=', True)][]</field>
+    </record>
+    <record id="kpi_bs_pre" model="mis.report.kpi">
+        <field name="name">PRE</field>
+        <field name="description">Pre-Pagos</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">25</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_style_header_l2" />
+        <field name="auto_expand_accounts" eval="True" />
+        <field name="auto_expand_accounts_style_id" ref="mis_style_details_l3" />
+        <field name="expression">bale[('account_type', '=', 'asset_prepayments')][]</field>
+    </record>
+    <record id="kpi_bs_fa" model="mis.report.kpi">
+        <field name="name">FA</field>
+        <field name="description">Activos fijos extra</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">30</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_template_financial_report_rd.mis_style_header_l1" />
+        <field name="auto_expand_accounts" eval="True" />
+        <field name="auto_expand_accounts_style_id" ref="mis_template_financial_report_rd.mis_style_details_l2" />
+        <field name="expression">bale[('account_type', '=', 'asset_fixed')][]</field>
+    </record>
+    <record id="kpi_bs_pnca" model="mis.report.kpi">
+        <field name="name">PNCA</field>
+        <field name="description">Activos no-circulantes extras</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">35</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_template_financial_report_rd.mis_style_header_l1" />
+        <field name="auto_expand_accounts" eval="True" />
+        <field name="auto_expand_accounts_style_id" ref="mis_template_financial_report_rd.mis_style_details_l2" />
+        <field name="expression">bale[('account_type', '=', 'asset_non_current')][]</field>
+    </record>
+    <!-- PASIVO -->
+    <record id="kpi_bs_l" model="mis.report.kpi">
+        <field name="name">L</field>
+        <field name="description">PASIVO</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">40</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_template_financial_report_rd.mis_style_header" />
+        <field name="auto_expand_accounts" eval="False" />
+        <field name="expression">CL + NL</field>
+    </record>
+    <record id="kpi_bs_cl" model="mis.report.kpi">
+        <field name="name">CL</field>
+        <field name="description">Pasivo Circulante</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">45</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_template_financial_report_rd.mis_style_header_l1" />
+        <field name="auto_expand_accounts" eval="False" />
+        <field name="expression">CL1 + CL2</field>
+    </record>
+    <record id="kpi_bs_cl1" model="mis.report.kpi">
+        <field name="name">CL1</field>
+        <field name="description">Pasivo Circulante</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">50</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_style_header_l2" />
+        <field name="auto_expand_accounts" eval="True" />
+        <field name="auto_expand_accounts_style_id" ref="mis_style_details_l3" />
+        <field name="expression">-bale['|', ('account_type', 'in', ('liability_current', 'liability_credit_card')), '&amp;', ('account_type', '=', 'liability_payable'), ('non_trade', '=', True)][]</field>
+    </record>
+    <record id="kpi_bs_cl2" model="mis.report.kpi">
+        <field name="name">CL2</field>
+        <field name="description">Por Pagar</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">55</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_style_header_l2" />
+        <field name="auto_expand_accounts" eval="True" />
+        <field name="auto_expand_accounts_style_id" ref="mis_style_details_l3" />
+        <field name="expression">-bale[('account_type', '=', 'liability_payable'), ('non_trade', '=', False)][]</field>
+    </record>
+    <record id="kpi_bs_nl" model="mis.report.kpi">
+        <field name="name">NL</field>
+        <field name="description">Pasivo no Circulante</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">60</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_template_financial_report_rd.mis_style_header_l1" />
+        <field name="auto_expand_accounts" eval="True" />
+        <field name="auto_expand_accounts_style_id" ref="mis_template_financial_report_rd.mis_style_details_l2" />
+        <field name="expression">-bale[('account_type', '=', 'liability_non_current')][]</field>
+    </record>
+    <!-- CAPITAL -->
+    <record id="kpi_bs_EQ" model="mis.report.kpi">
+        <field name="name">EQ</field>
+        <field name="description">CAPITAL</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">65</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_template_financial_report_rd.mis_style_header" />
+        <field name="auto_expand_accounts" eval="False" />
+        <field name="expression">equity_capital_social + equity_accion_tesoreria + equity_reserva_legal + equity_superavit_revaluacion + CURR_YEAR_EARNINGS + PREV_YEAR_EARNINGS</field>
+    </record>
+    <record id="kpi_bs_equity_capital_social" model="mis.report.kpi">
+        <field name="name">equity_capital_social</field>
+        <field name="description">Capital Social</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">70</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_template_financial_report_rd.mis_style_header_l1" />
+        <field name="auto_expand_accounts" eval="True" />
+        <field name="auto_expand_accounts_style_id" ref="mis_template_financial_report_rd.mis_style_details_l2" />
+        <field name="expression">-bale[('account_type', '=', 'equity_capital_social')][]</field>
+    </record>
+    <record id="kpi_bs_equity_reserva_legal" model="mis.report.kpi">
+        <field name="name">equity_reserva_legal</field>
+        <field name="description">Reserva Legal</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">75</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_template_financial_report_rd.mis_style_header_l1" />
+        <field name="auto_expand_accounts" eval="True" />
+        <field name="auto_expand_accounts_style_id" ref="mis_template_financial_report_rd.mis_style_details_l2" />
+        <field name="expression">-bale[('account_type', '=', 'equity_reserva_legal')][]</field>
+    </record>
+    <record id="kpi_bs_equity_accion_tesoreria" model="mis.report.kpi">
+        <field name="name">equity_accion_tesoreria</field>
+        <field name="description">Acciones en tesorería</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">80</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_template_financial_report_rd.mis_style_header_l1" />
+        <field name="auto_expand_accounts" eval="True" />
+        <field name="auto_expand_accounts_style_id" ref="mis_template_financial_report_rd.mis_style_details_l2" />
+        <field name="expression">-bale[('account_type', '=', 'equity_accion_tesoreria')][]</field>
+    </record>
+    <record id="kpi_bs_equity_superavit_revaluacion" model="mis.report.kpi">
+        <field name="name">equity_superavit_revaluacion</field>
+        <field name="description">Otras cuentas de capital</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">85</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_template_financial_report_rd.mis_style_header_l1" />
+        <field name="auto_expand_accounts" eval="True" />
+        <field name="auto_expand_accounts_style_id" ref="mis_template_financial_report_rd.mis_style_details_l2" />
+        <field name="expression">-bale[('account_type', 'in', ('equity_superavit_revaluacion', 'equity'))][]</field>
+    </record>
+    <record id="kpi_bs_CURR_YEAR_EARNINGS" model="mis.report.kpi">
+        <field name="name">CURR_YEAR_EARNINGS</field>
+        <field name="description">Ganancias Acumuladas del periodo</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">90</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_template_financial_report_rd.mis_style_header_l1" />
+        <field name="auto_expand_accounts" eval="False" />
+        <field name="expression">subreport_pl.NEP + -bale[('account_type', '=', 'equity_unaffected')][]</field>
+    </record>
+    <record id="kpi_bs_PREV_YEAR_EARNINGS" model="mis.report.kpi">
+        <field name="name">PREV_YEAR_EARNINGS</field>
+        <field name="description">Ganancias Acumuladas periodos anteriores</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">95</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_template_financial_report_rd.mis_style_header_l1" />
+        <field name="auto_expand_accounts" eval="False" />
+        <field name="expression">-balu[('account_type', 'in', ('income', 'income_other'))][] - balu[('account_type', 'in', ('expense', 'expense_direct_cost', 'expense_depreciation'))][]</field>
+    </record>
+    <record id="kpi_bs_le" model="mis.report.kpi">
+        <field name="name">LE</field>
+        <field name="description">PASIVO + CAPITAL</field>
+        <field name="type">num</field>
+        <field name="compare_method">diff</field>
+        <field name="accumulation_method">sum</field>
+        <field name="sequence">100</field>
+        <field name="report_id" ref="report_balance_sheet" />
+        <field name="style_id" ref="mis_template_financial_report_rd.mis_style_header" />
+        <field name="auto_expand_accounts" eval="False" />
+        <field name="expression">L + EQ</field>
+    </record>    
+</odoo>
