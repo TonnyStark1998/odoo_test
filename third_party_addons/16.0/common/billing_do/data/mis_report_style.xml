@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <record id="mis_style_header_l2" model="mis.report.style">
+        <field name="name">Header L2</field>
+        <field name="font_weight_inherit">false</field>
+        <field name="font_weight">bold</field>
+        <field name="indent_level_inherit">false</field>
+        <field name="indent_level">2</field>
+    </record>
+    <record id="mis_style_details_l3" model="mis.report.style">
+        <field name="name">Details L3</field>
+        <field name="indent_level_inherit">false</field>
+        <field name="indent_level">3</field>
+    </record>
+</odoo>
