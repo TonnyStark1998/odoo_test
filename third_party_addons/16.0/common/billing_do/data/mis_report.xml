@@ -4,9 +4,4 @@
         <field name="name">Balance de Situacion</field>
         <field name="style_id" ref="mis_template_financial_report_rd.mis_style_default" />
     </record>
-    <record id="report_balance_sheet_subreport_pl" model="mis.report.subreport">
-        <field name="name">subreport_pl</field>
-        <field name="subreport_id" ref="mis_template_financial_report_rd.report_pl" />
-        <field name="report_id" ref="report_balance_sheet" />
-    </record>
 </odoo>
