@@ -10,7 +10,7 @@
     'author': "Koala Creative Software SRL",
     'website': "http://www.koalacreativesoftware.com",
     'category': 'Accounting/Accounting',
-    'version': '1.0',
+    'version': '1.1',
     'depends': ['base', 
                 'account', 
                 'delivery', 
