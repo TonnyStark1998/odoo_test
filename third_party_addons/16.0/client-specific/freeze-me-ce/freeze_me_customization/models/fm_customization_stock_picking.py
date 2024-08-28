@@ -3,7 +3,7 @@
 import logging
 
 from odoo\
-    import models, fields, api
+    import models, fields, api, _
 
 class FreezeMeCustomizationStockPicking(models.Model):
     _inherit = "stock.picking"

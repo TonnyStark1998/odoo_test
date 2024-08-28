@@ -5381,3 +5381,28 @@ msgstr ""
 #: model:ir.actions.report,name:stock.action_report_picking
 msgid "Picking Operations"
 msgstr "Conduces con códigos de barra"
+
+#. module: professional_templates
+#: model_terms:ir.ui.view,arch_db:professional_templates.view_report_style_form
+msgid "<strong>Company Stamp</strong>"
+msgstr "<strong>Sello de la Compañía</strong>"
+
+#. module: professional_templates
+#: model:ir.model.fields,help:professional_templates.field_report_template_settings__company_stamp
+msgid ""
+"This field holds the image used as the company stamp for the reports."
+"            It is controlled by the 'Show Company Stamp' settings."
+msgstr ""
+"Este campo contiene la imagen utilizada como sello de la compañía en los reportes."
+"            Es controlada por la configuración 'Mostrar Sello de la Compañía'."
+
+#. module: professional_templates
+#: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__company_stamp
+#: model_terms:ir.ui.view,arch_db:professional_templates.company_stamp
+msgid "Company Stamp"
+msgstr "Sello de la Compañía"
+
+#. module: professional_templates
+#: model:ir.model.fields,field_description:professional_templates.field_report_template_settings__show_company_stamp
+msgid "Show Company Stamp"
+msgstr "Mostrar Sello de la Compañía"
