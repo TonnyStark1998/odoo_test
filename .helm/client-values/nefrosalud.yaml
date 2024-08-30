@@ -1,0 +1,5 @@
+# Values for client: Nefro Salud
+client: nefrosalud
+
+database:
+  name: nefrosalud

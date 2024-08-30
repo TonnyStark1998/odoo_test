@@ -1,0 +1,5 @@
+# Values for client: Elecprof, SRL
+client: elecprof
+
+database:
+  name: elecprof-ce

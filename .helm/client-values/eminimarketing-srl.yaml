@@ -1,0 +1,5 @@
+# Values for client: Emini Marketing SRL
+client: eminimarketing-srl
+
+database:
+  name: eminimarketing-srl-ce

@@ -1,0 +1,5 @@
+# Values for client: Sculptor
+client: sculptor
+
+database:
+  name: sculptor-ce

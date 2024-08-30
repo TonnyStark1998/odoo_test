@@ -1,0 +1,85 @@
+# General
+appName: odoo
+
+# Storage settings
+storage:
+  groupName: rg-odoo-production
+  accountName: saaccounterprise
+
+# Database
+database:
+  name: '{{ $.Values.client }}'
+  hostname: azdpodooprod01.postgres.database.azure.com
+  username: postgres_admin
+  port: 5432
+
+# Settings for Odoo sites Kubernetes resources
+odoo:
+  edition: ce
+  version: '16.0'
+  replicas: 1
+  port: 8069
+  geventPort: 8072
+  maxRetries: 3
+  sleepTime: 10
+  modulesToInstall:
+    account_oca_reconcile,
+    account_statement_base,
+    accounting_pdf_reports,
+    base_account_budget,
+    base_accounting_kit,
+    base,
+    billing_do_ce,
+    billing_do,
+    gsk_automatic_mail_server,
+    om_account_bank_statement_import,
+    om_account_daily_reports,
+    om_account_followup,
+    om_dynamic_reports,
+    om_fiscal_year,
+    om_recurring_payment,
+    professional_templates
+  modulesToUpdate:
+    billing_do,
+    billing_do_ce
+  resources:
+    requests:
+      memory: 1Gi
+      cpu: 350m
+    limits:
+      memory: 2Gi
+      cpu: 750m
+  ingress:
+    className: webapprouting.kubernetes.azure.com
+    proxyReadTimeout: 360
+    proxyConnectTimeout: 360
+    proxySendTimeout: 360
+    clientMaxBodySize: 100m
+    host: |
+      {{- if eq .Values.werf.env "production" -}}
+      {{ $.Values.client }}.accounterprise.com
+      {{- else -}}
+      {{ $.Values.client }}.{{ $.Values.werf.env }}.accounterprise.com
+      {{- end -}}
+  persistentVolume:
+    name: odoo-data-pv
+    storageCapacity: 5Gi
+    nfsFileShareName: odoo-data-fs
+  persistentVolumeClaim:
+    name: odoo-data-pvc
+
+# Environment Variables for Odoo sites
+environmentVariables:
+  HOST: "{{ $.Values.database.hostname }}"
+  USER: "{{ $.Values.database.username }}"
+  PASSWORD: "{{ $.Values.database.password }}"
+  DB_NAME: "{{ $.Values.database.name }}"
+  PORT: "{{ $.Values.database.port }}"
+
+  ODOO_INITIAL_MODULES: '{{ $.Values.odoo.modulesToInstall | replace " " "" }}'
+  ODOO_UPDATE_MODULES: '{{ $.Values.odoo.modulesToUpdate | replace " " "" }}'
+  ODOO_EDITION: "{{ $.Values.odoo.edition }}"
+  ODOO_ENVIRONMENT: "{{ $.Values.werf.env }}"
+
+  MAX_RETRIES: "{{ $.Values.odoo.maxRetries }}"
+  SLEEP_TIME: "{{ $.Values.odoo.sleepTime }}"

@@ -1,0 +1,265 @@
+version: '3'
+
+includes:
+  git:
+    taskfile: .ops/taskfiles/git.yaml
+  log:
+    taskfile: .ops/taskfiles/log.yaml
+  system:
+    taskfile: .ops/taskfiles/system.yaml
+  werf:
+    taskfile: .ops/taskfiles/werf.yaml
+    internal: true
+  k8s:
+    taskfile: .ops/taskfiles/k8s.yaml
+    internal: true
+
+dotenv:
+  - .env
+
+env:
+  PROJECT: 'accounterprise'
+  AKS_RG: 'rg-odoo-production-aks'
+  AKS_CLUSTER_NAME: 'aks-accounterprise'
+  AZ_SUBSCRIPTION_ID: '80957f7e-e98c-4fde-a6e9-ede4b10d093d'
+  ACR_URL: 'accounterprise.azurecr.io'
+
+tasks:
+# Tasks: Local Development
+  up:
+    cmds:
+      - task: copy-env
+      - docker compose up -d --remove-orphans
+
+  down:
+    cmds:
+      - docker compose down --remove-orphans --volumes
+      - rm -rf ./data
+
+  build:
+    cmds:
+      - docker compose pull > 2&>1 /dev/null || true
+      - docker compose build
+
+  copy-env:
+    cmds:
+      - cp .env.example .env
+    status:
+      - test -f .env
+
+  compose:
+    cmds:
+      - docker compose {{.CLI_ARGS}}
+
+# Tasks: Werf
+  deploy:
+    desc: Runs the deployment workflow with 'werf converge'.
+    vars:
+      ENVIRONMENT: '{{.ENVIRONMENT | default .CLI_ARGS}}'
+    cmds:
+      - task: acr-login
+      - task: kubeconfig
+      - task: werf:command-with-repo
+        vars: {
+          COMMAND: 'converge',
+          ENVIRONMENT: '{{.ENVIRONMENT}}',
+          CLIENT: '{{.CLIENT}}'
+        }
+
+  plan:
+    desc: Runs an speculative deployment test with 'werf plan'.
+    vars:
+      ENVIRONMENT: '{{default .CLI_ARGS .ENVIRONMENT}}'
+    cmds:
+      - task: acr-login
+      - task: kubeconfig
+      - task: werf:command-with-repo
+        vars: {
+          COMMAND: 'plan',
+          ENVIRONMENT: '{{.ENVIRONMENT}}',
+          CLIENT: '{{.CLIENT}}'
+        }
+    requires:
+      vars: [CLIENT, ENVIRONMENT]
+
+  render:
+    desc: Renders the application chart with 'werf render'.
+    vars:
+      ENVIRONMENT: '{{.ENVIRONMENT | default .CLI_ARGS}}'
+    cmds:
+      - task: werf:command
+        vars: {
+          COMMAND: 'render',
+          ENVIRONMENT: '{{.ENVIRONMENT}}',
+          CLIENT: '{{.CLIENT}}'
+        }
+
+  destroy:
+    desc: Removes deployed resources with 'werf dismiss'.
+    vars:
+      ENVIRONMENT: '{{.ENVIRONMENT | default .CLI_ARGS}}'
+    cmds:
+      - task: werf:dismiss
+        vars: {
+          PROJECT: '{{.PROJECT}}',
+          ENVIRONMENT: '{{.ENVIRONMENT}}'
+        }
+
+  image-build:
+    desc: Runs the image build with 'werf build'.
+    vars:
+      ENVIRONMENT: '{{.ENVIRONMENT | default .CLI_ARGS}}'
+    cmds:
+      - task: acr-login
+      - task: werf:build
+        vars: {
+          ENVIRONMENT: '{{.ENVIRONMENT}}'
+        }
+
+  image-push:
+    desc: Runs the image push/export command with 'werf export'.
+    vars:
+      ENVIRONMENT: '{{.ENVIRONMENT | default .CLI_ARGS}}'
+    cmds:
+      - task: werf:export
+        vars: {
+          ENVIRONMENT: '{{.ENVIRONMENT}}'
+        }
+
+  decrypt:
+    desc: Decrypts secret values with 'werf helm secret values decrypt'.
+    cmds:
+      - task: werf:secrets
+        vars: {
+          SECRET_COMMAND: 'decrypt',
+          ENVIRONMENT: '{{.CLI_ARGS}}'
+        }
+
+  encrypt:
+    desc: Encrypts secret values with 'werf helm secret values encrypt'.
+    cmds:
+      - task: werf:secrets
+        vars: {
+          SECRET_COMMAND: 'encrypt',
+          ENVIRONMENT: '{{.CLI_ARGS}}'
+        }
+
+# Tasks: Azure
+  az-login:
+    desc: Authenticate against the target subscription ID using Azure CLi
+    cmds:
+      # - az login
+      - az account set --subscription={{.AZ_SUBSCRIPTION_ID}}
+    status:
+      - (az account show | jq '.id') | grep -q {{.AZ_SUBSCRIPTION_ID}}
+
+  acr-login:
+    desc: Authenticate to the remote AWS ACR repository using the Azure CLI
+    cmds:
+      - task: az-login
+      - az acr login --name accounterprise
+
+# Tasks: Kubernetes
+  kubeconfig:
+    desc: Configures the local kubeconfig with the Azure AKS cluster credentials
+    cmds:
+      - az aks get-credentials
+        --resource-group {{.AKS_RG}}
+        --name {{.AKS_CLUSTER_NAME}}
+        --admin
+    status:
+      - kubectl config current-context | grep -q {{.AKS_CLUSTER_NAME}}-admin
+
+# Tasks: Database Helper
+  db:dump:
+    decs: Get a database dump from a production database
+    vars:
+      PROD_DB_NAME: '{{.PROD_DB_NAME | default .CLI_ARGS}}'
+    cmds:
+      - task: kubeconfig
+      - task: pod:deploy
+      - task: pod:install-tools
+      - task: pod:cleanup-dumps
+      - kubectl exec alpine -- env PGPASSWORD={{.PROD_DB_PASSWORD}}
+        pg_dump
+        --username={{.PROD_DB_USER}}
+        --host={{.PROD_DB_HOST}}
+        --port={{.PROD_DB_PORT}}
+        --dbname={{.PROD_DB_NAME}}
+        --format=plain
+        --no-owner
+        --no-privileges
+        --clean
+        --file=/tmp/{{.PROD_DB_NAME}}-$(date +'%Y%m%d_%H%M').sql
+      - kubectl cp alpine:/tmp ./dumps --retries 10
+    requires:
+      vars: [PROD_DB_HOST,PROD_DB_PORT,PROD_DB_USER,PROD_DB_PASSWORD,PROD_DB_NAME]
+
+  db:restore:
+    desc: Restore a database dump locally
+    cmds:
+      - task: db:check-local-service
+      - docker compose exec database
+        psql --username={{.DB_USER}} --dbname=postgres -c
+        'DROP DATABASE IF EXISTS "{{.PROD_DB_NAME}}"'
+      - docker compose exec database
+        psql --username={{.DB_USER}} --dbname=postgres -c
+        'CREATE DATABASE "{{.PROD_DB_NAME}}" WITH TEMPLATE template0 OWNER {{.DB_USER}}'
+      - docker compose exec database /bin/bash -c 'for file in /dumps/*.sql; do
+        env PGPASSWORD="{{.DB_PASSWORD}}" psql -q
+        --username={{.DB_USER}}
+        --host={{.DB_HOST}}
+        --port={{.DB_PORT}}
+        --dbname=postgres
+        --file "$file"
+        -o /dev/null;
+        done'
+    requires:
+      vars: [DB_HOST,DB_PORT,DB_USER,PROD_DB_NAME]
+
+  db:check-local-service:
+    desc: Checks wether the database local service is up and running
+    cmds:
+      - docker-compose ps database | grep -q "Up"
+      - docker-compose exec database test -d /dumps
+
+# Tasks: Pod Helper
+  pod:deploy:
+    desc: Deploys a helper Pod in the AKS cluster to execute commands or troubleshoot issues
+    cmds:
+      - task: kubeconfig
+      - kubectl run alpine --image=alpine -- tail -f /dev/null
+    status:
+      - kubectl get pods
+        --all-namespaces -o json |
+        jq -e '.items[] | select(.metadata.name == "alpine")' > /dev/null
+
+  pod:install-tools:
+    desc: Install required development tools in Pod Helper
+    cmds:
+      - task: pod:deploy
+      - kubectl exec alpine -- apk update
+      - kubectl exec alpine -- apk add postgresql-client
+    status:
+      - kubectl exec alpine -- psql --version
+
+  pod:cleanup-dumps:
+    desc: Delete all previously created database dumps from /tmp
+    prompt: 🚨 All database dump files will be removed... Continue?
+    silent: true
+    cmds:
+      - task: log:console
+        vars:
+          text: "Deploying helper Pod..."
+      - task: pod:deploy
+      - task: log:console
+        vars:
+          text: "Deleting dumps from remote Pod..."
+      - kubectl exec alpine -- /bin/sh -c 'rm -rf /tmp/*.sql'
+      - task: log:console
+        vars:
+          text: "Deleting dumps from local dir..."
+      - rm -rf ./dumps/*.sql
+      - task: log:console
+        vars:
+          text: "✅ Dump files deleted successfully."

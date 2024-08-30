@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ $.Values.client }}-{{ $.Values.odoo.persistentVolumeClaim.name }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ $.Values.odoo.persistentVolume.storageCapacity }}
+  volumeName: {{ $.Values.client }}-{{ $.Values.odoo.persistentVolume.name }}
+  storageClassName: azurefile-csi-premium
+  volumeMode: Filesystem

@@ -1,0 +1,79 @@
+---
+x-restart-policy: &restart
+  restart: unless-stopped
+
+x-networking: &networking
+  networks:
+    accounterprise:
+
+x-defaults: &defaults
+  <<: [*restart, *networking]
+
+services:
+  odoo:
+    <<: *defaults
+    container_name: odoo-web
+    image: accounterprise/odoo:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "${HOST_PORT}:8069"
+      - "${LONGPOLLING_PORT}:8072"
+    volumes:
+      - ./data/odoo:/var/data/odoo
+      - ./conf:/etc/odoo
+      - ./addons:/mnt/extra-addons
+    environment:
+      HOST: database
+      PORT: 5432
+      USER: ${DB_USER}
+      PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      ODOO_INITIAL_MODULES: >-
+        account_oca_reconcile,
+        account_statement_base,
+        accounting_pdf_reports,
+        base_account_budget,
+        base_accounting_kit,
+        base,billing_do,
+        billing_do_ce,
+        gsk_automatic_mail_server,
+        om_account_bank_statement_import,
+        om_account_daily_reports,
+        om_account_followup,
+        om_dynamic_reports,
+        om_fiscal_year,
+        om_recurring_payment,
+        professional_templates
+    entrypoint:
+      - /entrypoint.sh
+      - --init
+      - billing_do, billing_do_ce, professional_templates
+      - --update
+      - billing_do, billing_do_ce, kcs_medical_app, ars_do, professional_templates
+      - --addons-path
+      - ${ADDONS_PATH}
+    depends_on:
+      - database
+
+  database:
+    <<: *defaults
+    container_name: odoo-database
+    image: postgres:${POSTGRES_VERSION:-16-alpine}
+    ports:
+      - "${DB_PORT}:5432"
+    environment:
+      POSTGRES_DB: ${DB_NAME}"
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USER}
+    env_file:
+      - .env
+    volumes:
+      - ./data/pgdata:/var/lib/postgresql/data
+      - ./dumps:/dumps
+
+networks:
+  accounterprise:

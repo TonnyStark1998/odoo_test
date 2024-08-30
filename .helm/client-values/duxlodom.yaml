@@ -1,0 +1,5 @@
+# Values for client: Duxlodom, SRL
+client: duxlodom
+
+database:
+  name: duxlodom-ce

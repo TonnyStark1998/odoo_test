@@ -1,0 +1,42 @@
+version: '3'
+
+tasks:
+  commit-*:
+    desc: Adds a commit using the conventional commit format.
+    silent: true
+    preconditions:
+      - sh: task git:ticket-id
+        msg: 'Ticket ID not valid.'
+    prompt: >-
+      Commit message will be: "{{.COMMIT_TYPE}}: ({{.TICKET_ID}}) {{.COMMIT_MSG}}".
+      Looks good?
+    vars:
+      COMMIT_TYPE: '{{index .MATCH 0}}'
+      COMMIT_MSG: '{{.CLI_ARGS}}'
+      TICKET_ID:
+        sh: task git:ticket-id
+    cmds:
+      - git add .
+      - |
+        git commit -m "{{.COMMIT_TYPE}}: ({{.TICKET_ID}}) {{.COMMIT_MSG}}"
+
+  commit-amend:
+    desc: Updates the last commit with new files or a different message.
+    prompt: Using 'git commit --amend' may require force push to remote. Proceed?
+    cmds:
+      - git add .
+      - git commit --amend
+
+  ticket-id:
+    desc: Obtains the ticket ID from the current branch name.
+    silent: true
+    preconditions:
+      - sh: '[[ {{.GIT_REF}} =~ [A-Z]{2,}-[0-9]+ ]]'
+        msg: |
+          Error: '{{.GIT_REF}}' does not follow the expected branch convention.
+          Error: Ticket ID could not be determined.
+    vars:
+      GIT_REF:
+        sh: 'git branch --show-current'
+    cmds:
+      - echo "{{.GIT_REF}}" | grep -oE '[A-Z]{2,}-[0-9]+' | tr '[:lower:]' '[:upper:]'

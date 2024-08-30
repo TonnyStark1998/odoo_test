@@ -1,0 +1,5 @@
+# Values for client: inversiones-pereyca
+client: inversiones-pereyca
+
+database:
+  name: inversiones-pereyca-ce

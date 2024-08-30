@@ -1,0 +1,5 @@
+# Values for client: Remicon
+client: remicon
+
+database:
+  name: remicon-ce

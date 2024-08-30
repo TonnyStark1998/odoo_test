@@ -1,0 +1,14 @@
+version: '3'
+
+tasks:
+# Tasks: Log
+  console:
+    desc: Logs a message to the console
+    silent: true
+    vars:
+      text: '{{default .CLI_ARGS .text}}'
+      level: '{{default "info" .level}}'
+    cmds:
+      - gum log -sl {{.level}} "{{.text}}"
+    requires:
+      vars: [text]

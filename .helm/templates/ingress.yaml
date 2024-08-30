@@ -1,0 +1,43 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $.Values.client }}-{{ $.Values.appName }}-ingress
+  labels:
+    app: {{ $.Values.client }}-odoo
+  annotations:
+    cert-manager.io/issuer: letsencrypt-production
+spec:
+  ingressClassName: {{ $.Values.odoo.ingress.className }}
+  tls:
+    - hosts:
+        - {{ tpl $.Values.odoo.ingress.host $ }}
+      secretName: {{ $.Values.client }}-{{ $.Values.appName }}-ingress-tls
+  rules:
+    - host: {{ tpl $.Values.odoo.ingress.host $ }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $.Values.client }}-{{ $.Values.appName }}
+                port:
+                  number: {{ $.Values.odoo.port }}
+          {{ if eq $.Values.odoo.version "13.0" }}
+          - path: /longpolling
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $.Values.client }}-{{ $.Values.appName }}
+                port:
+                  number: {{ $.Values.odoo.geventPort }}
+          {{ else }}
+          - path: /websocket
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $.Values.client }}-{{ $.Values.appName }}
+                port:
+                  number: {{ $.Values.odoo.geventPort }}
+          {{ end }}

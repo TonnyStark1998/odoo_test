@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $.Values.client }}-{{ $.Values.appName }}-deployment
+  labels:
+    app: {{ $.Values.client }}-{{ $.Values.appName }}
+spec:
+  revisionHistoryLimit: 1
+  replicas: {{ $.Values.odoo.replicas }}
+  selector:
+    matchLabels:
+      app: {{ $.Values.client }}-{{ $.Values.appName }}
+  template:
+    metadata:
+      annotations:
+        commit: {{ $.Values.werf.commit.hash }}
+        date: {{ now }}
+      labels:
+        app: {{ $.Values.client }}-{{ $.Values.appName }}
+    spec:
+      containers:
+        - name: {{ $.Values.client }}-{{ $.Values.appName }}
+          image: {{ $.Values.werf.image.odoo }}
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: {{ $.Values.odoo.resources.requests.memory }}
+              cpu: {{ $.Values.odoo.resources.requests.cpu }}
+            limits:
+              memory: {{ $.Values.odoo.resources.limits.memory }}
+              cpu: {{ $.Values.odoo.resources.limits.cpu }}
+          envFrom:
+            - configMapRef:
+                name: {{ $.Values.client }}-{{ $.Values.appName }}-configmap
+          volumeMounts:
+            - mountPath: "/var/lib/odoo"
+              name: {{ $.Values.client }}-odoo-data-v
+              readOnly: false
+            - mountPath: "/etc/odoo/"
+              name: {{ $.Values.client }}-odoo-config-v
+              readOnly: false
+      volumes:
+        - name: {{ $.Values.client }}-odoo-data-v
+          persistentVolumeClaim:
+            claimName: {{ $.Values.client }}-{{ $.Values.odoo.persistentVolumeClaim.name }}
+        - name: {{ $.Values.client }}-odoo-config-v
+          configMap:
+            name: {{ $.Values.client }}-{{ $.Values.appName }}-odoo-conf

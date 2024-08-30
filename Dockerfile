@@ -1,42 +1,41 @@
-ARG ODOO_VERSION
-ARG ODOO_EDITION
-ARG ODOO_ENVIRONMENT
+ARG ODOO_VERSION=16.0
+ARG ODOO_EDITION=ce
+ARG ODOO_ENVIRONMENT=dev
 
-FROM odoo:${ODOO_VERSION:-16.0}
-MAINTAINER "Samuel Luciano <sluciano@accounterprise.com>"
+FROM odoo:${ODOO_VERSION}
 
 LABEL com.accounterprise.owner="Accounterprise SRL <contabilidad@accounterprise.com>" \
-    com.accounterprise.author="Samuel Luciano <sluciano@accounterprise.com>" \
-    version=1.0 \
-    description="Customizaciones implementadas al ERP Odoo\
+      com.accounterprise.author="Samuel Luciano <sluciano@accounterprise.com>" \
+      version=1.0 \
+      description="Customizaciones implementadas al ERP Odoo\
         por el equipo de TI de Accounterprise SRL para la adaptación\
         a las leyes fiscales de la República Dominicana.\
         (c) 2024 Copyright. Todos los derechos reservados."
 
-ENV ODOO_EDITION=${ODOO_EDITION:-ce} \
-    ODOO_ENVIRONMENT=${ODOO_ENVIRONMENT:-dev} \
-    DATABASE_NAME= \
-    ODOO_CONFIG_FILE=/etc/odoo/odoo.conf\
+ENV ODOO_EDITION=${ODOO_EDITION} \
+    ODOO_ENVIRONMENT=${ODOO_ENVIRONMENT} \
+    DB_NAME= \
+    ODOO_CONFIG_FILE='/etc/odoo/odoo.conf' \
     ODOO_INITIAL_MODULES= \
     ODOO_UPDATE_MODULES= \
-    USE_DEFAULT_ADDONS_PATH=y \
+    ODOO_ADDONS_PATH='/mnt/extra-addons' \
+    USE_DEFAULT_ADDONS_PATH='y' \
     MAX_RETRIES= \
     SLEEP_TIME=
 
-COPY odoo-entrypoint.sh /
-COPY remove_modules_on_odoo_version.sh /
-COPY test_database_settings.py /usr/local/bin/test_database_settings.py
-COPY third_party_addons/ /mnt/extra-addons
-COPY conf/odoo.conf /etc/odoo/
+# hadolint ignore=DL3013
+RUN pip3 install --no-cache-dir \
+    psycopg2 \
+    python-barcode
 
-USER root
-
-RUN [ "chmod", "-R", "777", "/etc/odoo" ]
-RUN /remove_modules_on_odoo_version.sh ${ODOO_VERSION}
-RUN [ "pip3", "install", "python-barcode" ]
+COPY .ops/scripts/odoo-entrypoint.sh /
+COPY .ops/scripts/test_database_settings.py /usr/local/bin/test_database_settings.py
+COPY conf/odoo.conf /etc/odoo/odoo.conf
+COPY addons/${ODOO_VERSION} ${ODOO_ADDONS_PATH}/${ODOO_VERSION}
 
 EXPOSE 8069 8072
-VOLUME [ "/var/lib/odoo" ]
+
+VOLUME /var/lib/odoo
 
 USER odoo
 

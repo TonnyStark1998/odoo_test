@@ -1,0 +1,5 @@
+# Values for client: Soleura
+client: soleura
+
+database:
+  name: soleura-ce

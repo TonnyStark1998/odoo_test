@@ -1,0 +1,16 @@
+version: '3'
+
+tasks:
+  # Tasks: System commands
+  os:
+    desc: Obtains the current OS type.
+    silent: true
+    preconditions:
+      - sh: '[[ {{.OS}} =~ (darwin|windows|linux) ]]'
+        msg: |
+          Error: '{{.OS}}' is not a supported OS.
+    vars:
+      OS:
+        sh: "uname -o | tr '[:upper:]' '[:lower:]'"
+    cmds:
+      - echo "{{.OS}}"

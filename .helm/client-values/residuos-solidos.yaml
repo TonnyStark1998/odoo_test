@@ -1,0 +1,5 @@
+# Values for client: Residuos Solidos
+client: residuos-solidos
+
+database:
+  name: residuos-solidos

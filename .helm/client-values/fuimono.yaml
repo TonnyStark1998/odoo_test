@@ -1,0 +1,5 @@
+# Values for client: Fuimono
+client: fuimono
+
+database:
+  name: fuimono-ce

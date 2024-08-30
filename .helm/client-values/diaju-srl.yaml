@@ -1,0 +1,5 @@
+# Values for client: Diaju SRL
+client: diaju-srl
+
+database:
+  name: diaju-srl-ce

@@ -1,0 +1,86 @@
+version: '3'
+
+vars:
+  ENVIRONMENT: '{{default .CLI_ARGS .ENVIRONMENT}}'
+
+tasks:
+# Tasks: Werf commands
+  command:
+    cmds:
+      - task: check-secret-key
+      - werf {{.COMMAND}}
+        --env {{.ENVIRONMENT}}
+        --values .helm/values/{{.ENVIRONMENT}}.yaml
+        --values .helm/client-values/{{.CLIENT}}.yaml
+        --dev
+    requires:
+      vars: [ENVIRONMENT, CLIENT, COMMAND]
+
+  command-with-repo:
+    cmds:
+      - task: check-secret-key
+      - werf {{.COMMAND}}
+        --env {{.ENVIRONMENT}}
+        --release {{.CLIENT}}-{{.ENVIRONMENT}}
+        --repo {{.ACR_URL}}/{{.ENVIRONMENT}}/{{.CLIENT}}
+        --values .helm/values/{{.ENVIRONMENT}}.yaml
+        --values .helm/client-values/{{.CLIENT}}.yaml
+        --dev
+    requires:
+      vars: [ENVIRONMENT, PROJECT, CLIENT, COMMAND]
+
+  build:
+    cmds:
+      - task: check-secret-key
+      - werf build --repo {{.ACR_URL}}/{{.ENVIRONMENT}}/{{.PROJECT}} --dev
+    requires:
+      vars: [ACR_URL, ENVIRONMENT, PROJECT]
+
+  dismiss:
+    cmds:
+      - werf dismiss
+        --namespace {{.PROJECT}}-{{.ENVIRONMENT}}
+        --release {{.PROJECT}}-{{.ENVIRONMENT}}
+        --dev
+    requires:
+      vars: [ENVIRONMENT, PROJECT]
+
+  export:
+    cmds:
+      - task: check-secret-key
+      - werf export
+        --repo {{.ACR_URL}}/{{.ENVIRONMENT}}/{{.PROJECT}}
+        --tag {{.ACR_URL}}/{{.ENVIRONMENT}}/{{.PROJECT}}:{{.ENVIRONMENT}}
+        --dev
+    requires:
+      vars: [ACR_URL, ENVIRONMENT, PROJECT]
+
+  secrets:
+    cmds:
+      - task: check-secret-key
+      # - werf helm secret values {{.SECRET_COMMAND}}
+      #   .helm/secrets/{{.ENVIRONMENT}}.yaml
+      #   -o .helm/secrets/{{.ENVIRONMENT}}.yaml
+      - werf helm secret values {{.SECRET_COMMAND}}
+        .helm/secret-values.yaml
+        -o .helm/secret-values.yaml
+
+# Utils: Check werf secret key
+  check-secret-key:
+    internal: true
+    silent: true
+    preconditions:
+      - sh: 'test -f .werf_secret_key'
+        msg: '.werf_secret_key file does not exist.'
+
+  # Utils: Check werf env generator
+  download-env-generator:
+    internal: true
+    desc: 'Check if werf-env-generate exists, if not, download it.'
+    vars:
+      OS: '{{.OS}}'
+      ARCH: '{{ "x64" | default .ARCH}}'
+    cmds:
+      - .ops/scripts/download-werf-env-generator.sh {{.OS}} {{.ARCH}}
+    status:
+      - test -f werf-env-generator

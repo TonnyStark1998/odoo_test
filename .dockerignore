@@ -1,0 +1,11 @@
+# paths ignored by Docker
+.git
+.github
+.gitignore
+.gitmodules
+compose.yaml
+README.md
+taskfile.yaml
+dumps
+.werf_secret_key
+/data/

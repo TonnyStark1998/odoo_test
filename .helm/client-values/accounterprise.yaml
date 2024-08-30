@@ -1,0 +1,14 @@
+# Values for client: Accounterprise
+client: accounterprise
+
+database:
+  name: accounterprise-ce
+
+odoo:
+  ingress:
+    host: |
+      {{- if eq .Values.werf.env "production" -}}
+      odoo.accounterprise.com
+      {{- else -}}
+      odoo.{{ $.Values.werf.env }}.accounterprise.com
+      {{- end -}}

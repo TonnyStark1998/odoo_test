@@ -1,0 +1,5 @@
+# Values for client: Grupo Pérez-Leconte
+client: grupo-perez-leconte
+
+database:
+  name: grupo-perez-leconte-ce

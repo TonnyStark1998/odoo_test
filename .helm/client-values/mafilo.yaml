@@ -1,0 +1,5 @@
+# Values for client: Mafilo
+client: mafilo
+
+database:
+  name: mafilo-ce

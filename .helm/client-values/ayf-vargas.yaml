@@ -1,0 +1,5 @@
+# Values for client: AyF Vargas
+client: ayf-vargas
+
+database:
+  name: ayf-vargas-ce

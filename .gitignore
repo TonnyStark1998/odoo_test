@@ -128,3 +128,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Local
+/data/
+dumps/
+/charts
+.werf_secret_key

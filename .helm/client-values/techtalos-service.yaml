@@ -1,0 +1,5 @@
+# Values for client: Techtalos Service
+client: techtalos-service
+
+database:
+  name: techtalos-service-ce

@@ -1,0 +1,5 @@
+# Values for client: DomPad Media Strategy
+client: dompad-mediastrategy
+
+database:
+  name: dompad-mediastrategy-ce

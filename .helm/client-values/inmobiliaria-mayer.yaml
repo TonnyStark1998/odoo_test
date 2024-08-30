@@ -1,0 +1,5 @@
+# Values for client: Inmobiliaria Mayer
+client: inmobiliaria-mayer
+
+database:
+  name: inmobiliaria-mayer-ce

@@ -1,0 +1,20 @@
+version: '3'
+
+vars:
+  NAMESPACE: '{{.NAMESPACE}}'
+  RESOURCE: '{{.RESOURCE}}'
+
+tasks:
+# Tasks: kubectl commands
+  configmap:
+    cmds:
+      - kubectl get
+        -n {{.NAMESPACE}}
+        configmap/{{.RESOURCE}}
+        -o jsonpath='{.data}' | jq .
+
+  logs:
+    cmds:
+      - kubectl logs
+        -n {{.NAMESPACE}}
+        deployment/{{.RESOURCE}}

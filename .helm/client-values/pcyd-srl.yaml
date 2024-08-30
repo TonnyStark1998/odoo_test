@@ -1,0 +1,5 @@
+# Values for client: PCyD SRL
+client: pcyd-srl
+
+database:
+  name: pcyd-srl-ce

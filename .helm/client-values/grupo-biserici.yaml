@@ -1,0 +1,5 @@
+# Values for client: Grupo Biserici
+client: grupo-biserici
+
+database:
+  name: grupo-biserici-ce

@@ -1,0 +1,5 @@
+# Values for client: Pedralbes
+client: pedralbes
+
+database:
+  name: pedralbes

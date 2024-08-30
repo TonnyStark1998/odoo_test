@@ -1,0 +1,8 @@
+project: accounterprise
+configVersion: 1
+build:
+  platform:
+  - linux/amd64
+---
+image: odoo
+dockerfile: Dockerfile

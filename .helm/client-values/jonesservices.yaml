@@ -1,0 +1,5 @@
+# Values for client: Jones Services SRL
+client: jonesservices
+
+database:
+  name: jonesservices

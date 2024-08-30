@@ -1,0 +1,5 @@
+# Values for client: Legalitas
+client: legalitas
+
+database:
+  name: legalitas

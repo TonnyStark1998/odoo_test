@@ -1,0 +1,5 @@
+# Values for client: Acro Salutte
+client: acro-salutte
+
+database:
+  name: acro-salutte-ce

@@ -1,0 +1,5 @@
+# Values for client: Freeze Ne
+client: freeze-me
+
+database:
+  name: freeze-me-ce
