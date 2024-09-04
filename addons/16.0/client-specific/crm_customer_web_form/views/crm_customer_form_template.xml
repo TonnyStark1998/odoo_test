@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="crm_customer_form">
+        <t t-call="web.basic_layout">
+            <script type="text/javascript" src="/crm_customer_web_form/static/src/js/crm_customer_form.js"/>
+            <div class="col-sm text-center text-sm-end">
+                <nav class="navbar navbar-expand navbar-light bg-light">
+                    <div class="container">
+                        <a href="/" class="navbar-brand logo">
+                            <img t-att-src="'/logo.png?company=%s' % res_company.id"
+                                 t-att-alt="'Logo of %s' % res_company.name" t-att-title="res_company.name"/>
+                        </a>
+                        <ul id="top_menu" class="nav navbar-nav ms-auto">
+                            <t t-call="portal.placeholder_user_sign_in">
+                                <t t-set="_item_class" t-value="'nav-item'"/>
+                                <t t-set="_link_class" t-value="'nav-link'"/>
+                            </t>
+                            <t t-call="portal.user_dropdown">
+                                <t t-set="_user_name" t-value="true"/>
+                                <t t-set="_item_class" t-value="'nav-item dropdown'"/>
+                                <t t-set="_link_class" t-value="'nav-link'"/>
+                                <t t-set="_dropdown_menu_class" t-value="'dropdown-menu-end'"/>
+                            </t>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="wrap o_survey_wrap pb16 d-flex justify-content-center align-items-center"
+                 style="min-height: 100vh;">
+                <div class="container o_survey_quick_access d-flex flex-column align-items-center">
+                    <div class="w-100 px-4 px-md-0">
+                        <div class="text-center mb32">
+                            <h3>Customer Form</h3>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-8">
+                                <form action="/send/form" method="post">
+                                    <div class="form-group mb-3">
+                                        <label for="name">Name:</label>
+                                        <input id="name" class="form-control" type="text" placeholder="Name"
+                                               autocomplete="off" oninput="validateLetters(this)" name="name"
+                                               required="required"/>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="surname">Surname:</label>
+                                        <input name="surname" id="surname" class="form-control" type="text"
+                                               autocomplete="off" oninput="validateLetters(this)"
+                                               placeholder="Surname" required="required"/>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="age">Age:</label>
+                                        <input id="age" class="form-control" type="number" placeholder="Age"
+                                               autocomplete="off" name="age" required="required"/>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="weight_loss">How many pounds do you want to lose?</label>
+                                        <select id="weight_loss" class="form-control" name="weight_loss">
+                                            <option value="less_than_20">Less than 20 pounds</option>
+                                            <option value="20-40">20-40 pounds</option>
+                                            <option value="40-80">40-80 pounds</option>
+                                            <option value="more_than_80">More than 80 pounds</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="country_id">Country:</label>
+                                        <select name="country_id" id="country_id" class="form-control">
+                                            <t t-foreach="countries" t-as="country">
+                                                <option t-att-value="country['id']"><t t-esc="country['name']"/>
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="phone">Phone Number:</label>
+                                        <input id="phone" class="form-control" type="tel" placeholder="Phone Number"
+                                               pattern="[0-9]{10,}" required="required" maxlength="10" name="phone"/>
+                                        <small class="form-text text-muted">
+                                            Enter your phone number (at least 10 digits)
+                                        </small>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="email">Email:</label>
+                                        <input id="email" class="form-control" type="email" placeholder="Email"
+                                               autocomplete="off" oninput="validateEmail(this)" name="email"/>
+                                        <small id="emailError" class="text-danger" style="display:none;">
+                                            Please enter a valid email address.
+                                        </small>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="bariatric_surgery">Have you had previous bariatric surgery?</label>
+                                        <select id="bariatric_surgery" class="form-control" name="bariatric_surgery"
+                                                onchange="toggleSurgeryField(this)">
+                                            <option value="no">No</option>
+                                            <option value="yes">Yes</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3" id="surgery_field" style="display: none;">
+                                        <label for="surgery_type">Which surgery did you have?</label>
+                                        <input id="surgery_type" class="form-control" type="text" name="surgery_type"
+                                               placeholder="Specify the surgery" autocomplete="off"/>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="procedure">Procedure or program of interest:</label>
+                                        <input id="procedure" class="form-control" type="text" name="procedure"
+                                               placeholder="Procedure or program" autocomplete="off"/>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="budget">Estimated budget (in USD):</label>
+                                        <select id="budget" class="form-control" name="buget">
+                                            <option value="1000-4000">1,000-4,000 USD</option>
+                                            <option value="4000-8000">4,000-8,000 USD</option>
+                                            <option value="8000-12000">8,000-12,000 USD</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="medium_id">How did you hear about us?</label>
+                                        <select name="medium_id" id="medium_id" class="form-control">
+                                            <t t-foreach="mediums" t-as="medium">
+                                                <option t-att-value="medium['id']"><t t-esc="medium['name']"/></option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="explanatoryVideo">Explanatory Video:</label>
+                                        <iframe id="explanatoryVideo" class="form-control" width="560"
+                                                height="315" src="https://www.youtube.com/embed/uQGrzMwVGtI?autoplay=1"
+                                                frameborder="0" allow="autoplay; encrypted-media"/>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm text-center text-sm-end">
+                <footer t-cache="no_footer,no_copyright" t-if="not no_footer" id="bottom" data-anchor="true"
+                        t-attf-class="bg-light o_footer">
+                    <div id="footer"/>
+                    <div t-if="not no_copyright" class="o_footer_copyright">
+                        <div class="container py-3">
+                            <div class="row">
+                                <div class="col-sm text-center text-sm-start text-muted">
+                                    <span class="o_footer_copyright_name me-2">Copyright </span>
+                                </div>
+                                <div class="col-sm text-center text-sm-end">
+                                    <t t-call="web.brand_promotion"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </t>
+    </template>
+</odoo>
